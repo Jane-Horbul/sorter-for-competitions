@@ -9,17 +9,25 @@
 </head>
 
 <body>
-    <header>
+    <header class="container">
         <div class="menu">
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+            <ul class="list">
+                <li><button type="button" class="menu__btn">Створити змагання</button></li>
+                <li><button type="button" class="menu__btn">Створити учасника</button></li>
             </ul>
-
         </div>
     </header>
-    <div class="menu__container"></div>
+    <div>
+        <form action="" method="post">
+            <label>
+                Ім'я учасника
+                <input type="text" name="message" placeholder="Введите сообщение" />
+            </label>
+
+
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
     <footer></footer>
 </body>
 
