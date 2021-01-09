@@ -16,6 +16,11 @@ body {
   line-height: 1.625;
   letter-spacing: 0.02em;
 }
+h1 {
+  color: black;
+  font-size: 36px;
+}
+
 .container {
   width: 800px;
   padding-left: 15px;
@@ -23,7 +28,9 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
-
+.card-link {
+  text-decoration: none;
+}
 .list {
   list-style-type: none;
   margin: 0;
@@ -33,4 +40,14 @@ body {
 
 .menu__btn {
   width: 210px;
+}
+/*main*/
+.card {
+  width: calc((100% - 30px * 3) / 4);
+  margin-right: 30px;
+  margin-bottom: 30px;
+  background-color: beige;
+  border: 1px;
+  border-color: bisque;
+  border-radius: 2px;
 }

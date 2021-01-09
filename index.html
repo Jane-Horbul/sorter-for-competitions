@@ -8,27 +8,52 @@
     <link rel="stylesheet" href="./css/main.css" />
 </head>
 
-<body>
+<body class="container">
     <header class="container">
         <div class="menu">
-            <ul class="list">
-                <li><button type="button" class="menu__btn">Створити змагання</button></li>
-                <li><button type="button" class="menu__btn">Створити учасника</button></li>
-            </ul>
+            <h1>List of competitions</h1>
+            <button  type="button">Create a competition</button>
         </div>
     </header>
-    <div>
-        <form action="" method="post">
-            <label>
-                Ім'я учасника
-                <input type="text" name="message" placeholder="Введите сообщение" />
-            </label>
+    <main class="container">
+        <div class="list">
+            
+                <div class="card">
+                    <a class="card-link" href="./competition-page.html"><img src="" alt="competition logo"></a>
+                    <a class="card-link" href="./competition-page.html"><h2>Name of competition</h2></a>
+                    <a class="card-link" href="./competition-page.html"><p>Short description</p></a>
+                </div>
+            
+            <div class="card">
+                <img src="" alt="competition logo">
+                <h2>Name of competition</h2>
+                <p>Short description</p>
+            </div>
+            <div class="card">
+                <img src="" alt="competition logo">
+                <h2>Name of competition</h2>
+                <p>Short description</p>
+            </div>
+            <div class="card">
+                <img src="" alt="competition logo">
+                <h2>Name of competition</h2>
+                <p>Short description</p>
+            </div>
+        </div>
 
+            <div>
+                <form action="" method="post">
+                    <label>
+                        Ім'я учасника
+                        <input type="text" name="message" placeholder="Введите сообщение" />
+                    </label>
+            
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+    </main>
 
-            <button type="submit">Отправить</button>
-        </form>
-    </div>
-    <footer></footer>
+    <footer  class="container"></footer>
 </body>
 
 </html>
