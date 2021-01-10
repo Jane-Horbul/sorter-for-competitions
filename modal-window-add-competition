@@ -1,0 +1,73 @@
+<div class="backdrop is-hidden" data-backdrop>
+        <!--<div class="backdrop" data-backdrop>-->
+        <div class="container">
+            <div class="modal">
+                <button class="btn-modal" data-close-modal>
+                    <svg class="btn-close">
+                        <use href="./img/speite-for-forms.svg#btn-close"></use>
+                    </svg>
+                </button>
+
+                <form class="modal-form">
+                    <span class="modal-title">Create a new competition</span>
+                    <label for="competition-name" class="form-field-label">
+                        <span class="form-field-title">The name of the competition</span>
+                        <div class="form-field">
+                            <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
+                            <svg class="form-field-icon">
+                                <use href="./img/speite-for-forms.svg#modal-name-icon"></use>
+                            </svg>
+                        </div>
+                    </label>
+                    <label for="competition-section" class="form-field-label">
+                        <span class="form-field-title">Add a section</span>
+                        <div class="form-field">
+                            <input type="text" name="competition-section" id="competition-section" class="form-field-input" required />
+                            <svg class="form-field-icon">
+                                <use href="./img/speite-for-forms.svg#icon-plus"></use>
+                            </svg>
+
+                        </div>
+                    </label>
+
+                    <label>
+                        <span class="form-field-title">Short description</span>
+                        <div class="form-field-message">
+                            <textarea name="user-message" class="form-field-comment" placeholder="Enter short description for competition"
+                                rows="3"></textarea>
+                        </div>
+                    </label>
+                    <label for="competition-logo" class="form-field-label">
+                        <span class="form-field-title">Upload a photo for the competition</span>
+                        <div class="form-field">
+                        <input type="file" name="photo" multiple accept="image/*,image/jpeg">
+                        <input type="submit" value="Enter">
+                        </div>
+                    </label>
+
+                    <button type="submit" class="modal-btn-submit">
+                        <span class="modal-btn-submit-text">Add competitions</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+	
+	 <script>
+        const refs = {
+            openModalBtn: document.querySelector("[data-open-modal]"),
+            closeModalBtn: document.querySelector("[data-close-modal]"),
+            backdrop: document.querySelector("[data-backdrop]"),
+        };
+        refs.openModalBtn.addEventListener("click", toggleModal);
+        refs.closeModalBtn.addEventListener("click", toggleModal);
+
+        refs.backdrop.addEventListener("click", logBackdropClick);
+
+        function toggleModal() {
+            refs.backdrop.classList.toggle("is-hidden");
+        }
+        function logBackdropClick() {
+            console.log("Click");
+        }
+
+    </script>
