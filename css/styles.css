@@ -904,3 +904,27 @@ li.active a span {
 .added-section-table {
   margin-top: 20px;
 }
+
+/*group*/
+.runner {
+  float: left;
+  margin-top: 40px;
+}
+/*filter*/
+
+#tabs {
+  font-size: 0.7em;
+  height: 500px;
+}
+#tabs-1,
+#tabs-2,
+#tabs-3 {
+  font-size: 1.2em;
+}
+#range {
+  color: grey;
+  font-weight: bold;
+  width: 300px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
