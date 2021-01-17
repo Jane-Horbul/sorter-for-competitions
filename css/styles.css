@@ -88,7 +88,7 @@ footer {
 
 h1 {
   font-size: 44px;
-  color: var(--white-color);
+  color: var(--assent-color);
   letter-spacing: 0.06em;
 }
 h2 {
@@ -627,7 +627,7 @@ li.active a span {
   margin-right: 0;
 }
 .services {
-  padding-top: 110px;
+  padding-top: 0px;
 }
 .services-list {
   display: flex;
@@ -650,7 +650,7 @@ li.active a span {
   bottom: 0;
   width: 363px;
   height: 70px;
-  background: rgba(47, 48, 58, 0.8);
+  background: var(--assent-color);
 }
 .services-title {
   text-transform: uppercase;
@@ -927,4 +927,10 @@ li.active a span {
   width: 300px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.main-tables {
+  display: flex;
+
+  margin-left: 20px;
+  margin-right: 20px;
 }
