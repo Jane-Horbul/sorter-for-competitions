@@ -61,7 +61,7 @@
                 </div>
             </label>
             
-            <button type="submit" class="modal-btn-submit">
+            <button type="submit" class="modal-btn-submit" onclick="getCategories()">
              <span class="modal-btn-submit-text">Add competitions</span></button>
             <!--   <p><input type="submit" value="Add competitions"></p>-->
         </div>
@@ -79,6 +79,19 @@ var el = document.getElementById(id);
   cell1.innerHTML = el.value;
   el.value= "";
 
+}
+
+function getCategories() {
+    var id = "competition-section";
+    var el = document.getElementById(id);
+
+    var table = document.getElementById("dynamic-grid");
+    var categories = "";
+    for(var i = 1; i < table.rows.length; i++){
+        categories += "<>" + table.rows[i].cells[0].innerHTML;
+    }
+    el.value= categories;
+    el.style.display = "none";
 }
     </script>
     </form>
