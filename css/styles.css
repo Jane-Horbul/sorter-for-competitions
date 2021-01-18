@@ -36,6 +36,9 @@ textarea {
   resize: none;
   border: 0px;
 }
+main {
+  margin-bottom: 25px;
+}
 .page-header {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -627,7 +630,7 @@ li.active a span {
   margin-right: 0;
 }
 .services {
-  padding-top: 0px;
+  padding-top: 30px;
 }
 .services-list {
   display: flex;
@@ -641,7 +644,7 @@ li.active a span {
 }
 
 .services-item:nth-child(3n) {
-  margin-right: 0;
+  margin-right: 0px;
 }
 
 .services-text {
@@ -930,7 +933,13 @@ li.active a span {
 }
 .main-tables {
   display: flex;
-
-  margin-left: 20px;
-  margin-right: 20px;
+  justify-content: flex-end;
 }
+.main-tables-item {
+  width: 50%;
+  margin-left: 25px;
+}
+
+/*.main-tables-item:nth-child(2n) {
+  margin-right: 0;
+}*/
