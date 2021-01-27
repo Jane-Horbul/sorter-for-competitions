@@ -15,33 +15,62 @@
     </header>
     <main>
         <div class="container">
-            <!--Section with add buttons-->
-            <section class="services">
-    <div class="container">
-        <ul class="list services-list">
-            <li class="services-item">
-                <a href="#">
-                <div class="services-text  services-title">
-                    <span>Create a group</span>
+            <!--Section with section with tables of created divisions and qualifications-->
+            <section class="secondary-tables">
+                <div class="secondary-tables--buttons">
+                    <ul>
+                    <li class="list"><button class="competition-page-main-btn">Form Pairs</button></li>
+                    <li class="list"><button class="competition-page-main-btn">Get Full List</button></li>
+                    <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
+                    </ul>
                 </div>
-                </a>
-            </li>
-            <li class="services-item">
-                <a href="#">
-                <div class="services-text services-title">
-                    <span>Create a category</span>
+                <div class="secondary-tables--item">
+                    <table class="dynamic-table secondary-tables--qualifications">
+                        <tr>
+                            <th colspan="2">Qualifications</th>
+                                <th>
+                                    <button class="" type="button" data-open-modal>
+                                        <svg class="sl-footer-icon">
+                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                        </svg>
+                                    </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="secondary-tables--td">1</td>
+                            <td>1 degree</td>
+                            <td class="secondary-tables--td">Dell</td>
+                        </tr>
+                        <tr>
+                            <td class="secondary-tables--td">2</td>
+                            <td>KMS</td>
+                            <td class="secondary-tables--td">Dell</td>
+                        </tr>
+                    </table>
                 </div>
-                </a>
-            </li>
-            <li class="services-item">
-                <a href="#">
-                <div class="services-text  services-title">
-                    <span>Create a member</span>
+                <div class="secondary-tables--item">
+                    <table class="dynamic-table secondary-tables--divisions">
+                        <tr>
+                            <th>Divisions</th>
+                            <th>
+                                <button class="" type="button" data-open-modal>
+                                    <svg class="sl-footer-icon">
+                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                    </svg>
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Light</td>
+                            <td class="secondary-tables--td">Dell</td>
+                        </tr>
+                        <tr>
+                            <td>Full</td>
+                            <td class="secondary-tables--td">Dell</td>
+                        </tr>
+                    </table>
                 </div>
-                </a>
-            </li>
-        </ul>
-    </div>
+
 </section>
 <section>
     <div class="main-tables">
@@ -96,10 +125,10 @@
             </tr>
                 <tr>
                     <td>Name of group</td>
-                    <td>Age of members (min, max)</td>
+                    <td>Age of members</td>
                     <td>Sex</td>
                     <td>Division</td>
-                    <td>Weight (min, max)</td>
+                    <td>Weight</td>
                     <td>Qualification</td>
                     <td>Pairs number</td>
                 </tr>

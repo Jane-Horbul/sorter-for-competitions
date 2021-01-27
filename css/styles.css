@@ -49,7 +49,7 @@ main {
   align-items: center;
 }
 .container {
-  width: 1200px;
+  width: 1600px;
   padding-left: 25px;
   padding-right: 25px;
   margin-right: auto;
@@ -943,3 +943,20 @@ li.active a span {
 /*.main-tables-item:nth-child(2n) {
   margin-right: 0;
 }*/
+.secondary-tables {
+  display: flex;
+}
+.secondary-tables--item {
+  width: 50%;
+  margin-left: 15px;
+  margin-bottom: 20px;
+}
+.secondary-tables--buttons {
+  width: 20%;
+}
+.competition-page-main-btn {
+  margin-bottom: 15px;
+}
+.secondary-tables--td {
+  width: 12%;
+}
