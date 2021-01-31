@@ -11,89 +11,110 @@
 </head>
 <body>
     <form action="/" method="post"> 
-            <header class="page-header">
-            
-            </header>
-    <main>
-        <div class="modal-form">
-            <span class="modal-title">Create a new competition</span>
-            <label for="competition-name" class="form-field-label">
-                <span class="form-field-title">The name of the competition</span>
-                <div class="form-field">
-                    <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
-                    <svg class="form-field-icon">
-                        <use href="./img/speite-for-forms.svg#modal-name-icon"></use>
-                    </svg>
+        <header class="page-header">
+        </header>
+        <main>
+            <div class="modal-form">
+                <span class="modal-title" id="page-name">Create a new competition</span>
+                <label for="competition-name" class="form-field-label">
+                    <span class="form-field-title">The name of the competition</span>
+                    <div class="form-field">
+                        <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
+                    </div>
+                </label>
+
+                <!-- Qualifications block-->
+                <div class="added-section-table">
+                    <table class="dynamic-table" id="qualifications-table">
+                        <tr>
+                            <th>Qualifications</th>
+                        </tr>
+                        <tr>
+                            <th class="form-field-input"> Qualification value </th>
+                            <th class="form-field-input"> Qualification name </th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="qual-val" id="qualification-value" class="form-field-input"/></td>
+                            <td><input type="text" name="qual-name" id="qualification-name" class="form-field-input"/></td>
+                            <td> <button id="add_qual" title="Add a qualification" type="button" onclick="addQualification()"> Add </button></td>
+                        </tr>
+                    </table>
                 </div>
-            </label>
-            <div class="form-field-table">
-<label for="competition-section" class="form-field-label">
-    <span class="form-field-title">Add a section</span>
-    <div class="form-field">
-        <input type="text" name="competition-section" id="competition-section" class="form-field-input" required />
-        <svg class="form-field-icon">
-            <use href="./img/speite-for-forms.svg#icon-plus"></use>
-        </svg>
-    </div>
 
-</label>
-</div>
-<div class="added-section-table">
-    <button id="add_new_option_button" title="Add a section" type="button" onclick="myFunction()">Add a section</button>
-           <table class="dynamic-table" id="dynamic-grid">
-<tr>
-    <th>Created categories</th>
-</tr>
-           </table>
-        
-            <label>
-                <span class="form-field-title">Short description</span>
-                <div class="form-field-message">
-                    <textarea name="user-message" class="form-field-comment" placeholder="Enter short description for competition"
-                        rows="3"></textarea>
+                <!-- Divisions block-->
+                <div class="added-section-table">
+                    <table class="dynamic-table" id="divisions-table">
+                        <tr>
+                            <th>Divisions</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="division-name" id="division-name" class="form-field-input"/></td>
+                            <td> <button id="add_division" title="Add division" type="button" onclick="addDivision()"> Add </button></td>
+                        </tr>
+                    </table>
+                    <label>
+                        <span class="form-field-title">Short description</span>
+                        <div class="form-field-message">
+                            <textarea name="description" class="form-field-comment" placeholder="Enter short description for competition"
+                                rows="3"></textarea>
+                        </div>
+                    </label>
+                    <button type="submit" class="modal-btn-submit" onclick="getTablesData()">
+                    <span class="modal-btn-submit-text">Add competitions</span></button>
+                    <!--   <p><input type="submit" value="Add competitions"></p>-->
                 </div>
-            </label>
-            <label for="competition-logo" class="form-field-label">
-                <span class="form-field-title">Upload a photo for the competition</span>
-                <div class="form-field">
-                    <input type="file" name="photo" multiple accept="image/*,image/jpeg">
-                    <input type="submit" value="Enter">
-                </div>
-            </label>
-            
-            <button type="submit" class="modal-btn-submit" onclick="getCategories()">
-             <span class="modal-btn-submit-text">Add competitions</span></button>
-            <!--   <p><input type="submit" value="Add competitions"></p>-->
-        </div>
-    </main>
-    <!--script for adding fields to the category table-->
- 
-    <script>
-        function myFunction() {
-var id = "competition-section";
-var el = document.getElementById(id);
-  var table = document.getElementById("dynamic-grid");
-  var row = table.insertRow(1);
-  var cell1 = row.insertCell(0);
+                <input type="hidden" name="divisions-string" id="divisions-string" />
+                <input type="hidden" name="qualifications-string" id="qualifications-string" />
+            </div>
+        </main>
+        <!--script for adding fields to the category table-->
+        <script>
+            function addDivision() {
+                var el = document.getElementById("division-name");
+                var table = document.getElementById("divisions-table");
+                if(el.value.localeCompare("") != 0){
+                    el.value.split(", ").forEach((element) => {
+                        var row = table.insertRow(1);
+                        var cell1 = row.insertCell(0);
+                        cell1.innerHTML = element;
+                    })
+                    el.value= "";
+                }
+            }
 
-  cell1.innerHTML = el.value;
-  el.value= "";
+            function addQualification() {
+                var qValue = document.getElementById("qualification-value");
+                var qName = document.getElementById("qualification-name");
+                var table = document.getElementById("qualifications-table");
+                if(isNaN(Number(qValue.value)) || (qName.value.localeCompare("") == 0)){
+                    return;
+                }
+                var row = table.insertRow(2);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                cell0.innerHTML = qValue.value;
+                cell1.innerHTML = qName.value;
+                qValue.value = "";
+                qName.value = "";
+            }
 
-}
-
-function getCategories() {
-    var id = "competition-section";
-    var el = document.getElementById(id);
-
-    var table = document.getElementById("dynamic-grid");
-    var categories = "";
-    for(var i = 1; i < table.rows.length; i++){
-        categories += "<>" + table.rows[i].cells[0].innerHTML;
-    }
-    el.value= categories;
-    el.style.display = "none";
-}
-    </script>
+            function getTablesData() {
+                var divisions = document.getElementById("divisions-string");
+                var qualifications = document.getElementById("qualifications-string");
+                var divisionsTable = document.getElementById("divisions-table");
+                var qualificationsTable = document.getElementById("qualifications-table");
+                var divisionsStr = "";
+                var qualificationsStr = "";
+                for(var i = 2; i < (divisionsTable.rows.length - 1); i++) {
+                    divisionsStr += divisionsTable.rows[i].cells[0].innerHTML + ", ";
+                }
+                for(var i = 2; i < (qualificationsTable.rows.length - 1); i++) {
+                    qualificationsStr += qualificationsTable.rows[i].cells[0].innerHTML + " - " + qualificationsTable.rows[i].cells[1].innerHTML + ", ";
+                }
+                divisions.value = divisionsStr;
+                qualifications.value = qualificationsStr;
+            }
+        </script>
     </form>
 </body>
 </html>
