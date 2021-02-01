@@ -69,38 +69,69 @@
         </main>
         <!--script for adding fields to the category table-->
         <script>
-            document.getElementById("page-name").innerHTML = "Створення нового змагання";
-            console.log(document.documentElement.lang);
             function addDivision() {
                 var el = document.getElementById("division-name");
                 var table = document.getElementById("divisions-table");
-                if(el.value.localeCompare("") != 0){
-                    el.value.split(", ").forEach((element) => {
-                        var row = table.insertRow(1);
-                        var cell1 = row.insertCell(0);
-                        cell1.innerHTML = element;
-                        cell1.setAttribute("name", "division" + table.rows.length);
-                    })
-                    el.value= "";
+
+                if(el.value.localeCompare("") == 0) return;
+                for(var i = 2; i < table.rows.length; i++) {
+                    if(table.rows[i].cells[0].innerHTML.localeCompare(el.value) == 0) return;
                 }
+
+                var row = table.insertRow(table.rows.length);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var button = document.createElement("button");
+                cell0.innerHTML = el.value;
+                button.innerHTML = "DEL";
+                button.setAttribute("type", "button");
+                button.setAttribute("onclick", "deleteDivision(" + (table.rows.length - 1) + ")");
+                cell1.appendChild(button);
+                el.value= "";
             }
 
             function addQualification() {
                 var qValue = document.getElementById("qualification-value");
                 var qName = document.getElementById("qualification-name");
                 var table = document.getElementById("qualifications-table");
-                if(isNaN(Number(qValue.value)) || (qName.value.localeCompare("") == 0)){
-                    return;
+
+                if(isNaN(Number(qValue.value)) || (qName.value.localeCompare("") == 0)) return;
+                for(var i = 2; i < table.rows.length; i++) {
+                    if(Number(table.rows[i].cells[0].innerHTML) == Number(qValue.value)) return;
+                    if(table.rows[i].cells[1].innerHTML.localeCompare(qName.value) == 0) return;
                 }
-                var row = table.insertRow(2);
+
+                var row = table.insertRow(table.rows.length);
                 var cell0 = row.insertCell(0);
                 var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+                var button = document.createElement("button");
+                button.innerHTML = "DEL";
+                button.setAttribute("type", "button");
+                button.setAttribute("onclick", "deleteQualification(" + (table.rows.length - 1) + ")");
                 cell0.innerHTML = qValue.value;
                 cell1.innerHTML = qName.value;
+                cell2.appendChild(button);
                 qValue.value = "";
                 qName.value = "";
             }
 
+            function deleteDivision(indx){
+                var table = document.getElementById("divisions-table");
+                table.deleteRow(indx);
+                for(var i = 2; i < table.rows.length; i++) {
+                    table.rows[i].cells[1].firstChild.setAttribute("onclick", "deleteDivision(" + i +")");
+                }
+            }
+
+            function deleteQualification(indx){
+                var table = document.getElementById("qualifications-table");
+                table.deleteRow(indx);
+                for(var i = 3; i < table.rows.length; i++) {
+                    table.rows[i].cells[2].firstChild.setAttribute("onclick", "deleteQualification(" + i +")");
+                }
+            }
+            
             function sendForm() {
                 var compName = document.getElementById("competition-name");
                 var compDescription = document.getElementById("description");
