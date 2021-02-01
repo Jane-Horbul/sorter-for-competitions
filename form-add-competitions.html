@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="./css/normalize.css">
 </head>
 <body>
-    <form action="/" method="post"> 
+    <form action="/" method="post" enctype="multipart/form-data"> 
         <header class="page-header">
         </header>
         <main>
@@ -55,20 +55,22 @@
                     <label>
                         <span class="form-field-title">Short description</span>
                         <div class="form-field-message">
-                            <textarea name="description" class="form-field-comment" placeholder="Enter short description for competition"
+                            <textarea name="description" id="description" class="form-field-comment" placeholder="Enter short description for competition"
                                 rows="3"></textarea>
                         </div>
                     </label>
-                    <button type="submit" class="modal-btn-submit" onclick="getTablesData()">
-                    <span class="modal-btn-submit-text">Add competitions</span></button>
+                    <a href="/">
+                        <button type="button" class="modal-btn-submit" onclick="sendForm()">
+                        <span class="modal-btn-submit-text">Add competitions</span></button>
+                    </a>
                     <!--   <p><input type="submit" value="Add competitions"></p>-->
                 </div>
-                <input type="hidden" name="divisions-string" id="divisions-string" />
-                <input type="hidden" name="qualifications-string" id="qualifications-string" />
             </div>
         </main>
         <!--script for adding fields to the category table-->
         <script>
+            document.getElementById("page-name").innerHTML = "Створення нового змагання";
+            console.log(document.documentElement.lang);
             function addDivision() {
                 var el = document.getElementById("division-name");
                 var table = document.getElementById("divisions-table");
@@ -77,6 +79,7 @@
                         var row = table.insertRow(1);
                         var cell1 = row.insertCell(0);
                         cell1.innerHTML = element;
+                        cell1.setAttribute("name", "division" + table.rows.length);
                     })
                     el.value= "";
                 }
@@ -98,21 +101,40 @@
                 qName.value = "";
             }
 
-            function getTablesData() {
-                var divisions = document.getElementById("divisions-string");
-                var qualifications = document.getElementById("qualifications-string");
+            function sendForm() {
+                var compName = document.getElementById("competition-name");
+                var compDescription = document.getElementById("description");
                 var divisionsTable = document.getElementById("divisions-table");
-                var qualificationsTable = document.getElementById("qualifications-table");
                 var divisionsStr = "";
+                var qualificationsTable = document.getElementById("qualifications-table");
                 var qualificationsStr = "";
-                for(var i = 2; i < (divisionsTable.rows.length - 1); i++) {
+                var boundary = String(Math.random()).slice(2);
+                var body = ['\r\n'];
+
+                body.push('Content-Disposition: form-data; name="competition-name"\r\n\r\n' + compName.value + '\r\n');
+                body.push('Content-Disposition: form-data; name="description"\r\n\r\n' + compDescription.value + '\r\n');
+
+                for(var i = 1; i < (divisionsTable.rows.length - 1); i++) {
                     divisionsStr += divisionsTable.rows[i].cells[0].innerHTML + ", ";
                 }
+                body.push('Content-Disposition: form-data; name="divisions"\r\n\r\n' + divisionsStr + '\r\n');
+
                 for(var i = 2; i < (qualificationsTable.rows.length - 1); i++) {
                     qualificationsStr += qualificationsTable.rows[i].cells[0].innerHTML + " - " + qualificationsTable.rows[i].cells[1].innerHTML + ", ";
                 }
-                divisions.value = divisionsStr;
-                qualifications.value = qualificationsStr;
+                body.push('Content-Disposition: form-data; name="qualifications"\r\n\r\n' + qualificationsStr + '\r\n');
+
+                
+                body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/competition-form', true);
+                xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+
+                xhr.onreadystatechange = function() {
+                    if (this.readyState != 4) return;
+                    alert( this.responseText );
+                }
+                xhr.send(body);
             }
         </script>
     </form>
