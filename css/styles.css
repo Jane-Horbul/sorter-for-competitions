@@ -960,3 +960,19 @@ li.active a span {
 .secondary-tables--td {
   width: 12%;
 }
+/*Create a new group card*/
+.create-ng--interval{
+  display: flex;
+}
+.create-ng--interval-min, 
+.create-ng--interval-max {
+  width: 50px;
+}
+.create-ng-option{
+  color: var(--assent-color);
+  font-size: 19px;
+}
+.create-ng-field-name{
+color: var(--logo-color);
+  font-size: 17px;
+}
