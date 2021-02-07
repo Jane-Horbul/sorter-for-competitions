@@ -145,12 +145,12 @@
                 body.push('Content-Disposition: form-data; name="competition-name"\r\n\r\n' + compName.value + '\r\n');
                 body.push('Content-Disposition: form-data; name="description"\r\n\r\n' + compDescription.value + '\r\n');
 
-                for(var i = 1; i < (divisionsTable.rows.length - 1); i++) {
+                for(var i = 2; i < divisionsTable.rows.length; i++) {
                     divisionsStr += divisionsTable.rows[i].cells[0].innerHTML + ", ";
                 }
                 body.push('Content-Disposition: form-data; name="divisions"\r\n\r\n' + divisionsStr + '\r\n');
 
-                for(var i = 2; i < (qualificationsTable.rows.length - 1); i++) {
+                for(var i = 3; i < qualificationsTable.rows.length; i++) {
                     qualificationsStr += qualificationsTable.rows[i].cells[0].innerHTML + " - " + qualificationsTable.rows[i].cells[1].innerHTML + ", ";
                 }
                 body.push('Content-Disposition: form-data; name="qualifications"\r\n\r\n' + qualificationsStr + '\r\n');

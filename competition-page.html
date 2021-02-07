@@ -1,169 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Competition page</title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/styles.css" />
-</head>
-<body>
-    <header class="page-header">
-        <div class="container">
-            <h1>Competition name</h1>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <!--Section with section with tables of created divisions and qualifications-->
-            <section class="secondary-tables">
-                <div class="secondary-tables--buttons">
-                    <ul>
-                    <li class="list"><button class="competition-page-main-btn">Form Pairs</button></li>
-                    <li class="list"><button class="competition-page-main-btn">Get Full List</button></li>
-                    <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
-                    </ul>
-                </div>
-                <div class="secondary-tables--item">
-                    <table class="dynamic-table secondary-tables--qualifications">
-                        <tr>
-                            <th colspan="2">Qualifications</th>
+    <script>
+        console.log(location.search);
+        function parseMap(str){
+            var result = new Map();
+            str.split(", ").forEach(field => {
+                var params =  field.split(" - ");
+                if(params.length > 1){
+                    result.set(params[0], params[1]);
+                } 
+            });
+            return result;
+        }
+
+        function parseMapArray(str){
+            var result = new Array(0);
+            str.split("}, ").forEach(map => {
+                result.push(parseMap(map.split("}")[0]));
+            });
+            return result;
+        }
+
+        function parseCompetitionParams(answer){
+            const parseResult = new Map();
+            var options = answer.split("<Option name>");
+            options.forEach(option => {
+                var params = option.split("<Option value>");
+                if(params.length < 2) return;
+
+                if(params[0].localeCompare("Divisions") == 0){
+                    parseResult.set(params[0], params[1].split(", "));
+                } else if(params[0].localeCompare("Qualifications") == 0){
+                    parseResult.set(params[0], parseMap(params[1]));
+                } else if(params[0].localeCompare("Members") == 0){
+                    parseResult.set(params[0], parseMapArray(params[1]));
+                } else if(params[0].localeCompare("Groups") == 0){
+                    parseResult.set(params[0], parseMapArray(params[1]));
+                } else if(params[0].localeCompare("Name") == 0){
+                    parseResult.set(params[0], params[1]);
+                } else if(params[0].localeCompare("Description") == 0){
+                    parseResult.set(params[0], params[1]);
+                }
+            });
+            return parseResult;
+        }
+
+        function getCompetitionParams() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "/competition-get-" + "id=" + location.search.split("?")[1], false);
+            xhr.send();
+            if (xhr.status != 200)   return new Map();
+            
+            console.log("Responce:" + xhr.responseText);
+            return parseCompetitionParams(xhr.responseText);
+        }
+
+        function qualificationElementCreate(value, name){
+            if(value == "") return "";
+            var row = document.createElement("tr");
+            var col1 =  document.createElement("td");
+            var col2 = document.createElement("td");
+            var col3 = document.createElement("td");
+            var button = document.createElement("button");
+            button.innerHTML = "Dell";
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "deleteQualification(\"" + value + "\")");
+
+            col1.setAttribute("class", "secondary-tables--td");
+            col3.setAttribute("class", "secondary-tables--td");
+            col1.innerHTML = value; 
+            col2.innerHTML = name; 
+            col3.append(button);
+
+            row.append(col1);
+            row.append(col2);
+            row.append(col3);
+            return row;
+        }
+
+        function divisionElementCreate(division){
+            if(division.localeCompare("\r\n") == 0) return "";
+            console.log("'" + division + "'");
+            var row = document.createElement("tr");
+            var col1 =  document.createElement("td");
+            var col2 = document.createElement("td");
+            var button = document.createElement("button");
+            button.innerHTML = "Dell";
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "deleteDivision(\"" + division + "\")");
+
+            col1.innerHTML = division; 
+            col2.setAttribute("class", "secondary-tables--td");
+            col2.append(button);
+            
+            row.append(col1);
+            row.append(col2);
+            return row;
+        }
+
+        function memberElementCreate(member){
+            if(member.get("id") == undefined) return "";
+
+            var row = document.createElement("tr");
+            var col1 = document.createElement("td");
+            var col2 = document.createElement("td");
+            var col3 = document.createElement("td");
+            var col4 = document.createElement("td");
+            var col5 = document.createElement("td");
+            var col6 = document.createElement("td");
+            var col7 = document.createElement("td");
+            var col8 = document.createElement("td");
+
+            col1.innerHTML = member.get("name") + member.get("surname"); 
+            col2.innerHTML = member.get("age"); 
+            col3.innerHTML = member.get("weight"); 
+            col4.innerHTML = member.get("sex"); 
+            col5.innerHTML = member.get("team"); 
+            col6.innerHTML = member.get("qualification"); 
+            col7.innerHTML = member.get("admited"); 
+            col8.innerHTML = member.get("groups_num"); 
+            
+            row.append(col1);
+            row.append(col2);
+            row.append(col3);
+            row.append(col4);
+            row.append(col5);
+            row.append(col6);
+            row.append(col7);
+            row.append(col8);
+            return row;
+        }
+
+        function groupElementCreate(group){
+            if(group.get("id") == undefined) return "";
+
+            var row = document.createElement("tr");
+            var name = document.createElement("td");
+            var age = document.createElement("td");
+            var sex = document.createElement("td");
+            var division = document.createElement("td");
+            var weight = document.createElement("td");
+            var qualification = document.createElement("td");
+            var pairsNum = document.createElement("td");
+
+            name.innerHTML = group.get("name"); 
+            age.innerHTML = group.get("age_min") + " - " + group.get("age_max"); 
+            sex.innerHTML = group.get("sex"); 
+            division.innerHTML = group.get("division"); 
+            weight.innerHTML = group.get("weight_min") + " - " + group.get("weight_max"); ; 
+            qualification.innerHTML = group.get("qualification_min") + " - " + group.get("qualification_max"); ; 
+            pairsNum.innerHTML = group.get("pairs_num"); 
+            
+            row.append(name);
+            row.append(age);
+            row.append(sex);
+            row.append(division);
+            row.append(weight);
+            row.append(qualification);
+            row.append(pairsNum);
+            return row;
+        }
+
+        const competitionParams = getCompetitionParams();
+        
+    </script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Competition page</title>
+        <link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/styles.css" />
+    </head>
+    <body>
+        <header class="page-header">
+            <div class="container">
+                <h1 id="competition-name">Competition name</h1>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <!--Section with section with tables of created divisions and qualifications-->
+                <section class="secondary-tables">
+                    <div class="secondary-tables--buttons">
+                        <ul>
+                            <li class="list"><button class="competition-page-main-btn">Form Pairs</button></li>
+                            <li class="list"><button class="competition-page-main-btn">Get Full List</button></li>
+                            <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
+                        </ul>
+                    </div>
+                    <div class="secondary-tables--item">
+                        <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
+                            <tr>
+                                <th colspan="2">Qualifications</th>
+                                    <th>
+                                        <button class="" type="button" onclick="toogleQualificationAdding()" data-open-modal>
+                                            <svg class="sl-footer-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="secondary-tables--item">
+                        <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
+                            <tr>
+                                <th>Divisions</th>
                                 <th>
-                                    <button class="" type="button" data-open-modal>
+                                    <button class="" type="button" onclick="toogleDivisionAdding()" data-open-modal>
                                         <svg class="sl-footer-icon">
                                             <use href="./img/symbol-defs.svg#icon-plus"></use>
                                         </svg>
                                     </button>
-                            </th>
-                        </tr>
-<!--The string of the created qualifications-item start
-                        <tr>
-                            <td class="secondary-tables--td">!qualifications-item-num</td>
-                            <td>!qualifications-item-qualification</td>
-                            <td class="secondary-tables--td">Dell</td>
-                        </tr>
-qualifications-item end-->
-<!--qualifications-item pos-->
-                    </table>
-                </div>
-                <div class="secondary-tables--item">
-                    <table class="dynamic-table secondary-tables--divisions">
-                        <tr>
-                            <th>Divisions</th>
-                            <th>
-                                <button class="" type="button" data-open-modal>
-                                    <svg class="sl-footer-icon">
-                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                    </svg>
-                                </button>
-                            </th>
-                        </tr>
-<!--The string of the created division-item start
-                        <tr>
-                            <td>!division-name</td>
-                            <td class="secondary-tables--td">Dell</td>
-                        </tr>
-division-item end-->
-<!--division-item pos-->
-                    </table>
-                </div>
-
-</section>
-<section>
-    <div class="main-tables">
-<div class="main-tables-item">
-        <table class="dynamic-table" id="members-table">
-            <tr>
-                <th colspan="8">Created members
-                    <!--Add member button start-->
-                <button class="" type="button" data-open-modal>
-                    <svg class="sl-footer-icon">
-                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                    </svg>
-                    </button>
-                    <!--Add member button end-->
-                </th>
-            </tr>
-            <tr>
-                <td>Name, Surname</td>
-                <td>Age</td>
-                <td>Weight</td>
-                <td>Sex</td>
-                <td>Team</td>
-                <td>Qualification</td>
-                <td>Adm</td>
-                <td>Number of categories</td>
-            </tr>
-<!--The string of the created member-item start
-            <tr>
-                <td>!member-name !member-surname</td>
-                <td>!member-age</td>
-                <td>!member-weight</td>
-                <td>!member-sex</td>
-                <td>!member-team</td>
-                <td>!member-qualification</td>
-                <td>!member-adm</td>
-                <td>!member-number-of-categories</td>
-            </tr>
-            Member-item end-->
-            <!--Member-item pos-->
-        </table>
-</div>
-<div class="main-tables-item">
-        <table class="dynamic-table" id="section-table">
-            <tr>
-                <th  colspan="7">Created groups
-                <button class="" type="button" data-open-modal>
-                    <svg class="sl-footer-icon">
-                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                    </svg>
-                    </button>
-                </th>
-            </tr>
-                <tr>
-                    <td>Name of group</td>
-                    <td>Age of members</td>
-                    <td>Sex</td>
-                    <td>Division</td>
-                    <td>Weight</td>
-                    <td>Qualification</td>
-                    <td>Pairs number</td>
-                </tr>
-                <!--The string of the created group-item start
-                <tr>
-                    <td>!group-name</td>
-                    <td>!group-age--min !group-age--max</td>
-                    <td>!group-sex</td>
-                    <td>!group-division</td>
-                    <td>!group-weight--min !group-weight--max</td>
-                    <td>!group-qualification</td>
-                    <td>!group-pairs-number</td>
-                </tr>
-                Members-group-item end-->
-                <!--group-item pos-->
-        </table>
-</div>
-</div>
-</section>
-        </div>
-
-    </main>
-
-    <footer>
-        <div class="container flexbox">
-            <address class="contacts-box">
-
-            </address>
-            <div class="container sl">
-
-
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                <section>
+                    <div class="main-tables">
+                        <div class="main-tables-item">
+                            <table class="dynamic-table" id="members-table">
+                                <tr>
+                                    <th colspan="8">Created members
+                                        <!--Add member button start-->
+                                        <button class="" type="button" data-open-modal>
+                                            <svg class="sl-footer-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                        <!--Add member button end-->
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Name, Surname</td>
+                                    <td>Age</td>
+                                    <td>Weight</td>
+                                    <td>Sex</td>
+                                    <td>Team</td>
+                                    <td>Qualification</td>
+                                    <td>Adm</td>
+                                    <td>Number of categories</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="main-tables-item">
+                            <table class="dynamic-table" id="groups-table">
+                                <tr>
+                                    <th  colspan="7">Created groups
+                                        <button class="" type="button" data-open-modal>
+                                            <svg class="sl-footer-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Name of group</td>
+                                    <td>Age of members</td>
+                                    <td>Sex</td>
+                                    <td>Division</td>
+                                    <td>Weight</td>
+                                    <td>Qualification</td>
+                                    <td>Pairs number</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div>
-
+        </main>
+        <footer>
+            <div class="container flexbox">
+                <address class="contacts-box">
+                </address>
+                <div class="container sl">
+                </div>
             </div>
+        </footer>
+    </body>
+    <script>
+        var divTable = document.getElementById("divisions-table");
+        var qualTable = document.getElementById("qualification-table");
+        var membersTable = document.getElementById("members-table");
+        var groupsTable = document.getElementById("groups-table");
+        
+        document.getElementById("competition-name").innerHTML = competitionParams.get("Name");
 
-    </footer>
+        competitionParams.get("Divisions").forEach(div => {
+            divTable.append(divisionElementCreate(div));
+        });
 
+        for (var [key, value] of competitionParams.get("Qualifications")) {
+            qualTable.append(qualificationElementCreate(key, value));
+        }
 
-</body>
+        competitionParams.get("Members").forEach(mem => {
+            membersTable.append(memberElementCreate(mem));
+        });
+
+        competitionParams.get("Groups").forEach(gr => {
+            groupsTable.append(groupElementCreate(gr));
+        });
+
+        function toogleQualificationAdding(){
+            var row = document.getElementById("qualification-adding");
+            if(row == null){
+                var row = qualTable.insertRow(1);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+                var valueInput = document.createElement("input");
+                var nameInput = document.createElement("input");
+                var button = document.createElement("button");
+                
+                valueInput.setAttribute("id", "add-qualification-value");
+                valueInput.setAttribute("type", "text");
+                //valueInput.setAttribute("class", "form-field-input");
+
+                nameInput.setAttribute("id", "add-qualification-name");
+                nameInput.setAttribute("type", "text");
+                //nameInput.setAttribute("class", "form-field-input");
+
+                button.innerHTML = "OK";
+                button.setAttribute("type", "button");
+                button.setAttribute("onclick", "addQualification(\"add-qualification-value\", \"add-qualification-name\")");
+
+                row.setAttribute("id", "qualification-adding");
+                cell0.append(valueInput);
+                cell1.append(nameInput);
+                cell2.append(button);
+            } else {
+                row.remove();
+            }
+        }
+
+        function addQualification(valueId, nameId){
+            var value = document.getElementById(valueId).value;
+            var name = document.getElementById(nameId).value;
+            console.log("Name: " + name);
+            console.log("value: " + value);
+            console.log("nameId: " + nameId);
+            console.log("valueId: " + valueId);
+
+            for(var i = 1; i < qualTable.rows.length; i++){
+                if(qualTable.rows[i].cells[0].innerHTML.localeCompare(value) == 0) return;
+                if(qualTable.rows[i].cells[1].innerHTML.localeCompare(name) == 0) return;
+            }
+            qualTable.append(qualificationElementCreate(value, name));
+            toogleQualificationAdding();
+            sendNotification("qualification-add", value + " - " + name);
+        }
+
+        function deleteQualification(value){
+            console.log(value);
+            for(var i = 1; i < qualTable.rows.length; i++){
+                if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
+                    qualTable.rows[i].remove();
+                    sendNotification("qualification-delete", value);
+                    return;
+                }
+            }
+        }
+
+        function toogleDivisionAdding(){
+            var row = document.getElementById("division-adding");
+            if(row == null){
+                var row = divTable.insertRow(1);
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var input = document.createElement("input");
+                var button = document.createElement("button");
+                
+                input.setAttribute("id", "add-division");
+                input.setAttribute("type", "text");
+                //input.setAttribute("class", "form-field-input");
+
+                button.innerHTML = "OK";
+                button.setAttribute("type", "button");
+                button.setAttribute("onclick", "addDivision(\"add-division\")");
+
+                row.setAttribute("id", "division-adding");
+                cell0.append(input);
+                cell1.append(button);
+            } else {
+                row.remove();
+            }
+        }
+
+        function addDivision(divId){
+            var div = document.getElementById(divId).value;
+            for(var i = 1; i < divTable.rows.length; i++){
+                if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0) return;
+            }
+            toogleDivisionAdding();
+            divTable.append(divisionElementCreate(div));
+            sendNotification("division-add", div);
+        }
+
+        function deleteDivision(div){
+            for(var i = 1; i < divTable.rows.length; i++){
+                if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
+                    divTable.rows[i].remove();
+                    sendNotification("division-delete", div);
+                    return;
+                } 
+            }
+        }
+
+        function sendNotification(name, value) {
+                var boundary = String(Math.random()).slice(2);
+                var body = ['\r\n'];
+                var xhr = new XMLHttpRequest();
+
+                body.push('Content-Disposition: form-data; name="' + name + '"\r\n\r\n' +  value + '\r\n');
+                body.push('Content-Disposition: form-data; name="id"\r\n\r\n' +  location.search.split("?")[1] + '\r\n');
+                body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
+
+                xhr.open('POST', '/competition-edition', true);
+                xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+
+                xhr.onreadystatechange = function() { if (this.readyState != 4) return; }
+                xhr.send(body);
+            }
+    </script>
 </html>
