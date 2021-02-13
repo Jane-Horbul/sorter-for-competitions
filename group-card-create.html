@@ -8,104 +8,131 @@
 </head>
 <body>
     <form>
+<!-- acc-menu start -->
+    <div class="conntainer">
+      <div>
         <label for="new-group-name" class="form-field-label">
-            <span class="form-field-title">Group name*</span>
-            <div class="form-field">
-                <input type="text" name="new-group-name" id="new-group-name" class="form-field-input" required />
+          <span class="create-ng-option">Group name*</span>
+          <div class="form-field">
+              <input type="text" name="new-group-name" id="new-group-name" class="form-field-input" required />
+          </div>
+      </label>
+      </div>
+                    <!--formula-of-group (round / rest) start-->
+                    <div>
+                    <label for="formula-of-group">
+                      <span class="create-ng-option">Enter the formula (round / rest)</span></label><br/>
+                  <div>
+
+                      <div class="create-ng--interval">
+                        <input type="text" name="new-group-age-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                        &nbsp;<span>/</span>&nbsp;
+                        <input type="text" name="new-group-age-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+              </div>
+              <!--formula-of-group (round / rest) end-->
+
+              <!--Choose devision start-->
+              <div>
+                <span class="create-ng-option">Choose division:</span></label><br/>
+
+               <div>
+                <select name="ng-division" id="ng-division">
+                  <option value="kick-light">Kick light</option>
+                  <option value="light-contact">Light contact</option>
+                  <option value="full-contact">Full contact</option>
+                </select>
+              </div>
+              </div>
+              <!--end-->
+      <section class="acc-conntainer">
+
+          <!-- acc-menu-1-item start -->
+
+          <span class="create-ng-field-name">Choose required items:</span>
+          <!-- acc-menu-2-item start -->
+        <div>
+           <input class="acc-item" id="acc-2" name="accordion-1" type="checkbox" />
+           <label class="acc-menu-item-gender-label"  for="acc-2">Enter min age and max age of the members of group (please enter number only)</label>
+              <article class="acc-medium">
+                <div class="not-required-items conntainer">
+
+                        <div class="create-ng--interval">
+                          <input type="text" name="new-group-age-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                          &nbsp;<span>-</span>&nbsp;
+                          <input type="text" name="new-group-age-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                      </div>
+      
+            </article>
+          </div>
+          <!-- acc-menu-2-item end -->
+          <!-- acc-menu-3-item start -->
+        <div>
+          <input class="acc-item" id="acc-3" name="accordion-1" type="checkbox" />
+          <label class="acc-menu-item-gender-label"  for="acc-3">Enter min weight and max weight of the members of group (please enter number only)</label>
+             <article class="acc-medium">
+              <div>
+                    <div class="create-ng--interval">
+                      <input type="text" name="new-group-weight-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                      &nbsp;<span>-</span>&nbsp;
+                      <input type="text" name="new-group-weight-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
             </div>
-        </label>
-
-        <div class="not-required-items">
-            
-            <label for="not-required-items"><span class="create-ng-option">Choose required items:</span></label><br/><br/>
-            <div>
-              <input type="checkbox" id="create-ng-age-interval" name="user-division-01" checked>
-              <label for="not-required-items">
-                <span class="create-ng-field-name">Enter min age and max age of the members of group (please enter number only)</span>
-                  <div class="create-ng--interval">
-                    <input type="text" name="new-group-age-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                    &nbsp;<span>-</span>&nbsp;
-                    <input type="text" name="new-group-age-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                </div>
-
-                <div>
-                    <input type="checkbox" id="create-ng-weight-interval" name="user-division-01" checked>
-                    <label for="not-required-items">
-                      <span class="create-ng-field-name">Enter min weight and max weight of the members of group (please enter number only)</span>
-                        <div class="create-ng--interval">
-                          <input type="text" name="new-group-weight-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                          &nbsp;<span>-</span>&nbsp;
-                          <input type="text" name="new-group-weight-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                </div>
-
-                <div>
-                    <input type="checkbox" id="create-ng-qualification-interval" name="user-division-01" checked>
-                    <label for="not-required-items">
-                      <span class="create-ng-field-name">Select the minimum value and the maximum qualification value </span>
-                        <div class="create-ng--interval">
-                            <select name="ng-qualification" id="ng-members-qualification">
-                                <option value="ms">MS</option>
-                                <option value="kms">KMS</option>
-                                <option value="1-category ">1 category </option>
-                              </select>
-                          &nbsp;<span>-</span>&nbsp;
-                          <select name="ng-qualification" id="ng-members-qualification">
+           </article>
+         </div>
+         <!-- acc-menu-3-item end -->
+        <!-- acc-menu-4-item start -->
+        <div>
+          <input class="acc-item" id="acc-4" name="accordion-1" type="checkbox" />
+          <label  class="acc-menu-item-gender-label"  for="acc-4">Select the minimum value and the maximum qualification value </label>
+             <article class="acc-medium">
+              <div>
+                    <div class="create-ng--interval">
+                        <select name="ng-qualification" id="ng-members-qualification">
                             <option value="ms">MS</option>
                             <option value="kms">KMS</option>
                             <option value="1-category ">1 category </option>
                           </select>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="create-ng-divisions-select" name="user-division-01" checked>
-                    <label for="not-required-items" class="form-field-label">
-                        <label for="ng-division"><span  class="create-ng-field-name">Choose divisions:</span></label>
-                        <div>
-                          <input type="checkbox" id="ng-division-01" name="ng-division-01"
-                                 checked>
-                          <label for="ng-division-01">Kick light</label>
-                        </div>
-                        
-                        <div>
-                          <input type="checkbox" id="ng-division-02" name="ng-division-02">
-                          <label for="ng-division-02">Light contact</label>
-                        </div>
-                    
-                        <div>
-                            <input type="checkbox" id="ng-division-03" name="ng-division-03">
-                            <label for="ng-division-03">Full contact</label>
-                          </div>
-                        </label>
-                </div>
-
-                <div>
-                    <input type="checkbox" id="create-ng-formula-interval" name="user-division-01" checked>
-                    <label for="not-required-items">
-                      <span class="create-ng-field-name">Enter the formula (round / rest) </span>
-                        <div class="create-ng--interval">
-                          <input type="text" name="new-group-age-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                          &nbsp;<span>/</span>&nbsp;
-                          <input type="text" name="new-group-age-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                </div>
-
-                <div>    <label for="not-required-items" class="form-field-label">
-                    <span class="create-ng-field-name">Your gender</span>
-                    <div>
-                        <input type="radio" id="create-ng-male" name="user-sex" value="male"
-                               checked>
-                        <label for="male">Male</label>
-                      </div>
-                      
-                      <div>
-                        <input type="radio" id="create-ng-female" name="user-sex" value="female">
-                        <label for="female">Female</label>
-                      </div>
-                </label></div>
-
-              </label>
-
+                      &nbsp;<span>-</span>&nbsp;
+                      <select name="ng-qualification" id="ng-members-qualification">
+                        <option value="ms">MS</option>
+                        <option value="kms">KMS</option>
+                        <option value="1-category ">1 category </option>
+                      </select>
             </div>
-            
-    </form>
+
+           </article>
+         </div>
+         <!-- acc-menu-4-item end -->
+        <!-- acc-menu-5-item start -->
+
+         <!-- acc-menu-5-item end -->
+        <!-- acc-menu-6-item start -->
+        <div>
+          <input class="acc-item" id="acc-6" name="accordion-1" type="checkbox" />
+          <label class="acc-menu-item-gender-label" for="acc-6">Group gender</label>
+             <article class="acc-medium">
+              <div class="acc-menu-item-gender-list">    
+                <div>
+                    <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male"
+                           checked>
+                    <label for="male">Male</label>
+                  </div>
+                  
+                  <div>
+                    <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
+                    <label for="female">Female</label>
+                  </div>
+              </div>
+            </article>
+            </label>
+        </div>
+         <!-- acc-menu-6-item end -->
+      </section>
+  </div>
+<!--Аккордеон меню end-->   
+
+  <button type="submit" class="group-card-btn-submit">
+  <span class="group-card-btn-submit">Add group</span></button>
+
+</form>
 </body>
 </html>
