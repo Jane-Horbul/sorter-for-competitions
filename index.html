@@ -1,72 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    function parseCompetiton(competition){
-        var fields = competition.substr(1);
-        const compRes = new Map();
-        fields.split(", ").forEach(field => {
-            var params =  field.split(" - ");
-            if(params.length > 1){
-                compRes.set(params[0], params[1]);
-            } 
-            
-        });
-        return compRes;
-    }
-
-    function parseAnswer(answer){
-        const parseResult = new Map();
-        var options = answer.split("<Option name>");
-        options.forEach(option => {
-            var params = option.split("<Option value>");
-            if(params.length < 2) return;
-
-            if(params[0].localeCompare("Competitions") == 0){
-                var competitions = new Array(0);
-                params[1].split("}, ").forEach(comp => {
-                    competitions.push(parseCompetiton(comp.split("}")[0]));
-                });
-                parseResult.set(params[0], competitions);
-            }
-        });
-        return parseResult;
-    }
-
-    function getCompetitionList() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/competition-list-get-default', false);
-        xhr.send();
-        if (xhr.status != 200)   return new Map();
-        
-        return parseAnswer(xhr.responseText);
-    }
-
-    function competitionElementCreate(competition){
-        if(competition.get("id") == undefined) return "";
-
-        var liComp = document.createElement("li");
-        var link =  document.createElement("a");
-        var div = document.createElement("div");
-        var header = document.createElement("h2");
-        var desc = document.createElement("p");
-
-        liComp.setAttribute("class", "advantages-item"); 
-        link.setAttribute("href", "competition?" + competition.get("id"));
-        div.setAttribute("class", "advantages-icon-bg");
-        header.innerHTML = competition.get("name");
-        desc.setAttribute("class", "advantages-content");
-        desc.innerHTML = competition.get("description");
-        
-        liComp.append(link);
-        link.append(div);
-        div.append(header);
-        div.append(desc);
-        return liComp;
-    }
-
-    const competitionList = getCompetitionList().get("Competitions");
-    
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -128,12 +61,15 @@
 
     </footer>
 </body>
-<script>
-    
-    var list = document.getElementById("competitions-list");
-    competitionList.forEach(competition => {
-        list.prepend(competitionElementCreate(competition));
-    });
-</script>
-
+<template id="competition-template">
+    <li class="advantages-item">
+        <a id="competition-link">
+            <div class="advantages-icon-bg">
+                <h2 id="competition-name"></h2>
+                <p class="advantages-content" id="competition-desc"></p>
+            </div>
+        </a>
+    </li>
+</template>
+<script src="./scripts/index.js" type="module"></script>
 </html>

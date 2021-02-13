@@ -36,7 +36,7 @@
                         <tr>
                             <td><input type="text" name="qual-val" id="qualification-value" class="form-field-input"/></td>
                             <td><input type="text" name="qual-name" id="qualification-name" class="form-field-input"/></td>
-                            <td> <button id="add_qual" title="Add a qualification" type="button" onclick="addQualification()"> Add </button></td>
+                            <td> <button id="add-qual-btn" title="Add a qualification" type="button"> Add </button></td>
                         </tr>
                     </table>
                 </div>
@@ -49,7 +49,7 @@
                         </tr>
                         <tr>
                             <td><input type="text" name="division-name" id="division-name" class="form-field-input"/></td>
-                            <td> <button id="add_division" title="Add division" type="button" onclick="addDivision()"> Add </button></td>
+                            <td> <button id="add-div-btn" title="Add division" type="button"> Add </button></td>
                         </tr>
                     </table>
                     <label>
@@ -60,114 +60,30 @@
                         </div>
                     </label>
                     <a href="/">
-                        <button type="button" class="modal-btn-submit" onclick="sendForm()">
+                        <button type="button" class="modal-btn-submit" id="send-form-btn">
                         <span class="modal-btn-submit-text">Add competitions</span></button>
                     </a>
                     <!--   <p><input type="submit" value="Add competitions"></p>-->
                 </div>
             </div>
         </main>
-        <!--script for adding fields to the category table-->
-        <script>
-            function addDivision() {
-                var el = document.getElementById("division-name");
-                var table = document.getElementById("divisions-table");
 
-                if(el.value.localeCompare("") == 0) return;
-                for(var i = 2; i < table.rows.length; i++) {
-                    if(table.rows[i].cells[0].innerHTML.localeCompare(el.value) == 0) return;
-                }
+        <template id="div-row-template">
+            <tr>
+                <td id="div-name"></td>
+                <td> <button type="button" id="div-dell-btn">Dell</button></td>
+            </tr>
+        </template>
 
-                var row = table.insertRow(table.rows.length);
-                var cell0 = row.insertCell(0);
-                var cell1 = row.insertCell(1);
-                var button = document.createElement("button");
-                cell0.innerHTML = el.value;
-                button.innerHTML = "DEL";
-                button.setAttribute("type", "button");
-                button.setAttribute("onclick", "deleteDivision(" + (table.rows.length - 1) + ")");
-                cell1.appendChild(button);
-                el.value= "";
-            }
+        <template id="qual-row-template">
+            <tr>
+                <td id="qual-value"></td>
+                <td id="qual-name"> </td>
+                <td> <button type="button" id="qual-dell-btn">Dell</button></td>
+            </tr>
+        </template>
 
-            function addQualification() {
-                var qValue = document.getElementById("qualification-value");
-                var qName = document.getElementById("qualification-name");
-                var table = document.getElementById("qualifications-table");
-
-                if(isNaN(Number(qValue.value)) || (qName.value.localeCompare("") == 0)) return;
-                for(var i = 2; i < table.rows.length; i++) {
-                    if(Number(table.rows[i].cells[0].innerHTML) == Number(qValue.value)) return;
-                    if(table.rows[i].cells[1].innerHTML.localeCompare(qName.value) == 0) return;
-                }
-
-                var row = table.insertRow(table.rows.length);
-                var cell0 = row.insertCell(0);
-                var cell1 = row.insertCell(1);
-                var cell2 = row.insertCell(2);
-                var button = document.createElement("button");
-                button.innerHTML = "DEL";
-                button.setAttribute("type", "button");
-                button.setAttribute("onclick", "deleteQualification(" + (table.rows.length - 1) + ")");
-                cell0.innerHTML = qValue.value;
-                cell1.innerHTML = qName.value;
-                cell2.appendChild(button);
-                qValue.value = "";
-                qName.value = "";
-            }
-
-            function deleteDivision(indx){
-                var table = document.getElementById("divisions-table");
-                table.deleteRow(indx);
-                for(var i = 2; i < table.rows.length; i++) {
-                    table.rows[i].cells[1].firstChild.setAttribute("onclick", "deleteDivision(" + i +")");
-                }
-            }
-
-            function deleteQualification(indx){
-                var table = document.getElementById("qualifications-table");
-                table.deleteRow(indx);
-                for(var i = 3; i < table.rows.length; i++) {
-                    table.rows[i].cells[2].firstChild.setAttribute("onclick", "deleteQualification(" + i +")");
-                }
-            }
-            
-            function sendForm() {
-                var compName = document.getElementById("competition-name");
-                var compDescription = document.getElementById("description");
-                var divisionsTable = document.getElementById("divisions-table");
-                var divisionsStr = "";
-                var qualificationsTable = document.getElementById("qualifications-table");
-                var qualificationsStr = "";
-                var boundary = String(Math.random()).slice(2);
-                var body = ['\r\n'];
-
-                body.push('Content-Disposition: form-data; name="competition-name"\r\n\r\n' + compName.value + '\r\n');
-                body.push('Content-Disposition: form-data; name="description"\r\n\r\n' + compDescription.value + '\r\n');
-
-                for(var i = 2; i < divisionsTable.rows.length; i++) {
-                    divisionsStr += divisionsTable.rows[i].cells[0].innerHTML + ", ";
-                }
-                body.push('Content-Disposition: form-data; name="divisions"\r\n\r\n' + divisionsStr + '\r\n');
-
-                for(var i = 3; i < qualificationsTable.rows.length; i++) {
-                    qualificationsStr += qualificationsTable.rows[i].cells[0].innerHTML + " - " + qualificationsTable.rows[i].cells[1].innerHTML + ", ";
-                }
-                body.push('Content-Disposition: form-data; name="qualifications"\r\n\r\n' + qualificationsStr + '\r\n');
-
-                
-                body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '/competition-form', true);
-                xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-
-                xhr.onreadystatechange = function() {
-                    if (this.readyState != 4) return;
-                    alert( this.responseText );
-                }
-                xhr.send(body);
-            }
-        </script>
+        <script src="./scripts/form-competition.js" type="module"></script>
     </form>
 </body>
 </html>
