@@ -42,3 +42,11 @@ export function parseAnswerParams(answer){
     });
     return parseResult;
 }
+
+export function sendRequest(request) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', request, false);
+    xhr.send();
+    if (xhr.status != 200)   return new Map();
+    return parseAnswerParams(xhr.responseText);
+}

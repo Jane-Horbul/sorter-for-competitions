@@ -1,13 +1,4 @@
-import {parseAnswerParams} from "./common.js"
-
-function getCompetitionList() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/competition-list-get-default', false);
-    xhr.send();
-    if (xhr.status != 200)   return new Map();
-    
-    return parseAnswerParams(xhr.responseText);
-}
+import {sendRequest} from "./common.js"
 
 function competitionElementCreate(competition){
     if(competition.get("id") == undefined) return "";
@@ -18,7 +9,7 @@ function competitionElementCreate(competition){
     return template;
 }
 
-const competitionList = getCompetitionList().get("Competitions");
+const competitionList = sendRequest('/competition-list-get?name=default').get("Competitions");
 
 for (var [key, value] of competitionList) {
     console.log(key + ' = ' + value);

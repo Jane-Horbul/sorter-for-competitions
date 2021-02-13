@@ -1,13 +1,5 @@
 
-import {parseAnswerParams} from "./common.js"
-
-function getCompetitionParams() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', "/competition-get-" + "id=" + location.search.split("?")[1], false);
-    xhr.send();
-    if (xhr.status != 200)   return new Map();
-    return parseAnswerParams(xhr.responseText);
-}
+import {sendRequest} from "./common.js"
 
 function sendNotification(name, value) {
     var boundary = String(Math.random()).slice(2);
@@ -167,8 +159,9 @@ function fillPageInfo(params){
 function setBtnActions(){
     document.getElementById("qual-add-btn").addEventListener("click", toogleQualificationAdding, false);
     document.getElementById("div-add-btn").addEventListener("click", toogleDivisionAdding, false);
+    document.getElementById("group-add-btn").setAttribute("href", window.location.href + "/group-form");
 }
 
 
-fillPageInfo(getCompetitionParams());
+fillPageInfo(sendRequest("/competition-get?" + "id=" + location.search.split("?")[1]));
 setBtnActions();

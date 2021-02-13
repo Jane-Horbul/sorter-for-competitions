@@ -96,6 +96,30 @@ function sendForm() {
 }
 
 function setBtnActions(){
+    document.getElementById("qualification-value").addEventListener("keydown", function(event){
+        if (event.defaultPrevented) return;
+        if ("Enter" == event.key){
+            addQualification();
+            event.preventDefault();
+        } 
+      }, true);
+
+    document.getElementById("qualification-name").addEventListener("keydown", function(event){
+        if (event.defaultPrevented) return;
+        if ("Enter" == event.key){
+            addQualification();
+            event.preventDefault();
+        } 
+      }, true);
+
+      document.getElementById("division-name").addEventListener("keydown", function(event){
+        if (event.defaultPrevented) return;
+        if ("Enter" == event.key){
+            addDivision();
+            event.preventDefault();
+        } 
+      }, true);
+    
     document.getElementById("add-qual-btn").addEventListener("click", addQualification, false);
     document.getElementById("add-div-btn").addEventListener("click", addDivision, false);
     document.getElementById("send-form-btn").addEventListener("click", sendForm, false);
