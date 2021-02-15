@@ -1034,7 +1034,7 @@ box-shadow:
 .acc-conntainer .acc-menu-item-gender-label:hover:after,
 .acc-conntainer .acc-item:checked + .acc-menu-item-gender-label:hover:after{
  content: "";
-  background: transparent url(../img/arrow_down.png) no-repeat center center;
+ background-image: url(../img/arrow_down.png) no-repeat center center;
  position: absolute;
  right: 13px;
     top: 7px;
@@ -1044,6 +1044,8 @@ box-shadow:
 
 .acc-conntainer .acc-item:checked + .acc-menu-item-gender-label:hover:after{
   background-image: url(../img/arrow_up.png);
+  background-color: var(--assent-color);
+  border-radius: 2px;
  }
 
  .acc-conntainer .acc-item{
