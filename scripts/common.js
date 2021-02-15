@@ -50,3 +50,33 @@ export function sendRequest(request) {
     if (xhr.status != 200)   return new Map();
     return parseAnswerParams(xhr.responseText);
 }
+
+export function sendForm(formName, boundary, body) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', formName, true);
+    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState != 4) return false;
+        alert( this.responseText );
+    }
+    xhr.send(body);
+    return true;
+}
+
+
+export function isNumber(num){
+    if(isNaN(Number(num)) || (num.localeCompare("") == 0)) return false;
+    return true;
+}
+
+export function isEmptyString(str){
+    if((str.localeCompare("") == 0)){
+       return true; 
+    }
+
+    if((str.localeCompare("\r\n") == 0)){
+        return true; 
+    }
+    return false;
+}

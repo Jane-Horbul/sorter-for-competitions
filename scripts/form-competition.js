@@ -1,3 +1,6 @@
+import {isNumber} from "./common.js"
+import {isEmptyString} from "./common.js"
+
 function createDivRow(division){
     var template = document.getElementById("div-row-template").content.cloneNode(true);
     template.getElementById("div-name").innerHTML = division;
@@ -39,7 +42,7 @@ function addQualification() {
     var qName = document.getElementById("qualification-name");
     var table = document.getElementById("qualifications-table");
 
-    if(isNaN(Number(qValue.value)) || (qName.value.localeCompare("") == 0)) return;
+    if(!isNumber(qValue.value) || isEmptyString(qName.value)) return;
     for(var i = 2; i < table.rows.length; i++) {
         if(Number(table.rows[i].cells[0].innerHTML) == Number(qValue.value)) return;
         if(table.rows[i].cells[1].innerHTML.localeCompare(qName.value) == 0) return;

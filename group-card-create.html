@@ -7,7 +7,6 @@
       <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <form>
       <!-- acc-menu start -->
       <div class="conntainer">
         <div>
@@ -25,9 +24,9 @@
           </label><br/>
           <div>
               <div class="create-ng--interval">
-                <input type="text" name="new-group-age-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                <input type="text" name="round-number" id="round-number" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
                 &nbsp;<span>/</span>&nbsp;
-                <input type="text" name="new-group-age-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                <input type="text" name="round-duration" id="round-duration" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
               </div>
               <!--formula-of-group (round / rest) end-->
               <!--Choose devision start-->
@@ -45,15 +44,15 @@
           <span class="create-ng-field-name">Choose required items:</span>
           <!-- acc-menu-2-item start -->
         <div>
-           <input class="acc-item" id="acc-2" name="accordion-1" type="checkbox" />
-           <label class="acc-menu-item-gender-label"  for="acc-2">Age interval (number only)</label>
+           <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
+           <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
               <article class="acc-medium">
                 <div class="not-required-items conntainer">
 
                         <div class="create-ng--interval">
-                          <input type="text" name="new-group-age-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                          <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
                           &nbsp;<span>-</span>&nbsp;
-                          <input type="text" name="new-group-age-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                          <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
                       </div>
       
               </article>
@@ -61,22 +60,22 @@
           <!-- acc-menu-2-item end -->
           <!-- acc-menu-3-item start -->
         <div>
-          <input class="acc-item" id="acc-3" name="accordion-1" type="checkbox" />
-          <label class="acc-menu-item-gender-label"  for="acc-3">Weight interval, kg</label>
+          <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
+          <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
              <article class="acc-medium">
               <div>
                     <div class="create-ng--interval">
-                      <input type="text" name="new-group-weight-min" id="new-group-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                      <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
                       &nbsp;<span>-</span>&nbsp;
-                      <input type="text" name="new-group-weight-max" id="new-group-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                      <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
             </div>
            </article>
          </div>
          <!-- acc-menu-3-item end -->
         <!-- acc-menu-4-item start -->
         <div>
-          <input class="acc-item" id="acc-4" name="accordion-1" type="checkbox" />
-          <label  class="acc-menu-item-gender-label"  for="acc-4">Qualification interval </label>
+          <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
+          <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
              <article class="acc-medium">
               <div>
                     <div class="create-ng--interval">
@@ -93,8 +92,8 @@
          <!-- acc-menu-5-item end -->
         <!-- acc-menu-6-item start -->
         <div>
-          <input class="acc-item" id="acc-6" name="accordion-1" type="checkbox" />
-          <label class="acc-menu-item-gender-label" for="acc-6">Group gender</label>
+          <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
+          <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
              <article class="acc-medium">
               <div class="acc-menu-item-gender-list">    
                 <div>
@@ -115,9 +114,10 @@
       </section>
   </div>
 <!--Аккордеон меню end-->   
-  <button type="submit" class="group-card-btn-submit">
-  <span class="group-card-btn-submit">Add group</span></button>
-  </form>
+  <a id="priv-page-link"> 
+    <button type="button" id="send-form-btn" class="group-card-btn-submit">
+    <span class="group-card-btn-submit">Add group</span></button>
+  </a>
   <script src="./scripts/form-group.js" type="module"></script> 
   </body>
 </html>

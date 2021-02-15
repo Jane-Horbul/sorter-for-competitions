@@ -1,5 +1,30 @@
 
 import {sendRequest} from "./common.js"
+import {isNumber} from "./common.js"
+
+var qualificationsMap = new Map();
+function getQualificationInterval(qMin, qMax){
+    var qMinName;
+    var qMaxName;
+    console.log("qMin -> " + qMin);
+    console.log("qMax -> " + qMax);
+    for (var [key, value] of qualificationsMap) {
+        console.log(key + " -> " + value);
+    }
+
+    if(!isNumber(qMin) || (Number(qMin) < 0) || (qualificationsMap.get(qMin) == undefined)){
+        qMinName = "";
+    } else {
+        qMinName = qualificationsMap.get(qMin);
+    }
+    if(!isNumber(qMax) || (Number(qMax) < 0) || (qualificationsMap.get(qMax) == undefined)){
+        qMaxName = "";
+    } else {
+        qMaxName = qualificationsMap.get(qMax);
+    }
+    if(Number(qMax) == Number(qMin)) return qMinName;
+    return qMinName + " - " + qMaxName;
+}
 
 function sendNotification(name, value) {
     var boundary = String(Math.random()).slice(2);
@@ -136,7 +161,7 @@ function groupElementCreate(group){
     template.getElementById("group-weight").innerHTML = group.get("weight_min") + " - " + group.get("weight_max");
     template.getElementById("group-sex").innerHTML = group.get("sex");
     template.getElementById("group-division").innerHTML = group.get("division"); 
-    template.getElementById("group-qualification").innerHTML = group.get("qualification_min") + " - " + group.get("qualification_max");
+    template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualification_min"), group.get("qualification_max"));
     template.getElementById("group-pairs-num").innerHTML = group.get("pairs_num"); 
     return template;
 }
@@ -147,13 +172,15 @@ function fillPageInfo(params){
     var membersTable = document.getElementById("members-table");
     var groupsTable = document.getElementById("groups-table");
 
+    for (var [key, value] of params.get("Qualifications")) {
+        qTable.append(qualificationElementCreate(key, value));
+        qualificationsMap.set(key, value);
+    }
     document.getElementById("competition-name").innerHTML = params.get("Name");
     params.get("Divisions").forEach(div => divTable.append(divisionElementCreate(div)));
     params.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
     params.get("Groups").forEach(gr =>   groupsTable.append(groupElementCreate(gr)));
-    for (var [key, value] of params.get("Qualifications")) {
-        qTable.append(qualificationElementCreate(key, value));
-    }
+    
 }
 
 function setBtnActions(){
