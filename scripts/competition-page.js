@@ -140,12 +140,12 @@ function deleteDivision(div){
 function memberElementCreate(member){
     if(member.get("id") == undefined) return "";
     var template = document.getElementById("member-template").content.cloneNode(true);
-    template.getElementById("member-name").innerHTML = member.get("name") + member.get("surname"); 
+    template.getElementById("member-name").innerHTML = member.get("name") + " " + member.get("surname"); 
     template.getElementById("member-age").innerHTML = member.get("age");
     template.getElementById("member-weight").innerHTML = member.get("weight");
     template.getElementById("member-sex").innerHTML = member.get("sex");
     template.getElementById("member-team").innerHTML = member.get("team");
-    template.getElementById("member-qualification").innerHTML = member.get("qualification");
+    template.getElementById("member-qualification").innerHTML = qualificationsMap.get(member.get("qualification"));
     template.getElementById("member-admited").innerHTML = member.get("admited");
     template.getElementById("member-groups-num").innerHTML = member.get("groups_num");
     return template;
@@ -180,13 +180,27 @@ function fillPageInfo(params){
     params.get("Divisions").forEach(div => divTable.append(divisionElementCreate(div)));
     params.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
     params.get("Groups").forEach(gr =>   groupsTable.append(groupElementCreate(gr)));
-    
+}
+
+function refreshPairs(){
+    var newParams = sendRequest("/refresh-group-pairs?" + "id=" + location.search.split("?")[1]);
+    var groupsTable = document.getElementById("groups-table");
+    groupsTable.delete
+    while(groupsTable.rows.length > 2){
+        groupsTable.deleteRow(groupsTable.rows.length - 1);
+    }
+    newParams.get("Groups").forEach(gr =>   groupsTable.append(groupElementCreate(gr)));
 }
 
 function setBtnActions(){
     document.getElementById("qual-add-btn").addEventListener("click", toogleQualificationAdding, false);
     document.getElementById("div-add-btn").addEventListener("click", toogleDivisionAdding, false);
+    document.getElementById("form-pairs-btn").addEventListener("click", refreshPairs, false);
+
     document.getElementById("group-add-btn").setAttribute("href", window.location.href + "/group-form");
+    document.getElementById("member-add-btn").setAttribute("href", window.location.href + "/member-form");
+
+    
 }
 
 

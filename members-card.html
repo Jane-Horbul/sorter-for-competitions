@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-    <title>Create a new member card</title>
-</head>
-<body>
-  <form>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+      <title>Create a new member card</title>
+  </head>
+  <body>
     <label for="user-name" class="form-field-label">
         <span class="form-field-title">Name</span>
         <div class="form-field">
@@ -21,19 +20,17 @@
         </div>
     </label>
     <div>
-    <label for="user-sex" class="form-field-label">
-        <span class="form-field-title">Your gender</span>
-        <div>
-            <input type="radio" id="user-sex-male" name="user-sex" value="male"
-                   checked>
+      <label for="user-sex" class="form-field-label">
+          <span class="form-field-title">Your gender</span>
+          <div>
+            <input type="radio" id="user-sex-male" name="user-sex" value="male" checked>
             <label for="male">Male</label>
           </div>
-          
           <div>
             <input type="radio" id="user-sex-female" name="user-sex" value="female">
             <label for="female">Female</label>
           </div>
-    </label>
+      </label>
     </div>
     <label for="user-weight" class="form-field-label">
         <span class="form-field-title">Weight</span>
@@ -56,47 +53,42 @@
         </div>
     </label>
     <label for="user-qualification">Choose a qualification:</label>
-    <select name="user-qualification" id="members-qualification">
-      <option value="ms">MS</option>
-      <option value="kms">KMS</option>
-      <option value="1-category ">1 category </option>
+    </br>
+    <select name="user-qualification" id="member-qualification">
+      <!--Qualifications-->
     </select>
-</br>
-    
-<label for="user-admission" class="form-field-label">
-    <label for="user-division">Choose divisions:</label>
-    <div>
-      <input type="checkbox" id="user-division-01" name="user-division-01"
-             checked>
-      <label for="user-division-01">Kick light</label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="user-division-02" name="user-division-02">
-      <label for="user-division-02">Light contact</label>
-    </div>
+    </br>
 
-    <div>
-        <input type="checkbox" id="user-division-03" name="user-division-03">
-        <label for="user-division-03">Full contact</label>
-      </div>
+    <label for="user-admission" id="members-divisions" class="form-field-label">
+      <label for="user-division">Choose divisions:</label>
+      <!--Divisons-->
     </label>
 
-<label for="user-sex" class="form-field-label">
-    <span class="form-field-title">User admission</span>
-    <div>
-        <input type="radio" id="user-admission-y" name="user-admission" value="yes"
-               checked>
+    <label for="user-sex" class="form-field-label">
+      <span class="form-field-title">User admission</span>
+      <div>
+        <input type="radio" id="user-admission-y" name="user-admission" value="yes" checked>
         <label for="yes">Yes</label>
       </div>
-      
       <div>
         <input type="radio" id="user-admission-n" name="user-admission" value="no">
         <label for="no">No</label>
       </div>
-</label>
-  </form>  
-</body>
+    </label>
+
+    <a id="priv-page-link"> 
+      <button type="button" id="send-form-btn">
+      <span class="group-card-btn-submit">Add member</span></button>
+    </a>
+  </body>
+
+  <template id="division-template">
+    <div>
+      <input type="checkbox" id="div-input">
+      <label for="user-division-01" id="div-name"> </label>
+    </div>
+  </template>
+  <script src="./scripts/form-member.js" type="module"></script>
 </html>
 
     

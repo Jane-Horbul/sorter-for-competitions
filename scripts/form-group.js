@@ -100,53 +100,38 @@ function isQualificationOk(){
 }
 
 function sendGroupForm() {
-    var boundary = String(Math.random()).slice(2);
-    var body = ['\r\n'];
-    var isOn = function(checkBoxId) { return document.getElementById(checkBoxId).checked; };
-    var pushField = function(name, valId) { 
-        body.push('Content-Disposition: form-data; name="' + name + '"\r\n\r\n' 
-        + document.getElementById(valId).value + '\r\n'); 
-    };
-
     if(!isMainGroupParamsOk()) return;
-    pushField("group-name", "new-group-name");
-    pushField("group-division", "ng-division");
-    pushField("round-number", "round-number");
-    pushField("round-duration", "round-duration");
+
+    var paramsMap = new Map();
+    var isOn = function(checkBoxId) { return document.getElementById(checkBoxId).checked; };
+
+    paramsMap.set("group-name", document.getElementById("new-group-name").value);
+    paramsMap.set("group-division", document.getElementById("ng-division").value);
+    paramsMap.set("round-number", document.getElementById("round-number").value);
+    paramsMap.set("round-duration", document.getElementById("round-duration").value);
 
     if(isOn("age-checkbox")){
         if(!isAgeOk()) return;
-        pushField("age-min", "age-min");
-        pushField("age-max", "age-max");
+        paramsMap.set("age-min", document.getElementById("age-min").value);
+        paramsMap.set("age-max", document.getElementById("age-max").value);
     }
     
     if(isOn("weight-checkbox")){
         if(!isWeightOk()) return;
-        pushField("weight-min", "weight-min");
-        pushField("weight-max", "weight-max");
+        paramsMap.set("weight-min", document.getElementById("weight-min").value);
+        paramsMap.set("weight-max", document.getElementById("weight-max").value);
     }
     
     if(isOn("qualification-checkbox")){
         if(!isQualificationOk()) return;
-        var qualMin = document.getElementById("ng-members-qualification-min").value;
-        var qualMax = document.getElementById("ng-members-qualification-max").value;
-        body.push('Content-Disposition: form-data; name="qualification-min"\r\n\r\n' 
-        + qualificationsMap.get(qualMin) + '\r\n'); 
-        body.push('Content-Disposition: form-data; name="qualification-max"\r\n\r\n' 
-        + qualificationsMap.get(qualMax) + '\r\n');
+        paramsMap.set("qualification-min", qualificationsMap.get(document.getElementById("ng-members-qualification-min").value));
+        paramsMap.set("qualification-max", qualificationsMap.get(document.getElementById("ng-members-qualification-max").value));
     }
 
-    if(isOn("gender-checkbox") && isOn("create-ng-male")){
-        pushField("sex", "create-ng-male");
-    } else if(isOn("gender-checkbox")){
-        pushField("sex", "create-ng-female");
+    if(isOn("gender-checkbox")){
+        paramsMap.set("sex", isOn("create-ng-male") ? "male" : "female");
     }
-    body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
-
-    if(!sendForm("/new-group-form?" + "id=" + location.search.split("/")[0].split("?")[1], boundary, body)){
-        return 255;
-    }
-   return 0;
+    sendForm("/new-group-form?" + "id=" + location.search.split("/")[0].split("?")[1], paramsMap);
 }
 
 var params = sendRequest("/group-params-get?" + "id=" + location.search.split("/")[0].split("?")[1]);

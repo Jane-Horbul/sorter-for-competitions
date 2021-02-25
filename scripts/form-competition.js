@@ -1,5 +1,6 @@
 import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
+import {sendForm} from "./common.js"
 
 function createDivRow(division){
     var template = document.getElementById("div-row-template").content.cloneNode(true);
@@ -62,40 +63,26 @@ function deleteQualification(qValue){
     }
 }
 
-function sendForm() {
-    var compName = document.getElementById("competition-name");
-    var compDescription = document.getElementById("description");
+function sendCompetitionForm() {
+    var paramsMap = new Map();
     var divisionsTable = document.getElementById("divisions-table");
-    var divisionsStr = "";
     var qualificationsTable = document.getElementById("qualifications-table");
+    var divisionsStr = "";
     var qualificationsStr = "";
-    var boundary = String(Math.random()).slice(2);
-    var body = ['\r\n'];
-
-    body.push('Content-Disposition: form-data; name="competition-name"\r\n\r\n' + compName.value + '\r\n');
-    body.push('Content-Disposition: form-data; name="description"\r\n\r\n' + compDescription.value + '\r\n');
 
     for(var i = 2; i < divisionsTable.rows.length; i++) {
         divisionsStr += divisionsTable.rows[i].cells[0].innerHTML + ", ";
     }
-    body.push('Content-Disposition: form-data; name="divisions"\r\n\r\n' + divisionsStr + '\r\n');
-
     for(var i = 3; i < qualificationsTable.rows.length; i++) {
         qualificationsStr += qualificationsTable.rows[i].cells[0].innerHTML + " - " + qualificationsTable.rows[i].cells[1].innerHTML + ", ";
     }
-    body.push('Content-Disposition: form-data; name="qualifications"\r\n\r\n' + qualificationsStr + '\r\n');
 
-    
-    body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/competition-form', true);
-    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
+    paramsMap.set("competition-name", document.getElementById("competition-name").value);
+    paramsMap.set("description", document.getElementById("description").value);
+    paramsMap.set("divisions", divisionsStr);
+    paramsMap.set("qualifications", qualificationsStr);
 
-    xhr.onreadystatechange = function() {
-        if (this.readyState != 4) return;
-        alert( this.responseText );
-    }
-    xhr.send(body);
+    sendForm('/competition-form', paramsMap);
 }
 
 function setBtnActions(){
@@ -125,7 +112,7 @@ function setBtnActions(){
     
     document.getElementById("add-qual-btn").addEventListener("click", addQualification, false);
     document.getElementById("add-div-btn").addEventListener("click", addDivision, false);
-    document.getElementById("send-form-btn").addEventListener("click", sendForm, false);
+    document.getElementById("send-form-btn").addEventListener("click", sendCompetitionForm, false);
 }
 
 setBtnActions();
