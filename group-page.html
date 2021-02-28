@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Group page</title>
+        <link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <header class="page-header">
+            <div class="container">
+                <h1 id="group-name">Group name</h1>
+                <h2 id="group-division">DIVISION</h2>
+                <h2 id="group-age">AGE</h2>
+                <h2 id="group-weight">WEIGHT</h2>
+                <h2 id="group-sex">GENDER</h2>
+                <h2 id="group-qulification">QUALIFICATION</h2>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <section>
+                    <div class="main-tables">
+                        <div class="main-tables-item">
+                            <table class="dynamic-table" id="members-table">
+                                <tr>
+                                    <th colspan="8"> Members 
+                                        <a id="member-add-btn">
+                                            <button class="" type="button" data-open-modal>
+                                                <svg class="sl-footer-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                </svg>
+                                            </button>
+                                        </a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Name, Surname</td>
+                                    <td>Age</td>
+                                    <td>Weight</td>
+                                    <td>Sex</td>
+                                    <td>Team</td>
+                                    <td>Qualification</td>
+                                    <td>Adm</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="main-tables-item">
+                            <table class="dynamic-table" id="pairs-table">
+                                <tr>
+                                    <th  colspan="7"> Pairs 
+                                        <button class="" type="button"  id="update-pairs-btn" data-open-modal> Update pairs </button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>Pair ID</td>
+                                    <td>Red member</td>
+                                    <td>Blue member</td>
+                                    <td>Winner</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <a id="priv-page-link">
+                <button type="button" id="delete-group-btn">
+                <span class="group-card-btn-submit">Delete group</span></button>
+            </a>
+        </main>
+        <footer>
+            <div class="container flexbox">
+                <address class="contacts-box">
+                </address>
+                <div class="container sl">
+                </div>
+            </div>
+        </footer>
+        <template id="member-template">
+            <tr>
+                <td id="member-name">  </td>
+                <td id="member-age">  </td>
+                <td id="member-weight">  </td>
+                <td id="member-sex">  </td>
+                <td id="member-team">  </td>
+                <td id="member-qualification">  </td>
+                <td id="member-admited">  </td>
+                <td> <button type="button" id="member-dell-btn">Dell</button></td>
+            </tr>
+        </template>
+        <template id="pair-template">
+            <tr>
+                <td id="pair-id">  </td>
+                <td id="pair-red">  </td>
+                <td id="pair-blue">  </td>
+                <td id="pair-winner">  </td>
+            </tr>
+        </template>
+        <script src="./scripts/group-page.js" type="module"></script>   
+    </body>
+</html>
+  

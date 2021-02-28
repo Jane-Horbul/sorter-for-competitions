@@ -2,7 +2,9 @@ import {sendRequest} from "./common.js"
 import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {sendForm} from "./common.js"
+import {getLinkParams} from "./common.js"
 
+var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
 
 function fillDivisions(divisions){
@@ -131,10 +133,10 @@ function sendGroupForm() {
     if(isOn("gender-checkbox")){
         paramsMap.set("sex", isOn("create-ng-male") ? "male" : "female");
     }
-    sendForm("/new-group-form?" + "id=" + location.search.split("/")[0].split("?")[1], paramsMap);
+    sendForm("/new-group-form?" + "cid=" + pageParams.get("cid"), paramsMap);
 }
 
-var params = sendRequest("/group-params-get?" + "id=" + location.search.split("/")[0].split("?")[1]);
+var params = sendRequest("/competition-params-get?" + "cid=" + pageParams.get("cid"));
 fillDivisions(params.get("Divisions"));
 fillQualifications(params.get("Qualifications"));
 document.getElementById("send-form-btn").addEventListener("click", sendGroupForm, false);

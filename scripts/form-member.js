@@ -2,8 +2,9 @@ import {sendRequest} from "./common.js"
 import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {sendForm} from "./common.js"
+import {getLinkParams} from "./common.js"
 
-
+var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
 var divisionsArray = new Array(0);
 
@@ -81,10 +82,10 @@ function sendMemberForm() {
     paramsMap.set("member-sex", isOn("user-sex-male") ? "male" : "female");
     paramsMap.set("admission", isOn("user-admission-y") ? "yes" : "no");
 
-    sendForm("/new-member-form?" + "id=" + location.search.split("/")[0].split("?")[1], paramsMap);
+    sendForm("/new-member-form?" + "cid=" + pageParams.get("cid"), paramsMap);
 }
 
-var params = sendRequest("/member-params-get?" + "id=" + location.search.split("/")[0].split("?")[1]);
+var params = sendRequest("/competition-params-get?" + "cid=" + pageParams.get("cid"));
 fillDivisions(params.get("Divisions"));
 fillQualifications(params.get("Qualifications"));
 document.getElementById("send-form-btn").addEventListener("click", sendMemberForm, false);

@@ -1,8 +1,12 @@
 
 import {sendRequest} from "./common.js"
 import {isNumber} from "./common.js"
+import {getLinkParams} from "./common.js"
+import {sendForm} from "./common.js"
 
+var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
+
 function getQualificationInterval(qMin, qMax){
     var qMinName;
     var qMaxName;
@@ -27,19 +31,11 @@ function getQualificationInterval(qMin, qMax){
 }
 
 function sendNotification(name, value) {
-    var boundary = String(Math.random()).slice(2);
-    var body = ['\r\n'];
-    var xhr = new XMLHttpRequest();
+    var paramsMap = new Map();
 
-    body.push('Content-Disposition: form-data; name="' + name + '"\r\n\r\n' +  value + '\r\n');
-    body.push('Content-Disposition: form-data; name="id"\r\n\r\n' +  location.search.split("?")[1] + '\r\n');
-    body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
-
-    xhr.open('POST', '/competition-edition', true);
-    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-
-    xhr.onreadystatechange = function() { if (this.readyState != 4) return; }
-    xhr.send(body);
+    paramsMap.set(name, value);
+    paramsMap.set("cid", pageParams.get("cid"));
+    sendForm('/competition-edition', paramsMap);
 }
 
 /* ------------------- QUALIFICATIONS ----------------------------*/
@@ -163,6 +159,8 @@ function groupElementCreate(group){
     template.getElementById("group-division").innerHTML = group.get("division"); 
     template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualification_min"), group.get("qualification_max"));
     template.getElementById("group-pairs-num").innerHTML = group.get("pairs_num"); 
+    template.getElementById("group-row").setAttribute("onclick", "window.location.href='"
+                                    + window.location.href + "/group?gid=" + group.get("id") + "'; return false"); 
     return template;
 }
 
@@ -183,26 +181,35 @@ function fillPageInfo(params){
 }
 
 function refreshPairs(){
-    var newParams = sendRequest("/refresh-group-pairs?" + "id=" + location.search.split("?")[1]);
+    var newParams = sendRequest("/competition-pairs-refresh?" + "cid=" + pageParams.get("cid"));
     var groupsTable = document.getElementById("groups-table");
-    groupsTable.delete
+    
     while(groupsTable.rows.length > 2){
         groupsTable.deleteRow(groupsTable.rows.length - 1);
     }
     newParams.get("Groups").forEach(gr =>   groupsTable.append(groupElementCreate(gr)));
 }
 
+function resortMembers(){
+    var newParams = sendRequest("/competition-members-sort?" + "cid=" + pageParams.get("cid"));
+    var membersTable = document.getElementById("members-table");
+    
+    while(membersTable.rows.length > 2){
+        membersTable.deleteRow(membersTable.rows.length - 1);
+    }
+    newParams.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
+}
+
 function setBtnActions(){
     document.getElementById("qual-add-btn").addEventListener("click", toogleQualificationAdding, false);
     document.getElementById("div-add-btn").addEventListener("click", toogleDivisionAdding, false);
     document.getElementById("form-pairs-btn").addEventListener("click", refreshPairs, false);
+    document.getElementById("sort-members-btn").addEventListener("click", resortMembers, false);
 
     document.getElementById("group-add-btn").setAttribute("href", window.location.href + "/group-form");
-    document.getElementById("member-add-btn").setAttribute("href", window.location.href + "/member-form");
-
-    
+    document.getElementById("member-add-btn").setAttribute("href", window.location.href + "/member-form");  
 }
 
 
-fillPageInfo(sendRequest("/competition-get?" + "id=" + location.search.split("?")[1]));
+fillPageInfo(sendRequest("/competition-get?" + "cid=" + pageParams.get("cid")));
 setBtnActions();

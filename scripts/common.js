@@ -14,6 +14,21 @@ export function isEmptyString(str){
     return false;
 }
 
+export function getLinkParams(link){
+    var paramsMap = new Map();
+    var sectors = link.split("/");
+    sectors.forEach(sect => {
+        var params = sect.split("?");
+        params.forEach(param => {
+            var field = param.split("=");
+            if(field.length == 2){
+                paramsMap.set(field[0], field[1]);
+            }
+        });
+    });
+    return paramsMap;
+}
+
 export function parseMap(str){
     var result = new Map();
     str.split(", ").forEach(field => {
@@ -39,20 +54,18 @@ export function parseAnswerParams(answer){
     options.forEach(option => {
         var params = option.split("<Option value>");
         if(params.length < 2) return;
-
-        if(params[0].localeCompare("Divisions") == 0){
+        
+        if(params[1].split("<Type single>").length > 1) {
+            params[1] = params[1].split("<Type single>")[1];
+            parseResult.set(params[0], params[1]);
+        } else if(params[1].split("<Type array>").length > 1) {
+            params[1] = params[1].split("<Type array>")[1];
             parseResult.set(params[0], params[1].split(", "));
-        } else if(params[0].localeCompare("Qualifications") == 0){
+        } else if(params[1].split("<Type map>").length > 1) {
+            params[1] = params[1].split("<Type map>")[1];
             parseResult.set(params[0], parseMap(params[1]));
-        } else if(params[0].localeCompare("Members") == 0){
-            parseResult.set(params[0], parseMapArray(params[1]));
-        } else if(params[0].localeCompare("Groups") == 0){
-            parseResult.set(params[0], parseMapArray(params[1]));
-        } else if(params[0].localeCompare("Name") == 0){
-            parseResult.set(params[0], params[1]);
-        } else if(params[0].localeCompare("Description") == 0){
-            parseResult.set(params[0], params[1]);
-        } else if(params[0].localeCompare("Competitions") == 0){
+        } else if(params[1].split("<Type mapArray>").length > 1) {
+            params[1] = params[1].split("<Type mapArray>")[1];
             parseResult.set(params[0], parseMapArray(params[1]));
         }
     });
@@ -64,7 +77,6 @@ export function sendRequest(request) {
     xhr.open('GET', request, false);
     xhr.send();
     if (xhr.status != 200)   return new Map();
-    console.log(xhr.responseText);
     return parseAnswerParams(xhr.responseText);
 }
 
