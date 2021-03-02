@@ -11,6 +11,7 @@
     <body>
         <header class="page-header">
             <div class="container">
+                <button type="button" data-open-modal>Add new member</button>
                 <h1 id="member-name">Member name</h1>
                 <h1 id="member-division">DIVISIONS</h1>
                 <h1 id="member-age">AGE</h1>
@@ -59,6 +60,84 @@
                 </div>
             </div>
         </footer>
+<!--modal-window-start-->
+<div class="backdrop is-hidden" data-backdrop>
+    <!--<div class="backdrop" data-backdrop>-->
+    <div class="container">
+        <div class="modal">
+            <button class="btn-modal" data-close-modal>
+                <svg class="btn-close">
+                    <use href="./img/speite-for-forms.svg#btn-close"></use>
+                </svg>
+            </button>
+            <form class="modal-form">
+
+                <span class="modal-title">Create new member</span>
+
+                <div class="new-member-field">
+
+                    <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
+                    </div>
+                
+                    <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
+                    </div>
+
+                    <label for="new-member-age"><span class="form-field-title">Member age</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
+                    </div>
+
+                    <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
+                    </div>
+
+                    <ul class="list new-member-gender-list">
+                        <label for="new-member-sex" class="form-field-label">
+                            <span class="form-field-title">Your gender</span>
+                            <li class="new-member-gender-item">
+                                <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
+                                <label for="male">Male</label>
+                            </li>
+
+                            <li class="new-member-gender-item">
+                              <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
+                              <label for="female">Female</label>
+                            </li>
+                        </label>
+                    </ul>
+                
+                    <label for="new-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
+                        <select name="new-member-qualification" id="new-member-qualification"><!--Qualification--></select>
+                    </div>
+                
+                    <label for="new-member-division" id="new-member-divisions" class="form-field-label">
+                        <span class="form-field-title">Choose divisions:</span>
+                        <div class="new-member-field">
+                                                    <!--Divisons-->
+                        <input type="checkbox" id="001" name="division-01" value="division">
+                        <label for="division-01">division-01</label>
+
+                        <input type="checkbox" id="002" name="division-02" value="division">
+                        <label for="division-02">division-02</label>
+                    </div>
+
+                    </label>
+                
+                <button type="submit" class="modal-btn-submit">
+                    <span class="modal-btn-submit-text">Send</span>
+                </button>
+                
+            </div>
+            </form>
+         </div>
+</div>
+</div>
+        <script src="./scripts/open-close-modal-window.js" type="module"></script>
     </body>
 </html>
   

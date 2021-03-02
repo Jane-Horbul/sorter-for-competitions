@@ -26,6 +26,8 @@ body {
   font-weight: 400;
   line-height: 1.625;
   letter-spacing: 0.02em;
+  display: flex;
+	flex-direction: column;
 }
 img {
   display: block;
@@ -38,6 +40,7 @@ textarea {
 }
 main {
   margin-bottom: 25px;
+  min-height: calc(100vh - 180px);
 }
 .page-header {
   padding-top: 30px;
@@ -389,7 +392,7 @@ li.active a span {
   height: 50px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 30px;
+  margin-top: 100px;
   background-color: var(--assent-color);
   border: none;
   color: var(--white-color);
@@ -620,6 +623,7 @@ li.active a span {
 }
 .advantages-list {
   display: flex;
+  flex-wrap: wrap;
 }
 .advantages-item {
   width: calc((100% - 30px * 3) / 4);
@@ -817,6 +821,10 @@ li.active a span {
   background-color: rgba(255, 255, 255, 0.1);
 }
 .sl-footer-icon {
+  display: block;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 10px;
   width: 20px;
   height: 20px;
   fill: var(--white-color);
@@ -1083,4 +1091,34 @@ height: auto;
 }
 .acc-conntainer .acc-item:checked ~ article.acc-large{
  height: auto;
+}
+
+/*member-page*/
+.new-member-field {
+  display: block;
+}
+.new-member-gender-list{
+  display: flex;
+}
+.new-member-gender-item {
+  display: inline;
+  width: 80px;
+}
+.new-member-qualification{
+  display: block;
+}
+
+/*main page*/
+.add-new-competition-btn {
+  margin-top: 50px;
+  margin-left: 70px;
+  border:0px;
+  background-color: #f5f4fa;
+}
+.add-new-competition-block {
+  display: block;
+}
+.add-new-competition-btn-text {
+  margin-top: 15px;
+  font-size: 16px;
 }

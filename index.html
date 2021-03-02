@@ -14,8 +14,17 @@
 </head>
 
 <body>
+    <div class="wrapper">
     <header class="page-header">
-
+        <div class="container flexbox">
+            <nav class="navigation">
+                <!--site logo-->
+                <img class="program-logo "
+                    src="./img/competition-logo.png"
+                    alt="Program logo">
+            </nav>
+            
+        </div>
     </header>
     <main>
         <!--Slidebar-->
@@ -32,13 +41,16 @@
                 <ul class="list advantages-list" id="competitions-list">
                     <li class="advantages-item">
                         <div class="advantages-icon-bg">
+                            <div class="add-new-competition-block">
                             <a href="./competition-add-form">
-                                <button class="" type="button" data-open-modal>Add competitions
+                                <button class="add-new-competition-btn" type="button" data-open-modal>
                                     <svg class="sl-footer-icon">
                                     <use href="./img/symbol-defs.svg#icon-plus"></use>
                                 </svg>
+                                <span class="add-new-competition-btn-text">Add competitions</span>
                                 </button>
                             </a>
+                            </div>
                         </div>
                     </li>
                     <!--The end of the element "Add competition" -->
@@ -60,6 +72,7 @@
         </div>
 
     </footer>
+</div>
 </body>
 <template id="competition-template">
     <li class="advantages-item">
