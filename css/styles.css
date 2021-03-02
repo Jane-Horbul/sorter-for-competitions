@@ -489,7 +489,7 @@ li.active a span {
   margin: -15px;
 }
 .projects-item {
-  width: calc((100% - 30px * 3) / 3);
+  width: 270px;
   margin-right: 30px;
   margin-bottom: 30px;
 }
@@ -531,7 +531,7 @@ li.active a span {
 
 .overlay > p {
   color: var(--white-color);
-  padding: 63px 24px;
+  padding: 20px 24px;
   margin: 0;
   font-family: Roboto;
   font-size: 18px;
@@ -1121,4 +1121,7 @@ height: auto;
 .add-new-competition-btn-text {
   margin-top: 15px;
   font-size: 16px;
+}
+.title-of-competition-list-item {
+  text-decoration: none;
 }
