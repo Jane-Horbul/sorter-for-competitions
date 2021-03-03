@@ -9,6 +9,7 @@
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
+        <div class="wrapper">
         <header class="page-header">
             <div class="container">
                 <h1 id="competition-name">Competition name</h1>
@@ -30,7 +31,7 @@
                             <tr>
                                 <th colspan="2">Qualifications</th>
                                     <th>
-                                        <button class="" type="button" id="qual-add-btn" data-open-modal>
+                                        <button class="" type="button" id="qual-add-btn">
                                             <svg class="sl-footer-icon">
                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                             </svg>
@@ -44,7 +45,7 @@
                             <tr>
                                 <th>Divisions</th>
                                 <th>
-                                    <button class="" type="button" id="div-add-btn" data-open-modal>
+                                    <button class="" type="button" id="div-add-btn">
                                         <svg class="sl-footer-icon">
                                             <use href="./img/symbol-defs.svg#icon-plus"></use>
                                         </svg>
@@ -61,11 +62,13 @@
                                 <tr>
                                     <th colspan="8">Members
                                         <!--Add member button start-->
-                                        <a id="member-add-btn">
-                                            <button class="" type="button" data-open-modal>
-                                                <svg class="sl-footer-icon">
+                                        <a href="#popup_1" class="popup-link">
+                                            <button class="" type="button">
+                                                
+                                                    <svg class="sl-footer-icon">
                                                     <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                 </svg>
+                                                
                                             </button>
                                         </a>
                                         <!--Add member button end-->
@@ -87,11 +90,12 @@
                             <table class="dynamic-table" id="groups-table">
                                 <tr>
                                     <th  colspan="7">Groups
-                                        <a id="group-add-btn">
-                                            <button class="" type="button" data-open-modal>
+                                        <a href="#popup_2" class="popup-link">
+                                            <button class="" type="button">
                                                 <svg class="sl-footer-icon">
                                                     <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                 </svg>
+                                                
                                             </button>
                                         </a>    
                                     </th>
@@ -119,6 +123,7 @@
                 </div>
             </div>
         </footer>
+    </div>
         <template id="qualification-template">
             <tr>
                 <td class="secondary-tables--td" id="qual-value">  </td>
@@ -173,7 +178,130 @@
                 <td id="group-pairs-num">  </td>
             </tr>
         </template>
-        <script src="./scripts/competition-page.js" type="module"></script>          
-</body>
+<!--popup-window-start-->
+<div class="popup" id = "popup_1">
+    <a href="#header" class="popup__area"></a>
+    <div class="popup__body">
+        <div class="popup__content">
+            <a href="#header" class="popup__close close-popup">X</a>
+            <form class="modal-form">
+
+                <span class="modal-title">Create new member</span>
+
+                <div class="new-member-field">
+
+                    <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
+                    </div>
+                
+                    <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
+                    </div>
+
+                    <label for="new-member-age"><span class="form-field-title">Member age</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
+                    </div>
+
+                    <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
+                    </div>
+
+                    <ul class="list new-member-gender-list">
+                        <label for="new-member-sex" class="form-field-label">
+                            <span class="form-field-title">Member`s gender</span>
+                            <li class="new-member-gender-item">
+                                <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
+                                <label for="male">Male</label>
+                            </li>
+
+                            <li class="new-member-gender-item">
+                              <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
+                              <label for="female">Female</label>
+                            </li>
+                        </label>
+                    </ul>
+
+                    <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
+                    </div>
+                
+                    <label for="new-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
+                        <select name="new-member-qualification" id="new-member-qualification"><!--Qualification--></select>
+                    </div>
+                
+                    <label for="new-member-division" id="new-member-divisions" class="form-field-label">
+                        <span class="form-field-title">Choose divisions:</span>
+                        <div class="new-member-field">
+                                                    <!--Divisons-->
+                        <input type="checkbox" id="001" name="division-01" value="division">
+                        <label for="division-01">division-01</label>
+
+                        <input type="checkbox" id="002" name="division-02" value="division">
+                        <label for="division-02">division-02</label>
+                    </div>
+                    </label>
+
+                    <div class="form-field--option">
+                    <ul class="list new-member-permit-list">
+                        <label for="new-member-permit" class="form-field-label">
+                            <span class="form-field-title">Member`s permit</span>
+                            <li class="new-member-permit-item">
+                                <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
+                                <label for="yes">Yes</label>
+                            </li>
+
+                            <li class="new-member-permit-item">
+                              <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
+                              <label for="no">No</label>
+                            </li>
+                        </label>
+                    </ul>
+                </div>
+                
+                <button type="submit" class="modal-btn-submit">
+                    <span class="modal-btn-submit-text">Send</span>
+                </button>
+                
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="popup" id = "popup_2">
+    <a href="#header" class="popup__area"></a>
+    <div class="popup__body">
+        <div class="popup__content">
+            <a href="#header" class="popup__close close-popup">X</a>
+            <form class="modal-form">
+
+                <span class="modal-title">Add a group</span>
+
+                <div class="new-member-field">
+
+                    <label for="new-group-name"><span class="form-field-title">Group name</span></label>
+                    <div class="form-field">
+                        <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
+                    </div>
+                
+                <button type="submit" class="modal-btn-submit">
+                    <span class="modal-btn-submit-text">Send</span>
+                </button>
+                
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--popup-window-end-->
+
+        <script src="./scripts/competition-page.js" type="module"></script> 
+        <script src="./scripts/open-close-popup.js" type="module"></script>          
+
+    </body>
 </html>
   

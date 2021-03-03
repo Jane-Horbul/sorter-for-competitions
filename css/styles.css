@@ -311,6 +311,12 @@ li.active a span {
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--assent-color);
 }*/
+
+.form-field--option {
+  width: 448px;
+  height: auto;
+}
+
 .link-agree {
   color: var(--assent-color);
 }
@@ -1097,10 +1103,12 @@ height: auto;
 .new-member-field {
   display: block;
 }
-.new-member-gender-list{
+.new-member-gender-list, 
+.new-member-permit-list {
   display: flex;
 }
-.new-member-gender-item {
+.new-member-gender-item, 
+.new-member-permit-item {
   display: inline;
   width: 80px;
 }
@@ -1124,4 +1132,75 @@ height: auto;
 }
 .title-of-competition-list-item {
   text-decoration: none;
+}
+
+/*PopUPs*/
+body.lock {
+  overflow: hidden;
+}
+.wrapper{
+  overflow: hidden;
+  min-height: 100%;
+}
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #bdbdbdea;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.8s ease 0s;
+}
+.popup.open{
+  opacity: 1;
+  visibility: visible;
+}
+.popup.open .popup__content{
+transform: perspective(600px) translate(0px, 0%);
+opacity: 1;
+}
+.popup:target{
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup__area{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.popup__body {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+}
+.popup__content {
+  position: relative;
+  background-color: var(--white-color);
+  color: #000;
+  max-width: 800px;
+  padding: 30px;
+}
+.popup__close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  color: #000;
+  text-decoration: none;
+}
+.popup__title {
+  font-size: 40px;
+  margin: 0px 0px 1em 0px;
+}
+.popup__text {
+  font-size: 16px;
 }
