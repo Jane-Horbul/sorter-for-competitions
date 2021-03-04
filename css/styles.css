@@ -1049,13 +1049,13 @@ color: var(--logo-color);
 
 /*ackordeon tabs*/
 .acc-conntainer{
-  width: 1200px;
- margin: 50px auto 30px;
-text-align: left;
+  width: 450px;
+  margin: 30px auto 30px;
+  text-align: left;
 }
 .acc-conntainer .acc-menu-item-gender-label{
   font-family: Arial, sans-serif;
-padding: 5px 20px;
+padding: 0 20px;
 position: relative;
 z-index: 20;
   display: block;
@@ -1064,7 +1064,7 @@ height: 30px;
   color: #777;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
 line-height: 33px;
-font-size: 19px;
+font-size: 13px;
   background: #ffffff;
   background: -moz-linear-gradient(top, #ffffff 1%, #eaeaea 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #ffffff), color-stop(100%, #eaeaea));
@@ -1086,7 +1086,7 @@ box-shadow:
 .acc-conntainer .acc-item:checked + .acc-menu-item-gender-label,
 .acc-conntainer .acc-item:checked + .acc-menu-item-gender-label:hover{
  background-color: #c6e1ec;
-  color: #3d7489;
+  color: var(--assent-color);
  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
   box-shadow: 
         0px 0px 0px 1px rgba(155, 155, 155, 0.3), 
