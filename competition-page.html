@@ -176,7 +176,7 @@
                 <td id="group-pairs-num">  </td>
             </tr>
         </template>
-<!--popup-window-start-->
+<!--first-popup-window-start-->
 <div class="popup" id = "popup_1">
     <a href="#header" class="popup__area"></a>
     <div class="popup__body">
@@ -270,6 +270,8 @@
         </div>
     </div>
 </div>
+<!--first-popup-window-end-->
+<!--second-popup-window-start-->
 <div class="popup" id = "popup_2">
     <a href="#header" class="popup__area"></a>
     <div class="popup__body">
@@ -285,6 +287,17 @@
                     <div class="form-field">
                         <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
                     </div>
+
+                    <div class="form-field--option">
+                        <label for="division-of-group">
+                            <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
+                            <select name="division-of-group" id=""><!--Divisons--></select>
+                    </div>
+                    <div class="form-field--option">
+                        <label for="formula-of-group">
+                            <label for="formula-of-group"><span class="form-field-title">Choose formula of competition:</span></label>
+                            <select name="formula-of-group" id=""><!--Formula --></select>
+                    </div>
                 
                 <button type="submit" class="modal-btn-submit">
                     <span class="modal-btn-submit-text">Send</span>
@@ -295,7 +308,7 @@
         </div>
     </div>
 </div>
-<!--popup-window-end-->
+<!--second-popup-window-end-->
 
         <script src="./scripts/competition-page.js" type="module"></script> 
         <script src="./scripts/open-close-popup.js" type="module"></script>          
