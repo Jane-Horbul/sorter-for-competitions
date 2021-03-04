@@ -828,11 +828,10 @@ li.active a span {
 }
 .sl-footer-icon {
   display: block;
-margin-left: auto;
-margin-right: auto;
-margin-bottom: 10px;
   width: 20px;
   height: 20px;
+  margin-left: auto;
+margin-right: auto;
   fill: var(--white-color);
 }
 .sl-footer-link:hover {
@@ -894,6 +893,7 @@ margin-bottom: 10px;
   background-repeat: repeat-x, no-repeat;
 }
 .dynamic-table {
+  position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -968,8 +968,56 @@ margin-bottom: 10px;
 .secondary-tables--buttons {
   width: 20%;
 }
+.competition-page-main-btn-list{
+  margin-top: 0px;
+margin-bottom: 0px;
+padding-left: 25px;
+}
 .competition-page-main-btn {
-  margin-bottom: 15px;
+  width: 200px;
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: var(--assent-color);
+  border: none;
+  color: var(--white-color);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+.competition-page-main-btn:hover,
+.competition-page-main-btn:focus {
+  background-color: var(--white-color) ;
+  color: var(--assent-color);
+  box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.competition-page-add-btn,
+.competition-page-add-btn-modal {
+  position: absolute;
+  top: 28%;
+  left: 95%;
+  width: 50px;
+  height: 30px;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: var(--white-color);
+  border: none;
+  color: var(--assent-color);
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+.competition-page-add-btn {
+  position: absolute;
+  top: 48%;
+  left: 94%;
+}
+.competition-page-add-btn-text{
+  font-size: 16px;
+  justify-content: center;
 }
 .secondary-tables--td {
   width: 12%;
