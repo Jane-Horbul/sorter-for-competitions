@@ -10,118 +10,118 @@
     </head>
     <body>
         <div class="wrapper">
-        <header class="page-header">
-            <div class="container">
-                <h1 id="competition-name">Competition name</h1>
-            </div>
-        </header>
-        <main>
-            <div class="container">
-                <!--Section with section with tables of created divisions and qualifications-->
-                <section class="secondary-tables">
-                    <div class="secondary-tables--buttons">
-                        <ul class="competition-page-main-btn-list">
-                            <li class="list"><button class="competition-page-main-btn" id="sort-members-btn">Sort members</button></li>
-                            <li class="list"><button class="competition-page-main-btn" id="form-pairs-btn">Form pairs</button></li>
-                            <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
-                        </ul>
-                    </div>
-                    <div class="secondary-tables--item">
-                        <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
-                            <tr>
-                                <th colspan="2">Qualifications</th>
+            <header class="page-header">
+                <div class="container">
+                    <h1 id="competition-name">Competition name</h1>
+                </div>
+            </header>
+            <main>
+                <div class="container">
+                    <!--Section with section with tables of created divisions and qualifications-->
+                    <section class="secondary-tables">
+                        <div class="secondary-tables--buttons">
+                            <ul class="competition-page-main-btn-list">
+                                <li class="list"><button class="competition-page-main-btn" id="sort-members-btn">Sort members</button></li>
+                                <li class="list"><button class="competition-page-main-btn" id="form-pairs-btn">Form pairs</button></li>
+                                <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
+                            </ul>
+                        </div>
+                        <div class="secondary-tables--item">
+                            <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
+                                <tr>
+                                    <th colspan="2">Qualifications</th>
+                                        <th>
+                                            <button class="competition-page-add-btn" type="button" id="qual-add-btn">
+                                                <svg class="sl-footer-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                </svg>
+                                            </button>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="secondary-tables--item">
+                            <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
+                                <tr>
+                                    <th>Divisions</th>
                                     <th>
-                                        <button class="competition-page-add-btn" type="button" id="qual-add-btn">
+                                        <button class="competition-page-add-btn" type="button" id="div-add-btn">
                                             <svg class="sl-footer-icon">
                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                             </svg>
                                         </button>
-                                </th>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="secondary-tables--item">
-                        <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
-                            <tr>
-                                <th>Divisions</th>
-                                <th>
-                                    <button class="competition-page-add-btn" type="button" id="div-add-btn">
-                                        <svg class="sl-footer-icon">
-                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                        </svg>
-                                    </button>
-                                </th>
-                            </tr>
-                        </table>
-                    </div>
-                </section>
-                <section>
-                    <div class="main-tables">
-                        <div class="main-tables-item">
-                            <table class="dynamic-table" id="members-table">
-                                <tr>
-                                    <th colspan="8">Members
-                                        <!--Add member button start-->
-                                        <a href="#popup_1" class="popup-link">
-                                            <button class="competition-page-add-btn-modal" type="button">
-                                                    <svg class="sl-footer-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                                
-                                            </button>
-                                        </a>
-                                        <!--Add member button end-->
                                     </th>
-                                </tr>
-                                <tr>
-                                    <td>Name, Surname</td>
-                                    <td>Age</td>
-                                    <td>Weight</td>
-                                    <td>Sex</td>
-                                    <td>Team</td>
-                                    <td>Qualification</td>
-                                    <td>Adm</td>
-                                    <td>Number of categories</td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="main-tables-item">
-                            <table class="dynamic-table" id="groups-table">
-                                <tr>
-                                    <th  colspan="7">Groups
-                                        <a href="#popup_2" class="popup-link">
-                                            <button class="competition-page-add-btn-modal" type="button">
-                                                <svg class="sl-footer-icon competition-page-add-btn-text">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                            </button>
-                                        </a>    
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>Name of group</td>
-                                    <td>Age of members</td>
-                                    <td>Sex</td>
-                                    <td>Division</td>
-                                    <td>Weight</td>
-                                    <td>Qualification</td>
-                                    <td>Pairs number</td>
-                                </tr>
-                            </table>
+                    </section>
+                    <section>
+                        <div class="main-tables">
+                            <div class="main-tables-item">
+                                <table class="dynamic-table" id="members-table">
+                                    <tr>
+                                        <th colspan="8">Members
+                                            <!--Add member button start-->
+                                            <a href="#popup_1" class="popup-link">
+                                                <button class="competition-page-add-btn-modal" type="button">
+                                                        <svg class="sl-footer-icon">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                                    
+                                                </button>
+                                            </a>
+                                            <!--Add member button end-->
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Name, Surname</td>
+                                        <td>Age</td>
+                                        <td>Weight</td>
+                                        <td>Sex</td>
+                                        <td>Team</td>
+                                        <td>Qualification</td>
+                                        <td>Adm</td>
+                                        <td>Number of groups</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="main-tables-item">
+                                <table class="dynamic-table" id="groups-table">
+                                    <tr>
+                                        <th  colspan="7">Groups
+                                            <a href="#popup_2" class="popup-link">
+                                                <button class="competition-page-add-btn-modal" type="button">
+                                                    <svg class="sl-footer-icon competition-page-add-btn-text">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                                </button>
+                                            </a>    
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Name of group</td>
+                                        <td>Age of members</td>
+                                        <td>Sex</td>
+                                        <td>Division</td>
+                                        <td>Weight</td>
+                                        <td>Qualification</td>
+                                        <td>Pairs number</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-        </main>
-        <footer>
-            <div class="container flexbox">
-                <address class="contacts-box">
-                </address>
-                <div class="container sl">
+                    </section>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </main>
+            <footer>
+                <div class="container flexbox">
+                    <address class="contacts-box">
+                    </address>
+                    <div class="container sl">
+                    </div>
+                </div>
+            </footer>
+        </div>
         <template id="qualification-template">
             <tr>
                 <td class="secondary-tables--td" id="qual-value">  </td>
@@ -153,7 +153,7 @@
         </template>
 
         <template id="member-template">
-            <tr>
+            <tr id="member-row">
                 <td id="member-name">  </td>
                 <td id="member-age">  </td>
                 <td id="member-weight">  </td>
@@ -176,224 +176,224 @@
                 <td id="group-pairs-num">  </td>
             </tr>
         </template>
-<!--first-popup-window-start-->
-<div class="popup" id = "popup_1">
-    <a href="#header" class="popup__area"></a>
-    <div class="popup__body">
-        <div class="popup__content">
-            <a href="#header" class="popup__close close-popup">X</a>
-            <form class="modal-form">
+        
+        <!--first-popup-window-start-->
+        <div class="popup" id = "popup_1">
+            <a href="#header" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <a href="#header" class="popup__close close-popup">X</a>
+                    <form class="modal-form">
 
-                <span class="modal-title">Create new member</span>
+                        <span class="modal-title">Create new member</span>
 
-                <div class="new-member-field">
-
-                    <label for="new-member-name"><span class="form-field-title">Member name</span></label>
-                    <div class="form-field">
-                        <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
-                    </div>
-                
-                    <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
-                    <div class="form-field">
-                        <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
-                    </div>
-
-                    <label for="new-member-age"><span class="form-field-title">Member age</span></label>
-                    <div class="form-field">
-                        <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
-                    </div>
-
-                    <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
-                    <div class="form-field">
-                        <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
-                    </div>
-
-                    <ul class="list new-member-gender-list">
-                        <label for="new-member-sex" class="form-field-label">
-                            <span class="form-field-title">Member`s gender</span>
-                            <li class="new-member-gender-item">
-                                <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                <label for="male">Male</label>
-                            </li>
-
-                            <li class="new-member-gender-item">
-                              <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                              <label for="female">Female</label>
-                            </li>
-                        </label>
-                    </ul>
-
-                    <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
-                    <div class="form-field">
-                        <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
-                    </div>
-                
-                    <label for="new-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
-                        <select name="new-member-qualification" id="new-member-qualification"><!--Qualification--></select>
-                    </div>
-                
-                    <label for="new-member-division" id="new-member-divisions" class="form-field-label">
-                        <span class="form-field-title">Choose divisions:</span>
                         <div class="new-member-field">
-                                                    <!--Divisons-->
-                        <input type="checkbox" id="001" name="division-01" value="division">
-                        <label for="division-01">division-01</label>
 
-                        <input type="checkbox" id="002" name="division-02" value="division">
-                        <label for="division-02">division-02</label>
-                    </div>
-                    </label>
+                            <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                            <div class="form-field">
+                                <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
+                            </div>
+                        
+                            <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                            <div class="form-field">
+                                <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
+                            </div>
 
-                    <div class="form-field--option">
-                    <ul class="list new-member-permit-list">
-                        <label for="new-member-permit" class="form-field-label">
-                            <span class="form-field-title">Member`s permit</span>
-                            <li class="new-member-permit-item">
-                                <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
-                                <label for="yes">Yes</label>
-                            </li>
+                            <label for="new-member-age"><span class="form-field-title">Member age</span></label>
+                            <div class="form-field">
+                                <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
+                            </div>
 
-                            <li class="new-member-permit-item">
-                              <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
-                              <label for="no">No</label>
-                            </li>
+                            <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
+                            <div class="form-field">
+                                <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
+                            </div>
+
+                            <ul class="list new-member-gender-list">
+                                <label for="new-member-sex" class="form-field-label">
+                                    <span class="form-field-title">Member`s gender</span>
+                                    <li class="new-member-gender-item">
+                                        <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
+                                        <label for="male">Male</label>
+                                    </li>
+
+                                    <li class="new-member-gender-item">
+                                    <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
+                                    <label for="female">Female</label>
+                                    </li>
+                                </label>
+                            </ul>
+
+                            <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
+                            <div class="form-field">
+                                <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
+                            </div>
+                        
+                            <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
+                            <select name="create-member-qualification" id="create-member-qualifications">
+                                <template id="create-member-qual-temp">
+                                    <option id="create-member-qual-item" value="value">Name</option>
+                                </template>
+                            </select>
+                        </div>
+                        
+                        <label for="new-member-division" id="new-member-divisions" class="form-field-label">
+                            <span class="form-field-title">Choose divisions:</span>
+                            <div class="new-member-field" id="create-member-divisions">
+                                <template id="create-member-division-template">
+                                    <input type="checkbox" id="div-input" name="div-name" value="div-val">
+                                    <label id="div-label" for="div-name">division-01</label>
+                                </template>
+                            </div>
                         </label>
-                    </ul>
+
+                        <div class="form-field--option">
+                            <ul class="list new-member-permit-list">
+                                <label for="new-member-permit" class="form-field-label">
+                                    <span class="form-field-title">Member`s permit</span>
+                                    <li class="new-member-permit-item">
+                                        <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
+                                        <label for="yes">Yes</label>
+                                    </li>
+
+                                    <li class="new-member-permit-item">
+                                    <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
+                                    <label for="no">No</label>
+                                    </li>
+                                </label>
+                            </ul>
+                        </div>
+                        
+                        <button type="button" id="member-form-send-btn" class="modal-btn-submit">
+                            <span class="modal-btn-submit-text">Send</span>
+                        </button>
+                    </form>
                 </div>
-                
-                <button type="submit" class="modal-btn-submit">
-                    <span class="modal-btn-submit-text">Send</span>
-                </button>
-                
             </div>
-            </form>
         </div>
-    </div>
-</div>
-<!--first-popup-window-end-->
-<!--second-popup-window-start-->
-<div class="popup" id = "popup_2">
-    <a href="#header" class="popup__area"></a>
-    <div class="popup__body">
-        <div class="popup__content">
-            <a href="#header" class="popup__close close-popup">X</a>
-            <form class="modal-form">
+        <!--first-popup-window-end-->
 
-                <span class="modal-title">Add a group</span>
+        <!--second-popup-window-start-->
+        <div class="popup" id = "popup_2">
+            <a href="#header" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <a href="#header" class="popup__close close-popup">X</a>
+                    <form class="modal-form">
+                        <span class="modal-title">Add a group</span>
+                        <div class="new-member-field">
+                            <label for="new-group-name"><span class="form-field-title">Group name</span></label>
+                            <div class="form-field">
+                                <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
+                            </div>
 
-                <div class="new-member-field">
+                            <div class="form-field--option">
+                                <label for="division-of-group">
+                                    <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
+                                    <select name="division-of-group" id="create-group-division">
+                                        <template id="create-group-div-temp">
+                                            <option id="create-group-div-item" value="value">Name</option>
+                                        </template>
+                                    </select>
+                            </div>
 
-                    <label for="new-group-name"><span class="form-field-title">Group name</span></label>
-                    <div class="form-field">
-                        <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
-                    </div>
+                            <div class="form-field--option">
+                                <label for="formula-of-group">
+                                    <label for="formula-of-group"><span class="form-field-title">Choose formula of competition:</span></label>
+                                    <select name="formula-of-group" id=""><!--Formula --></select>
+                            </div>
 
-                    <div class="form-field--option">
-                        <label for="division-of-group">
-                            <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
-                            <select name="division-of-group" id=""><!--Divisons--></select>
-                    </div>
-                    <div class="form-field--option">
-                        <label for="formula-of-group">
-                            <label for="formula-of-group"><span class="form-field-title">Choose formula of competition:</span></label>
-                            <select name="formula-of-group" id=""><!--Formula --></select>
-                    </div>
+                            <div class="form-field--option">
+                                <!-- acc-menu start -->
+                                <div class="conntainer">
+                                    <section class="acc-conntainer">
+                                        <span class="create-ng-field-name">Choose required items:</span>
+                                        
+                                        <!-- acc-menu-1-item start -->
+                                        <div>
+                                            <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
+                                            <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
+                                                <article class="acc-medium">
+                                                    <div class="acc-menu-item-gender-list">    
+                                                        <div>
+                                                            <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male" checked>
+                                                            <label for="male">Male</label>
+                                                        </div>
+                                                        <div>
+                                                            <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
+                                                            <label for="female">Female</label>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </label>
+                                        </div>
+                                        <!-- acc-menu-1-item end -->
 
-                    <div class="form-field--option">
-                              <!-- acc-menu start -->
-      <div class="conntainer">
-      <section class="acc-conntainer">
+                                        <!-- acc-menu-2-item start -->
+                                        <div>
+                                            <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
+                                            <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
+                                            <article class="acc-medium">
+                                                <div class="not-required-items conntainer">
+                                                    <div class="create-ng--interval">
+                                                        <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                                                        &nbsp;<span>-</span>&nbsp;
+                                                        <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                                            
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <!-- acc-menu-2-item end -->
 
-          <!-- acc-menu-1-item start -->
+                                        <!-- acc-menu-3-item start -->
+                                        <div>
+                                            <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
+                                            <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
+                                            <article class="acc-medium">
+                                                <div class="create-ng--interval">
+                                                    <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                                                    &nbsp;<span>-</span>&nbsp;
+                                                    <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <!-- acc-menu-3-item end -->
 
-          <span class="create-ng-field-name">Choose required items:</span>
-          <!-- acc-menu-2-item start -->
-        <div>
-           <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
-           <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
-              <article class="acc-medium">
-                <div class="not-required-items conntainer">
-
-                        <div class="create-ng--interval">
-                          <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                          &nbsp;<span>-</span>&nbsp;
-                          <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                      </div>
-      
-              </article>
-        </div>
-          <!-- acc-menu-2-item end -->
-          <!-- acc-menu-3-item start -->
-        <div>
-          <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
-          <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
-             <article class="acc-medium">
-              <div>
-                    <div class="create-ng--interval">
-                      <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                      &nbsp;<span>-</span>&nbsp;
-                      <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                                        <!-- acc-menu-4-item start -->
+                                        <div>
+                                            <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
+                                            <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
+                                                <article class="acc-medium">
+                                                    <div class="create-ng--interval">
+                                                        <select name="ng-qualification-min" id="ng-members-qualification-min">
+                                                            <template id="create-group-qual-temp">
+                                                                <option id="create-group-qual-item" value="value">Name</option>
+                                                            </template>
+                                                        </select>
+                                                        &nbsp;<span>-</span>&nbsp;
+                                                        <select name="ng-qualification-max" id="ng-members-qualification-max">
+                                                        </select>
+                                                    </div>
+                                            </article>
+                                        </div>
+                                        <!-- acc-menu-4-item end -->
+                                    </section>
+                                </div>
+                            </div>
+                            <button type="button" id="group-form-send-btn" class="modal-btn-submit">
+                                <span class="modal-btn-submit-text">Send</span>
+                            </button>
+                        
+                        </div>
+                    </form>
+                </div>
             </div>
-           </article>
-         </div>
-         <!-- acc-menu-3-item end -->
-        <!-- acc-menu-4-item start -->
-        <div>
-          <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
-          <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
-             <article class="acc-medium">
-              <div>
-                    <div class="create-ng--interval">
-                        <select name="ng-qualification-min" id="ng-members-qualification-min"></select>
-                      &nbsp;<span>-</span>&nbsp;
-                      <select name="ng-qualification-max" id="ng-members-qualification-max"></select>
-            </div>
-
-           </article>
-         </div>
-         <!-- acc-menu-4-item end -->
-        <!-- acc-menu-5-item start -->
-
-        <!-- acc-menu-5-item end -->
-        <!-- acc-menu-6-item start -->
-        <div>
-          <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
-          <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
-             <article class="acc-medium">
-              <div class="acc-menu-item-gender-list">    
-                <div>
-                    <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male"
-                           checked>
-                    <label for="male">Male</label>
-                  </div>
-                  
-                  <div>
-                    <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
-                    <label for="female">Female</label>
-                  </div>
-              </div>
-            </article>
-            </label>
         </div>
-         <!-- acc-menu-6-item end -->
-      </section>
-  </div>
-                    </div>
-                
-                <button type="submit" class="modal-btn-submit">
-                    <span class="modal-btn-submit-text">Send</span>
-                </button>
-                
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!--second-popup-window-end-->
+        <!--second-popup-window-end-->
 
         <script src="./scripts/competition-page.js" type="module"></script> 
         <script src="./scripts/open-close-popup.js" type="module"></script>          
-
     </body>
 </html>
   
