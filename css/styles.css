@@ -1235,3 +1235,8 @@ opacity: 1;
 .popup__text {
   font-size: 16px;
 }
+
+
+.selected-row { background-color: aquamarine !important;}
+
+.non-selected-row { background-color: transparent !important; }

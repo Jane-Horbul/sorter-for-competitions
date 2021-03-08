@@ -35,7 +35,9 @@ groupForm.set( "qualIsOn",       document.getElementById("qualification-checkbox
 groupForm.set( "qualMin",        document.getElementById("ng-members-qualification-min"));
 groupForm.set( "qualMax",        document.getElementById("ng-members-qualification-max"));
 
-
+function refreshPage(){
+    location.reload();
+}
 
 function getQualificationInterval(qMin, qMax){
     var qMinName;
@@ -125,7 +127,7 @@ function deleteQualification(value){
         if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
             qualTable.rows[i].remove();
             sendNotification("qualification-delete", value);
-            location.reload();
+            setTimeout(refreshPage, 1000);
             return;
         }
     }
@@ -191,7 +193,7 @@ function deleteDivision(div){
         if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
             divTable.rows[i].remove();
             sendNotification("division-delete", div);
-            location.reload();
+            setTimeout(refreshPage, 1000);
             return;
         } 
     }
@@ -212,7 +214,7 @@ function memberElementCreate(member){
     template.getElementById("member-groups-num").innerHTML = member.get("groups_num");
 
     template.getElementById("member-row").setAttribute("onclick", "window.location.href='"
-                                    + document.referrer + "/member?mid=" + member.get("id") + "'; return false");
+                                    + window.location.href + "/member?mid=" + member.get("id") + "'; return false");
     return template;
 }
 
@@ -279,7 +281,7 @@ function sendMemberForm() {
       });
 
     sendForm("/new-member-form?" + "cid=" + pageParams.get("cid"), paramsMap);
-    location.reload();
+    setTimeout(refreshPage, 1000);
 }
 /* ------------------- GROUPS ----------------------------*/
 
@@ -292,7 +294,7 @@ function groupElementCreate(group){
     template.getElementById("group-sex").innerHTML = group.get("sex");
     template.getElementById("group-division").innerHTML = group.get("division"); 
     template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualification_min"), group.get("qualification_max"));
-    template.getElementById("group-pairs-num").innerHTML = group.get("pairs_num"); 
+    template.getElementById("group-members-num").innerHTML = group.get("members_num"); 
     template.getElementById("group-row").setAttribute("onclick", "window.location.href='"
                                     + window.location.href + "/group?gid=" + group.get("id") + "'; return false"); 
     return template;
@@ -388,7 +390,7 @@ function sendGroupForm() {
         paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
     }
     sendForm("/new-group-form?" + "cid=" + pageParams.get("cid"), paramsMap);
-    location.reload();
+    setTimeout(refreshPage, 1000); 
 }
 /* ------------------- COMMON ----------------------------*/
 
