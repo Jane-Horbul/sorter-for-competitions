@@ -1218,8 +1218,8 @@ opacity: 1;
   position: relative;
   background-color: var(--white-color);
   color: #000;
-  max-width: 800px;
-  padding: 30px;
+  max-width: 900px;
+  padding: 20px;
 }
 .popup__close {
   position: absolute;
@@ -1242,7 +1242,7 @@ opacity: 1;
 .non-selected-row { background-color: transparent !important; }
 
 .skroll-for-modal {
-  max-height: 800px;
+  max-height: 600px;
   min-height: auto;
   overflow-y:auto;
 }
@@ -1339,8 +1339,8 @@ margin-right: auto;
 }
 .group-page-ref-btn {
   position: absolute;
-  top: 28%;
-  left: 95%;
+  top: 29px;
+  right: -9px;
   width: 50px;
   height: 30px;
   transform: translateX(-50%) translateY(-50%);
@@ -1352,4 +1352,32 @@ margin-right: auto;
   letter-spacing: 0.06em;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   outline-width: 0px;
+}
+.dynamic-table-for-modal {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  max-height: 600px;
+min-height: auto;
+  width: 100%;
+}
+.dynamic-table-for-modal th,
+.dynamic-table-for-modal td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.dynamic-table-for-modal tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.dynamic-table-for-modal tr:hover {
+  background-color: #ddd;
+}
+
+.dynamic-table-for-modal th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--assent-color);
+  color: white;
 }
