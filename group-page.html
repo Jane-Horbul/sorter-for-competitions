@@ -11,24 +11,51 @@
     <body>
         <div class="wrapper">
             <header class="page-header">
-                <div class="container"><h1 id="group-name"></h1></div>
-            </header>
-            <main>
-                <div class="container" id="member-info">
-                    <a href="#popup_1" class="popup-link"><button  type="button">Edit group</button></a>
-                    <div class="container"> Division:       <div id="group-division">      </div></div>
-                    <div class="container"> Age:            <div id="group-age">           </div></div>
-                    <div class="container"> Weight:         <div id="group-weight">        </div></div>
-                    <div class="container"> Gender:         <div id="group-sex">           </div></div>
-                    <div class="container"> Qualification:  <div id="group-qulification">  </div></div>
-                </div>
                 <div class="container">
+                    <ul class="group-page-header list">
+                    <li><h1 id="group-name"></h1></li>
+                    <li><div>                
+                        <a id="priv-page-link">
+                            <button class="group-page-del-btn" type="button" id="delete-group-btn">
+                            <span class="group-card-btn-submit">Delete group</span></button>
+                        </a>
+                    </div>
+                </li>
+                </ul>
+                </div>
+
+            </header>
+
+            <section class="group-info">
+                <div class="group-info-main">
+                    <div id="member-info">
+                        <div class="group-info-title--siting">
+                            <div class="group-info-title"><span>Group info</span></div>
+                            <a href="#popup_1" class="popup-link">
+                                <button class="group-info-edit-btn" type="button">
+                                    <svg class="group-info-edit-btn-icon">
+                                        <use href="./img/icons.svg#icon-pencil2"></use>
+                                    </svg>
+                                </button>
+                            </a>
+                        </div>
+                    <div class="group-info-fields">
+                        <div class="group-info-fields--item"> Division:<span>&nbsp</span><div id="group-division"></div></div>
+                        <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="group-age"></div></div>
+                        <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="group-weight"></div></div>
+                        <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="group-sex"></div></div>
+                        <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="group-qulification"></div></div>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="group-info-tables">
                     <section>
                         <div class="main-tables">
                             <div class="main-tables-item">
                                 <table class="dynamic-table" id="members-table">
                                     <tr>
-                                        <th colspan="8"> Members 
+                                        <th colspan="8" class="group-info-table-title"> Members 
                                             <a href="#popup_2" class="popup-link" id="member-add-btn" >
                                                 <button class="" type="button" data-open-modal>
                                                     <svg class="sl-footer-icon">
@@ -64,8 +91,12 @@
                             <div class="main-tables-item">
                                 <table class="dynamic-table" id="pairs-table">
                                     <tr>
-                                        <th  colspan="7"> Pairs 
-                                            <button class="" type="button"  id="update-pairs-btn" data-open-modal> Update pairs </button>
+                                        <th class="group-info-table-title" colspan="7"> Pairs 
+                                            <button class="group-page-ref-btn" type="button"  id="update-pairs-btn" data-open-modal>
+                                                <svg class="sl-footer-icon">
+                                                    <use href="./img/icons.svg#icon-loop2"></use>
+                                                </svg>
+                                            </button>
                                         </th>
                                     </tr>
                                     <tr>
@@ -79,10 +110,14 @@
                         </div>
                     </section>
                 </div>
-                <a id="priv-page-link">
-                    <button type="button" id="delete-group-btn">
-                    <span class="group-card-btn-submit">Delete group</span></button>
-                </a>
+            </section>
+        
+            <main>
+
+                <div class="container">
+                    
+                </div>
+
             </main>
             <footer>
                 <div class="container flexbox">
@@ -107,6 +142,7 @@
                 <div class="popup__body">
                     <div class="popup__content">
                         <a href="#header" class="popup__close close-popup">X</a>
+                        
                         <form class="modal-form">
                             <span class="modal-title">Edit group</span>
                             <div class="new-member-field">
@@ -225,11 +261,12 @@
                 <div class="popup__body">
                     <div class="popup__content">
                         <a href="#header" class="popup__close close-popup">X</a>
+                        <div class="skroll-for-modal">
                         <form class="modal-form">
                             <div class="conntainer">
                                 <table class="dynamic-table" id="members-adding-table">
                                     <tr>
-                                        <th colspan="8">Members</th>
+                                        <th colspan="8" class="group-info-table-title">Members</th>
                                     </tr>
                                     <tr>
                                         <td>Name</td>
@@ -257,6 +294,7 @@
                                 <span class="modal-btn-submit-text">Add</span>
                             </button>
                         </form>
+                        </div>
                     </div>
                 </div>
             </div>
