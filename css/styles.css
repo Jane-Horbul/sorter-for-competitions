@@ -2,7 +2,7 @@
   --title-text-color: #212121;
   --main-text-color: #757575;
   --white-color: #fff;
-  --assent-color: #2196f3;
+  --assent-color: #2195f3;
   --logo-color: #000;
   --bg-color: #f5f4fa;
   --secondr-bg-color: #2f303a;
@@ -300,19 +300,29 @@ li.active a span {
   letter-spacing: 0.01em;
   color: rgba(117, 117, 117, 0.5);
 }
-/*.form-field-table {
-  width: 448px;
-  height: auto;
-  border: 1px solid rgba(33, 33, 33, 0.2);
-  box-sizing: border-box;
-  border-radius: 4px;
+.add-form-field-input {
+  width: 200px;
+  margin-left: 43px;
+  padding-top: 12px;
+  background-color: transparent;
+  border: 0px;
+  outline: transparent;
 }
-.form-field-table:focus,
-.form-field-table:hover {
-  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid var(--assent-color);
-}*/
-
+.add-form-field-comment::placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+}
+.first-order-title{
+  text-transform: uppercase;
+  height: 50px;
+}
+.second-order-title{
+height: 50px;
+background-color: #217cf39f;
+}
 .form-field--option {
   width: 448px;
   height: auto;
