@@ -10,33 +10,62 @@
     </head>
     <body>
         <div class="wrapper">
+
             <header class="page-header">
                 <div class="container">
-                    <h1 id="member-name"></h1>
+                    <ul class="group-page-header list">
+                    <li><h1 id="member-name"></h1></li>
+                    <li><div>                
+                        <a id="priv-page-link">
+                            <a id="priv-page-link">
+                                <button  class="group-page-del-btn" type="button" id="delete-member-btn">
+                                <span class="group-card-btn-submit">Delete member</span></button>
+                            </a>
+                    </div>
+                </li>
+                </ul>
                 </div>
             </header>
-            <main>
-                <div class="container" id="member-info">
-                    <a href="#popup_1" class="popup-link"><button  type="button">Edit member</button></a>
-                    <div class="container"> Id:             <div id="member-id">            </div></div>
-                    <div class="container"> Divisions:      <div id="member-division">      </div></div>
-                    <div class="container"> Age:            <div id="member-age">           </div></div>
-                    <div class="container"> Weight:         <div id="member-weight">        </div></div>
-                    <div class="container"> Gender:         <div id="member-sex">           </div></div>
-                    <div class="container"> Qualification:  <div id="member-qulification">  </div></div>
-                    <div class="container"> Team:           <div id="member-team">          </div> </div>
-                    <div class="container"> Admition:       <div id="member-admit">         </div> </div>
-                </div>
-                <div class="container" id="member-groups">
-                    <section>
+
+            <main class="container">
+
+                <section class="member-info">
+                    <div class="group-info-main">
+                        <div id="member-info">
+                            <div class="group-info-title--siting">
+                                <div class="group-info-title"><span>Member info</span></div>
+                                <a href="#popup_1" class="popup-link">
+                                    <button class="group-info-edit-btn" type="button">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/icons.svg#icon-pencil2"></use>
+                                        </svg>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="group-info-fields">
+                            <div class="" id="member-info">
+                                <div class="group-info-fields--item"> Id:<span>&nbsp</span><div id="member-id">            </div></div>
+                                <div class="group-info-fields--item"> Divisions:<span>&nbsp</span><div id="member-division">      </div></div>
+                                <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="member-age">           </div></div>
+                                <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="member-weight">        </div></div>
+                                <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="member-sex">           </div></div>
+                                <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="member-qulification">  </div></div>
+                                <div class="group-info-fields--item"> Team:<span>&nbsp</span><div id="member-team">          </div> </div>
+                                <div class="group-info-fields--item"> Admition:<span>&nbsp</span><div id="member-admit">         </div> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-info-tables">
                         <div class="main-tables">
-                            <div class="main-tables-item">
+                            <div class="main-tables-member-item">
                                 <table class="dynamic-table" id="groups-table">
                                     <tr>
-                                        <th  colspan="7">Groups
+                                        <th class="group-info-table-title" colspan="7">Groups
                                             <a id="group-add-btn">
-                                                <button class="" type="button" data-open-modal>
-                                                    <svg class="sl-footer-icon">
+                                                <button class="group-page-ref-btn" type="button" data-open-modal>
+                                                    <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
                                                 </button>
@@ -67,11 +96,9 @@
                                 </table>
                             </div>
                         </div>
-                    </section>
-                </div>
-                <a id="priv-page-link">
-                    <button type="button" id="delete-member-btn"><span class="group-card-btn-submit">Delete member</span></button>
-                </a>
+                    </div>
+                </section>
+
             </main>
             <footer>
                 <div class="container flexbox">

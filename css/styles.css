@@ -1147,6 +1147,14 @@ height: auto;
 .new-member-qualification{
   display: block;
 }
+.main-tables-member-item {
+  width: 100%;
+  margin-left: 20px;
+}
+.member-info {
+  display: flex;
+  margin-top: 20px;
+}
 
 /*main page*/
 .add-new-competition-btn {
