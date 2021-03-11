@@ -18,7 +18,7 @@
                     <li><div>                
                         <a id="priv-page-link">
                             <a id="priv-page-link">
-                                <button  class="group-page-del-btn" type="button" id="delete-member-btn">
+                                <button  class="group-page-del-btn js-visible-element" type="button" id="delete-member-btn">
                                 <span class="group-card-btn-submit">Delete member</span></button>
                             </a>
                     </div>
@@ -35,7 +35,7 @@
                             <div class="group-info-title--siting">
                                 <div class="group-info-title"><span>Member info</span></div>
                                 <a href="#popup_1" class="popup-link">
-                                    <button class="group-info-edit-btn" type="button">
+                                    <button class="group-info-edit-btn js-visible-element" type="button">
                                         <svg class="group-info-edit-btn-icon">
                                             <use href="./img/icons.svg#icon-pencil2"></use>
                                         </svg>
@@ -62,9 +62,9 @@
                             <div class="main-tables-member-item">
                                 <table class="dynamic-table" id="groups-table">
                                     <tr>
-                                        <th class="all-table-title group-info-table-title" colspan="7">Groups
+                                        <th class="all-table-title group-info-table-title" colspan="8">Groups
                                             <a id="group-add-btn">
-                                                <button class="group-page-ref-btn" type="button" data-open-modal>
+                                                <button class="group-page-ref-btn js-visible-element" type="button" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
@@ -80,6 +80,7 @@
                                         <td>Weight</td>
                                         <td>Qualification</td>
                                         <td>Members number</td>
+                                        <td class="column-for-button js-visible-element"></td>
                                     </tr>
                                     <template id="group-template">
                                         <tr>
@@ -90,7 +91,7 @@
                                             <td id="group-weight">  </td>
                                             <td id="group-qualification">  </td>
                                             <td id="group-members-num">  </td>
-                                            <td> <button type="button" id="group-dell-btn">Dell</button></td>
+                                            <td class="js-visible-element"> <button type="button" id="group-dell-btn">Dell</button></td>
                                         </tr>
                                     </template>
                                 </table>

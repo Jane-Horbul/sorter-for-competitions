@@ -11,15 +11,31 @@
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 </head>
 <body>
+
+    <header class="page-header">
+        <div class="container">
+            <ul class="group-page-header list">
+            <li><h1 id="page-name">Create a new competition</h1></li>
+            <!--<li><div>                
+                <a id="priv-page-link">
+                    <a id="priv-page-link">
+                        <button  class="group-page-del-btn" type="button" id="delete-member-btn">
+                        <span class="group-card-btn-submit">Delete member</span></button>
+                    </a>
+            </div>
+        </li>-->
+        </ul>
+        </div>
+    </header>
+
+    <div class="class="container">
     <form action="/" method="post" enctype="multipart/form-data"> 
-        <header class="page-header">
-        </header>
+
         <main>
-            <div class="modal-form">
-                <span class="modal-title" id="page-name">Create a new competition</span>
+            <div class="form-add-comp">
                 <label for="competition-name" class="form-field-label">
                     <span class="form-field-title">The name of the competition</span>
-                    <div class="form-field">
+                    <div class="form-field-add-comp">
                         <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
                     </div>
                 </label>
@@ -55,8 +71,8 @@
                     </table>
                     <label>
                         <span class="form-field-title">Short description</span>
-                        <div class="form-field-message">
-                            <textarea name="description" id="description" class="form-field-comment" placeholder="Enter short description for competition"
+                        <div class="form-field-add-comp-message">
+                            <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
                                 rows="3"></textarea>
                         </div>
                     </label>
@@ -86,5 +102,6 @@
 
         <script src="./scripts/form-competition.js" type="module"></script>
     </form>
+</div>
 </body>
 </html>

@@ -287,7 +287,7 @@ li.active a span {
 }
 .form-field-input {
   width: 405px;
-  margin-left: 43px;
+  margin-left: 13px;
   padding-top: 12px;
   background-color: transparent;
   border: 0px;
@@ -302,7 +302,7 @@ li.active a span {
 }
 .add-form-field-input {
   width: 200px;
-  margin-left: 43px;
+  margin-left: 13px;
   padding-top: 12px;
   background-color: transparent;
   border: 0px;
@@ -931,6 +931,7 @@ margin-right: auto;
 }
 .added-section-table {
   margin-top: 20px;
+  width: 600px;
 }
 
 /*group*/
@@ -1165,6 +1166,9 @@ height: auto;
   display: flex;
   margin-top: 20px;
 }
+.column-for-button{
+  width: 85px;
+}
 
 /*main page*/
 .add-new-competition-btn {
@@ -1261,8 +1265,11 @@ opacity: 1;
 
 .skroll-for-modal {
   max-height: 600px;
+  width: 600px;
   min-height: auto;
-  overflow-y:auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
 }
 .conntainer{
   width: 100%;
@@ -1398,4 +1405,70 @@ min-height: auto;
   text-align: left;
   background-color: var(--assent-color);
   color: white;
+}
+
+/*form add competitions*/
+.form-add-comp{
+  display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+width: 660px;
+padding-right: 10px;
+margin-right: 40px;
+margin-left: 40px;
+  margin-top: 15px;
+}
+.form-field-add-comp {
+  width: 600px;
+  height: 40px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.form-field-add-comp:focus,
+.form-field-add-comp:hover {
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--assent-color);
+}
+.form-field-add-comp:hover .form-field-icon {
+  fill: var(--assent-color);
+}
+.form-field-add-comp-message {
+  width: 600px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.form-field-add-comp-message:focus,
+.form-field-add-comp-message:hover {
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--assent-color);
+}
+.form-field-add-comp-comment {
+  width: 560px;
+  margin: 12px 16px;
+  outline: transparent;
+}
+.form-field-add-comp-input {
+  width: 405px;
+  margin-left: 13px;
+  padding-top: 12px;
+  background-color: transparent;
+  border: 0px;
+  outline: transparent;
+}
+.form-field-add-comp-comment::placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+}
+
+.js-hidden-element{
+  visibility: hidden;
+}
+.js-visible-element{
+  visibility: visible;
 }
