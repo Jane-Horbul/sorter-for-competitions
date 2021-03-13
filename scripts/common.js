@@ -1,3 +1,7 @@
+export function refreshPage(){
+    location.reload();
+}
+
 export function isNumber(num){
     if(isNaN(Number(num)) || (num.localeCompare("") == 0)) return false;
     return true;
