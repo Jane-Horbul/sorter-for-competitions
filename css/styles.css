@@ -1250,7 +1250,7 @@ opacity: 1;
   position: relative;
   background-color: var(--white-color);
   color: #000;
-  max-width: 900px;
+  width: 710px;
   padding: 20px;
 }
 .popup__close {

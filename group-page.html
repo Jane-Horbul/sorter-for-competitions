@@ -73,6 +73,7 @@
                                         <td>Team</td>
                                         <td>Qualification</td>
                                         <td>Adm</td>
+                                        <td class="column-for-button"></td>
                                     </tr>
                                     <template id="group-member-template">
                                         <tr>
@@ -83,7 +84,12 @@
                                             <td id="member-team">  </td>
                                             <td id="member-qualification">  </td>
                                             <td id="member-admited">  </td>
-                                            <td> <button type="button" id="member-dell-btn">Dell</button></td>
+                                            <td class="column-for-button"> <button type="button" id="member-dell-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-cross"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
                                         </tr>
                                     </template>
                                 </table>
