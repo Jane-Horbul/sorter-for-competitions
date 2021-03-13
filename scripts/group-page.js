@@ -6,6 +6,7 @@ import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
+import {refreshPage} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var pageInfo = sendRequest("/group-get?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"));
@@ -357,7 +358,29 @@ function refreshPairs(){
     pageInfo.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
 }
 
+function addMembersToGroup()
+{
+    if(membersToAdd.length < 1)
+        return;
+        
+    var paramsMap = new Map();
+    var first = true;
+    var membersIds = "";
+
+    membersToAdd.forEach(memb => {
+        membersIds += (first ? memb.get("id") : ("," + memb.get("id")));
+        first = false;
+    });
+    paramsMap.set("group-members-add",  membersIds);
+    paramsMap.set("gid",                pageParams.get("gid"));
+    paramsMap.set("cid",                pageParams.get("cid"));  
+
+    sendForm("/competition-edition", paramsMap);
+    setTimeout(refreshPage, 1000);
+}
+
 fillPageInfo(pageInfo);
+document.getElementById("members-add-btn").addEventListener("click", addMembersToGroup, false);
 document.getElementById("group-form-send-btn").addEventListener("click", sendGroupForm, false);
 document.getElementById("update-pairs-btn").addEventListener("click", refreshPairs, false);
 document.getElementById("delete-group-btn").addEventListener("click", deleteGroup, false);

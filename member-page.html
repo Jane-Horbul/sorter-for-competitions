@@ -63,13 +63,13 @@
                                 <table class="dynamic-table" id="groups-table">
                                     <tr>
                                         <th class="all-table-title group-info-table-title" colspan="8">Groups
-                                            <a id="group-add-btn">
-                                                <button class="group-page-ref-btn js-visible-element" type="button" data-open-modal>
+                                            <a href="#popup_2" class="popup-link" id="member-add-btn" >
+                                                <button class="group-page-ref-btn" type="button" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
                                                 </button>
-                                            </a>    
+                                            </a>  
                                         </th>
                                     </tr>
                                     <tr>
@@ -211,6 +211,52 @@
                 </div>
             </div>
             <!--first-popup-window-end-->
+
+            <!--member-groups-edit-popup-window-start-->
+            <div class="popup" id = "popup_2">
+                <a href="#header" class="popup__area"></a>
+                <div class="popup__body">
+                    <div class="popup__content">
+                        <a href="#header" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="conntainer">
+                                <div class="skroll-for-modal">
+                                    <table class="dynamic-table-for-modal" id="groups-adding-table">
+                                        <tr>
+                                            <th class="group-info-table-title" colspan="7">Groups</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Name of group</td>
+                                            <td>Age of members</td>
+                                            <td>Sex</td>
+                                            <td>Division</td>
+                                            <td>Weight</td>
+                                            <td>Qualification</td>
+                                            <td>Members number</td>
+                                        </tr>
+                                        <template id="group-adding-template">
+                                            <tr id="group-row">
+                                                <td id="group-name">  </td>
+                                                <td id="group-age">  </td>
+                                                <td id="group-sex">  </td>
+                                                <td id="group-division">  </td>
+                                                <td id="group-weight">  </td>
+                                                <td id="group-qualification">  </td>
+                                                <td id="group-members-num">  </td>
+                                            </tr>
+                                        </template>
+                                    </table>
+                                </div>
+                            </div>
+                            <button type="button" id="groups-add-btn" class="modal-btn-submit">
+                                <span class="modal-btn-submit-text">Add</span>
+                            </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--member-groups-edit-popup-window-end-->
             <script src="./scripts/member-page.js" type="module"></script>
             <script src="./scripts/open-close-popup.js" type="module"></script>  
         </div>

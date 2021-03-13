@@ -4,11 +4,13 @@ import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
+import {refreshPage} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var pageInfo = sendRequest("/member-get?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"));
-var competitionParams = sendRequest("/competition-params-get?" + "cid=" + pageParams.get("cid"));
+var competitionParams = sendRequest("/competition-get?" + "cid=" + pageParams.get("cid"));
 var qualsMap = competitionParams.get("Qualifications");
+var groupsToAdd = new Array(0);
 
 var memberInfo = new Map();
 memberInfo.set( "name",         document.getElementById("member-name"));
@@ -169,7 +171,7 @@ function groupDelete(id){
 function groupElementCreate(group){
     if(group.get("id") == undefined) return "";
     var template = document.getElementById("group-template").content.cloneNode(true);
-
+    console.log(group);
     template.getElementById("group-name").innerHTML          = group.get("name"); 
     template.getElementById("group-sex").innerHTML           = group.get("sex");
     template.getElementById("group-division").innerHTML      = group.get("division");
@@ -178,8 +180,6 @@ function groupElementCreate(group){
     template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualificationMin"), group.get("qualificationMax"));
     template.getElementById("group-members-num").innerHTML     = group.get("membersNum");
     
-    
-
     template.getElementById("group-name").setAttribute("onclick", "window.location.href='"
                                     + document.referrer + "/group?gid=" + group.get("id") + "'; return false");
     template.getElementById("group-dell-btn").addEventListener("click", function(){groupDelete(group.get("id"))}, false);
@@ -188,6 +188,60 @@ function groupElementCreate(group){
 
 function deleteMember(){
     sendNotification("member-delete", pageParams.get("mid"));
+}
+
+function putGroupToAdd(id){
+    var group = competitionParams.get("Groups").find( gr => gr.get("id") == id);
+    var groupRow = document.getElementById("comp-group-" + id);
+    if(group == undefined) return;
+
+    if(groupsToAdd.find( gr => gr.get("id") == id) == undefined){
+        groupsToAdd.push(group);
+        groupRow.setAttribute("class", "selected-row");
+    } else {
+        var pos = groupsToAdd.indexOf(group);
+        groupsToAdd.splice(pos, 1);
+        groupRow.setAttribute("class", "non-selected-row");
+    }
+}
+
+function addMemberToGroups()
+{
+    if(groupsToAdd.length < 1)
+        return;
+        
+    var paramsMap = new Map();
+    var first = true;
+    var groupsIds = "";
+
+    groupsToAdd.forEach(gr => {
+        groupsIds += (first ? gr.get("id") : ("," + gr.get("id")));
+        first = false;
+    });
+    paramsMap.set("member-groups-add",  groupsIds);
+    paramsMap.set("mid",                pageParams.get("mid"));
+    paramsMap.set("cid",                pageParams.get("cid"));  
+
+    sendForm("/competition-edition", paramsMap);
+    setTimeout(refreshPage, 1000);
+}
+
+function competitionListGroupsAdd(group){
+    if(group.get("id") == undefined) return "";
+    var groupsTable = document.getElementById("groups-adding-table");
+    var template = document.getElementById("group-adding-template").content.cloneNode(true);
+
+    template.getElementById("group-name").innerHTML          = group.get("name"); 
+    template.getElementById("group-sex").innerHTML           = group.get("sex");
+    template.getElementById("group-division").innerHTML      = group.get("division");
+    template.getElementById("group-age").innerHTML           = getNumberInterval(group.get("age_min"), group.get("age_max"));
+    template.getElementById("group-weight").innerHTML        = getNumberInterval(group.get("weight_min"), group.get("weight_max"));
+    template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualification_min"), group.get("qualification_max"));
+    template.getElementById("group-members-num").innerHTML     = group.get("members_num");
+
+    template.getElementById("group-row").addEventListener("click", function(){putGroupToAdd(group.get("id"))}, false);
+    template.getElementById("group-row").setAttribute("id", "comp-group-" + group.get("id"));
+    groupsTable.append(template);
 }
 
 function fillPageInfo(params){
@@ -225,9 +279,17 @@ function fillPageInfo(params){
     divisionElementAddToPage(division , (params.get("Divisions").find( div => div == division) == undefined) ? false : true);
     });
     params.get("Groups").forEach(gr => groupsTable.append(groupElementCreate(gr)));
+
+    /*--------------------------------Adding groups params--------------------------------------------------------------------------------*/
+    competitionParams.get("Groups").forEach(compGroup => {
+        if(params.get("Groups").find( memberGroup => memberGroup.get("id") == compGroup.get("id")) == undefined){
+            competitionListGroupsAdd(compGroup);
+        }
+    });
 }
 
 fillPageInfo(pageInfo);
+document.getElementById("groups-add-btn").addEventListener("click", addMemberToGroups, false);
 document.getElementById("member-form-send-btn").addEventListener("click", sendMemberForm, false);
 document.getElementById("delete-member-btn").addEventListener("click", deleteMember, false);
 document.getElementById("priv-page-link").setAttribute("href", document.referrer)

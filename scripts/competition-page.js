@@ -4,6 +4,7 @@ import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
+import {refreshPage} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
@@ -34,10 +35,6 @@ groupForm.set( "weightMax",      document.getElementById("weight-max"));
 groupForm.set( "qualIsOn",       document.getElementById("qualification-checkbox"));
 groupForm.set( "qualMin",        document.getElementById("ng-members-qualification-min"));
 groupForm.set( "qualMax",        document.getElementById("ng-members-qualification-max"));
-
-function refreshPage(){
-    location.reload();
-}
 
 function getQualificationInterval(qMin, qMax){
     var qMinName;
