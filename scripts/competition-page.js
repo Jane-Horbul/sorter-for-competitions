@@ -35,6 +35,7 @@ groupForm.set( "weightMax",      document.getElementById("weight-max"));
 groupForm.set( "qualIsOn",       document.getElementById("qualification-checkbox"));
 groupForm.set( "qualMin",        document.getElementById("ng-members-qualification-min"));
 groupForm.set( "qualMax",        document.getElementById("ng-members-qualification-max"));
+groupForm.set( "formSystem",     document.getElementById("pairs-form-system"));
 
 function getQualificationInterval(qMin, qMax){
     var qMinName;
@@ -364,7 +365,8 @@ function sendGroupForm() {
     
     paramsMap.set("group-name",     groupForm.get("name").value);
     paramsMap.set("group-division", groupForm.get("division").value);
-
+    paramsMap.set("form-system",    groupForm.get("formSystem").value);
+    
     if(groupForm.get("ageIsOn").checked){
         if(!isAgeOk()) return;
         paramsMap.set("age-min", groupForm.get("ageMin").value);
