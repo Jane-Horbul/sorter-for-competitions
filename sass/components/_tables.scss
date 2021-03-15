@@ -1,0 +1,24 @@
+.secondary-tables {
+    display: flex;
+  }
+  .secondary-tables--item {
+    width: 50%;
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
+  .secondary-tables--buttons {
+    width: 20%;
+  }
+.secondary-tables--td {
+    width: 12%;
+  }
+
+.red-cell-style {
+    background-color: rgb(241, 106, 106);
+    color: #000;
+  }
+  
+  .blue-cell-style {
+    background-color: rgb(51, 137, 236);
+    color: #FFF;
+  }
