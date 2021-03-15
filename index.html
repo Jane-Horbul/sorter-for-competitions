@@ -9,88 +9,36 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./old-css/normalize.css">
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-
-
 </head>
 
 <body>
     <div class="wrapper">
-    <header class="page-header">
-        <div class="container flexbox">
-            <nav class="navigation">
-                <!--site logo-->
-                <img class="program-logo "
-                    src="./img/competition-logo.png"
-                    alt="Program logo">
-            </nav>
-            
-        </div>
-    </header>
-    <main>
-        <!--Slidebar-->
-        <section class="hero">
+        <header class="page-header">
             <div class="container flexbox">
-
-                   
-
+                <nav class="navigation">
+                    <!--site logo-->
+                    <img class="program-logo " src="./img/competition-logo.png" alt="Program logo">
+                </nav>
             </div>
-        </section>
-        <!--Our advantages-->
-        <section class="advantages">
-            <div class="container">
-                <ul class="list advantages-list" id="competitions-list">
-                    <li class="advantages-item">
-                        <div class="advantages-icon-bg">
-                            <div class="add-new-competition-block">
-                            <a href="./competition-add-form">
-                                <button class="add-new-competition-btn" type="button" data-open-modal>
-                                    <svg class="sl-footer-icon">
-                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                </svg>
-                                <span class="add-new-competition-btn-text">Add competitions</span>
-                                </button>
-                            </a>
-                            </div>
-                        </div>
-                    </li>
-                    <!--The end of the element "Add competition" -->
-                </ul>
+        </header>
+        <main>
+            <!--Slidebar-->
+            <div class="conntainer">
+                <input type="text" id="login"> <br>
+                <input type="text" id="password"> <br>
+                <button type="button" id="login-btn" class="modal-btn-submit">
+                    <span class="modal-btn-submit-text">Login</span>
+                </button>
             </div>
-        </section>
-       
-    </main>
+        </main>
 
-    <footer>
-        <div class="container flexbox">
-            <address class="contacts-box">
-
-            </address>
-            <div class="container sl">
+        <footer>
+            <div class="container flexbox">
+                <address class="contacts-box"> </address>
+                <div class="container sl"></div>
             </div>
-            <div>
-               
-        </div>
-
-    </footer>
-</div>
+        </footer>
+    </div>
 </body>
-<template id="competition-template">
-    <li class="projects-item">
-        <a id="competition-link" class="title-of-competition-list-item">
-            <div class="project-card">
-                <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
-                        alt="" />
-                    <div class="overlay">
-                        <p class="advantages-content" id="competition-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    </div>
-                </div>
-                <div class="caption">
-                    <h2 class="title-of-competition-list-item" id="competition-name"></h2>
-                
-                </div>
-            </div>
-        </a>
-    </li>
-</template>
 <script src="./scripts/index.js" type="module"></script>
 </html>

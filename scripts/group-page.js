@@ -29,6 +29,7 @@ groupForm.set( "weightMax",      document.getElementById("weight-max"));
 groupForm.set( "qualIsOn",       document.getElementById("qualification-checkbox"));
 groupForm.set( "qualMin",        document.getElementById("ng-members-qualification-min"));
 groupForm.set( "qualMax",        document.getElementById("ng-members-qualification-max"));
+groupForm.set( "formSystem",     document.getElementById("pairs-form-system"));
 
 
 function isMainGroupParamsOk(){
@@ -134,11 +135,12 @@ function memberNameGet(id){
 }
 
 function sendNotification(name, value) {
+    var header = (name == "group-delete") ? '/competition-edition' : '/group-edit';
     var paramsMap = new Map();
     paramsMap.set(name, value);
     paramsMap.set("cid", pageParams.get("cid"));
     paramsMap.set("gid", pageParams.get("gid"));
-    sendForm('/competition-edition', paramsMap);
+    sendForm(header, paramsMap);
 }
 
 function sendGroupForm() {
@@ -150,6 +152,7 @@ function sendGroupForm() {
     paramsMap.set("cid",            pageParams.get("cid"));  
     paramsMap.set("group-name",     groupForm.get("name").value);
     paramsMap.set("group-division", groupForm.get("division").value);
+    paramsMap.set("form-system",    groupForm.get("formSystem").value);
 
     if(groupForm.get("ageIsOn").checked){
         if(!isAgeOk()) return;
@@ -172,7 +175,7 @@ function sendGroupForm() {
     if(groupForm.get("sexIsOn").checked){
         paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
     }
-    sendForm("/competition-edition", paramsMap);
+    sendForm("/group-edit", paramsMap);
     location.reload();
 }
 
@@ -211,6 +214,28 @@ function putMemberToAdd(id){
     console.log(membersToAdd);
 }
 
+function pairSetWinner(id, color) {
+    var paramsMap = new Map();
+    paramsMap.set("color", color);
+    sendForm(window.location.href + '/pair-member-win?pid=' + id, paramsMap);
+    setTimeout(refreshPage, 1000);
+}
+
+function pairWinnerElementCreate(pair, template){
+    
+    if(!isEmptyString(pair.get("winner"))){
+        console.log("Set winner: " + pair.get("winner"));
+        template.getElementById("pair-winner").innerHTML = memberNameGet(pair.get("winner"));
+        template.getElementById("pair-winner").setAttribute("class",
+            (pair.get("winner") == pair.get("member_red")) ? "red-cell-style" : "blue-cell-style");
+        return;
+    }
+    template.getElementById("red-member-win")
+        .addEventListener("click", function(){pairSetWinner(pair.get("id"), "red")}, false);
+        template.getElementById("blue-member-win")
+        .addEventListener("click", function(){pairSetWinner(pair.get("id"), "blue")}, false);
+}
+
 function pairElementCreate(pair){
     if(pair.get("id") == undefined){
         return "";
@@ -220,9 +245,10 @@ function pairElementCreate(pair){
     var memberBlueId = pair.get("member_blue");
     
     template.getElementById("pair-id").innerHTML = pair.get("id"); 
-    template.getElementById("pair-winner").innerHTML = pair.get("winner");
     template.getElementById("pair-red").innerHTML = memberNameGet(memberRedId);
     template.getElementById("pair-blue").innerHTML = memberNameGet(memberBlueId);
+    pairWinnerElementCreate(pair, template);
+
     if(Number(memberRedId) >= 0){
         template.getElementById("pair-red").setAttribute("onclick", "window.location.href='"
                                     + document.referrer + "/member?mid=" + memberRedId + "'; return false"); 
@@ -293,6 +319,7 @@ function fillPageInfo(params){
     var pairsTable = document.getElementById("pairs-table");
 
     document.getElementById("group-name").innerHTML         = params.get("Name");
+    document.getElementById("group-form-system").innerHTML   = params.get("FormSys");
     document.getElementById("group-division").innerHTML     = params.get("Division");
     document.getElementById("group-sex").innerHTML          = params.get("Sex");
     document.getElementById("group-age").innerHTML          = getNumberInterval(params.get("Age_min"), params.get("Age_max"));
@@ -375,7 +402,7 @@ function addMembersToGroup()
     paramsMap.set("gid",                pageParams.get("gid"));
     paramsMap.set("cid",                pageParams.get("cid"));  
 
-    sendForm("/competition-edition", paramsMap);
+    sendForm("/group-edit", paramsMap);
     setTimeout(refreshPage, 1000);
 }
 

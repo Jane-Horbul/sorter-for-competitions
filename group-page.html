@@ -14,7 +14,7 @@
                 <div class="container">
                     <ul class="group-page-header list">
                     <li><h1 id="group-name"></h1></li>
-                    <li><div>                
+                    <li><div class="js-visible-element">                
                         <a id="priv-page-link">
                             <button class="group-page-del-btn" type="button" id="delete-group-btn">
                             <span class="group-card-btn-submit">Delete group</span></button>
@@ -40,6 +40,7 @@
                             </a>
                         </div>
                     <div class="group-info-fields">
+                        <div class="group-info-fields--item"> Form system:<span>&nbsp</span><div id="group-form-system"></div></div>
                         <div class="group-info-fields--item"> Division:<span>&nbsp</span><div id="group-division"></div></div>
                         <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="group-age"></div></div>
                         <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="group-weight"></div></div>
@@ -129,9 +130,12 @@
             <template id="pair-template">
                 <tr>
                     <td id="pair-id">  </td>
-                    <td id="pair-red">  </td>
-                    <td id="pair-blue">  </td>
-                    <td id="pair-winner">  </td>
+                    <td id="pair-red" class="red-cell-style">  </td>
+                    <td id="pair-blue" class="blue-cell-style">  </td>
+                    <td id="pair-winner">
+                        <button class="red-button-style" type="button"  id="red-member-win"></button>
+                        <button class="blue-button-style" type="button"  id="blue-member-win"></button>
+                    </td>
                 </tr>
             </template>
 
@@ -161,9 +165,12 @@
                                 </div>
 
                                 <div class="form-field--option">
-                                    <label for="formula-of-group">
-                                        <label for="formula-of-group"><span class="form-field-title">Choose formula of competition:</span></label>
-                                        <select name="formula-of-group" id=""><!--Formula --></select>
+                                    <label for="form-system-of-group">
+                                        <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
+                                        <select name="form-system-of-group" id="pairs-form-system">
+                                            <option value="olimpic">Olimpic</option>
+                                            <option value="circle">Circle</option>
+                                        </select>
                                 </div>
 
                                 <div class="form-field--option">
