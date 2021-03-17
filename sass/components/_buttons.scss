@@ -113,9 +113,13 @@
     width: 200px;
     margin-right: 10px;
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1200px) and (max-width: 1799px) {
     width: 200px;
     margin-right: 10px;
+  }
+  @media screen and (min-width: 1800px) {
+    width: 200px;
+    margin-right: 13px;
   }
 }
 .competition-page-main-btn {
