@@ -1,5 +1,6 @@
 @import "./utils/variables";
 @import "./utils/mixins";
+@import "./utils/normalize";
 
 @import "./base/common";
 
@@ -13,6 +14,8 @@
 @import "./components/dynamic-table";
 @import "./components/create-ng-card";
 @import "./components/icons-on-btn";
+@import "./components/header";
+
 
 @import "./layouts/group-page";
 @import "./layouts/form-add-competition";

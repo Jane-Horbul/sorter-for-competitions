@@ -5,111 +5,124 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Competition page</title>
         <link rel="stylesheet" href="./old-css/normalize.css">
-        <link rel="stylesheet" href="./old-css/styles.css" />
+        <link rel="stylesheet" href="./css/main.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <div class="wrapper">
-            <header class="page-header">
-                <div class="container">
+            <header class="page-header container">
+                <div class="">
                     <h1 id="competition-name">Competition name</h1>
                 </div>
             </header>
+            <div class="header-border"></div>
             <main>
                 <div class="container">
                     <!--Section with section with tables of created divisions and qualifications-->
                     <section class="secondary-tables">
-                        <div class="secondary-tables--buttons">
-                            <ul class="competition-page-main-btn-list">
-                                <li class="list"><button class="competition-page-main-btn" id="sort-members-btn">Sort members</button></li>
-                                <li class="list"><button class="competition-page-main-btn" id="form-pairs-btn">Form pairs</button></li>
-                                <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
-                            </ul>
-                        </div>
-                        <div class="secondary-tables--item">
-                            <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
-                                <tr>
-                                    <th colspan="2" class="group-info-table-title">Qualifications</th>
-                                        <th>
-                                            <button class="group-page-ref-btn" type="button" id="qual-add-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                            </button>
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="secondary-tables--item">
-                            <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
-                                <tr>
-                                    <th class="group-info-table-title">Divisions</th>
-                                    <th class="group-info-table-title">
-                                        <button class="group-page-ref-btn" type="button" id="div-add-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                            </svg>
-                                        </button>
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
-                    </section>
-                    <section>
-                        <div class="main-tables">
-                            <div class="main-tables-item">
-                                <table class="dynamic-table" id="members-table">
-                                    <tr>
-                                        <th class="group-info-table-title" colspan="8">Members
-                                            <!--Add member button start-->
-                                            <a href="#popup_1" class="popup-link">
-                                                <button class="group-page-ref-btn" type="button">
+                        <ul class="list flexbox">
+                            <li>
+                                <div class="secondary-tables--buttons">
+                                    <ul class="competition-page-main-btn-list">
+                                        <li class="list"><button class="competition-page-main-btn" id="sort-members-btn">Sort members</button></li>
+                                        <li class="list"><button class="competition-page-main-btn" id="form-pairs-btn">Form pairs</button></li>
+                                        <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="secondary-tables--item">
+                                    <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
+                                        <tr>
+                                            <th colspan="2" class="group-info-table-title"><span>Qualifications</span>
+                                                    <button class="group-page-ref-btn" type="button" id="qual-add-btn">
                                                         <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                    </svg>
-                                                    
-                                                </button>
-                                            </a>
-                                            <!--Add member button end-->
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>Name, Surname</td>
-                                        <td>Age</td>
-                                        <td>Weight</td>
-                                        <td>Sex</td>
-                                        <td>Team</td>
-                                        <td>Qualification</td>
-                                        <td>Adm</td>
-                                        <td>Number of groups</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="main-tables-item">
-                                <table class="dynamic-table" id="groups-table">
-                                    <tr>
-                                        <th class="group-info-table-title" colspan="7">Groups
-                                            <a href="#popup_2" class="popup-link">
-                                                <button class="group-page-ref-btn" type="button">
+                                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                        </svg>
+                                                    </button>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="secondary-tables--item">
+                                    <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
+                                        <tr>
+                                            <th class="group-info-table-title">Divisions</th>
+                                            <th class="group-info-table-title">
+                                                <button class="group-page-ref-btn" type="button" id="div-add-btn">
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
                                                 </button>
-                                            </a>    
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>Name of group</td>
-                                        <td>Age of members</td>
-                                        <td>Sex</td>
-                                        <td>Division</td>
-                                        <td>Weight</td>
-                                        <td>Qualification</td>
-                                        <td>Members number</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        
+                            <ul class="list main-tables">
+                                    <li>
+                                        <div class="main-tables-item">
+                                            <table class="dynamic-table" id="members-table">
+                                                <tr>
+                                                    <th class="group-info-table-title" colspan="8"><span>Members</span>
+                                                        <!--Add member button start-->
+                                                        <a href="#popup_1" class="popup-link">
+                                                            <button class="group-page-ref-btn" type="button">
+                                                                    <svg class="group-info-edit-btn-icon">
+                                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                                </svg>
+                                                                
+                                                            </button>
+                                                        </a>
+                                                        <!--Add member button end-->
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-tables--text">Name, Surname</td>
+                                                    <td class="secondary-title-tables--text">Age</td>
+                                                    <td class="secondary-title-tables--text">Weight</td>
+                                                    <td class="secondary-title-tables--text">Sex</td>
+                                                    <td class="secondary-title-tables--text">Team</td>
+                                                    <td class="secondary-title-tables--text">Qualification</td>
+                                                    <td class="secondary-title-tables--text">Adm</td>
+                                                    <td class="secondary-title-tables--text">Number of groups</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="main-tables-item">
+                                            <table class="dynamic-table" id="groups-table">
+                                                <tr>
+                                                    <th class="group-info-table-title" colspan="7">Groups
+                                                        <a href="#popup_2" class="popup-link">
+                                                            <button class="group-page-ref-btn" type="button">
+                                                                <svg class="group-info-edit-btn-icon">
+                                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                                </svg>
+                                                            </button>
+                                                        </a>    
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-tables--text">Name of group</td>
+                                                    <td class="secondary-title-tables--text">Age of members</td>
+                                                    <td class="secondary-title-tables--text">Sex</td>
+                                                    <td class="secondary-title-tables--text">Division</td>
+                                                    <td class="secondary-title-tables--text">Weight</td>
+                                                    <td class="secondary-title-tables--text">Qualification</td>
+                                                    <td class="secondary-title-tables--text">Members number</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                </li>
+                            </ul>
+                        
                     </section>
                 </div>
             </main>
@@ -398,7 +411,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+
         <!--second-popup-window-end-->
 
         <script src="./scripts/competition-page.js" type="module"></script> 

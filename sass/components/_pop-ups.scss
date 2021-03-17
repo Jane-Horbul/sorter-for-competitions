@@ -47,7 +47,7 @@ body.lock {
   }
   .popup__content {
     position: relative;
-    background-color: var(--white-color);
+    background-color: $white-color;
     color: #000;
     width: 710px;
     padding: 20px;
