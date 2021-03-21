@@ -42,7 +42,7 @@
   .acc-conntainer .acc-item:checked + .acc-menu-item-gender-label,
   .acc-conntainer .acc-item:checked + .acc-menu-item-gender-label:hover{
    background-color: #c6e1ec;
-    color: var(--assent-color);
+    color: $assent-color;
    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
     box-shadow: 
           0px 0px 0px 1px rgba(155, 155, 155, 0.3), 

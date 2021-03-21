@@ -18,10 +18,10 @@
   .form-field-add-comp:focus,
   .form-field-add-comp:hover {
     transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid var(--assent-color);
+    border: 1px solid $assent-color;
   }
   .form-field-add-comp:hover .form-field-icon {
-    fill: var(--assent-color);
+    fill: $assent-color;
   }
   .form-field-add-comp-message {
     width: 600px;
@@ -31,7 +31,7 @@
   .form-field-add-comp-message:focus,
   .form-field-add-comp-message:hover {
     transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid var(--assent-color);
+    border: 1px solid $assent-color;
   }
   .form-field-add-comp-comment {
     width: 560px;

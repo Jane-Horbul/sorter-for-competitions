@@ -1,14 +1,72 @@
+.main-tables {
+display: block;
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 4px;
+  }
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+  }
+}
+.main-tables-item {
+  width: 320px;
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    width: 375px;
+  }
+  @media screen and (min-width: 1200px) and (max-width: 1799px) {
+    width: 590px;
+    margin-right: 10px;
+  }
+  @media screen and (min-width: 1800px) {
+    width: 885px;
+    margin-right: 15px;
+  }
+
+}
 .secondary-tables {
     display: flex;
-  }
+}
+
   .secondary-tables--item {
-    width: 50%;
-    margin-left: 15px;
-    margin-bottom: 20px;
-  }
-  .secondary-tables--buttons {
-    width: 20%;
-  }
+    width: 320px;
+
+    @media screen and (min-width: 767px) and (max-width: 1199px) {
+      width: 270px;
+      margin-right: 10px;
+    }
+    @media screen and (min-width: 1200px) and (max-width: 1799px) {
+      width: 485px;
+      margin-right: 15px;
+    }
+    @media screen and (min-width: 1800px) {
+      width: 780px;
+      margin-right: 15px;
+    }
+}
+  /*.secondary-tables--buttons {
+    width: 100%;
+
+    @include for-size(mobile) {
+width: 320px;
+    }
+  
+    @include for-size(tables) {
+      width: 240px;
+    }
+  
+    @include for-size(desktop) {
+      width: 240px;
+    }
+  
+    @include for-size(max-desktop) {
+      width: 240px;
+    }
+  }*/
 .secondary-tables--td {
     width: 12%;
   }
@@ -21,4 +79,34 @@
   .blue-cell-style {
     background-color: rgb(51, 137, 236);
     color: #FFF;
+  }
+  .group-info-table-title{
+    height: 60px;
+    position: relative;
+  }
+
+  .secondary-title-tables--text {
+    border: 1px solid #ddd;
+    font-size: 10px;
+    padding: 3px;
+
+    @include for-size(mobile) {
+      font-size: 10px;
+      padding: 3px;
+    }
+  
+    @include for-size(tables) {
+      font-size: 12px;
+      padding: 5px;
+    }
+  
+    @include for-size(desktop) {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    @include for-size(max-desktop) {
+      font-size: 16px;
+      padding: 15px;
+    }
   }

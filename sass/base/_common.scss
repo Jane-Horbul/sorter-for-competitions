@@ -40,29 +40,26 @@ html {
   
   .container {
     width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
     margin-right: auto;
     margin-left: auto;
   
     @include for-size(mobile) {
-      width: 480px;
+      width: 320px;
+      overflow-x: scroll;
     }
   
     @include for-size(tablet) {
       width: 768px;
+      padding-left: 4px;
+      overflow-x: hidden;
     }
   
     @include for-size(desktop) {
       width: 1200px;
-      padding-left: 25px;
-      padding-right: 25px;
     }
 
     @include for-size(max-desktop) {
       width: 1800px;
-      padding-left: 25px;
-      padding-right: 25px;
     }
   }
   .section {
@@ -71,12 +68,13 @@ html {
   
   .flexbox {
     display: block;
+    
     @include for-size(mobile) {
       display: block;
     }
   
     @include for-size(tablet) {
-      display: block;
+      display: flex;
     }
   
     @include for-size(desktop) {
@@ -92,11 +90,11 @@ html {
   
   h1 {
     font-size: 44px;
-    color: $white-color;
+    color: $assent-color;
     letter-spacing: 0.06em;
   
     @include for-size(mobile-only) {
-      font-size: 26px;
+      font-size: 20px;
     }
   
     @include for-size(mobile) {
@@ -104,7 +102,7 @@ html {
     }
   
     @include for-size(tablet) {
-      font-size: 26px;
+      font-size: 30px;
     }
   
     @include for-size(desktop) {
