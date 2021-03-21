@@ -7,12 +7,15 @@ import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
+import {showAllIfAdmin} from "./common.js"
 
+var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 var pageParams = getLinkParams(location.search);
 var pageInfo = sendRequest("/group-get?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"));
 var competitionParams = sendRequest("/competition-get?" + "cid=" + pageParams.get("cid"));
 var qualsMap = competitionParams.get("Qualifications");
 var membersToAdd = new Array(0);
+
 
 var groupForm = new Map();
 groupForm.set( "name",           document.getElementById("new-group-name"));
@@ -243,19 +246,21 @@ function pairElementCreate(pair){
     var template = document.getElementById("pair-template").content.cloneNode(true);
     var memberRedId = pair.get("member_red");
     var memberBlueId = pair.get("member_blue");
-    
+    var redLink = prevPage + "/member?mid=" + memberRedId;
+    var blueLink = prevPage + "/member?mid=" + memberBlueId;
+
     template.getElementById("pair-id").innerHTML = pair.get("id"); 
     template.getElementById("pair-red").innerHTML = memberNameGet(memberRedId);
     template.getElementById("pair-blue").innerHTML = memberNameGet(memberBlueId);
     pairWinnerElementCreate(pair, template);
 
     if(Number(memberRedId) >= 0){
-        template.getElementById("pair-red").setAttribute("onclick", "window.location.href='"
-                                    + document.referrer + "/member?mid=" + memberRedId + "'; return false"); 
+        template.getElementById("pair-red")
+            .setAttribute("onclick", "window.location.href='" + redLink + "'; return false"); 
     }
     if(Number(memberBlueId) >= 0){
-        template.getElementById("pair-blue").setAttribute("onclick", "window.location.href='"
-                                    + document.referrer + "/member?mid=" + memberBlueId + "'; return false"); 
+        template.getElementById("pair-blue")
+            .setAttribute("onclick", "window.location.href='" + blueLink + "'; return false"); 
     }
     return template;
 }
@@ -307,7 +312,7 @@ function memberElementCreate(member){
     template.getElementById("member-qualification").innerHTML = qualsMap.get(member.get("qualification"));
     template.getElementById("member-admited").innerHTML = member.get("admited");
     template.getElementById("member-name").setAttribute("onclick", "window.location.href='"
-                                    + document.referrer + "/member?mid=" + member.get("id") + "'; return false");
+                                    + prevPage + "/member?mid=" + member.get("id") + "'; return false");
     template.getElementById("member-dell-btn").addEventListener("click", function(){memberDelete(member.get("id"))}, false);
     return template;
 }
@@ -406,9 +411,11 @@ function addMembersToGroup()
     setTimeout(refreshPage, 1000);
 }
 
+
 fillPageInfo(pageInfo);
 document.getElementById("members-add-btn").addEventListener("click", addMembersToGroup, false);
 document.getElementById("group-form-send-btn").addEventListener("click", sendGroupForm, false);
 document.getElementById("update-pairs-btn").addEventListener("click", refreshPairs, false);
 document.getElementById("delete-group-btn").addEventListener("click", deleteGroup, false);
-document.getElementById("priv-page-link").setAttribute("href", document.referrer)
+document.getElementById("priv-page-link").setAttribute("href", prevPage);
+showAllIfAdmin();

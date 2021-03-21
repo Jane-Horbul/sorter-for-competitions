@@ -1485,6 +1485,7 @@ margin-left: 40px;
 
 .js-hidden-element{
   visibility: hidden;
+  height: 0px;
 }
 .js-visible-element{
   visibility: visible;
