@@ -1,0 +1,161 @@
+.advantages {
+    padding-top: 95px;
+  }
+  .advantages-title {
+    text-transform: uppercase;
+  }
+  .advantages-content {
+    letter-spacing: 0.03em;
+  }
+  .advantages-list {
+    display: block;
+
+    @include for-size(mobile) {
+      display: block;
+    }
+  
+    @include for-size(tablet) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    @include for-size(desktop) {
+      display: flex;
+    }
+  }
+  /*.advantages-item {
+    width: calc((100% - 30px * 3) / 4);
+    margin-right: 30px;
+    margin-bottom: 30px;
+  }
+  .advantages-item:nth-child(4n) {
+    margin-right: 0;
+  }*/
+
+  .advantages-item {
+      margin-right: 30px;
+      margin-bottom: 30px;
+
+      @include for-size(mobile) {
+        width: 300px;
+      }
+      @include for-size(tablet) {
+        width: 338px;
+      }
+      @include for-size(desktop) {
+        width: 353px;
+      }
+      @include for-size(max-desktop) {
+        width: 310px;
+      }
+  }
+
+  .advantages__item:nth-child(4n) {
+    margin-right: 0;
+  }
+
+
+  .advantages-icon-bg {
+    margin-left: auto;
+    margin-right: auto;
+    width: 270px;
+    height: 160px;
+    background: #f5f4fa;
+    border-radius: 4px;
+  }
+  .advantages-icon {
+    width: 65px;
+    height: 70px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 100px;
+  }
+
+  .add-new-competition-block {
+    display: block;
+  }
+  .title-of-competition-list-item {
+    text-decoration: none;
+    font-size: 20px;
+
+    @include for-size(desktop) {
+      font-size: 22px;
+    }
+    @include for-size(max-desktop) {
+      font-size: 24px;
+    }
+  }
+  /*overlay on projects item*/
+  .projects-item {
+    margin-right: 30px;
+    margin-bottom: 30px;
+
+    @include for-size(mobile) {
+      width: 300px;
+    }
+    @include for-size(tablet) {
+      width: 338px;
+    }
+    @include for-size(desktop) {
+      width: 353px;
+    }
+    @include for-size(max-desktop) {
+      width: 310px;
+    }
+  }
+  .projects-item:nth-child(3n) {
+    margin-right: 0;
+  }
+  .project-card {
+margin-right: auto;
+margin-left: auto;
+width: 270px;
+    border: 1px solid aliceblue;
+  }
+  .project-card:hover {
+    background: var (--white-color);
+    border: 1px solid #eeeeee;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+      1px 4px 6px rgba(0, 0, 0, 0.16);
+  }
+  .project-overlay {
+    position: relative;
+  
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #bdbdbd;
+    overflow: hidden;
+  }
+  .project-overlay:hover .overlay {
+    transform: translateY(0);
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(33, 150, 243, 0.9);
+  
+    transform: translateY(100%);
+    transition: transform 250ms ease;
+  }
+  
+  .overlay > p {
+    color: $white-color;
+    padding: 20px 24px;
+    margin: 0;
+    font-family: Roboto;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+  }
+  
+  .overlay code {
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #2a2a2a;
+  }

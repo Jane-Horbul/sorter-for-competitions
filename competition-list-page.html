@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Studio</title>
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/main.css" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./css/normalize.css">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+
     <header class="page-header">
         <div class="container flexbox">
             <nav class="navigation">
@@ -23,74 +23,55 @@
                     src="./img/competition-logo.png"
                     alt="Program logo">
             </nav>
-            
         </div>
     </header>
+
     <main>
-        <!--Slidebar-->
-        <section class="hero">
-            <div class="container flexbox">
-
-                   
-
-            </div>
-        </section>
-        <!--Our advantages-->
-        <section class="advantages">
-            <div class="container">
+        <section class="advantages container">
                 <ul class="list advantages-list" id="competitions-list">
                     <li class="advantages-item js-hidden-element">
                         <div class="advantages-icon-bg">
                             <div class="add-new-competition-block">
-                            <a href="./competition-add-form">
-                                <button class="add-new-competition-btn" type="button" data-open-modal>
-                                    <svg class="sl-footer-icon">
-                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                </svg>
-                                <span class="add-new-competition-btn-text">Add competitions</span>
-                                </button>
-                            </a>
+                                <a href="./competition-add-form">
+                                    <button class="add-new-competition-btn" type="button" data-open-modal>
+                                        <svg class="sl-footer-icon">
+                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                        </svg>
+                                        <span class="add-new-competition-btn-text">Add competitions</span>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </li>
-                    <!--The end of the element "Add competition" -->
                 </ul>
-            </div>
-        </section>
-       
+        </section>      
     </main>
 
     <footer>
-        <div class="container flexbox">
-            <address class="contacts-box">
-
-            </address>
-            <div class="container sl">
-            </div>
-            <div>
-               
-        </div>
-
     </footer>
-</div>
+
 </body>
+
 <template id="competition-template">
-    <li class="projects-item">
-        <a id="competition-link" class="title-of-competition-list-item">
-            <div class="project-card">
-                <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
+    <li class="advantages-item">
+        <div class="projects-item">
+            <a id="competition-link" class="title-of-competition-list-item">
+                <div class="project-card">
+                    <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
                         alt="" />
-                    <div class="overlay">
-                        <p class="advantages-content" id="competition-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="overlay">
+                            <p class="advantages-content" id="competition-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <h2 class="title-of-competition-list-item" id="competition-name"></h2>
+                
                     </div>
                 </div>
-                <div class="caption">
-                    <h2 class="title-of-competition-list-item" id="competition-name"></h2>
-                
-                </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </li>
 </template>
+
 <script src="./scripts/competition-list-page.js" type="module"></script>
 </html>

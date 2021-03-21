@@ -1,0 +1,28 @@
+.new-member-field {
+    display: block;
+  }
+  .new-member-gender-list, 
+  .new-member-permit-list {
+    display: flex;
+  }
+  .new-member-gender-item, 
+  .new-member-permit-item {
+    display: inline;
+    width: 80px;
+  }
+  .new-member-qualification{
+    display: block;
+  }
+  .main-tables-member-item {
+    width: 100%;
+    margin-left: 20px;
+  }
+  .member-info {
+    display: flex;
+    margin-top: 20px;
+  }
+  .column-for-button{
+    position: relative;
+    width: 85px;
+  }
+  

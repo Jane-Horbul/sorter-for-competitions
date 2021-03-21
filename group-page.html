@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Group page</title>
-        <link rel="stylesheet" href="./css/normalize.css">
-        <link rel="stylesheet" href="./css/styles.css" />
+        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./old-css/styles.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
@@ -75,7 +75,7 @@
                                         <td>Team</td>
                                         <td>Qualification</td>
                                         <td>Adm</td>
-                                        <td></td>
+                                        <td class="column-for-button"></td>
                                     </tr>
                                     <template id="group-member-template">
                                         <tr>
@@ -86,7 +86,12 @@
                                             <td id="member-team">  </td>
                                             <td id="member-qualification">  </td>
                                             <td id="member-admited">  </td>
-                                            <td> <button class=" js-hidden-element" type="button" id="member-dell-btn">Dell</button></td>
+                                            <td class="column-for-button"> <button type="button" id="member-dell-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-cross"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
                                         </tr>
                                     </template>
                                 </table>

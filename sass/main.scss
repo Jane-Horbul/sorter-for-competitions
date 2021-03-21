@@ -1,0 +1,20 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+
+@import "./base/common";
+
+@import "./components/buttons";
+@import "./components/acc-tabs";
+@import "./components/login-form";
+@import "./components/pop-ups";
+@import "./components/dynamic-table-for-modal";
+@import "./components/js-styles";
+@import "./components/tables";
+@import "./components/dynamic-table";
+@import "./components/create-ng-card";
+@import "./components/icons-on-btn";
+
+@import "./layouts/group-page";
+@import "./layouts/form-add-competition";
+@import "./layouts/member-page";
+@import "./layouts/competition-list-page";
