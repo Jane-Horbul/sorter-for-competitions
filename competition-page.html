@@ -4,124 +4,112 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Competition page</title>
-        <link rel="stylesheet" href="./old-css/normalize.css">
-        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/styles.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
-            <header class="page-header container">
-                <div class="">
+        <div class="wrapper">
+            <header class="page-header">
+                <div class="container">
                     <h1 id="competition-name">Competition name</h1>
                 </div>
             </header>
-            <div class="header-border"></div>
             <main>
                 <div class="container">
                     <!--Section with section with tables of created divisions and qualifications-->
-                    <section class="secondary-tables">
-                        <ul class="list flexbox">
-                            <li>
-                                <div class="secondary-tables--buttons">
-                                    <ul class="competition-page-main-btn-list">
-                                        <li class="list"><button class="competition-page-main-btn" id="sort-members-btn">Sort members</button></li>
-                                        <li class="list"><button class="competition-page-main-btn" id="form-pairs-btn">Form pairs</button></li>
-                                        <li class="list"><button class="competition-page-main-btn">All Pairs</button></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="secondary-tables--item">
-                                    <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
-                                        <tr>
-                                            <th colspan="3" class="group-info-table-title"><span>Qualifications</span>
-                                                    <button class="group-page-ref-btn" type="button" id="qual-add-btn">
+                    <section class="secondary-tables js-hidden-element">
+                        <div class="secondary-tables--buttons">
+                            <ul class="competition-page-main-btn-list">
+                                <li class="list"><button class="competition-page-main-btn" id="sort-members-btn">Сортувати учасників</button></li>
+                                <li class="list"><button class="competition-page-main-btn" id="form-pairs-btn">Сформувати пари</button></li>
+                                <li class="list"><button class="competition-page-main-btn">Список пар</button></li>
+                            </ul>
+                        </div>
+                        <div class="secondary-tables--item">
+                            <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
+                                <tr>
+                                    <th colspan="2" class="group-info-table-title">Кваліфікації</th>
+                                        <th>
+                                            <button class="group-page-ref-btn" type="button" id="qual-add-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                </svg>
+                                            </button>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="secondary-tables--item">
+                            <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
+                                <tr>
+                                    <th class="group-info-table-title">Розділи</th>
+                                    <th class="group-info-table-title">
+                                        <button class="group-page-ref-btn" type="button" id="div-add-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="main-tables">
+                            <div class="main-tables-item">
+                                <table class="dynamic-table" id="members-table">
+                                    <tr>
+                                        <th class="group-info-table-title" colspan="8">Учасники
+                                            <!--Add member button start-->
+                                            <a href="#popup_1" class="popup-link js-hidden-element">
+                                                <button class="group-page-ref-btn" type="button">
                                                         <svg class="group-info-edit-btn-icon">
-                                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                        </svg>
-                                                    </button>
-                                            </th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="secondary-tables--item">
-                                    <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
-                                        <tr>
-                                            <th class="group-info-table-title">Divisions</th>
-                                            <th class="group-info-table-title">
-                                                <button class="group-page-ref-btn" type="button" id="div-add-btn">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                                    
+                                                </button>
+                                            </a>
+                                            <!--Add member button end-->
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Прізвище, ім'я</td>
+                                        <td>Вік</td>
+                                        <td>Вага</td>
+                                        <td>Стать</td>
+                                        <td>Команда</td>
+                                        <td>Кваліфікація</td>
+                                        <td>Допуск</td>
+                                        <td>К-ть груп</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="main-tables-item">
+                                <table class="dynamic-table" id="groups-table">
+                                    <tr>
+                                        <th class="group-info-table-title" colspan="7">Групи
+                                            <a href="#popup_2" class="popup-link js-hidden-element">
+                                                <button class="group-page-ref-btn" type="button">
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
                                                 </button>
-                                            </th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        
-                            <ul class="list main-tables">
-                                    <li>
-                                        <div class="main-tables-item">
-                                            <table class="dynamic-table" id="members-table">
-                                                <tr>
-                                                    <th class="group-info-table-title" colspan="8"><span>Members</span>
-                                                        <!--Add member button start-->
-                                                        <a href="#popup_1" class="popup-link">
-                                                            <button class="group-page-ref-btn" type="button">
-                                                                    <svg class="group-info-edit-btn-icon">
-                                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                                </svg>
-                                                                
-                                                            </button>
-                                                        </a>
-                                                        <!--Add member button end-->
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td class="secondary-title-tables--text">Name, Surname</td>
-                                                    <td class="secondary-title-tables--text">Age</td>
-                                                    <td class="secondary-title-tables--text">Weight</td>
-                                                    <td class="secondary-title-tables--text">Sex</td>
-                                                    <td class="secondary-title-tables--text">Team</td>
-                                                    <td class="secondary-title-tables--text">Qualification</td>
-                                                    <td class="secondary-title-tables--text">Adm</td>
-                                                    <td class="secondary-title-tables--text">Number of groups</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="main-tables-item">
-                                            <table class="dynamic-table" id="groups-table">
-                                                <tr>
-                                                    <th class="group-info-table-title" colspan="7">Groups
-                                                        <a href="#popup_2" class="popup-link">
-                                                            <button class="group-page-ref-btn" type="button">
-                                                                <svg class="group-info-edit-btn-icon">
-                                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                                </svg>
-                                                            </button>
-                                                        </a>    
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td class="secondary-title-tables--text">Name of group</td>
-                                                    <td class="secondary-title-tables--text">Age of members</td>
-                                                    <td class="secondary-title-tables--text">Sex</td>
-                                                    <td class="secondary-title-tables--text">Division</td>
-                                                    <td class="secondary-title-tables--text">Weight</td>
-                                                    <td class="secondary-title-tables--text">Qualification</td>
-                                                    <td class="secondary-title-tables--text">Members number</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                </li>
-                            </ul>
+                                            </a>    
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Ім'я групи</td>
+                                        <td>Вік</td>
+                                        <td>Стать</td>
+                                        <td>Розділ</td>
+                                        <td>Вага</td>
+                                        <td>Кваліфікація</td>
+                                        <td>Учасники number</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </main>
@@ -138,7 +126,7 @@
             <tr>
                 <td class="secondary-tables--td" id="qual-value">  </td>
                 <td class="secondary-tables--td" id="qual-name">  </td>
-                <td class="column-for-button"> <button type="button" id="qual-dell-btn">Dell</button></td>
+                <td> <button type="button" id="qual-dell-btn">Dell</button></td>
             </tr>
         </template>
 
@@ -153,13 +141,7 @@
         <template id="division-template">
             <tr>
                 <td class="secondary-tables--td" id="div-name">  </td>
-                <td class="column-for-button">
-                    <button type="button" id="div-dell-btn">
-                        <svg class="group-info-edit-btn-icon">
-                            <use href="./img/symbol-defs.svg#icon-cross"></use>
-                        </svg>
-                    </button>
-                </td>
+                <td><button type="button" id="div-dell-btn">Dell</button></td>
             </tr>
         </template>
 
@@ -203,51 +185,51 @@
                     <a href="#header" class="popup__close close-popup">X</a>
                     <form class="modal-form">
 
-                        <span class="modal-title">Create new member</span>
+                        <span class="modal-title">Додавання учасника</span>
 
                         <div class="new-member-field">
 
-                            <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                            <label for="new-member-name"><span class="form-field-title">Ім'я</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
+                                <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Введіть ім'я учасника">
                             </div>
                         
-                            <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                            <label for="new-member-surname"><span class="form-field-title">Прізвище</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
+                                <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Введіть прізвище учасника">
                             </div>
 
-                            <label for="new-member-age"><span class="form-field-title">Member age</span></label>
+                            <label for="new-member-age"><span class="form-field-title">Вік</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
+                                <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Введіть вік учасника">
                             </div>
 
-                            <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
+                            <label for="new-member-weight"><span class="form-field-title">Вага</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
+                                <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Введіть вагу учасника">
                             </div>
 
                             <ul class="list new-member-gender-list">
                                 <label for="new-member-sex" class="form-field-label">
-                                    <span class="form-field-title">Member`s gender</span>
+                                    <span class="form-field-title">Стать</span>
                                     <li class="new-member-gender-item">
                                         <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                        <label for="male">Male</label>
+                                        <label for="male">Чоловіча</label>
                                     </li>
 
                                     <li class="new-member-gender-item">
                                     <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                    <label for="female">Female</label>
+                                    <label for="female">Жіноча</label>
                                     </li>
                                 </label>
                             </ul>
 
-                            <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
+                            <label for="new-member-team"><span class="form-field-title">Назва команди</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
+                                <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Введіть назву команди">
                             </div>
                         
-                            <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
+                            <label for="create-member-qualification"><span class="form-field-title">Кваіфікація:</span></label>
                             <select name="create-member-qualification" id="create-member-qualifications">
                                 <template id="create-member-qual-temp">
                                     <option id="create-member-qual-item" value="value">Name</option>
@@ -256,7 +238,7 @@
                         </div>
                         
                         <label for="new-member-division" id="new-member-divisions" class="form-field-label">
-                            <span class="form-field-title">Choose divisions:</span>
+                            <span class="form-field-title">Розділи:</span>
                             <div class="new-member-field" id="create-member-divisions">
                                 <template id="create-member-division-template">
                                     <input type="checkbox" id="div-input" name="div-name" value="div-val">
@@ -268,22 +250,22 @@
                         <div class="form-field--option">
                             <ul class="list new-member-permit-list">
                                 <label for="new-member-permit" class="form-field-label">
-                                    <span class="form-field-title">Member`s permit</span>
+                                    <span class="form-field-title">Допуск</span>
                                     <li class="new-member-permit-item">
                                         <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
-                                        <label for="yes">Yes</label>
+                                        <label for="yes">Так</label>
                                     </li>
 
                                     <li class="new-member-permit-item">
                                     <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
-                                    <label for="no">No</label>
+                                    <label for="no">Ні</label>
                                     </li>
                                 </label>
                             </ul>
                         </div>
                         
                         <button type="button" id="member-form-send-btn" class="modal-btn-submit">
-                            <span class="modal-btn-submit-text">Send</span>
+                            <span class="modal-btn-submit-text">Додати</span>
                         </button>
                     </form>
                 </div>
@@ -298,16 +280,16 @@
                 <div class="popup__content">
                     <a href="#header" class="popup__close close-popup">X</a>
                     <form class="modal-form">
-                        <span class="modal-title">Add a group</span>
+                        <span class="modal-title">Створення групи</span>
                         <div class="new-member-field">
-                            <label for="new-group-name"><span class="form-field-title">Group name</span></label>
+                            <label for="new-group-name"><span class="form-field-title">Назва групи</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
+                                <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Введіть назву групи">
                             </div>
 
                             <div class="form-field--option">
                                 <label for="division-of-group">
-                                    <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
+                                    <label for="division-of-group"><span class="form-field-title">Розділ:</span></label>
                                     <select name="division-of-group" id="create-group-division">
                                         <template id="create-group-div-temp">
                                             <option id="create-group-div-item" value="value">Name</option>
@@ -317,10 +299,10 @@
 
                             <div class="form-field--option">
                                 <label for="form-system-of-group">
-                                    <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
+                                    <label for="form-system-of-group"><span class="form-field-title">Система формування пар:</span></label>
                                     <select name="form-system-of-group" id="pairs-form-system">
-                                        <option value="olimpic">Olimpic</option>
-                                        <option value="circle">Circle</option>
+                                        <option value="olimpic">Оімпійська</option>
+                                        <option value="circle">Колова</option>
                                     </select>
                             </div>
 
@@ -328,21 +310,21 @@
                                 <!-- acc-menu start -->
                                 <div class="conntainer">
                                     <section class="acc-conntainer">
-                                        <span class="create-ng-field-name">Choose required items:</span>
+                                        <span class="create-ng-field-name">Оберіть критерії додавання учасників:</span>
                                         
                                         <!-- acc-menu-1-item start -->
                                         <div>
                                             <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
-                                            <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
+                                            <label class="acc-menu-item-gender-label" for="gender-checkbox">Стать</label>
                                                 <article class="acc-medium">
                                                     <div class="acc-menu-item-gender-list">    
                                                         <div>
                                                             <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male" checked>
-                                                            <label for="male">Male</label>
+                                                            <label for="male">Чоловіча</label>
                                                         </div>
                                                         <div>
                                                             <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
-                                                            <label for="female">Female</label>
+                                                            <label for="female">Жіноча</label>
                                                         </div>
                                                     </div>
                                                 </article>
@@ -353,7 +335,7 @@
                                         <!-- acc-menu-2-item start -->
                                         <div>
                                             <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
-                                            <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
+                                            <label class="acc-menu-item-gender-label"  for="age-checkbox">Віковий проміжок (тіьки числа)</label>
                                             <article class="acc-medium">
                                                 <div class="not-required-items conntainer">
                                                     <div class="create-ng--interval">
@@ -370,7 +352,7 @@
                                         <!-- acc-menu-3-item start -->
                                         <div>
                                             <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
-                                            <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
+                                            <label class="acc-menu-item-gender-label"  for="weight-checkbox">Ваговий проміжок, кг (тіьки числа)</label>
                                             <article class="acc-medium">
                                                 <div class="create-ng--interval">
                                                     <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
@@ -384,7 +366,7 @@
                                         <!-- acc-menu-4-item start -->
                                         <div>
                                             <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
-                                            <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
+                                            <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Кваліфікація </label>
                                                 <article class="acc-medium">
                                                     <div class="create-ng--interval">
                                                         <select name="ng-qualification-min" id="ng-members-qualification-min">
@@ -403,14 +385,14 @@
                                 </div>
                             </div>
                             <button type="button" id="group-form-send-btn" class="modal-btn-submit">
-                                <span class="modal-btn-submit-text">Send</span>
+                                <span class="modal-btn-submit-text">Додати</span>
                             </button>
                         
                         </div>
                     </form>
                 </div>
             </div>
-
+        </div>
         <!--second-popup-window-end-->
 
         <script src="./scripts/competition-page.js" type="module"></script> 

@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Group page</title>
-        <link rel="stylesheet" href="./old-css/normalize.css">
-        <link rel="stylesheet" href="./old-css/styles.css" />
+        <link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/styles.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
@@ -18,7 +18,7 @@
                     <div class="js-hidden-element">                
                         <a id="priv-page-link">
                             <button class="group-page-del-btn" type="button" id="delete-group-btn">
-                            <span class="group-card-btn-submit">Delete group</span></button>
+                            <span class="group-card-btn-submit">Видаити групу</span></button>
                         </a>
                     </div>
                 </li>
@@ -31,7 +31,7 @@
                 <div class="group-info-main">
                     <div id="member-info">
                         <div class="group-info-title--siting">
-                            <div class="group-info-title"><span>Group info</span></div>
+                            <div class="group-info-title"><span>Дані про групу</span></div>
                             <a href="#popup_1" class="popup-link js-hidden-element">
                                 <button class="group-info-edit-btn" type="button">
                                     <svg class="group-info-edit-btn-icon">
@@ -41,12 +41,12 @@
                             </a>
                         </div>
                     <div class="group-info-fields">
-                        <div class="group-info-fields--item"> Form system:<span>&nbsp</span><div id="group-form-system"></div></div>
-                        <div class="group-info-fields--item"> Division:<span>&nbsp</span><div id="group-division"></div></div>
-                        <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="group-age"></div></div>
-                        <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="group-weight"></div></div>
-                        <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="group-sex"></div></div>
-                        <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="group-qulification"></div></div>
+                        <div class="group-info-fields--item"> Система форумування пар:<span>&nbsp</span><div id="group-form-system"></div></div>
+                        <div class="group-info-fields--item"> Розділ:<span>&nbsp</span><div id="group-division"></div></div>
+                        <div class="group-info-fields--item"> Вік:<span>&nbsp</span><div id="group-age"></div></div>
+                        <div class="group-info-fields--item"> Вага:<span>&nbsp</span><div id="group-weight"></div></div>
+                        <div class="group-info-fields--item"> Стать:<span>&nbsp</span><div id="group-sex"></div></div>
+                        <div class="group-info-fields--item"> Кваліфікація:<span>&nbsp</span><div id="group-qulification"></div></div>
                     </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                             <div class="main-tables-item">
                                 <table class="dynamic-table" id="members-table">
                                     <tr>
-                                        <th colspan="8" class="all-table-title group-info-table-title"> Members 
+                                        <th colspan="8" class="all-table-title group-info-table-title"> Учасники 
                                             <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
                                                 <button class="group-page-ref-btn" type="button" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
@@ -68,14 +68,14 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td>Name, Surname</td>
-                                        <td>Age</td>
-                                        <td>Weight</td>
-                                        <td>Sex</td>
-                                        <td>Team</td>
-                                        <td>Qualification</td>
-                                        <td>Adm</td>
-                                        <td class="column-for-button"></td>
+                                        <td>Прізвище, ім'я</td>
+                                        <td>Вік</td>
+                                        <td>Вага</td>
+                                        <td>Стать</td>
+                                        <td>Команда</td>
+                                        <td>Кваліфікація</td>
+                                        <td>Допуск</td>
+                                        <td></td>
                                     </tr>
                                     <template id="group-member-template">
                                         <tr>
@@ -86,12 +86,7 @@
                                             <td id="member-team">  </td>
                                             <td id="member-qualification">  </td>
                                             <td id="member-admited">  </td>
-                                            <td class="column-for-button"> <button type="button" id="member-dell-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-cross"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
+                                            <td> <button class=" js-hidden-element" type="button" id="member-dell-btn">Dell</button></td>
                                         </tr>
                                     </template>
                                 </table>
@@ -99,7 +94,7 @@
                             <div class="main-tables-item">
                                 <table class="dynamic-table" id="pairs-table">
                                     <tr>
-                                        <th class="all-table-title group-info-table-title" colspan="7"> Pairs 
+                                        <th class="all-table-title group-info-table-title" colspan="7"> Пари 
                                             <button class="group-page-ref-btn  js-hidden-element" type="button"  id="update-pairs-btn" data-open-modal>
                                                 <svg class="group-info-edit-btn-icon">
                                                     <use href="./img/icons.svg#icon-loop2"></use>
@@ -108,10 +103,10 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td>Pair ID</td>
-                                        <td>Red member</td>
-                                        <td>Blue member</td>
-                                        <td>Winner</td>
+                                        <td>ID пари</td>
+                                        <td>Червоний кут</td>
+                                        <td>Синій кут</td>
+                                        <td>Переможець</td>
                                     </tr>
                                 </table>
                             </div>
@@ -157,7 +152,7 @@
 
                                 <div class="form-field--option">
                                     <label for="division-of-group">
-                                        <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
+                                        <label for="division-of-group"><span class="form-field-title">Розділ:</span></label>
                                         <select name="division-of-group" id="create-group-division">
                                             <template id="create-group-div-temp">
                                                 <option id="create-group-div-item" value="value">Name</option>
@@ -167,10 +162,10 @@
 
                                 <div class="form-field--option">
                                     <label for="form-system-of-group">
-                                        <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
+                                        <label for="form-system-of-group"><span class="form-field-title">Система формування пар:</span></label>
                                         <select name="form-system-of-group" id="pairs-form-system">
-                                            <option value="olimpic">Olimpic</option>
-                                            <option value="circle">Circle</option>
+                                            <option value="olimpic">Оімпійська</option>
+                                            <option value="circle">Колова</option>
                                         </select>
                                 </div>
 
@@ -178,12 +173,12 @@
                                     <!-- acc-menu start -->
                                     <div class="conntainer">
                                         <section class="acc-conntainer">
-                                            <span class="create-ng-field-name">Choose required items:</span>
+                                            <span class="create-ng-field-name">Оберіть критерії додавання учасників:</span>
                                             
                                             <!-- acc-menu-1-item start -->
                                             <div>
                                                 <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
+                                                <label class="acc-menu-item-gender-label" for="gender-checkbox">Стать</label>
                                                     <article class="acc-medium">
                                                         <div class="acc-menu-item-gender-list">    
                                                             <div>
@@ -203,7 +198,7 @@
                                             <!-- acc-menu-2-item start -->
                                             <div>
                                                 <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
+                                                <label class="acc-menu-item-gender-label"  for="age-checkbox">Вік interval (number only)</label>
                                                 <article class="acc-medium">
                                                     <div class="not-required-items conntainer">
                                                         <div class="create-ng--interval">
@@ -220,7 +215,7 @@
                                             <!-- acc-menu-3-item start -->
                                             <div>
                                                 <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
+                                                <label class="acc-menu-item-gender-label"  for="weight-checkbox">Ваговий проміжок, кг (тіьки числа)</label>
                                                 <article class="acc-medium">
                                                     <div class="create-ng--interval">
                                                         <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
@@ -234,7 +229,7 @@
                                             <!-- acc-menu-4-item start -->
                                             <div>
                                                 <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
-                                                <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
+                                                <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Кваліфікація interval </label>
                                                     <article class="acc-medium">
                                                         <div class="create-ng--interval">
                                                             <select name="ng-qualification-min" id="ng-members-qualification-min">
@@ -253,7 +248,7 @@
                                     </div>
                                 </div>
                                 <button type="button" id="group-form-send-btn" class="modal-btn-submit">
-                                    <span class="modal-btn-submit-text">Accept</span>
+                                    <span class="modal-btn-submit-text">Прийняти</span>
                                 </button>
                             
                             </div>
@@ -273,16 +268,16 @@
                                 <div class="skroll-for-modal">
                                     <table class="dynamic-table-for-modal" id="members-adding-table">
                                         <tr>
-                                            <th colspan="8" class="all-table-title group-info-table-title">Members</th>
+                                            <th colspan="8" class="all-table-title group-info-table-title">Учасники</th>
                                         </tr>
                                         <tr>
-                                            <td>Name, Surname</td>
-                                            <td>Age</td>
-                                            <td>Weight</td>
-                                            <td>Sex</td>
-                                            <td>Team</td>
-                                            <td>Qualification</td>
-                                            <td>Adm</td>
+                                            <td>Прізвище, ім'я</td>
+                                            <td>Вік</td>
+                                            <td>Вага</td>
+                                            <td>Стать</td>
+                                            <td>Команда</td>
+                                            <td>Кваліфікація</td>
+                                            <td>Допуск</td>
                                         </tr>
                                         <template id="competition-member-template">
                                             <tr id="member-row">

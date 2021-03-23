@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Member page</title>
-        <link rel="stylesheet" href="./old-css/normalize.css">
-        <link rel="stylesheet" href="./old-css/styles.css" />
+        <link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/styles.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
@@ -19,7 +19,7 @@
                         <a id="priv-page-link">
                             <a id="priv-page-link">
                                 <button  class="group-page-del-btn js-hidden-element" type="button" id="delete-member-btn">
-                                <span class="group-card-btn-submit">Delete member</span></button>
+                                <span class="group-card-btn-submit">Видалити учасника</span></button>
                             </a>
                     </div>
                 </li>
@@ -33,7 +33,7 @@
                     <div class="group-info-main">
                         <div id="member-info">
                             <div class="group-info-title--siting">
-                                <div class="group-info-title"><span>Member info</span></div>
+                                <div class="group-info-title"><span>Дані про учасника</span></div>
                                 <a href="#popup_1" class="popup-link js-hidden-element">
                                     <button class="group-info-edit-btn" type="button">
                                         <svg class="group-info-edit-btn-icon">
@@ -46,13 +46,13 @@
                         <div class="group-info-fields">
                             <div class="" id="member-info">
                                 <div class="group-info-fields--item"> Id:<span>&nbsp</span><div id="member-id">            </div></div>
-                                <div class="group-info-fields--item"> Divisions:<span>&nbsp</span><div id="member-division">      </div></div>
-                                <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="member-age">           </div></div>
-                                <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="member-weight">        </div></div>
-                                <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="member-sex">           </div></div>
-                                <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="member-qulification">  </div></div>
-                                <div class="group-info-fields--item"> Team:<span>&nbsp</span><div id="member-team">          </div> </div>
-                                <div class="group-info-fields--item"> Admition:<span>&nbsp</span><div id="member-admit">         </div> </div>
+                                <div class="group-info-fields--item"> Розділи:<span>&nbsp</span><div id="member-division">      </div></div>
+                                <div class="group-info-fields--item"> Вік:<span>&nbsp</span><div id="member-age">           </div></div>
+                                <div class="group-info-fields--item"> Вага:<span>&nbsp</span><div id="member-weight">        </div></div>
+                                <div class="group-info-fields--item"> Стать:<span>&nbsp</span><div id="member-sex">           </div></div>
+                                <div class="group-info-fields--item"> Кваліфікація:<span>&nbsp</span><div id="member-qulification">  </div></div>
+                                <div class="group-info-fields--item"> Команда:<span>&nbsp</span><div id="member-team">          </div> </div>
+                                <div class="group-info-fields--item"> Допуск<span>&nbsp</span><div id="member-admit">         </div> </div>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                             <div class="main-tables-member-item">
                                 <table class="dynamic-table" id="groups-table">
                                     <tr>
-                                        <th class="all-table-title group-info-table-title" colspan="8">Groups
+                                        <th class="all-table-title group-info-table-title" colspan="8">Групи
                                             <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
                                                 <button class="group-page-ref-btn" type="button" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
@@ -73,13 +73,13 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td>Name of group</td>
-                                        <td>Age of members</td>
-                                        <td>Sex</td>
-                                        <td>Division</td>
-                                        <td>Weight</td>
-                                        <td>Qualification</td>
-                                        <td>Members number</td>
+                                        <td>Назва групи</td>
+                                        <td>Вік</td>
+                                        <td>Стать</td>
+                                        <td>Розділ</td>
+                                        <td>Вага</td>
+                                        <td>Кваліфікація</td>
+                                        <td>К-ть учасників</td>
                                         <td class="column-for-button"></td>
                                     </tr>
                                     <template id="group-template">
@@ -91,13 +91,7 @@
                                             <td id="group-weight">  </td>
                                             <td id="group-qualification">  </td>
                                             <td id="group-members-num">  </td>
-                                            <td class="column-for-button js-visible-element"> 
-                                                <button type="button" id="group-dell-btn">
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-cross"></use>
-                                                    </svg>
-                                                </button>
-                                            </td>
+                                            <td> <button class="js-hidden-element" type="button" id="group-dell-btn">Dell</button></td>
                                         </tr>
                                     </template>
                                 </table>
@@ -124,51 +118,51 @@
                         <a href="#header" class="popup__close close-popup">X</a>
                         <form class="modal-form">
 
-                            <span class="modal-title">Edit member</span>
+                            <span class="modal-title">Редагувати учасника</span>
 
                             <div class="new-member-field">
 
-                                <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                                <label for="new-member-name"><span class="form-field-title">Ім'я</span></label>
                                 <div class="form-field">
-                                    <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
+                                    <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Введіть ім'я учасника">
                                 </div>
                             
-                                <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                                <label for="new-member-surname"><span class="form-field-title">Прізвище</span></label>
                                 <div class="form-field">
-                                    <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
+                                    <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Введіть прізвище учасника">
                                 </div>
 
-                                <label for="new-member-age"><span class="form-field-title">Member age</span></label>
+                                <label for="new-member-age"><span class="form-field-title">Вік</span></label>
                                 <div class="form-field">
-                                    <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
+                                    <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Введіть вік учасника">
                                 </div>
 
-                                <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
+                                <label for="new-member-weight"><span class="form-field-title">Вага</span></label>
                                 <div class="form-field">
-                                    <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
+                                    <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Введіть вагу учасника">
                                 </div>
 
                                 <ul class="list new-member-gender-list">
                                     <label for="new-member-sex" class="form-field-label">
-                                        <span class="form-field-title">Member`s gender</span>
+                                        <span class="form-field-title">Стать</span>
                                         <li class="new-member-gender-item">
                                             <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                            <label for="male">Male</label>
+                                            <label for="male">Чоловіча</label>
                                         </li>
 
                                         <li class="new-member-gender-item">
                                         <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                        <label for="female">Female</label>
+                                        <label for="female">Жіноча</label>
                                         </li>
                                     </label>
                                 </ul>
 
-                                <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
+                                <label for="new-member-team"><span class="form-field-title">Назва команди</span></label>
                                 <div class="form-field">
-                                    <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
+                                    <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Введіть назву команди">
                                 </div>
                             
-                                <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
+                                <label for="create-member-qualification"><span class="form-field-title">Кваіфікація:</span></label>
                                 <select name="create-member-qualification" id="create-member-qualifications">
                                     <template id="create-member-qual-temp">
                                         <option id="create-member-qual-item" value="value">Name</option>
@@ -177,7 +171,7 @@
                             </div>
                             
                             <label for="new-member-division" id="new-member-divisions" class="form-field-label">
-                                <span class="form-field-title">Choose divisions:</span>
+                                <span class="form-field-title">Розділи:</span>
                                 <div class="new-member-field" id="create-member-divisions">
                                     <template id="create-member-division-template">
                                         <input type="checkbox" id="div-input" name="div-name" value="div-val">
@@ -189,22 +183,22 @@
                             <div class="form-field--option">
                                 <ul class="list new-member-permit-list">
                                     <label for="new-member-permit" class="form-field-label">
-                                        <span class="form-field-title">Member`s permit</span>
+                                        <span class="form-field-title">Допуск</span>
                                         <li class="new-member-permit-item">
                                             <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
-                                            <label for="yes">Yes</label>
+                                            <label for="yes">Так</label>
                                         </li>
 
                                         <li class="new-member-permit-item">
                                         <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
-                                        <label for="no">No</label>
+                                        <label for="no">Ні</label>
                                         </li>
                                     </label>
                                 </ul>
                             </div>
                             
                             <button type="button" id="member-form-send-btn" class="modal-btn-submit">
-                                <span class="modal-btn-submit-text">Accept</span>
+                                <span class="modal-btn-submit-text">Прийняти</span>
                             </button>
                         </form>
                     </div>
@@ -223,16 +217,16 @@
                                 <div class="skroll-for-modal">
                                     <table class="dynamic-table-for-modal" id="groups-adding-table">
                                         <tr>
-                                            <th class="group-info-table-title" colspan="7">Groups</th>
+                                            <th class="group-info-table-title" colspan="7">Групи</th>
                                         </tr>
                                         <tr>
-                                            <td>Name of group</td>
-                                            <td>Age of members</td>
-                                            <td>Sex</td>
-                                            <td>Division</td>
-                                            <td>Weight</td>
-                                            <td>Qualification</td>
-                                            <td>Members number</td>
+                                            <td>Назва групи</td>
+                                            <td>Вік</td>
+                                            <td>Стать</td>
+                                            <td>Розділ</td>
+                                            <td>Вага</td>
+                                            <td>Кваліфікація</td>
+                                            <td>К-ть учасників</td>
                                         </tr>
                                         <template id="group-adding-template">
                                             <tr id="group-row">

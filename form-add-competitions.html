@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create a new competition</title>
-        <link rel="stylesheet" href="./old-css/styles.css" />
+    <title>Створення змагання</title>
+        <link rel="stylesheet" href="./css/styles.css" />
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;700&display=swap"
             rel="stylesheet">
-        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./css/normalize.css">
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -15,7 +15,7 @@
     <header class="page-header">
         <div class="container">
             <ul class="group-page-header list">
-            <li><h1 id="page-name">Create a new competition</h1></li>
+            <li><h1 id="page-name">Створення змагання</h1></li>
             <!--<li><div>                
                 <a id="priv-page-link">
                     <a id="priv-page-link">
@@ -34,7 +34,7 @@
         <main>
             <div class="form-add-comp">
                 <label for="competition-name" class="form-field-label">
-                    <span class="form-field-title">The name of the competition</span>
+                    <span class="form-field-title">Назва змагань</span>
                     <div class="form-field-add-comp">
                         <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
                     </div>
@@ -44,11 +44,11 @@
                 <div class="added-section-table">
                     <table class="dynamic-table" id="qualifications-table">
                         <tr>
-                            <th class="all-table-title first-order-title" colspan="3">Qualifications</th>
+                            <th class="all-table-title first-order-title" colspan="3">Кваліфікації</th> 
                         </tr>
                         <tr>
-                            <th class="second-order-title"> Qualification value </th>
-                            <th colspan="2" class="second-order-title"> Qualification name </th>
+                            <th class="second-order-title"> Значення кваліфікації </th>
+                            <th colspan="2" class="second-order-title"> Назва кваліфікації </th>
                         </tr>
                         <tr>
                             <td><input type="text" name="qual-val" id="qualification-value" class="add-form-field-input"/></td>
@@ -68,7 +68,7 @@
                 <div class="added-section-table">
                     <table class="dynamic-table" id="divisions-table">
                         <tr>
-                            <th colspan="2">Divisions</th>
+                            <th colspan="2">Розділи</th>
                         </tr>
                         <tr>
                             <td><input type="text" name="division-name" id="division-name" class="form-field-input"/></td>
@@ -82,17 +82,17 @@
                         </tr>
                     </table>
                     <label>
-                        <span class="form-field-title">Short description</span>
+                        <span class="form-field-title">Короткий опис</span>
                         <div class="form-field-add-comp-message">
-                            <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                            <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Введіть короткий опис змагань"
                                 rows="3"></textarea>
                         </div>
                     </label>
                     <a class="form-submit-text-link" href="/">
                         <button type="button" class="main-btn-submit" id="send-form-btn">
-                        <span class="group-card-btn-submit">Add competition</span></button>
+                        <span class="group-card-btn-submit">Створити</span></button>
                     </a>
-                    <!--   <p><input type="submit" value="Add competitions"></p>-->
+                    <!--   <p><input type="submit" value="Створитиs"></p>-->
                 </div>
             </div>
         </main>
