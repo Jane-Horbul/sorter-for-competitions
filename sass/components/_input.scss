@@ -1,0 +1,43 @@
+.competition-page-input {
+    width: 98px;
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 3px;
+  background-color: transparent;
+  border: 1px solid rgba(117, 117, 117, 0.5);
+  outline: transparent;
+
+  @media screen and (min-width: 1200px) and (max-width: 1799px) {
+    width: 185px;
+  }
+  @media screen and (min-width: 1800px) {
+    width: 330px;
+  }
+}
+.competition-page-input::placeholder,
+.competition-page-division-input::placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.699);
+}
+
+.competition-page-division-input {
+    width: 215px;
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 3px;
+  background-color: transparent;
+  border: 1px solid rgba(117, 117, 117, 0.5);
+  outline: transparent;
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    width: 165px;
+  }
+  @media screen and (min-width: 1200px) and (max-width: 1799px) {
+    width: 380px;
+  }
+  @media screen and (min-width: 1800px) {
+    width: 675px;
+  }
+}

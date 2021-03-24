@@ -1260,9 +1260,28 @@ body.lock {
 }
 
 .secondary-tables--td {
+  font-size: 10px;
   padding: 2px;
   text-align: center;
   border: 1px solid #ced7df;
+}
+
+@media screen and (min-width: 767px) and (max-width: 1199px) {
+  .secondary-tables--td {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .secondary-tables--td {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .secondary-tables--td {
+    font-size: 14px;
+  }
 }
 
 .all-table-title {
@@ -1323,25 +1342,6 @@ body.lock {
 
 .dynamic-table tr {
   height: 45px;
-  font-size: 9px;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-  .dynamic-table tr {
-    font-size: 12px;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1799px) {
-  .dynamic-table tr {
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .dynamic-table tr {
-    font-size: 14px;
-  }
 }
 
 .dynamic-table tr:nth-child(even) {
@@ -1461,6 +1461,92 @@ body.lock {
 @media (min-width: 1800px) {
   .header-border {
     margin-bottom: 30px;
+  }
+}
+
+.competition-page-input {
+  width: 98px;
+  height: 25px;
+  padding-top: 5px;
+  padding-left: 3px;
+  background-color: transparent;
+  border: 1px solid rgba(117, 117, 117, 0.5);
+  outline: transparent;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .competition-page-input {
+    width: 185px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .competition-page-input {
+    width: 330px;
+  }
+}
+
+.competition-page-input::-webkit-input-placeholder,
+.competition-page-division-input::-webkit-input-placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.699);
+}
+
+.competition-page-input:-ms-input-placeholder,
+.competition-page-division-input:-ms-input-placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.699);
+}
+
+.competition-page-input::-ms-input-placeholder,
+.competition-page-division-input::-ms-input-placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.699);
+}
+
+.competition-page-input::placeholder,
+.competition-page-division-input::placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.699);
+}
+
+.competition-page-division-input {
+  width: 215px;
+  height: 25px;
+  padding-top: 5px;
+  padding-left: 3px;
+  background-color: transparent;
+  border: 1px solid rgba(117, 117, 117, 0.5);
+  outline: transparent;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .competition-page-division-input {
+    width: 165px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .competition-page-division-input {
+    width: 380px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .competition-page-division-input {
+    width: 675px;
   }
 }
 

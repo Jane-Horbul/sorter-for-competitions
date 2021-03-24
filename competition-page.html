@@ -33,7 +33,7 @@
                                 <div class="secondary-tables--item">
                                     <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
                                         <tr>
-                                            <th colspan="3" class="group-info-table-title"><span>Qualifications</span>
+                                            <th colspan="3" class="group-info-table-title all-table-title"><span>Qualifications</span>
                                                     <button class="group-page-ref-btn" type="button" id="qual-add-btn">
                                                         <svg class="group-info-edit-btn-icon">
                                                             <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -42,13 +42,41 @@
                                             </th>
                                         </tr>
                                     </table>
+                                        <template id="qualification-template">
+                                            <tr>
+                                                <td class="secondary-tables--td" id="qual-value">  </td>
+                                                <td class="secondary-tables--td" id="qual-name">  </td>
+                                                <td class="secondary-tables--td column-for-button"> 
+                                                    <button class="member-page-dell-btn" type="button" id="qual-dell-btn">
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </template>
+
+                                        <template id="qualification-adding-template">
+                                            <tr id="qualification-add-field">
+                                                <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="Enter value"> </td>
+                                                <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="Enter name">  </td>
+                                                <td class="secondary-tables--td">
+                                                    <button class="member-page-dell-btn" type="button" id="qual-dell-btn">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/icons.svg#icon-checkmark"></use>
+                                                    </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </template>
+
                                 </div>
                             </li>
                             <li>
                                 <div class="secondary-tables--item">
                                     <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
                                         <tr>
-                                            <th class="group-info-table-title">Divisions</th>
+                                            <th class="group-info-table-title all-table-title">Divisions</th>
                                             <th class="group-info-table-title">
                                                 <button class="group-page-ref-btn" type="button" id="div-add-btn">
                                                     <svg class="group-info-edit-btn-icon">
@@ -58,18 +86,45 @@
                                             </th>
                                         </tr>
                                     </table>
+
+                                    <template id="division-template">
+                                        <tr>
+                                            <td class="secondary-tables--td" id="div-name">  </td>
+                                            <td class="column-for-button secondary-tables--td">
+                                                <button class="member-page-dell-btn" type="button" id="div-dell-btn">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+                            
+                                    <template id="division-adding-template">
+                                        <tr id="division-add-field">
+                                            <td class="secondary-tables--td"><input class="competition-page-division-input"  type="text" id="add-division" placeholder="Enter value"> </td>
+                                            <td class="secondary-tables--td">
+                                                <button type="button" class="member-page-dell-btn" id="div-ok-btn">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/icons.svg#icon-checkmark"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </template>
+
                                 </div>
                             </li>
                         </ul>
                     </section>
                     <section>
                         
-                            <ul class="list main-tables">
+                                <ul class="list main-tables">
                                     <li>
                                         <div class="main-tables-item">
                                             <table class="dynamic-table" id="members-table">
                                                 <tr>
-                                                    <th class="group-info-table-title" colspan="8"><span>Members</span>
+                                                    <th class="group-info-table-title all-table-title" colspan="8"><span>Members</span>
                                                         <!--Add member button start-->
                                                         <a href="#popup_1" class="popup-link">
                                                             <button class="group-page-ref-btn" type="button">
@@ -93,13 +148,26 @@
                                                     <td class="secondary-title-tables--text">Number of groups</td>
                                                 </tr>
                                             </table>
+                                            <template id="member-template">
+                                                <tr id="member-row">
+                                                    <td class="secondary-tables--td" id="member-name">  </td>
+                                                    <td class="secondary-tables--td" id="member-age">  </td>
+                                                    <td class="secondary-tables--td" id="member-weight">  </td>
+                                                    <td class="secondary-tables--td" id="member-sex">  </td>
+                                                    <td class="secondary-tables--td" id="member-team">  </td>
+                                                    <td class="secondary-tables--td" id="member-qualification">  </td>
+                                                    <td class="secondary-tables--td" id="member-admited">  </td>
+                                                    <td class="secondary-tables--td" id="member-groups-num">  </td>
+                                                </tr>
+                                            </template>
+
                                         </div>
                                     </li>
                                     <li>
                                         <div class="main-tables-item">
                                             <table class="dynamic-table" id="groups-table">
                                                 <tr>
-                                                    <th class="group-info-table-title" colspan="7">Groups
+                                                    <th class="group-info-table-title all-table-title" colspan="7">Groups
                                                         <a href="#popup_2" class="popup-link">
                                                             <button class="group-page-ref-btn" type="button">
                                                                 <svg class="group-info-edit-btn-icon">
@@ -119,9 +187,21 @@
                                                     <td class="secondary-title-tables--text">Members number</td>
                                                 </tr>
                                             </table>
+                                            
+                                            <template id="group-template">
+                                                <tr id="group-row">
+                                                    <td class="secondary-tables--td" id="group-name">  </td>
+                                                    <td class="secondary-tables--td" id="group-age">  </td>
+                                                    <td class="secondary-tables--td" id="group-sex">  </td>
+                                                    <td class="secondary-tables--td" id="group-division">  </td>
+                                                    <td class="secondary-tables--td" id="group-weight">  </td>
+                                                    <td class="secondary-tables--td" id="group-qualification">  </td>
+                                                    <td class="secondary-tables--td" id="group-members-num">  </td>
+                                                </tr>
+                                            </template>
                                         </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
                     </section>
                 </div>
             </main>
@@ -134,67 +214,7 @@
                 </div>
             </footer>
         </div>
-        <template id="qualification-template">
-            <tr>
-                <td class="secondary-tables--td" id="qual-value">  </td>
-                <td class="secondary-tables--td" id="qual-name">  </td>
-                <td class="column-for-button"> <button type="button" id="qual-dell-btn">Dell</button></td>
-            </tr>
-        </template>
 
-        <template id="qualification-adding-template">
-            <tr id="qualification-add-field">
-                <td><input type="text" id="add-qualification-value"> </td>
-                <td><input type="text" id="add-qualification-name"> </td>
-                <td><button type="button" id="qual-ok-btn">OK</button></td>
-            </tr>
-        </template>
-
-        <template id="division-template">
-            <tr>
-                <td class="secondary-tables--td" id="div-name">  </td>
-                <td class="column-for-button">
-                    <button type="button" id="div-dell-btn">
-                        <svg class="group-info-edit-btn-icon">
-                            <use href="./img/symbol-defs.svg#icon-cross"></use>
-                        </svg>
-                    </button>
-                </td>
-            </tr>
-        </template>
-
-        <template id="division-adding-template">
-            <tr id="division-add-field">
-                <td><input type="text" id="add-division"> </td>
-                <td><button type="button" id="div-ok-btn">OK</button></td>
-            </tr>
-        </template>
-
-        <template id="member-template">
-            <tr id="member-row">
-                <td id="member-name">  </td>
-                <td id="member-age">  </td>
-                <td id="member-weight">  </td>
-                <td id="member-sex">  </td>
-                <td id="member-team">  </td>
-                <td id="member-qualification">  </td>
-                <td id="member-admited">  </td>
-                <td id="member-groups-num">  </td>
-            </tr>
-        </template>
-
-        <template id="group-template">
-            <tr id="group-row">
-                <td id="group-name">  </td>
-                <td id="group-age">  </td>
-                <td id="group-sex">  </td>
-                <td id="group-division">  </td>
-                <td id="group-weight">  </td>
-                <td id="group-qualification">  </td>
-                <td id="group-members-num">  </td>
-            </tr>
-        </template>
-        
         <!--first-popup-window-start-->
         <div class="popup" id = "popup_1">
             <a href="#header" class="popup__area"></a>
