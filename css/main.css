@@ -391,7 +391,7 @@ textarea {
 
 @media (min-width: 320px) {
   .container {
-    width: 360px;
+    width: 320px;
     overflow-x: scroll;
   }
 }

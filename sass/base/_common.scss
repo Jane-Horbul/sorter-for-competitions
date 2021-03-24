@@ -44,7 +44,7 @@ html {
     margin-left: auto;
   
     @include for-size(mobile) {
-      width: 360px;
+      width: 320px;
       overflow-x: scroll;
     }
   
