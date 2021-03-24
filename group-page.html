@@ -14,7 +14,8 @@
                 <div class="container">
                     <ul class="group-page-header list">
                     <li><h1 id="group-name"></h1></li>
-                    <li><div class="js-visible-element">                
+                <li>
+                    <div class="js-hidden-element">                
                         <a id="priv-page-link">
                             <button class="group-page-del-btn" type="button" id="delete-group-btn">
                             <span class="group-card-btn-submit">Delete group</span></button>
@@ -31,7 +32,7 @@
                     <div id="member-info">
                         <div class="group-info-title--siting">
                             <div class="group-info-title"><span>Group info</span></div>
-                            <a href="#popup_1" class="popup-link">
+                            <a href="#popup_1" class="popup-link js-hidden-element">
                                 <button class="group-info-edit-btn" type="button">
                                     <svg class="group-info-edit-btn-icon">
                                         <use href="./img/icons.svg#icon-pencil2"></use>
@@ -57,7 +58,7 @@
                                 <table class="dynamic-table" id="members-table">
                                     <tr>
                                         <th colspan="8" class="all-table-title group-info-table-title"> Members 
-                                            <a href="#popup_2" class="popup-link" id="member-add-btn" >
+                                            <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
                                                 <button class="group-page-ref-btn" type="button" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -99,7 +100,7 @@
                                 <table class="dynamic-table" id="pairs-table">
                                     <tr>
                                         <th class="all-table-title group-info-table-title" colspan="7"> Pairs 
-                                            <button class="group-page-ref-btn" type="button"  id="update-pairs-btn" data-open-modal>
+                                            <button class="group-page-ref-btn  js-hidden-element" type="button"  id="update-pairs-btn" data-open-modal>
                                                 <svg class="group-info-edit-btn-icon">
                                                     <use href="./img/icons.svg#icon-loop2"></use>
                                                 </svg>
@@ -133,8 +134,8 @@
                     <td id="pair-red" class="red-cell-style">  </td>
                     <td id="pair-blue" class="blue-cell-style">  </td>
                     <td id="pair-winner">
-                        <button class="red-button-style" type="button"  id="red-member-win"></button>
-                        <button class="blue-button-style" type="button"  id="blue-member-win"></button>
+                        <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
+                        <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
                     </td>
                 </tr>
             </template>
@@ -275,7 +276,7 @@
                                             <th colspan="8" class="all-table-title group-info-table-title">Members</th>
                                         </tr>
                                         <tr>
-                                            <td>Name</td>
+                                            <td>Name, Surname</td>
                                             <td>Age</td>
                                             <td>Weight</td>
                                             <td>Sex</td>

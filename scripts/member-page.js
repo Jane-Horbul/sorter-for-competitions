@@ -5,7 +5,9 @@ import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
+import {showAllIfAdmin} from "./common.js"
 
+var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 var pageParams = getLinkParams(location.search);
 var pageInfo = sendRequest("/member-get?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"));
 var competitionParams = sendRequest("/competition-get?" + "cid=" + pageParams.get("cid"));
@@ -181,7 +183,7 @@ function groupElementCreate(group){
     template.getElementById("group-members-num").innerHTML     = group.get("membersNum");
     
     template.getElementById("group-name").setAttribute("onclick", "window.location.href='"
-                                    + document.referrer + "/group?gid=" + group.get("id") + "'; return false");
+                                    + prevPage + "/group?gid=" + group.get("id") + "'; return false");
     template.getElementById("group-dell-btn").addEventListener("click", function(){groupDelete(group.get("id"))}, false);
     return template;
 }
@@ -292,4 +294,6 @@ fillPageInfo(pageInfo);
 document.getElementById("groups-add-btn").addEventListener("click", addMemberToGroups, false);
 document.getElementById("member-form-send-btn").addEventListener("click", sendMemberForm, false);
 document.getElementById("delete-member-btn").addEventListener("click", deleteMember, false);
-document.getElementById("priv-page-link").setAttribute("href", document.referrer)
+document.getElementById("priv-page-link").setAttribute("href", prevPage);
+
+showAllIfAdmin();

@@ -18,7 +18,7 @@
                     <li><div>                
                         <a id="priv-page-link">
                             <a id="priv-page-link">
-                                <button  class="group-page-del-btn js-visible-element" type="button" id="delete-member-btn">
+                                <button  class="group-page-del-btn js-hidden-element" type="button" id="delete-member-btn">
                                 <span class="group-card-btn-submit">Delete member</span></button>
                             </a>
                     </div>
@@ -34,8 +34,8 @@
                         <div id="member-info">
                             <div class="group-info-title--siting">
                                 <div class="group-info-title"><span>Member info</span></div>
-                                <a href="#popup_1" class="popup-link">
-                                    <button class="group-info-edit-btn js-visible-element" type="button">
+                                <a href="#popup_1" class="popup-link js-hidden-element">
+                                    <button class="group-info-edit-btn" type="button">
                                         <svg class="group-info-edit-btn-icon">
                                             <use href="./img/icons.svg#icon-pencil2"></use>
                                         </svg>
@@ -63,7 +63,7 @@
                                 <table class="dynamic-table" id="groups-table">
                                     <tr>
                                         <th class="all-table-title group-info-table-title" colspan="8">Groups
-                                            <a href="#popup_2" class="popup-link" id="member-add-btn" >
+                                            <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
                                                 <button class="group-page-ref-btn" type="button" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -80,7 +80,7 @@
                                         <td>Weight</td>
                                         <td>Qualification</td>
                                         <td>Members number</td>
-                                        <td class="column-for-button js-visible-element"></td>
+                                        <td class="column-for-button"></td>
                                     </tr>
                                     <template id="group-template">
                                         <tr>

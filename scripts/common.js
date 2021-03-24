@@ -24,10 +24,12 @@ export function getLinkParams(link){
     sectors.forEach(sect => {
         var params = sect.split("?");
         params.forEach(param => {
-            var field = param.split("=");
-            if(field.length == 2){
-                paramsMap.set(field[0], field[1]);
-            }
+            param.split("&").forEach(pair => {
+                var field = pair.split("=");
+                if(field.length == 2){
+                    paramsMap.set(field[0], field[1]);
+                }
+            });
         });
     });
     return paramsMap;
@@ -104,4 +106,21 @@ export function sendForm(formName, paramsMap) {
     return true;
 }
 
+export function removeHiden(){
+    document.getElementById("testSec").classList.remove("js-hidden-element");
+}
 
+export function addHiden(){
+    document.getElementById("testSec").classList.add("js-hidden-element");
+}
+
+export function showAllIfAdmin(){
+    var clStatus = sendRequest("client-status-get").get("ClientStatus");
+    var shadows = document.querySelectorAll(".js-hidden-element");
+    console.log(shadows);
+    if(clStatus == "admin"){
+        for (let shadow of shadows) {
+            shadow.classList.remove("js-hidden-element");
+        }
+    }
+}

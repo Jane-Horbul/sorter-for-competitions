@@ -5,6 +5,7 @@ import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
+import {showAllIfAdmin} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
@@ -426,6 +427,6 @@ function setBtnActions(){
     document.getElementById("group-form-send-btn").addEventListener("click", sendGroupForm, false);
 }
 
-
+showAllIfAdmin();
 fillPageInfo(sendRequest("/competition-get?" + "cid=" + pageParams.get("cid")));
 setBtnActions();
