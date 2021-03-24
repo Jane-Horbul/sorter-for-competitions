@@ -9,101 +9,162 @@
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <div class="wrapper">
 
             <header class="page-header">
                 <div class="container">
                     <ul class="group-page-header list">
-                    <li><h1 id="member-name"></h1></li>
-                    <li><div>                
-                        <a id="priv-page-link">
-                            <a id="priv-page-link">
-                                <button  class="group-page-del-btn js-hidden-element" type="button" id="delete-member-btn">
-                                <span class="group-card-btn-submit">Delete member</span></button>
-                            </a>
-                    </div>
-                </li>
-                </ul>
+                        <li><h1 id="member-name"></h1></li>
+                        <li>
+                            <div class="member-page-btn-del">                
+                                <a id="priv-page-link">
+                                    <button  class="group-page-del-btn js-hidden-element" type="button" id="delete-member-btn">
+                                    <span class="group-card-btn-submit">Delete member</span></button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </header>
 
             <main class="container">
 
                 <section class="member-info">
-                    <div class="group-info-main">
-                        <div id="member-info">
-                            <div class="group-info-title--siting">
-                                <div class="group-info-title"><span>Member info</span></div>
-                                <a href="#popup_1" class="popup-link js-hidden-element">
-                                    <button class="group-info-edit-btn" type="button">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/icons.svg#icon-pencil2"></use>
-                                        </svg>
-                                    </button>
-                                </a>
+                    <ul class="list flexbox">
+                        <li>
+                            <div class="group-info-main">
+                                <div id="member-info">
+                                    <div class="group-info-title--siting">
+                                        <div class="group-info-title"><span>Member info</span></div>
+                                        <a href="#popup_1" class="popup-link js-hidden-element">
+                                            <button class="group-info-edit-btn" type="button">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/icons.svg#icon-pencil2"></use>
+                                                </svg>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="group-info-fields">
+                                    <div class="" id="member-info">
+                                        <div class="group-info-fields--item"> Id:<span>&nbsp</span><div id="member-id">            </div></div>
+                                        <div class="group-info-fields--item"> Divisions:<span>&nbsp</span><div id="member-division">      </div></div>
+                                        <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="member-age">           </div></div>
+                                        <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="member-weight">        </div></div>
+                                        <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="member-sex">           </div></div>
+                                        <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="member-qulification">  </div></div>
+                                        <div class="group-info-fields--item"> Team:<span>&nbsp</span><div id="member-team">          </div> </div>
+                                        <div class="group-info-fields--item"> Admition:<span>&nbsp</span><div id="member-admit">         </div> </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="group-info-fields">
-                            <div class="" id="member-info">
-                                <div class="group-info-fields--item"> Id:<span>&nbsp</span><div id="member-id">            </div></div>
-                                <div class="group-info-fields--item"> Divisions:<span>&nbsp</span><div id="member-division">      </div></div>
-                                <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="member-age">           </div></div>
-                                <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="member-weight">        </div></div>
-                                <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="member-sex">           </div></div>
-                                <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="member-qulification">  </div></div>
-                                <div class="group-info-fields--item"> Team:<span>&nbsp</span><div id="member-team">          </div> </div>
-                                <div class="group-info-fields--item"> Admition:<span>&nbsp</span><div id="member-admit">         </div> </div>
-                            </div>
-                        </div>
-                    </div>
+                        </li>
+                        <li>
+                            <div class="group-info-tables">
+                                <div class="main-tables">
+                                    <div class="main-tables-member-item">
+                                        <table class="dynamic-table" id="groups-table">
+                                        
+                                                <th class="all-table-title group-info-table-title" colspan="8">Groups
+                                                    <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
+                                                        <button class="group-page-ref-btn" type="button" data-open-modal>
+                                                            <svg class="group-info-edit-btn-icon">
+                                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                            </svg>
+                                                        </button>
+                                                    </a>  
+                                                </th>
+                                            
+                                            <tr>
+                                                <td class="secondary-title-tables--text">Name of group</td>
+                                                <td class="secondary-title-tables--text">Age of members</td>
+                                                <td class="secondary-title-tables--text">Sex</td>
+                                                <td class="secondary-title-tables--text">Division</td>
+                                                <td class="secondary-title-tables--text">Weight</td>
+                                                <td class="secondary-title-tables--text">Qualification</td>
+                                                <td class="secondary-title-tables--text">Members number</td>
+                                                <td class="column-for-button secondary-title-tables--text"></td>
+                                            </tr>
 
-                    <div class="group-info-tables">
-                        <div class="main-tables">
-                            <div class="main-tables-member-item">
-                                <table class="dynamic-table" id="groups-table">
-                                    <tr>
-                                        <th class="all-table-title group-info-table-title" colspan="8">Groups
-                                            <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
-                                                <button class="group-page-ref-btn" type="button" data-open-modal>
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                    </svg>
-                                                </button>
-                                            </a>  
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>Name of group</td>
-                                        <td>Age of members</td>
-                                        <td>Sex</td>
-                                        <td>Division</td>
-                                        <td>Weight</td>
-                                        <td>Qualification</td>
-                                        <td>Members number</td>
-                                        <td class="column-for-button"></td>
-                                    </tr>
-                                    <template id="group-template">
-                                        <tr>
-                                            <td id="group-name">  </td>
-                                            <td id="group-age">  </td> 
-                                            <td id="group-sex">  </td>
-                                            <td id="group-division">  </td>
-                                            <td id="group-weight">  </td>
-                                            <td id="group-qualification">  </td>
-                                            <td id="group-members-num">  </td>
-                                            <td class="column-for-button js-visible-element"> 
-                                                <button type="button" id="group-dell-btn">
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-cross"></use>
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </template>
-                                </table>
+                                            <!--start-->
+                                            <tr>
+                                                <td class="secondary-tables--td" id="group-name">kik lite</td>
+                                                <td class="secondary-tables--td" id="group-age">18-24</td> 
+                                                <td class="secondary-tables--td" id="group-sex">female</td>
+                                                <td class="secondary-tables--td" id="group-division">1-2</td>
+                                                <td class="secondary-tables--td" id="group-weight">60-70</td>
+                                                <td class="secondary-tables--td" id="group-qualification">kms</td>
+                                                <td class="secondary-tables--td" id="group-members-num">12</td>
+                                                <td class="secondary-tables--td column-for-button js-visible-element"> 
+                                                    <button class="member-page-dell-btn" type="button" id="group-dell-btn">
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="secondary-tables--td" id="group-name">kik lite</td>
+                                                <td class="secondary-tables--td" id="group-age">18-24</td> 
+                                                <td class="secondary-tables--td" id="group-sex">female</td>
+                                                <td class="secondary-tables--td" id="group-division">1-2</td>
+                                                <td class="secondary-tables--td" id="group-weight">60-70</td>
+                                                <td class="secondary-tables--td" id="group-qualification">kms</td>
+                                                <td class="secondary-tables--td" id="group-members-num">12</td>
+                                                <td class="secondary-tables--td column-for-button js-visible-element"> 
+                                                    <button type="button" id="group-dell-btn">
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/symbol-defs.svg#icon-cross"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="secondary-tables--td" id="group-name">kik lite</td>
+                                                <td class="secondary-tables--td" id="group-age">18-24</td> 
+                                                <td class="secondary-tables--td" id="group-sex">female</td>
+                                                <td class="secondary-tables--td" id="group-division">1-2</td>
+                                                <td class="secondary-tables--td" id="group-weight">60-70</td>
+                                                <td class="secondary-tables--td" id="group-qualification">kms</td>
+                                                <td class="secondary-tables--td" id="group-members-num">12</td>
+                                                <td class="secondary-tables--td column-for-button js-visible-element"> 
+                                                    <button type="button" id="group-dell-btn">
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/symbol-defs.svg#icon-cross"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <!--end-->
+
+                                            <template id="group-template">
+                                                <tr>
+                                                    <td class="secondary-tables--td" id="group-name">  </td>
+                                                    <td class="secondary-tables--td" id="group-age">  </td> 
+                                                    <td class="secondary-tables--td" id="group-sex">  </td>
+                                                    <td class="secondary-tables--td" id="group-division">  </td>
+                                                    <td class="secondary-tables--td" id="group-weight">  </td>
+                                                    <td class="secondary-tables--td" id="group-qualification">  </td>
+                                                    <td class="secondary-tables--td" id="group-members-num">  </td>
+                                                    <td  class="secondary-tables--td column-for-button js-visible-element"> 
+                                                        <button type="button" id="group-dell-btn">
+                                                            <svg class="group-info-edit-btn-icon">
+                                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
+
+
+
                 </section>
 
             </main>
@@ -259,7 +320,7 @@
             <!--member-groups-edit-popup-window-end-->
             <script src="./scripts/member-page.js" type="module"></script>
             <script src="./scripts/open-close-popup.js" type="module"></script>  
-        </div>
+        
     </body>
 </html>
   

@@ -48,27 +48,15 @@ display: block;
       margin-right: 15px;
     }
 }
-  /*.secondary-tables--buttons {
-    width: 100%;
-
-    @include for-size(mobile) {
-width: 320px;
-    }
-  
-    @include for-size(tables) {
-      width: 240px;
-    }
-  
-    @include for-size(desktop) {
-      width: 240px;
-    }
-  
-    @include for-size(max-desktop) {
-      width: 240px;
-    }
-  }*/
 .secondary-tables--td {
-    width: 12%;
+  
+    padding: 2px;
+text-align: center;
+border: 1px solid #ced7df;
+  }
+
+  .all-table-title {
+    padding-left: 20px;
   }
 
 .red-cell-style {
@@ -89,6 +77,8 @@ width: 320px;
     border: 1px solid #ddd;
     font-size: 10px;
     padding: 3px;
+    font-weight: bold;
+    text-align: center;
 
     @include for-size(mobile) {
       font-size: 10px;

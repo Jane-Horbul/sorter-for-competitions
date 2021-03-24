@@ -5,16 +5,28 @@
     width: 100%;
     margin-bottom: 10px;
   }
-  .dynamic-table th {
-    border: 1px solid #ddd;
+
+  .dynamic-table tr {
+    height: 45px;
+    font-size: 9px;
+    @media screen and (min-width: 768px) and (max-width: 1199px) {
+      font-size: 12px;
+    }
+    @media screen and (min-width: 1200px) and (max-width: 1799px) {
+      font-size: 14px;
+    }
+    @media screen and (min-width: 1800px) {
+      font-size: 14px;
+    }
   }
   .dynamic-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #c9e6ff;
   }
   
   .dynamic-table tr:hover {
-    background-color: #ddd;
+    background-color: aliceblue;
   }
+
   
   .dynamic-table th {
     padding-top: 12px;
@@ -22,6 +34,7 @@
     text-align: left;
     background-color: $assent-color;
     color: white;
+    border: 1px solid #ddd;
   }
   .added-section-table {
     margin-top: 20px;

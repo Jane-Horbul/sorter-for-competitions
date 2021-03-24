@@ -744,6 +744,27 @@ h4 {
   outline-width: 0px;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .group-info-edit-btn {
+    margin-top: 9px;
+    margin-right: 9px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .group-info-edit-btn {
+    margin-top: 30px;
+    margin-right: 45px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .group-info-edit-btn {
+    margin-top: 30px;
+    margin-right: 45px;
+  }
+}
+
 .group-info-edit-btn:hover,
 .group-info-edit-btn:focus,
 .group-info-edit-btn-icon:hover,
@@ -868,6 +889,34 @@ h4 {
 
 .group-page-ref-btn:hover,
 .group-page-ref-btn:focus {
+  background-color: #2196f3;
+  border: none;
+  fill: #fff;
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+
+.member-page-dell-btn {
+  position: absolute;
+  margin-top: 0px;
+  width: 50px;
+  height: 30px;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  background-color: #fff;
+  border: none;
+  fill: #2196f3;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+
+.member-page-dell-btn:hover,
+.member-page-dell-btn:focus {
   background-color: #2196f3;
   border: none;
   fill: #fff;
@@ -1119,14 +1168,14 @@ body.lock {
   color: white;
 }
 
-.js-hidden-element {
-  visibility: hidden;
-}
-
-.js-visible-element {
-  visibility: visible;
-}
-
+/*
+.js-hidden-element{
+    visibility: hidden;
+  }
+.js-visible-element{
+    visibility: visible;
+  }
+  */
 .main-tables {
   display: block;
 }
@@ -1210,27 +1259,14 @@ body.lock {
   }
 }
 
-/*.secondary-tables--buttons {
-    width: 100%;
-
-    @include for-size(mobile) {
-width: 320px;
-    }
-  
-    @include for-size(tables) {
-      width: 240px;
-    }
-  
-    @include for-size(desktop) {
-      width: 240px;
-    }
-  
-    @include for-size(max-desktop) {
-      width: 240px;
-    }
-  }*/
 .secondary-tables--td {
-  width: 12%;
+  padding: 2px;
+  text-align: center;
+  border: 1px solid #ced7df;
+}
+
+.all-table-title {
+  padding-left: 20px;
 }
 
 .red-cell-style {
@@ -1252,6 +1288,8 @@ width: 320px;
   border: 1px solid #ddd;
   font-size: 10px;
   padding: 3px;
+  font-weight: bold;
+  text-align: center;
 }
 
 @media (min-width: 320px) {
@@ -1283,16 +1321,35 @@ width: 320px;
   margin-bottom: 10px;
 }
 
-.dynamic-table th {
-  border: 1px solid #ddd;
+.dynamic-table tr {
+  height: 45px;
+  font-size: 9px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .dynamic-table tr {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .dynamic-table tr {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .dynamic-table tr {
+    font-size: 14px;
+  }
 }
 
 .dynamic-table tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #c9e6ff;
 }
 
 .dynamic-table tr:hover {
-  background-color: #ddd;
+  background-color: aliceblue;
 }
 
 .dynamic-table th {
@@ -1301,6 +1358,7 @@ width: 320px;
   text-align: left;
   background-color: #2196f3;
   color: white;
+  border: 1px solid #ddd;
 }
 
 .added-section-table {
@@ -1414,12 +1472,30 @@ width: 320px;
 }
 
 .group-info-main {
-  width: 25%;
+  width: 320px;
   border: 2px solid;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .group-info-main {
+    width: 270px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .group-info-main {
+    width: 320px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .group-info-main {
+    width: 320px;
+  }
+}
+
 .group-info-tables {
-  width: 75%;
+  width: 100%;
 }
 
 .group-info-title {
@@ -1427,6 +1503,25 @@ width: 320px;
   margin-left: 25px;
   font-size: 30px;
   color: #2196f3;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .group-info-title {
+    margin-top: 15px;
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .group-info-title {
+    width: 320px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .group-info-title {
+    width: 320px;
+  }
 }
 
 .group-info-title--siting {
@@ -1451,12 +1546,40 @@ width: 320px;
 }
 
 .group-page-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  display: block;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .group-page-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .group-page-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .group-page-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
 }
 
 .runner {
@@ -1585,8 +1708,32 @@ width: 320px;
 }
 
 .main-tables-member-item {
-  width: 100%;
-  margin-left: 20px;
+  width: 320px;
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .main-tables-member-item {
+    width: 480px;
+    margin-left: 7px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .main-tables-member-item {
+    width: 860px;
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .main-tables-member-item {
+    width: 1455px;
+    margin-left: 15px;
+    margin-top: 0px;
+  }
 }
 
 .member-info {
@@ -1599,6 +1746,18 @@ width: 320px;
 .column-for-button {
   position: relative;
   width: 85px;
+}
+
+.member-page-btn-del {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .member-page-btn-del {
+    margin-right: 7px;
+  }
 }
 
 .advantages {
