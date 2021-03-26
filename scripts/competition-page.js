@@ -94,18 +94,6 @@ function qualificationElementAddToPage(value, name){
     document.getElementById("ng-members-qualification-max").append(groupQualsTemplate);
 }
 
-function toogleQualificationAdding(){
-    var row = document.getElementById("qualification-add-field");
-    if(row == null){
-        var row =  document.getElementById("qualification-table").insertRow(1);
-        row.innerHTML =  document.getElementById("qualification-adding-template").innerHTML;
-        row.setAttribute("id", "qualification-add-field");
-        document.getElementById("qual-ok-btn").
-        addEventListener("click", function(){addQualification("add-qualification-value", "add-qualification-name")}, false);
-    } else {
-        row.remove();
-    }
-}
 
 function addQualification(valueId, nameId){
     var value = document.getElementById(valueId).value;
@@ -118,6 +106,19 @@ function addQualification(valueId, nameId){
     qualificationElementAddToPage(value, name);
     toogleQualificationAdding();
     sendNotification("qualification-add", value + " - " + name);
+}
+
+function toogleQualificationAdding(){
+    var row = document.getElementById("qualification-add-field");
+    if(row == null){
+        var row =  document.getElementById("qualification-table").insertRow(1);
+        row.innerHTML =  document.getElementById("qualification-adding-template").innerHTML;
+        row.setAttribute("id", "qualification-add-field");
+        document.getElementById("qual-ok-btn").
+        addEventListener("click", function(){addQualification("add-qualification-value", "add-qualification-name")}, false);
+    } else {
+        row.remove();
+    }
 }
 
 function deleteQualification(value){
