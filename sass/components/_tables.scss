@@ -83,6 +83,34 @@ border: 1px solid #ced7df;
     position: relative;
   }
 
+  .first-title-tables--text {
+    border: 1px solid #ddd;
+    font-size: 10px;
+    padding: 3px;
+    font-weight: bold;
+    text-align: center;
+
+    @include for-size(mobile) {
+      font-size: 10px;
+      padding: 3px;
+    }
+  
+    @include for-size(tables) {
+      font-size: 12px;
+      padding: 5px;
+    }
+  
+    @include for-size(desktop) {
+      font-size: 12px;
+      padding: 5px;
+    }
+  
+    @include for-size(max-desktop) {
+      font-size: 13px;
+      padding: 10px;
+    }
+  }
+
   .secondary-title-tables--text {
     border: 1px solid #ddd;
     font-size: 10px;
@@ -115,7 +143,6 @@ border: 1px solid #ced7df;
     border: 1px solid #ddd;
     font-size: 10px;
     padding: 3px;
-    font-weight: bold;
     text-align: center;
 
     @include for-size(mobile) {
@@ -130,7 +157,7 @@ border: 1px solid #ced7df;
   
     @include for-size(desktop) {
       font-size: 11px;
-      padding: 10px;
+      padding: 5px;
     }
   
     @include for-size(max-desktop) {

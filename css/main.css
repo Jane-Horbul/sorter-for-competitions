@@ -1303,6 +1303,35 @@ body.lock {
   position: relative;
 }
 
+.first-title-tables--text {
+  border: 1px solid #ddd;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (min-width: 320px) {
+  .first-title-tables--text {
+    font-size: 10px;
+    padding: 3px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .first-title-tables--text {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .first-title-tables--text {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
 .secondary-title-tables--text {
   border: 1px solid #ddd;
   font-size: 10px;
@@ -1336,7 +1365,6 @@ body.lock {
   border: 1px solid #ddd;
   font-size: 10px;
   padding: 3px;
-  font-weight: bold;
   text-align: center;
 }
 
@@ -1350,7 +1378,7 @@ body.lock {
 @media (min-width: 1200px) {
   .secondary-title-two-tables {
     font-size: 11px;
-    padding: 10px;
+    padding: 5px;
   }
 }
 
@@ -1725,7 +1753,7 @@ body.lock {
 
 @media screen and (min-width: 1800px) {
   .main-tables-group-item {
-    width: 750px;
+    width: 715px;
     margin-left: 15px;
     margin-top: 0px;
   }
