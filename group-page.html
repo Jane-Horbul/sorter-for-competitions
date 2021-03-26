@@ -58,7 +58,7 @@
                     <li>
                         <div class="group-info-tables">
                         <div class="main-tables">
-                            <div class="main-tables-member-item">
+                            <div class="main-tables-group-item">
                                 <table class="dynamic-table" id="members-table">
                                     <tr>
                                         <th colspan="8" class="all-table-title group-info-table-title"> Members 
@@ -72,26 +72,26 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="secondary-title-tables--text">Name, Surname</td>
-                                        <td class="secondary-title-tables--text">Age</td>
-                                        <td class="secondary-title-tables--text">Weight</td>
-                                        <td class="secondary-title-tables--text">Sex</td>
-                                        <td class="secondary-title-tables--text">Team</td>
-                                        <td class="secondary-title-tables--text">Qualification</td>
-                                        <td class="secondary-title-tables--text">Adm</td>
-                                        <td class="column-for-button secondary-title-tables--text"></td>
+                                        <td class="secondary-title-two-tables">Name, Surname</td>
+                                        <td class="secondary-title-two-tables">Age</td>
+                                        <td class="secondary-title-two-tables">Weight</td>
+                                        <td class="secondary-title-two-tables">Sex</td>
+                                        <td class="secondary-title-two-tables">Team</td>
+                                        <td class="secondary-title-two-tables">Qualification</td>
+                                        <td class="secondary-title-two-tables">Adm</td>
+                                        <td class="column-for-button secondary-title-two-tables"></td>
                                     </tr>
 
                                     <template id="group-member-template">
                                         <tr>
-                                            <td class="secondary-title-tables--text" id="member-name">  </td>
-                                            <td class="secondary-title-tables--text" id="member-age">  </td>
-                                            <td class="secondary-title-tables--text" id="member-weight">  </td>
-                                            <td class="secondary-title-tables--text" id="member-sex">  </td>
-                                            <td class="secondary-title-tables--text" id="member-team">  </td>
-                                            <td class="secondary-title-tables--text" id="member-qualification">  </td>
-                                            <td class="secondary-title-tables--text" id="member-admited">  </td>
-                                            <td class="column-for-button secondary-title-tables--text"> 
+                                            <td class="secondary-title-two-tables" id="member-name">  </td>
+                                            <td class="secondary-title-two-tables" id="member-age">  </td>
+                                            <td class="secondary-title-two-tables" id="member-weight">  </td>
+                                            <td class="secondary-title-two-tables" id="member-sex">  </td>
+                                            <td class="secondary-title-two-tables" id="member-team">  </td>
+                                            <td class="secondary-title-two-tables" id="member-qualification">  </td>
+                                            <td class="secondary-title-two-tables" id="member-admited">  </td>
+                                            <td class="column-for-button secondary-title-two-tables"> 
                                                 <button class="member-page-dell-btn" type="button" id="member-dell-btn">
                                                 <svg class="group-info-edit-btn-icon">
                                                     <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
@@ -107,38 +107,42 @@
                     </div>
                     </li>
                     <li>
-                        <div class="main-tables-item">
-                            <table class="dynamic-table" id="pairs-table">
-                                <tr>
-                                    <th class="all-table-title group-info-table-title" colspan="7"> Pairs 
-                                        <button class="group-page-ref-btn  js-hidden-element" type="button"  id="update-pairs-btn" data-open-modal>
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/icons.svg#icon-loop2"></use>
-                                            </svg>
-                                        </button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>Pair ID</td>
-                                    <td>Red member</td>
-                                    <td>Blue member</td>
-                                    <td>Winner</td>
-                                </tr>
+                        <div class="group-info-tables">
+                            <div class="main-tables">
+                                <div class="main-tables-group-item">
+                                    <table class="dynamic-table" id="pairs-table">
+                                        <tr>
+                                            <th class="all-table-title group-info-table-title" colspan="7"> Pairs 
+                                                <button class="group-page-ref-btn  js-hidden-element" type="button"  id="update-pairs-btn" data-open-modal>
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/icons.svg#icon-loop2"></use>
+                                                    </svg>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables">Pair ID</td>
+                                            <td class="secondary-title-two-tables">Red member</td>
+                                            <td class="secondary-title-two-tables">Blue member</td>
+                                            <td class="secondary-title-two-tables">Winner</td>
+                                        </tr>
 
-                                <template id="pair-template">
-                                    <tr>
-                                        <td id="pair-id">  </td>
-                                        <td id="pair-red" class="red-cell-style">  </td>
-                                        <td id="pair-blue" class="blue-cell-style">  </td>
-                                        <td id="pair-winner">
-                                            <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                                            <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                                        </td>
-                                    </tr>
-                                </template>
+                                        <template id="pair-template">
+                                            <tr>
+                                                <td class="secondary-title-two-tables" id="pair-id">  </td>
+                                                <td class="secondary-title-two-tables" id="pair-red" class="red-cell-style">  </td>
+                                                <td class="secondary-title-two-tables" id="pair-blue" class="blue-cell-style">  </td>
+                                                <td class="secondary-title-two-tables" id="pair-winner">
+                                                    <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
+                                                    <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
+                                                </td>
+                                            </tr>
+                                        </template>
 
-                            </table>
-                        </div> 
+                                    </table>
+                                </div> 
+                            </div>
+                        </div>
                     </li>
                 </ul>
 

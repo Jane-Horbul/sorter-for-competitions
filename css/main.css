@@ -1332,6 +1332,35 @@ body.lock {
   }
 }
 
+.secondary-title-two-tables {
+  border: 1px solid #ddd;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (min-width: 320px) {
+  .secondary-title-two-tables {
+    font-size: 10px;
+    padding: 3px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .secondary-title-two-tables {
+    font-size: 11px;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .secondary-title-two-tables {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+
 .dynamic-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -1671,6 +1700,35 @@ body.lock {
 .runner {
   float: left;
   margin-top: 40px;
+}
+
+.main-tables-group-item {
+  width: 320px;
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .main-tables-group-item {
+    width: 240px;
+    margin-left: 7px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .main-tables-group-item {
+    width: 420px;
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .main-tables-group-item {
+    width: 750px;
+    margin-left: 15px;
+    margin-top: 0px;
+  }
 }
 
 .form-add-comp {
