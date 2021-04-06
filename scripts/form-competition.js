@@ -1,6 +1,7 @@
 import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {sendForm} from "./common.js"
+import {languageSwitchingOn} from "./common.js"
 
 function createDivRow(division){
     var template = document.getElementById("div-row-template").content.cloneNode(true);
@@ -116,3 +117,4 @@ function setBtnActions(){
 }
 
 setBtnActions();
+languageSwitchingOn();

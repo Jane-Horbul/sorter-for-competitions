@@ -6,6 +6,7 @@ import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
+import {languageSwitchingOn} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
@@ -431,3 +432,4 @@ function setBtnActions(){
 showAllIfAdmin();
 fillPageInfo(sendRequest("/competition-get?" + "cid=" + pageParams.get("cid")));
 setBtnActions();
+languageSwitchingOn();

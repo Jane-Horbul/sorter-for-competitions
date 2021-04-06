@@ -8,6 +8,7 @@ import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
+import {languageSwitchingOn} from "./common.js"
 
 var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 var pageParams = getLinkParams(location.search);
@@ -388,6 +389,7 @@ function refreshPairs(){
         pairsTable.deleteRow(pairsTable.rows.length - 1);
     }
     pageInfo.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
+    showAllIfAdmin();
 }
 
 function addMembersToGroup()
@@ -418,4 +420,6 @@ document.getElementById("group-form-send-btn").addEventListener("click", sendGro
 document.getElementById("update-pairs-btn").addEventListener("click", refreshPairs, false);
 document.getElementById("delete-group-btn").addEventListener("click", deleteGroup, false);
 document.getElementById("priv-page-link").setAttribute("href", prevPage);
+document.getElementById("group-grid").setAttribute("href", window.location.href + "/group-grid");
 showAllIfAdmin();
+languageSwitchingOn();

@@ -1,5 +1,6 @@
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
+import {languageSwitchingOn} from "./common.js"
 
 function sendLogin() {
     var paramsMap = new Map();
@@ -9,3 +10,4 @@ function sendLogin() {
     setTimeout(refreshPage, 500);
 }
 document.getElementById("login-btn").addEventListener("click", sendLogin, false);
+languageSwitchingOn();

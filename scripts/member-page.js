@@ -6,6 +6,7 @@ import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
 import {refreshPage} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
+import {languageSwitchingOn} from "./common.js"
 
 var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 var pageParams = getLinkParams(location.search);
@@ -297,3 +298,4 @@ document.getElementById("delete-member-btn").addEventListener("click", deleteMem
 document.getElementById("priv-page-link").setAttribute("href", prevPage);
 
 showAllIfAdmin();
+languageSwitchingOn();

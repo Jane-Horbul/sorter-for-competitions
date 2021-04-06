@@ -11,20 +11,24 @@
     <body>
         
             <header class="page-header">
+                <div style="max-width: 3%;">
+                    <a type="button" id="lang-ru"> <img src="./img/ru.png"> </a>
+                    <a type="button" id="lang-en"> <img src="./img/en.png"> </a>
+                    <a type="button" id="lang-ua"> <img src="./img/ua.png"> </a>
+                </div>
                 <div class="container">
                     <ul class="group-page-header list">
-                    <li><h1 id="group-name"></h1></li>
-                <li>
-                    <div class="member-page-btn-del js-hidden-element">                
-                        <a id="priv-page-link">
-                            <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
-                            <span class="group-card-btn-submit">Delete group</span></button>
-                        </a>
-                    </div>
-                </li>
-                </ul>
+                        <li><h1 id="group-name"></h1></li>
+                        <li>
+                            <div class="member-page-btn-del js-hidden-element">                
+                                <a id="priv-page-link">
+                                    <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
+                                    <span class="group-card-btn-submit">Delete group</span></button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-
             </header>
 
             <main class="container">
@@ -51,6 +55,13 @@
                                     <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="group-weight"></div></div>
                                     <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="group-sex"></div></div>
                                     <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="group-qulification"></div></div>
+                                    <div class="js-hidden-element">                
+                                        <a id="group-grid">
+                                            <button class="group-page-del-btn js-hidden-element" type="button" id="group-grid-btn">
+                                            <span class="group-card-btn-submit">Form pair grid</span></button>
+                                        </a>
+                                        <br>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +156,6 @@
                         </div>
                     </li>
                 </ul>
-
             </section>
         </main>
         
@@ -171,10 +181,10 @@
 
             <!--group-edit-popup-window-start-->
             <div class="popup" id = "popup_1">
-                <a href="#header" class="popup__area"></a>
+                <a href="" class="popup__area"></a>
                 <div class="popup__body">
                     <div class="popup__content">
-                        <a href="#header" class="popup__close close-popup">X</a>
+                        <a href="" class="popup__close close-popup">X</a>
                         
                         <form class="modal-form">
                             <span class="modal-title">Edit group</span>
@@ -293,10 +303,10 @@
             <!--group-edit-popup-window-end-->
             <!--group-edit-popup-window-start-->
             <div class="popup" id = "popup_2">
-                <a href="#header" class="popup__area"></a>
+                <a href="" class="popup__area"></a>
                 <div class="popup__body">
                     <div class="popup__content">
-                        <a href="#header" class="popup__close close-popup">X</a>
+                        <a href="" class="popup__close close-popup">X</a>
                         <form class="modal-form">
                             <div class="conntainer">
                                 <div class="skroll-for-modal">

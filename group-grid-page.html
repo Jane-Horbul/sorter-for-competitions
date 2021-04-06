@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+</head>
+<body style="overflow: scroll;">
+    <header class="page-header">
+        <div style="max-width: 3%;">
+            <a type="button" id="lang-ru"> <img src="./img/ru.png"> </a>
+            <a type="button" id="lang-en"> <img src="./img/en.png"> </a>
+            <a type="button" id="lang-ua"> <img src="./img/ua.png"> </a>
+        </div>
+        <div class="container">
+            <ul class="group-page-header list">
+                <li><h1 id="group-name">Group grid</h1></li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="pairs-grid"></div>
+
+    <template id="pair-tab-temp">
+        <table id="pair-table" border="1">
+            <tr>
+                <td id="member-red-name">Member 1</td>
+            </tr>
+            <tr>
+                <td id="member-blue-name">Member 2</td>
+            </tr>
+        </table>
+    </template>
+    <script src="./scripts/group-grid-page.js" type="module"></script>
+</body>
+</html>

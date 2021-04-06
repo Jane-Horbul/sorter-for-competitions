@@ -1,6 +1,7 @@
 import {sendRequest} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
+import {languageSwitchingOn} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 
@@ -21,6 +22,7 @@ for (var [key, value] of competitionList) {
   }
 
 showAllIfAdmin();
+languageSwitchingOn();
 var list = document.getElementById("competitions-list");
 competitionList.forEach(competition => {
     list.prepend(competitionElementCreate(competition));

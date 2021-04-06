@@ -124,3 +124,24 @@ export function showAllIfAdmin(){
         }
     }
 }
+
+function langLinkForm(lang){
+    var indx = window.location.href.indexOf("lang=");
+    if(indx < 0){
+        indx = window.location.href.indexOf("pp.ua/") + 6;
+        var mainLink = window.location.href.substr(0, indx);
+        var afterLink =  window.location.href.substr(indx);
+        return mainLink + "?lang=" + lang + "/" + afterLink;
+    } else{
+        indx += "?lang=".length - 1;
+        var mainLink = window.location.href.substr(0, indx)
+        var afterLink =  window.location.href.substr(indx + 2);
+        return mainLink + lang + afterLink;
+    }
+}
+
+export function languageSwitchingOn(){
+    document.getElementById("lang-ua").setAttribute("href", langLinkForm("ua"))
+    document.getElementById("lang-ru").setAttribute("href", langLinkForm("ru"))
+    document.getElementById("lang-en").setAttribute("href", langLinkForm("en"))
+}
