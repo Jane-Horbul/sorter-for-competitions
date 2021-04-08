@@ -83,7 +83,7 @@ function sendCompetitionForm() {
     paramsMap.set("divisions", divisionsStr);
     paramsMap.set("qualifications", qualificationsStr);
 
-    sendForm('/competition-form', paramsMap);
+    sendForm('/competition-form', paramsMap, false);
 }
 
 function setBtnActions(){

@@ -4,7 +4,6 @@ import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
-import {refreshPage} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
 import {languageSwitchingOn} from "./common.js"
 
@@ -141,8 +140,7 @@ function sendMemberForm() {
         console.log(`${key} => ${value}`);
       });
 
-    sendForm("/competition-edition", paramsMap);
-    location.reload();
+    sendForm("/member-edit", paramsMap, true);
 }
 
 function sendNotification(name, value) {
@@ -150,7 +148,7 @@ function sendNotification(name, value) {
     paramsMap.set(name, value);
     paramsMap.set("cid", pageParams.get("cid"));
     paramsMap.set("mid", pageParams.get("mid"));
-    sendForm('/competition-edition', paramsMap);
+    sendForm('/member-edit', paramsMap, false);
 }
 
 function groupNameGet(id){
@@ -225,8 +223,7 @@ function addMemberToGroups()
     paramsMap.set("mid",                pageParams.get("mid"));
     paramsMap.set("cid",                pageParams.get("cid"));  
 
-    sendForm("/competition-edition", paramsMap);
-    setTimeout(refreshPage, 1000);
+    sendForm("/member-edit", paramsMap, true);
 }
 
 function competitionListGroupsAdd(group){

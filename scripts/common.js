@@ -1,5 +1,6 @@
 export function refreshPage(){
-    location.reload();
+    var newLink = document.location.href.split("#")[0];
+    document.location.replace(newLink);
 }
 
 export function isNumber(num){
@@ -86,7 +87,7 @@ export function sendRequest(request) {
     return parseAnswerParams(xhr.responseText);
 }
 
-export function sendForm(formName, paramsMap) {
+export function sendForm(formName, paramsMap, refresh) {
     var xhr = new XMLHttpRequest();
     var boundary = String(Math.random()).slice(2);
     var body = ['\r\n'];
@@ -95,13 +96,14 @@ export function sendForm(formName, paramsMap) {
     });
     body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
 
+
+    xhr.onreadystatechange = function () {
+        if(refresh == true && xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            refreshPage();
+        };
+    };
     xhr.open('POST', formName, true);
     xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-
-    xhr.onreadystatechange = function() {
-        if (this.readyState != 4) return false;
-        alert( this.responseText );
-    }
     xhr.send(body);
     return true;
 }
@@ -117,7 +119,6 @@ export function addHiden(){
 export function showAllIfAdmin(){
     var clStatus = sendRequest("client-status-get").get("ClientStatus");
     var shadows = document.querySelectorAll(".js-hidden-element");
-    console.log(shadows);
     if(clStatus == "admin"){
         for (let shadow of shadows) {
             shadow.classList.remove("js-hidden-element");

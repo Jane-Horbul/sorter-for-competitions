@@ -4,7 +4,6 @@ import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
-import {refreshPage} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
 import {languageSwitchingOn} from "./common.js"
 
@@ -62,12 +61,12 @@ function getQualificationInterval(qMin, qMax){
     return qMinName + " - " + qMaxName;
 }
 
-function sendNotification(name, value) {
+function sendNotification(name, value, refresh) {
     var paramsMap = new Map();
 
     paramsMap.set(name, value);
     paramsMap.set("cid", pageParams.get("cid"));
-    sendForm('/competition-edition', paramsMap);
+    sendForm('/competition-edition', paramsMap, refresh);
 }
 
 /* ------------------- QUALIFICATIONS ----------------------------*/
@@ -106,7 +105,7 @@ function addQualification(valueId, nameId){
     }
     qualificationElementAddToPage(value, name);
     toogleQualificationAdding();
-    sendNotification("qualification-add", value + " - " + name);
+    sendNotification("qualification-add", value + " - " + name, false);
 }
 
 function toogleQualificationAdding(){
@@ -127,8 +126,7 @@ function deleteQualification(value){
     for(var i = 1; i < qualTable.rows.length; i++){
         if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
             qualTable.rows[i].remove();
-            sendNotification("qualification-delete", value);
-            setTimeout(refreshPage, 1000);
+            sendNotification("qualification-delete", value, true);
             return;
         }
     }
@@ -185,7 +183,7 @@ function addDivision(divId){
     }
     toogleDivisionAdding();
     divisionElementAddToPage(div);
-    sendNotification("division-add", div);
+    sendNotification("division-add", div, false);
 }
 
 function deleteDivision(div){
@@ -193,8 +191,7 @@ function deleteDivision(div){
     for(var i = 1; i < divTable.rows.length; i++){
         if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
             divTable.rows[i].remove();
-            sendNotification("division-delete", div);
-            setTimeout(refreshPage, 1000);
+            sendNotification("division-delete", div, true);
             return;
         } 
     }
@@ -281,8 +278,7 @@ function sendMemberForm() {
         console.log(`${key} => ${value}`);
       });
 
-    sendForm("/new-member-form?" + "cid=" + pageParams.get("cid"), paramsMap);
-    setTimeout(refreshPage, 1000);
+    sendForm("/new-member-form?" + "cid=" + pageParams.get("cid"), paramsMap, true);
 }
 /* ------------------- GROUPS ----------------------------*/
 
@@ -391,8 +387,7 @@ function sendGroupForm() {
     if(groupForm.get("sexIsOn").checked){
         paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
     }
-    sendForm("/new-group-form?" + "cid=" + pageParams.get("cid"), paramsMap);
-    setTimeout(refreshPage, 1000); 
+    sendForm("/new-group-form?" + "cid=" + pageParams.get("cid"), paramsMap, true);
 }
 /* ------------------- COMMON ----------------------------*/
 

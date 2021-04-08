@@ -6,7 +6,6 @@ import {isNumber} from "./common.js"
 import {isEmptyString} from "./common.js"
 import {getLinkParams} from "./common.js"
 import {sendForm} from "./common.js"
-import {refreshPage} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
 import {languageSwitchingOn} from "./common.js"
 
@@ -144,7 +143,7 @@ function sendNotification(name, value) {
     paramsMap.set(name, value);
     paramsMap.set("cid", pageParams.get("cid"));
     paramsMap.set("gid", pageParams.get("gid"));
-    sendForm(header, paramsMap);
+    sendForm(header, paramsMap, false);
 }
 
 function sendGroupForm() {
@@ -167,7 +166,7 @@ function sendGroupForm() {
     if(groupForm.get("weightIsOn").checked){
         if(!isWeightOk()) return;
         paramsMap.set("weight-min", groupForm.get("weightMin").value);
-        paramsMap.set("weight-max", groupForm.get("weightMin").value);
+        paramsMap.set("weight-max", groupForm.get("weightMax").value);
     }
     
     if(groupForm.get("qualIsOn").checked){
@@ -179,8 +178,8 @@ function sendGroupForm() {
     if(groupForm.get("sexIsOn").checked){
         paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
     }
-    sendForm("/group-edit", paramsMap);
-    location.reload();
+    console.log(paramsMap);
+    sendForm("/group-edit", paramsMap, true);
 }
 
 function deleteGroup(){
@@ -221,8 +220,7 @@ function putMemberToAdd(id){
 function pairSetWinner(id, color) {
     var paramsMap = new Map();
     paramsMap.set("color", color);
-    sendForm(window.location.href + '/pair-member-win?pid=' + id, paramsMap);
-    setTimeout(refreshPage, 1000);
+    sendForm(window.location.href + '/pair-member-win?pid=' + id, paramsMap, true);
 }
 
 function pairWinnerElementCreate(pair, template){
@@ -409,8 +407,7 @@ function addMembersToGroup()
     paramsMap.set("gid",                pageParams.get("gid"));
     paramsMap.set("cid",                pageParams.get("cid"));  
 
-    sendForm("/group-edit", paramsMap);
-    setTimeout(refreshPage, 1000);
+    sendForm("/group-edit", paramsMap, true);
 }
 
 
