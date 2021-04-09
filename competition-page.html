@@ -9,6 +9,7 @@
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
+        <div class="wrapper">
             <header class="page-header container">
                 <div style="max-width: 3%;">
                     <a type="button" id="lang-ru"> <img src="./img/ru.png"> </a>
@@ -306,6 +307,23 @@
                                 </label>
                             </ul>
                         </div>
+
+                        <div class="form-field--option">
+                            <ul class="list nm-more-than-one-list">
+                                <label for="nm-more-than-one" class="form-field-label">
+                                    <span class="form-field-title">Enter more than one member</span>
+                                    <li class="nm-more-than-one-item">
+                                        <input type="radio" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
+                                        <label for="yes">Yes</label>
+                                    </li>
+
+                                    <li class="nm-more-than-one-item">
+                                    <input type="radio" id="nm-more-than-one-no" name="nm-more-than-one" value="no">
+                                    <label for="no">No</label>
+                                    </li>
+                                </label>
+                            </ul>
+                        </div>
                         
                         <button type="button" id="member-form-send-btn" class="modal-btn-submit">
                             <span class="modal-btn-submit-text">Send</span>
@@ -321,7 +339,7 @@
             <a href="" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
-                    <a href="" class="popup__close close-popup">X</a>
+                    <a href="#" class="popup__close close-popup">X</a>
                     <form class="modal-form">
                         <span class="modal-title">Add a group</span>
                         <div class="new-member-field">
@@ -427,6 +445,24 @@
                                     </section>
                                 </div>
                             </div>
+
+                            <div class="form-field--option">
+                                <ul class="list nm-more-than-one-list">
+                                    <label for="nm-more-than-one" class="form-field-label">
+                                        <span class="form-field-title">Enter more than one</span>
+                                        <li class="nm-more-than-one-item">
+                                            <input type="radio" id="ng-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
+                                            <label for="yes">Yes</label>
+                                        </li>
+    
+                                        <li class="nm-more-than-one-item">
+                                        <input type="radio" id="ng-more-than-one-no" name="nm-more-than-one" value="no">
+                                        <label for="no">No</label>
+                                        </li>
+                                    </label>
+                                </ul>
+                            </div>
+
                             <button type="button" id="group-form-send-btn" class="modal-btn-submit">
                                 <span class="modal-btn-submit-text">Send</span>
                             </button>
@@ -437,6 +473,7 @@
             </div>
 
         <!--second-popup-window-end-->
+        </div>
 
         <script src="./scripts/competition-page.js" type="module"></script> 
         <script src="./scripts/open-close-popup.js" type="module"></script>          
