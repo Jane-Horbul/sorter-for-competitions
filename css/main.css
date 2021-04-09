@@ -1607,6 +1607,69 @@ body.lock {
   }
 }
 
+.lang-panel {
+  width: 320px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .lang-panel {
+    width: 130px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .lang-panel {
+    width: 160px;
+  }
+}
+
+.lang-panel-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.lang-panel-item {
+  margin-left: 4px;
+  margin-right: 2px;
+  margin-top: 5px;
+}
+
+.lang-panel-flag {
+  position: relative;
+  width: 95px;
+  margin-right: 3px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .lang-panel-flag {
+    width: 35px;
+    margin-right: 3px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .lang-panel-flag {
+    width: 45px;
+    margin-right: 3px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .lang-panel-flag {
+    width: 45px;
+    margin-right: 3px;
+  }
+}
+
+.lang-panel-flag > a > img {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1863,14 +1926,16 @@ body.lock {
 }
 
 .new-member-gender-list,
-.new-member-permit-list {
+.new-member-permit-list,
+.nm-more-than-one-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
 .new-member-gender-item,
-.new-member-permit-item {
+.new-member-permit-item,
+.nm-more-than-one-item {
   display: inline;
   width: 80px;
 }

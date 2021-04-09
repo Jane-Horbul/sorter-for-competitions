@@ -1,0 +1,44 @@
+.lang-panel {
+    width: 320px;
+    margin-left: auto;
+    margin-right: 0;
+    
+    @media screen and (min-width: 768px) and (max-width: 1199px) {
+        width: 130px;
+      }
+      @media screen and (min-width: 1200px) {
+        width: 160px;
+      }
+}
+.lang-panel-list {
+    display: flex;
+}
+.lang-panel-item {
+    margin-left: 4px;
+    margin-right: 2px;
+    margin-top: 5px;
+}
+.lang-panel-flag {
+    position: relative;
+    width: 95px;
+margin-right: 3px;
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    width: 35px;
+margin-right: 3px;
+  }
+  @media screen and (min-width: 1200px) and (max-width: 1799px) {
+    width: 45px;
+margin-right: 3px;
+  }
+  @media screen and (min-width: 1800px) {
+    width: 45px;
+margin-right: 3px;
+  }
+
+}
+.lang-panel-flag > a > img {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
