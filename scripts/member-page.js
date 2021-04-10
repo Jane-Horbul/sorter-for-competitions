@@ -289,6 +289,8 @@ function fillPageInfo(params){
 }
 
 fillPageInfo(pageInfo);
+document.getElementById("competition-name").innerHTML = competitionParams.get("Name");
+document.getElementById("competition-link").setAttribute("href", prevPage);
 document.getElementById("groups-add-btn").addEventListener("click", addMemberToGroups, false);
 document.getElementById("member-form-send-btn").addEventListener("click", sendMemberForm, false);
 document.getElementById("delete-member-btn").addEventListener("click", deleteMember, false);

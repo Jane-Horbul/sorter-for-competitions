@@ -375,7 +375,7 @@ function sendGroupForm() {
     if(groupForm.get("weightIsOn").checked){
         if(!isWeightOk()) return;
         paramsMap.set("weight-min", groupForm.get("weightMin").value);
-        paramsMap.set("weight-max", groupForm.get("weightMin").value);
+        paramsMap.set("weight-max", groupForm.get("weightMax").value);
     }
     
     if(groupForm.get("qualIsOn").checked){

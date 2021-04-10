@@ -16,6 +16,7 @@ var competitionParams = sendRequest("/competition-get?" + "cid=" + pageParams.ge
 var qualsMap = competitionParams.get("Qualifications");
 var membersToAdd = new Array(0);
 
+console.log(competitionParams)
 
 var groupForm = new Map();
 groupForm.set( "name",           document.getElementById("new-group-name"));
@@ -412,6 +413,8 @@ function addMembersToGroup()
 
 
 fillPageInfo(pageInfo);
+document.getElementById("competition-name").innerHTML = competitionParams.get("Name");
+document.getElementById("competition-link").setAttribute("href", prevPage);
 document.getElementById("members-add-btn").addEventListener("click", addMembersToGroup, false);
 document.getElementById("group-form-send-btn").addEventListener("click", sendGroupForm, false);
 document.getElementById("update-pairs-btn").addEventListener("click", refreshPairs, false);

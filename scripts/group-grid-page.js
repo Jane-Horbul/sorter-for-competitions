@@ -5,6 +5,7 @@ import {languageSwitchingOn} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var pageInfo = sendRequest("/group-get?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"));
+var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 
 function memberNameGet(id){
     console.log(id);
@@ -153,6 +154,8 @@ function drawGrid(){
         drawPair(sizes, pair);
     });
 }
+document.getElementById("group-name").innerHTML = pageInfo.get("Name");
+document.getElementById("group-link").setAttribute("href", prevPage);
 
 drawGrid();
 languageSwitchingOn();
