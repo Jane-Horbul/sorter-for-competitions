@@ -12,31 +12,49 @@
         <div class="wrapper">
         
             <header class="page-header">
-                <div class="lang-panel">
-                    <ul class="list lang-panel-list">
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ru"> 
-                                    <img src="./img/ru.png"> 
-                                </a>
-                            </div>
+
+                <div class="container">
+                    <ul class="group-page-header list">
+                        <li>
+                            <a class="link" href="#">
+                                <h1 id="competition-name">Competition name</h1>
+                            </a>
                         </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-en"> 
-                                    <img src="./img/en.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ua"> 
-                                    <img src="./img/ua.png"> 
-                                </a>
+                        <li>
+                            <div class="lang-panel">
+                                <ul class="list lang-panel-list">
+                                    <li class="lang-panel-item">
+                                        <div class="lang-panel-flag">
+                                            <a type="button" id="lang-ru"> 
+                                                <img src="./img/ru.png"> 
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="lang-panel-item">
+                                        <div class="lang-panel-flag">
+                                            <a type="button" id="lang-en"> 
+                                                <img src="./img/en.png"> 
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="lang-panel-item">
+                                        <div class="lang-panel-flag">
+                                            <a type="button" id="lang-ua"> 
+                                                <img src="./img/ua.png"> 
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                     </ul>
                 </div>
+            
+                
+
+            </header>
+
+            <main class="container">
                 <div class="container">
                     <ul class="group-page-header list">
                         <li><h1 id="group-name"></h1></li>
@@ -44,16 +62,12 @@
                             <div class="member-page-btn-del js-hidden-element">                
                                 <a id="priv-page-link">
                                     <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
-                                    <span class="group-card-btn-submit">Delete group</span></button>
+                                    <span class="group-card-btn-del-text">Delete group</span></button>
                                 </a>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </header>
-
-            <main class="container">
-
             <section class="group-info">
                 <ul class="list flexbox">
                     <li>
@@ -78,8 +92,8 @@
                                     <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="group-qulification"></div></div>
                                     <div class="js-hidden-element">                
                                         <a id="group-grid">
-                                            <button class="group-page-del-btn js-hidden-element" type="button" id="group-grid-btn">
-                                            <span class="group-card-btn-submit">Form pair grid</span></button>
+                                            <button class="group-card-btn-submit js-hidden-element" type="button" id="group-grid-btn">
+                                            <span class="group-card-btn-submit-text">Form pair grid</span></button>
                                         </a>
                                         <br>
                                     </div>
@@ -158,6 +172,44 @@
                                             <td class="secondary-title-two-tables">Blue member</td>
                                             <td class="secondary-title-two-tables">Winner</td>
                                         </tr>
+                                        <!--start-->
+                                        <tr>
+                                            <td class="first-title-tables--text" id="pair-id"> 1 </td>
+                                            <td class="first-title-tables--text" id="pair-red" class="red-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-blue" class="blue-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-winner">
+                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
+                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first-title-tables--text" id="pair-id"> 2 </td>
+                                            <td class="first-title-tables--text" id="pair-red" class="red-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-blue" class="blue-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-winner">
+                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
+                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first-title-tables--text" id="pair-id"> 3 </td>
+                                            <td class="first-title-tables--text" id="pair-red" class="red-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-blue" class="blue-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-winner">
+                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
+                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first-title-tables--text" id="pair-id"> 4 </td>
+                                            <td class="first-title-tables--text" id="pair-red" class="red-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-blue" class="blue-cell-style"> Name Name </td>
+                                            <td class="first-title-tables--text" id="pair-winner">
+                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
+                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
+                                            </td>
+                                        </tr>
+                                        <!--end-->
 
                                         <template id="pair-template">
                                             <tr>
