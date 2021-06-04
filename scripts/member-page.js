@@ -125,7 +125,6 @@ function sendMemberForm() {
     });
 
     paramsMap.set("member-edit",    pageParams.get("mid"));
-    paramsMap.set("cid",            pageParams.get("cid"));    
     paramsMap.set("member-name",    memberForm.get("name").value);
     paramsMap.set("member-surname", memberForm.get("surname").value);
     paramsMap.set("member-weight",  memberForm.get("weight").value);
@@ -140,15 +139,13 @@ function sendMemberForm() {
         console.log(`${key} => ${value}`);
       });
 
-    sendForm("/member-edit", paramsMap, true);
+    sendForm("/member-edit?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"), paramsMap, true);
 }
 
 function sendNotification(name, value) {
     var paramsMap = new Map();
     paramsMap.set(name, value);
-    paramsMap.set("cid", pageParams.get("cid"));
-    paramsMap.set("mid", pageParams.get("mid"));
-    sendForm('/member-edit', paramsMap, false);
+    sendForm('/member-edit?cid=' + pageParams.get("cid") + "&mid=" + pageParams.get("mid"), paramsMap, false);
 }
 
 function groupNameGet(id){
@@ -220,10 +217,8 @@ function addMemberToGroups()
         first = false;
     });
     paramsMap.set("member-groups-add",  groupsIds);
-    paramsMap.set("mid",                pageParams.get("mid"));
-    paramsMap.set("cid",                pageParams.get("cid"));  
 
-    sendForm("/member-edit", paramsMap, true);
+    sendForm("/member-edit?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"), paramsMap, true);
 }
 
 function competitionListGroupsAdd(group){

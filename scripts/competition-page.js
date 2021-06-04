@@ -65,8 +65,7 @@ function sendNotification(name, value, refresh) {
     var paramsMap = new Map();
 
     paramsMap.set(name, value);
-    paramsMap.set("cid", pageParams.get("cid"));
-    sendForm('/competition-edition', paramsMap, refresh);
+    sendForm('/competition-edition?cid=' + pageParams.get("cid"), paramsMap, refresh);
 }
 
 /* ------------------- QUALIFICATIONS ----------------------------*/

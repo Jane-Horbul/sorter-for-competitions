@@ -142,8 +142,7 @@ function sendNotification(name, value) {
     var header = (name == "group-delete") ? '/competition-edition' : '/group-edit';
     var paramsMap = new Map();
     paramsMap.set(name, value);
-    paramsMap.set("cid", pageParams.get("cid"));
-    paramsMap.set("gid", pageParams.get("gid"));
+    header += "?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid");
     sendForm(header, paramsMap, false);
 }
 
@@ -151,9 +150,7 @@ function sendGroupForm() {
     if(!isMainGroupParamsOk()) return;
 
     var paramsMap = new Map();
-    
-    paramsMap.set("group-edit",    pageParams.get("gid"));
-    paramsMap.set("cid",            pageParams.get("cid"));  
+
     paramsMap.set("group-name",     groupForm.get("name").value);
     paramsMap.set("group-division", groupForm.get("division").value);
     paramsMap.set("form-system",    groupForm.get("formSystem").value);
@@ -180,7 +177,7 @@ function sendGroupForm() {
         paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
     }
     console.log(paramsMap);
-    sendForm("/group-edit", paramsMap, true);
+    sendForm("/group-edit?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"), paramsMap, true);
 }
 
 function deleteGroup(){
@@ -405,10 +402,7 @@ function addMembersToGroup()
         first = false;
     });
     paramsMap.set("group-members-add",  membersIds);
-    paramsMap.set("gid",                pageParams.get("gid"));
-    paramsMap.set("cid",                pageParams.get("cid"));  
-
-    sendForm("/group-edit", paramsMap, true);
+    sendForm("/group-edit?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"), paramsMap, true);
 }
 
 

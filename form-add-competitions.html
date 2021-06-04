@@ -12,146 +12,134 @@
 </head>
 <body>
     <div class="wrapper">
-    <header class="page-header">
-        <div class="lang-panel">
-            <ul class="list lang-panel-list">
-                <li class="lang-panel-item">
-                    <div class="lang-panel-flag">
-                        <a type="button" id="lang-ru"> 
-                            <img src="./img/ru.png"> 
-                        </a>
-                    </div>
-                </li>
-                <li class="lang-panel-item">
-                    <div class="lang-panel-flag">
-                        <a type="button" id="lang-en"> 
-                            <img src="./img/en.png"> 
-                        </a>
-                    </div>
-                </li>
-                <li class="lang-panel-item">
-                    <div class="lang-panel-flag">
-                        <a type="button" id="lang-ua"> 
-                            <img src="./img/ua.png"> 
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="container">
-            <ul class="group-page-header list">
-            <li><h1 id="page-name">Create a new competition</h1></li>
-            <!--<li><div>                
-                <a id="priv-page-link">
-                    <a id="priv-page-link">
-                        <button  class="group-page-del-btn" type="button" id="delete-member-btn">
-                        <span class="group-card-btn-submit">Delete member</span></button>
-                    </a>
-            </div>
-        </li>-->
-        </ul>
-        </div>
-    </header>
-
-    <div class="class="container">
-    <form action="/" method="post" enctype="multipart/form-data"> 
-
-        <main>
-            <div class="form-add-comp">
-                <label for="competition-name" class="form-field-label">
-                    <span class="form-field-title">The name of the competition</span>
-                    <div class="form-field-add-comp">
-                        <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
-                    </div>
-                </label>
-
-                <!-- Qualifications block-->
-                <div class="added-section-table">
-                    <table class="dynamic-table" id="qualifications-table">
-                        <tr>
-                            <th class="all-table-title first-order-title" colspan="3">Qualifications</th>
-                        </tr>
-                        <tr>
-                            <th class="second-order-title"> Qualification value </th>
-                            <th colspan="2" class="second-order-title"> Qualification name </th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="qual-val" id="qualification-value" class="add-form-field-input"/></td>
-                            <td><input type="text" name="qual-name" id="qualification-name" class="add-form-field-input"/></td>
-                            <td class="column-for-button"> 
-                                <button id="add-qual-btn" class="main-btn-add-del" title="Add a qualification" type="button">
-                                    <svg class="main-btn-add-del-icon">
-                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                    </svg>
-                                </button>
-                        </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- Divisions block-->
-                <div class="added-section-table">
-                    <table class="dynamic-table" id="divisions-table">
-                        <tr>
-                            <th colspan="2">Divisions</th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="division-name" id="division-name" class="form-field-input"/></td>
-                            <td class="column-for-button"> 
-                                <button id="add-div-btn" class="main-btn-add-del" title="Add division" type="button">
-                                    <svg class="main-btn-add-del-icon">
-                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                    </svg>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                    <label>
-                        <span class="form-field-title">Short description</span>
-                        <div class="form-field-add-comp-message">
-                            <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
-                                rows="3"></textarea>
+        <header class="page-header container">
+            <div class="lang-panel">
+                <ul class="list lang-panel-list">
+                    <li class="lang-panel-item">
+                        <div class="lang-panel-flag">
+                            <a type="button" id="lang-ru"> 
+                                <img src="./img/ru.png"> 
+                            </a>
                         </div>
-                    </label>
-                    <a class="form-submit-text-link" href="/">
-                        <button type="button" class="main-btn-submit" id="send-form-btn">
-                        <span class="group-card-btn-submit">Add competition</span></button>
-                    </a>
-                    <!--   <p><input type="submit" value="Add competitions"></p>-->
-                </div>
+                    </li>
+                    <li class="lang-panel-item">
+                        <div class="lang-panel-flag">
+                            <a type="button" id="lang-en"> 
+                                <img src="./img/en.png"> 
+                            </a>
+                        </div>
+                    </li>
+                    <li class="lang-panel-item">
+                        <div class="lang-panel-flag">
+                            <a type="button" id="lang-ua"> 
+                                <img src="./img/ua.png"> 
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </main>
+            <div>
+                <h1>Create a new competition</h1>
+            </div>
+        </header>
 
-        <template id="div-row-template">
-            <tr>
-                <td id="div-name"></td>
-                <td class="column-for-button"> 
-                    <button type="button" class="main-btn-add-del" id="div-dell-btn">
-                        <svg class="main-btn-add-del-icon">
-                            <use href="./img/icons.svg#icon-cross"></use>
-                        </svg>
-                    </button>
-                </td>
-            </tr>
-        </template>
+        <div class="container">
+            <form action="/" method="post" enctype="multipart/form-data"> 
+                <main>
+                    <div class="form-add-comp">
+                        <label for="competition-name" class="form-field-label">
+                            <span class="form-field-title">The name of the competition</span>
+                            <div class="form-field-add-comp">
+                                <input type="text" name="competition-name" id="competition-name" class="form-field-input" required />
+                            </div>
+                        </label>
 
-        <template id="qual-row-template">
-            <tr>
-                <td id="qual-value"></td>
-                <td id="qual-name"> </td>
-                <td class="column-for-button"> 
-                    <button type="button" class="main-btn-add-del" id="qual-dell-btn">
-                        <svg class="main-btn-add-del-icon">
-                            <use href="./img/icons.svg#icon-cross"></use>
-                        </svg>
-                    </button>
-                </td>
-            </tr>
-        </template>
+                        <!-- Qualifications block-->
+                        <div class="added-section-table">
+                            <table class="dynamic-table" id="qualifications-table">
+                                <tr>
+                                    <th class="all-table-title first-order-title" colspan="3">Qualifications</th>
+                                </tr>
+                                <tr>
+                                    <th class="second-order-title"> Qualification value </th>
+                                    <th colspan="2" class="second-order-title"> Qualification name </th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="qual-val" id="qualification-value" class="add-form-field-input"/></td>
+                                    <td><input type="text" name="qual-name" id="qualification-name" class="add-form-field-input"/></td>
+                                    <td class="column-for-button"> 
+                                        <button id="add-qual-btn" class="main-btn-add-del" title="Add a qualification" type="button">
+                                            <svg class="main-btn-add-del-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
 
-        <script src="./scripts/form-competition.js" type="module"></script>
-    </form>
-</div>
-</div>
+                        <!-- Divisions block-->
+                        <div class="added-section-table">
+                            <table class="dynamic-table" id="divisions-table">
+                                <tr>
+                                    <th colspan="2">Divisions</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="division-name" id="division-name" class="form-field-input"/></td>
+                                    <td class="column-for-button"> 
+                                        <button id="add-div-btn" class="main-btn-add-del" title="Add division" type="button">
+                                            <svg class="main-btn-add-del-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <label>
+                                <span class="form-field-title">Short description</span>
+                                <div class="form-field-add-comp-message">
+                                    <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                                        rows="3"></textarea>
+                                </div>
+                            </label>
+                            <a class="form-submit-text-link" href="/">
+                                <button type="button" class="main-btn-submit" id="send-form-btn">
+                                <span class="group-card-btn-submit">Add competition</span></button>
+                            </a>
+                            <!--   <p><input type="submit" value="Add competitions"></p>-->
+                        </div>
+                    </div>
+                </main>
+
+                <template id="div-row-template">
+                    <tr>
+                        <td id="div-name"></td>
+                        <td class="column-for-button"> 
+                            <button type="button" class="main-btn-add-del" id="div-dell-btn">
+                                <svg class="main-btn-add-del-icon">
+                                    <use href="./img/icons.svg#icon-cross"></use>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </template>
+
+                <template id="qual-row-template">
+                    <tr>
+                        <td id="qual-value"></td>
+                        <td id="qual-name"> </td>
+                        <td class="column-for-button"> 
+                            <button type="button" class="main-btn-add-del" id="qual-dell-btn">
+                                <svg class="main-btn-add-del-icon">
+                                    <use href="./img/icons.svg#icon-cross"></use>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </template>
+                <script src="./scripts/form-competition.js" type="module"></script>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

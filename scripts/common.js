@@ -146,3 +146,34 @@ export function languageSwitchingOn(){
     document.getElementById("lang-ru").setAttribute("href", langLinkForm("ru"))
     document.getElementById("lang-en").setAttribute("href", langLinkForm("en"))
 }
+
+export function tabSelect(id){
+    var selectedTabs = document.querySelectorAll(".tab_selected");
+    var tab = document.getElementById(id);
+
+    for (let sTab of selectedTabs) {
+        sTab.classList.remove("tab_selected");
+        sTab.classList.add("tab");
+    }
+    tab.classList.remove("tab");
+    tab.classList.add("tab_selected");
+
+    var showedContent = document.querySelectorAll(".tab_content");
+    var contentToShow = document.getElementById(id + "-content");
+
+    for (let cont of showedContent) {
+        cont.classList.remove("tab_content");
+        cont.classList.add("tab_content_hidden");
+    }
+    contentToShow.classList.remove("tab_content_hidden");
+    contentToShow.classList.add("tab_content");
+}
+
+export function tabsInit(){
+    var tabs = document.querySelectorAll(".tab");
+    for (let tab of tabs) {
+        tab.addEventListener("click",  function(){tabSelect(tab.id)}, false);
+    }
+}
+
+tabsInit()
