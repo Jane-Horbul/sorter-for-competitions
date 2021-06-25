@@ -1757,26 +1757,8 @@ body.lock {
 }
 
 .group-info-main {
-  width: 320px;
+  width: 100%;
   border: 2px solid;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-  .group-info-main {
-    width: 270px;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1799px) {
-  .group-info-main {
-    width: 320px;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .group-info-main {
-    width: 320px;
-  }
 }
 
 .group-info-tables {

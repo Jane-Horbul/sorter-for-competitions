@@ -49,12 +49,10 @@
                         </li>
                     </ul>
                 </div>
-            
-                
-
             </header>
 
             <main class="container">
+                
                 <div class="container">
                     <ul class="group-page-header list">
                         <li><h1 id="group-name"></h1></li>
@@ -68,9 +66,15 @@
                         </li>
                     </ul>
                 </div>
-            <section class="group-info">
-                <ul class="list flexbox">
-                    <li>
+
+                <div class="tab">
+                    <button class="tablinks" onclick="openPage(event, 'GroupInfo')" id="defaultOpen">Group info</button>
+                    <button class="tablinks" onclick="openPage(event, 'Members')">Members</button>
+                    <button class="tablinks" onclick="openPage(event, 'Pairs')">Pairs</button>
+                    <button class="tablinks" onclick="openPage(event, 'Grid')">Grid</button>
+                </div>
+                
+                    <div id="GroupInfo" class="tabcontent">
                         <div class="group-info-main">
                             <div id="member-info">
                                 <div class="group-info-title--siting">
@@ -100,8 +104,8 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                    <li>
+                    </div>
+                    <div id="Members" class="tabcontent">
                         <div class="group-info-tables">
                         <div class="main-tables">
                             <div class="main-tables-group-item">
@@ -150,9 +154,9 @@
                                 </table>
                             </div>
                         </div>
+                        </div>
                     </div>
-                    </li>
-                    <li>
+                    <div id="Pairs" class="tabcontent">
                         <div class="group-info-tables">
                             <div class="main-tables">
                                 <div class="main-tables-group-item">
@@ -227,9 +231,11 @@
                                 </div> 
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </section>
+                    </div>
+                    <div id="GroupInfo" class="tabcontent">
+                        
+                    </div>
+
         </main>
         
             <footer>
@@ -439,6 +445,25 @@
             <!--group-edit-popup-window-end-->
             <script src="./scripts/group-page.js" type="module"></script>   
             <script src="./scripts/open-close-popup.js" type="module"></script>
+
+            <script>
+                function openPage(evt, pageName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(pageName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+                
+                document.getElementById("defaultOpen").click();
+                </script>
+
         </div>
     </body>
 </html>
