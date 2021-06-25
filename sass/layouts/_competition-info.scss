@@ -1,0 +1,26 @@
+.competition-info-fields--item {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+
+  .competition-info {
+    display: flex;
+  }
+
+  .competition-info-main {
+    width: 99%;
+    border: 2px solid;
+  }
+  .competition-info-list-item{
+      width: 49%;
+      margin-right: 7px;
+margin-top: 15px;
+
+@media screen and (min-width: 900px) {
+    margin-right: 9px;
+  }
+  @media screen and (min-width: 1200px) {
+    margin-right: 14px;
+  }
+  }

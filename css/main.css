@@ -1229,27 +1229,7 @@ body.lock {
 }
 
 .main-tables-item {
-  width: 320px;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1199px) {
-  .main-tables-item {
-    width: 375px;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1799px) {
-  .main-tables-item {
-    width: 590px;
-    margin-right: 10px;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .main-tables-item {
-    width: 885px;
-    margin-right: 15px;
-  }
+  width: 100%;
 }
 
 .secondary-tables {
@@ -1259,28 +1239,7 @@ body.lock {
 }
 
 .secondary-tables--item {
-  width: 320px;
-}
-
-@media screen and (min-width: 767px) and (max-width: 1199px) {
-  .secondary-tables--item {
-    width: 270px;
-    margin-right: 10px;
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1799px) {
-  .secondary-tables--item {
-    width: 485px;
-    margin-right: 15px;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .secondary-tables--item {
-    width: 780px;
-    margin-right: 15px;
-  }
+  width: 100%;
 }
 
 .secondary-tables--td {
@@ -1484,6 +1443,7 @@ body.lock {
 }
 
 .page-header {
+  height: 100px;
   background: #1499f6;
   background: -webkit-gradient(linear, left bottom, left top, from(rgba(20, 153, 246, 0.417787)), color-stop(6%, white));
   background: linear-gradient(0deg, rgba(20, 153, 246, 0.417787) 0%, white 6%);
@@ -1695,6 +1655,84 @@ body.lock {
   width: 100%;
 }
 
+.tabs-bar {
+  display: inline-block;
+  background-color: #0077ff;
+  min-width: 15%;
+  max-width: 15%;
+  min-height: 100vh;
+}
+
+.tab-old {
+  color: white;
+  background-color: #0077ff;
+  width: 100%;
+  height: 50px;
+  font: 2em sans-serif;
+  border: 0px;
+}
+
+.tab_selected {
+  color: black;
+  background-color: white;
+  width: 100%;
+  height: 50px;
+  font: 2em sans-serif;
+  border: 0px;
+}
+
+.tab {
+  float: left;
+  background-color: #f1f1f1;
+  width: 15%;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  font-size: 13px;
+}
+
+@media screen and (min-width: 900px) {
+  .tab button {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .tab button {
+    font-size: 17px;
+  }
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  width: 85%;
+  border-left: none;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1845,6 +1883,16 @@ body.lock {
     margin-left: 15px;
     margin-top: 0px;
   }
+}
+
+.group-page-pair-red {
+  background-color: #fb00005e;
+  color: black;
+}
+
+.group-page-pair-blue {
+  background-color: #0000fb9c;
+  color: white;
 }
 
 .form-add-comp {
@@ -2020,10 +2068,6 @@ body.lock {
   .member-page-btn-del {
     margin-right: 7px;
   }
-}
-
-.advantages {
-  padding-top: 95px;
 }
 
 .advantages-title {
@@ -2235,5 +2279,42 @@ body.lock {
   border-radius: 2px;
   background-color: #fff;
   color: #2a2a2a;
+}
+
+.competition-info-fields--item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.competition-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.competition-info-main {
+  width: 99%;
+  border: 2px solid;
+}
+
+.competition-info-list-item {
+  width: 49%;
+  margin-right: 7px;
+  margin-top: 15px;
+}
+
+@media screen and (min-width: 900px) {
+  .competition-info-list-item {
+    margin-right: 9px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .competition-info-list-item {
+    margin-right: 14px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

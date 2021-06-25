@@ -175,5 +175,3 @@ export function tabsInit(){
         tab.addEventListener("click",  function(){tabSelect(tab.id)}, false);
     }
 }
-
-tabsInit()
