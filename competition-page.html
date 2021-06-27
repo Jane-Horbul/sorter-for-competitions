@@ -152,7 +152,7 @@
                                     <div id="member-info">
                                         <div class="group-info-title--siting">
                                             <div class="group-info-title"><span>Competition info</span></div>
-                                            <a href="#popup_1" class="popup-link js-hidden-element">
+                                            <a href="#popup_3" class="popup-link js-hidden-element">
                                                 <button class="group-info-edit-btn" type="button">
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/icons.svg#icon-pencil2"></use>
@@ -184,107 +184,27 @@
         </div>
 
         <!--first-popup-window-start-->
-        <div class="popup" id = "popup_1">
+
+        <div class="popup" id = "popup_3">
             <a href="" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
                     <a href="" class="popup__close close-popup">X</a>
                     <form class="modal-form">
 
-                        <span class="modal-title">Create new member</span>
+                        <h3><span class="modal-title">Edit competition info</span></h3>
 
                         <div class="new-member-field">
 
-                            <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                            <label for="new-member-name"><span class="form-field-title">Competition name</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
+                                <input type="text" id="edit-competition-name" name="edit-competition-name" class="form-field-input" placeholder="Enter the competition name">
                             </div>
                         
-                            <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                            <label for="new-member-surname"><span class="form-field-title">Competition ID</span></label>
                             <div class="form-field">
-                                <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
+                                <input type="text" id="edit-competition-id" name="edit-competition-id" class="form-field-input" placeholder="Enter the competition id">
                             </div>
-
-                            <label for="new-member-age"><span class="form-field-title">Member age</span></label>
-                            <div class="form-field">
-                                <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
-                            </div>
-
-                            <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
-                            <div class="form-field">
-                                <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
-                            </div>
-
-                            <ul class="list new-member-gender-list">
-                                <label for="new-member-sex" class="form-field-label">
-                                    <span class="form-field-title">Member`s gender</span>
-                                    <li class="new-member-gender-item">
-                                        <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                        <label for="male">Male</label>
-                                    </li>
-
-                                    <li class="new-member-gender-item">
-                                    <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                    <label for="female">Female</label>
-                                    </li>
-                                </label>
-                            </ul>
-
-                            <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
-                            <div class="form-field">
-                                <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
-                            </div>
-                        
-                            <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
-                            <select name="create-member-qualification" id="create-member-qualifications">
-                                <template id="create-member-qual-temp">
-                                    <option id="create-member-qual-item" value="value">Name</option>
-                                </template>
-                            </select>
-                        </div>
-                        
-                        <label for="new-member-division" id="new-member-divisions" class="form-field-label">
-                            <span class="form-field-title">Choose divisions:</span>
-                            <div class="new-member-field" id="create-member-divisions">
-                                <template id="create-member-division-template">
-                                    <input type="checkbox" id="div-input" name="div-name" value="div-val">
-                                    <label id="div-label" for="div-name">division-01</label>
-                                </template>
-                            </div>
-                        </label>
-
-                        <div class="form-field--option">
-                            <ul class="list new-member-permit-list">
-                                <label for="new-member-permit" class="form-field-label">
-                                    <span class="form-field-title">Member`s permit</span>
-                                    <li class="new-member-permit-item">
-                                        <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
-                                        <label for="yes">Yes</label>
-                                    </li>
-
-                                    <li class="new-member-permit-item">
-                                    <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
-                                    <label for="no">No</label>
-                                    </li>
-                                </label>
-                            </ul>
-                        </div>
-
-                        <div class="form-field--option">
-                            <ul class="list nm-more-than-one-list">
-                                <label for="nm-more-than-one" class="form-field-label">
-                                    <span class="form-field-title">Enter more than one member</span>
-                                    <li class="nm-more-than-one-item">
-                                        <input type="radio" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                        <label for="yes">Yes</label>
-                                    </li>
-
-                                    <li class="nm-more-than-one-item">
-                                    <input type="radio" id="nm-more-than-one-no" name="nm-more-than-one" value="no">
-                                    <label for="no">No</label>
-                                    </li>
-                                </label>
-                            </ul>
                         </div>
                         
                         <button type="button" id="member-form-send-btn" class="modal-btn-submit">
