@@ -2332,4 +2332,46 @@ body.lock {
     margin-right: 14px;
   }
 }
+
+.login-page {
+  background-color: #a3d7fc;
+  margin-top: -100px;
+  height: 1000px;
+}
+
+.login-page-btn {
+  background: #f7f7f7;
+  border: 22px solid #1d8fbd;
+  width: 500px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.login-page-btn-submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 350px;
+  height: 70px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  border: 1 px solid #e5e5e5;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.06em;
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+
+.login-page-btn-submit:focus, .login-page-btn-submit:hover {
+  outline: none;
+}
+
+.login-page-title {
+  text-align: center;
+}
 /*# sourceMappingURL=main.css.map */
