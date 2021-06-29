@@ -2335,7 +2335,8 @@ body.lock {
 
 .login-page {
   background-color: #a3d7fc;
-  margin-top: -100px;
+  padding-top: 5px;
+  margin-top: -20px;
   height: 1000px;
 }
 
