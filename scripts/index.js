@@ -1,11 +1,8 @@
-import {sendForm} from "./common.js"
+import {sendLogin} from "./communication.js"
 import {languageSwitchingOn} from "./common.js"
 
-function sendLogin() {
-    var paramsMap = new Map();
-    paramsMap.set("login",     document.getElementById("login").value);
-    paramsMap.set("password",  document.getElementById("password").value);
-    sendForm("/admin-login", paramsMap, true);
+function login() {
+    sendLogin(document.getElementById("login").value, document.getElementById("password").value);
 }
-document.getElementById("login-btn").addEventListener("click", sendLogin, false);
+document.getElementById("login-btn").addEventListener("click", login, false);
 languageSwitchingOn();

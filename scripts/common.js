@@ -1,3 +1,5 @@
+import {sendGetClientStatus} from "./communication.js"
+
 export function refreshPage(){
     var newLink = document.location.href.split("#")[0];
     document.location.replace(newLink);
@@ -50,7 +52,9 @@ export function parseMap(str){
 export function parseMapArray(str){
     var result = new Array(0);
     str.split("}, ").forEach(map => {
-        result.push(parseMap(map.substr(1).split("}")[0]));
+        var map = parseMap(map.substr(1).split("}")[0]);
+        if(map.length > 0)
+            result.push(map);
     });
     return result;
 }
@@ -67,7 +71,11 @@ export function parseAnswerParams(answer){
             parseResult.set(params[0], params[1]);
         } else if(params[1].split("<Type array>").length > 1) {
             params[1] = params[1].split("<Type array>")[1];
-            parseResult.set(params[0], params[1].split(", "));
+            var array = params[1].split(", ");
+            if(array[0].length > 0)
+                parseResult.set(params[0], array);
+            else
+                parseResult.set(params[0], new Array(0));
         } else if(params[1].split("<Type map>").length > 1) {
             params[1] = params[1].split("<Type map>")[1];
             parseResult.set(params[0], parseMap(params[1]));
@@ -79,35 +87,6 @@ export function parseAnswerParams(answer){
     return parseResult;
 }
 
-export function sendRequest(request) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', request, false);
-    xhr.send();
-    if (xhr.status != 200)   return new Map();
-    return parseAnswerParams(xhr.responseText);
-}
-
-export function sendForm(formName, paramsMap, refresh) {
-    var xhr = new XMLHttpRequest();
-    var boundary = String(Math.random()).slice(2);
-    var body = ['\r\n'];
-    paramsMap.forEach(function(value, key) {
-        body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + value + '\r\n');
-    });
-    body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
-
-
-    xhr.onreadystatechange = function () {
-        if(refresh == true && xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            refreshPage();
-        };
-    };
-    xhr.open('POST', formName, true);
-    xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + boundary);
-    xhr.send(body);
-    return true;
-}
-
 export function removeHiden(){
     document.getElementById("testSec").classList.remove("js-hidden-element");
 }
@@ -117,7 +96,7 @@ export function addHiden(){
 }
 
 export function showAllIfAdmin(){
-    var clStatus = sendRequest("client-status-get").get("ClientStatus");
+    var clStatus = sendGetClientStatus();
     var shadows = document.querySelectorAll(".js-hidden-element");
     if(clStatus == "admin"){
         for (let shadow of shadows) {

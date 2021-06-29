@@ -9,7 +9,6 @@ import {languageSwitchingOn} from "./common.js"
 
 var pageParams = getLinkParams(location.search);
 var qualificationsMap = new Map();
-var divisionsArray = new Array(0);
 
 var memberForm = new Map();
 memberForm.set( "name",           document.getElementById("new-member-name"));
@@ -59,141 +58,6 @@ function getQualificationInterval(qMin, qMax){
     }
     if(Number(qMax) == Number(qMin)) return qMinName;
     return qMinName + " - " + qMaxName;
-}
-
-function sendNotification(name, value, refresh) {
-    var paramsMap = new Map();
-
-    paramsMap.set(name, value);
-    sendForm('/competition-edition?cid=' + pageParams.get("cid"), paramsMap, refresh);
-}
-
-/* ------------------- QUALIFICATIONS ----------------------------*/
-
-function qualificationElementAddToPage(value, name){
-    if(value == "") return "";
-
-    var qTable =  document.getElementById("qualification-table");
-    var qTableTemplate = document.getElementById("qualification-template").content.cloneNode(true);
-
-    qTableTemplate.getElementById("qual-value").innerHTML = value;
-    qTableTemplate.getElementById("qual-name").innerHTML = name;
-    qTableTemplate.getElementById("qual-dell-btn").addEventListener("click", function(){deleteQualification(value)}, false);
-    qTable.append(qTableTemplate);
-
-    var memberQualsTemplate = document.getElementById("create-member-qual-temp").content.cloneNode(true).getElementById("create-member-qual-item");
-    memberQualsTemplate.setAttribute("value", value);
-    memberQualsTemplate.innerHTML = name;
-    document.getElementById("create-member-qualifications").append(memberQualsTemplate);
-
-    var groupQualsTemplate = document.getElementById("create-group-qual-temp").content.cloneNode(true).getElementById("create-group-qual-item");
-    groupQualsTemplate.setAttribute("value", value);
-    groupQualsTemplate.innerHTML = name;
-    document.getElementById("ng-members-qualification-min").append(groupQualsTemplate.cloneNode(true));
-    document.getElementById("ng-members-qualification-max").append(groupQualsTemplate);
-}
-
-
-function addQualification(valueId, nameId){
-    var value = document.getElementById(valueId).value;
-    var name = document.getElementById(nameId).value;
-    var qualTable =  document.getElementById("qualification-table")
-    for(var i = 1; i < qualTable.rows.length; i++){
-        if(qualTable.rows[i].cells[0].innerHTML.localeCompare(value) == 0) return;
-        if(qualTable.rows[i].cells[1].innerHTML.localeCompare(name) == 0) return;
-    }
-    qualificationElementAddToPage(value, name);
-    toogleQualificationAdding();
-    sendNotification("qualification-add", value + " - " + name, false);
-}
-
-function toogleQualificationAdding(){
-    var row = document.getElementById("qualification-add-field");
-    if(row == null){
-        var row =  document.getElementById("qualification-table").insertRow(1);
-        row.innerHTML =  document.getElementById("qualification-adding-template").innerHTML;
-        row.setAttribute("id", "qualification-add-field");
-        document.getElementById("qual-ok-btn").
-        addEventListener("click", function(){addQualification("add-qualification-value", "add-qualification-name")}, false);
-    } else {
-        row.remove();
-    }
-}
-
-function deleteQualification(value){
-    var qualTable =  document.getElementById("qualification-table")
-    for(var i = 1; i < qualTable.rows.length; i++){
-        if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
-            qualTable.rows[i].remove();
-            sendNotification("qualification-delete", value, true);
-            return;
-        }
-    }
-    
-}
-
-/* ------------------- DIVISIONS ----------------------------*/
-
-function divisionElementAddToPage(division){
-    if(division.localeCompare("\r\n") == 0) return "";
-    divisionsArray.push(division);
-
-    var divTable = document.getElementById("divisions-table");
-    var divTableTemplate = document.getElementById("division-template").content.cloneNode(true);
-    divTableTemplate.getElementById("div-name").innerHTML = division;
-    divTableTemplate.getElementById("div-dell-btn").addEventListener("click", function(){deleteDivision(division)}, false);
-    divTable.append(divTableTemplate);
-
-    var memberDivs = document.getElementById("create-member-divisions");
-    var memberDivsTemplate = document.getElementById("create-member-division-template").content.cloneNode(true);
-    var membDivId = memberDivsTemplate.getElementById("div-input");
-    membDivId.setAttribute("id", memberForm.get("divisionPrefix") + division);
-    membDivId.setAttribute("name", division);
-    membDivId.setAttribute("value", division);
-    memberDivsTemplate.getElementById("div-label").setAttribute("for", division);
-    memberDivsTemplate.getElementById("div-label").innerHTML = division;
-    memberDivs.append(memberDivsTemplate);
-
-    var groupDivsTemplate = document.getElementById("create-group-div-temp").content.cloneNode(true).getElementById("create-group-div-item");
-    groupDivsTemplate.setAttribute("value", division);
-    groupDivsTemplate.innerHTML = division;
-    groupForm.get("division").append(groupDivsTemplate);  
-}
-
-function toogleDivisionAdding(){
-    var rowId = "division-add-field";
-    var row = document.getElementById(rowId);
-    if(row == null){
-        var row = document.getElementById("divisions-table").insertRow(1);
-        row.innerHTML =  document.getElementById("division-adding-template").innerHTML;
-        row.setAttribute("id", rowId);
-        document.getElementById("div-ok-btn").
-        addEventListener("click", function(){addDivision("add-division")}, false);
-    } else {
-        row.remove();
-    }
-}
-
-function addDivision(divId){
-    var divTable = document.getElementById("divisions-table");
-    var div = document.getElementById(divId).value;
-    for(var i = 1; i < divTable.rows.length; i++){
-        if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0) return;
-    }
-    toogleDivisionAdding();
-    divisionElementAddToPage(div);
-    sendNotification("division-add", div, false);
-}
-
-function deleteDivision(div){
-    var divTable = document.getElementById("divisions-table");
-    for(var i = 1; i < divTable.rows.length; i++){
-        if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
-            divTable.rows[i].remove();
-            sendNotification("division-delete", div, true);
-            return;
-        } 
-    }
 }
 
 /* ------------------- MEMBERS ----------------------------*/
@@ -394,12 +258,7 @@ function fillPageInfo(params){
     var membersTable = document.getElementById("members-table");
     var groupsTable = document.getElementById("groups-table");
 
-    for (var [key, value] of params.get("Qualifications")) {
-        qualificationElementAddToPage(key, value);
-        qualificationsMap.set(key, value);
-    }
     document.getElementById("competition-name").innerHTML = params.get("Name");
-    params.get("Divisions").forEach(div => divisionElementAddToPage(div));
     params.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
     params.get("Groups").forEach(gr =>   groupsTable.append(groupElementCreate(gr)));
 }
@@ -415,8 +274,6 @@ function refreshPairs(){
 }
 
 function setBtnActions(){
-    document.getElementById("qual-add-btn").addEventListener("click", toogleQualificationAdding, false);
-    document.getElementById("div-add-btn").addEventListener("click", toogleDivisionAdding, false);
     document.getElementById("form-pairs-btn").addEventListener("click", refreshPairs, false);
     document.getElementById("sort-members-btn").addEventListener("click", resortMembers, false);
     document.getElementById("member-form-send-btn").addEventListener("click", sendMemberForm, false);

@@ -1,8 +1,9 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="./old-css/normalize.css">
 <link rel="stylesheet" href="./css/main.css" />
@@ -56,7 +57,7 @@
         </header>
              
         <div>
-            <h1 id="competition-name">Department name</h1>
+            <h1 id="department-name">Department name</h1>
         </div>
 
         <div class="tab">
@@ -157,20 +158,18 @@
                             <div class="competition-info-main">
                                 <div id="member-info">
                                     <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>Competition info</span></div>
-                                        <a href="#popup_1" class="popup-link js-hidden-element">
-                                            <button class="group-info-edit-btn" type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/icons.svg#icon-pencil2"></use>
-                                                </svg>
-                                            </button>
-                                        </a>
+                                        <div class="group-info-title"><span>Department info</span></div>
+                                        <button class="group-info-edit-btn" type="button" id="department-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/icons.svg#icon-pencil2"></use>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="group-info-fields">
                                     <div class="" id="member-info">
-                                        <div class="competition-info-fields--item"> Name:<span>&nbsp</span><div id="">            </div></div>
-                                        <div class="competition-info-fields--item"> ID:<span>&nbsp</span><div id="">      </div></div>
+                                        <div class="competition-info-fields--item"> Name:<span>&nbsp</span><div id="department-name-set">            </div></div>
+                                        <div class="competition-info-fields--item"> ID:<span>&nbsp</span><div id="department-id">      </div></div>
                                     </div>
                                 </div>
                             </div>
