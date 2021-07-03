@@ -3,6 +3,7 @@ import {parseAnswerParams} from "./common.js"
 
 const backendLinks = new Map();
 backendLinks.set("DEPARTMENT_GET",                  "competition-list-get?");
+backendLinks.set("DEPARTMENT_INFO_EDIT",            "department-info-edit");
 backendLinks.set("DEPARTMENT_QUALIFICATION_ADD",    "department-qual-add");
 backendLinks.set("DEPARTMENT_QUALIFICATION_DEL",    "department-qual-del");
 backendLinks.set("DEPARTMENT_DISCIPLINE_ADD",       "department-disc-add");
@@ -96,17 +97,17 @@ export function sendAddQualification(value, name){
 }
 
 export function sendDeleteQualification(value){
-    sendSingleValue(backendLinks.get("DEPARTMENT_QUALIFICATION_DEL"), value, true)
+    sendSingleValue(backendLinks.get("DEPARTMENT_QUALIFICATION_DEL"), value, true);
 }
 
 export function sendAddDiscipline(discip){
-    sendSingleValue(backendLinks.get("DEPARTMENT_DISCIPLINE_ADD"), discip, false)
+    sendSingleValue(backendLinks.get("DEPARTMENT_DISCIPLINE_ADD"), discip, false);
 }
 
 export function sendDeleteDiscipline(discip){
-    sendSingleValue(backendLinks.get("DEPARTMENT_DISCIPLINE_DEL"), discip, false)
+    sendSingleValue(backendLinks.get("DEPARTMENT_DISCIPLINE_DEL"), discip, false);
 }
 
 export function sendDepartmentInfo(name){
-    
+    sendSingleValue(backendLinks.get("DEPARTMENT_INFO_EDIT"), name, true);
 }

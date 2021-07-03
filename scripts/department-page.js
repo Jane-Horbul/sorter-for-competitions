@@ -8,7 +8,7 @@ import {sendAddQualification} from "./communication.js"
 import {sendDeleteQualification} from "./communication.js"
 import {sendAddDiscipline} from "./communication.js"
 import {sendDeleteDiscipline} from "./communication.js"
-
+import {sendDepartmentInfo} from "./communication.js"
 
 var pageParams = getLinkParams(location.search);
 const department = sendGetDepartment();
@@ -133,16 +133,16 @@ function competitionElementCreate(competition){
 
 /* ------------------- COMMON ----------------------------*/
 function editInfo(){
-    var input = document.getElementById("name-info-input");
-    if(input == null){
-        var nameInput = document.createElement("input");
+    var nameInput = document.getElementById("name-info-input");
+    if(nameInput == null){
+        nameInput = document.createElement("input");
         nameInput.setAttribute("id", "name-info-input");
         nameInput.value = department.get("Name");
         var setName = document.getElementById("department-name-set");
         setName.innerHTML = "";
         setName.appendChild(nameInput);
     } else{
-        
+        sendDepartmentInfo(nameInput.value);
     }
 }
 
