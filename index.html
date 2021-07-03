@@ -14,55 +14,59 @@
 <body>
     <div class="wrapper">
         <header class="page-header">
-            <div class="lang-panel">
-                <ul class="list lang-panel-list">
-                    <li class="lang-panel-item">
-                        <div class="lang-panel-flag">
-                            <a type="button" id="lang-ru"> 
-                                <img src="./img/ru.png"> 
-                            </a>
-                        </div>
-                    </li>
-                    <li class="lang-panel-item">
-                        <div class="lang-panel-flag">
-                            <a type="button" id="lang-en"> 
-                                <img src="./img/en.png"> 
-                            </a>
-                        </div>
-                    </li>
-                    <li class="lang-panel-item">
-                        <div class="lang-panel-flag">
-                            <a type="button" id="lang-ua"> 
-                                <img src="./img/ua.png"> 
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            
             <div class="container flexbox">
+
                 <nav class="navigation">
-                    <img class="program-logo " src="./img/competition-logo.png" alt="Program logo">
+                    <!--site logo-->
+                    <img class="program-logo "
+                        src="./img/competition-logo-new.png"
+                        alt="Program logo">
                 </nav>
+
+                <div class="lang-panel">
+                    <ul class="list lang-panel-list">
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ru"> 
+                                    <img src="./img/ru.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-en"> 
+                                    <img src="./img/en.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ua"> 
+                                    <img src="./img/ua.png"> 
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </header>
-        <div class="header-border"></div>
-        <main>
-            <!--Slidebar-->
-            <div class="conntainer">
-                <input type="text" id="login" class="modal-btn-submit" placeholder="enter login"> <br>
-                <input type="text" id="password" class="modal-btn-submit" placeholder="enter password"> <br>
-                <button type="button" id="login-btn" class="modal-btn-submit">
-                    <span class="modal-btn-submit-text">Enter</span>
-                </button>
-            </div>
-        </main>
 
-        <footer>
-            <div class="container flexbox">
-                <address class="contacts-box"> </address>
-                <div class="container sl"></div>
-            </div>
-        </footer>
+
+    <div class="conntainer">
+        <main class="login-page">
+                    <div class="login-page-btn">
+                        <div class="login-page-title">
+                            <h1>LOGIN</h1>
+                        </div>
+                        <input type="text" id="login" class="login-page-input-submit" placeholder="ENTER LOGIN"> <br>
+                        <input type="text" id="password" class="login-page-input-submit" placeholder="ENTER PASSWORD"> <br>
+                        <button type="button" id="login-btn" class="login-page-btn-submit">
+                            <span class="modal-btn-submit-text">LOG IN</span>
+                        </button>
+                    </div>
+
+        </main>
     </div>
 
 </body>

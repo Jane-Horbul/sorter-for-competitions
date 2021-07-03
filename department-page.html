@@ -72,7 +72,7 @@
                     <li class="advantages-item js-hidden-element">
                         <div class="advantages-icon-bg">
                             <div class="add-new-competition-block">
-                                <a href="./competition-add-form">
+                                <a href="#popup_4" class="popup-link">
                                     <button class="add-new-competition-btn" type="button" data-open-modal>
                                         <svg class="sl-footer-icon">
                                             <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -522,6 +522,45 @@
             </div>
 
         <!--second-popup-window-end-->
+
+                <!--Add-competition-popup-window-start-->
+
+                <div class="popup" id = "popup_4">
+                    <a href="" class="popup__area"></a>
+                    <div class="popup__body">
+                        <div class="popup__content">
+                            <a href="" class="popup__close close-popup">X</a>
+                            <form class="modal-form">
+    
+                                <div>
+                                    <h2>Create a new competition</h2>
+                                </div>
+        
+                                <div class="form-add-comp">
+                                    <label for="competition-name" class="form-field-label">
+                                        <span class="form-field-title">The name of the competition</span>
+                                        <div class="form-field-add-comp">
+                                            <input type="text" name="competition-name" id="competition-name" class="form-field-input-comp-add" required />
+                                        </div>
+                                    </label>
+    
+                                    <label>
+                                        <span class="form-field-title">Short description</span>
+                                        <div class="form-field-add-comp-message">
+                                            <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                                                rows="3"></textarea>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <button type="button" id="send-form-btn" class="modal-btn-submit">
+                                    <span class="modal-btn-submit-text">Add competition</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--Add-competition-popup-window-end-->
 
   
 <script>
