@@ -8,7 +8,11 @@ backendLinks.set("DEPARTMENT_QUALIFICATION_ADD",    "department-qual-add");
 backendLinks.set("DEPARTMENT_QUALIFICATION_DEL",    "department-qual-del");
 backendLinks.set("DEPARTMENT_DISCIPLINE_ADD",       "department-disc-add");
 backendLinks.set("DEPARTMENT_DISCIPLINE_DEL",       "department-disc-del");
-backendLinks.set("DEPARTMENT_COMPETITION_ADD",      "competition-form");
+backendLinks.set("DEPARTMENT_COMPETITION_ADD",      "department-comp-add");
+backendLinks.set("DEPARTMENT_SPORTSMEN_GET",        "department-sports-get?");
+backendLinks.set("DEPARTMENT_SPORTSMEN_EDIT",       "department-sports-edit");
+backendLinks.set("DEPARTMENT_SPORTSMEN_ADD",        "department-sports-add");
+backendLinks.set("DEPARTMENT_SPORTSMEN_DEL",        "department-sports-del");
 
 backendLinks.set("COMPETITION_GET",                 "competition-get?");
 backendLinks.set("COMPETITION_SPORTSMEN_ADD",       "new-member-form");
@@ -34,13 +38,6 @@ backendLinks.set("SPORTSMEN_GROUP_DEL",             "member-group-del");
 backendLinks.set("LOGIN",                           "admin-login");
 backendLinks.set("CLIENT_STATUS_GET",               "client-status-get");
 
-function sendNotification(name, value, refresh) {
-    var paramsMap = new Map();
-
-    paramsMap.set(name, value);
-    sendForm('/competition-edition?cid=' + pageParams.get("cid"), paramsMap, refresh);
-}
-
 function sendRequest(request) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', request, false);
@@ -49,7 +46,7 @@ function sendRequest(request) {
     return parseAnswerParams(xhr.responseText);
 }
 
-function sendForm(formName, paramsMap, refresh) {
+function sendParametersList(formName, paramsMap, refresh) {
     var xhr = new XMLHttpRequest();
     var boundary = String(Math.random()).slice(2);
     var body = ['\r\n'];
@@ -73,14 +70,14 @@ function sendForm(formName, paramsMap, refresh) {
 function sendSingleValue(link, value, refresh){
     var paramsMap = new Map();
     paramsMap.set(link, value);
-    sendForm(link, paramsMap, refresh);
+    sendParametersList(link, paramsMap, refresh);
 }
 
 export function sendLogin(login, pass){
     var paramsMap = new Map();
     paramsMap.set("login",     login);
     paramsMap.set("password",  pass);
-    sendForm(backendLinks.get("LOGIN"), paramsMap, true);
+    sendParametersList(backendLinks.get("LOGIN"), paramsMap, true);
 }
 
 export function sendGetClientStatus(){
@@ -110,4 +107,8 @@ export function sendDeleteDiscipline(discip){
 
 export function sendDepartmentInfo(name){
     sendSingleValue(backendLinks.get("DEPARTMENT_INFO_EDIT"), name, true);
+}
+
+export function sendDepartmentSportsmen(params){
+    sendParametersList(backendLinks.get("DEPARTMENT_SPORTSMEN_ADD"), params, false);
 }

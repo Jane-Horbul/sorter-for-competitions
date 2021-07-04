@@ -51,10 +51,10 @@ export function parseMap(str){
 
 export function parseMapArray(str){
     var result = new Array(0);
-    str.split("}, ").forEach(map => {
-        var map = parseMap(map.substr(1).split("}")[0]);
-        if(map.length > 0)
-            result.push(map);
+    str.split("}, ").forEach(mapStr => {
+        var resMap = parseMap(mapStr.substr(1).split("}")[0]);
+        if(resMap.size > 0)
+            result.push(resMap);   
     });
     return result;
 }

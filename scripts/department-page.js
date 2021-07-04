@@ -2,6 +2,8 @@ import {getLinkParams} from "./common.js"
 import {showAllIfAdmin} from "./common.js"
 import {languageSwitchingOn} from "./common.js"
 import {insertElement} from "./common.js"
+import {isEmptyString} from "./common.js"
+import {isNumber} from "./common.js"
 
 import {sendGetDepartment} from "./communication.js"
 import {sendAddQualification} from "./communication.js"
@@ -9,6 +11,7 @@ import {sendDeleteQualification} from "./communication.js"
 import {sendAddDiscipline} from "./communication.js"
 import {sendDeleteDiscipline} from "./communication.js"
 import {sendDepartmentInfo} from "./communication.js"
+import {sendDepartmentSportsmen} from "./communication.js"
 
 var pageParams = getLinkParams(location.search);
 const department = sendGetDepartment();
@@ -117,6 +120,8 @@ function deleteDivision(div){
     }
 }
 
+
+
 /* ------------------- COMPETITIONS ----------------------------*/
 
 function competitionElementCreate(competition){
@@ -130,6 +135,92 @@ function competitionElementCreate(competition){
     return insertElement("competition-template", compParams);
 }
 
+/* ------------------- SPORTSMENS ----------------------------*/
+var sportsmenForm = new Map();
+sportsmenForm.set( "name",           document.getElementById("new-member-name"));
+sportsmenForm.set( "surname",        document.getElementById("new-member-surname"));
+sportsmenForm.set( "age",            document.getElementById("new-member-age"));
+sportsmenForm.set( "weight",         document.getElementById("new-member-weight"));
+sportsmenForm.set( "is_male",        document.getElementById("new-member-sex-male"));
+sportsmenForm.set( "team",           document.getElementById("new-member-team"));
+
+function memberElementCreate(member){
+    if(member.get("id") == undefined) return "";
+    var template = document.getElementById("member-template").content.cloneNode(true);
+    template.getElementById("member-name").innerHTML = member.get("name"); 
+    template.getElementById("member-surname").innerHTML = member.get("surname"); 
+    template.getElementById("member-age").innerHTML = member.get("birth");
+    template.getElementById("member-weight").innerHTML = member.get("weight");
+    template.getElementById("member-sex").innerHTML = member.get("sex");
+    template.getElementById("member-team").innerHTML = member.get("team");
+    template.getElementById("member-qual").innerHTML = member.get("qualification");
+
+    template.getElementById("member-row").setAttribute("onclick", "window.location.href='"
+                                    + window.location.href + "/member?mid=" + member.get("id") + "'; return false");
+    return template;
+}
+
+function resortMembers(){
+    var newParams = sendRequest("/competition-members-sort?" + "cid=" + pageParams.get("cid"));
+    var membersTable = document.getElementById("members-table");
+    
+    while(membersTable.rows.length > 2){
+        membersTable.deleteRow(membersTable.rows.length - 1);
+    }
+    newParams.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
+}
+
+function dateValidate(date){
+    var dt = date.split(".");
+    if(dt.length < 3) return false;
+    dt[1] -= 1;
+
+    var d = new Date(dt[2], dt[1], dt[0]);
+    if ((d.getFullYear() == dt[2]) && (d.getMonth() == dt[1]) && (d.getDate() == dt[0]))
+        return true;
+    return false;
+}
+
+function isMemberParamsOk() {
+    var name = sportsmenForm.get("name").value;
+    var surname = sportsmenForm.get("surname").value;
+    var weight = sportsmenForm.get("weight").value;
+    var age = sportsmenForm.get("age").value;
+
+    if(isEmptyString(name)){
+        alert("Empty member name!");
+        return false;
+    }
+    if(isEmptyString(surname)){
+        alert("Empty member surname!");
+        return false;
+    }
+    if(!isNumber(weight)){
+        alert("Bad weight value. Enter number only.");
+        return false;
+    }
+    if(!dateValidate(age)){
+        alert("Bad Date of Birth value. Enter it in format dd.mm.yy");
+        return false;
+    }
+    return true;
+}
+
+function sendSportsmenForm() {
+    if(!isMemberParamsOk()) return;
+
+    var paramsMap = new Map();
+
+    paramsMap.set("member-name",    sportsmenForm.get("name").value);
+    paramsMap.set("member-surname", sportsmenForm.get("surname").value);
+    paramsMap.set("member-weight",  sportsmenForm.get("weight").value);
+    paramsMap.set("member-age",     sportsmenForm.get("age").value);
+    paramsMap.set("member-team",    sportsmenForm.get("team").value);
+    paramsMap.set("member-sex",     sportsmenForm.get("is_male").checked ? "male" : "female");
+
+    console.log(paramsMap);
+    sendDepartmentSportsmen(paramsMap);
+}
 
 /* ------------------- COMMON ----------------------------*/
 function editInfo(){
@@ -148,6 +239,7 @@ function editInfo(){
 
 function fillPageInfo(){
     var list = document.getElementById("competitions-list");
+    var sportsTable = document.getElementById("members-table");
     department.get("Competitions").forEach(competition => {
         list.prepend(competitionElementCreate(competition));
     });
@@ -161,12 +253,15 @@ function fillPageInfo(){
     document.getElementById("department-name").innerHTML = department.get("Name");
     document.getElementById("department-name-set").innerHTML = department.get("Name");
     document.getElementById("department-id").innerHTML = department.get("Id");
+    
+    department.get("Sportsmens").forEach(sp => sportsTable.append(memberElementCreate(sp)));
 }
 
 function setActions(){
     document.getElementById("qual-add-btn").addEventListener("click", toogleQualificationAdding, false);
     document.getElementById("div-add-btn").addEventListener("click", toogleDivisionAdding, false);
     document.getElementById("department-edit-btn").addEventListener("click", editInfo, false);
+    document.getElementById("member-form-send-btn").addEventListener("click", sendSportsmenForm, false);
     
 }
 /* ------------------- MAIN CHUNK ----------------------------*/

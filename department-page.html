@@ -57,16 +57,16 @@
         </header>
              
         <div>
-            <h1 id="department-name">Department name</h1>
+            <h1 id="department-name"></h1>
         </div>
 
         <div class="tab">
-            <button class="tablinks" onclick="openPage(event, 'Competition')" id="defaultOpen">Competitions</button>
-            <button class="tablinks" onclick="openPage(event, 'Members')">Members</button>
-            <button class="tablinks" onclick="openPage(event, 'Settings')">Settings</button>
+            <button class="tablinks" onclick="openPage(event, 'competition-tab')" id="defaultOpen">Competitions</button>
+            <button class="tablinks" onclick="openPage(event, 'members-tab')">Members</button>
+            <button class="tablinks" onclick="openPage(event, 'settings-tab')">Settings</button>
         </div>
 
-        <div id="Competition" class="tabcontent">
+        <div id="competition-tab" class="tabcontent">
             <section class="advantages container">
                 <ul class="list advantages-list" id="competitions-list">
                     <li class="advantages-item js-hidden-element">
@@ -107,7 +107,7 @@
             </template>
         </div>
 
-        <div id="Members" class="tabcontent">
+        <div id="members-tab" class="tabcontent">
             <div class="main-tables-item">
                 <table class="dynamic-table" id="members-table">
                     <tr>
@@ -125,33 +125,31 @@
                         </th>
                     </tr>
                     <tr>
-                        <td class="secondary-title-tables--text">Name, Surname</td>
+                        <td class="secondary-title-tables--text">Surname</td>
+                        <td class="secondary-title-tables--text">Name</td>
                         <td class="secondary-title-tables--text">Age</td>
                         <td class="secondary-title-tables--text">Weight</td>
                         <td class="secondary-title-tables--text">Sex</td>
                         <td class="secondary-title-tables--text">Team</td>
                         <td class="secondary-title-tables--text">Qualification</td>
-                        <td class="secondary-title-tables--text">Adm</td>
-                        <td class="secondary-title-tables--text">Number of groups</td>
                     </tr>
                 </table>
                 <template id="member-template">
                     <tr id="member-row">
+                        <td class="secondary-tables--td" id="member-surname">  </td>
                         <td class="secondary-tables--td" id="member-name">  </td>
                         <td class="secondary-tables--td" id="member-age">  </td>
                         <td class="secondary-tables--td" id="member-weight">  </td>
                         <td class="secondary-tables--td" id="member-sex">  </td>
                         <td class="secondary-tables--td" id="member-team">  </td>
-                        <td class="secondary-tables--td" id="member-qualification">  </td>
-                        <td class="secondary-tables--td" id="member-admited">  </td>
-                        <td class="secondary-tables--td" id="member-groups-num">  </td>
+                        <td class="secondary-tables--td" id="member-qual">  </td>
                     </tr>
                 </template>
 
             </div>
         </div>
 
-        <div id="Settings" class="tabcontent">
+        <div id="settings-tab" class="tabcontent">
             <div>
                 <section class="competition-info">
 
@@ -168,8 +166,8 @@
                                 </div>
                                 <div class="group-info-fields">
                                     <div class="" id="member-info">
-                                        <div class="competition-info-fields--item"> Name:<span>&nbsp</span><div id="department-name-set">            </div></div>
-                                        <div class="competition-info-fields--item"> ID:<span>&nbsp</span><div id="department-id">      </div></div>
+                                        <div class="competition-info-fields--item">Name:<span>&nbsp</span><div id="department-name-set">            </div></div>
+                                        <div class="competition-info-fields--item">ID:<span>&nbsp</span><div id="department-id">      </div></div>
                                     </div>
                                 </div>
                             </div>
@@ -328,33 +326,6 @@
                                     <option id="create-member-qual-item" value="value">Name</option>
                                 </template>
                             </select>
-                        </div>
-                        
-                        <label for="new-member-division" id="new-member-divisions" class="form-field-label">
-                            <span class="form-field-title">Choose divisions:</span>
-                            <div class="new-member-field" id="create-member-divisions">
-                                <template id="create-member-division-template">
-                                    <input type="checkbox" id="div-input" name="div-name" value="div-val">
-                                    <label id="div-label" for="div-name">division-01</label>
-                                </template>
-                            </div>
-                        </label>
-
-                        <div class="form-field--option">
-                            <ul class="list new-member-permit-list">
-                                <label for="new-member-permit" class="form-field-label">
-                                    <span class="form-field-title">Member`s permit</span>
-                                    <li class="new-member-permit-item">
-                                        <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
-                                        <label for="yes">Yes</label>
-                                    </li>
-
-                                    <li class="new-member-permit-item">
-                                    <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
-                                    <label for="no">No</label>
-                                    </li>
-                                </label>
-                            </ul>
                         </div>
 
                         <div class="form-field--option">
