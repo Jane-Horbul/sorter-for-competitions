@@ -90,7 +90,7 @@ export function sendGetDepartment(){
 
 export function sendAddQualification(value, name){
     sendSingleValue(backendLinks.get("DEPARTMENT_QUALIFICATION_ADD"), 
-                        value + " - " + name, false)
+                        value + " - " + name, true)
 }
 
 export function sendDeleteQualification(value){
@@ -109,6 +109,22 @@ export function sendDepartmentInfo(name){
     sendSingleValue(backendLinks.get("DEPARTMENT_INFO_EDIT"), name, true);
 }
 
-export function sendDepartmentSportsmen(params){
-    sendParametersList(backendLinks.get("DEPARTMENT_SPORTSMEN_ADD"), params, false);
+export function sendDepartmentSportsmen(name, surname, weight, age, team, sex, qual){
+    var params = new Map();
+    params.set("member-name",    name);
+    params.set("member-surname", surname);
+    params.set("member-weight",  weight);
+    params.set("member-age",     age);
+    params.set("member-team",    team);
+    params.set("member-sex",     sex);
+    params.set("member-qual",    qual);
+    
+    sendParametersList(backendLinks.get("DEPARTMENT_SPORTSMEN_ADD"), params, true);
+}
+
+export function sendDepartmentCompetition(name, description){
+    var params = new Map();
+    params.set("competition-name",  name);
+    params.set("description",       description);
+    sendParametersList(backendLinks.get("DEPARTMENT_COMPETITION_ADD"), params, true);
 }

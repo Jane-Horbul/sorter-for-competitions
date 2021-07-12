@@ -126,10 +126,11 @@ export function languageSwitchingOn(){
     document.getElementById("lang-en").setAttribute("href", langLinkForm("en"))
 }
 
-export function insertElement(name, paramsMap){
-    var template = document.getElementById(name).content.cloneNode(true);
+export function insertElement(item, paramsMap){
+    var template = item.cloneNode(true);
+
     paramsMap.forEach(function(value, key) {
         template.innerHTML = template.innerHTML.replace(key, value);
       });
-    return template;
+    return template.content;
 }

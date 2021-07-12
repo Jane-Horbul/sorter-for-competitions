@@ -12,6 +12,7 @@ import {sendAddDiscipline} from "./communication.js"
 import {sendDeleteDiscipline} from "./communication.js"
 import {sendDepartmentInfo} from "./communication.js"
 import {sendDepartmentSportsmen} from "./communication.js"
+import {sendDepartmentCompetition} from "./communication.js"
 
 var pageParams = getLinkParams(location.search);
 const department = sendGetDepartment();
@@ -20,7 +21,7 @@ console.log(department);
 /* ------------------- QUALIFICATIONS ----------------------------*/
 var qualificationsMap = new Map();
 
-function qualificationElementAddToPage(value, name){
+function qualificationElementAddToPage(name, value){
     if(value == "") return "";
 
     var qTable =  document.getElementById("qualification-table");
@@ -32,15 +33,27 @@ function qualificationElementAddToPage(value, name){
     qTable.append(qTableTemplate);
 }
 
+
 function addQualification(valueId, nameId){
     var value = document.getElementById(valueId).value;
     var name = document.getElementById(nameId).value;
+    if(!isNumber(value)){
+        alert("Incorrect qualification value! Please, enter the number.");
+        return;
+    }
+
     var qualTable =  document.getElementById("qualification-table")
     for(var i = 1; i < qualTable.rows.length; i++){
-        if(qualTable.rows[i].cells[0].innerHTML.localeCompare(value) == 0) return;
-        if(qualTable.rows[i].cells[1].innerHTML.localeCompare(name) == 0) return;
+        if(qualTable.rows[i].cells[0].innerHTML.localeCompare(value) == 0){
+            alert("Qualification value already exists!");
+            return; 
+        } 
+        if(qualTable.rows[i].cells[1].innerHTML.localeCompare(name) == 0){
+            alert("Qualification name already exists!");
+            return;
+        }
     }
-    qualificationElementAddToPage(value, name);
+    qualificationElementAddToPage(name, value);
     toogleQualificationAdding();
     sendAddQualification(value, name);
 }
@@ -123,16 +136,35 @@ function deleteDivision(div){
 
 
 /* ------------------- COMPETITIONS ----------------------------*/
+const competitionForm = {
+    getName()          { return document.getElementById("competition-name-input").value;},
+    getDescription()   { return document.getElementById("competition-desc-input").value;}
+}
 
-function competitionElementCreate(competition){
+const compItem = {
+    getTable()     { return document.getElementById("competitions-list");},
+    getTemplate()  { return document.getElementById("competition-template")},
+    phDid:      "#departmentId",
+    phCid:      "#competitionId",
+    phName:     "#competition-name",
+    phDesc:     "#competition-desc"
+}
+
+function competitionPageElementAdd(competition){
     if(competition.get("id") == undefined) return "";
-    
     var compParams = new Map();
-    compParams.set("#competition-link", "competition?clist=" + pageParams.get("clist") + "&cid=" + competition.get("id"));
-    compParams.set("#competition-name", competition.get("name"));
-    compParams.set("#competition-desc", competition.get("description"));
+    compParams.set(compItem.phDid,  department.get("Id"));
+    compParams.set(compItem.phCid,  competition.get("id"));
+    compParams.set(compItem.phName, competition.get("name"));
+    compParams.set(compItem.phDesc, competition.get("description"));
 
-    return insertElement("competition-template", compParams);
+    compItem.getTable().prepend(insertElement(compItem.getTemplate(), compParams));
+}
+
+function sendCompetitionForm() {
+    var name = competitionForm.getName();
+    var description = competitionForm.getDescription();
+    sendDepartmentCompetition(name, description);
 }
 
 /* ------------------- SPORTSMENS ----------------------------*/
@@ -143,31 +175,36 @@ sportsmenForm.set( "age",            document.getElementById("new-member-age"));
 sportsmenForm.set( "weight",         document.getElementById("new-member-weight"));
 sportsmenForm.set( "is_male",        document.getElementById("new-member-sex-male"));
 sportsmenForm.set( "team",           document.getElementById("new-member-team"));
+sportsmenForm.set( "qualification",  document.getElementById("new-member-qualifications"));
 
 function memberElementCreate(member){
     if(member.get("id") == undefined) return "";
     var template = document.getElementById("member-template").content.cloneNode(true);
+    var qualName = qualificationsMap.get(member.get("qualification"))
+    if(qualName == undefined)
+        qualName = member.get("qualification")
+
     template.getElementById("member-name").innerHTML = member.get("name"); 
     template.getElementById("member-surname").innerHTML = member.get("surname"); 
     template.getElementById("member-age").innerHTML = member.get("birth");
     template.getElementById("member-weight").innerHTML = member.get("weight");
     template.getElementById("member-sex").innerHTML = member.get("sex");
     template.getElementById("member-team").innerHTML = member.get("team");
-    template.getElementById("member-qual").innerHTML = member.get("qualification");
+    template.getElementById("member-qual").innerHTML = qualName;
 
     template.getElementById("member-row").setAttribute("onclick", "window.location.href='"
                                     + window.location.href + "/member?mid=" + member.get("id") + "'; return false");
     return template;
 }
 
-function resortMembers(){
-    var newParams = sendRequest("/competition-members-sort?" + "cid=" + pageParams.get("cid"));
-    var membersTable = document.getElementById("members-table");
-    
-    while(membersTable.rows.length > 2){
-        membersTable.deleteRow(membersTable.rows.length - 1);
-    }
-    newParams.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
+function addQulificationListItem(name, value){
+    if((name == "") || (value == "")) return;
+    var qList =  document.getElementById("new-member-qualifications");
+    var itemTemplate = document.getElementById("new-member-qual-temp").content.cloneNode(true);
+
+    itemTemplate.getElementById("new-member-qual-item").innerHTML = name;
+    itemTemplate.getElementById("new-member-qual-item").value = value;
+    qList.append(itemTemplate);
 }
 
 function dateValidate(date){
@@ -208,18 +245,14 @@ function isMemberParamsOk() {
 
 function sendSportsmenForm() {
     if(!isMemberParamsOk()) return;
-
-    var paramsMap = new Map();
-
-    paramsMap.set("member-name",    sportsmenForm.get("name").value);
-    paramsMap.set("member-surname", sportsmenForm.get("surname").value);
-    paramsMap.set("member-weight",  sportsmenForm.get("weight").value);
-    paramsMap.set("member-age",     sportsmenForm.get("age").value);
-    paramsMap.set("member-team",    sportsmenForm.get("team").value);
-    paramsMap.set("member-sex",     sportsmenForm.get("is_male").checked ? "male" : "female");
-
-    console.log(paramsMap);
-    sendDepartmentSportsmen(paramsMap);
+    var name = sportsmenForm.get("name").value;
+    var surname = sportsmenForm.get("surname").value;
+    var weight = sportsmenForm.get("weight").value;
+    var age = sportsmenForm.get("age").value;
+    var team = sportsmenForm.get("team").value;
+    var sex = sportsmenForm.get("is_male").checked ? "male" : "female";
+    var qual = sportsmenForm.get("qualification").value;
+    sendDepartmentSportsmen(name, surname, weight, age, team, sex, qual);
 }
 
 /* ------------------- COMMON ----------------------------*/
@@ -238,17 +271,17 @@ function editInfo(){
 }
 
 function fillPageInfo(){
-    var list = document.getElementById("competitions-list");
     var sportsTable = document.getElementById("members-table");
     department.get("Competitions").forEach(competition => {
-        list.prepend(competitionElementCreate(competition));
+        competitionPageElementAdd(competition);
     });
 
     department.get("Divisions").forEach(div => divisionElementAddToPage(div));
 
-    for (var [key, value] of department.get("Qualifications")) {
-        qualificationElementAddToPage(key, value);
-        qualificationsMap.set(key, value);
+    for (var [value, name] of department.get("Qualifications")) {
+        qualificationElementAddToPage(name, value);
+        addQulificationListItem(name, value);
+        qualificationsMap.set(value, name);
     }
     document.getElementById("department-name").innerHTML = department.get("Name");
     document.getElementById("department-name-set").innerHTML = department.get("Name");
@@ -262,7 +295,7 @@ function setActions(){
     document.getElementById("div-add-btn").addEventListener("click", toogleDivisionAdding, false);
     document.getElementById("department-edit-btn").addEventListener("click", editInfo, false);
     document.getElementById("member-form-send-btn").addEventListener("click", sendSportsmenForm, false);
-    
+    document.getElementById("send-competition-form-btn").addEventListener("click", sendCompetitionForm, false);
 }
 /* ------------------- MAIN CHUNK ----------------------------*/
 
@@ -270,3 +303,4 @@ showAllIfAdmin();
 languageSwitchingOn();
 fillPageInfo();
 setActions();
+  

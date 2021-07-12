@@ -88,7 +88,7 @@
             <template id="competition-template">
                 <li class="advantages-item">
                     <div class="projects-item">
-                        <a href="#competition-link" class="title-of-competition-list-item">
+                        <a href="competition?clist=#departmentId&cid=#competitionId" class="title-of-competition-list-item">
                             <div class="project-card">
                                 <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
                                     alt="" />
@@ -321,9 +321,9 @@
                             </div>
                         
                             <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
-                            <select name="create-member-qualification" id="create-member-qualifications">
-                                <template id="create-member-qual-temp">
-                                    <option id="create-member-qual-item" value="value">Name</option>
+                            <select name="create-member-qualification" id="new-member-qualifications">
+                                <template id="new-member-qual-temp">
+                                    <option id="new-member-qual-item" value="value">Name</option>
                                 </template>
                             </select>
                         </div>
@@ -511,20 +511,20 @@
                                     <label for="competition-name" class="form-field-label">
                                         <span class="form-field-title">The name of the competition</span>
                                         <div class="form-field-add-comp">
-                                            <input type="text" name="competition-name" id="competition-name" class="form-field-input-comp-add" required />
+                                            <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
                                         </div>
                                     </label>
     
                                     <label>
                                         <span class="form-field-title">Short description</span>
                                         <div class="form-field-add-comp-message">
-                                            <textarea name="description" id="description" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                                            <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
                                                 rows="3"></textarea>
                                         </div>
                                     </label>
                                 </div>
                                 
-                                <button type="button" id="send-form-btn" class="modal-btn-submit">
+                                <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
                                     <span class="modal-btn-submit-text">Add competition</span>
                                 </button>
                             </form>
