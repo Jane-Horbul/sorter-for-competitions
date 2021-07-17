@@ -21,6 +21,10 @@ export function isEmptyString(str){
     return false;
 }
 
+export function onClick(object, action){
+    object.addEventListener("click", action, false);
+}
+
 export function getLinkParams(link){
     var paramsMap = new Map();
     var sectors = link.split("/");
@@ -126,11 +130,11 @@ export function languageSwitchingOn(){
     document.getElementById("lang-en").setAttribute("href", langLinkForm("en"))
 }
 
-export function insertElement(item, paramsMap){
+export function createPageItem(item, values){
     var template = item.cloneNode(true);
 
-    paramsMap.forEach(function(value, key) {
-        template.innerHTML = template.innerHTML.replace(key, value);
-      });
+    for (let ph in values) {
+        template.innerHTML = template.innerHTML.replace(ph, values[ph]);
+    }
     return template.content;
 }
