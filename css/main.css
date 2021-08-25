@@ -1376,7 +1376,7 @@ body.lock {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 99%;
   margin-bottom: 10px;
 }
 
@@ -1783,6 +1783,10 @@ body.lock {
 
 .group-info-tables {
   width: 100%;
+}
+
+.group-info-table {
+  width: 200px;
 }
 
 .group-info-title {
