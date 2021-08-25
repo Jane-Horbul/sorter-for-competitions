@@ -1,22 +1,21 @@
+import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem} from "./common.js"
+import {departmentOp, competitionOp, groupOp, sportsmanOp, server} from "./communication.js"
 
+const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+const departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
+const pageParams        = getLinkParams(location.search);
+const page = {
+    cid: pageParams.get("cid"),
+    gid: pageParams.get("gid")
+}
+var groupInfo             = server.getGroup(page.cid, page.gid);
+const departmentInfo      = server.getDepartment();
+const competitionInfo     = server.getCompetition(page.cid);
+const qualificationsMap   = departmentOp.getQualifications(departmentInfo);
+var competitionSportsmans = competitionOp.getSportsmans(competitionInfo);
+var membersToAdd          = new Array(0);
 
-
-import {sendRequest} from "./common.js"
-import {isNumber} from "./common.js"
-import {isEmptyString} from "./common.js"
-import {getLinkParams} from "./common.js"
-import {sendForm} from "./common.js"
-import {showAllIfAdmin} from "./common.js"
-import {languageSwitchingOn} from "./common.js"
-
-var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
-var pageParams = getLinkParams(location.search);
-var pageInfo = sendRequest("/group-get?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"));
-var competitionParams = sendRequest("/competition-get?" + "cid=" + pageParams.get("cid"));
-var qualsMap = competitionParams.get("Qualifications");
-var membersToAdd = new Array(0);
-
-console.log(competitionParams)
+console.log(groupInfo);
 
 var groupForm = new Map();
 groupForm.set( "name",           document.getElementById("new-group-name"));
@@ -83,7 +82,7 @@ function isWeightOk(){
 function isQualificationOk(){
     var qualMinVal = groupForm.get("qualMin").value;
     var qualMaxVal = groupForm.get("qualMax").value;
-    
+
     if(qualMinVal == undefined || qualMaxVal == undefined){
         alert("Undefined qualifications value!");
         return false;
@@ -96,42 +95,12 @@ function isQualificationOk(){
     return true;
 }
 
-function getQualificationInterval(qMin, qMax){
-    var qMinName;
-    var qMaxName;
-    if(!isNumber(qMin) || (Number(qMin) < 0) || (qualsMap.get(qMin) == undefined)){
-        qMinName = "";
-    } else {
-        qMinName = qualsMap.get(qMin);
-    }
-    if(!isNumber(qMax) || (Number(qMax) < 0) || (qualsMap.get(qMax) == undefined)){
-        qMaxName = "";
-    } else {
-        qMaxName = qualsMap.get(qMax);
-    }
-    if(Number(qMax) == Number(qMin) && (Number(qMin) > 0)) return qMinName;
-    return qMinName + " - " + qMaxName;
-}
-
-function getNumberInterval(min, max){
-    if(!isNumber(min) || (Number(min) < 0)){
-        min = -1;
-    }
-    if(!isNumber(max) || (Number(max) < 0)){
-        max = -1;
-    }
-    if((min < 0) && (max < 0)) return "-";
-    if(max < 0) return min + "+";
-    if(min < 0) return "-" + max;
-    return min + " - " + max;
-}
-
 function memberNameGet(id){
     console.log(id);
     if(!isNumber(id)){
         return "Winner of " + id;
     }
-    var member = pageInfo.get("Members").find( memb => memb.get("id") == id );
+    var member = groupInfo.get("Members").find( memb => memb.get("id") == id );
     if(member == undefined){
         return "";
     }
@@ -142,7 +111,7 @@ function sendNotification(name, value) {
     var header = (name == "group-delete") ? '/competition-edition' : '/group-edit';
     var paramsMap = new Map();
     paramsMap.set(name, value);
-    header += "?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid");
+    header += "?cid=" + page.cid + "&gid=" + page.gid;
     sendForm(header, paramsMap, false);
 }
 
@@ -160,13 +129,13 @@ function sendGroupForm() {
         paramsMap.set("age-min", groupForm.get("ageMin").value);
         paramsMap.set("age-max", groupForm.get("ageMax").value);
     }
-    
+
     if(groupForm.get("weightIsOn").checked){
         if(!isWeightOk()) return;
         paramsMap.set("weight-min", groupForm.get("weightMin").value);
         paramsMap.set("weight-max", groupForm.get("weightMax").value);
     }
-    
+
     if(groupForm.get("qualIsOn").checked){
         if(!isQualificationOk()) return;
         paramsMap.set("qualification-min", groupForm.get("qualMin").value);
@@ -177,11 +146,11 @@ function sendGroupForm() {
         paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
     }
     console.log(paramsMap);
-    sendForm("/group-edit?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"), paramsMap, true);
+    sendForm("/group-edit?cid=" + page.cid + "&gid=" + page.gid, paramsMap, true);
 }
 
 function deleteGroup(){
-    sendNotification("group-delete", pageParams.get("gid"));
+    sendNotification("group-delete", page.gid);
 }
 
 function memberDelete(id){
@@ -196,11 +165,11 @@ function memberDelete(id){
             return;
         }
     }
-    
+
 }
 
 function putMemberToAdd(id){
-    var member = competitionParams.get("Members").find( memb => memb.get("id") == id);
+    var member = competitionInfo.get("Members").find( memb => memb.get("id") == id);
     var memberRow = document.getElementById("comp-member-" + id);
     if(member == undefined) return;
 
@@ -222,7 +191,7 @@ function pairSetWinner(id, color) {
 }
 
 function pairWinnerElementCreate(pair, template){
-    
+
     if(!isEmptyString(pair.get("winner"))){
         console.log("Set winner: " + pair.get("winner"));
         template.getElementById("pair-winner").innerHTML = memberNameGet(pair.get("winner"));
@@ -246,67 +215,31 @@ function pairElementCreate(pair){
     var redLink = prevPage + "/member?mid=" + memberRedId;
     var blueLink = prevPage + "/member?mid=" + memberBlueId;
 
-    template.getElementById("pair-id").innerHTML = pair.get("id"); 
+    template.getElementById("pair-id").innerHTML = pair.get("id");
     template.getElementById("pair-red").innerHTML = memberNameGet(memberRedId);
     template.getElementById("pair-blue").innerHTML = memberNameGet(memberBlueId);
     pairWinnerElementCreate(pair, template);
 
     if(Number(memberRedId) >= 0){
         template.getElementById("pair-red")
-            .setAttribute("onclick", "window.location.href='" + redLink + "'; return false"); 
+            .setAttribute("onclick", "window.location.href='" + redLink + "'; return false");
     }
     if(Number(memberBlueId) >= 0){
         template.getElementById("pair-blue")
-            .setAttribute("onclick", "window.location.href='" + blueLink + "'; return false"); 
+            .setAttribute("onclick", "window.location.href='" + blueLink + "'; return false");
     }
     return template;
-}
-
-function divisionElementAddToPage(division ){
-    if(division.localeCompare("\r\n") == 0) return "";
-
-    var groupDivsTemplate = document.getElementById("create-group-div-temp").content.cloneNode(true).getElementById("create-group-div-item");
-    groupDivsTemplate.setAttribute("value", division);
-    groupDivsTemplate.innerHTML = division;
-    groupForm.get("division").append(groupDivsTemplate); 
-}
-
-function qualificationElementAddToPage(value, name){
-    if(value == "") return "";
-
-    var groupQualsTemplate = document.getElementById("create-group-qual-temp").content.cloneNode(true).getElementById("create-group-qual-item");
-    groupQualsTemplate.setAttribute("value", value);
-    groupQualsTemplate.innerHTML = name;
-    document.getElementById("ng-members-qualification-min").append(groupQualsTemplate.cloneNode(true));
-    document.getElementById("ng-members-qualification-max").append(groupQualsTemplate);
-}
-
-function competitionListMembersAdd(member){
-    if(member.get("id") == undefined) return "";
-    var membersTable = document.getElementById("members-adding-table");
-    var template = document.getElementById("competition-member-template").content.cloneNode(true);
-
-    template.getElementById("member-name").innerHTML = member.get("name") + " " + member.get("surname"); 
-    template.getElementById("member-age").innerHTML = member.get("age");
-    template.getElementById("member-weight").innerHTML = member.get("weight");
-    template.getElementById("member-sex").innerHTML = member.get("sex");
-    template.getElementById("member-team").innerHTML = member.get("team");
-    template.getElementById("member-qualification").innerHTML = qualsMap.get(member.get("qualification"));
-    template.getElementById("member-admited").innerHTML = member.get("admited");
-    template.getElementById("member-row").addEventListener("click", function(){putMemberToAdd(member.get("id"))}, false);
-    template.getElementById("member-row").setAttribute("id", "comp-member-" + member.get("id"));
-    membersTable.append(template);
 }
 
 function memberElementCreate(member){
     if(member.get("id") == undefined) return "";
     var template = document.getElementById("group-member-template").content.cloneNode(true);
-    template.getElementById("member-name").innerHTML = member.get("name") + " " + member.get("surname"); 
+    template.getElementById("member-name").innerHTML = member.get("name") + " " + member.get("surname");
     template.getElementById("member-age").innerHTML = member.get("age");
     template.getElementById("member-weight").innerHTML = member.get("weight");
     template.getElementById("member-sex").innerHTML = member.get("sex");
     template.getElementById("member-team").innerHTML = member.get("team");
-    template.getElementById("member-qualification").innerHTML = qualsMap.get(member.get("qualification"));
+    template.getElementById("member-qualification").innerHTML = qualificationsMap.get(member.get("qualification"));
     template.getElementById("member-admited").innerHTML = member.get("admited");
     template.getElementById("member-name").setAttribute("onclick", "window.location.href='"
                                     + prevPage + "/member?mid=" + member.get("id") + "'; return false");
@@ -314,77 +247,13 @@ function memberElementCreate(member){
     return template;
 }
 
-
-function fillPageInfo(params){
-    /*--------------------------------Main tables params--------------------------------------------------------------------------------*/
-    var membersTable = document.getElementById("members-table");
-    var pairsTable = document.getElementById("pairs-table");
-
-    document.getElementById("group-name").innerHTML         = params.get("Name");
-    document.getElementById("group-form-system").innerHTML   = params.get("FormSys");
-    document.getElementById("group-division").innerHTML     = params.get("Division");
-    document.getElementById("group-sex").innerHTML          = params.get("Sex");
-    document.getElementById("group-age").innerHTML          = getNumberInterval(params.get("Age_min"), params.get("Age_max"));
-    document.getElementById("group-weight").innerHTML       = getNumberInterval(params.get("Weight_min"), params.get("Weight_max"));
-    document.getElementById("group-qulification").innerHTML = getQualificationInterval(params.get("Qualification_min"), params.get("Qualification_max"));
-    params.get("Members").forEach(mem => membersTable.append(memberElementCreate(mem)));
-    params.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
-
-    /*--------------------------------Edit window params--------------------------------------------------------------------------------*/
-    competitionParams.get("Divisions").forEach(division => {
-        divisionElementAddToPage(division);
-    });
-    qualsMap.forEach(function(value, key) {
-        qualificationElementAddToPage(key, value);
-    });
-    
-    groupForm.get("name").value    = params.get("Name");
-    groupForm.get("division").value    = params.get("Division");
-
-    if(params.get("Sex") == "Male"){
-        groupForm.get("sexIsOn").checked = true;
-        groupForm.get("sexIsMale").checked = true;
-    } else if(params.get("Sex") == "Female"){
-        groupForm.get("sexIsOn").checked = true;
-        groupForm.get("sexIsFemale").checked = true;
-    }
-    
-    if((Number(params.get("Age_min")) >= 0) || (Number(params.get("Age_max")) >= 0)){
-        groupForm.get("ageIsOn").checked = true;
-        groupForm.get("ageMin").value = (Number(params.get("Age_min")) < 0) ? "" : params.get("Age_min");
-        groupForm.get("ageMax").value = (Number(params.get("Age_max")) < 0) ? "" : params.get("Age_max");
-    }
-    
-    if((Number(params.get("Weight_min")) >= 0) || (Number(params.get("Weight_max")) >= 0)){
-        groupForm.get("weightIsOn").checked = true;
-        groupForm.get("weightMin").value = (Number(params.get("Weight_min")) < 0) ? "" : params.get("Weight_min");
-        groupForm.get("weightMax").value = (Number(params.get("Weight_max")) < 0) ? "" : params.get("Weight_max");
-    }
-    
-    var qmin = Number(params.get("Qualification_min"));
-    var qmax = Number(params.get("Qualification_max"));
-    
-    if((qmin >= 0) || (qmax >= 0)){
-        groupForm.get("qualIsOn").checked = true;
-        groupForm.get("qualMin").value = (qmin < 0) ? "" : params.get("Qualification_min");
-        groupForm.get("qualMax").value = (qmax < 0) ? "" : params.get("Qualification_max");
-    }
-
-    /*--------------------------------Adding members params--------------------------------------------------------------------------------*/
-    competitionParams.get("Members").forEach(compMember => {
-        if(params.get("Members").find( grMember => grMember.get("id") == compMember.get("id")) == undefined){
-            competitionListMembersAdd(compMember);
-        }
-    });
-}
-
 function refreshPairs(){
     var pairsTable = document.getElementById("pairs-table");
-    pageInfo = sendRequest("/group-pairs-refresh?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"));
+    groupInfo = sendRequest("/group-pairs-refresh?cid=" + page.cid + "&gid=" + page.gid);
     while(pairsTable.rows.length > 2){
         pairsTable.deleteRow(pairsTable.rows.length - 1);
     }
-    pageInfo.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
+    groupInfo.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
     showAllIfAdmin();
 }
 
@@ -392,7 +261,7 @@ function addMembersToGroup()
 {
     if(membersToAdd.length < 1)
         return;
-        
+
     var paramsMap = new Map();
     var first = true;
     var membersIds = "";
@@ -402,18 +271,323 @@ function addMembersToGroup()
         first = false;
     });
     paramsMap.set("group-members-add",  membersIds);
-    sendForm("/group-edit?cid=" + pageParams.get("cid") + "&gid=" + pageParams.get("gid"), paramsMap, true);
+    sendForm("/group-edit?cid=" + page.cid + "&gid=" + page.gid, paramsMap, true);
+}
+
+/* ------------------- SPORTSMANS ----------------------------*/
+const sportsmanObjects = {
+    sportsmanRowId:     "sports-row-id-",
+    removeBtnId:        "remove-gr-sports-",
+
+    getTable()                  { return document.getElementById("members-table");},
+    getTemplate()               { return document.getElementById("group-member-template");},
+
+    getAddingTable()            { return document.getElementById("add-sportsman-table");},
+    getAddingTemplate()         { return document.getElementById("add-sportsman-template");},
+/*    getAddSportsRowId(id)       { return "add-sports-" + id},
+
+    getAddingRow(id)            { return document.getElementById("adding-row-sportsman-" + id);},
+    setAddingRowId(row, id)     { row.setAttribute("id", "adding-row-sportsman-" + id);},
+    getAddingRowTemplate()      { return document.getElementById("add-settings-template");},
+    getSportsAdmition(row)      { return row.querySelector('#admitted').checked ? "true" : "false";},
+    isCheckedDisc(row, num)     { return row.querySelector("#discipline-" + num).checked;},
+*/
+    getPlaceholders(sp)         { return {
+                                        "#sp-id":           sportsmanOp.getId(sp),
+                                        "#sp-surname":      sportsmanOp.getSurname(sp),
+                                        "#sp-name":         sportsmanOp.getName(sp),
+                                        "#sp-age":          sportsmanOp.getAge(sp),
+                                        "#sp-weight":       sportsmanOp.getWeight(sp),
+                                        "#sp-sex":          sportsmanOp.getSex(sp),
+                                        "#sp-team":         sportsmanOp.getTeam(sp),
+                                        "#sp-qual":         qualificationsMap.get(sportsmanOp.getQualification(sp)),
+                                        "#sp-admit":        sportsmanOp.getAdmition(sp),
+                                        "#sp-gr-num":       sportsmanOp.getGroupsNum(sp),
+                                        "#sportsman-link":  competitionLink + sportsmanOp.getLinkFromCompetition(sp),
+                                        "#sports-row-id":   this.sportsmanRowId + sportsmanOp.getId(sp)
+                                    };
+                                },
+    getSportsRow(id)            { return document.getElementById(this.sportsmanRowId + id);},
+    configDelBtn(item, sp)      {var btn = item.getElementById(this.removeBtnId); 
+                                    onClick(btn, function(){sportsmanRemove(sportsmanOp.getId(sp))});
+                                    btn.id = this.removeBtnId + sportsmanOp.getId(sp);
+                                },
+    getDelBtn()                 { return document.getElementById("member-dell-btn");}
+}
+
+function excludeCompetitionSportsman(sp){
+    for(var i = 0; i < competitionSportsmans.length; i++){
+        if(sportsmanOp.getId(sp) == sportsmanOp.getId(competitionSportsmans[i])){
+            competitionSportsmans.splice(i, 1);
+            return;
+        }
+    }
+}
+
+function sportsmanRemove(id){
+    var spRow = sportsmanObjects.getSportsRow(id);
+    var sportsmans = groupOp.getSportsmans(groupInfo);
+    if(null != spRow)
+        spRow.parentElement.removeChild(spRow);
+    for(var i = 0; i < sportsmans.length; i++){
+        if(id == sportsmanOp.getId(sportsmans[i])){
+            sportsmans.splice(i, 1);
+            break;
+        }
+    }
+    console.log("Del id: " + id);
+    server.removeGroupSportsman(page.cid, page.gid, id);
+}
+
+function competitionSportsmanElementAdd(sp){
+    if(sportsmanOp.getId(sp) != undefined){
+        var template = sportsmanObjects.getAddingTemplate();
+        var placeholders = sportsmanObjects.getPlaceholders(sp);
+        var newItem = createPageItem(template, placeholders);
+        sportsmanObjects.getAddingTable().append(newItem);
+
+        //var row = document.getElementById(sportsmanObjects.getAddSportsRowId(sportsmanOp.getId(sp)));
+        //onClick(row, function(){sportsmanAddingSelect(sportsmanOp.getId(sp))});
+    }
+}
+
+function sportsmanPageElementAdd(sp){
+    if(sportsmanOp.getId(sp) != undefined){
+        excludeCompetitionSportsman(sp);
+        var template = sportsmanObjects.getTemplate();
+        var placeholders = sportsmanObjects.getPlaceholders(sp);
+        var newItem = createPageItem(template, placeholders);
+        sportsmanObjects.getTable().append(newItem); 
+        onClick(document.getElementById(sportsmanObjects.removeBtnId + sportsmanOp.getId(sp)), function(){sportsmanRemove(sportsmanOp.getId(sp))});
+    }
+    
+}
+
+/* ------------------- COMMON ----------------------------*/
+
+const groupObjects = {
+    pageNameId:         "page-name",
+    pageNameLinkId:     "page-name-link",
+    compLinkId:         "competition-link",
+    depLinkId:          "department-link",
+    groupLinkId:        "group-link",
+    groupHeaderId:      "group-name-header",
+
+    setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
+    setPageNameLink(link)       {document.getElementById(this.pageNameLinkId).setAttribute("href", link);},
+    setDepartmentName(name)     {document.getElementById(this.depLinkId).innerHTML = name;},
+    setDepartmentLink(link)     {document.getElementById(this.depLinkId).setAttribute("href", link);},
+    setCompetitionName(name)    {document.getElementById(this.compLinkId).innerHTML = name;},
+    setCompetitionLink(link)    {document.getElementById(this.compLinkId).setAttribute("href", link);},
+    setGroupName(name)          {document.getElementById(this.groupLinkId).innerHTML = name;},
+    setGroupLink(link)          {document.getElementById(this.groupLinkId).setAttribute("href", link);},
+    setGroupHeader(name)        {document.getElementById(this.groupHeaderId).innerHTML = name;},
+
+    infoNameId:         "group-info-name",
+    infoSystemId:       "group-info-system",
+    infoSexId:          "group-info-sex",
+    infoDisciplineId:   "group-info-discipline",
+    infoAgeMinId:       "group-info-age-min",
+    infoAgeMaxId:       "group-info-age-max",
+    infoWeightMinId:    "group-info-weight-min",
+    infoWeightMaxId:    "group-info-weight-max",
+    infoQualMinId:      "group-info-qulification-min",
+    infoQualMaxId:      "group-info-qulification-max",
+
+    setInfoName(val)            {document.getElementById(this.infoNameId).innerHTML = val;},
+    setInfoSystem(val)          {document.getElementById(this.infoSystemId).innerHTML = val;},
+    setInfoSex(val)             {document.getElementById(this.infoSexId).innerHTML = val;},
+    setInfoDiscipline(val)      {document.getElementById(this.infoDisciplineId).innerHTML = val;},
+    setInfoAgeMin(val)          {document.getElementById(this.infoAgeMinId).innerHTML = val;},
+    setInfoAgeMax(val)          {document.getElementById(this.infoAgeMaxId).innerHTML = val;},
+    setInfoWeightMin(val)       {document.getElementById(this.infoWeightMinId).innerHTML = val;},
+    setInfoWeightMax(val)       {document.getElementById(this.infoWeightMaxId).innerHTML = val;},
+    setInfoQulificationMin(val) {document.getElementById(this.infoQualMinId).innerHTML = val;},
+    setInfoQulificationMax(val) {document.getElementById(this.infoQualMaxId).innerHTML = val;},
+
+    inputNameId:         "group-input-name",
+    inputSystemId:       "group-input-system",
+    inputSexId:          "group-input-sex",
+    inputDisciplineId:   "group-input-discipline",
+    inputAgeMinId:       "group-input-age-min",
+    inputAgeMaxId:       "group-input-age-max",
+    inputWeightMinId:    "group-input-weight-min",
+    inputWeightMaxId:    "group-input-weight-max",
+    inputQualMinId:      "group-input-qulification-min",
+    inputQualMaxId:      "group-input-qulification-max",
+
+    getNameInput()          { return document.getElementById(this.inputNameId);},
+    getSystemInput()        { return document.getElementById(this.inputSystemId);},
+    getSexInput()           { return document.getElementById(this.inputSexId);},
+    getDisciplineInput()    { return document.getElementById(this.inputDisciplineId);},
+    getAgeMinInput()        { return document.getElementById(this.inputAgeMinId);},
+    getAgeMaxInput()        { return document.getElementById(this.inputAgeMaxId);},
+    getWeightMinInput()     { return document.getElementById(this.inputWeightMinId);},
+    getWeightMaxInput()     { return document.getElementById(this.inputWeightMaxId);},
+    getQualMinInput()       { return document.getElementById(this.inputQualMinId);},
+    getQualMaxInput()       { return document.getElementById(this.inputQualMaxId);},
+
+    createInput(id)             { return document.getElementById((id + "-template")).cloneNode(true).content;},
+    createOption(id, name, val) { var res = document.createElement("option");
+                                    res.setAttribute("id", id);
+                                    res.value = val;
+                                    res.innerHTML = name;
+                                    return res;
+                                },
+    getAndCleanPlace(id)        { var pl= document.getElementById(id); pl.innerHTML = ""; return pl;},
+
+    addSporsBtnId:      "members-add-btn",
+    delBtnId:           "del-btn-link",
+    editBtnId:          "group-edit-btn",
+    updatePairsBtnId:   "update-pairs-btn",
+    formGridBtnId:      "group-grid-btn",
+
+    setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
+    getAddSportsmanBtn()        { return document.getElementById(this.addSporsBtnId);},
+    getDelBtn()                 { return document.getElementById(this.delBtnId);},
+    getEditBtn()                { return document.getElementById(this.editBtnId);},
+    getUpdatePairsBtn()         { return document.getElementById(this.updatePairsBtnId);},
+    getFormGridBtn()            { return document.getElementById(this.formGridBtnId);},
+
+    pairsTableId:       "pairs-table",
+}
+
+function groupInfoEdit(){
+    var nameInput = groupObjects.getNameInput();
+    
+    if(nameInput != null){
+        var discipline = groupObjects.getDisciplineInput().value;
+        var system = groupObjects.getSystemInput().value;
+        var sex = groupObjects.getSexInput().value;
+        var ageMin = groupObjects.getAgeMinInput().value;
+        var ageMax = groupObjects.getAgeMaxInput().value;
+        var weightMin = groupObjects.getWeightMinInput().value;
+        var weightMax = groupObjects.getWeightMaxInput().value;
+        var qualMin = groupObjects.getQualMinInput().value;
+        var qualMax = groupObjects.getQualMaxInput().value;
+        server.editGroup(page.cid, page.gid, nameInput.value,
+            discipline, system,
+            sex == "Not applicable" ? undefined : sex,
+            ageMin == "" ? undefined : ageMin,
+            ageMax == "" ? undefined : ageMax,
+            weightMin == "" ? undefined : weightMin,
+            weightMax == "" ? undefined : weightMax,
+            qualMin == "Not applicable" ? undefined : qualMin,
+            qualMax == "Not applicable" ? undefined : qualMax);
+            return;
+    }
+    var namePlace       = groupObjects.getAndCleanPlace(groupObjects.infoNameId);
+    var systemPlace     = groupObjects.getAndCleanPlace(groupObjects.infoSystemId);
+    var sexPlace        = groupObjects.getAndCleanPlace(groupObjects.infoSexId);
+    var disciplinePlace = groupObjects.getAndCleanPlace(groupObjects.infoDisciplineId);
+    var ageMinPlace     = groupObjects.getAndCleanPlace(groupObjects.infoAgeMinId);
+    var ageMaxPlace     = groupObjects.getAndCleanPlace(groupObjects.infoAgeMaxId);
+    var weightMinPlace  = groupObjects.getAndCleanPlace(groupObjects.infoWeightMinId);
+    var weightMaxPlace  = groupObjects.getAndCleanPlace(groupObjects.infoWeightMaxId);
+    var qualMinPlace    = groupObjects.getAndCleanPlace(groupObjects.infoQualMinId);
+    var qualMaxPlace    = groupObjects.getAndCleanPlace(groupObjects.infoQualMaxId);
+
+    namePlace.appendChild(      groupObjects.createInput(groupObjects.inputNameId));
+    systemPlace.appendChild(    groupObjects.createInput(groupObjects.inputSystemId));
+    sexPlace.appendChild(       groupObjects.createInput(groupObjects.inputSexId));
+    disciplinePlace.appendChild(groupObjects.createInput(groupObjects.inputDisciplineId));
+    ageMinPlace.appendChild(    groupObjects.createInput(groupObjects.inputAgeMinId));
+    ageMaxPlace.appendChild(    groupObjects.createInput(groupObjects.inputAgeMaxId));
+    weightMinPlace.appendChild( groupObjects.createInput(groupObjects.inputWeightMinId));
+    weightMaxPlace.appendChild( groupObjects.createInput(groupObjects.inputWeightMaxId));
+    qualMinPlace.appendChild(   groupObjects.createInput(groupObjects.inputQualMinId));
+    qualMaxPlace.appendChild(   groupObjects.createInput(groupObjects.inputQualMaxId));
+
+    groupObjects.getNameInput().value       = groupOp.getName(groupInfo);
+    groupObjects.getAgeMinInput().value     = groupOp.getAgeMin(groupInfo);
+    groupObjects.getAgeMaxInput().value     = groupOp.getAgeMax(groupInfo);
+    groupObjects.getWeightMinInput().value  = groupOp.getWeightMin(groupInfo);
+    groupObjects.getWeightMaxInput().value  = groupOp.getWeightMax(groupInfo);
+    groupObjects.getSystemInput().value = groupOp.getFormSystem(groupInfo);
+    if(groupOp.getSex(groupInfo) != "")
+        groupObjects.getSexInput().value = groupOp.getSex(groupInfo);
+
+    var discList = groupObjects.getDisciplineInput();
+    departmentOp.getDisciplines(departmentInfo).forEach(dsc => {
+        var opt = groupObjects.createOption(dsc + "-id", dsc, dsc);
+        discList.appendChild(opt);
+        if(groupOp.getDiscipline(groupInfo) == dsc)
+            discList.value = dsc;
+
+    });
+    var qualMinList = groupObjects.getQualMinInput();
+    var qualMaxList = groupObjects.getQualMaxInput();
+    qualificationsMap.forEach(function(name, value) {
+        var optMin = groupObjects.createOption(name + "-min-id", name, value);
+        var optMax = groupObjects.createOption(name + "-max-id", name, value);
+        qualMinList.appendChild(optMin);
+        qualMaxList.appendChild(optMax);
+        if(groupOp.getQualMin(groupInfo) == value)
+            qualMinList.value = value;
+
+        if(groupOp.getQualMax(groupInfo) == value)
+            qualMaxList.value = value;
+    });
 }
 
 
-fillPageInfo(pageInfo);
-document.getElementById("competition-name").innerHTML = competitionParams.get("Name");
-document.getElementById("competition-link").setAttribute("href", prevPage);
-document.getElementById("members-add-btn").addEventListener("click", addMembersToGroup, false);
-document.getElementById("group-form-send-btn").addEventListener("click", sendGroupForm, false);
-document.getElementById("update-pairs-btn").addEventListener("click", refreshPairs, false);
-document.getElementById("delete-group-btn").addEventListener("click", deleteGroup, false);
-document.getElementById("priv-page-link").setAttribute("href", prevPage);
-document.getElementById("group-grid").setAttribute("href", window.location.href + "/group-grid");
+function fillPageInfo(params){
+    /*--------------------------------Main tables params--------------------------------------------------------------------------------*/
+    var qualMax = qualificationsMap.get(groupOp.getQualMax(groupInfo));
+    var qualMin = qualificationsMap.get(groupOp.getQualMin(groupInfo));
+
+    groupObjects.setPageName(competitionOp.getName(competitionInfo));
+    groupObjects.setPageNameLink(competitionLink);
+    groupObjects.setCompetitionName(competitionOp.getName(competitionInfo));
+    groupObjects.setCompetitionLink(competitionLink);
+    groupObjects.setDepartmentName(departmentOp.getName(departmentInfo));
+    groupObjects.setDepartmentLink(departmentLink);
+    groupObjects.setGroupName(groupOp.getName(groupInfo));
+    groupObjects.setGroupLink( window.location.href);
+
+    groupObjects.setDelBtnLink(competitionLink);
+    groupObjects.setGroupHeader(groupOp.getName(groupInfo));
+
+    groupObjects.setInfoName(       groupOp.getName(groupInfo));
+    groupObjects.setInfoSystem(     groupOp.getFormSystem(groupInfo));
+    groupObjects.setInfoDiscipline( groupOp.getDiscipline(groupInfo));
+    groupObjects.setInfoSex(        groupOp.getSex(groupInfo));
+    groupObjects.setInfoAgeMin(     groupOp.getAgeMin(groupInfo));
+    groupObjects.setInfoAgeMax(     groupOp.getAgeMax(groupInfo));
+    groupObjects.setInfoWeightMin(  groupOp.getWeightMin(groupInfo));
+    groupObjects.setInfoWeightMax(  groupOp.getWeightMax(groupInfo));
+    groupObjects.setInfoQulificationMin((qualMin == undefined) ? "" : qualMin);
+    groupObjects.setInfoQulificationMax((qualMax == undefined) ? "" : qualMax);
+
+    groupOp.getSportsmans(groupInfo).forEach(sp => sportsmanPageElementAdd(sp));
+    competitionSportsmans.forEach(sp => competitionSportsmanElementAdd(sp));
+    /*
+    
+    params.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
+    */
+   
+    /*--------------------------------Adding members params--------------------------------------------------------------------------------*/
+    /*
+    competitionInfo.get("Members").forEach(compMember => {
+        if(params.get("Members").find( grMember => grMember.get("id") == compMember.get("id")) == undefined){
+            competitionListMembersAdd(compMember);
+        }
+    });
+    */
+}
+
+function setBtnActions(){
+    onClick(groupObjects.getAddSportsmanBtn(),  addMembersToGroup);
+    onClick(groupObjects.getDelBtn(),           deleteGroup);
+    onClick(groupObjects.getEditBtn(),          groupInfoEdit);
+
+
+    onClick(groupObjects.getUpdatePairsBtn(),   refreshPairs);
+    onClick(groupObjects.getFormGridBtn(),      {});
+
+}
+
+fillPageInfo();
+setBtnActions();
 showAllIfAdmin();
 languageSwitchingOn();

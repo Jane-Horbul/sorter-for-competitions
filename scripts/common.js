@@ -1,4 +1,6 @@
-import {sendGetClientStatus} from "./communication.js"
+import {server} from "./communication.js"
+
+export const arrayDivider = ", ";
 
 export function refreshPage(){
     var newLink = document.location.href.split("#")[0];
@@ -44,7 +46,7 @@ export function getLinkParams(link){
 
 export function parseMap(str){
     var result = new Map();
-    str.split(", ").forEach(field => {
+    str.split(arrayDivider).forEach(field => {
         var params =  field.split(" - ");
         if(params.length > 1){
             result.set(params[0], params[1]);
@@ -75,7 +77,7 @@ export function parseAnswerParams(answer){
             parseResult.set(params[0], params[1]);
         } else if(params[1].split("<Type array>").length > 1) {
             params[1] = params[1].split("<Type array>")[1];
-            var array = params[1].split(", ");
+            var array = params[1].split(arrayDivider);
             if(array[0].length > 0)
                 parseResult.set(params[0], array);
             else
@@ -100,7 +102,7 @@ export function addHiden(){
 }
 
 export function showAllIfAdmin(){
-    var clStatus = sendGetClientStatus();
+    var clStatus = server.getClientStatus();
     var shadows = document.querySelectorAll(".js-hidden-element");
     if(clStatus == "admin"){
         for (let shadow of shadows) {
@@ -134,7 +136,7 @@ export function createPageItem(item, values){
     var template = item.cloneNode(true);
 
     for (let ph in values) {
-        template.innerHTML = template.innerHTML.replace(ph, values[ph]);
+        template.innerHTML = template.innerHTML.replaceAll(ph, values[ph]);
     }
     return template.content;
 }

@@ -12,12 +12,11 @@
         <div class="wrapper">
         
             <header class="page-header">
-
                 <div class="container">
                     <ul class="group-page-header list">
                         <li>
-                            <a class="link" id="competition-link" href="#">
-                                <h1 id="competition-name">Competition name</h1>
+                            <a class="link" id="page-name-link" href="#">
+                                <h1 id="page-name"></h1>
                             </a>
                         </li>
                         <li>
@@ -52,24 +51,24 @@
             </header>
 
 <div class="bread-crumbs"> 
-    <div class="bread-crumbs-item" id=""><a href="#">Department name</a></div>
+    <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
     <div class="bread-crumbs-item"> 
         <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
     </div>
-    <div class="bread-crumbs-item" id=""><a href="#">Competition name</a></div>
+    <div class="bread-crumbs-item"><a id="competition-link" href="#"></a></div>
     <div class="bread-crumbs-item"> 
         <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
     </div>
-    <div class="bread-crumbs-item" id=""><a href="#">Group name</a></div>
+    <div class="bread-crumbs-item"><a id="group-link" href="#"></a></div>
 </div>
             <main class="container">
                 
                 <div class="container">
                     <ul class="group-page-header list">
-                        <li><h1 id="group-name"></h1></li>
+                        <li><h1 id="group-name-header"></h1></li>
                         <li>
                             <div class="member-page-btn-del js-hidden-element">                
-                                <a id="priv-page-link">
+                                <a id="del-btn-link">
                                     <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
                                     <span class="group-card-btn-del-text">Delete group</span></button>
                                 </a>
@@ -90,26 +89,60 @@
                             <div id="member-info">
                                 <div class="group-info-title--siting">
                                     <div class="group-info-title"><span>Group info</span></div>
-                                        <a href="#popup_1" class="popup-link js-hidden-element">
-                                            <button class="group-info-edit-btn" type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/icons.svg#icon-pencil2"></use>
-                                                </svg>
-                                            </button>
-                                        </a>
+                                        <button class="group-info-edit-btn" type="button" id="group-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/icons.svg#icon-pencil2"></use>
+                                            </svg>
+                                        </button>
                                     </div>
                                     <div class="group-info-fields">
-                                    <div class="group-info-fields--item"> Form system:<span>&nbsp</span><div id="group-form-system"></div></div>
-                                    <div class="group-info-fields--item"> Division:<span>&nbsp</span><div id="group-division"></div></div>
-                                    <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="group-age"></div></div>
-                                    <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="group-weight"></div></div>
-                                    <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="group-sex"></div></div>
-                                    <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="group-qulification"></div></div>
-                                    <div class="js-hidden-element">                
-                                        <a id="group-grid">
-                                            <button class="group-card-btn-submit js-hidden-element" type="button" id="group-grid-btn">
-                                            <span class="group-card-btn-submit-text">Form pair grid</span></button>
-                                        </a>
+                                        <table class="dynamic-table">
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Name:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-name"></div>  </td>
+                                            </tr>   
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Form system:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-system"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Discipline:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-discipline"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Gender:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-sex"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Low age:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-age-min"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Top age:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-age-max"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Low weight:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-weight-min"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Top weight:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-weight-max"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Low qualification:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-qulification-min"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables"> <div class="group-info-fields--item"> Top qualification:</div> </td>
+                                                <td class="secondary-title-two-tables"> <div id="group-info-qulification-max"></div>  </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <div class="js-hidden-element">                
+                                        <button class="group-card-btn-submit js-hidden-element" type="button" id="group-grid-btn">
+                                            <span class="group-card-btn-submit-text">Form pair grid</span>
+                                        </button>
                                         <br>
                                     </div>
                                 </div>
@@ -122,9 +155,9 @@
                             <div class="main-tables-group-item">
                                 <table class="dynamic-table" id="members-table">
                                     <tr>
-                                        <th colspan="8" class="all-table-title group-info-table-title"> Members 
-                                            <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
-                                                <button class="group-page-ref-btn" type="button" data-open-modal>
+                                        <th colspan="9" class="all-table-title group-info-table-title"> Members 
+                                            <a href="#popup_1" class="popup-link js-hidden-element" id="member-add-btn" >
+                                                <button class="group-page-ref-btn" type="button" id="members-add-btn" data-open-modal>
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
@@ -133,7 +166,8 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="secondary-title-two-tables">Name, Surname</td>
+                                        <td class="secondary-title-two-tables">Surname</td>
+                                        <td class="secondary-title-two-tables">Name</td>
                                         <td class="secondary-title-two-tables">Age</td>
                                         <td class="secondary-title-two-tables">Weight</td>
                                         <td class="secondary-title-two-tables">Sex</td>
@@ -144,21 +178,22 @@
                                     </tr>
 
                                     <template id="group-member-template">
-                                        <tr>
-                                            <td class="first-title-tables--text" id="member-name">  </td>
-                                            <td class="first-title-tables--text" id="member-age">  </td>
-                                            <td class="first-title-tables--text" id="member-weight">  </td>
-                                            <td class="first-title-tables--text" id="member-sex">  </td>
-                                            <td class="first-title-tables--text" id="member-team">  </td>
-                                            <td class="first-title-tables--text" id="member-qualification">  </td>
-                                            <td class="first-title-tables--text" id="member-admited">  </td>
+                                        <tr id="#sports-row-id">
+                                            <td class="secondary-tables--td" onclick="window.location.href='#sportsman-link'; return false">#sp-surname</td>
+                                            <td class="secondary-tables--td">#sp-name</td>
+                                            <td class="secondary-tables--td">#sp-age</td>
+                                            <td class="secondary-tables--td">#sp-weight</td>
+                                            <td class="secondary-tables--td">#sp-sex</td>
+                                            <td class="secondary-tables--td">#sp-team</td>
+                                            <td class="secondary-tables--td">#sp-qual</td>
+                                            <td class="secondary-tables--td">#sp-admit</td>
                                             <td class="column-for-button secondary-title-two-tables"> 
-                                                <button class="member-page-dell-btn" type="button" id="member-dell-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
+                                                <button class="member-page-dell-btn" id="remove-gr-sports-#sp-id"  type="button">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </template>
 
@@ -269,138 +304,128 @@
                 </tr>
             </template>
 
-            <!--group-edit-popup-window-start-->
+            <template id="group-input-name-template">
+                <div class="form-field">
+                    <input type="text" class="form-field-input" id="group-input-name"  placeholder="Enter the group name">
+                </div>
+            </template>
+
+            <template id="group-input-discipline-template">
+                <div class="form-field--option">
+                    <select name="division-of-group" id="group-input-discipline">
+                        <template id="create-group-div-temp">
+                            <option id="#discipline-id" value="#value">#name</option>
+                        </template>
+                    </select>
+                </div>
+            </template>
+
+            <template id="group-input-system-template">
+                <div class="form-field--option">
+                    <select name="form-system-of-group" id="group-input-system">
+                        <option value="olimpic">Olimpic</option>
+                        <option value="circle">Circle</option>
+                    </select>
+                </div>
+            </template>
+
+            <template id="group-input-sex-template">
+                <div class="form-field--option">
+                    <select name="form-system-of-group" id="group-input-sex">
+                        <option selected value="Not applicable">Not applicable</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </template>
+
+            <template id="group-input-age-min-template">
+                <div class="create-ng--interval">
+                    <input type="text" name="age-min" id="group-input-age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                </div>
+            </template>
+            <template id="group-input-age-max-template">
+                <div class="create-ng--interval">
+                    <input type="text" name="age-max" id="group-input-age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                </div>
+            </template>
+            <template id="group-input-weight-min-template">
+                <div class="create-ng--interval">
+                    <input type="text" name="weight-min" id="group-input-weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                </div>
+            </template>
+            <template id="group-input-weight-max-template">
+                <div class="create-ng--interval">
+                    <input type="text" name="weight-max" id="group-input-weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                </div>
+            </template>
+            <template id="group-input-qulification-min-template">
+                <div class="create-ng--interval">
+                    <select id="group-input-qulification-min">
+                        <option value="Not applicable">Not applicable</option>
+                    </select>
+                    &nbsp;<span>-</span>&nbsp;
+                </div>
+            </template>
+            <template id="group-input-qulification-max-template">
+                <div class="create-ng--interval">
+                    <select id="group-input-qulification-max">
+                        <option value="Not applicable">Not applicable</option>
+                    </select>
+                </div>
+            </template>
+
             <div class="popup" id = "popup_1">
                 <a href="" class="popup__area"></a>
                 <div class="popup__body">
                     <div class="popup__content">
-                        <a href="" class="popup__close close-popup">X</a>
-                        
+                        <a href="#" class="popup__close close-popup">X</a>
                         <form class="modal-form">
-                            <span class="modal-title">Edit group</span>
+                            <span class="modal-title">Add sportsman</span>
                             <div class="new-member-field">
-                                <label for="new-group-name"><span class="form-field-title">Group name</span></label>
-                                <div class="form-field">
-                                    <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
-                                </div>
-
-                                <div class="form-field--option">
-                                    <label for="division-of-group">
-                                        <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
-                                        <select name="division-of-group" id="create-group-division">
-                                            <template id="create-group-div-temp">
-                                                <option id="create-group-div-item" value="value">Name</option>
+                                <table class="dynamic-table" id="add-sportsman-table">
+                                    <tr>
+                                        <th class="group-info-table-title all-table-title" colspan="7">
+                                            <span>Sportsmans</span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="secondary-title-tables--text">Surname</td>
+                                        <td class="secondary-title-tables--text">Name</td>
+                                        <td class="secondary-title-tables--text">Age</td>
+                                        <td class="secondary-title-tables--text">Weight</td>
+                                        <td class="secondary-title-tables--text">Sex</td>
+                                        <td class="secondary-title-tables--text">Team</td>
+                                        <td class="secondary-title-tables--text">Qualification</td>
+                                    </tr>
+    
+                                    <template id="add-sportsman-template">
+                                        <tr id="add-sports-#sp-id">
+                                            <td class="secondary-tables--td">#sp-surname</td>
+                                            <td class="secondary-tables--td">#sp-name</td>
+                                            <td class="secondary-tables--td">#sp-age</td>
+                                            <td class="secondary-tables--td">#sp-weight</td>
+                                            <td class="secondary-tables--td">#sp-sex</td>
+                                            <td class="secondary-tables--td">#sp-team</td>
+                                            <td class="secondary-tables--td">#sp-qual</td>
+                                        </tr>
+                                    </template>
+    
+                                    <template id="add-settings-template">
+                                        <td class="secondary-tables--td" colspan="6" id="sports-disc-list">
+                                            <template id="add-discipline-template">
+                                                <input type="checkbox" id="#disc-id" name="#disc-name">
+                                                <label for="#disc-name">#disc-name</label>
                                             </template>
-                                        </select>
-                                </div>
-
-                                <div class="form-field--option">
-                                    <label for="form-system-of-group">
-                                        <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
-                                        <select name="form-system-of-group" id="pairs-form-system">
-                                            <option value="olimpic">Olimpic</option>
-                                            <option value="circle">Circle</option>
-                                        </select>
-                                </div>
-
-                                <div class="form-field--option">
-                                    <!-- acc-menu start -->
-                                    <div class="conntainer">
-                                        <section class="acc-conntainer">
-                                            <span class="create-ng-field-name">Choose required items:</span>
-                                            
-                                            <!-- acc-menu-1-item start -->
-                                            <div>
-                                                <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
-                                                    <article class="acc-medium">
-                                                        <div class="acc-menu-item-gender-list">    
-                                                            <div>
-                                                                <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male" checked>
-                                                                <label for="male">Male</label>
-                                                            </div>
-                                                            <div>
-                                                                <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
-                                                                <label for="female">Female</label>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </label>
-                                            </div>
-                                            <!-- acc-menu-1-item end -->
-
-                                            <!-- acc-menu-2-item start -->
-                                            <div>
-                                                <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
-                                                <article class="acc-medium">
-                                                    <div class="not-required-items conntainer">
-                                                        <div class="create-ng--interval">
-                                                            <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                                                            &nbsp;<span>-</span>&nbsp;
-                                                            <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                                                
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <!-- acc-menu-2-item end -->
-
-                                            <!-- acc-menu-3-item start -->
-                                            <div>
-                                                <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
-                                                <article class="acc-medium">
-                                                    <div class="create-ng--interval">
-                                                        <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                                                        &nbsp;<span>-</span>&nbsp;
-                                                        <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <!-- acc-menu-3-item end -->
-
-                                            <!-- acc-menu-4-item start -->
-                                            <div>
-                                                <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
-                                                <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
-                                                    <article class="acc-medium">
-                                                        <div class="create-ng--interval">
-                                                            <select name="ng-qualification-min" id="ng-members-qualification-min">
-                                                                <template id="create-group-qual-temp">
-                                                                    <option id="create-group-qual-item" value="value">Name</option>
-                                                                </template>
-                                                            </select>
-                                                            &nbsp;<span>-</span>&nbsp;
-                                                            <select name="ng-qualification-max" id="ng-members-qualification-max">
-                                                            </select>
-                                                        </div>
-                                                </article>
-                                            </div>
-                                            <!-- acc-menu-4-item end -->
-                                        </section>
-                                    </div>
-                                </div>
-
-                                <div class="form-field--option">
-                                    <ul class="list nm-more-than-one-list">
-                                        <label for="nm-more-than-one" class="form-field-label">
-                                            <span class="form-field-title">Enter more than one</span>
-                                            <li class="nm-more-than-one-item">
-                                                <input type="radio" id="ng-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                                <label for="yes">Yes</label>
-                                            </li>
-        
-                                            <li class="nm-more-than-one-item">
-                                            <input type="radio" id="ng-more-than-one-no" name="nm-more-than-one" value="no">
-                                            <label for="no">No</label>
-                                            </li>
-                                        </label>
-                                    </ul>
-                                </div>
-
-                                <button type="button" id="group-form-send-btn" class="modal-btn-submit">
-                                    <span class="modal-btn-submit-text">Accept</span>
+                                        </td>
+                                        <td class="secondary-tables--td" colspan="1">
+                                            <input type="checkbox" id="admitted" name="admitted">
+                                            <label for="admitted">Admitted</label>
+                                        </td>
+                                    </template>
+                                </table>
+                                <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
+                                    <span class="modal-btn-submit-text">Add</span>
                                 </button>
                             
                             </div>
@@ -408,51 +433,7 @@
                     </div>
                 </div>
             </div>
-            <!--group-edit-popup-window-end-->
-            <!--group-edit-popup-window-start-->
-            <div class="popup" id = "popup_2">
-                <a href="" class="popup__area"></a>
-                <div class="popup__body">
-                    <div class="popup__content">
-                        <a href="" class="popup__close close-popup">X</a>
-                        <form class="modal-form">
-                            <div class="conntainer">
-                                <div class="skroll-for-modal">
-                                    <table class="dynamic-table-for-modal" id="members-adding-table">
-                                        <tr>
-                                            <th colspan="8" class="all-table-title group-info-table-title">Members</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Name, Surname</td>
-                                            <td>Age</td>
-                                            <td>Weight</td>
-                                            <td>Sex</td>
-                                            <td>Team</td>
-                                            <td>Qualification</td>
-                                            <td>Adm</td>
-                                        </tr>
-                                        <template id="competition-member-template">
-                                            <tr id="member-row">
-                                                <td id="member-name">  </td>
-                                                <td id="member-age">  </td>
-                                                <td id="member-weight">  </td>
-                                                <td id="member-sex">  </td>
-                                                <td id="member-team">  </td>
-                                                <td id="member-qualification">  </td>
-                                                <td id="member-admited">  </td>
-                                            </tr>
-                                        </template>
-                                    </table>
-                                </div>
-                            </div>
-                            <button type="button" id="members-add-btn" class="modal-btn-submit">
-                                <span class="modal-btn-submit-text">Add</span>
-                            </button>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
+
             <!--group-edit-popup-window-end-->
             <script src="./scripts/group-page.js" type="module"></script>   
             <script src="./scripts/open-close-popup.js" type="module"></script>

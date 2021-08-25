@@ -1,25 +1,8 @@
-import {getLinkParams, onClick} from "./common.js"
-import {showAllIfAdmin} from "./common.js"
-import {languageSwitchingOn} from "./common.js"
-import {createPageItem} from "./common.js"
-import {isEmptyString} from "./common.js"
-import {isNumber} from "./common.js"
-
-import {sendGetDepartment} from "./communication.js"
-import {sendAddQualification} from "./communication.js"
-import {sendDeleteQualification} from "./communication.js"
-import {sendAddDiscipline} from "./communication.js"
-import {sendDeleteDiscipline} from "./communication.js"
-import {sendDepartmentInfo} from "./communication.js"
-import {sendDepartmentSportsman} from "./communication.js"
-import {sendDepartmentCompetition} from "./communication.js"
-
-import {competitionOper} from "./communication.js"
-import {departmentOper} from "./communication.js"
-import {sportsmanOper} from "./communication.js"
+import {getLinkParams, onClick, showAllIfAdmin, languageSwitchingOn, createPageItem, isEmptyString, isNumber} from "./common.js"
+import {departmentOp, competitionOp, sportsmanOp, server} from "./communication.js"
 
 var pageParams = getLinkParams(location.search);
-const department = sendGetDepartment();
+const department = server.getDepartment();
 console.log(department);
 
 /* ------------------- QUALIFICATIONS ----------------------------*/
@@ -85,7 +68,7 @@ function addQualification(){
     }
     qualificationElementAddToPage(name, value);
     toogleQualificationAdding();
-    sendAddQualification(value, name);
+    server.addQualification(value, name);
 }
 
 function toogleQualificationAdding(){
@@ -106,7 +89,7 @@ function deleteQualification(value){
     for(var i = 1; i < qualTable.rows.length; i++){
         if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
             qualTable.rows[i].remove();
-            sendDeleteQualification(value);
+            server.deleteQualification(value);
             return;
         }
     }
@@ -163,7 +146,7 @@ function addDiscipline(){
     }
     toogleDisciplineAdding();
     disciplineAddToPage(div);
-    sendAddDiscipline(div);
+    server.addDiscipline(div);
 }
 
 function deleteDiscipline(div){
@@ -171,7 +154,7 @@ function deleteDiscipline(div){
     for(var i = 1; i < divTable.rows.length; i++){
         if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
             divTable.rows[i].remove();
-            sendDeleteDiscipline(div);
+            server.deleteDiscipline(div);
             return;
         }
     }
@@ -188,16 +171,16 @@ const competitionObjects = {
     getAddBtn()             { return document.getElementById("send-competition-form-btn");},
 
     getPlaceholders(comp)   { return {
-                                    "#departmentId":        departmentOper.getId(department),
-                                    "#competitionId":       competitionOper.getId(comp),
-                                    "#competition-name":    competitionOper.getName(comp),
-                                    "#competition-desc":    competitionOper.getDescription(comp)
+                                    "#departmentId":        departmentOp.getId(department),
+                                    "#competitionId":       competitionOp.getId(comp),
+                                    "#competition-name":    competitionOp.getName(comp),
+                                    "#competition-desc":    competitionOp.getDescription(comp)
                                     };
                             }
 }
 
 function competitionPageElementAdd(competition){
-    if(competitionOper.getId(competition) != undefined){
+    if(competitionOp.getId(competition) != undefined){
         var template = competitionObjects.getTemplate();
         var placeholders = competitionObjects.getPlaceholders(competition);
         competitionObjects.getTable().prepend(createPageItem(template, placeholders)); 
@@ -207,7 +190,7 @@ function competitionPageElementAdd(competition){
 function sendCompetitionForm() {
     var name = competitionObjects.getNameInput();
     var description = competitionObjects.getDescriptionInput();
-    sendDepartmentCompetition(name, description);
+    server.addCompetition(name, description);
 }
 
 /* ------------------- SPORTSMANS ----------------------------*/
@@ -233,14 +216,14 @@ const sportsmanObjects = {
     getAddBtn()                 { return document.getElementById("member-form-send-btn");},
 
     getPlaceholders(sp)         { return {
-                                        "#sp-surname":      sportsmanOper.getSurname(sp),
-                                        "#sp-name":         sportsmanOper.getName(sp),
-                                        "#sp-age":          sportsmanOper.getAge(sp),
-                                        "#sp-weight":       sportsmanOper.getWeight(sp),
-                                        "#sp-sex":          sportsmanOper.getSex(sp),
-                                        "#sp-team":         sportsmanOper.getTeam(sp),
-                                        "#sp-qual":         qualificationObjects.getName(sportsmanOper.getQualification(sp)),
-                                        "#sportsman-link":  window.location.href + sportsmanOper.getLinkFromDepartament(sp)
+                                        "#sp-surname":      sportsmanOp.getSurname(sp),
+                                        "#sp-name":         sportsmanOp.getName(sp),
+                                        "#sp-age":          sportsmanOp.getAge(sp),
+                                        "#sp-weight":       sportsmanOp.getWeight(sp),
+                                        "#sp-sex":          sportsmanOp.getSex(sp),
+                                        "#sp-team":         sportsmanOp.getTeam(sp),
+                                        "#sp-qual":         qualificationObjects.getName(sportsmanOp.getQualification(sp)),
+                                        "#sportsman-link":  window.location.href + sportsmanOp.getLinkFromDepartament(sp)
                                     };
                                 },
 
@@ -251,7 +234,7 @@ const sportsmanObjects = {
 }
 
 function sportsmanPageElementAdd(sp){
-    if(sportsmanOper.getId(sp) != undefined){
+    if(sportsmanOp.getId(sp) != undefined){
         var template = sportsmanObjects.getTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
         sportsmanObjects.getTable().append(createPageItem(template, placeholders)); 
@@ -293,7 +276,7 @@ function isSportsmansParamsOk() {
 
 function sendSportsmanForm() {
     if(isSportsmansParamsOk()) {
-        sendDepartmentSportsman(sportsmanObjects.getNameInput(), 
+        server.addDepartmentSportsman(sportsmanObjects.getNameInput(), 
                                 sportsmanObjects.getSurnameInput(), 
                                 sportsmanObjects.getWeightInput(), 
                                 sportsmanObjects.getAgeInput(), 
@@ -322,24 +305,24 @@ function departamentEdit(){
     var namePlace = departamentObjects.getNamePlace();
     if(setLine == null){
         setLine = departamentObjects.createNameInput();
-        setLine.value = departmentOper.getName(department);
+        setLine.value = departmentOp.getName(department);
         namePlace.innerHTML = "";
         namePlace.appendChild(setLine);
     } else {
-        sendDepartmentInfo(setLine.value);
+        server.editDepartment(setLine.value);
     }
 }
 
 function fillPageInfo(){
-    var departamentName = departmentOper.getName(department);
-    var competitions = departmentOper.getCompetitions(department);
-    var disciplines = departmentOper.getDisciplines(department);
-    var qualifications = departmentOper.getQualifications(department);
-    var sportsmans = departmentOper.getSportsmans(department);
+    var departamentName = departmentOp.getName(department);
+    var competitions = departmentOp.getCompetitions(department);
+    var disciplines = departmentOp.getDisciplines(department);
+    var qualifications = departmentOp.getQualifications(department);
+    var sportsmans = departmentOp.getSportsmans(department);
 
     departamentObjects.setPageName(departamentName);
     departamentObjects.setName(departamentName);
-    departamentObjects.setId(departmentOper.getId(department));
+    departamentObjects.setId(departmentOp.getId(department));
 
     for (var [value, name] of qualifications) {
         qualificationElementAddToPage(name, value);
