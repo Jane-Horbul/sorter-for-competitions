@@ -1807,6 +1807,11 @@ body.lock {
   border: 2px solid #1e8e1b;
 }
 
+.add-sportsman-table-tr--active {
+  border: 2px solid #1e8e1b;
+  background-color: #feffc996;
+}
+
 .add-sportsman-table--title {
   background-color: #c9e6ff;
 }
