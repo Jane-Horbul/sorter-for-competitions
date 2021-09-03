@@ -1,5 +1,5 @@
 import {getLinkParams, onClick, showAllIfAdmin, languageSwitchingOn, createPageItem, isEmptyString, isNumber} from "./common.js"
-import {departmentOp, competitionOp, sportsmanOp, server} from "./communication.js"
+import {ops, server} from "./communication.js"
 
 var pageParams = getLinkParams(location.search);
 const department = server.getDepartment();
@@ -171,16 +171,16 @@ const competitionObjects = {
     getAddBtn()             { return document.getElementById("send-competition-form-btn");},
 
     getPlaceholders(comp)   { return {
-                                    "#departmentId":        departmentOp.getId(department),
-                                    "#competitionId":       competitionOp.getId(comp),
-                                    "#competition-name":    competitionOp.getName(comp),
-                                    "#competition-desc":    competitionOp.getDescription(comp)
+                                    "#departmentId":        ops.department.getId(department),
+                                    "#competitionId":       ops.competition.getId(comp),
+                                    "#competition-name":    ops.competition.getName(comp),
+                                    "#competition-desc":    ops.competition.getDescription(comp)
                                     };
                             }
 }
 
 function competitionPageElementAdd(competition){
-    if(competitionOp.getId(competition) != undefined){
+    if(ops.competition.getId(competition) != undefined){
         var template = competitionObjects.getTemplate();
         var placeholders = competitionObjects.getPlaceholders(competition);
         competitionObjects.getTable().prepend(createPageItem(template, placeholders)); 
@@ -216,14 +216,14 @@ const sportsmanObjects = {
     getAddBtn()                 { return document.getElementById("member-form-send-btn");},
 
     getPlaceholders(sp)         { return {
-                                        "#sp-surname":      sportsmanOp.getSurname(sp),
-                                        "#sp-name":         sportsmanOp.getName(sp),
-                                        "#sp-age":          sportsmanOp.getAge(sp),
-                                        "#sp-weight":       sportsmanOp.getWeight(sp),
-                                        "#sp-sex":          sportsmanOp.getSex(sp),
-                                        "#sp-team":         sportsmanOp.getTeam(sp),
-                                        "#sp-qual":         qualificationObjects.getName(sportsmanOp.getQualification(sp)),
-                                        "#sportsman-link":  window.location.href + sportsmanOp.getLinkFromDepartament(sp)
+                                        "#sp-surname":      ops.sportsman.getSurname(sp),
+                                        "#sp-name":         ops.sportsman.getName(sp),
+                                        "#sp-age":          ops.sportsman.getAge(sp),
+                                        "#sp-weight":       ops.sportsman.getWeight(sp),
+                                        "#sp-sex":          ops.sportsman.getSex(sp),
+                                        "#sp-team":         ops.sportsman.getTeam(sp),
+                                        "#sp-qual":         qualificationObjects.getName(ops.sportsman.getQualification(sp)),
+                                        "#sportsman-link":  window.location.href + ops.sportsman.getLinkFromDepartament(sp)
                                     };
                                 },
 
@@ -234,7 +234,7 @@ const sportsmanObjects = {
 }
 
 function sportsmanPageElementAdd(sp){
-    if(sportsmanOp.getId(sp) != undefined){
+    if(ops.sportsman.getId(sp) != undefined){
         var template = sportsmanObjects.getTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
         sportsmanObjects.getTable().append(createPageItem(template, placeholders)); 
@@ -305,7 +305,7 @@ function departamentEdit(){
     var namePlace = departamentObjects.getNamePlace();
     if(setLine == null){
         setLine = departamentObjects.createNameInput();
-        setLine.value = departmentOp.getName(department);
+        setLine.value = ops.department.getName(department);
         namePlace.innerHTML = "";
         namePlace.appendChild(setLine);
     } else {
@@ -314,15 +314,15 @@ function departamentEdit(){
 }
 
 function fillPageInfo(){
-    var departamentName = departmentOp.getName(department);
-    var competitions = departmentOp.getCompetitions(department);
-    var disciplines = departmentOp.getDisciplines(department);
-    var qualifications = departmentOp.getQualifications(department);
-    var sportsmans = departmentOp.getSportsmans(department);
+    var departamentName = ops.department.getName(department);
+    var competitions = ops.department.getCompetitions(department);
+    var disciplines = ops.department.getDisciplines(department);
+    var qualifications = ops.department.getQualifications(department);
+    var sportsmans = ops.department.getSportsmans(department);
 
     departamentObjects.setPageName(departamentName);
     departamentObjects.setName(departamentName);
-    departamentObjects.setId(departmentOp.getId(department));
+    departamentObjects.setId(ops.department.getId(department));
 
     for (var [value, name] of qualifications) {
         qualificationElementAddToPage(name, value);

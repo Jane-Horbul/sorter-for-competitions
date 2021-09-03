@@ -7,15 +7,15 @@ import {isNumber,
     languageSwitchingOn, 
     createPageItem,
     refreshPage} from "./common.js"
-import {departmentOp, competitionOp, sportsmanOp, groupOp, server} from "./communication.js"
+import {ops, server} from "./communication.js"
 
 const page = {
     cid: getLinkParams(location.search).get("cid")
 }
 const department = server.getDepartment();
-const qualificationsMap = departmentOp.getQualifications(department);
-const disciplines = departmentOp.getDisciplines(department);
-var departamentSportsmans = departmentOp.getSportsmans(department);
+const qualificationsMap = ops.department.getQualifications(department);
+const disciplines = ops.department.getDisciplines(department);
+var departamentSportsmans = ops.department.getSportsmans(department);
 var sportsmansAddList = new Array(0);
 
 var competition = server.getCompetition(page.cid);
@@ -38,17 +38,17 @@ const sportsmanObjects = {
     isCheckedDisc(row, num)     { return row.querySelector("#discipline-" + num).checked;},
 
     getPlaceholders(sp)         { return {
-                                        "#sp-id":           sportsmanOp.getId(sp),
-                                        "#sp-surname":      sportsmanOp.getSurname(sp),
-                                        "#sp-name":         sportsmanOp.getName(sp),
-                                        "#sp-age":          sportsmanOp.getAge(sp),
-                                        "#sp-weight":       sportsmanOp.getWeight(sp),
-                                        "#sp-sex":          sportsmanOp.getSex(sp),
-                                        "#sp-team":         sportsmanOp.getTeam(sp),
-                                        "#sp-qual":         qualificationsMap.get(sportsmanOp.getQualification(sp)),
-                                        "#sp-admit":        sportsmanOp.getAdmition(sp),
-                                        "#sp-gr-num":       sportsmanOp.getGroupsNum(sp),
-                                        "#sportsman-link":  window.location.href + sportsmanOp.getLinkFromCompetition(sp)
+                                        "#sp-id":           ops.sportsman.getId(sp),
+                                        "#sp-surname":      ops.sportsman.getSurname(sp),
+                                        "#sp-name":         ops.sportsman.getName(sp),
+                                        "#sp-age":          ops.sportsman.getAge(sp),
+                                        "#sp-weight":       ops.sportsman.getWeight(sp),
+                                        "#sp-sex":          ops.sportsman.getSex(sp),
+                                        "#sp-team":         ops.sportsman.getTeam(sp),
+                                        "#sp-qual":         qualificationsMap.get(ops.sportsman.getQualification(sp)),
+                                        "#sp-admit":        ops.sportsman.getAdmition(sp),
+                                        "#sp-gr-num":       ops.sportsman.getGroupsNum(sp),
+                                        "#sportsman-link":  window.location.href + ops.sportsman.getLinkFromCompetition(sp)
                                     };
                                 },
     getDisciplinesList()        {return this.getAddingRowTemplate().content.getElementById("sports-disc-list");},
@@ -63,7 +63,7 @@ const sportsmanObjects = {
 
 function excludeDepSportsman(sp){
     for(var i = 0; i < departamentSportsmans.length; i++){
-        if(sportsmanOp.getId(sp) == sportsmanOp.getId(departamentSportsmans[i])){
+        if(ops.sportsman.getId(sp) == ops.sportsman.getId(departamentSportsmans[i])){
             departamentSportsmans.splice(i, 1);
             return;
         }
@@ -71,7 +71,7 @@ function excludeDepSportsman(sp){
 }
 
 function sportsmanPageElementAdd(sp){
-    if(sportsmanOp.getId(sp) != undefined){
+    if(ops.sportsman.getId(sp) != undefined){
         excludeDepSportsman(sp);
         var template = sportsmanObjects.getTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
@@ -93,19 +93,22 @@ function sportsmanAddingSelect(sid){
     var table = sportsmanObjects.getAddingTable();
     var addingRow = sportsmanObjects.getAddingRow(sid);
     var rowIndx = findRowIndxById(table, sportsmanObjects.getAddSportsRowId(sid)) + 1;
-    var sp = departamentSportsmans.find( curSp => sportsmanOp.getId(curSp) == sid);
+    var sp = departamentSportsmans.find( curSp => ops.sportsman.getId(curSp) == sid);
     
     if(addingRow == undefined) {
         var newItem = createPageItem(sportsmanObjects.getAddingRowTemplate(), sportsmanObjects.getPlaceholders(sp));
         addingRow = table.insertRow(rowIndx);
+        table.rows[rowIndx - 1].setAttribute("class", "dynamic-table-th--selected");
+        table.rows[rowIndx].setAttribute("class", "dynamic-table-th--selected");
         sportsmanObjects.setAddingRowId(addingRow, sid);
         addingRow.append(newItem);
         sportsmansAddList.push(sp);
 
     } else {
         addingRow.remove();
+        table.rows[rowIndx - 1].setAttribute("class", "");
         for(var i = 0; i < sportsmansAddList.length; i++){
-            if(sportsmanOp.getId(sp) == sportsmanOp.getId(sportsmansAddList[i])){
+            if(ops.sportsman.getId(sp) == ops.sportsman.getId(sportsmansAddList[i])){
                 sportsmansAddList.splice(i, 1);
                 break;
             }
@@ -116,30 +119,30 @@ function sportsmanAddingSelect(sid){
 function sportsmansAddListSend() {
     var table = sportsmanObjects.getAddingTable();
     for(var i = 0; i < sportsmansAddList.length; i++){
-        var sid = sportsmanOp.getId(sportsmansAddList[i]);
+        var sid = ops.sportsman.getId(sportsmansAddList[i]);
         var indx = findRowIndxById(table, sportsmanObjects.getAddSportsRowId(sid)) + 1;
         var settings = table.rows[indx];
-        sportsmanOp.setAdmition(sportsmansAddList[i], sportsmanObjects.getSportsAdmition(settings));
+        ops.sportsman.setAdmition(sportsmansAddList[i], sportsmanObjects.getSportsAdmition(settings));
 
         var sportsDisc = new Array(0);
         for(var j = 0; j < disciplines.length; j++){
             if(sportsmanObjects.isCheckedDisc(settings, j))
                 sportsDisc.push(disciplines[j]);
         }
-        sportsmanOp.setDisciplines(sportsmansAddList[i], sportsDisc);
+        ops.sportsman.setDisciplines(sportsmansAddList[i], sportsDisc);
     }
     server.addCompetitionSprotsmans(page.cid, sportsmansAddList);
 }
 
 function departamentSportsmanElementAdd(sp){
-    if(sportsmanOp.getId(sp) != undefined){
+    if(ops.sportsman.getId(sp) != undefined){
         var template = sportsmanObjects.getAddingTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
         var newItem = createPageItem(template, placeholders);
         sportsmanObjects.getAddingTable().append(newItem);
 
-        var row = document.getElementById(sportsmanObjects.getAddSportsRowId(sportsmanOp.getId(sp)));
-        onClick(row, function(){sportsmanAddingSelect(sportsmanOp.getId(sp))});
+        var row = document.getElementById(sportsmanObjects.getAddSportsRowId(ops.sportsman.getId(sp)));
+        onClick(row, function(){sportsmanAddingSelect(ops.sportsman.getId(sp))});
     }
 }
 
@@ -176,14 +179,14 @@ const groupObjects = {
     getAddBtn()                 { return document.getElementById("group-form-send-btn");},
     getFormPairsBtn()           { return document.getElementById("form-pairs-btn");},
     getPlaceholders(gr)         { return {
-                                        "#group-name":          groupOp.getName(gr),
-                                        "#group-age":           groupOp.getAgeMin(gr) + " - " + groupOp.getAgeMax(gr),
-                                        "#group-weight":        groupOp.getWeightMin(gr) + " - " + groupOp.getWeightMax(gr),
-                                        "#group-qualification": getQualificationInterval(groupOp.getQualMin(gr), groupOp.getQualMax(gr)),
-                                        "#group-sex":           groupOp.getSex(gr),
-                                        "#group-discipline":    groupOp.getDiscipline(gr),
-                                        "#group-sp-num":        groupOp.getSportsNum(gr),
-                                        "#group-link":          window.location.href + groupOp.getLink(gr)
+                                        "#group-name":          ops.group.getName(gr),
+                                        "#group-age":           ops.group.getAgeMin(gr) + " - " + ops.group.getAgeMax(gr),
+                                        "#group-weight":        ops.group.getWeightMin(gr) + " - " + ops.group.getWeightMax(gr),
+                                        "#group-qualification": getQualificationInterval(ops.group.getQualMin(gr), ops.group.getQualMax(gr)),
+                                        "#group-sex":           ops.group.getSex(gr),
+                                        "#group-discipline":    ops.group.getDiscipline(gr),
+                                        "#group-sp-num":        ops.group.getSportsNum(gr),
+                                        "#group-link":          window.location.href + ops.group.getLink(gr)
                                     };
                                 },
 
@@ -230,7 +233,7 @@ function getQualificationInterval(qMin, qMax){
 }
 
 function groupPageElementAdd(group){
-    if(groupOp.getId(group) != undefined){
+    if(ops.group.getId(group) != undefined){
         var template = groupObjects.getTemplate();
         var placeholders = groupObjects.getPlaceholders(group);
         groupObjects.getTable().append(createPageItem(template, placeholders)); 
@@ -355,8 +358,8 @@ function competitionEdit(){
         nameInput = competitionObjects.createNameInput();
         descInput = competitionObjects.createDescInput();
 
-        nameInput.value = competitionOp.getName(competition);
-        descInput.value = competitionOp.getDescription(competition);
+        nameInput.value = ops.competition.getName(competition);
+        descInput.value = ops.competition.getDescription(competition);
         namePlace.innerHTML = "";
         descPlace.innerHTML = "";
         namePlace.appendChild(nameInput);
@@ -390,17 +393,17 @@ function disciplinesAddToPage(){
 }
 
 function fillPageInfo(){
-    competitionObjects.setPageName(competitionOp.getName(competition));
-    competitionObjects.setName(competitionOp.getName(competition));
-    competitionObjects.setId(competitionOp.getId(competition));
-    competitionObjects.setDescription(competitionOp.getDescription(competition));
+    competitionObjects.setPageName(ops.competition.getName(competition));
+    competitionObjects.setName(ops.competition.getName(competition));
+    competitionObjects.setId(ops.competition.getId(competition));
+    competitionObjects.setDescription(ops.competition.getDescription(competition));
     
     for (var [value, name] of qualificationsMap) {
         qualificationAddToPage(name, value);
     }
     disciplinesAddToPage();
-    competitionOp.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
-    competitionOp.getSportsmans(competition).forEach(sp => sportsmanPageElementAdd(sp));
+    ops.competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
+    ops.competition.getSportsmans(competition).forEach(sp => sportsmanPageElementAdd(sp));
     departamentSportsmans.forEach(sp => departamentSportsmanElementAdd(sp));
 }
 
@@ -411,7 +414,7 @@ function refreshPairs(){
     while(groupsTable.rows.length > 2){
         groupsTable.deleteRow(groupsTable.rows.length - 1);
     }
-    competitionOp.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
+    ops.competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
 }
 
 function setBtnActions(){

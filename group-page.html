@@ -218,58 +218,18 @@
                                         </tr>
                                         <tr>
                                             <td class="secondary-title-two-tables">Pair ID</td>
+                                            <td class="secondary-title-two-tables">Final part</td>
                                             <td class="secondary-title-two-tables">Red member</td>
                                             <td class="secondary-title-two-tables">Blue member</td>
                                             <td class="secondary-title-two-tables">Winner</td>
                                         </tr>
-                                        <!--start-->
-                                        <tr>
-                                            <td class="first-title-tables--text" id="pair-id"> 1 </td>
-                                            <td class="first-title-tables--text group-page-pair-red" id="pair-red" class="red-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text group-page-pair-blue" id="pair-blue" class="blue-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text" id="pair-winner">
-                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="first-title-tables--text" id="pair-id"> 2 </td>
-                                            <td class="first-title-tables--text group-page-pair-red" id="pair-red" class="red-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text group-page-pair-blue" id="pair-blue" class="blue-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text" id="pair-winner">
-                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="first-title-tables--text" id="pair-id"> 3 </td>
-                                            <td class="first-title-tables--text group-page-pair-red" id="pair-red" class="red-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text group-page-pair-blue" id="pair-blue" class="blue-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text" id="pair-winner">
-                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="first-title-tables--text" id="pair-id"> 4 </td>
-                                            <td class="first-title-tables--text group-page-pair-red" id="pair-red" class="red-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text group-page-pair-blue" id="pair-blue" class="blue-cell-style"> Name Name </td>
-                                            <td class="first-title-tables--text" id="pair-winner">
-                                                <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                                                <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                                            </td>
-                                        </tr>
-                                        <!--end-->
-
                                         <template id="pair-template">
                                             <tr>
-                                                <td class="first-title-tables--text" id="pair-id">  </td>
-                                                <td class="first-title-tables--text group-page-pair-red" id="pair-red" class="red-cell-style">  </td>
-                                                <td class="first-title-tables--text group-page-pair-blue" id="pair-blue" class="blue-cell-style">  </td>
-                                                <td class="first-title-tables--text" id="pair-winner">
-                                                    <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                                                    <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                                                </td>
+                                                <td class="first-title-tables--text">#pair-id</td>
+                                                <td class="first-title-tables--text">#final-part</td>
+                                                <td class="first-title-tables--text group-page-pair-red red-cell-style">#red-sportsman</td>
+                                                <td class="first-title-tables--text group-page-pair-blue blue-cell-style">#blue-sportsman</td>
+                                                <td class="first-title-tables--text #winner-style">#pair-winner</td>
                                             </tr>
                                         </template>
 
@@ -278,8 +238,19 @@
                             </div>
                         </div>
                     </div>
-                    <div id="GroupInfo" class="tabcontent">
-                        
+                    <div id="Grid" class="tabcontent">
+                        <div id="pairs-grid"></div>
+
+                        <template id="pair-tab-temp">
+                            <table id="pair-table" border="1">
+                                <tr>
+                                    <td id="member-red-name">Member 1</td>
+                                </tr>
+                                <tr>
+                                    <td id="member-blue-name">Member 2</td>
+                                </tr>
+                            </table>
+                        </template>
                     </div>
 
         </main>
@@ -292,17 +263,6 @@
                     </div>
                 </div>
             </footer>
-            <template id="pair-template">
-                <tr>
-                    <td id="pair-id">  </td>
-                    <td id="pair-red" class="red-cell-style">  </td>
-                    <td id="pair-blue" class="blue-cell-style">  </td>
-                    <td id="pair-winner">
-                        <button class="red-button-style js-hidden-element" type="button"  id="red-member-win"></button>
-                        <button class="blue-button-style js-hidden-element" type="button"  id="blue-member-win"></button>
-                    </td>
-                </tr>
-            </template>
 
             <template id="group-input-name-template">
                 <div class="form-field">
@@ -398,38 +358,6 @@
                                         <td class="secondary-title-tables--text">Team</td>
                                         <td class="secondary-title-tables--text">Qualification</td>
                                     </tr>
-
-                                    <!--start
-                                    <tr id="add-sports-#sp-id">
-                                        <td class="secondary-tables--td">sp-surname</td>
-                                        <td class="secondary-tables--td">sp-name</td>
-                                        <td class="secondary-tables--td">sp-age</td>
-                                        <td class="secondary-tables--td">sp-weight</td>
-                                        <td class="secondary-tables--td">sp-sex</td>
-                                        <td class="secondary-tables--td">sp-team</td>
-                                        <td class="secondary-tables--td">sp-qual</td>
-                                    </tr>
-
-                                    <tr id="add-sports-#sp-id" class="dynamic-table-th--selected">
-                                        <td class="secondary-tables--td">sp-surname</td>
-                                        <td class="secondary-tables--td">sp-name</td>
-                                        <td class="secondary-tables--td">sp-age</td>
-                                        <td class="secondary-tables--td">sp-weight</td>
-                                        <td class="secondary-tables--td">sp-sex</td>
-                                        <td class="secondary-tables--td">sp-team</td>
-                                        <td class="secondary-tables--td">sp-qual</td>
-                                    </tr>
-
-                                    <tr id="add-sports-#sp-id" class="dynamic-table-th--selected">
-                                        <td class="secondary-tables--td">sp-surname</td>
-                                        <td class="secondary-tables--td">sp-name</td>
-                                        <td class="secondary-tables--td">sp-age</td>
-                                        <td class="secondary-tables--td">sp-weight</td>
-                                        <td class="secondary-tables--td">sp-sex</td>
-                                        <td class="secondary-tables--td">sp-team</td>
-                                        <td class="secondary-tables--td">sp-qual</td>
-                                    </tr>
-                                    end-->
     
                                     <template id="add-sportsman-template">
                                         <tr id="add-sports-#sp-id">
@@ -486,7 +414,7 @@
                 }
                 
                 document.getElementById("defaultOpen").click();
-                </script>
+            </script>
 
         </div>
     </body>

@@ -18,7 +18,7 @@ const backendLinks = {
     COMPETITION_SPORTSMEN_ADD(cid)      {return "new-member-form?cid=" + cid;},
     COMPETITION_SPORTSMEN_DEL(cid, sid) {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
     COMPETITION_GROUP_ADD(cid)          {return "new-group-form?cid=" + cid;},
-    COMPETITION_GROUP_DEL(cid, gid)     {return "competition-group-del?cid=" + cid + "&gid=" + gid;},
+    COMPETITION_GROUP_DEL(cid, gid)     {return "competition-group-del?cid=" + cid;},
     COMPETITION_GROUPS_PAIRS_FORM(cid)  {return "competition-pairs-refresh?cid=" + cid;},
     COMPETITION_MEMBERS_SORT(cid)       {return "competition-members-sort?cid=" + cid;},
 
@@ -27,7 +27,7 @@ const backendLinks = {
     GROUP_SPORTSMENS_ADD(cid, gid)      {return "group-sportsmens-add?cid=" + cid + "&gid=" + gid;},
     GROUP_SPORTSMEN_DEL(cid, gid)       {return "group-sportsmen-del?cid=" + cid + "&gid=" + gid;},
     GROUP_PAIRS_REFRESH(cid, gid)       {return "group-pairs-refresh?cid=" + cid + "&gid=" + gid;},
-    GROUP_PAIR_WINNER(cid, gid)         {return "pair-member-win?cid=" + cid + "&gid=" + gid;},
+    GROUP_PAIR_WINNER(cid, gid, pid)    {return "pair-member-win?cid=" + cid + "&gid=" + gid + "&pid=" + pid;},
 
     SPORTSMEN_GET:                      "member-get?",
     SPORTSMEN_INFO_EDIT:                "member-info-edit",
@@ -38,7 +38,7 @@ const backendLinks = {
     CLIENT_STATUS_GET:                  "client-status-get"
 };
 
-export const departmentOp = {
+const departmentOp = {
     getId(dep)             {return dep.get("Id");},
     getName(dep)           {return dep.get("Name");},
     getCompetitions(dep)   {return dep.get("Competitions");},
@@ -47,7 +47,7 @@ export const departmentOp = {
     getQualifications(dep) {return dep.get("Qualifications");},
 }
 
-export const competitionOp = {
+const competitionOp = {
     getId(comp)             {return comp.get("Id");},
     getName(comp)           {return comp.get("Name");},
     getDescription(comp)    {return comp.get("Description");},
@@ -55,7 +55,7 @@ export const competitionOp = {
     getGroups(comp)         {return comp.get("Groups");}
 }
 
-export const sportsmanOp = {
+const sportsmanOp = {
     getId(sp)               {return sp.get("Id");},
     getName(sp)             {return sp.get("Name");},
     getSurname(sp)          {return sp.get("Surname");},
@@ -75,7 +75,7 @@ export const sportsmanOp = {
     getLinkFromCompetition(sp)  {return "/sportsman?sid=" + this. getId(sp);}
 }
 
-export const groupOp = {
+const groupOp = {
     getId(gr)           {return gr.get("Id");},
     getName(gr)         {return gr.get("Name");},
     getFormSystem(gr)   {return gr.get("Form_sys");},
@@ -89,7 +89,32 @@ export const groupOp = {
     getDiscipline(gr)   {return gr.get("Division");},
     getSportsmans(gr)   {return gr.get("Members");},
     getSportsNum(gr)    {return gr.get("Members_num");},
+    getPairs(gr)        {return gr.get("Pairs");},
     getLink(gr)         {return "/group?gid=" + this.getId(gr);}
+}
+
+const pairsOp = {
+    getId(pr)           {return pr.get("Id");},
+    getRedSp(pr)        {return pr.get("Sportsman_red");},
+    getBlueSp(pr)       {return pr.get("Sportsman_blue");},
+    getWinner(pr)       {return pr.get("Winner");},
+    getNumber(pr)       {return pr.get("Number");},
+    getFinalPart(pr)    {return pr.get("Final_part");},
+    getChildPair(pr)    {return pr.get("Child_pair");},
+    getGridRow(pr)      {return pr.get("Grid_row");},
+    getGridCol(pr)      {return pr.get("Grid_col");},
+    setGridRow(pr, v)   { pr.set("Grid_row", v);},
+    setGridCol(pr, v)   { pr.set("Grid_col", v);},
+    
+}
+
+export const ops = {
+    department:     departmentOp,
+    competition:    competitionOp,
+    sportsman:      sportsmanOp,
+    group:          groupOp,
+    pair:           pairsOp
+
 }
 
 function sendRequest(request) {
@@ -123,7 +148,6 @@ function sendParametersList(formName, paramsMap, refresh) {
 
 function sendSingleValue(link, value, refresh){
     var paramsMap = new Map();
-    console.log("Link: " + link + " vale: " + value);
     paramsMap.set(link, value);
     sendParametersList(link, paramsMap, refresh);
 }
@@ -164,14 +188,14 @@ function addCpSportsmans(cid, spArray){
     var params = new Map();
 
     spArray.forEach(sp => {
-        var value = "admition=" + sportsmanOp.getAdmition(sp) + "<paramDivider>disciplines="
-        var disciplines = sportsmanOp.getDisciplines(sp);
+        var value = "admition=" + ops.sportsman.getAdmition(sp) + "<paramDivider>disciplines="
+        var disciplines = ops.sportsman.getDisciplines(sp);
         var first = true;
         disciplines.forEach(d => {
             value += first ? d : (arrayDivider + d);
             first = false;
         });
-        params.set(sportsmanOp.getId(sp), value);
+        params.set(ops.sportsman.getId(sp), value);
     });
     console.log(params);
     sendParametersList(backendLinks.COMPETITION_SPORTSMEN_ADD(cid), params, true);
@@ -267,7 +291,10 @@ export const server = {
         qualMin, qualMax)               {editCpGroup(cid, gid, name, discipline, pairsSystem, sex, 
                                             ageMin, ageMax, weightMin, weightMax, qualMin, qualMax)},
     getGroup(cid, gid)                  {return sendRequest(backendLinks.GROUP_GET(cid, gid));},
-    removeGroupSportsman(cid, gid, sid) {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
+    delGroup(cid, gid)                  {return sendSingleValue(backendLinks.COMPETITION_GROUP_DEL(cid), gid, false);},
 
-    refreshPairs(cid)                   {return sendRequest(backendLinks.COMPETITION_GROUPS_PAIRS_FORM(cid));}
+    removeGroupSportsman(cid, gid, sid) {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
+    addGroupSportsList(cid, gid, sids)  {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
+    setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);},
+    refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid));}
 }

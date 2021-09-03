@@ -1,5 +1,5 @@
-import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem} from "./common.js"
-import {departmentOp, competitionOp, groupOp, sportsmanOp, server} from "./communication.js"
+import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem, arrayDivider, refreshPage} from "./common.js"
+import {ops, server} from "./communication.js"
 
 const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 const departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
@@ -11,313 +11,137 @@ const page = {
 var groupInfo             = server.getGroup(page.cid, page.gid);
 const departmentInfo      = server.getDepartment();
 const competitionInfo     = server.getCompetition(page.cid);
-const qualificationsMap   = departmentOp.getQualifications(departmentInfo);
-var competitionSportsmans = competitionOp.getSportsmans(competitionInfo);
-var membersToAdd          = new Array(0);
+const qualificationsMap   = ops.department.getQualifications(departmentInfo);
+var competitionSportsmans = ops.competition.getSportsmans(competitionInfo);
+var sportsmansAddList     = new Array(0);
 
 console.log(groupInfo);
 
-var groupForm = new Map();
-groupForm.set( "name",           document.getElementById("new-group-name"));
-groupForm.set( "division",       document.getElementById("create-group-division"));
-groupForm.set( "sexIsOn",        document.getElementById("gender-checkbox"));
-groupForm.set( "sexIsMale",      document.getElementById("create-ng-male"));
-groupForm.set( "sexIsFemale",    document.getElementById("create-ng-female"));
-groupForm.set( "ageIsOn",        document.getElementById("age-checkbox"));
-groupForm.set( "ageMin",         document.getElementById("age-min"));
-groupForm.set( "ageMax",         document.getElementById("age-max"));
-groupForm.set( "weightIsOn",     document.getElementById("weight-checkbox"));
-groupForm.set( "weightMin",      document.getElementById("weight-min"));
-groupForm.set( "weightMax",      document.getElementById("weight-max"));
-groupForm.set( "qualIsOn",       document.getElementById("qualification-checkbox"));
-groupForm.set( "qualMin",        document.getElementById("ng-members-qualification-min"));
-groupForm.set( "qualMax",        document.getElementById("ng-members-qualification-max"));
-groupForm.set( "formSystem",     document.getElementById("pairs-form-system"));
+/* ------------------- PAIRS ----------------------------*/
+const pairObjects = {
+    redBtnStyle:     "red-button-style",
+    blueBtnStyle:    "blue-button-style",
+    redWinStyle:     "red-cell-style",
+    blueWinStyle:    "blue-cell-style",
 
+    getTable()                  { return document.getElementById("pairs-table");},
+    getTemplate()               { return document.getElementById("pair-template");},
 
-function isMainGroupParamsOk(){
-    if(isEmptyString(groupForm.get("name").value)){
-        alert("Empty group name!");
-        return false;
-    }
-    return true;
+    getPlaceholders(p)          { return {
+                                        "#pair-id":         ops.pair.getId(p),
+                                        "#final-part":      "1/" + ops.pair.getFinalPart(p),
+                                        "#red-sportsman":   getSportsName(ops.pair.getRedSp(p)),
+                                        "#blue-sportsman":  getSportsName(ops.pair.getBlueSp(p)),
+                                        "#pair-winner":     getPairWinner(p),
+                                        "#winner-style":    getWinStyle(p)
+                                    };
+                                },
+    createWinBtn(stl, id)       {   var res = document.createElement("button");
+                                    res.setAttribute("class", stl);
+                                    res.setAttribute("type", "button");
+                                    res.setAttribute("id", ((stl == this.redBtnStyle) ? "red-btn-" : "blue-btn-") + id);
+                                    return res;
+                                },
+    createWinBtns(id)           {   var redBtn = this.createWinBtn(this.redBtnStyle, id);
+                                    var blueBtn = this.createWinBtn(this.blueBtnStyle, id);
+                                    var ctnr = document.createElement("div");
+                                    ctnr.append(redBtn);
+                                    ctnr.append(blueBtn);
+                                    return ctnr.innerHTML;
+                                },
+    confiWinBtn(id)             {onClick(document.getElementById("red-btn-" + id), function(){server.setPairWinner(page.cid, page.gid, id, "red")});
+                                 onClick(document.getElementById("blue-btn-" + id), function(){server.setPairWinner(page.cid, page.gid, id, "blue")});}
 }
 
-function isAgeOk(){
-    var ageMin = groupForm.get("ageMin").value;
-    var ageMax = groupForm.get("ageMax").value;
-    if(!isNumber(ageMin)){
-        alert("Bad minimal age!");
-        return false;
-    }
-    if(!isNumber(ageMax)){
-        alert("Bad maximal age!");
-        return false;
-    }
-    if((Number(ageMax) - Number(ageMin)) < 0){
-        alert("Maximal age must be greater than minimal!");
-        return false;
-    }
-    return true;
-}
-
-function isWeightOk(){
-    var weightMin = groupForm.get("weightMin").value;
-    var weightMax = groupForm.get("weightMax").value;
-    if(!isNumber(weightMin)){
-        alert("Bad minimal weight!");
-        return false;
-    }
-    if(!isNumber(weightMax)){
-        alert("Bad maximal weight!");
-        return false;
-    }
-    if((Number(weightMax) - Number(weightMin)) < 0){
-        alert("Maximal weight must be greater than minimal!");
-        return false;
-    }
-    return true;
-}
-
-function isQualificationOk(){
-    var qualMinVal = groupForm.get("qualMin").value;
-    var qualMaxVal = groupForm.get("qualMax").value;
-
-    if(qualMinVal == undefined || qualMaxVal == undefined){
-        alert("Undefined qualifications value!");
-        return false;
-    }
-    if(qualMinVal > qualMaxVal){
-        alert("Maximal value must greater than minimal!");
-        return false;
-    }
-
-    return true;
-}
-
-function memberNameGet(id){
-    console.log(id);
+function getSportsName(id){
     if(!isNumber(id)){
         return "Winner of " + id;
     }
-    var member = groupInfo.get("Members").find( memb => memb.get("id") == id );
-    if(member == undefined){
+    var sports = ops.group.getSportsmans(groupInfo).find( sp => ops.sportsman.getId(sp) == id);
+    if(sports == undefined) return "";
+    return ops.sportsman.getSurname(sports) + " " + ops.sportsman.getName(sports);
+}
+
+function getWinStyle(pair){
+    var winner = ops.pair.getWinner(pair);
+    if(isEmptyString(winner)){
         return "";
+    } else if(winner == ops.pair.getRedSp){
+        return pairObjects.redWinStyle;
+    } else{
+        return pairObjects.blueWinStyle;
     }
-    return member.get("name") + " " + member.get("surname");
 }
 
-function sendNotification(name, value) {
-    var header = (name == "group-delete") ? '/competition-edition' : '/group-edit';
-    var paramsMap = new Map();
-    paramsMap.set(name, value);
-    header += "?cid=" + page.cid + "&gid=" + page.gid;
-    sendForm(header, paramsMap, false);
-}
-
-function sendGroupForm() {
-    if(!isMainGroupParamsOk()) return;
-
-    var paramsMap = new Map();
-
-    paramsMap.set("group-name",     groupForm.get("name").value);
-    paramsMap.set("group-division", groupForm.get("division").value);
-    paramsMap.set("form-system",    groupForm.get("formSystem").value);
-
-    if(groupForm.get("ageIsOn").checked){
-        if(!isAgeOk()) return;
-        paramsMap.set("age-min", groupForm.get("ageMin").value);
-        paramsMap.set("age-max", groupForm.get("ageMax").value);
-    }
-
-    if(groupForm.get("weightIsOn").checked){
-        if(!isWeightOk()) return;
-        paramsMap.set("weight-min", groupForm.get("weightMin").value);
-        paramsMap.set("weight-max", groupForm.get("weightMax").value);
-    }
-
-    if(groupForm.get("qualIsOn").checked){
-        if(!isQualificationOk()) return;
-        paramsMap.set("qualification-min", groupForm.get("qualMin").value);
-        paramsMap.set("qualification-max", groupForm.get("qualMax").value);
-    }
-
-    if(groupForm.get("sexIsOn").checked){
-        paramsMap.set("sex", groupForm.get("sexIsMale").checked ? "male" : "female");
-    }
-    console.log(paramsMap);
-    sendForm("/group-edit?cid=" + page.cid + "&gid=" + page.gid, paramsMap, true);
-}
-
-function deleteGroup(){
-    sendNotification("group-delete", page.gid);
-}
-
-function memberDelete(id){
-    var table = document.getElementById("members-table");
-    var memberName = memberNameGet(id);
-
-    for(var i = 2; i < table.rows.length; i++) {
-        if(table.rows[i].cells[0].innerHTML.localeCompare(memberName) == 0){
-            table.deleteRow(i);
-            sendNotification("group-member-delete", id);
-            setTimeout(refreshPairs, 1000);
-            return;
-        }
-    }
-
-}
-
-function putMemberToAdd(id){
-    var member = competitionInfo.get("Members").find( memb => memb.get("id") == id);
-    var memberRow = document.getElementById("comp-member-" + id);
-    if(member == undefined) return;
-
-    if(membersToAdd.find( memb => memb.get("id") == id) == undefined){
-        membersToAdd.push(member);
-        memberRow.setAttribute("class", "selected-row");
+function getPairWinner(pair){
+    var winner = ops.pair.getWinner(pair);
+    if(isEmptyString(winner)){
+        if(!isNumber(ops.pair.getRedSp(pair)) || !isNumber(ops.pair.getBlueSp(pair)))
+            return "";
+        return pairObjects.createWinBtns(ops.pair.getId(pair));
     } else {
-        var pos = membersToAdd.indexOf(member);
-        membersToAdd.splice(pos, 1);
-        memberRow.setAttribute("class", "non-selected-row");
+        return getSportsName(winner);
     }
-    console.log(membersToAdd);
 }
 
-function pairSetWinner(id, color) {
-    var paramsMap = new Map();
-    paramsMap.set("color", color);
-    sendForm(window.location.href + '/pair-member-win?pid=' + id, paramsMap, true);
-}
-
-function pairWinnerElementCreate(pair, template){
-
-    if(!isEmptyString(pair.get("winner"))){
-        console.log("Set winner: " + pair.get("winner"));
-        template.getElementById("pair-winner").innerHTML = memberNameGet(pair.get("winner"));
-        template.getElementById("pair-winner").setAttribute("class",
-            (pair.get("winner") == pair.get("member_red")) ? "red-cell-style" : "blue-cell-style");
-        return;
+function pairPageElementAdd(pair){
+    if(ops.pair.getId(pair) == undefined) return;
+    var unknowWinner = isEmptyString(ops.pair.getWinner(pair));
+    var unknowMember = !isNumber(ops.pair.getRedSp(pair)) || !isNumber(ops.pair.getBlueSp(pair));
+    var template = pairObjects.getTemplate();
+    var placeholders = pairObjects.getPlaceholders(pair);
+    var newItem = createPageItem(template, placeholders);
+    pairObjects.getTable().append(newItem); 
+    if(unknowWinner && !unknowMember) {
+        pairObjects.confiWinBtn(ops.pair.getId(pair));
     }
-    template.getElementById("red-member-win")
-        .addEventListener("click", function(){pairSetWinner(pair.get("id"), "red")}, false);
-        template.getElementById("blue-member-win")
-        .addEventListener("click", function(){pairSetWinner(pair.get("id"), "blue")}, false);
-}
-
-function pairElementCreate(pair){
-    if(pair.get("id") == undefined){
-        return "";
-    }
-    var template = document.getElementById("pair-template").content.cloneNode(true);
-    var memberRedId = pair.get("member_red");
-    var memberBlueId = pair.get("member_blue");
-    var redLink = prevPage + "/member?mid=" + memberRedId;
-    var blueLink = prevPage + "/member?mid=" + memberBlueId;
-
-    template.getElementById("pair-id").innerHTML = pair.get("id");
-    template.getElementById("pair-red").innerHTML = memberNameGet(memberRedId);
-    template.getElementById("pair-blue").innerHTML = memberNameGet(memberBlueId);
-    pairWinnerElementCreate(pair, template);
-
-    if(Number(memberRedId) >= 0){
-        template.getElementById("pair-red")
-            .setAttribute("onclick", "window.location.href='" + redLink + "'; return false");
-    }
-    if(Number(memberBlueId) >= 0){
-        template.getElementById("pair-blue")
-            .setAttribute("onclick", "window.location.href='" + blueLink + "'; return false");
-    }
-    return template;
-}
-
-function memberElementCreate(member){
-    if(member.get("id") == undefined) return "";
-    var template = document.getElementById("group-member-template").content.cloneNode(true);
-    template.getElementById("member-name").innerHTML = member.get("name") + " " + member.get("surname");
-    template.getElementById("member-age").innerHTML = member.get("age");
-    template.getElementById("member-weight").innerHTML = member.get("weight");
-    template.getElementById("member-sex").innerHTML = member.get("sex");
-    template.getElementById("member-team").innerHTML = member.get("team");
-    template.getElementById("member-qualification").innerHTML = qualificationsMap.get(member.get("qualification"));
-    template.getElementById("member-admited").innerHTML = member.get("admited");
-    template.getElementById("member-name").setAttribute("onclick", "window.location.href='"
-                                    + prevPage + "/member?mid=" + member.get("id") + "'; return false");
-    template.getElementById("member-dell-btn").addEventListener("click", function(){memberDelete(member.get("id"))}, false);
-    return template;
 }
 
 function refreshPairs(){
-    var pairsTable = document.getElementById("pairs-table");
-    groupInfo = sendRequest("/group-pairs-refresh?cid=" + page.cid + "&gid=" + page.gid);
-    while(pairsTable.rows.length > 2){
-        pairsTable.deleteRow(pairsTable.rows.length - 1);
-    }
-    groupInfo.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
-    showAllIfAdmin();
-}
-
-function addMembersToGroup()
-{
-    if(membersToAdd.length < 1)
-        return;
-
-    var paramsMap = new Map();
-    var first = true;
-    var membersIds = "";
-
-    membersToAdd.forEach(memb => {
-        membersIds += (first ? memb.get("id") : ("," + memb.get("id")));
-        first = false;
-    });
-    paramsMap.set("group-members-add",  membersIds);
-    sendForm("/group-edit?cid=" + page.cid + "&gid=" + page.gid, paramsMap, true);
+    server.refreshPairs(page.cid, page.gid);
+    refreshPage();
 }
 
 /* ------------------- SPORTSMANS ----------------------------*/
 const sportsmanObjects = {
     sportsmanRowId:     "sports-row-id-",
     removeBtnId:        "remove-gr-sports-",
+    addBtnId:           "sportsmans-add-list-send-btn",
 
     getTable()                  { return document.getElementById("members-table");},
     getTemplate()               { return document.getElementById("group-member-template");},
 
     getAddingTable()            { return document.getElementById("add-sportsman-table");},
     getAddingTemplate()         { return document.getElementById("add-sportsman-template");},
-/*    getAddSportsRowId(id)       { return "add-sports-" + id},
+    getAddingSportsRow(id)      { return document.getElementById("add-sports-" + id)},
 
-    getAddingRow(id)            { return document.getElementById("adding-row-sportsman-" + id);},
-    setAddingRowId(row, id)     { row.setAttribute("id", "adding-row-sportsman-" + id);},
-    getAddingRowTemplate()      { return document.getElementById("add-settings-template");},
-    getSportsAdmition(row)      { return row.querySelector('#admitted').checked ? "true" : "false";},
-    isCheckedDisc(row, num)     { return row.querySelector("#discipline-" + num).checked;},
-*/
     getPlaceholders(sp)         { return {
-                                        "#sp-id":           sportsmanOp.getId(sp),
-                                        "#sp-surname":      sportsmanOp.getSurname(sp),
-                                        "#sp-name":         sportsmanOp.getName(sp),
-                                        "#sp-age":          sportsmanOp.getAge(sp),
-                                        "#sp-weight":       sportsmanOp.getWeight(sp),
-                                        "#sp-sex":          sportsmanOp.getSex(sp),
-                                        "#sp-team":         sportsmanOp.getTeam(sp),
-                                        "#sp-qual":         qualificationsMap.get(sportsmanOp.getQualification(sp)),
-                                        "#sp-admit":        sportsmanOp.getAdmition(sp),
-                                        "#sp-gr-num":       sportsmanOp.getGroupsNum(sp),
-                                        "#sportsman-link":  competitionLink + sportsmanOp.getLinkFromCompetition(sp),
-                                        "#sports-row-id":   this.sportsmanRowId + sportsmanOp.getId(sp)
+                                        "#sp-id":           ops.sportsman.getId(sp),
+                                        "#sp-surname":      ops.sportsman.getSurname(sp),
+                                        "#sp-name":         ops.sportsman.getName(sp),
+                                        "#sp-age":          ops.sportsman.getAge(sp),
+                                        "#sp-weight":       ops.sportsman.getWeight(sp),
+                                        "#sp-sex":          ops.sportsman.getSex(sp),
+                                        "#sp-team":         ops.sportsman.getTeam(sp),
+                                        "#sp-qual":         qualificationsMap.get(ops.sportsman.getQualification(sp)),
+                                        "#sp-admit":        ops.sportsman.getAdmition(sp),
+                                        "#sp-gr-num":       ops.sportsman.getGroupsNum(sp),
+                                        "#sportsman-link":  competitionLink + ops.sportsman.getLinkFromCompetition(sp),
+                                        "#sports-row-id":   this.sportsmanRowId + ops.sportsman.getId(sp)
                                     };
                                 },
     getSportsRow(id)            { return document.getElementById(this.sportsmanRowId + id);},
+    getAddBtn()                 { return document.getElementById(this.addBtnId);},
     configDelBtn(item, sp)      {var btn = item.getElementById(this.removeBtnId); 
-                                    onClick(btn, function(){sportsmanRemove(sportsmanOp.getId(sp))});
-                                    btn.id = this.removeBtnId + sportsmanOp.getId(sp);
+                                    onClick(btn, function(){sportsmanRemove(ops.sportsman.getId(sp))});
+                                    btn.id = this.removeBtnId + ops.sportsman.getId(sp);
                                 },
     getDelBtn()                 { return document.getElementById("member-dell-btn");}
 }
 
 function excludeCompetitionSportsman(sp){
     for(var i = 0; i < competitionSportsmans.length; i++){
-        if(sportsmanOp.getId(sp) == sportsmanOp.getId(competitionSportsmans[i])){
+        if(ops.sportsman.getId(sp) == ops.sportsman.getId(competitionSportsmans[i])){
             competitionSportsmans.splice(i, 1);
             return;
         }
@@ -326,11 +150,11 @@ function excludeCompetitionSportsman(sp){
 
 function sportsmanRemove(id){
     var spRow = sportsmanObjects.getSportsRow(id);
-    var sportsmans = groupOp.getSportsmans(groupInfo);
+    var sportsmans = ops.group.getSportsmans(groupInfo);
     if(null != spRow)
         spRow.parentElement.removeChild(spRow);
     for(var i = 0; i < sportsmans.length; i++){
-        if(id == sportsmanOp.getId(sportsmans[i])){
+        if(id == ops.sportsman.getId(sportsmans[i])){
             sportsmans.splice(i, 1);
             break;
         }
@@ -339,28 +163,187 @@ function sportsmanRemove(id){
     server.removeGroupSportsman(page.cid, page.gid, id);
 }
 
+function sportsmanAddingSelect(sid){
+    var spRow   = sportsmanObjects.getAddingSportsRow(sid);
+    var sp      = sportsmansAddList.find( curSp => ops.sportsman.getId(curSp) == sid);
+    console.log("Select callback: " + sid);
+    if(sp == undefined) {
+        sp = competitionSportsmans.find( curSp => ops.sportsman.getId(curSp) == sid);
+        spRow.setAttribute("class", "dynamic-table-th--selected");
+        sportsmansAddList.push(sp);
+    } else {
+        spRow.setAttribute("class", "");
+        for(var i = 0; i < sportsmansAddList.length; i++){
+            if(sid == ops.sportsman.getId(sportsmansAddList[i])){
+                sportsmansAddList.splice(i, 1);
+                break;
+            }
+        }
+    }
+}
+
 function competitionSportsmanElementAdd(sp){
-    if(sportsmanOp.getId(sp) != undefined){
+    var sid = ops.sportsman.getId(sp);
+    if(sid != undefined){
         var template = sportsmanObjects.getAddingTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
         var newItem = createPageItem(template, placeholders);
         sportsmanObjects.getAddingTable().append(newItem);
-
-        //var row = document.getElementById(sportsmanObjects.getAddSportsRowId(sportsmanOp.getId(sp)));
-        //onClick(row, function(){sportsmanAddingSelect(sportsmanOp.getId(sp))});
+        onClick(sportsmanObjects.getAddingSportsRow(sid), function(){sportsmanAddingSelect(sid)});
+        
     }
 }
 
 function sportsmanPageElementAdd(sp){
-    if(sportsmanOp.getId(sp) != undefined){
+    if(ops.sportsman.getId(sp) != undefined){
         excludeCompetitionSportsman(sp);
         var template = sportsmanObjects.getTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
         var newItem = createPageItem(template, placeholders);
         sportsmanObjects.getTable().append(newItem); 
-        onClick(document.getElementById(sportsmanObjects.removeBtnId + sportsmanOp.getId(sp)), function(){sportsmanRemove(sportsmanOp.getId(sp))});
+        onClick(document.getElementById(sportsmanObjects.removeBtnId + ops.sportsman.getId(sp)), function(){sportsmanRemove(ops.sportsman.getId(sp))});
     }
+}
+
+function addSportsmansList()
+{
+    var sids = "";
+    sportsmansAddList.forEach(sp =>   sids += ops.sportsman.getId(sp) + arrayDivider);
+    server.addGroupSportsList(page.cid, page.gid, sids);
+}
+
+/* ------------------- PAIRS GRID ----------------------------*/
+const gridObjects = {
+    sc: 30,
+}
+
+function setColsForPairs(){
+    var maxPart = 1;
+    ops.group.getPairs(groupInfo).forEach(pr =>  {
+        var curPart = Number(ops.pair.getFinalPart(pr));
+        if(curPart > maxPart) maxPart = curPart;
+    });
+    var colMap = new Map();
+    var curCol = 0;
+
+    for(var i = maxPart; i >= 1; i /= 2){
+        colMap.set("" + i, curCol);
+        curCol++;
+    }
+    ops.group.getPairs(groupInfo).forEach(pair =>  {
+        ops.pair.setGridCol(pair, colMap.get(ops.pair.getFinalPart(pair)));
+    });
+}
+
+function getParentPair(childId, spId){
+    var res = ops.group.getPairs(groupInfo).find(pair => {
+        if(childId  != ops.pair.getChildPair(pair)) return false;
+        if(spId     == ops.pair.getWinner(pair))    return true;
+        if(spId     == ops.pair.getRedSp(pair))     return true;
+        if(spId     == ops.pair.getBlueSp(pair))    return true;
+        if(spId     == ops.pair.getId(pair))        return true;
+        return false;
+    });
+    return res;
+}
+
+function setRowsForPairs(){
+    var pairsArray = new Array(0);
+    var finalPair = ops.group.getPairs(groupInfo).find( pr => (ops.pair.getFinalPart(pr) == "1") );
     
+    ops.pair.setGridRow(finalPair, 0);
+    pairsArray.push(finalPair);
+    while(pairsArray.length > 0){
+        var firstPair = pairsArray[0];
+        var rowNum = ops.pair.getGridRow(firstPair);
+        var redPair =   getParentPair(ops.pair.getId(firstPair), ops.pair.getRedSp(firstPair));
+        var bluePair =  getParentPair(ops.pair.getId(firstPair), ops.pair.getBlueSp(firstPair));
+
+        if(redPair != undefined){
+            ops.pair.setGridRow(redPair, (rowNum * 2));
+            pairsArray.push(redPair);
+        }
+        if(bluePair != undefined){
+            ops.pair.setGridRow(bluePair, (rowNum * 2 + 1));
+            pairsArray.push(bluePair);
+        }
+        pairsArray.shift();
+    }
+}
+
+function drawLine(start, end, ctx, color){
+    ctx.beginPath()
+    ctx.strokeStyle = color
+    ctx.fillStyle = color
+    ctx.moveTo(start.x, start.y)
+    ctx.lineTo(end.x, end.y)
+    ctx.stroke()
+}
+
+function drawConnection(container, table, sizes, lineHigh, up){
+    lineHigh = lineHigh * sizes.scale + (sizes.scale / 2);
+
+    var canvas = document.createElement('canvas')
+    var ctx = canvas.getContext('2d')
+    var halfW = sizes.width/2
+    var fullW = sizes.width
+    var halfH = (sizes.height / 2) + (up ? lineHigh : 0)
+    var fullH = halfH + (up ? -lineHigh : lineHigh)
+    var color = up ? "blue" : "red";
+
+    canvas.style.position = 'absolute'
+    canvas.style.left = sizes.width + table.offsetLeft + "px"
+    canvas.style.top =(table.offsetTop - (up ? lineHigh : 0)) + "px"
+    canvas.width = sizes.width
+    canvas.height = lineHigh + sizes.height;
+
+    drawLine({x: 0,     y: halfH}, {x: halfW, y: halfH}, ctx, color);
+    drawLine({x: halfW, y: halfH}, {x: halfW, y: fullH}, ctx, color);
+    drawLine({x: halfW, y: fullH}, {x: fullW, y: fullH}, ctx, color);
+    container.append(canvas);
+}
+
+function drawPair(sizes, pair){
+    var container   = document.getElementById("pairs-grid");
+    var template    = document.getElementById("pair-tab-temp").content.cloneNode(true);
+    var table       = template.getElementById('pair-table');
+    var spRed       = template.getElementById('member-red-name');
+    var spBlue      = template.getElementById('member-blue-name');
+    var col         = ops.pair.getGridCol(pair);
+    var row         = ops.pair.getGridRow(pair);
+    var red_name    = getSportsName(ops.pair.getRedSp(pair));
+    var blue_name   = getSportsName(ops.pair.getBlueSp(pair));
+
+    var pairsDistY = Math.pow(2, (col + 2));
+    var tabPosX = 12 * sizes.scale * col;
+    var tabPosY = (((pairsDistY / 2) - 2) + (row * pairsDistY)) * sizes.scale ;
+
+    table.setAttribute("width", String(sizes.width));
+    table.setAttribute("height", String(sizes.height));
+    table.style.position = 'absolute';
+    table.style.left = tabPosX + "px";
+    table.style.top = tabPosY + "px";
+
+    spRed.innerHTML  = (red_name == "")  ? ("Winner of " + ops.pair.getRedSp(pair))  : red_name;
+    spBlue.innerHTML = (blue_name == "") ? ("Winner of " + ops.pair.getBlueSp(pair)) : blue_name;
+    container.append(table);
+    if(ops.pair.getFinalPart(pair) != "1"){
+        drawConnection(container, table, sizes, (Math.pow(2, (col + 1)) - 1), ((row % 2) == 0) ? false : true);
+    }
+}
+
+function drawGrid(){
+    setColsForPairs();
+    setRowsForPairs();
+
+    var pairSizes = {
+        scale: gridObjects.sc, 
+        width: (6 * gridObjects.sc), 
+        height: (2 * gridObjects.sc)
+    };
+    ops.group.getPairs(groupInfo).forEach(pair =>  {
+        drawPair(pairSizes, pair);
+    });
 }
 
 /* ------------------- COMMON ----------------------------*/
@@ -436,14 +419,12 @@ const groupObjects = {
                                 },
     getAndCleanPlace(id)        { var pl= document.getElementById(id); pl.innerHTML = ""; return pl;},
 
-    addSporsBtnId:      "members-add-btn",
     delBtnId:           "del-btn-link",
     editBtnId:          "group-edit-btn",
     updatePairsBtnId:   "update-pairs-btn",
     formGridBtnId:      "group-grid-btn",
 
     setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
-    getAddSportsmanBtn()        { return document.getElementById(this.addSporsBtnId);},
     getDelBtn()                 { return document.getElementById(this.delBtnId);},
     getEditBtn()                { return document.getElementById(this.editBtnId);},
     getUpdatePairsBtn()         { return document.getElementById(this.updatePairsBtnId);},
@@ -498,20 +479,20 @@ function groupInfoEdit(){
     qualMinPlace.appendChild(   groupObjects.createInput(groupObjects.inputQualMinId));
     qualMaxPlace.appendChild(   groupObjects.createInput(groupObjects.inputQualMaxId));
 
-    groupObjects.getNameInput().value       = groupOp.getName(groupInfo);
-    groupObjects.getAgeMinInput().value     = groupOp.getAgeMin(groupInfo);
-    groupObjects.getAgeMaxInput().value     = groupOp.getAgeMax(groupInfo);
-    groupObjects.getWeightMinInput().value  = groupOp.getWeightMin(groupInfo);
-    groupObjects.getWeightMaxInput().value  = groupOp.getWeightMax(groupInfo);
-    groupObjects.getSystemInput().value = groupOp.getFormSystem(groupInfo);
-    if(groupOp.getSex(groupInfo) != "")
-        groupObjects.getSexInput().value = groupOp.getSex(groupInfo);
+    groupObjects.getNameInput().value       = ops.group.getName(groupInfo);
+    groupObjects.getAgeMinInput().value     = ops.group.getAgeMin(groupInfo);
+    groupObjects.getAgeMaxInput().value     = ops.group.getAgeMax(groupInfo);
+    groupObjects.getWeightMinInput().value  = ops.group.getWeightMin(groupInfo);
+    groupObjects.getWeightMaxInput().value  = ops.group.getWeightMax(groupInfo);
+    groupObjects.getSystemInput().value = ops.group.getFormSystem(groupInfo);
+    if(ops.group.getSex(groupInfo) != "")
+        groupObjects.getSexInput().value = ops.group.getSex(groupInfo);
 
     var discList = groupObjects.getDisciplineInput();
-    departmentOp.getDisciplines(departmentInfo).forEach(dsc => {
+    ops.department.getDisciplines(departmentInfo).forEach(dsc => {
         var opt = groupObjects.createOption(dsc + "-id", dsc, dsc);
         discList.appendChild(opt);
-        if(groupOp.getDiscipline(groupInfo) == dsc)
+        if(ops.group.getDiscipline(groupInfo) == dsc)
             discList.value = dsc;
 
     });
@@ -522,66 +503,52 @@ function groupInfoEdit(){
         var optMax = groupObjects.createOption(name + "-max-id", name, value);
         qualMinList.appendChild(optMin);
         qualMaxList.appendChild(optMax);
-        if(groupOp.getQualMin(groupInfo) == value)
+        if(ops.group.getQualMin(groupInfo) == value)
             qualMinList.value = value;
 
-        if(groupOp.getQualMax(groupInfo) == value)
+        if(ops.group.getQualMax(groupInfo) == value)
             qualMaxList.value = value;
     });
 }
 
 
-function fillPageInfo(params){
+function fillPageInfo(){
     /*--------------------------------Main tables params--------------------------------------------------------------------------------*/
-    var qualMax = qualificationsMap.get(groupOp.getQualMax(groupInfo));
-    var qualMin = qualificationsMap.get(groupOp.getQualMin(groupInfo));
+    var qualMax = qualificationsMap.get(ops.group.getQualMax(groupInfo));
+    var qualMin = qualificationsMap.get(ops.group.getQualMin(groupInfo));
 
-    groupObjects.setPageName(competitionOp.getName(competitionInfo));
+    groupObjects.setPageName(ops.competition.getName(competitionInfo));
     groupObjects.setPageNameLink(competitionLink);
-    groupObjects.setCompetitionName(competitionOp.getName(competitionInfo));
+    groupObjects.setCompetitionName(ops.competition.getName(competitionInfo));
     groupObjects.setCompetitionLink(competitionLink);
-    groupObjects.setDepartmentName(departmentOp.getName(departmentInfo));
+    groupObjects.setDepartmentName(ops.department.getName(departmentInfo));
     groupObjects.setDepartmentLink(departmentLink);
-    groupObjects.setGroupName(groupOp.getName(groupInfo));
+    groupObjects.setGroupName(ops.group.getName(groupInfo));
     groupObjects.setGroupLink( window.location.href);
 
     groupObjects.setDelBtnLink(competitionLink);
-    groupObjects.setGroupHeader(groupOp.getName(groupInfo));
+    groupObjects.setGroupHeader(ops.group.getName(groupInfo));
 
-    groupObjects.setInfoName(       groupOp.getName(groupInfo));
-    groupObjects.setInfoSystem(     groupOp.getFormSystem(groupInfo));
-    groupObjects.setInfoDiscipline( groupOp.getDiscipline(groupInfo));
-    groupObjects.setInfoSex(        groupOp.getSex(groupInfo));
-    groupObjects.setInfoAgeMin(     groupOp.getAgeMin(groupInfo));
-    groupObjects.setInfoAgeMax(     groupOp.getAgeMax(groupInfo));
-    groupObjects.setInfoWeightMin(  groupOp.getWeightMin(groupInfo));
-    groupObjects.setInfoWeightMax(  groupOp.getWeightMax(groupInfo));
+    groupObjects.setInfoName(       ops.group.getName(groupInfo));
+    groupObjects.setInfoSystem(     ops.group.getFormSystem(groupInfo));
+    groupObjects.setInfoDiscipline( ops.group.getDiscipline(groupInfo));
+    groupObjects.setInfoSex(        ops.group.getSex(groupInfo));
+    groupObjects.setInfoAgeMin(     ops.group.getAgeMin(groupInfo));
+    groupObjects.setInfoAgeMax(     ops.group.getAgeMax(groupInfo));
+    groupObjects.setInfoWeightMin(  ops.group.getWeightMin(groupInfo));
+    groupObjects.setInfoWeightMax(  ops.group.getWeightMax(groupInfo));
     groupObjects.setInfoQulificationMin((qualMin == undefined) ? "" : qualMin);
     groupObjects.setInfoQulificationMax((qualMax == undefined) ? "" : qualMax);
 
-    groupOp.getSportsmans(groupInfo).forEach(sp => sportsmanPageElementAdd(sp));
+    ops.group.getSportsmans(groupInfo).forEach(sp => sportsmanPageElementAdd(sp));
     competitionSportsmans.forEach(sp => competitionSportsmanElementAdd(sp));
-    /*
-    
-    params.get("Pairs").forEach(pair =>   pairsTable.append(pairElementCreate(pair)));
-    */
-   
-    /*--------------------------------Adding members params--------------------------------------------------------------------------------*/
-    /*
-    competitionInfo.get("Members").forEach(compMember => {
-        if(params.get("Members").find( grMember => grMember.get("id") == compMember.get("id")) == undefined){
-            competitionListMembersAdd(compMember);
-        }
-    });
-    */
+    ops.group.getPairs(groupInfo).forEach(pair =>   pairPageElementAdd(pair));
 }
 
 function setBtnActions(){
-    onClick(groupObjects.getAddSportsmanBtn(),  addMembersToGroup);
-    onClick(groupObjects.getDelBtn(),           deleteGroup);
+    onClick(sportsmanObjects.getAddBtn(),       addSportsmansList);
+    onClick(groupObjects.getDelBtn(),           function(){server.delGroup(page.cid, page.gid)});
     onClick(groupObjects.getEditBtn(),          groupInfoEdit);
-
-
     onClick(groupObjects.getUpdatePairsBtn(),   refreshPairs);
     onClick(groupObjects.getFormGridBtn(),      {});
 
@@ -589,5 +556,6 @@ function setBtnActions(){
 
 fillPageInfo();
 setBtnActions();
+drawGrid();
 showAllIfAdmin();
 languageSwitchingOn();

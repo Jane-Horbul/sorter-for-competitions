@@ -148,8 +148,7 @@ function drawGrid(){
     };
     setColsForPairs();
     setRowsForPairs();
-    console.log(pageInfo.get("Pairs"));
-
+    
     pageInfo.get("Pairs").forEach(pair =>  {
         drawPair(sizes, pair);
     });
