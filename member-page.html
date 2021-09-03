@@ -51,100 +51,58 @@
                 <div class="container">
                     <ul class="group-page-header list">
                         <li><h1 id="member-name"></h1></li>
-                        <li>
-                            <div class="js-hidden-element member-page-btn-del">                
-                                <a id="priv-page-link">
-                                    <button  class="group-page-del-btn js-hidden-element" type="button" id="delete-member-btn">
-                                    <span class="group-card-btn-submit">Delete member</span></button>
-                                </a>
-                            </div>
-                        </li>
+                    
                     </ul>
                 </div>
 
-                <section class="member-info">
-                    <ul class="list flexbox">
-                        <li>
-                            <div class="group-info-main">
-                                <div id="member-info">
-                                    <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>Member info</span></div>
-                                        <a href="#popup_1" class="popup-link js-hidden-element">
-                                            <button class="group-info-edit-btn" type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/icons.svg#icon-pencil2"></use>
-                                                </svg>
-                                            </button>
-                                        </a>
-                                    </div>
+                <div class="tab">
+                    <button class="tablinks" onclick="openPage(event, 'Settings')" id="defaultOpen">Settings</button>
+                    <button class="tablinks" onclick="openPage(event, 'Statistics')">Statistics</button>
+                </div>
+
+
+                <div id="Settings" class="tabcontent">
+                    <div class="group-info-main">
+                        <div id="member-info">
+                            <div class="group-info-title--siting">
+
+                                <div class="group-info-title"><span>Member info</span></div>
+                                    <button class="group-info-edit-btn" type="button" id="group-edit-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/icons.svg#icon-pencil2"></use>
+                                        </svg>
+                                    </button>
                                 </div>
                                 <div class="group-info-fields">
                                     <div class="" id="member-info">
                                         <div class="group-info-fields--item"> Id:<span>&nbsp</span><div id="member-id">            </div></div>
-                                        <div class="group-info-fields--item"> Divisions:<span>&nbsp</span><div id="member-division">      </div></div>
                                         <div class="group-info-fields--item"> Age:<span>&nbsp</span><div id="member-age">           </div></div>
                                         <div class="group-info-fields--item"> Weight:<span>&nbsp</span><div id="member-weight">        </div></div>
                                         <div class="group-info-fields--item"> Gender:<span>&nbsp</span><div id="member-sex">           </div></div>
                                         <div class="group-info-fields--item"> Qualification:<span>&nbsp</span><div id="member-qulification">  </div></div>
-                                        <div class="group-info-fields--item"> Team:<span>&nbsp</span><div id="member-team">          </div> </div>
-                                        <div class="group-info-fields--item"> Admition:<span>&nbsp</span><div id="member-admit">         </div> </div>
+                                        <div class="group-info-fields--item"> Team:<span>&nbsp</span><div id="member-team">          </div> </div> 
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="group-info-tables">
-                                <div class="main-tables">
-                                    <div class="main-tables-member-item">
-                                        <table class="dynamic-table" id="groups-table">
-                                        
-                                                <th class="all-table-title group-info-table-title" colspan="8">Groups
-                                                    <a href="#popup_2" class="popup-link js-hidden-element" id="member-add-btn" >
-                                                        <button class="group-page-ref-btn" type="button" data-open-modal>
-                                                            <svg class="group-info-edit-btn-icon">
-                                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </a>  
-                                                </th>
-                                            
-                                            <tr>
-                                                <td class="secondary-title-tables--text">Name of group</td>
-                                                <td class="secondary-title-tables--text">Age of members</td>
-                                                <td class="secondary-title-tables--text">Sex</td>
-                                                <td class="secondary-title-tables--text">Division</td>
-                                                <td class="secondary-title-tables--text">Weight</td>
-                                                <td class="secondary-title-tables--text">Qualification</td>
-                                                <td class="secondary-title-tables--text">Members number</td>
-                                                <td class="column-for-button secondary-title-tables--text"></td>
-                                            </tr>
 
-                                            <template id="group-template">
-                                                <tr>
-                                                    <td class="secondary-tables--td" id="group-name">  </td>
-                                                    <td class="secondary-tables--td" id="group-age">  </td> 
-                                                    <td class="secondary-tables--td" id="group-sex">  </td>
-                                                    <td class="secondary-tables--td" id="group-division">  </td>
-                                                    <td class="secondary-tables--td" id="group-weight">  </td>
-                                                    <td class="secondary-tables--td" id="group-qualification">  </td>
-                                                    <td class="secondary-tables--td" id="group-members-num">  </td>
-                                                    <td  class="secondary-tables--td column-for-button js-visible-element"> 
-                                                        <button class="member-page-dell-btn" type="button" id="group-dell-btn">
-                                                            <svg class="group-info-edit-btn-icon">
-                                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                            </svg>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </table>
-                                    </div>
+                                <div class="member-page-btn-del js-hidden-element">                
+                                    <a id="del-btn-link">
+                                        <button class="group-page-del-btn js-hidden-element" type="button" id="delete-member-btn">
+                                        <span class="group-card-btn-del-text">Delete member</span>
+                                        </button>
+                                    </a>
+                                </div>
+
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                </div>
 
-                </section>
+                <div id="Statistics" class="tabcontent">
+                    <div>
+                        <h3>??????</h3>
+                    </div>
+                </div>
 
             </main>
             <footer>
@@ -317,6 +275,25 @@
             <script src="./scripts/member-page.js" type="module"></script>
             <script src="./scripts/open-close-popup.js" type="module"></script>  
         </div>
+
+        <script>
+            function openPage(evt, pageName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(pageName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            
+            document.getElementById("defaultOpen").click();
+            </script>
+
     </body>
 </html>
   
