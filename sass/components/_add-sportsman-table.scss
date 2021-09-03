@@ -1,0 +1,49 @@
+
+.add-sportsman-table {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 99%;
+    margin-bottom: 10px;
+  }
+
+  .add-sportsman-table tr {
+    height: 45px;
+  }
+
+  //.add-sportsman-table tr:nth-child(even) {
+  //  background-color: #e9f5ffc9;
+  //}
+  
+  //.add-sportsman-table tr:hover {
+    //background: rgb(201,230,255);
+//background: linear-gradient(0deg, rgba(201,230,255,1) 1%, rgba(255,255,255,1) 99%);
+  //}
+
+  
+  .add-sportsman-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $assent-color;
+    color: white;
+    border: 1px solid #ddd;
+  }
+
+  .add-sportsman-table-tr--selected { 
+    border: 2px solid #1e8e1b;
+    background-color: #c9ffe896; 
+   }
+   .add-sportsman-table-tr--selected:hover {
+    border: 2px solid #1e8e1b;
+   }
+
+   .add-sportsman-table-tr--active { 
+    border: 2px solid #1e8e1b;
+    background-color: #c9e6ff6e; 
+   }
+
+
+   .add-sportsman-table--title{
+    background-color: #c9e6ff; 
+   }

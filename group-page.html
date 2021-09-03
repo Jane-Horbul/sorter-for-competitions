@@ -66,14 +66,7 @@
                 <div class="container">
                     <ul class="group-page-header list">
                         <li><h1 id="group-name-header"></h1></li>
-                        <li>
-                            <div class="member-page-btn-del js-hidden-element">                
-                                <a id="del-btn-link">
-                                    <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
-                                    <span class="group-card-btn-del-text">Delete group</span></button>
-                                </a>
-                            </div>
-                        </li>
+                       
                     </ul>
                 </div>
 
@@ -139,11 +132,25 @@
                                             </tr>
                                         </table>
                                         
-                                        <div class="js-hidden-element">                
-                                        <button class="group-card-btn-submit js-hidden-element" type="button" id="group-grid-btn">
-                                            <span class="group-card-btn-submit-text">Form pair grid</span>
-                                        </button>
-                                        <br>
+                                        <ul class="list header-list">
+                                            <li class="header-item"> 
+                                                <div class="js-hidden-element">                
+                                                <button class="group-card-btn-submit js-hidden-element" type="button" id="group-grid-btn">
+                                                    <span class="group-card-btn-submit-text">Form pair grid</span>
+                                                </button>
+                                                </div>
+                                            </li>
+                                            <li class="header-item"> 
+                                                <div class="member-page-btn-del js-hidden-element">                
+                                                    <a id="del-btn-link">
+                                                        <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
+                                                        <span class="group-card-btn-del-text">Delete group</span>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -341,22 +348,24 @@
                     <div class="popup__content">
                         <a href="#" class="popup__close close-popup">X</a>
                         <form class="modal-form">
-                            <span class="modal-title">Add sportsman</span>
+                            <span class="modal-title">
+                                <h3>Add sportsman</h3>
+                            </span>
                             <div class="new-member-field">
-                                <table class="dynamic-table" id="add-sportsman-table">
+                                <table class="add-sportsman-table" id="add-sportsman-table">
                                     <tr>
                                         <th class="group-info-table-title all-table-title" colspan="7">
                                             <span>Sportsmans</span>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="secondary-title-tables--text">Surname</td>
-                                        <td class="secondary-title-tables--text">Name</td>
-                                        <td class="secondary-title-tables--text">Age</td>
-                                        <td class="secondary-title-tables--text">Weight</td>
-                                        <td class="secondary-title-tables--text">Sex</td>
-                                        <td class="secondary-title-tables--text">Team</td>
-                                        <td class="secondary-title-tables--text">Qualification</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Surname</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Name</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Age</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Weight</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Sex</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Team</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">Qualification</td>
                                     </tr>
     
                                     <template id="add-sportsman-template">
@@ -387,6 +396,8 @@
                                 <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
                                     <span class="modal-btn-submit-text">Add</span>
                                 </button>
+
+
                             
                             </div>
                         </form>
