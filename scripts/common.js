@@ -1,7 +1,9 @@
 import {server} from "./communication.js"
 
-export const arrayDivider = ", ";
-
+export const commonStrings = {
+    arrDivider: ", ",
+    pairWinner(id)  {return "Winner of pair " + id;}  
+}
 export function refreshPage(){
     var newLink = document.location.href.split("#")[0];
     document.location.replace(newLink);
@@ -46,7 +48,7 @@ export function getLinkParams(link){
 
 export function parseMap(str){
     var result = new Map();
-    str.split(arrayDivider).forEach(field => {
+    str.split(commonStrings.arrDivider).forEach(field => {
         var params =  field.split(" - ");
         if(params.length > 1){
             result.set(params[0], params[1]);
@@ -77,7 +79,7 @@ export function parseAnswerParams(answer){
             parseResult.set(params[0], params[1]);
         } else if(params[1].split("<Type array>").length > 1) {
             params[1] = params[1].split("<Type array>")[1];
-            var array = params[1].split(arrayDivider);
+            var array = params[1].split(commonStrings.arrDivider);
             if(array[0].length > 0)
                 parseResult.set(params[0], array);
             else

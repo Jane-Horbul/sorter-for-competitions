@@ -98,8 +98,8 @@ function sportsmanAddingSelect(sid){
     if(addingRow == undefined) {
         var newItem = createPageItem(sportsmanObjects.getAddingRowTemplate(), sportsmanObjects.getPlaceholders(sp));
         addingRow = table.insertRow(rowIndx);
-        table.rows[rowIndx - 1].setAttribute("class", "dynamic-table-th--selected");
-        table.rows[rowIndx].setAttribute("class", "dynamic-table-th--selected");
+        table.rows[rowIndx - 1].setAttribute("class", "add-sportsman-table-tr--selected");
+        table.rows[rowIndx].setAttribute("class", "add-sportsman-table-tr--active");
         sportsmanObjects.setAddingRowId(addingRow, sid);
         addingRow.append(newItem);
         sportsmansAddList.push(sp);

@@ -1,4 +1,4 @@
-import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem, arrayDivider, refreshPage} from "./common.js"
+import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem, commonStrings, refreshPage} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -169,7 +169,7 @@ function sportsmanAddingSelect(sid){
     console.log("Select callback: " + sid);
     if(sp == undefined) {
         sp = competitionSportsmans.find( curSp => ops.sportsman.getId(curSp) == sid);
-        spRow.setAttribute("class", "dynamic-table-th--selected");
+        spRow.setAttribute("class", "add-sportsman-table-tr--selected");
         sportsmansAddList.push(sp);
     } else {
         spRow.setAttribute("class", "");
@@ -208,35 +208,53 @@ function sportsmanPageElementAdd(sp){
 function addSportsmansList()
 {
     var sids = "";
-    sportsmansAddList.forEach(sp =>   sids += ops.sportsman.getId(sp) + arrayDivider);
+    sportsmansAddList.forEach(sp =>   sids += ops.sportsman.getId(sp) + commonStrings.arrDivider);
     server.addGroupSportsList(page.cid, page.gid, sids);
 }
 
 /* ------------------- PAIRS GRID ----------------------------*/
 const gridObjects = {
-    sc: 30,
+    scale:          30,
+    final:          1,
+    redFillColor:   "rgb(255,96,90)",
+    blueFillColor:  "rgb(0,148,204)",
+    shiftTextX:     10,
+    shiftTextY:     10,
+    
+    isFinalPair(pair)           {return (ops.pair.getFinalPart(pair) == "1");},
+    getPow(pair_num)            {
+                                    for(var i = 1, pn = 2; ; i++, pn *=2)
+                                        if(pn > pair_num)
+                                            return {pow: i, num: pn};
+                                },
+    
+    getGridWidh(pair_num)       {return ((this.getPairWidh() + this.getDistanceWidh())      * this.getPow(pair_num).pow);},
+    getGridHeight(pair_num)     {return ((this.getPairHeight() + this.getDistanceHeight())  * this.getPow(pair_num).num / 2);},
+
+    getPairWidh()               { return 6 * this.scale; },
+    getPairHeight()             { return 2 * this.scale; },
+    
+    getDistanceWidh()           { return this.getPairWidh() / 2; },
+    getDistanceHeight()         { return this.getPairHeight(); },
+    getContainer()              { return document.getElementById("pairs-grid"); },
+    createCanvas()              { 
+                                    var canvas              = document.createElement('canvas');
+                                    canvas.style.position   = 'fixed'
+                                    canvas.width            = this.getGridWidh(ops.group.getPairs(groupInfo).length);
+                                    canvas.height           = this.getGridHeight(ops.group.getPairs(groupInfo).length);
+                                    
+                                    var ctx                 = canvas.getContext('2d');
+                                    ctx.font                = "17px serif";
+                                    ctx.lineWidth           = 3;
+                                    return canvas;
+                                },
+    printText(ctx, text, x, y)  {ctx.fillText(text, x + this.shiftTextX, y - this.shiftTextY);}
 }
 
-function setColsForPairs(){
-    var maxPart = 1;
-    ops.group.getPairs(groupInfo).forEach(pr =>  {
-        var curPart = Number(ops.pair.getFinalPart(pr));
-        if(curPart > maxPart) maxPart = curPart;
-    });
-    var colMap = new Map();
-    var curCol = 0;
 
-    for(var i = maxPart; i >= 1; i /= 2){
-        colMap.set("" + i, curCol);
-        curCol++;
-    }
-    ops.group.getPairs(groupInfo).forEach(pair =>  {
-        ops.pair.setGridCol(pair, colMap.get(ops.pair.getFinalPart(pair)));
-    });
-}
 
-function getParentPair(childId, spId){
-    var res = ops.group.getPairs(groupInfo).find(pair => {
+function getParentPair(pairs, childId, spId){
+    var res = pairs.find(pair => {
         if(childId  != ops.pair.getChildPair(pair)) return false;
         if(spId     == ops.pair.getWinner(pair))    return true;
         if(spId     == ops.pair.getRedSp(pair))     return true;
@@ -247,103 +265,143 @@ function getParentPair(childId, spId){
     return res;
 }
 
-function setRowsForPairs(){
-    var pairsArray = new Array(0);
-    var finalPair = ops.group.getPairs(groupInfo).find( pr => (ops.pair.getFinalPart(pr) == "1") );
-    
-    ops.pair.setGridRow(finalPair, 0);
-    pairsArray.push(finalPair);
-    while(pairsArray.length > 0){
-        var firstPair = pairsArray[0];
-        var rowNum = ops.pair.getGridRow(firstPair);
-        var redPair =   getParentPair(ops.pair.getId(firstPair), ops.pair.getRedSp(firstPair));
-        var bluePair =  getParentPair(ops.pair.getId(firstPair), ops.pair.getBlueSp(firstPair));
+function createPairsGrid(pairs) {
+    var grid = new Array(0);
+    var finalPair = pairs.find( pr => (gridObjects.isFinalPair(pr)) );;
+    var lastCol = new Array(1);
+    var maxPairsInCol = 1;
 
-        if(redPair != undefined){
-            ops.pair.setGridRow(redPair, (rowNum * 2));
-            pairsArray.push(redPair);
+    lastCol[0] = finalPair;
+    grid.push(lastCol);
+    for(var i = 0; i < grid.length; i++)
+    {
+        var curCol = new Array(maxPairsInCol);
+        var found = false;
+        for(var j = 0; j < maxPairsInCol; j++)
+        {
+            var curPair = grid[0][j];
+            if(undefined == curPair) continue;
+            var spRed = getParentPair(pairs, ops.pair.getId(curPair), ops.pair.getRedSp(curPair));
+            var spBlu = getParentPair(pairs, ops.pair.getId(curPair), ops.pair.getBlueSp(curPair));
+            if(spRed != undefined)
+            {
+                found = true;
+                curCol[j * 2] = spRed;
+            }
+            if(spBlu != undefined)
+            {
+                found = true;
+                curCol[j * 2 + 1] = spBlu;
+            }   
         }
-        if(bluePair != undefined){
-            ops.pair.setGridRow(bluePair, (rowNum * 2 + 1));
-            pairsArray.push(bluePair);
-        }
-        pairsArray.shift();
+        if(found)
+            grid.unshift(curCol);
+        maxPairsInCol *=2;
     }
+    return grid;
 }
 
 function drawLine(start, end, ctx, color){
-    ctx.beginPath()
-    ctx.strokeStyle = color
-    ctx.fillStyle = color
-    ctx.moveTo(start.x, start.y)
-    ctx.lineTo(end.x, end.y)
-    ctx.stroke()
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.moveTo(start.x, start.y);
+    ctx.lineTo(end.x, end.y);
+    ctx.stroke();
 }
 
-function drawConnection(container, table, sizes, lineHigh, up){
-    lineHigh = lineHigh * sizes.scale + (sizes.scale / 2);
+function drawConnection(ctx, shiftX, shiftY, row, lineHigh){
+    var startX  = shiftX + gridObjects.getPairWidh();
+    var midleX  = startX + gridObjects.getDistanceWidh() / 2;
+    var endX    = startX + gridObjects.getDistanceWidh();
+    var startY  = shiftY + gridObjects.getPairHeight() / 2;
 
-    var canvas = document.createElement('canvas')
-    var ctx = canvas.getContext('2d')
-    var halfW = sizes.width/2
-    var fullW = sizes.width
-    var halfH = (sizes.height / 2) + (up ? lineHigh : 0)
-    var fullH = halfH + (up ? -lineHigh : lineHigh)
-    var color = up ? "blue" : "red";
+    if((row % 2) == 1)
+    {
+        var color   = gridObjects.blueFillColor;
+        var endY    = startY - lineHigh + gridObjects.getPairHeight() / 4;
+    }
+    else
+    {
+        var color   = gridObjects.redFillColor;
+        var endY    = startY + lineHigh - gridObjects.getPairHeight() / 4;
+    }
 
-    canvas.style.position = 'absolute'
-    canvas.style.left = sizes.width + table.offsetLeft + "px"
-    canvas.style.top =(table.offsetTop - (up ? lineHigh : 0)) + "px"
-    canvas.width = sizes.width
-    canvas.height = lineHigh + sizes.height;
-
-    drawLine({x: 0,     y: halfH}, {x: halfW, y: halfH}, ctx, color);
-    drawLine({x: halfW, y: halfH}, {x: halfW, y: fullH}, ctx, color);
-    drawLine({x: halfW, y: fullH}, {x: fullW, y: fullH}, ctx, color);
-    container.append(canvas);
+    drawLine({x: startX, y: startY}, {x: midleX, y: startY}, ctx, color);
+    drawLine({x: midleX, y: startY}, {x: midleX, y: endY}, ctx, color);
+    drawLine({x: midleX, y: endY},   {x: endX,   y: endY}, ctx, color);
 }
 
-function drawPair(sizes, pair){
-    var container   = document.getElementById("pairs-grid");
-    var template    = document.getElementById("pair-tab-temp").content.cloneNode(true);
-    var table       = template.getElementById('pair-table');
-    var spRed       = template.getElementById('member-red-name');
-    var spBlue      = template.getElementById('member-blue-name');
-    var col         = ops.pair.getGridCol(pair);
-    var row         = ops.pair.getGridRow(pair);
-    var red_name    = getSportsName(ops.pair.getRedSp(pair));
-    var blue_name   = getSportsName(ops.pair.getBlueSp(pair));
+function getGridPairNames(pair)
+{
+    var redId = ops.pair.getRedSp(pair);
+    var blueId = ops.pair.getBlueSp(pair);
+    var spRed    = ops.group.getSportsmans(groupInfo).find( sp => (ops.sportsman.getId(sp) == redId));
+    var spBlue   = ops.group.getSportsmans(groupInfo).find( sp => (ops.sportsman.getId(sp) == blueId));
+    var names = {red: "", blue: ""}; 
 
-    var pairsDistY = Math.pow(2, (col + 2));
-    var tabPosX = 12 * sizes.scale * col;
-    var tabPosY = (((pairsDistY / 2) - 2) + (row * pairsDistY)) * sizes.scale ;
+    if(spRed == undefined)
+        names.red = commonStrings.pairWinner(redId);
+    else
+        names.red = ops.sportsman.getSurname(spRed) + " " + ops.sportsman.getName(spRed);
 
-    table.setAttribute("width", String(sizes.width));
-    table.setAttribute("height", String(sizes.height));
-    table.style.position = 'absolute';
-    table.style.left = tabPosX + "px";
-    table.style.top = tabPosY + "px";
+    if(spBlue == undefined)
+        names.blue = commonStrings.pairWinner(blueId);
+    else
+        names.blue = ops.sportsman.getSurname(spBlue) + " " + ops.sportsman.getName(spBlue);
+    return names;
+}
 
-    spRed.innerHTML  = (red_name == "")  ? ("Winner of " + ops.pair.getRedSp(pair))  : red_name;
-    spBlue.innerHTML = (blue_name == "") ? ("Winner of " + ops.pair.getBlueSp(pair)) : blue_name;
-    container.append(table);
-    if(ops.pair.getFinalPart(pair) != "1"){
-        drawConnection(container, table, sizes, (Math.pow(2, (col + 1)) - 1), ((row % 2) == 0) ? false : true);
+function drawPair(ctx, shiftX, shiftY, pair){
+    var width       = gridObjects.getPairWidh();
+    var height      = gridObjects.getPairHeight();
+    var midleHeight = height / 2;
+    var midleY      = shiftY + midleHeight;
+    var names       = getGridPairNames(pair);
+    
+    ctx.fillStyle = gridObjects.redFillColor;
+    ctx.fillRect(shiftX, shiftY, width, midleHeight);
+    ctx.fillStyle = gridObjects.blueFillColor;;
+    ctx.fillRect(shiftX, midleY, width, midleHeight);
+
+    ctx.fillStyle   = "black";
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(shiftX, shiftY, width, midleHeight);
+    ctx.strokeRect(shiftX, midleY, width, midleHeight);
+
+    gridObjects.printText(ctx, names.red,  shiftX, shiftY + midleHeight);
+    gridObjects.printText(ctx, names.blue, shiftX, midleY + midleHeight);
+}
+
+function drawGrid(ctx, grid){
+    var shiftX      = 0;
+    var pairH       = gridObjects.getPairHeight();
+    var distH       = gridObjects.getDistanceHeight();
+    var powNum      = 1;
+
+    for(var col = 0; col < grid.length; col++){
+        var firstSpace = ((powNum - 1) / 2) * (pairH + distH);
+        var stepY = powNum * (pairH + distH);
+        var shiftY = firstSpace;
+        for(var row = 0; row < grid[col].length; row++){
+            if(grid[col][row] != undefined)
+            {
+                drawPair(ctx, shiftX, shiftY, grid[col][row]);
+                if(!gridObjects.isFinalPair(grid[col][row]))
+                    drawConnection(ctx, shiftX, shiftY, row, stepY / 2);
+            }
+            shiftY += stepY;
+        }
+        powNum *= 2;
+        shiftX += gridObjects.getPairWidh() + gridObjects.getDistanceWidh();
     }
 }
 
-function drawGrid(){
-    setColsForPairs();
-    setRowsForPairs();
+function formPairsGrid(){
+    var pairsGrid           = createPairsGrid(ops.group.getPairs(groupInfo));
+    var canvas              = gridObjects.createCanvas();
 
-    var pairSizes = {
-        scale: gridObjects.sc, 
-        width: (6 * gridObjects.sc), 
-        height: (2 * gridObjects.sc)
-    };
-    ops.group.getPairs(groupInfo).forEach(pair =>  {
-        drawPair(pairSizes, pair);
-    });
+    drawGrid(canvas.getContext('2d'), pairsGrid);
+    gridObjects.getContainer().append(canvas);
 }
 
 /* ------------------- COMMON ----------------------------*/
@@ -556,6 +614,6 @@ function setBtnActions(){
 
 fillPageInfo();
 setBtnActions();
-drawGrid();
+formPairsGrid();
 showAllIfAdmin();
 languageSwitchingOn();

@@ -1,4 +1,4 @@
-import {refreshPage, parseAnswerParams, arrayDivider} from "./common.js"
+import {refreshPage, parseAnswerParams, commonStrings} from "./common.js"
 
 const backendLinks = {
     DEPARTMENT_GET:                     "competition-list-get?",
@@ -192,7 +192,7 @@ function addCpSportsmans(cid, spArray){
         var disciplines = ops.sportsman.getDisciplines(sp);
         var first = true;
         disciplines.forEach(d => {
-            value += first ? d : (arrayDivider + d);
+            value += first ? d : (commonStrings.arrDivider + d);
             first = false;
         });
         params.set(ops.sportsman.getId(sp), value);
