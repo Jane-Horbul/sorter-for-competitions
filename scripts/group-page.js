@@ -251,8 +251,6 @@ const gridObjects = {
     printText(ctx, text, x, y)  {ctx.fillText(text, x + this.shiftTextX, y - this.shiftTextY);}
 }
 
-
-
 function getParentPair(pairs, childId, spId){
     var res = pairs.find(pair => {
         if(childId  != ops.pair.getChildPair(pair)) return false;

@@ -1,41 +1,23 @@
 
-import {sendRequest} from "./common.js"
-import {isNumber} from "./common.js"
-import {isEmptyString} from "./common.js"
-import {getLinkParams} from "./common.js"
-import {sendForm} from "./common.js"
-import {showAllIfAdmin} from "./common.js"
-import {languageSwitchingOn} from "./common.js"
+import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn} from "./common.js"
+import {ops, server} from "./communication.js"
 
-var prevPage = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
-var pageParams = getLinkParams(location.search);
-var pageInfo = sendRequest("/member-get?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"));
-var competitionParams = sendRequest("/competition-get?" + "cid=" + pageParams.get("cid"));
-var qualsMap = competitionParams.get("Qualifications");
+const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+const departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
+const pageParams        = getLinkParams(location.search);
+const page = {
+    cid: pageParams.get("cid"),
+    gid: pageParams.get("gid")
+}
+
+const departmentInfo      = server.getDepartment();
+const competitionInfo     = server.getCompetition(page.cid);
+const groupInfo           = server.getGroup(page.cid, page.gid);
+const qualificationsMap   = ops.department.getQualifications(departmentInfo);
+var competitionSportsmans = ops.competition.getSportsmans(competitionInfo);
+
 var groupsToAdd = new Array(0);
 
-var memberInfo = new Map();
-memberInfo.set( "name",         document.getElementById("member-name"));
-memberInfo.set( "divisions",    document.getElementById("member-division"));
-memberInfo.set( "age",          document.getElementById("member-age"));
-memberInfo.set( "weight",       document.getElementById("member-weight"));
-memberInfo.set( "sex",          document.getElementById("member-sex"));
-memberInfo.set( "qulification", document.getElementById("member-qulification"));
-memberInfo.set( "team",         document.getElementById("member-team"));
-memberInfo.set( "id",           document.getElementById("member-id"));
-memberInfo.set( "admit",        document.getElementById("member-admit"));
-
-var memberForm = new Map();
-memberForm.set( "name",           document.getElementById("new-member-name"));
-memberForm.set( "surname",        document.getElementById("new-member-surname"));
-memberForm.set( "age",            document.getElementById("new-member-age"));
-memberForm.set( "weight",         document.getElementById("new-member-weight"));
-memberForm.set( "is_male",        document.getElementById("new-member-sex-male"));
-memberForm.set( "is_female",        document.getElementById("new-member-sex-female"));
-memberForm.set( "team",           document.getElementById("new-member-team"));
-memberForm.set( "qualification",  document.getElementById("create-member-qualifications"));
-memberForm.set( "divisionPrefix", "member-create-");
-memberForm.set( "permit",         document.getElementById("new-member-permit-yes"));
 
 function divisionElementAddToPage(division , isOn){
     if(division.localeCompare("\r\n") == 0) return "";
@@ -237,6 +219,75 @@ function competitionListGroupsAdd(group){
     template.getElementById("group-row").addEventListener("click", function(){putGroupToAdd(group.get("id"))}, false);
     template.getElementById("group-row").setAttribute("id", "comp-group-" + group.get("id"));
     groupsTable.append(template);
+}
+
+/* ------------------- COMMON ----------------------------*/
+
+const sportsmanObjects = {
+    pageNameId:         "page-name",
+    pageNameLinkId:     "page-name-link",
+    compLinkId:         "competition-link",
+    depLinkId:          "department-link",
+    sportsLinkId:        "",
+    sportsHeaderId:      "",
+
+    setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
+    setPageNameLink(link)       {document.getElementById(this.pageNameLinkId).setAttribute("href", link);},
+    setDepartmentName(name)     {document.getElementById(this.depLinkId).innerHTML = name;},
+    setDepartmentLink(link)     {document.getElementById(this.depLinkId).setAttribute("href", link);},
+    setCompetitionName(name)    {document.getElementById(this.compLinkId).innerHTML = name;},
+    setCompetitionLink(link)    {document.getElementById(this.compLinkId).setAttribute("href", link);},
+    setSportsmanName(name)      {document.getElementById(this.sportsLinkId).innerHTML = name;},
+    setSportsmanLink(link)      {document.getElementById(this.sportsLinkId).setAttribute("href", link);},
+    setSportsmanHeader(name)    {document.getElementById(this.sportsHeaderId).innerHTML = name;},
+
+    infoNameId:         "",
+    infoSurnameId:      "",
+    infoSexId:          "",
+    infoAgeId:          "",
+    infoWeightId:       "",
+    infoQualId:         "",
+    infoTeamId:         "",
+
+    setInfoName(val)            {document.getElementById(this.infoNameId).innerHTML = val;},
+    setInfoSurname(val)         {document.getElementById(this.infoSurnameId).innerHTML = val;},
+    setInfoSex(val)             {document.getElementById(this.infoSexId).innerHTML = val;},
+    setInfoAge(val)             {document.getElementById(this.infoAgeId).innerHTML = val;},
+    setInfoWeight(val)          {document.getElementById(this.infoWeightId).innerHTML = val;},
+    setInfoQual(val)            {document.getElementById(this.infoQualId).innerHTML = val;},
+    setInfoTeam(val)            {document.getElementById(this.infoTeamId).innerHTML = val;},
+
+    inputNameId:         "",
+    inputSurnameId:      "",
+    inputSexId:          "",
+    inputAgeId:          "",
+    inputWeightId:       "",
+    inputQualId:         "",
+    inputTeamId:         "",
+
+    getNameInput()          { return document.getElementById(this.inputNameId);},
+    getSurnameInput()       { return document.getElementById(this.inputSurnameId);},
+    getSexInput()           { return document.getElementById(this.inputSexId);},
+    getAgeInput()           { return document.getElementById(this.inputAgeId);},
+    getWeightInput()        { return document.getElementById(this.inputWeightId);},
+    getQualInput()          { return document.getElementById(this.inputQualId);},
+    getTeamInput()          { return document.getElementById(this.inputTeamId);},
+
+    createInput(id)             { return document.getElementById((id + "-template")).cloneNode(true).content;},
+    createOption(id, name, val) { var res = document.createElement("option");
+                                    res.setAttribute("id", id);
+                                    res.value = val;
+                                    res.innerHTML = name;
+                                    return res;
+                                },
+    getAndCleanPlace(id)        { var pl= document.getElementById(id); pl.innerHTML = ""; return pl;},
+
+    delBtnId:           "del-btn-link",
+    editBtnId:          "group-edit-btn",
+
+    setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
+    getDelBtn()                 { return document.getElementById(this.delBtnId);},
+    getEditBtn()                { return document.getElementById(this.editBtnId);},
 }
 
 function fillPageInfo(params){
