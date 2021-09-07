@@ -64,14 +64,20 @@
                 <div id="Settings" class="tabcontent">
                     <div class="group-info-main">
                         <div id="member-info">
-                            <div class="group-info-title--siting">
+                            <div class="member-info-title--siting">
 
-                                <div class="group-info-title"><span>Member info</span></div>
-                                    <button class="group-info-edit-btn" type="button" id="group-edit-btn">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/icons.svg#icon-pencil2"></use>
-                                        </svg>
-                                    </button>
+                                <div class="member-info-title">
+                                    <span>Member info</span>  
+                                    
+                                   <div>
+                                        <button class="member-info-edit-btn" type="button" id="group-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/icons.svg#icon-pencil2"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
 
                                 <div class="group-info-fields">
                                     <div class="" id="member-info">
@@ -98,8 +104,48 @@
                 </div>
 
                 <div id="Statistics" class="tabcontent">
-                    <div>
-                        <h3>??????</h3>
+                    <div class="group-info-main">
+
+<button class="accordion">Competition 1</button>
+<div class="panel">
+  <ul class="list advantages-list">
+    <li class="advantages-item">
+        <div class="projects-item">
+            <a id="competition-link" class="title-of-competition-list-item">
+                <div class="sportsman-group-card">
+                    <!--<div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
+                        alt="" />
+                        <div class="overlay">
+                            <p class="advantages-content" id="competition-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>-->
+                    <div class="caption">
+                        <h2 class="title-of-competition-list-item" id="competition-name">GROUP 1</h2>
+                        <div class="sportsman-group-card-text">
+                            <p>Pairs num:</p>
+                            <p>Win num:</p>
+                            <p>Score:</p>
+                            <p>Place:</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </li>
+  </ul>
+    
+</div>
+
+<button class="accordion">Competition 2</button>
+<div class="panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<button class="accordion">Competition 3</button>
+<div class="panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
                     </div>
                 </div>
 
@@ -292,6 +338,8 @@
             
             document.getElementById("defaultOpen").click();
             </script>
+
+<script src="./scripts/accordion.js" type="module"></script>  
 
     </body>
 </html>
