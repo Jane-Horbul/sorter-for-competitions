@@ -1954,6 +1954,26 @@ input[type=checkbox]:checked + label::after {
   margin-right: 0;
 }
 
+.sp-card-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.sp-card-title--img {
+  width: 40px;
+  margin-left: 65px;
+}
+
+.sp-card-title-text {
+  margin-left: 30px;
+  font-size: 21px;
+}
+
+.sp-card-title-text--h {
+  width: 205px;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;
