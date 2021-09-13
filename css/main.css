@@ -2288,12 +2288,6 @@ input[type=checkbox]:checked + label::after {
   margin-right: auto;
 }
 
-@media screen and (min-width: 768px) {
-  .member-page-btn-del {
-    margin-right: 7px;
-  }
-}
-
 .member-info-title--siting {
   display: block;
   -webkit-box-pack: justify;
@@ -2303,6 +2297,7 @@ input[type=checkbox]:checked + label::after {
 
 .member-info-title {
   margin-top: 20px;
+  margin-bottom: 15px;
   margin-left: 25px;
   font-size: 30px;
   color: #2196f3;
@@ -2740,5 +2735,64 @@ input[type=checkbox]:checked + label::after {
   .sportsman-info-table {
     width: 230px;
   }
+}
+
+.sportsman-info-item--id {
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .sportsman-info-item--id {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sportsman-info-item--id {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .sportsman-info-item--id {
+    font-size: 20px;
+  }
+}
+
+.sportsman-info-item--input {
+  width: 100%;
+  border: transparent;
+  background: transparent;
+  color: #767676;
+}
+
+@media (min-width: 768px) {
+  .sportsman-info-item--input {
+    font-size: 16px;
+    padding: 5px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sportsman-info-item--input {
+    font-size: 18px;
+    padding: 5px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .sportsman-info-item--input {
+    font-size: 20px;
+    padding: 5px;
+  }
+}
+
+.sportsman-info-item--sex,
+.sportsman-info-item--qual {
+  background-color: transparent;
+  border: none;
+  color: #5d6a76;
+  width: 99%;
+  font-size: 16px;
 }
 /*# sourceMappingURL=main.css.map */
