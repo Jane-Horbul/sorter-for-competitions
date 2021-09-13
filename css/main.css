@@ -2817,4 +2817,20 @@ input[type=checkbox]:checked + label::after {
   width: 99%;
   font-size: 16px;
 }
+
+.sportsman-info-item--text {
+  font-size: 16px;
+}
+
+@media (min-width: 1200px) {
+  .sportsman-info-item--text {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .sportsman-info-item--text {
+    font-size: 20px;
+  }
+}
 /*# sourceMappingURL=main.css.map */
