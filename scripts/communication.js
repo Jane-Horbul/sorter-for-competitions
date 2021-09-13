@@ -8,10 +8,11 @@ const backendLinks = {
     DEPARTMENT_DISCIPLINE_ADD:          "department-disc-add",
     DEPARTMENT_DISCIPLINE_DEL:          "department-disc-del",
     DEPARTMENT_COMPETITION_ADD:         "department-comp-add",
-    DEPARTMENT_SPORTSMEN_GET:           "department-sports-get?",
-    DEPARTMENT_SPORTSMEN_EDIT:          "department-sports-edit",
+
+    DEPARTMENT_SPORTSMEN_GET(sid)       {return "department-sports-get?sid=" + sid;},
+    DEPARTMENT_SPORTSMEN_EDIT(sid)      {return "department-sports-edit?sid=" + sid;},
     DEPARTMENT_SPORTSMEN_ADD:           "department-sports-add",
-    DEPARTMENT_SPORTSMEN_DEL:           "department-sports-del",
+    DEPARTMENT_SPORTSMEN_DEL(sid)       {return "department-sports-del?sid=" + sid;},
 
     COMPETITION_GET(cid)                {return "competition-get?cid=" + cid;},
     COMPETITION_INFO_EDIT(cid)          {return "competition-info-edit?cid=" + cid;},
@@ -29,14 +30,46 @@ const backendLinks = {
     GROUP_PAIRS_REFRESH(cid, gid)       {return "group-pairs-refresh?cid=" + cid + "&gid=" + gid;},
     GROUP_PAIR_WINNER(cid, gid, pid)    {return "pair-member-win?cid=" + cid + "&gid=" + gid + "&pid=" + pid;},
 
-    SPORTSMEN_GET:                      "member-get?",
-    SPORTSMEN_INFO_EDIT:                "member-info-edit",
-    SPORTSMEN_GROUP_ADD:                "member-group-add",
-    SPORTSMEN_GROUP_DEL:                "member-group-del",
+    COMPETITION_SPORTSMEN_GET(cid, sid)         {return "competition-sports-get?cid=" + cid + "&sid=" + sid;},
+    COMPETITION_SPORTSMEN_INFO_EDIT(cid, sid)   {return "competition-sports-info-edit?cid=" + cid + "&sid=" + sid;},
+    COMPETITION_SPORTSMEN_GROUP_ADD(cid)        {return "competition-sports-group-add?cid=" + cid;},
+    COMPETITION_SPORTSMEN_GROUP_DEL(cid, sid)   {return "competition-sports-group-del" + cid + "&sid=" + sid;},
 
     LOGIN:                              "admin-login",
     CLIENT_STATUS_GET:                  "client-status-get"
 };
+
+function createSports(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getId()               {return this.params.get("Id");},
+        getName()             {return this.params.get("Name");},
+        getSurname()          {return this.params.get("Surname");},
+        getAge()              {return this.params.get("Birth");},
+        getWeight()           {return this.params.get("Weight");},
+        getSex()              {return this.params.get("Sex");},
+        getTeam()             {return this.params.get("Team");},
+        getQualification()    {return this.params.get("Qualification");},
+        getAdmition()         {return this.params.get("Admited");},
+        getDisciplines()      {return this.params.get("Disciplines");},
+        getGroupsNum()        {return this.params.get("Groups_num");},
+
+        setId(v)               {return this.params.set("Id", v);},
+        setName(v)             {return this.params.set("Name", v);},
+        setSurname(v)          {return this.params.set("Surname", v);},
+        setAge()               {return this.params.set("Birth", v);},
+        setWeight(v)           {return this.params.set("Weight", v);},
+        setSex(v)              {return this.params.set("Sex", v);},
+        setTeam(v)             {return this.params.set("Team", v);},
+        setQualification(v)    {return this.params.set("Qualification", v);},
+        setAdmition(v)         {return this.params.set("Admited", v);},
+        setDisciplines(v)      {return this.params.set("Disciplines", v);},
+        setGroupsNum(v)        {return this.params.set("Groups_num", v);},
+
+        getLinkFromDepartament()  {return "/sportsman?sid=" + this. getId(this.params);},
+        getLinkFromCompetition()  {return "/sportsman?sid=" + this. getId(this.params);}
+    };
+  }
 
 const departmentOp = {
     getId(dep)             {return dep.get("Id");},
@@ -113,7 +146,8 @@ export const ops = {
     competition:    competitionOp,
     sportsman:      sportsmanOp,
     group:          groupOp,
-    pair:           pairsOp
+    pair:           pairsOp,
+    createSportsman(m) {return createSports(m);}
 
 }
 
@@ -250,9 +284,6 @@ function editCpInfo(cid, name, desc){
     sendParametersList(backendLinks.COMPETITION_INFO_EDIT(cid), params, true);
 }
 
-
-
-
 export const server = {
     login(login, pass)                  {sendLogin(login, pass);},
     getClientStatus()                   {return sendRequest(backendLinks.CLIENT_STATUS_GET).get("ClientStatus");},
@@ -266,6 +297,8 @@ export const server = {
                             team,
                             sex,
                             qual)       {addDpSportsman(name, surname, weight, age, team, sex, qual);},
+    getDepartmentSportsman(sid)         {return sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid));},
+
     addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, true)},
     deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, true);},
     addDiscipline(name)                 {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_ADD, name, false);},
@@ -276,7 +309,8 @@ export const server = {
     editCompetition(cid, name, desc)    {editCpInfo(cid, name, desc);},
     sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid));},
     addCompetitionSprotsmans(cid, ids)  {addCpSportsmans(cid, ids);},
-    
+    getCompetitionSportsman(cid, sid)   {return sendRequest(backendLinks.COMPETITION_SPORTSMEN_GET(cid, sid));},
+
     addGroup(cid, name,
             discipline, pairsSystem, sex,
             ageMin, ageMax,

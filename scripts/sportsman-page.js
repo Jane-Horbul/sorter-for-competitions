@@ -1,22 +1,33 @@
 
-import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn} from "./common.js"
+import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick} from "./common.js"
 import {ops, server} from "./communication.js"
 
-const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
-const departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
 const pageParams        = getLinkParams(location.search);
 const page = {
     cid: pageParams.get("cid"),
-    gid: pageParams.get("gid")
+    gid: pageParams.get("gid"),
+    sid: pageParams.get("sid")
 }
 
-const departmentInfo      = server.getDepartment();
-const competitionInfo     = server.getCompetition(page.cid);
-const groupInfo           = server.getGroup(page.cid, page.gid);
-const qualificationsMap   = ops.department.getQualifications(departmentInfo);
-var competitionSportsmans = ops.competition.getSportsmans(competitionInfo);
+const departmentInfo    = server.getDepartment();
+const qualificationsMap = ops.department.getQualifications(departmentInfo);
+var departmentLink      = "";   
+var competitionLink     = undefined;
+var competitionInfo     = undefined;
+var sportsmanInfo       = undefined;
 
-var groupsToAdd = new Array(0);
+if(page.cid != undefined){
+    competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));   
+    departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
+    competitionInfo   = server.getCompetition(page.cid);
+    sportsmanInfo     = server.getCompetitionSportsman(page.cid, page.sid);
+} else{
+    departmentLink  = window.location.href.substr(0, window.location.href.lastIndexOf("/"));   
+    sportsmanInfo   = server.getDepartmentSportsman(page.sid);
+}
+console.log(sportsmanInfo);
+
+sportsmanInfo = ops.createSportsman(sportsmanInfo);
 
 
 function divisionElementAddToPage(division , isOn){
@@ -228,8 +239,10 @@ const sportsmanObjects = {
     pageNameLinkId:     "page-name-link",
     compLinkId:         "competition-link",
     depLinkId:          "department-link",
-    sportsLinkId:        "",
-    sportsHeaderId:      "",
+    sportsLinkId:       "sportsman-link",
+    sportsHeaderId:     "sportsman-header",
+    compBreadCrumb:     "competition-bread-crumb",
+    arrowBreadCrumb:    "arrow-bread-crumb",
 
     setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
     setPageNameLink(link)       {document.getElementById(this.pageNameLinkId).setAttribute("href", link);},
@@ -240,15 +253,18 @@ const sportsmanObjects = {
     setSportsmanName(name)      {document.getElementById(this.sportsLinkId).innerHTML = name;},
     setSportsmanLink(link)      {document.getElementById(this.sportsLinkId).setAttribute("href", link);},
     setSportsmanHeader(name)    {document.getElementById(this.sportsHeaderId).innerHTML = name;},
+    removeCompetitionBrCrumb()  {document.getElementById(this.compBreadCrumb).remove(); document.getElementById(this.arrowBreadCrumb).remove();},
 
-    infoNameId:         "",
-    infoSurnameId:      "",
-    infoSexId:          "",
-    infoAgeId:          "",
-    infoWeightId:       "",
-    infoQualId:         "",
-    infoTeamId:         "",
+    infoIdId:           "sportsman-info-id",
+    infoNameId:         "sportsman-info-name",
+    infoSurnameId:      "sportsman-info-surname",
+    infoSexId:          "sportsman-info-sex",
+    infoAgeId:          "sportsman-info-age",
+    infoWeightId:       "sportsman-info-weight",
+    infoQualId:         "sportsman-info-qual",
+    infoTeamId:         "sportsman-info-team",
 
+    setInfoId(val)              {document.getElementById(this.infoIdId).innerHTML = val;},
     setInfoName(val)            {document.getElementById(this.infoNameId).innerHTML = val;},
     setInfoSurname(val)         {document.getElementById(this.infoSurnameId).innerHTML = val;},
     setInfoSex(val)             {document.getElementById(this.infoSexId).innerHTML = val;},
@@ -257,13 +273,13 @@ const sportsmanObjects = {
     setInfoQual(val)            {document.getElementById(this.infoQualId).innerHTML = val;},
     setInfoTeam(val)            {document.getElementById(this.infoTeamId).innerHTML = val;},
 
-    inputNameId:         "",
-    inputSurnameId:      "",
-    inputSexId:          "",
-    inputAgeId:          "",
-    inputWeightId:       "",
-    inputQualId:         "",
-    inputTeamId:         "",
+    inputNameId:         "sports-input-name",
+    inputSurnameId:      "sports-input-surname",
+    inputSexId:          "sports-input-sex",
+    inputAgeId:          "sports-input-age",
+    inputWeightId:       "sports-input-weight",
+    inputQualId:         "sports-input-qulification",
+    inputTeamId:         "sports-input-team",
 
     getNameInput()          { return document.getElementById(this.inputNameId);},
     getSurnameInput()       { return document.getElementById(this.inputSurnameId);},
@@ -290,28 +306,85 @@ const sportsmanObjects = {
     getEditBtn()                { return document.getElementById(this.editBtnId);},
 }
 
-function fillPageInfo(params){
-    console.log(params);
-    var groupsTable = document.getElementById("groups-table");
+function sportsmanInfoEdit(){
+    var nameInput = sportsmanObjects.getNameInput();
     
-    memberInfo.get("name").innerHTML            = params.get("Name") + " " + params.get("Surname");
-    memberInfo.get("id").innerHTML              = params.get("Id");
-    memberInfo.get("sex").innerHTML             = params.get("Sex");
-    memberInfo.get("age").innerHTML             = params.get("Age");
-    memberInfo.get("weight").innerHTML          = params.get("Weight");
-    memberInfo.get("team").innerHTML            = params.get("Team");
-    memberInfo.get("qulification").innerHTML    = qualsMap.get(params.get("Qualification"));
-    memberInfo.get("divisions").innerHTML       = params.get("Divisions");
-    memberInfo.get("admit").innerHTML           = params.get("Admit");
+    if(nameInput != null){
+        var name    = sportsmanObjects.getNameInput().value;
+        var surname = sportsmanObjects.getSurnameInput().value;
+        var sex     = sportsmanObjects.getSexInput().value;
+        var age     = sportsmanObjects.getAgeInput().value;
+        var weight  = sportsmanObjects.getWeightInput().value;
+        var qual    = sportsmanObjects.getQualInput().value;
+        var team    = sportsmanObjects.getTeamInput().value;
 
-    memberForm.get("name").value    = params.get("Name");
-    memberForm.get("surname").value = params.get("Surname");
-    memberForm.get("age").value     = params.get("Age");
-    memberForm.get("weight").value  = params.get("Weight");
-    memberForm.get("team").value    = params.get("Team");
-    if(params.get("Sex") == "Female")   memberForm.get("is_female").checked = true;
-    if(params.get("Sex") == "Male")     memberForm.get("is_male").checked = true;
+       // server.editSportsman();
+        return;
+    }
 
+    var namePlace       = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoNameId);
+    var surnamePlace    = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoSurnameId);
+    var sexPlace        = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoSexId);
+    var agePlace        = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoAgeId);
+    var weightPlace     = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoWeightId);
+    var qualPlace       = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoQualId);
+    var teamPlace       = sportsmanObjects.getAndCleanPlace(sportsmanObjects.infoTeamId);
+
+    namePlace.appendChild(      sportsmanObjects.createInput(sportsmanObjects.inputNameId));
+    surnamePlace.appendChild(   sportsmanObjects.createInput(sportsmanObjects.inputSurnameId));
+    sexPlace.appendChild(       sportsmanObjects.createInput(sportsmanObjects.inputSexId));
+    agePlace.appendChild(       sportsmanObjects.createInput(sportsmanObjects.inputAgeId));
+    weightPlace.appendChild(    sportsmanObjects.createInput(sportsmanObjects.inputWeightId));
+    qualPlace.appendChild(      sportsmanObjects.createInput(sportsmanObjects.inputQualId));
+    teamPlace.appendChild(      sportsmanObjects.createInput(sportsmanObjects.inputTeamId));
+
+    sportsmanObjects.getNameInput().value       = sportsmanInfo.getName();
+    sportsmanObjects.getSurnameInput().value    = sportsmanInfo.getSurname();
+    sportsmanObjects.getAgeInput().value        = sportsmanInfo.getAge();
+    sportsmanObjects.getWeightInput().value     = sportsmanInfo.getWeight();
+    sportsmanObjects.getTeamInput().value       = sportsmanInfo.getTeam();
+    
+    if(sportsmanInfo.getSex() != "")
+        sportsmanObjects.getSexInput().value = sportsmanInfo.getSex();
+
+    var qualList = sportsmanObjects.getQualInput();
+
+    qualificationsMap.forEach(function(name, value) {
+        var optMin = sportsmanObjects.createOption(name + "-id", name, value);
+        qualList.appendChild(optMin);
+        if(sportsmanInfo.getQualification() == value)
+            qualList.value = value;
+    });
+}
+
+function fillPageInfo(){
+    var sportsName = sportsmanInfo.getSurname() + " " + sportsmanInfo.getName();
+    if(competitionInfo != undefined){
+        sportsmanObjects.setPageName(ops.competition.getName(competitionInfo));
+        sportsmanObjects.setPageNameLink(competitionLink);
+        sportsmanObjects.setCompetitionName(ops.competition.getName(competitionInfo));
+        sportsmanObjects.setCompetitionLink(competitionLink)
+    } else{
+        sportsmanObjects.removeCompetitionBrCrumb();
+        sportsmanObjects.setPageName(ops.department.getName(departmentInfo));
+        sportsmanObjects.setPageNameLink(departmentLink);
+    }
+    sportsmanObjects.setDepartmentName(ops.department.getName(departmentInfo));
+    sportsmanObjects.setDepartmentLink(departmentLink);
+    sportsmanObjects.setSportsmanHeader(sportsName);
+    sportsmanObjects.setSportsmanName(sportsName);
+    sportsmanObjects.setSportsmanLink(window.location.href);
+    
+    sportsmanObjects.setInfoId(     sportsmanInfo.getId());
+    sportsmanObjects.setInfoName(   sportsmanInfo.getName());
+    sportsmanObjects.setInfoSurname(sportsmanInfo.getSurname());
+    sportsmanObjects.setInfoSex(    sportsmanInfo.getSex());
+    sportsmanObjects.setInfoAge(    sportsmanInfo.getAge());
+    sportsmanObjects.setInfoWeight( sportsmanInfo.getWeight());
+    sportsmanObjects.setInfoQual(   sportsmanInfo.getQualification());
+    sportsmanObjects.setInfoTeam(   sportsmanInfo.getTeam());
+
+    /*
     for (var [key, value] of qualsMap) {
         var memberQualsTemplate = document.getElementById("create-member-qual-temp").content.cloneNode(true).getElementById("create-member-qual-item");
         memberQualsTemplate.setAttribute("value", key);
@@ -325,22 +398,21 @@ function fillPageInfo(params){
     divisionElementAddToPage(division , (params.get("Divisions").find( div => div == division) == undefined) ? false : true);
     });
     params.get("Groups").forEach(gr => groupsTable.append(groupElementCreate(gr)));
-
+    */
     /*--------------------------------Adding groups params--------------------------------------------------------------------------------*/
-    competitionParams.get("Groups").forEach(compGroup => {
+    /*competitionParams.get("Groups").forEach(compGroup => {
         if(params.get("Groups").find( memberGroup => memberGroup.get("id") == compGroup.get("id")) == undefined){
             competitionListGroupsAdd(compGroup);
         }
-    });
+    });*/
 }
 
-fillPageInfo(pageInfo);
-document.getElementById("competition-name").innerHTML = competitionParams.get("Name");
-document.getElementById("competition-link").setAttribute("href", prevPage);
-document.getElementById("groups-add-btn").addEventListener("click", addMemberToGroups, false);
-document.getElementById("member-form-send-btn").addEventListener("click", sendMemberForm, false);
-document.getElementById("delete-member-btn").addEventListener("click", deleteMember, false);
-document.getElementById("priv-page-link").setAttribute("href", prevPage);
+function setBtnActions(){
+    onClick(sportsmanObjects.getEditBtn(), sportsmanInfoEdit);
+}
+
+fillPageInfo();
+setBtnActions();
 
 showAllIfAdmin();
 languageSwitchingOn();

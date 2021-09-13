@@ -216,14 +216,14 @@ const sportsmanObjects = {
     getAddBtn()                 { return document.getElementById("member-form-send-btn");},
 
     getPlaceholders(sp)         { return {
-                                        "#sp-surname":      ops.sportsman.getSurname(sp),
-                                        "#sp-name":         ops.sportsman.getName(sp),
-                                        "#sp-age":          ops.sportsman.getAge(sp),
-                                        "#sp-weight":       ops.sportsman.getWeight(sp),
-                                        "#sp-sex":          ops.sportsman.getSex(sp),
-                                        "#sp-team":         ops.sportsman.getTeam(sp),
-                                        "#sp-qual":         qualificationObjects.getName(ops.sportsman.getQualification(sp)),
-                                        "#sportsman-link":  window.location.href + ops.sportsman.getLinkFromDepartament(sp)
+                                        "#sp-surname":      sp.getSurname(),
+                                        "#sp-name":         sp.getName(),
+                                        "#sp-age":          sp.getAge(),
+                                        "#sp-weight":       sp.getWeight(),
+                                        "#sp-sex":          sp.getSex(),
+                                        "#sp-team":         sp.getTeam(),
+                                        "#sp-qual":         qualificationObjects.getName(sp.getQualification()),
+                                        "#sportsman-link":  window.location.href + sp.getLinkFromDepartament()
                                     };
                                 },
 
@@ -234,7 +234,7 @@ const sportsmanObjects = {
 }
 
 function sportsmanPageElementAdd(sp){
-    if(ops.sportsman.getId(sp) != undefined){
+    if(sp.getId() != undefined){
         var template = sportsmanObjects.getTemplate();
         var placeholders = sportsmanObjects.getPlaceholders(sp);
         sportsmanObjects.getTable().append(createPageItem(template, placeholders)); 
@@ -330,7 +330,7 @@ function fillPageInfo(){
     }
     disciplines.forEach( disciplinne => disciplineAddToPage(disciplinne));
     competitions.forEach(competition => competitionPageElementAdd(competition));
-    sportsmans.forEach(  sportsman   => sportsmanPageElementAdd(sportsman));
+    sportsmans.forEach(  sportsman   => sportsmanPageElementAdd(ops.createSportsman(sportsman)));
 }
 
 function setActions(){

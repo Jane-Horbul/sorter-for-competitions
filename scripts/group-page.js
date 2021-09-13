@@ -580,7 +580,7 @@ function fillPageInfo(){
     groupObjects.setDepartmentName(ops.department.getName(departmentInfo));
     groupObjects.setDepartmentLink(departmentLink);
     groupObjects.setGroupName(ops.group.getName(groupInfo));
-    groupObjects.setGroupLink( window.location.href);
+    groupObjects.setGroupLink(window.location.href);
 
     groupObjects.setDelBtnLink(competitionLink);
     groupObjects.setGroupHeader(ops.group.getName(groupInfo));
@@ -607,7 +607,6 @@ function setBtnActions(){
     onClick(groupObjects.getEditBtn(),          groupInfoEdit);
     onClick(groupObjects.getUpdatePairsBtn(),   refreshPairs);
     onClick(groupObjects.getFormGridBtn(),      {});
-
 }
 
 fillPageInfo();
