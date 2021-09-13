@@ -169,3 +169,24 @@ border: 1px solid #ced7df;
       padding: 15px;
     }
   }
+
+  .sportsman-info-table-info {
+    width: 280px;
+   
+    @include for-size(mobile) {
+      font-size: 10px;
+    }
+  
+    @include for-size(tables) {
+      width: 280px;
+    }
+  
+    @include for-size(desktop) {
+      width: 550px;
+    }
+  
+    @include for-size(max-desktop) {
+      width: 1010px;
+    }
+  }
+  
