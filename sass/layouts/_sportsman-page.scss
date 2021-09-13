@@ -1,0 +1,81 @@
+.sportsman-dynamic-table {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 98%;
+    margin-bottom: 10px;
+
+    //@include for-size(mobile) {
+       // width: 300px;
+      //}
+      //@include for-size(tablet) {
+      //  width: 600px;
+      //}
+      //@include for-size(desktop) {
+      //  width: 932px;
+      //}
+      //@include for-size(max-desktop) {
+      //  width: 1000px;
+      //}
+  }
+
+  .dsportsman-dynamic-table tr {
+    height: 45px;
+  }
+  .sportsman-dynamic-table tr:nth-child(even) {
+    background-color: #c9e6ff;
+  }
+  
+  .sportsman-dynamic-table tr:hover {
+    background-color: aliceblue;
+  }
+
+  
+  .sportsman-dynamic-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $assent-color;
+    color: white;
+    border: 1px solid #ddd;
+  }
+
+  .sportsman-info-list{
+      display: flex;
+  }
+
+  .sportsman-info-item{
+    width: 79%;
+
+    @include for-size(desktop) {
+        width: 81%;
+    }
+    @include for-size(max-desktop) {
+      width: 86%;
+    }
+  }
+
+  .sportsman-foto {
+    width: 150px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+
+    @include for-size(desktop) {
+        width: 175px;
+      }
+      @include for-size(max-desktop) {
+        width: 200px;
+      }
+  }
+
+  .sportsman-info-table{
+      width: 150px;
+      padding-left: 15px;
+
+    @include for-size(desktop) {
+        width: 200px;
+    }
+    @include for-size(max-desktop) {
+      width: 230px;
+    }
+  }

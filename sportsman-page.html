@@ -87,13 +87,20 @@
                                     </div>
                                 </div>
                                 <div class="group-info-fields">
+                                    <ul class="list sportsman-info-list">
+                                        <li>
+                                            <div class="sportsman-foto">
+                                                <img src="./img/sportsman-foto.png" alt="sportsman foto">
+                                            </div>
+                                            </li>
+                                    <!--<li>
                                     <table class="dynamic-table">
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> ID:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> ID:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-id"></div></td>
                                         </tr>   
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Surname:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Surname:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-surname"></div></td>
                                             <template id="sports-input-surname-template">
                                                 <div class="form-field">
@@ -102,7 +109,7 @@
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Name:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Name:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-name"></div>  </td>
                                             <template id="sports-input-name-template">
                                                 <div class="form-field">
@@ -111,7 +118,7 @@
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Sex:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Sex:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-sex"></div> </td>
                                             <template id="sports-input-sex-template">
                                                 <div class="form-field--option">
@@ -124,7 +131,7 @@
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Birth date:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Birth date:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-age"></div>  </td>
                                             <template id="sports-input-age-template">
                                                 <div class="create-ng--interval">
@@ -133,7 +140,7 @@
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Weight:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Weight:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-weight"></div>  </td>
                                             <template id="sports-input-weight-template">
                                                 <div class="create-ng--interval">
@@ -142,7 +149,7 @@
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Qualification:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Qualification:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-qual"></div> </td>
                                             <template id="sports-input-qulification-template">
                                                 <div class="create-ng--interval">
@@ -154,7 +161,7 @@
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="secondary-title-two-tables group-info-table"> <div class="group-info-fields--item"> Team:</div> </td>
+                                            <td class="secondary-title-two-tables sportsman-info-tablesportsman-info-table"> <div class="group-info-fields--item"> Team:</div> </td>
                                             <td class="secondary-title-two-tables"> <div id="sportsman-info-team"></div>  </td>
                                             <template id="sports-input-team-template">
                                                 <div class="form-field">
@@ -163,6 +170,89 @@
                                             </template>
                                         </tr>
                                     </table>
+                                    </li>-->
+                                    <!--start-->
+                                    <li class="sportsman-info-item">
+                                    <table class="sportsman-dynamic-table">
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-tablesportsman-info-table"> <div class="group-info-fields--item"> ID:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-id">234</div></td>
+                                        </tr>   
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-tablesportsman-info-table"> <div class="group-info-fields--item"> Surname:</div> </td>
+                                            <td class="secondary-title-two-tables"> 
+                                                <div id="sportsman-info-surname">
+                                                    <div class="form-field">
+                                                        <input type="text" class="form-field-input" id="sports-input-surname"  placeholder="Enter sportsman surname">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-tablesportsman-info-table"> <div class="group-info-fields--item"> Name:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-name"></div>  </td>
+                                            <template id="sports-input-name-template">
+                                                <div class="form-field">
+                                                    <input type="text" class="form-field-input" id="sports-input-name"  placeholder="Enter sportsman name">
+                                                </div>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-tablesportsman-info-table"> <div class="group-info-fields--item"> Sex:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-sex"></div> </td>
+                                            <template id="sports-input-sex-template">
+                                                <div class="form-field--option">
+                                                    <select name="form-system-of-group" id="sports-input-sex">
+                                                        <option selected value="Not applicable">Not applicable</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Birth date:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-age"></div>  </td>
+                                            <template id="sports-input-age-template">
+                                                <div class="create-ng--interval">
+                                                    <input type="text" name="age-min" id="sports-input-age" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                                                </div>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Weight:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-weight"></div>  </td>
+                                            <template id="sports-input-weight-template">
+                                                <div class="create-ng--interval">
+                                                    <input type="text" name="weight-min" id="sports-input-weight" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                                                </div>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Qualification:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-qual"></div> </td>
+                                            <template id="sports-input-qulification-template">
+                                                <div class="create-ng--interval">
+                                                    <select id="sports-input-qulification">
+                                                        <option value="Not applicable">Not applicable</option>
+                                                    </select>
+                                                    &nbsp;<span>-</span>&nbsp;
+                                                </div>
+                                            </template>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Team:</div> </td>
+                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-team"></div>  </td>
+                                            <template id="sports-input-team-template">
+                                                <div class="form-field">
+                                                    <input type="text" class="form-field-input" id="sports-input-team"  placeholder="Enter sportsman team">
+                                                </div>
+                                            </template>
+                                        </tr>
+                                    </table>
+                                    </li>
+                                </ul>
+                                    <!--end-->
                                 </div>
 
                                 <div class="member-page-btn-del js-hidden-element">                
@@ -466,7 +556,7 @@
                 </div>
             </div>
             <!--member-groups-edit-popup-window-end-->
-            <script src="./scripts/sportsman-page.js" type="module"></script>
+            <!--<script src="./scripts/sportsman-page.js" type="module"></script>-->
             <script src="./scripts/open-close-popup.js" type="module"></script>  
         </div>
 
