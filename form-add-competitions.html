@@ -4,44 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a new competition</title>
-        <link rel="stylesheet" href="./old-css/styles.css" />
+        <link rel="stylesheet" href="./css/main.css" />
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;700&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="./old-css/normalize.css">
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <div class="wrapper">
-        <header class="page-header container">
-            <div class="lang-panel">
-                <ul class="list lang-panel-list">
-                    <li class="lang-panel-item">
-                        <div class="lang-panel-flag">
-                            <a type="button" id="lang-ru"> 
-                                <img src="./img/ru.png"> 
-                            </a>
-                        </div>
-                    </li>
-                    <li class="lang-panel-item">
-                        <div class="lang-panel-flag">
-                            <a type="button" id="lang-en"> 
-                                <img src="./img/en.png"> 
-                            </a>
-                        </div>
-                    </li>
-                    <li class="lang-panel-item">
-                        <div class="lang-panel-flag">
-                            <a type="button" id="lang-ua"> 
-                                <img src="./img/ua.png"> 
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <h1>Create a new competition</h1>
-            </div>
-        </header>
+<div class="wrapper">
+    <header class="page-header">
+        <ul class="group-page-header list">
+            <li>
+                <a class="link" id="page-name-link" href="#">
+                    <h1 id="page-name"></h1>
+                </a>
+            </li>
+            <li>
+                <div class="lang-panel">
+                    <ul class="list lang-panel-list">
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ru"> 
+                                    <img src="./img/ru.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-en"> 
+                                    <img src="./img/en.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ua"> 
+                                    <img src="./img/ua.png"> 
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
 
         <div class="container">
             <form action="/" method="post" enctype="multipart/form-data"> 

@@ -1810,7 +1810,7 @@ input[type=checkbox] {
   display: none;
 }
 
-label {
+.label-to-checkbox {
   position: relative;
   height: 38px;
   line-height: 36px;
@@ -1829,7 +1829,7 @@ label {
   color: black;
 }
 
-label::before {
+.label-to-checkbox::before {
   content: '';
   position: absolute;
   top: 0px;
@@ -1838,7 +1838,7 @@ label::before {
   width: 2px;
 }
 
-label::after {
+.label-to-checkbox::after {
   display: inline-block;
   border-radius: 4px;
   height: 26px;
@@ -1846,13 +1846,13 @@ label::after {
   width: 24px;
 }
 
-input[type=checkbox]:checked + label {
+input[type=checkbox]:checked + .label-to-checkbox {
   border: 1px solid #2196f3;
   color: #ffffff;
   background: #2196f3;
 }
 
-input[type=checkbox]:checked + label::after {
+input[type=checkbox]:checked + .label-to-checkbox::after {
   border: 1px solid #2196f3;
   background-color: #2196f3;
   color: #fff;
@@ -2238,6 +2238,11 @@ input[type=checkbox]:checked + label::after {
   line-height: 14px;
   letter-spacing: 0.01em;
   color: rgba(117, 117, 117, 0.5);
+}
+
+.form-field-label {
+  background: white;
+  border: none;
 }
 
 .new-member-field {
