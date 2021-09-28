@@ -2,22 +2,22 @@ import {refreshPage, parseAnswerParams, commonStrings} from "./common.js"
 
 const backendLinks = {
     DEPARTMENT_GET:                     "competition-list-get?",
-    DEPARTMENT_INFO_EDIT:               "department-info-edit",
+    DEPARTMENT_EDIT:                    "department-info-edit",
     DEPARTMENT_QUALIFICATION_ADD:       "department-qual-add",
     DEPARTMENT_QUALIFICATION_DEL:       "department-qual-del",
     DEPARTMENT_DISCIPLINE_ADD:          "department-disc-add",
     DEPARTMENT_DISCIPLINE_DEL:          "department-disc-del",
-    DEPARTMENT_COMPETITION_ADD:         "department-comp-add",
-
+    
     DEPARTMENT_SPORTSMEN_GET(sid)       {return "department-sports-get?sid=" + sid;},
     DEPARTMENT_SPORTSMEN_EDIT(sid)      {return "department-sports-edit?sid=" + sid;},
     DEPARTMENT_SPORTSMEN_ADD:           "department-sports-add",
     DEPARTMENT_SPORTSMEN_DEL(sid)       {return "department-sports-del?sid=" + sid;},
 
+    COMPETITION_CREATE:                 "department-comp-add",
     COMPETITION_GET(cid)                {return "competition-get?cid=" + cid;},
-    COMPETITION_INFO_EDIT(cid)          {return "competition-info-edit?cid=" + cid;},
-    COMPETITION_SPORTSMEN_ADD(cid)      {return "new-member-form?cid=" + cid;},
-    COMPETITION_SPORTSMEN_DEL(cid, sid) {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
+    COMPETITION_EDIT(cid)               {return "competition-info-edit?cid=" + cid;},
+    COMPETITION_SPORTSMAN_ADD(cid)      {return "new-member-form?cid=" + cid;},
+    COMPETITION_SPORTSMAN_DEL(cid, sid) {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
     COMPETITION_GROUP_ADD(cid)          {return "new-group-form?cid=" + cid;},
     COMPETITION_GROUP_DEL(cid, gid)     {return "competition-group-del?cid=" + cid;},
     COMPETITION_GROUPS_PAIRS_FORM(cid)  {return "competition-pairs-refresh?cid=" + cid;},
@@ -39,7 +39,15 @@ const backendLinks = {
     CLIENT_STATUS_GET:                  "client-status-get"
 };
 
-function createSports(map) {
+function mapToObjArray(mapArr, createObj){
+    var res = new Array(0);
+    mapArr.forEach(map => {
+        res.push(createObj(map));
+    });
+    return res;
+}
+
+function mapToSportsman(map) {
     return {
         params: (map == undefined) ? (new Map()) : map,
         getId()               {return this.params.get("Id");},
@@ -57,7 +65,7 @@ function createSports(map) {
         setId(v)               {return this.params.set("Id", v);},
         setName(v)             {return this.params.set("Name", v);},
         setSurname(v)          {return this.params.set("Surname", v);},
-        setAge()               {return this.params.set("Birth", v);},
+        setAge(v)              {return this.params.set("Birth", v);},
         setWeight(v)           {return this.params.set("Weight", v);},
         setSex(v)              {return this.params.set("Sex", v);},
         setTeam(v)             {return this.params.set("Team", v);},
@@ -66,89 +74,111 @@ function createSports(map) {
         setDisciplines(v)      {return this.params.set("Disciplines", v);},
         setGroupsNum(v)        {return this.params.set("Groups_num", v);},
 
-        getLinkFromDepartament()  {return "/sportsman?sid=" + this. getId(this.params);},
-        getLinkFromCompetition()  {return "/sportsman?sid=" + this. getId(this.params);}
+        getLink()              {return "/sportsman?sid=" + this. getId(this.params);}
     };
-  }
-
-const departmentOp = {
-    getId(dep)             {return dep.get("Id");},
-    getName(dep)           {return dep.get("Name");},
-    getCompetitions(dep)   {return dep.get("Competitions");},
-    getSportsmans(dep)     {return dep.get("Sportsmens");},
-    getDisciplines(dep)    {return dep.get("Divisions");},
-    getQualifications(dep) {return dep.get("Qualifications");},
 }
 
-const competitionOp = {
-    getId(comp)             {return comp.get("Id");},
-    getName(comp)           {return comp.get("Name");},
-    getDescription(comp)    {return comp.get("Description");},
-    getSportsmans(comp)     {return comp.get("Sportsmans");},
-    getGroups(comp)         {return comp.get("Groups");}
+function mapToPair(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getId()           {return this.params.get("Id");},
+        getRedSp()        {return this.params.get("Sportsman_red");},
+        getBlueSp()       {return this.params.get("Sportsman_blue");},
+        getWinner()       {return this.params.get("Winner");},
+        getNumber()       {return this.params.get("Number");},
+        getFinalPart()    {return this.params.get("Final_part");},
+        getChildPair()    {return this.params.get("Child_pair");},
+
+        setId(v)           {return this.params.set("Id", v);},
+        setRedSp(v)        {return this.params.set("Sportsman_red", v);},
+        setBlueSp(v)       {return this.params.set("Sportsman_blue", v);},
+        setWinner(v)       {return this.params.set("Winner", v);},
+        setNumber(v)       {return this.params.set("Number", v);},
+        setFinalPart(v)    {return this.params.set("Final_part", v);},
+        setChildPair(v)    {return this.params.set("Child_pair", v);},
+    };
 }
 
-const sportsmanOp = {
-    getId(sp)               {return sp.get("Id");},
-    getName(sp)             {return sp.get("Name");},
-    getSurname(sp)          {return sp.get("Surname");},
-    getAge(sp)              {return sp.get("Birth");},
-    getWeight(sp)           {return sp.get("Weight");},
-    getSex(sp)              {return sp.get("Sex");},
-    getTeam(sp)             {return sp.get("Team");},
-    getQualification(sp)    {return sp.get("Qualification");},
-    getAdmition(sp)         {return sp.get("Admited");},
-    getDisciplines(sp)      {return sp.get("Disciplines");},
-    getGroupsNum(sp)        {return sp.get("Groups_num");},
+function mapToGroup(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getId()           {return this.params.get("Id");},
+        getName()         {return this.params.get("Name");},
+        getFormSystem()   {return this.params.get("Form_sys");},
+        getAgeMin()       {return this.params.get("Age_min");},
+        getAgeMax()       {return this.params.get("Age_max");},
+        getWeightMin()    {return this.params.get("Weight_min");},
+        getWeightMax()    {return this.params.get("Weight_max");},
+        getQualMin()      {return this.params.get("Qualification_min");},
+        getQualMax()      {return this.params.get("Qualification_max");},
+        getSex()          {return this.params.get("Sex");},
+        getDiscipline()   {return this.params.get("Division");},
+        getSportsmans()   {return mapToObjArray(this.params.get("Members"), mapToSportsman);},
+        getSportsNum()    {return this.params.get("Members_num");},
+        getPairs()        {return mapToObjArray(this.params.get("Pairs"), mapToPair);},
 
-    setDisciplines(sp,v)    {sp.set("Disciplines", v);},
-    setAdmition(sp,v)       {sp.set("Admited", v);},
+        setId(v)           {return this.params.set("Id", v);},
+        setName(v)         {return this.params.set("Name", v);},
+        setFormSystem(v)   {return this.params.set("Form_sys", v);},
+        setAgeMin(v)       {return this.params.set("Age_min", v);},
+        setAgeMax(v)       {return this.params.set("Age_max", v);},
+        setWeightMin(v)    {return this.params.set("Weight_min", v);},
+        setWeightMax(v)    {return this.params.set("Weight_max", v);},
+        setQualMin(v)      {return this.params.set("Qualification_min", v);},
+        setQualMax(v)      {return this.params.set("Qualification_max", v);},
+        setSex(v)          {return this.params.set("Sex", v);},
+        setDiscipline(v)   {return this.params.set("Division", v);},
+        setSportsmans(v)   {return this.params.set("Members", v);},
+        setSportsNum(v)    {return this.params.set("Members_num", v);},
+        setPairs(v)        {return this.params.set("Pairs", v);},
 
-    getLinkFromDepartament(sp)  {return "/sportsman?sid=" + this. getId(sp);},
-    getLinkFromCompetition(sp)  {return "/sportsman?sid=" + this. getId(sp);}
+        getLink()         {return "/group?gid=" + this.getId();} 
+    };
 }
 
-const groupOp = {
-    getId(gr)           {return gr.get("Id");},
-    getName(gr)         {return gr.get("Name");},
-    getFormSystem(gr)   {return gr.get("Form_sys");},
-    getAgeMin(gr)       {return gr.get("Age_min");},
-    getAgeMax(gr)       {return gr.get("Age_max");},
-    getWeightMin(gr)    {return gr.get("Weight_min");},
-    getWeightMax(gr)    {return gr.get("Weight_max");},
-    getQualMin(gr)      {return gr.get("Qualification_min");},
-    getQualMax(gr)      {return gr.get("Qualification_max");},
-    getSex(gr)          {return gr.get("Sex");},
-    getDiscipline(gr)   {return gr.get("Division");},
-    getSportsmans(gr)   {return gr.get("Members");},
-    getSportsNum(gr)    {return gr.get("Members_num");},
-    getPairs(gr)        {return gr.get("Pairs");},
-    getLink(gr)         {return "/group?gid=" + this.getId(gr);}
+function mapToCompetition(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getId()             {return this.params.get("Id");},
+        getName()           {return this.params.get("Name");},
+        getDescription()    {return this.params.get("Description");},
+        getSportsmans()     {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
+        getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
+
+        setId(v)             {return this.params.set("Id", v);},
+        setName(v)           {return this.params.set("Name", v);},
+        setDescription(v)    {return this.params.set("Description", v);},
+        setSportsmans(v)     {return this.params.set("Sportsmans", v);},
+        setGroups(v)         {return this.params.set("Groups", v);},
+        
+    };
 }
 
-const pairsOp = {
-    getId(pr)           {return pr.get("Id");},
-    getRedSp(pr)        {return pr.get("Sportsman_red");},
-    getBlueSp(pr)       {return pr.get("Sportsman_blue");},
-    getWinner(pr)       {return pr.get("Winner");},
-    getNumber(pr)       {return pr.get("Number");},
-    getFinalPart(pr)    {return pr.get("Final_part");},
-    getChildPair(pr)    {return pr.get("Child_pair");},
-    getGridRow(pr)      {return pr.get("Grid_row");},
-    getGridCol(pr)      {return pr.get("Grid_col");},
-    setGridRow(pr, v)   { pr.set("Grid_row", v);},
-    setGridCol(pr, v)   { pr.set("Grid_col", v);},
-    
+function mapToDepatrment(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getId()             {return this.params.get("Id");},
+        getName()           {return this.params.get("Name");},
+        getCompetitions()   {return mapToObjArray(this.params.get("Competitions"), mapToCompetition);},
+        getSportsmans()     {return mapToObjArray(this.params.get("Sportsmens"), mapToSportsman);},
+        getDisciplines()    {return this.params.get("Divisions");},
+        getQualifications() {return this.params.get("Qualifications");},
+
+        setId(v)             {return this.params.set("Id", v);},
+        setName(v)           {return this.params.set("Name", v);},
+        setCompetitions(v)   {return this.params.set("Competitions", v);},
+        setSportsmans(v)     {return this.params.set("Sportsmens", v);},
+        setDisciplines(v)    {return this.params.set("Divisions", v);},
+        setQualifications(v) {return this.params.set("Qualifications", v);},
+    };
 }
 
 export const ops = {
-    department:     departmentOp,
-    competition:    competitionOp,
-    sportsman:      sportsmanOp,
-    group:          groupOp,
-    pair:           pairsOp,
-    createSportsman(m) {return createSports(m);}
-
+    createSportsman(m)      {return mapToSportsman(m);},
+    createPair(m)           {return mapToPair(m);},
+    createGroup(m)          {return mapToGroup(m);},
+    createCompetition(m)    {return mapToCompetition(m);},
+    createDepartmant(m)     {return mapToDepatrment(m);}
 }
 
 function sendRequest(request) {
@@ -195,140 +225,141 @@ function sendLogin(login, pass){
     sendParametersList(backendLinks.LOGIN, paramsMap, true);
 }
 
-/* ------------------- DEPARTMENT ----------------------------*/
-
-function addDpSportsman(name, surname, weight, age, team, sex, qual){
-    var params = new Map();
-    params.set("member-name",    name);
-    params.set("member-surname", surname);
-    params.set("member-weight",  weight);
-    params.set("member-age",     age);
-    params.set("member-team",    team);
-    params.set("member-sex",     sex);
-    params.set("member-qual",    qual);
-    sendParametersList(backendLinks.DEPARTMENT_SPORTSMEN_ADD, params, true);
-}
-
-function addDpCompetition(name, description){
-    var params = new Map();
-    params.set("competition-name",  name);
-    params.set("description",       description);
-    sendParametersList(backendLinks.DEPARTMENT_COMPETITION_ADD, params, true);
-}
-
 /* ------------------- COMPETITION ----------------------------*/
+
+function createCompetition(cp){
+    var params = new Map();
+     params.set("competition-name",  cp.getName());
+     params.set("description",       cp.getDescription());
+    sendParametersList(backendLinks.COMPETITION_CREATE, params, true);
+}
+
+function  editCompetition(cid, name, desc){
+    var params = new Map();
+     params.set("competition-name",  name);
+     params.set("description",       desc);
+    sendParametersList(backendLinks. COMPETITION_EDIT(cid), params, true);
+}
 
 function addCpSportsmans(cid, spArray){
     var params = new Map();
 
     spArray.forEach(sp => {
-        var value = "admition=" + ops.sportsman.getAdmition(sp) + "<paramDivider>disciplines="
-        var disciplines = ops.sportsman.getDisciplines(sp);
+        var value = "admition=" + sp.getAdmition() + "<paramDivider>disciplines="
+        var disciplines = sp.getDisciplines();
         var first = true;
         disciplines.forEach(d => {
             value += first ? d : (commonStrings.arrDivider + d);
             first = false;
         });
-        params.set(ops.sportsman.getId(sp), value);
+         params.set(sp.getId(), value);
     });
     console.log(params);
-    sendParametersList(backendLinks.COMPETITION_SPORTSMEN_ADD(cid), params, true);
+    sendParametersList(backendLinks. COMPETITION_SPORTSMAN_ADD(cid), params, true);
 }
 
-function addCpGroup(cid, name, discipline, pairsSystem, 
-                        sex, ageMin, ageMax, weightMin, weightMax, qualMin, qualMax){
+/* ------------------- GROUP ----------------------------*/
+
+function createGroup(cid, gr){
     var params = new Map();
-    params.set("group-name",        name);
-    params.set("group-division",    discipline);
-    params.set("form-system",       pairsSystem);
-    
-    if(sex != undefined)
-        params.set("sex",               sex);
-    if(ageMin != undefined){
-        params.set("age-min",           ageMin);
-        params.set("age-max",           ageMax);
+     params.set("group-name",        gr.getName());
+     params.set("group-division",    gr.getDiscipline());
+     params.set("form-system",       gr.getFormSystem());
+    if(gr.getSex() != undefined)
+         params.set("sex", gr.getSex());
+    if(gr.getAgeMin() != undefined){
+         params.set("age-min", gr.getAgeMin());
+         params.set("age-max", gr.getAgeMax());
     }
-    if(weightMin != undefined){
-        params.set("weight-min",        weightMin);
-        params.set("weight-max",        weightMax);
+    if(gr.getWeightMin() != undefined){
+         params.set("weight-min", gr.getWeightMin());
+         params.set("weight-max", gr.getWeightMax());
     }
-    if(qualMin != undefined){
-        params.set("qualification-min", qualMin);
-        params.set("qualification-max", qualMax);
+    if(gr.getQualMin() != undefined){
+         params.set("qualification-min", gr.getQualMin());
+         params.set("qualification-max", gr.getQualMax());
     }
     sendParametersList(backendLinks.COMPETITION_GROUP_ADD(cid), params, true);
 }
 
-function editCpGroup(cid, gid, name, discipline, pairsSystem, 
-    sex, ageMin, ageMax, weightMin, weightMax, qualMin, qualMax){
+function editGroup(cid, gid, gr){
     var params = new Map();
-    params.set("group-name",        name);
-    params.set("group-division",    discipline);
-    params.set("form-system",       pairsSystem);
 
-    if(sex != undefined)        params.set("sex",               sex);
-    if(ageMin != undefined)     params.set("age-min",           ageMin);
-    if(ageMax != undefined)     params.set("age-max",           ageMax);
-    if(weightMin != undefined)  params.set("weight-min",        weightMin);
-    if(weightMax != undefined)  params.set("weight-max",        weightMax);
-    if(qualMin != undefined)    params.set("qualification-min", qualMin);
-    if(qualMax != undefined)    params.set("qualification-max", qualMax);
+     params.set("group-name",        gr.getName());
+     params.set("group-division",    gr.getDiscipline());
+     params.set("form-system",       gr.getFormSystem());
+
+    if(gr.getSex() != undefined)         params.set("sex", gr.getSex());
+    if(gr.getAgeMin() != undefined)      params.set("age-min", gr.getAgeMin());
+    if(gr.getAgeMax() != undefined)      params.set("age-max", gr.getAgeMax());
+    if(gr.getWeightMin() != undefined)   params.set("weight-min", gr.getWeightMin());
+    if(gr.getWeightMax() != undefined)   params.set("weight-max", gr.getWeightMax());
+    if(gr.getQualMin() != undefined)     params.set("qualification-min", gr.getQualMin());
+    if(gr.getQualMax() != undefined)     params.set("qualification-max", gr.getQualMax());
 
     sendParametersList(backendLinks.GROUP_INFO_EDIT(cid, gid), params, true);
 }
 
-function editCpInfo(cid, name, desc){
+/* ------------------- SPORTSMAN ----------------------------*/
+
+function createSportsman(sports){
     var params = new Map();
-    params.set("competition-name",  name);
-    params.set("description",       desc);
-    sendParametersList(backendLinks.COMPETITION_INFO_EDIT(cid), params, true);
+    params.set("member-name",    sports.getName());
+    params.set("member-surname", sports.getSurname());
+    params.set("member-weight",  sports.getWeight());
+    params.set("member-age",     sports.getAge());
+    params.set("member-team",    sports.getTeam());
+    params.set("member-sex",     sports.getSex());
+    params.set("member-qual",    sports.getQualification());
+    sendParametersList(backendLinks.DEPARTMENT_SPORTSMEN_ADD, params, true);
+}
+
+function editSportsman(sid, sports){
+    var params = new Map();
+    params.set("member-name",    sports.getName());
+    params.set("member-surname", sports.getSurname());
+    params.set("member-weight",  sports.getWeight());
+    params.set("member-age",     sports.getAge());
+    params.set("member-team",    sports.getTeam());
+    params.set("member-sex",     sports.getSex());
+    params.set("member-qual",    sports.getQualification());
+    sendParametersList(backendLinks.DEPARTMENT_SPORTSMEN_EDIT(sid), params, true);
 }
 
 export const server = {
-    login(login, pass)                  {sendLogin(login, pass);},
-    getClientStatus()                   {return sendRequest(backendLinks.CLIENT_STATUS_GET).get("ClientStatus");},
-    
-    getDepartment()                     {return sendRequest(backendLinks.DEPARTMENT_GET);},
-    editDepartment(name)                {sendSingleValue(backendLinks.DEPARTMENT_INFO_EDIT, name, true);},
-    addDepartmentSportsman( name, 
-                            surname, 
-                            weight, 
-                            age, 
-                            team,
-                            sex,
-                            qual)       {addDpSportsman(name, surname, weight, age, team, sex, qual);},
-    getDepartmentSportsman(sid)         {return sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid));},
-
-    addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, true)},
-    deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, true);},
-    addDiscipline(name)                 {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_ADD, name, false);},
-    deleteDiscipline(name)              {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_DEL, name, false);},
-    
-    addCompetition(name, desc)          {addDpCompetition(name, desc);},
-    getCompetition(cid)                 {return sendRequest(backendLinks.COMPETITION_GET(cid));},
-    editCompetition(cid, name, desc)    {editCpInfo(cid, name, desc);},
-    sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid));},
-    addCompetitionSprotsmans(cid, ids)  {addCpSportsmans(cid, ids);},
-    getCompetitionSportsman(cid, sid)   {return sendRequest(backendLinks.COMPETITION_SPORTSMEN_GET(cid, sid));},
-
-    addGroup(cid, name,
-            discipline, pairsSystem, sex,
-            ageMin, ageMax,
-            weightMin, weightMax,
-            qualMin, qualMax)           {addCpGroup(cid, name, discipline, pairsSystem, sex, 
-                                            ageMin, ageMax, weightMin, weightMax, qualMin, qualMax)},
-    editGroup(cid, gid, 
-        name, discipline, 
-        pairsSystem, sex, 
-        ageMin, ageMax, 
-        weightMin, weightMax, 
-        qualMin, qualMax)               {editCpGroup(cid, gid, name, discipline, pairsSystem, sex, 
-                                            ageMin, ageMax, weightMin, weightMax, qualMin, qualMax)},
-    getGroup(cid, gid)                  {return sendRequest(backendLinks.GROUP_GET(cid, gid));},
-    delGroup(cid, gid)                  {return sendSingleValue(backendLinks.COMPETITION_GROUP_DEL(cid), gid, false);},
-
-    removeGroupSportsman(cid, gid, sid) {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
-    addGroupSportsList(cid, gid, sids)  {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
-    setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);},
-    refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid));}
+    access: {
+        login(login, pass)                  {sendLogin(login, pass);},
+        getClientStatus()                   {return sendRequest(backendLinks.CLIENT_STATUS_GET).get("ClientStatus");}
+    },
+    department: {
+        get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET));},
+        edit(name)                          {sendSingleValue(backendLinks.DEPARTMENT_EDIT, name, true);},
+        addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, true)},
+        deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, true);},
+        addDiscipline(name)                 {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_ADD, name, false);},
+        deleteDiscipline(name)              {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_DEL, name, false);}
+    },
+    competition: {
+        get(cid)                            {return ops.createCompetition(sendRequest(backendLinks.COMPETITION_GET(cid)));},
+        edit(cid, name, desc)               {editCompetition(cid, name, desc);},
+        create(cp)                          {createCompetition(cp);},
+        sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid));},
+        addSprotsmans(cid, ids)             {addCpSportsmans(cid, ids);},
+        formPairs(cid)                      {return sendRequest(backendLinks.COMPETITION_GROUPS_PAIRS_FORM(cid));}
+    },
+    group: {
+        get(cid, gid)                       {return ops.createGroup(sendRequest(backendLinks.GROUP_GET(cid, gid)));},
+        edit(cid, gid, gr)                  {editGroup(cid, gid, gr)},
+        create(cid, gr)                     {createGroup(cid, gr)},
+        remove(cid, gid)                    {return sendSingleValue(backendLinks.COMPETITION_GROUP_DEL(cid), gid, false);},
+        excludeSportsman(cid, gid, sid)     {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
+        includeSportsList(cid, gid, sids)   {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
+        refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid));},
+        setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);}
+    },
+    sportsman: {
+        get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid)));},
+        create(sp)                          {createSportsman(sp);},
+        edit(sid, sp)                       {editSportsman(sid, sp);}
+    }
 }

@@ -104,7 +104,7 @@ export function addHiden(){
 }
 
 export function showAllIfAdmin(){
-    var clStatus = server.getClientStatus();
+    var clStatus = server.access.getClientStatus();
     var shadows = document.querySelectorAll(".js-hidden-element");
     if(clStatus == "admin"){
         for (let shadow of shadows) {

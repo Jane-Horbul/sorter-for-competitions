@@ -2,7 +2,7 @@ import {getLinkParams, onClick, showAllIfAdmin, languageSwitchingOn, createPageI
 import {ops, server} from "./communication.js"
 
 var pageParams = getLinkParams(location.search);
-const department = server.getDepartment();
+const department = server.department.get();
 console.log(department);
 
 /* ------------------- QUALIFICATIONS ----------------------------*/
@@ -68,7 +68,7 @@ function addQualification(){
     }
     qualificationElementAddToPage(name, value);
     toogleQualificationAdding();
-    server.addQualification(value, name);
+    server.department.addQualification(value, name);
 }
 
 function toogleQualificationAdding(){
@@ -89,7 +89,7 @@ function deleteQualification(value){
     for(var i = 1; i < qualTable.rows.length; i++){
         if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
             qualTable.rows[i].remove();
-            server.deleteQualification(value);
+            server.department.deleteQualification(value);
             return;
         }
     }
@@ -146,7 +146,7 @@ function addDiscipline(){
     }
     toogleDisciplineAdding();
     disciplineAddToPage(div);
-    server.addDiscipline(div);
+    server.department.addDiscipline(div);
 }
 
 function deleteDiscipline(div){
@@ -154,7 +154,7 @@ function deleteDiscipline(div){
     for(var i = 1; i < divTable.rows.length; i++){
         if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
             divTable.rows[i].remove();
-            server.deleteDiscipline(div);
+            server.department.deleteDiscipline(div);
             return;
         }
     }
@@ -171,16 +171,16 @@ const competitionObjects = {
     getAddBtn()             { return document.getElementById("send-competition-form-btn");},
 
     getPlaceholders(comp)   { return {
-                                    "#departmentId":        ops.department.getId(department),
-                                    "#competitionId":       ops.competition.getId(comp),
-                                    "#competition-name":    ops.competition.getName(comp),
-                                    "#competition-desc":    ops.competition.getDescription(comp)
+                                    "#departmentId":        department.getId(),
+                                    "#competitionId":       comp.getId(),
+                                    "#competition-name":    comp.getName(),
+                                    "#competition-desc":    comp.getDescription()
                                     };
                             }
 }
 
 function competitionPageElementAdd(competition){
-    if(ops.competition.getId(competition) != undefined){
+    if(competition.getId() != undefined){
         var template = competitionObjects.getTemplate();
         var placeholders = competitionObjects.getPlaceholders(competition);
         competitionObjects.getTable().prepend(createPageItem(template, placeholders)); 
@@ -188,9 +188,10 @@ function competitionPageElementAdd(competition){
 }
 
 function sendCompetitionForm() {
-    var name = competitionObjects.getNameInput();
-    var description = competitionObjects.getDescriptionInput();
-    server.addCompetition(name, description);
+    var cp = ops.createCompetition(undefined);
+    cp.setName(competitionObjects.getNameInput());
+    cp.setDescription(competitionObjects.getDescriptionInput());
+    server.competition.create(cp);
 }
 
 /* ------------------- SPORTSMANS ----------------------------*/
@@ -223,7 +224,7 @@ const sportsmanObjects = {
                                         "#sp-sex":          sp.getSex(),
                                         "#sp-team":         sp.getTeam(),
                                         "#sp-qual":         qualificationObjects.getName(sp.getQualification()),
-                                        "#sportsman-link":  window.location.href + sp.getLinkFromDepartament()
+                                        "#sportsman-link":  window.location.href + sp.getLink()
                                     };
                                 },
 
@@ -276,13 +277,15 @@ function isSportsmansParamsOk() {
 
 function sendSportsmanForm() {
     if(isSportsmansParamsOk()) {
-        server.addDepartmentSportsman(sportsmanObjects.getNameInput(), 
-                                sportsmanObjects.getSurnameInput(), 
-                                sportsmanObjects.getWeightInput(), 
-                                sportsmanObjects.getAgeInput(), 
-                                sportsmanObjects.getTeamInput(), 
-                                sportsmanObjects.getSexInput(), 
-                                sportsmanObjects.getQualificationInput());
+        var sporsman = ops.createSportsman(undefined);
+        sporsman.setName(sportsmanObjects.getNameInput());
+        sporsman.setSurname(sportsmanObjects.getSurnameInput());
+        sporsman.setWeight(sportsmanObjects.getWeightInput());
+        sporsman.setAge(sportsmanObjects.getAgeInput());
+        sporsman.setTeam(sportsmanObjects.getTeamInput());
+        sporsman.setSex(sportsmanObjects.getSexInput());
+        sporsman.setQualification(sportsmanObjects.getQualificationInput());
+        server.sportsman.create(sporsman);
     }
     
 }
@@ -305,24 +308,24 @@ function departamentEdit(){
     var namePlace = departamentObjects.getNamePlace();
     if(setLine == null){
         setLine = departamentObjects.createNameInput();
-        setLine.value = ops.department.getName(department);
+        setLine.value = department.getName();
         namePlace.innerHTML = "";
         namePlace.appendChild(setLine);
     } else {
-        server.editDepartment(setLine.value);
+        server.department.edit(setLine.value);
     }
 }
 
 function fillPageInfo(){
-    var departamentName = ops.department.getName(department);
-    var competitions = ops.department.getCompetitions(department);
-    var disciplines = ops.department.getDisciplines(department);
-    var qualifications = ops.department.getQualifications(department);
-    var sportsmans = ops.department.getSportsmans(department);
+    var departamentName = department.getName();
+    var competitions    = department.getCompetitions();
+    var disciplines     = department.getDisciplines();
+    var qualifications  = department.getQualifications();
+    var sportsmans      = department.getSportsmans();
 
     departamentObjects.setPageName(departamentName);
     departamentObjects.setName(departamentName);
-    departamentObjects.setId(ops.department.getId(department));
+    departamentObjects.setId(department.getId());
 
     for (var [value, name] of qualifications) {
         qualificationElementAddToPage(name, value);
@@ -330,7 +333,7 @@ function fillPageInfo(){
     }
     disciplines.forEach( disciplinne => disciplineAddToPage(disciplinne));
     competitions.forEach(competition => competitionPageElementAdd(competition));
-    sportsmans.forEach(  sportsman   => sportsmanPageElementAdd(ops.createSportsman(sportsman)));
+    sportsmans.forEach(  sportsman   => sportsmanPageElementAdd(sportsman));
 }
 
 function setActions(){
