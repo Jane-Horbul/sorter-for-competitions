@@ -12,16 +12,17 @@ import {ops, server} from "./communication.js"
 const page = {
     cid: getLinkParams(location.search).get("cid")
 }
-const department = server.getDepartment();
-const qualificationsMap = ops.department.getQualifications(department);
-const disciplines = ops.department.getDisciplines(department);
-var departamentSportsmans = new Array(0);
-var sportsmansAddList = new Array(0);
-var competition = server.getCompetition(page.cid);
+const department        = server.department.get();
+var competition         = server.competition.get(page.cid);
+const qualificationsMap = department.getQualifications();
+const disciplines       = department.getDisciplines();
+const departmentLink    = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 
-ops.department.getSportsmans(department).forEach(spMap => {
-    departamentSportsmans.push(ops.createSportsman(spMap));
-});
+var departamentSportsmans   = new Array(0);
+var sportsmansAddList       = new Array(0);
+
+
+department.getSportsmans().forEach(sp => { departamentSportsmans.push(sp);});
 
 console.log(competition);
 console.log(department);
@@ -52,7 +53,7 @@ const sportsmanObjects = {
                                         "#sp-qual":         qualificationsMap.get(sp.getQualification()),
                                         "#sp-admit":        sp.getAdmition(),
                                         "#sp-gr-num":       sp.getGroupsNum(),
-                                        "#sportsman-link":  window.location.href + sp.getLinkFromCompetition()
+                                        "#sportsman-link":  departmentLink + sp.getLink()
                                     };
                                 },
     getDisciplinesList()        {return this.getAddingRowTemplate().content.getElementById("sports-disc-list");},
@@ -135,7 +136,7 @@ function sportsmansAddListSend() {
         }
         sportsmansAddList[i].setDisciplines(sportsDisc);
     }
-    server.addCompetitionSprotsmans(page.cid, sportsmansAddList);
+    server.competition.addSprotsmans(page.cid, sportsmansAddList);
 }
 
 function departamentSportsmanElementAdd(sp){
@@ -151,7 +152,7 @@ function departamentSportsmanElementAdd(sp){
 }
 
 function resortSportsmens(){
-    competition = server.sortSportsmans(page.cid);
+    competition = server.competition.sortSportsmans(page.cid);
     refreshPage();
 }
 
@@ -183,14 +184,14 @@ const groupObjects = {
     getAddBtn()                 { return document.getElementById("group-form-send-btn");},
     getFormPairsBtn()           { return document.getElementById("form-pairs-btn");},
     getPlaceholders(gr)         { return {
-                                        "#group-name":          ops.group.getName(gr),
-                                        "#group-age":           ops.group.getAgeMin(gr) + " - " + ops.group.getAgeMax(gr),
-                                        "#group-weight":        ops.group.getWeightMin(gr) + " - " + ops.group.getWeightMax(gr),
-                                        "#group-qualification": getQualificationInterval(ops.group.getQualMin(gr), ops.group.getQualMax(gr)),
-                                        "#group-sex":           ops.group.getSex(gr),
-                                        "#group-discipline":    ops.group.getDiscipline(gr),
-                                        "#group-sp-num":        ops.group.getSportsNum(gr),
-                                        "#group-link":          window.location.href + ops.group.getLink(gr)
+                                        "#group-name":          gr.getName(),
+                                        "#group-age":           gr.getAgeMin() + " - " + gr.getAgeMax(),
+                                        "#group-weight":        gr.getWeightMin() + " - " + gr.getWeightMax(),
+                                        "#group-qualification": getQualificationInterval(gr.getQualMin(), gr.getQualMax()),
+                                        "#group-sex":           gr.getSex(),
+                                        "#group-discipline":    gr.getDiscipline(),
+                                        "#group-sp-num":        gr.getSportsNum(),
+                                        "#group-link":          window.location.href + gr.getLink()
                                     };
                                 },
 
@@ -237,7 +238,7 @@ function getQualificationInterval(qMin, qMax){
 }
 
 function groupPageElementAdd(group){
-    if(ops.group.getId(group) != undefined){
+    if(group.getId() != undefined){
         var template = groupObjects.getTemplate();
         var placeholders = groupObjects.getPlaceholders(group);
         groupObjects.getTable().append(createPageItem(template, placeholders)); 
@@ -313,17 +314,29 @@ function sendGroupForm() {
         return;
     if(groupObjects.isQualOn() && !isQualificationOk())
         return;
-    server.addGroup(page.cid, 
-        groupObjects.getNameInput(),
-        groupObjects.getDisciplineInput(),
-        groupObjects.getPairsSystemInput(),
-        groupObjects.isSexOn()      ? groupObjects.getSexInput()        : undefined,
-        groupObjects.isAgeOn()      ? groupObjects.getAgeMinInput()     : undefined,
-        groupObjects.isAgeOn()      ? groupObjects.getAgeMaxInput()     : undefined,
-        groupObjects.isWeightOn()   ? groupObjects.getWeightMinInput()  : undefined,
-        groupObjects.isWeightOn()   ? groupObjects.getWeightMaxInput()  : undefined,
-        groupObjects.isQualOn()     ? groupObjects.getQualMinInput()    : undefined,
-        groupObjects.isQualOn()     ? groupObjects.getQualMaxInput()    : undefined);
+
+    var group = ops.createGroup(undefined);
+    group.setName(groupObjects.getNameInput());
+    group.setDiscipline(groupObjects.getDisciplineInput());
+    group.setFormSystem(groupObjects.getPairsSystemInput());
+    if(groupObjects.isSexOn())
+        group.setSex(groupObjects.getSexInput());
+    if(groupObjects.isAgeOn())
+    {
+        group.setAgeMin(groupObjects.getAgeMinInput());
+        group.setAgeMax(groupObjects.getAgeMaxInput());
+    }
+    if(groupObjects.isWeightOn())
+    {
+        group.setWeightMin(groupObjects.getWeightMinInput());
+        group.setWeightMax(groupObjects.getWeightMaxInput());
+    }
+    if(groupObjects.isQualOn())
+    {
+        group.setQualMin(groupObjects.getQualMinInput());
+        group.setQualMax(groupObjects.getQualMaxInput());
+    }
+    server.group.create(page.cid, group);
 }
 
 /* ------------------- COMMON ----------------------------*/
@@ -362,14 +375,14 @@ function competitionEdit(){
         nameInput = competitionObjects.createNameInput();
         descInput = competitionObjects.createDescInput();
 
-        nameInput.value = ops.competition.getName(competition);
-        descInput.value = ops.competition.getDescription(competition);
+        nameInput.value = competition.getName();
+        descInput.value = competition.getDescription();
         namePlace.innerHTML = "";
         descPlace.innerHTML = "";
         namePlace.appendChild(nameInput);
         descPlace.appendChild(descInput);
     } else {
-        server.editCompetition(page.cid, nameInput.value, descInput.value);
+        server.competition.edit(page.cid, nameInput.value, descInput.value);
     }
 }
 
@@ -397,28 +410,27 @@ function disciplinesAddToPage(){
 }
 
 function fillPageInfo(){
-    competitionObjects.setPageName(ops.competition.getName(competition));
-    competitionObjects.setName(ops.competition.getName(competition));
-    competitionObjects.setId(ops.competition.getId(competition));
-    competitionObjects.setDescription(ops.competition.getDescription(competition));
+    competitionObjects.setPageName(competition.getName());
+    competitionObjects.setName(competition.getName());
+    competitionObjects.setId(competition.getId());
+    competitionObjects.setDescription(competition.getDescription());
     
     for (var [value, name] of qualificationsMap) {
         qualificationAddToPage(name, value);
     }
     disciplinesAddToPage();
-    ops.competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
-    ops.competition.getSportsmans(competition).forEach(sp => sportsmanPageElementAdd(ops.createSportsman(sp)));
+    competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
+    competition.getSportsmans(competition).forEach(sp => sportsmanPageElementAdd(sp));
     departamentSportsmans.forEach(sp => departamentSportsmanElementAdd(sp));
 }
 
 function refreshPairs(){
-    competition = server.refreshPairs(page.cid);
-    
+    competition = server.competition.formPairs(page.cid);
     var groupsTable = groupObjects.getTable();
     while(groupsTable.rows.length > 2){
         groupsTable.deleteRow(groupsTable.rows.length - 1);
     }
-    ops.competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
+    competition.getGroups().forEach(gr =>   groupPageElementAdd(gr));
 }
 
 function setBtnActions(){
