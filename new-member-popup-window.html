@@ -1,112 +1,189 @@
-<div class="wrapper">
-    <div class="popup" id = "popup_1">
-        <a href="" class="popup__area"></a>
-        <div class="popup__body">
-            <div class="popup__content">
-                <a href="" class="popup__close close-popup">X</a>
-                <form class="modal-form">
-
-                    <span class="modal-title">Create new member</span>
-
-                    <div class="new-member-field">
-
-                        <label for="new-member-name"><span class="form-field-title">Member name</span></label>
-                        <div class="form-field">
-                            <input type="text" id="new-member-name" name="new-member-name" class="form-field-input" placeholder="Enter the member name">
-                        </div>
-                    
-                        <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
-                        <div class="form-field">
-                            <input type="text" id="new-member-surname" name="new-member-surname" class="form-field-input" placeholder="Enter the member surname">
-                        </div>
-
-                        <label for="new-member-age"><span class="form-field-title">Member age</span></label>
-                        <div class="form-field">
-                            <input type="text" id="new-member-age" name="new-member-age" class="form-field-input" placeholder="Enter the member age">
-                        </div>
-
-                        <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
-                        <div class="form-field">
-                            <input type="text" id="new-member-weight" name="new-member-weight" class="form-field-input" placeholder="Enter the member weight">
-                        </div>
-
-                        <ul class="list new-member-gender-list">
-                            <label for="new-member-sex" class="form-field-label">
-                                <span class="form-field-title">Member`s gender</span>
-                                <li class="new-member-gender-item">
-                                    <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                    <label for="male">Male</label>
-                                </li>
-
-                                <li class="new-member-gender-item">
-                                <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                <label for="female">Female</label>
-                                </li>
-                            </label>
-                        </ul>
-
-                        <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
-                        <div class="form-field">
-                            <input type="text" id="new-member-team" name="new-member-team" class="form-field-input" placeholder="Enter the name of member`s team">
-                        </div>
-                    
-                        <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
-                        <select name="create-member-qualification" id="create-member-qualifications">
-                            <template id="create-member-qual-temp">
-                                <option id="create-member-qual-item" value="value">Name</option>
-                            </template>
-                        </select>
-                    </div>
-                    
-                    <label for="new-member-division" id="new-member-divisions" class="form-field-label">
-                        <span class="form-field-title">Choose divisions:</span>
-                        <div class="new-member-field" id="create-member-divisions">
-                            <template id="create-member-division-template">
-                                <input type="checkbox" id="div-input" name="div-name" value="div-val">
-                                <label id="div-label" for="div-name">division-01</label>
-                            </template>
-                        </div>
-                    </label>
-
-                    <div class="form-field--option">
-                        <ul class="list new-member-permit-list">
-                            <label for="new-member-permit" class="form-field-label">
-                                <span class="form-field-title">Member`s permit</span>
-                                <li class="new-member-permit-item">
-                                    <input type="radio" id="new-member-permit-yes" name="new-member-permit" value="yes" checked>
-                                    <label for="yes">Yes</label>
-                                </li>
-
-                                <li class="new-member-permit-item">
-                                <input type="radio" id="new-member-permit-no" name="new-member-permit" value="no">
-                                <label for="no">No</label>
-                                </li>
-                            </label>
-                        </ul>
-                    </div>
-
-                    <div class="form-field--option">
-                        <ul class="list nm-more-than-one-list">
-                            <label for="nm-more-than-one" class="form-field-label">
-                                <span class="form-field-title">Enter more than one member</span>
-                                <li class="nm-more-than-one-item">
-                                    <input type="radio" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                    <label for="yes">Yes</label>
-                                </li>
-
-                                <li class="nm-more-than-one-item">
-                                <input type="radio" id="nm-more-than-one-no" name="nm-more-than-one" value="no">
-                                <label for="no">No</label>
-                                </li>
-                            </label>
-                        </ul>
-                    </div>
-                    
-                    <button type="button" id="member-form-send-btn" class="modal-btn-submit">
-                        <span class="modal-btn-submit-text">Send</span>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Member page</title>
+        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <div class="wrapper">
+            <header class="page-header">
+                
+            </header>
+            
+            <main class="container">
+                 <!--Add member button start-->
+                 <a href="#popup_1" class="popup-link">
+                    <button class="group-page-ref-btn" type="button">
+                            <svg class="group-info-edit-btn-icon">
+                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                        </svg>
                     </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                </a>
+                <!--Add member button end-->
+
+                <div class="popup" id = "popup_2">
+                    <a href="" class="popup__area"></a>
+                    <div class="popup__body">
+                        <div class="popup__content">
+                            <a href="#" class="popup__close close-popup">X</a>
+                            <form class="modal-form">
+                                <span class="modal-title">Add a group</span>
+                                <div class="new-member-field">
+                                    <label for="new-group-name"><span class="form-field-title">Group name</span></label>
+                                    <div class="form-field">
+                                        <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
+                                    </div>
+        
+                                    <div class="form-field--option">
+                                        <label for="division-of-group">
+                                            <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
+                                            <select name="division-of-group" id="create-group-division">
+                                                <template id="create-group-div-temp">
+                                                    <option value="#group-disc-value">#group-disc-name</option>
+                                                </template>
+                                            </select>
+                                    </div>
+        
+                                    <div class="form-field--option">
+                                        <label for="form-system-of-group">
+                                            <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
+                                            <select name="form-system-of-group" id="pairs-form-system">
+                                                <option value="olimpic">Olimpic</option>
+                                                <option value="circle">Circle</option>
+                                            </select>
+                                    </div>
+        
+                                    <div class="form-field--option">
+                                        <!-- acc-menu start -->
+                                        <div class="conntainer">
+                                            <section class="acc-conntainer">
+                                                <span class="create-ng-field-name">Choose required items:</span>
+                                                
+                                                <!-- acc-menu-1-item start -->
+                                                <div>
+                                                    <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
+                                                    <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
+                                                        <article class="acc-medium">
+                                                            <div class="acc-menu-item-gender-list">    
+                                                                <div>
+                                                                    <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male" checked>
+                                                                    <label for="male">Male</label>
+                                                                </div>
+                                                                <div>
+                                                                    <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
+                                                                    <label for="female">Female</label>
+                                                                </div>
+                                                            </div>
+                                                        </article>
+                                                    </label>
+                                                </div>
+                                                <!-- acc-menu-1-item end -->
+        
+                                                <!-- acc-menu-2-item start -->
+                                                <div>
+                                                    <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
+                                                    <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
+                                                    <article class="acc-medium">
+                                                        <div class="not-required-items conntainer">
+                                                            <div class="create-ng--interval">
+                                                                <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                                                                &nbsp;<span>-</span>&nbsp;
+                                                                <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                                                    
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                                <!-- acc-menu-2-item end -->
+        
+                                                <!-- acc-menu-3-item start -->
+                                                <div>
+                                                    <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
+                                                    <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
+                                                    <article class="acc-medium">
+                                                        <div class="create-ng--interval">
+                                                            <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
+                                                            &nbsp;<span>-</span>&nbsp;
+                                                            <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                                <!-- acc-menu-3-item end -->
+        
+                                                <!-- acc-menu-4-item start -->
+                                                <div>
+                                                    <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
+                                                    <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
+                                                        <article class="acc-medium">
+                                                            <div class="create-ng--interval">
+                                                                <select name="ng-qualification-min" id="ng-members-qualification-min">
+                                                                    <template id="create-group-qual-temp">
+                                                                        <option value="#qual-value-ph">#qual-name-ph</option>
+                                                                    </template>
+                                                                </select>
+                                                                &nbsp;<span>-</span>&nbsp;
+                                                                <select name="ng-qualification-max" id="ng-members-qualification-max">
+                                                                </select>
+                                                            </div>
+                                                    </article>
+                                                </div>
+                                                <!-- acc-menu-4-item end -->
+                                            </section>
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-field--option">
+                                        <ul class="list nm-more-than-one-list">
+                                            <label for="nm-more-than-one" class="form-field-label">
+                                                <span class="form-field-title">Enter more than one</span>
+                                                <li class="nm-more-than-one-item">
+                                                    <input type="radio" id="ng-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
+                                                    <label for="yes">Yes</label>
+                                                </li>
+            
+                                                <li class="nm-more-than-one-item">
+                                                <input type="radio" id="ng-more-than-one-no" name="nm-more-than-one" value="no">
+                                                <label for="no">No</label>
+                                                </li>
+                                            </label>
+                                        </ul>
+                                    </div>
+        
+                                    <button type="button" id="group-form-send-btn" class="modal-btn-submit">
+                                        <span class="modal-btn-submit-text">Send</span>
+                                    </button>
+                                
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+</main>
+
+<script src="./scripts/competition-page.js" type="module"></script> 
+<script src="./scripts/open-close-popup.js" type="module"></script> 
+<script src="./scripts/tabs-bar.js" type="module"></script> 
+
+<script>
+    function openPage(evt, pageName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(pageName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    
+    document.getElementById("defaultOpen").click();
+    </script> 
+
+</body>
+</html>
