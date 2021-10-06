@@ -246,6 +246,79 @@
             </div>
         </div>
 
+        <!--start templates-->
+        <template id="group-input-name-template">
+            <div class="form-field">
+                <input type="text" class="add-group-pop-up--input" id="group-input-name"  placeholder="Enter the group name">
+            </div>
+        </template>
+
+        <template id="group-input-discipline-template">
+            <div class="form-field--option">
+                <select class="add-group-pop-up--discipline" name="division-of-group" id="group-input-discipline">
+                    <template id="create-group-div-temp">
+                        <option id="#discipline-id" value="#value">#name</option>
+                    </template>
+                </select>
+            </div>
+        </template>
+
+        <template id="group-input-system-template">
+            <div class="form-field--option">
+                <select class="add-group-pop-up--form-system" name="form-system-of-group" id="group-input-system">
+                    <option value="olimpic">Olimpic</option>
+                    <option value="circle">Circle</option>
+                </select>
+            </div>
+        </template>
+
+        <template id="group-input-sex-template">
+            <div class="form-field--option">
+                <select name="form-system-of-group" id="group-input-sex" class="add-group-pop-up--sex">
+                    <option selected value="Not applicable">Not applicable</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </template>
+
+        <template id="group-input-age-min-template">
+            <div class="create-ng--interval">
+                <input type="text" name="age-min" id="group-input-age-min" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the min age"/>
+            </div>
+        </template>
+        <template id="group-input-age-max-template">
+            <div class="create-ng--interval">
+                <input type="text" name="age-max" id="group-input-age-max" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the max age"/>
+            </div>
+        </template>
+        <template id="group-input-weight-min-template">
+            <div class="create-ng--interval">
+                <input type="text" name="weight-min" id="group-input-weight-min" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the min weight"/>
+            </div>
+        </template>
+        <template id="group-input-weight-max-template">
+            <div class="create-ng--interval">
+                <input type="text" name="weight-max" id="group-input-weight-max" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the max weight"/>
+            </div>
+        </template>
+        <template id="group-input-qulification-min-template">
+            <div class="create-ng--interval">
+                <select class="add-group-pop-up--qual" id="group-input-qulification-min">
+                    <option value="Not applicable">Not applicable</option>
+                </select>
+                &nbsp;<span>-</span>&nbsp;
+            </div>
+        </template>
+        <template id="group-input-qulification-max-template">
+            <div class="create-ng--interval">
+                <select class="add-group-pop-up--qual" id="group-input-qulification-max">
+                    <option value="Not applicable">Not applicable</option>
+                </select>
+            </div>
+        </template>
+        <!--end-->
+
         <!--add-group-popup-window-start-->
     <div class="popup" id = "popup_2">
         <a href="" class="popup__area"></a>
