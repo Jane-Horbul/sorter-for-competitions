@@ -1,0 +1,95 @@
+.add-group-pop-up-info-main {
+    width: 100%;
+}
+.group-info-table-pop-up {
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.group-info-table-pop-up-td {
+    width: 150px;
+    border: 1px solid #ddd;
+    padding-left: 12px;
+}
+
+.dynamic-table-pop-up {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 97%;
+    margin-bottom: 10px;
+  }
+
+  .dynamic-table-pop-up tr {
+    height: 45px;
+  }
+  .dynamic-table-pop-up tr:nth-child(even) {
+    background-color: #c9e6ff;
+  }
+  
+  .dynamic-table-pop-up tr:hover {
+    background-color: aliceblue;
+  }
+
+  .dynamic-table-pop-up th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: $assent-color;
+    color: white;
+    border: 1px solid #ddd;
+  }
+
+  .add-group-pop-up--input {
+    width: 100%;
+    border: transparent;
+    background: transparent;
+    color: #767676;
+    font-size: 16px;
+    padding-left: 15px;
+    } 
+    .add-group-pop-up--input:active,
+    .add-group-pop-up--input:hover,
+    .add-group-pop-up--input:checked {
+        border: transparent;
+    }
+
+    .add-group-pop-up--sex, 
+    .add-group-pop-up--qual,
+    .add-group-pop-up--form-system,
+    .add-group-pop-up--discipline  {
+    background-color: transparent;
+  border: none;
+  color: #5d6a76;
+  width: 99%;
+  font-size: 16px;
+  padding-left: 15px;
+  }
+
+  .block-for-button {
+    display: flex;
+    width: 97%;
+    justify-content: center;
+  }
+
+  .add-group-pop-up-btn-submit{
+    width: 200px;
+    height: 50px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    background-color: $assent-color;
+    border: none;
+    color: $white-color;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    outline-width: 0px;
+  }
+  .add-group-pop-up-btn-submit:hover,
+  .add-group-pop-up-btn-submit:focus {
+    background-color:#fff;
+    color: $assent-color;
+    box-shadow: drop-shadow(0px 4px 4px rgba(2, 153, 204, 0.699));
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
