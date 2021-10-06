@@ -69,28 +69,31 @@ export function parseMapArray(str){
 
 export function parseAnswerParams(answer){
     const parseResult = new Map();
-    var options = answer.split("<Option name>");
-    options.forEach(option => {
-        var params = option.split("<Option value>");
-        if(params.length < 2) return;
-        
-        if(params[1].split("<Type single>").length > 1) {
-            params[1] = params[1].split("<Type single>")[1];
-            parseResult.set(params[0], params[1]);
-        } else if(params[1].split("<Type array>").length > 1) {
-            params[1] = params[1].split("<Type array>")[1];
-            var array = params[1].split(commonStrings.arrDivider);
-            if(array[0].length > 0)
-                parseResult.set(params[0], array);
-            else
-                parseResult.set(params[0], new Array(0));
-        } else if(params[1].split("<Type map>").length > 1) {
-            params[1] = params[1].split("<Type map>")[1];
-            parseResult.set(params[0], parseMap(params[1]));
-        } else if(params[1].split("<Type mapArray>").length > 1) {
-            params[1] = params[1].split("<Type mapArray>")[1];
-            parseResult.set(params[0], parseMapArray(params[1]));
-        }
+    var blocks = answer.split("<Option block>");
+    blocks.forEach(block => {
+        var options = block.split("<Option name>");
+        options.forEach(option => {
+            var params = option.split("<Option value>");
+            if(params.length < 2) return;
+            
+            if(params[1].split("<Type single>").length > 1) {
+                params[1] = params[1].split("<Type single>")[1];
+                parseResult.set(params[0], params[1]);
+            } else if(params[1].split("<Type array>").length > 1) {
+                params[1] = params[1].split("<Type array>")[1];
+                var array = params[1].split(commonStrings.arrDivider);
+                if(array[0].length > 0)
+                    parseResult.set(params[0], array);
+                else
+                    parseResult.set(params[0], new Array(0));
+            } else if(params[1].split("<Type map>").length > 1) {
+                params[1] = params[1].split("<Type map>")[1];
+                parseResult.set(params[0], parseMap(params[1]));
+            } else if(params[1].split("<Type mapArray>").length > 1) {
+                params[1] = params[1].split("<Type mapArray>")[1];
+                parseResult.set(params[0], parseMapArray(params[1]));
+            }
+        });
     });
     return parseResult;
 }

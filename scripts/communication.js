@@ -9,6 +9,7 @@ const backendLinks = {
     DEPARTMENT_DISCIPLINE_DEL:          "department-disc-del",
     
     DEPARTMENT_SPORTSMEN_GET(sid)       {return "department-sports-get?sid=" + sid;},
+    DEPARTMENT_SPORTSMEN_STAT_GET(sid)  {return "department-sports-stat-get?sid=" + sid;},
     DEPARTMENT_SPORTSMEN_EDIT(sid)      {return "department-sports-edit?sid=" + sid;},
     DEPARTMENT_SPORTSMEN_ADD:           "department-sports-add",
     DEPARTMENT_SPORTSMEN_DEL(sid)       {return "department-sports-del?sid=" + sid;},
@@ -75,6 +76,23 @@ function mapToSportsman(map) {
         setGroupsNum(v)        {return this.params.set("Groups_num", v);},
 
         getLink()              {return "/sportsman?sid=" + this. getId(this.params);}
+    };
+}
+
+function mapToStats(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getCompetitionId()      {return this.params.get("CompetitionId");},
+        getCompetitionName()    {return this.params.get("CompetitionName");},
+        getDisciplines()        {return this.params.get("Disciplines");},
+        isAdmitted()            {return (this.params.get("Admition") == "yes" ? true : false);},
+        isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
+        
+        setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
+        setCompetitionName(v)   {return this.params.set("CompetitionName", v);},
+        setDisciplines(v)       {return this.params.set("Disciplines", v);},
+        setAdmition(v)          {return this.params.set("Admition", v ? "yes" : "no");},
+        setActive(v)            {return this.params.set("IsActive", v ? "yes" : "no");},
     };
 }
 
@@ -175,6 +193,7 @@ function mapToDepatrment(map) {
 
 export const ops = {
     createSportsman(m)      {return mapToSportsman(m);},
+    createStatistics(m)     {return mapToStats(m);},
     createPair(m)           {return mapToPair(m);},
     createGroup(m)          {return mapToGroup(m);},
     createCompetition(m)    {return mapToCompetition(m);},
@@ -359,6 +378,7 @@ export const server = {
     },
     sportsman: {
         get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid)));},
+        getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_STAT_GET(sid)));},
         create(sp)                          {createSportsman(sp);},
         edit(sid, sp)                       {editSportsman(sid, sp);}
     }

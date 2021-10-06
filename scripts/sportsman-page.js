@@ -11,8 +11,9 @@ const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 var sportsmanInfo       = server.sportsman.get(page.sid);
+var sportsmanStats      = server.sportsman.getStatistics(page.sid);
 console.log(sportsmanInfo);
-
+console.log(sportsmanStats);
 
 function divisionElementAddToPage(division , isOn){
     if(division.localeCompare("\r\n") == 0) return "";
