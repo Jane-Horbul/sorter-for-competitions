@@ -246,145 +246,151 @@
             </div>
         </div>
 
-        <!--second-popup-window-start-->
-        <div class="popup" id = "popup_2">
-            <a href="" class="popup__area"></a>
-            <div class="popup__body">
-                <div class="popup__content">
-                    <a href="#" class="popup__close close-popup">X</a>
-                    <form class="modal-form">
-                        <span class="modal-title">Add a group</span>
-                        <div class="new-member-field">
-                            <label for="new-group-name"><span class="form-field-title">Group name</span></label>
-                            <div class="form-field">
-                                <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
+        <!--add-group-popup-window-start-->
+    <div class="popup" id = "popup_2">
+        <a href="" class="popup__area"></a>
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup">X</a>
+                <form class="modal-form">
+                    
+                    <div class="add-group-pop-up-info-main">
+                        <div id="member-info">
+                            <div class="group-info-title--siting">
+                                <div class="group-info-title"><span>Add a group</span></div>
+
                             </div>
-
-                            <div class="form-field--option">
-                                <label for="division-of-group">
-                                    <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
-                                    <select name="division-of-group" id="create-group-division">
-                                        <template id="create-group-div-temp">
-                                            <option value="#group-disc-value">#group-disc-name</option>
-                                        </template>
-                                    </select>
-                            </div>
-
-                            <div class="form-field--option">
-                                <label for="form-system-of-group">
-                                    <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
-                                    <select name="form-system-of-group" id="pairs-form-system">
-                                        <option value="olimpic">Olimpic</option>
-                                        <option value="circle">Circle</option>
-                                    </select>
-                            </div>
-
-                            <div class="form-field--option">
-                                <!-- acc-menu start -->
-                                <div class="conntainer">
-                                    <section class="acc-conntainer">
-                                        <span class="create-ng-field-name">Choose required items:</span>
-                                        
-                                        <!-- acc-menu-1-item start -->
-                                        <div>
-                                            <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
-                                            <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
-                                                <article class="acc-medium">
-                                                    <div class="acc-menu-item-gender-list">    
-                                                        <div>
-                                                            <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male" checked>
-                                                            <label for="male">Male</label>
-                                                        </div>
-                                                        <div>
-                                                            <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
-                                                            <label for="female">Female</label>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </label>
-                                        </div>
-                                        <!-- acc-menu-1-item end -->
-
-                                        <!-- acc-menu-2-item start -->
-                                        <div>
-                                            <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
-                                            <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
-                                            <article class="acc-medium">
-                                                <div class="not-required-items conntainer">
-                                                    <div class="create-ng--interval">
-                                                        <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                                                        &nbsp;<span>-</span>&nbsp;
-                                                        <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                                            
-                                                    </div>
+                            <div class="group-info-fields">
+                                <table class="dynamic-table-pop-up">
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Name:</div> </td>
+                                        <td> 
+                                            <div id="group-info-name">
+                                                <div class="form-field">
+                                                    <input type="text" class="add-group-pop-up--input" id="group-input-name"  placeholder="Enter the group name">
                                                 </div>
-                                            </article>
-                                        </div>
-                                        <!-- acc-menu-2-item end -->
-
-                                        <!-- acc-menu-3-item start -->
-                                        <div>
-                                            <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
-                                            <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
-                                            <article class="acc-medium">
+                                            </div>  
+                                        </td>
+                                    </tr>   
+                                    <tr class="group-info-table-pop-up"> 
+                                        <td class="group-info-table-pop-up-td"> <div> Form system:</div> </td>
+                                        <td> 
+                                            <div id="group-info-system">
+                                                <div class="form-field--option">
+                                                    <select class="add-group-pop-up--form-system" name="form-system-of-group" id="group-input-system">
+                                                        <option value="olimpic">Olimpic</option>
+                                                        <option value="circle">Circle</option>
+                                                    </select>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Discipline:</div> </td>
+                                        <td> 
+                                            <div id="group-info-discipline">
+                                                <div class="form-field--option">
+                                                    <select class="add-group-pop-up--discipline" name="division-of-group" id="group-input-discipline">
+                                                        <template id="create-group-div-temp">
+                                                            <option id="#discipline-id" value="#value">#name</option>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Gender:</div> </td>
+                                        <td>
+                                             <div id="group-info-sex">
+                                                <div class="form-field--option">
+                                                    <select name="form-system-of-group" id="group-input-sex" class="add-group-pop-up--sex">
+                                                        <option selected value="Not applicable">Not applicable</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                             </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Low age:</div> </td>
+                                        <td> 
+                                            <div id="group-info-age-min">
                                                 <div class="create-ng--interval">
-                                                    <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                                                    &nbsp;<span>-</span>&nbsp;
-                                                    <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
+                                                    <input type="text" name="age-min" id="group-input-age-min" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the min age"/>
                                                 </div>
-                                            </article>
-                                        </div>
-                                        <!-- acc-menu-3-item end -->
-
-                                        <!-- acc-menu-4-item start -->
-                                        <div>
-                                            <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
-                                            <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
-                                                <article class="acc-medium">
-                                                    <div class="create-ng--interval">
-                                                        <select name="ng-qualification-min" id="ng-members-qualification-min">
-                                                            <template id="create-group-qual-temp">
-                                                                <option value="#qual-value-ph">#qual-name-ph</option>
-                                                            </template>
-                                                        </select>
-                                                        &nbsp;<span>-</span>&nbsp;
-                                                        <select name="ng-qualification-max" id="ng-members-qualification-max">
-                                                        </select>
-                                                    </div>
-                                            </article>
-                                        </div>
-                                        <!-- acc-menu-4-item end -->
-                                    </section>
-                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Top age:</div> </td>
+                                        <td> 
+                                            <div id="group-info-age-max">
+                                                <div class="create-ng--interval">
+                                                    <input type="text" name="age-max" id="group-input-age-max" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the max age"/>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up"> 
+                                        <td class="group-info-table-pop-up-td"> <div> Low weight:</div> </td>
+                                        <td> 
+                                            <div id="group-info-weight-min">
+                                                <div class="create-ng--interval">
+                                                    <input type="text" name="weight-min" id="group-input-weight-min" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the min weight"/>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Top weight:</div> </td>
+                                        <td> 
+                                            <div id="group-info-weight-max">
+                                                <div class="create-ng--interval">
+                                                    <input type="text" name="weight-max" id="group-input-weight-max" class="add-group-pop-up--input" pattern="[0-9]+" required="required" placeholder="Enter the max weight"/>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Low qualification:</div> </td>
+                                        <td> 
+                                            <div id="group-info-qulification-min">
+                                                <div class="create-ng--interval">
+                                                    <select class="add-group-pop-up--qual" id="group-input-qulification-min">
+                                                        <option value="Not applicable">Not applicable</option>
+                                                    </select>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div> Top qualification:</div> </td>
+                                        <td> 
+                                            <div id="group-info-qulification-max">
+                                                <div class="create-ng--interval">
+                                                    <select class="add-group-pop-up--qual" id="group-input-qulification-max">
+                                                        <option value="Not applicable">Not applicable</option>
+                                                    </select>
+                                                </div>
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="block-for-button">
+                                    <button class="add-group-pop-up-btn-submit js-hidden-element" type="button" id="">
+                                        <span class="group-card-btn-submit-text">Add group</span>
+                                    </button>
+                                </div>                                      
                             </div>
-
-                            <div class="form-field--option">
-                                <ul class="list nm-more-than-one-list">
-                                    <label for="nm-more-than-one" class="form-field-label">
-                                        <span class="form-field-title">Enter more than one</span>
-                                        <li class="nm-more-than-one-item">
-                                            <input type="radio" id="ng-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                            <label for="yes">Yes</label>
-                                        </li>
-    
-                                        <li class="nm-more-than-one-item">
-                                        <input type="radio" id="ng-more-than-one-no" name="nm-more-than-one" value="no">
-                                        <label for="no">No</label>
-                                        </li>
-                                    </label>
-                                </ul>
-                            </div>
-
-                            <button type="button" id="group-form-send-btn" class="modal-btn-submit">
-                                <span class="modal-btn-submit-text">Send</span>
-                            </button>
-                        
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <!--second-popup-window-end-->
+    </div>
+    <!--add-group-popup-window-end-->
         
 
         <script src="./scripts/competition-page.js" type="module"></script> 
