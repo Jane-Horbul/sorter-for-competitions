@@ -2061,7 +2061,7 @@ body.lock {
 .add-group-pop-up--discipline {
   background-color: transparent;
   border: none;
-  color: #5d6a76;
+  color: #48525c;
   width: 99%;
   font-size: 16px;
   padding-left: 15px;
@@ -2101,6 +2101,22 @@ body.lock {
           box-shadow: drop-shadow(0px 4px 4px rgba(2, 153, 204, 0.699));
   -webkit-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.add-group-pop-up--input::-webkit-input-placeholder {
+  color: #bebebe;
+}
+
+.add-group-pop-up--input:-ms-input-placeholder {
+  color: #bebebe;
+}
+
+.add-group-pop-up--input::-ms-input-placeholder {
+  color: #bebebe;
+}
+
+.add-group-pop-up--input::placeholder {
+  color: #bebebe;
 }
 
 .group-info {
