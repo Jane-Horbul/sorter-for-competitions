@@ -68,9 +68,10 @@ export function parseMapArray(str){
 }
 
 export function parseAnswerParams(answer){
-    const parseResult = new Map();
+    var blocksResult = new Array(0);
     var blocks = answer.split("<Option block>");
     blocks.forEach(block => {
+        const parseResult = new Map();
         var options = block.split("<Option name>");
         options.forEach(option => {
             var params = option.split("<Option value>");
@@ -94,8 +95,10 @@ export function parseAnswerParams(answer){
                 parseResult.set(params[0], parseMapArray(params[1]));
             }
         });
+        if(parseResult.size > 0)
+            blocksResult.push(parseResult);
     });
-    return parseResult;
+    return blocksResult;
 }
 
 export function removeHiden(){

@@ -39,8 +39,8 @@ const sportsmanObjects = {
     getAddingRow(id)            { return document.getElementById("adding-row-sportsman-" + id);},
     setAddingRowId(row, id)     { row.setAttribute("id", "adding-row-sportsman-" + id);},
     getAddingRowTemplate()      { return document.getElementById("add-settings-template");},
-    getSportsAdmition(row)      { return row.querySelector('#admitted').checked ? "true" : "false";},
-    isCheckedDisc(row, num)     { return row.querySelector("#discipline-" + num).checked;},
+    getSportsAdmition(row, sid) { return row.querySelector('#admitted-' + sid).checked ? "true" : "false";},
+    isCheckedDisc(row, sid, num){ return row.querySelector("#discipline-" + sid + "-" + num).checked;},
 
     getPlaceholders(sp)         { return {
                                         "#sp-id":           sp.getId(),
@@ -53,14 +53,16 @@ const sportsmanObjects = {
                                         "#sp-qual":         qualificationsMap.get(sp.getQualification()),
                                         "#sp-admit":        sp.getAdmition(),
                                         "#sp-gr-num":       sp.getGroupsNum(),
-                                        "#sportsman-link":  departmentLink + sp.getLink()
+                                        "#sportsman-link":  departmentLink + sp.getLink(),
+                                        "#disc-list-id":    "sports-disc-list-" + sp.getId(),
+                                        "#admitted-id":     "admitted-" + sp.getId()
                                     };
                                 },
-    getDisciplinesList()        {return this.getAddingRowTemplate().content.getElementById("sports-disc-list");},
-    getDisciplineTemplate()     {return this.getAddingRowTemplate().content.getElementById("add-discipline-template");},
-    getDiscPlaceholders(n, id)  {return {   "#disc-name":   n, 
-                                            "#disc-id":     ("discipline-" + id)};
-                                },
+    getDisciplinesList(spId)            {return document.getElementById("sports-disc-list-" + spId);},
+    getDisciplineTemplate()             {return document.getElementById("add-discipline-template");},
+    getDiscPlaceholders(n, id, spId)    {return {   "#disc-name":   n, 
+                                                    "#disc-id":     ("discipline-" + spId + "-" + id)};
+                                            },
     
     getAddBtn()                 { return document.getElementById("sportsmans-add-list-send-btn");},
     getSortSpBtn()              { return document.getElementById("sort-members-btn");}
@@ -107,6 +109,7 @@ function sportsmanAddingSelect(sid){
         table.rows[rowIndx].setAttribute("class", "add-sportsman-table-tr--active");
         sportsmanObjects.setAddingRowId(addingRow, sid);
         addingRow.append(newItem);
+        disciplinesCheckboxesAdd(sid);
         sportsmansAddList.push(sp);
 
     } else {
@@ -127,11 +130,11 @@ function sportsmansAddListSend() {
         var sid = sportsmansAddList[i].getId();
         var indx = findRowIndxById(table, sportsmanObjects.getAddSportsRowId(sid)) + 1;
         var settings = table.rows[indx];
-        sportsmansAddList[i].setAdmition(sportsmanObjects.getSportsAdmition(settings));
+        sportsmansAddList[i].setAdmition(sportsmanObjects.getSportsAdmition(settings, sid));
 
         var sportsDisc = new Array(0);
         for(var j = 0; j < disciplines.length; j++){
-            if(sportsmanObjects.isCheckedDisc(settings, j))
+            if(sportsmanObjects.isCheckedDisc(settings, sid, j))
                 sportsDisc.push(disciplines[j]);
         }
         sportsmansAddList[i].setDisciplines(sportsDisc);
@@ -160,25 +163,28 @@ function resortSportsmens(){
 /* ------------------- GROUPS ----------------------------*/
 
 const groupObjects = {
-    getNameInput()              { return document.getElementById("new-group-name").value;},
-    getDisciplineInput()        { return document.getElementById("create-group-division").value;},
-    getPairsSystemInput()       { return document.getElementById("pairs-form-system").value;},
+    inputNameId:         "group-input-name",
+    inputSystemId:       "group-input-system",
+    inputSexId:          "group-input-sex",
+    inputDisciplineId:   "group-input-discipline",
+    inputAgeMinId:       "group-input-age-min",
+    inputAgeMaxId:       "group-input-age-max",
+    inputWeightMinId:    "group-input-weight-min",
+    inputWeightMaxId:    "group-input-weight-max",
+    inputQualMinId:      "group-input-qulification-min",
+    inputQualMaxId:      "group-input-qulification-max",
 
-    isSexOn()                   { return document.getElementById("gender-checkbox").checked;},
-    getSexInput()               { return document.getElementById("create-ng-male").checked ? "male" : "female";},
-
-    isAgeOn()                   { return document.getElementById("age-checkbox").checked;},
-    getAgeMinInput()            { return document.getElementById("age-min").value;},
-    getAgeMaxInput()            { return document.getElementById("age-max").value;},
-
-    isWeightOn()                { return document.getElementById("weight-checkbox").checked;},
-    getWeightMinInput()         { return document.getElementById("weight-min").value;},
-    getWeightMaxInput()         { return document.getElementById("weight-max").value;},
-
-    isQualOn()                  { return document.getElementById("qualification-checkbox").checked;},
-    getQualMinInput()           { return document.getElementById("ng-members-qualification-min").value;},
-    getQualMaxInput()           { return document.getElementById("ng-members-qualification-max").value;},
-
+    getNameInput()          { return document.getElementById(this.inputNameId);},
+    getSystemInput()        { return document.getElementById(this.inputSystemId);},
+    getSexInput()           { return document.getElementById(this.inputSexId);},
+    getDisciplineInput()    { return document.getElementById(this.inputDisciplineId);},
+    getAgeMinInput()        { return document.getElementById(this.inputAgeMinId);},
+    getAgeMaxInput()        { return document.getElementById(this.inputAgeMaxId);},
+    getWeightMinInput()     { return document.getElementById(this.inputWeightMinId);},
+    getWeightMaxInput()     { return document.getElementById(this.inputWeightMaxId);},
+    getQualMinInput()       { return document.getElementById(this.inputQualMinId);},
+    getQualMaxInput()       { return document.getElementById(this.inputQualMaxId);},
+    
     getTable()                  { return document.getElementById("groups-table");},
     getTemplate()               { return document.getElementById("group-template");},
     getAddBtn()                 { return document.getElementById("group-form-send-btn");},
@@ -195,7 +201,7 @@ const groupObjects = {
                                     };
                                 },
 
-    getDisciplinesList()        {return document.getElementById("create-group-division");},
+    getDisciplinesList()        {return document.getElementById("group-input-discipline");},
     getDisciplineTemplate()     {return document.getElementById("create-group-div-temp");},
     getDiscPlaceholders(name)   {return {
                                             "#group-disc-value": name,
@@ -203,9 +209,14 @@ const groupObjects = {
                                         };
                                 },
 
-    getQualMinList()            {return document.getElementById("ng-members-qualification-min");},
-    getQualMaxList()            {return document.getElementById("ng-members-qualification-max");},
-    getQualTemplate()           {return document.getElementById("create-group-qual-temp");},
+    getQualMinList()            {return document.getElementById("group-input-qulification-min");},
+    getQualMaxList()            {return document.getElementById("group-input-qulification-max");},
+    createOption(id, name, val) { var res = document.createElement("option");
+                                    res.setAttribute("id", id);
+                                    res.value = val;
+                                    res.innerHTML = name;
+                                    return res;
+                                },
     getQualPlaceholders(v, n)   {return {  
                                             "#qual-value-ph": v,
                                             "#qual-name-ph": n
@@ -246,7 +257,7 @@ function groupPageElementAdd(group){
 }
 
 function isMainGroupParamsOk(){
-    if(isEmptyString(groupObjects.getNameInput())){
+    if(isEmptyString(groupObjects.getNameInput().value)){
         groupObjects.alertNameFormat();
         return false;
     }
@@ -254,51 +265,55 @@ function isMainGroupParamsOk(){
 }
 
 function isAgeOk(){
-    var ageMin = groupObjects.getAgeMinInput();
-    var ageMax = groupObjects.getAgeMaxInput();
-    if(!isNumber(ageMin)){
+    var ageMin = groupObjects.getAgeMinInput().value;
+    var ageMax = groupObjects.getAgeMaxInput().value;
+    if(!isEmptyString(ageMin) && !isNumber(ageMin)){
         groupObjects.alertAgeMinFormat();
         return false;
     }
-    if(!isNumber(ageMax)){
-        groupObjects.alertAgeMaxFormat();
-        return false;
-    }
-    if((Number(ageMax) - Number(ageMin)) < 0){
-        groupObjects.alertAgeIntervalFormat();
-        return false;
+    if(!isEmptyString(ageMax)){
+        if(!isNumber(ageMax)){
+            groupObjects.alertAgeMaxFormat();
+            return false; 
+        }
+        if(!isEmptyString(ageMin) && (Number(ageMax) - Number(ageMin)) < 0)
+        {
+            groupObjects.alertAgeIntervalFormat();
+            return false; 
+        }
     }
     return true;
 }
 
 function isWeightOk(){
-    var weightMin = groupObjects.getWeightMinInput();
-    var weightMax = groupObjects.getWeightMaxInput();
+    var weightMin = groupObjects.getWeightMinInput().value;
+    var weightMax = groupObjects.getWeightMaxInput().value;
 
-    if(!isNumber(weightMin)){
+    if(!isEmptyString(weightMin) && !isNumber(weightMin)){
         groupObjects.alertWeightMinFormat();
         return false;
     }
-    if(!isNumber(weightMax)){
-        groupObjects.alertWeightMaxFormat();
-        return false;
-    }
-    if((Number(weightMax) - Number(weightMin)) < 0){
-        groupObjects.alertWeightIntervalFormat();
-        return false;
+    if(!isEmptyString(weightMax)){
+        if(!isNumber(weightMax)){
+            groupObjects.alertWeightMaxFormat();
+            return false; 
+        }
+        if(!isEmptyString(weightMin) && (Number(weightMax) - Number(weightMin)) < 0)
+        {
+            groupObjects.alertWeightIntervalFormat();
+            return false; 
+        }
     }
     return true;
 }
 
 function isQualificationOk(){
-    var qualMinVal = groupObjects.getQualMinInput();
-    var qualMaxVal = groupObjects.getQualMaxInput();
-    
-    if(qualMinVal == undefined || qualMaxVal == undefined){
-        groupObjects.alertQualificationFormat();
-        return false;
-    }
-    if(qualMinVal > qualMaxVal){
+    var qualMinVal = groupObjects.getQualMinInput().value;
+    var qualMaxVal = groupObjects.getQualMaxInput().value;
+
+    if((qualMinVal != "Not applicable") 
+            && (qualMaxVal != "Not applicable") 
+            && (Number(qualMinVal) > Number(qualMaxVal))){
         groupObjects.alertQualificationInterval();
         return false;
     }
@@ -306,37 +321,28 @@ function isQualificationOk(){
 }
 
 function sendGroupForm() {
-    if(!isMainGroupParamsOk())
+    if(!isMainGroupParamsOk() || !isAgeOk() || !isWeightOk() || !isQualificationOk())
         return;
-    if(groupObjects.isAgeOn() && !isAgeOk())
-        return;
-    if(groupObjects.isWeightOn() && !isWeightOk())
-        return;
-    if(groupObjects.isQualOn() && !isQualificationOk())
-        return;
+    var newGroup = ops.createGroup(undefined);
+    newGroup.setName(groupObjects.getNameInput().value);
+    newGroup.setDiscipline(groupObjects.getDisciplineInput().value);
+    newGroup.setFormSystem(groupObjects.getSystemInput().value);
 
-    var group = ops.createGroup(undefined);
-    group.setName(groupObjects.getNameInput());
-    group.setDiscipline(groupObjects.getDisciplineInput());
-    group.setFormSystem(groupObjects.getPairsSystemInput());
-    if(groupObjects.isSexOn())
-        group.setSex(groupObjects.getSexInput());
-    if(groupObjects.isAgeOn())
-    {
-        group.setAgeMin(groupObjects.getAgeMinInput());
-        group.setAgeMax(groupObjects.getAgeMaxInput());
-    }
-    if(groupObjects.isWeightOn())
-    {
-        group.setWeightMin(groupObjects.getWeightMinInput());
-        group.setWeightMax(groupObjects.getWeightMaxInput());
-    }
-    if(groupObjects.isQualOn())
-    {
-        group.setQualMin(groupObjects.getQualMinInput());
-        group.setQualMax(groupObjects.getQualMaxInput());
-    }
-    server.group.create(page.cid, group);
+    if(groupObjects.getSexInput().value != "Not applicable")
+        newGroup.setSex(groupObjects.getSexInput().value);
+    if(groupObjects.getAgeMinInput().value != "")
+        newGroup.setAgeMin(groupObjects.getAgeMinInput().value);
+    if(groupObjects.getAgeMaxInput().value != "")
+        newGroup.setAgeMax(groupObjects.getAgeMaxInput().value);
+    if(groupObjects.getWeightMinInput().value != "")
+        newGroup.setWeightMin(groupObjects.getWeightMinInput().value);
+    if(groupObjects.getWeightMaxInput().value != "")
+        newGroup.setWeightMax(groupObjects.getWeightMaxInput().value);
+    if(groupObjects.getQualMinInput().value != "Not applicable")
+        newGroup.setQualMin(groupObjects.getQualMinInput().value);
+    if(groupObjects.getQualMaxInput().value != "Not applicable")
+        newGroup.setQualMax(groupObjects.getQualMaxInput().value);
+    server.group.create(page.cid, newGroup);
 }
 
 /* ------------------- COMMON ----------------------------*/
@@ -386,26 +392,34 @@ function competitionEdit(){
     }
 }
 
-function qualificationAddToPage(name, value){
-    if(!isEmptyString(value)){
-        var template = groupObjects.getQualTemplate();
-        var placeholders = groupObjects.getQualPlaceholders(value, name);
-        groupObjects.getQualMinList().append(createPageItem(template, placeholders)); 
-        groupObjects.getQualMaxList().append(createPageItem(template, placeholders)); 
-    }
+function qualificationAddToPage(){
+    var qualMinList = groupObjects.getQualMinList();
+    var qualMaxList = groupObjects.getQualMaxList();
+    qualificationsMap.forEach(function(name, value) {
+        var optMin = groupObjects.createOption(name + "-min-id", name, value);
+        var optMax = groupObjects.createOption(name + "-max-id", name, value);
+        qualMinList.appendChild(optMin);
+        qualMaxList.appendChild(optMax);
+    });
 }
 
 function disciplinesAddToPage(){
     for(var i = 0; i < disciplines.length; i++){
         if(isEmptyString(disciplines[i]))
             continue;
-        var template = groupObjects.getDisciplineTemplate();
-        var placeholders = groupObjects.getDiscPlaceholders(disciplines[i]);
-        groupObjects.getDisciplinesList().append(createPageItem(template, placeholders));
 
-        template = sportsmanObjects.getDisciplineTemplate();
-        placeholders = sportsmanObjects.getDiscPlaceholders(disciplines[i], i);
-        sportsmanObjects.getDisciplinesList().append(createPageItem(template, placeholders));
+        var opt = groupObjects.createOption(disciplines[i] + "-id", disciplines[i], disciplines[i]);
+        groupObjects.getDisciplinesList().appendChild(opt);
+    }
+}
+function disciplinesCheckboxesAdd(spId){
+    for(var i = 0; i < disciplines.length; i++){
+        if(isEmptyString(disciplines[i]))
+            continue;
+        var template = sportsmanObjects.getDisciplineTemplate();
+        var placeholders = sportsmanObjects.getDiscPlaceholders(disciplines[i], i, spId);
+        sportsmanObjects.getDisciplinesList(spId).append(createPageItem(template, placeholders));
+        
     }
 }
 
@@ -415,9 +429,8 @@ function fillPageInfo(){
     competitionObjects.setId(competition.getId());
     competitionObjects.setDescription(competition.getDescription());
     
-    for (var [value, name] of qualificationsMap) {
-        qualificationAddToPage(name, value);
-    }
+    qualificationAddToPage();
+    
     disciplinesAddToPage();
     competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
     competition.getSportsmans(competition).forEach(sp => sportsmanPageElementAdd(sp));

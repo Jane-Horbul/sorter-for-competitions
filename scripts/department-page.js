@@ -243,12 +243,12 @@ function sportsmanPageElementAdd(sp){
 }
 
 function dateValidate(date){
-    var dt = date.split(".");
+    var dt = date.split("-");
     if(dt.length < 3) return false;
     dt[1] -= 1;
 
-    var d = new Date(dt[2], dt[1], dt[0]);
-    if ((d.getFullYear() == dt[2]) && (d.getMonth() == dt[1]) && (d.getDate() == dt[0]))
+    var d = new Date(dt[0], dt[1], dt[2]);
+    if ((d.getFullYear() == dt[0]) && (d.getMonth() == dt[1]) && (d.getDate() == dt[2]))
         return true;
     return false;
 }

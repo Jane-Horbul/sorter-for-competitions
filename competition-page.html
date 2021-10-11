@@ -224,16 +224,16 @@
                                 </template>
 
                                 <template id="add-settings-template">
-                                    <td class="secondary-tables--td" colspan="6" id="sports-disc-list">
-                                        <template id="add-discipline-template">
-                                            <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
-                                            <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
-                                        </template>
-                                    </td>
+                                    <td class="secondary-tables--td" colspan="6" id="#disc-list-id"></td>
                                     <td class="secondary-tables--td" colspan="1">
-                                        <input class="input-to-choose-type" type="checkbox" id="admitted" name="admitted">
-                                        <label class="label-to-choose-type" for="admitted">Admitted</label>
+                                        <input class="input-to-choose-type" type="checkbox" id="#admitted-id" name="#admitted-id">
+                                        <label class="label-to-choose-type" for="#admitted-id">Admitted</label>
                                     </td>
+                                </template>
+
+                                <template id="add-discipline-template">
+                                    <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                                    <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
                                 </template>
                             </table>
                             <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
@@ -452,7 +452,7 @@
                                     </tr>
                                 </table>
                                 <div class="block-for-button">
-                                    <button class="add-group-pop-up-btn-submit js-hidden-element" type="button" id="">
+                                    <button class="add-group-pop-up-btn-submit js-hidden-element" type="button" id="group-form-send-btn">
                                         <span class="group-card-btn-submit-text">Add group</span>
                                     </button>
                                 </div>                                      
