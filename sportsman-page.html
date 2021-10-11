@@ -165,99 +165,6 @@
                                         </tr>
                                     </table>
                                     </li>
-
-<!--
-                                    <li class="sportsman-info-item">
-                                    <table class="sportsman-dynamic-table">
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> ID:</div> </td>
-                                            <td class="secondary-title-two-tables"> <div class="sportsman-info-item--id" id="sportsman-info-id">234</div></td>
-                                        </tr>   
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Surname:</div> </td>
-
-                                             <td class="secondary-title-two-tables"> 
-                                                <div id="sportsman-info-surname">
-                                                    <div class="form-field">
-                                                        <input type="text" class="sportsman-info-item--input" id="sports-input-surname"  placeholder="Enter sportsman surname">
-                                                    </div>
-                                                </div>
-                                             </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Name:</div> </td>
-                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-name">
-                                                <div class="form-field">
-                                                    <input type="text" class="sportsman-info-item--input" id="sports-input-name"  placeholder="Enter sportsman name">
-                                                </div>
-                                            </div>  
-                                        </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Sex:</div> </td>
-                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-sex">
-                                                <div class="form-field--option">
-                                                    <select class="sportsman-info-item--sex" name="form-system-of-group" id="sports-input-sex">
-                                                        <option selected value="Not applicable">Not applicable</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Birth date:</div> </td>
-                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-age">
-                                                <div class="create-ng--interval">
-                                                    <input type="date" name="age-min" id="sports-input-age" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
-                                                </div>
-                                            </div>  
-                                        </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Weight:</div> </td>
-                                            <td class="secondary-title-two-tables"> 
-                                                <div id="sportsman-info-weight">                                                
-                                                <div class="create-ng--interval">
-                                                <input type="text" name="weight-min" id="sports-input-weight" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
-                                                </div>
-                                                </div>  
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Qualification:</div> </td>
-                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-qual">
-                                                <div class="create-ng--interval">
-                                                    <select class="sportsman-info-item--qual" id="sports-input-qulification">
-                                                        <option value="Not applicable">Not applicable</option>
-                                                    </select>
-
-                                                </div>
-                                            </div> </td>
-
-
-
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> Team:</div> </td>
-                                            <td class="secondary-title-two-tables"> <div id="sportsman-info-team">
-
-                                                <div class="form-field">
-                                                    <input type="text" class="sportsman-info-item--input" id="sports-input-team"  placeholder="Enter sportsman team">
-                                                </div>
-                                            </div>  </td>
-
-
-                                        </tr>
-                                    </table>
-                                    </li>
--->
                                 </ul>
                                     
                                 
@@ -276,8 +183,82 @@
                     </div>
                 </div>
                 <div id="Statistics" class="tabcontent">
+
+                    <div class="comp-statistics">
+                        <div>
+                            <ul class="list comp-statistics-list">
+                                <li class="comp-statistics-list--item">
+                                    <h2 class="comp-statistics-title">Comp name</h2>
+                                </li>
+                                <li class="comp-statistics-list--item">
+                                    <button class="comp-statistics-btn">Apply</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="comp-statistics-main">
+                            <div class="comp-statistics-main-res">
+                                <h3 class="comp-statistics-main-title">Result</h3>
+                                <p>Place:      #place-num</p>
+                                <p>Pairs num:  #pairs-num</p>
+                                <p>Win num:    #wins-num</p>
+                                <p>Score:      #score</p>
+                            </div>
+                            <div class="comp-statistics-main-discipline">
+                                <h3 class="comp-statistics-main-title">Discipline</h3>
+                                <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                                <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                            </div>
+                            <div class="comp-statistics-main-admition">
+                                <h3 class="comp-statistics-main-title"></h3>
+                                <div class="comp-statistics-main-admition-checkbox">
+                                    <input class="input-to-choose-type--admition" type="checkbox" id="admitted" name="admitted">
+                                    <label class="label-to-choose-type--admition" for="admitted">Admitted</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="group-info-main" id="competitions-list-id">
-                        <template id="competition-item-template-id">
+                        <!--start-->
+                            <button class="accordion">#competition-name</button>
+                            <div class="panel">
+                                <ul class="list advantages-list" id="#groups-list-id"> 
+                                    <li class="sportsman-group-card--item">
+                                        <div class="sp-card-item">
+                                            <div class="sportsman-group-card">
+                                                <div class="caption">
+                                                    <a href="#group-link" class="title-of-competition-list-item">
+                                                        <div class="sp-card-title">
+                                                            <div class="sp-card-title-text--h">
+                                                                    <h2 class="sp-card-title-text" id="competition-name">#group-name</h2>
+                                                            </div>
+                                                            <div class="sp-card-title--img">
+                                                                <img src="#place-image"/>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="sportsman-group-card-text">
+                                                        <p>Place:      #place-num</p>
+                                                        <p>Discipline: #discipline</p>
+                                                        <p>Pairs num:  #pairs-num</p>
+                                                        <p>Win num:    #wins-num</p>
+                                                        <p>Score:      #score</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+        
+                                </ul> 
+                            </div>
+
+                        <button class="accordion">#competition-name</button>
+                        <div class="panel">
+                            <ul class="list advantages-list" id="#groups-list-id"> </ul>
+                        </div>
+
+                        <!--end-->
+
+                        <!-- <template id="competition-item-template-id">
                             <button class="accordion">#competition-name</button>
                             <div class="panel">
                                 <ul class="list advantages-list" id="#groups-list-id"> </ul>   
@@ -309,7 +290,7 @@
                                     </div>
                                 </div>
                             </li>
-                        </template>
+                        </template> -->
                     </div>
                 </div>
 

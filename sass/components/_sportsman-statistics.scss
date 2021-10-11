@@ -1,0 +1,56 @@
+.comp-statistics {
+    width: 100%;
+    border: 2px solid #757575;
+    height: auto;
+    margin-bottom: 20px;
+}
+.comp-statistics-title {
+  color: #2196f3;
+}
+.comp-statistics-list {
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+}
+.comp-statistics-list--item {
+  margin-right: 40px;
+  margin-left: 40px;
+}
+.comp-statistics-btn {
+  width: 200px;
+  height: 50px;
+  background-color: #2196f3;
+  margin-top: 45px;
+  border: 0px;
+  color: white;
+}
+.comp-statistics-btn:hover,
+.comp-statistics-btn:focus {
+  background-color: $white-color;
+  border: 2px solid #757575;
+  color: #212121;
+  color: $logo-color;
+  box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.comp-statistics-main {
+  display: flex;
+}
+.comp-statistics-main-title {
+  font-size: 20px;
+  color: #2196f3;
+}
+.comp-statistics-main-res,
+.comp-statistics-main-discipline {
+  width: 40%;
+  font-size: 18px;
+  margin: 20px;
+  margin-top: 0px;
+}
+.comp-statistics-main-admition {
+  font-size: 18px;
+}
+.comp-statistics-main-admition-checkbox {
+  margin-top: 73px;
+}
