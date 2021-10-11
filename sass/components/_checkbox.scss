@@ -2,10 +2,14 @@
 .input-to-choose-type[type=checkbox] { display: none; }
 .label-to-choose-type {
     position: relative;
-    height: 38px; line-height: 36px; 
-    margin: 4px; padding: 0px 8px 0px 8px;
-    display: inline-block; cursor: pointer;
-    border: 1px solid #aaa; border-radius: 5px;
+    height: 38px; 
+    line-height: 36px; 
+    margin: 4px; 
+    padding: 0px 8px 0px 8px;
+    display: inline-block; 
+    cursor: pointer;
+    border: 1px solid #aaa; 
+    border-radius: 5px;
     font-family: helvetica, sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -53,6 +57,13 @@
     user-select: none;    
     background: red;
     color: black;
+
+    @media screen and (min-width: 768px) and (max-width: 1199px) {
+        width: 120px;
+        height: 30px;
+        padding: 0px 8px 0px 27px;
+        font-size: 16px;
+      }
 }
 .label-to-choose-type--admition::before {
     content: ''; 

@@ -185,7 +185,7 @@
                 <div id="Statistics" class="tabcontent">
 
                     <div class="comp-statistics">
-                        <div>
+                        <div class="comp-statistics-name">
                             <ul class="list comp-statistics-list">
                                 <li class="comp-statistics-list--item">
                                     <h2 class="comp-statistics-title">Comp name</h2>
@@ -198,15 +198,34 @@
                         <div class="comp-statistics-main">
                             <div class="comp-statistics-main-res">
                                 <h3 class="comp-statistics-main-title">Result</h3>
-                                <p>Place:      #place-num</p>
-                                <p>Pairs num:  #pairs-num</p>
-                                <p>Win num:    #wins-num</p>
-                                <p>Score:      #score</p>
+                                <table class="comp-statistics-main-res--table">
+                                    <tr>
+                                        <td>
+                                            <p class="comp-statistics-main-res--item">Place:      #place-num</p>
+                                            <p class="comp-statistics-main-res--item">Pairs num:  #pairs-num</p>
+                                        </td>
+                                        <td>
+                                            <p class="comp-statistics-main-res--item">Win num:    #wins-num</p>
+                                            <p class="comp-statistics-main-res--item">Score:      #score</p>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
                             </div>
                             <div class="comp-statistics-main-discipline">
                                 <h3 class="comp-statistics-main-title">Discipline</h3>
-                                <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
-                                <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                                <ul class="list comp-statistics-main-discipline-list">
+                                    <li>                                
+                                        <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                                        <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                                    </li>
+                                    <li>                                
+                                        <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                                        <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                                    </li>
+
+                                </ul>
                             </div>
                             <div class="comp-statistics-main-admition">
                                 <h3 class="comp-statistics-main-title"></h3>

@@ -1882,6 +1882,15 @@ body.lock {
   color: black;
 }
 
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .label-to-choose-type--admition {
+    width: 120px;
+    height: 30px;
+    padding: 0px 8px 0px 27px;
+    font-size: 16px;
+  }
+}
+
 .label-to-choose-type--admition::before {
   content: '';
   position: absolute;
@@ -2180,7 +2189,12 @@ body.lock {
 }
 
 .comp-statistics-title {
+  font-size: 24px;
   color: #2196f3;
+}
+
+.comp-statistics-name {
+  height: 50px;
 }
 
 .comp-statistics-list {
@@ -2203,9 +2217,16 @@ body.lock {
   width: 200px;
   height: 50px;
   background-color: #2196f3;
-  margin-top: 45px;
+  margin-top: 15px;
   border: 0px;
   color: white;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .comp-statistics-btn {
+    width: 120px;
+    height: 30px;
+  }
 }
 
 .comp-statistics-btn:hover,
@@ -2224,11 +2245,14 @@ body.lock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 30px;
+  border-top: 2px solid aliceblue;
 }
 
 .comp-statistics-main-title {
-  font-size: 20px;
+  font-size: 18px;
   color: #2196f3;
+  margin-top: 10px;
 }
 
 .comp-statistics-main-res,
@@ -2239,12 +2263,29 @@ body.lock {
   margin-top: 0px;
 }
 
+.comp-statistics-main-res--item {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.comp-statistics-main-res--table {
+  width: 100%;
+}
+
 .comp-statistics-main-admition {
   font-size: 18px;
 }
 
 .comp-statistics-main-admition-checkbox {
   margin-top: 73px;
+}
+
+.comp-statistics-main-discipline-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .group-info {
