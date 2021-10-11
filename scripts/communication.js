@@ -79,21 +79,59 @@ function mapToSportsman(map) {
     };
 }
 
-function mapToStats(map) {
-    return {
-        params: (map == undefined) ? (new Map()) : map,
-        getCompetitionId()      {return this.params.get("CompetitionId");},
-        getCompetitionName()    {return this.params.get("CompetitionName");},
-        getDisciplines()        {return this.params.get("Disciplines");},
-        isAdmitted()            {return (this.params.get("Admition") == "yes" ? true : false);},
-        isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
-        
-        setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
-        setCompetitionName(v)   {return this.params.set("CompetitionName", v);},
-        setDisciplines(v)       {return this.params.set("Disciplines", v);},
-        setAdmition(v)          {return this.params.set("Admition", v ? "yes" : "no");},
-        setActive(v)            {return this.params.set("IsActive", v ? "yes" : "no");},
-    };
+function formGroupLink(cid, gid)
+{
+    return window.location.href.substr(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid + "/group?gid=" + gid;
+}
+
+function arrayToGs(arr, cid) {
+    var res = new Array(0);
+    arr.forEach(map => {
+        var groupStat = {
+            params:               (map == undefined) ? (new Map()) : map,
+            getGroupId()          {return this.params.get("GroupId");},
+            getGroupName()        {return this.params.get("GroupName");},
+            getDiscipline()       {return this.params.get("Discipline");},
+            getScore()            {return this.params.get("Score");},
+            getPairsNum()         {return this.params.get("PairsNum");},
+            getWinsNum()          {return this.params.get("WinsNum");},
+            getPlace()            {return this.params.get("Place");},
+            getGroupLink()        {return formGroupLink(cid, this.params.get("GroupId"));},
+
+            setGroupId(v)          {return this.params.set("GroupId", v);},
+            setGroupName(v)        {return this.params.set("GroupName", v);},
+            setDiscipline(v)       {return this.params.set("Discipline", v);},
+            setScore(v)            {return this.params.set("Score", v);},
+            setPairsNum(v)         {return this.params.set("PairsNum", v);},
+            setWinsNum(v)          {return this.params.set("WinsNum", v);}
+        };
+        res.push(groupStat);
+    });
+    return res;
+}
+
+function arrayToCompStats(arr) {
+    var res = new Array(0);
+    console.log(arr);
+    arr.forEach(map => {
+        var compStat = {
+            params: (map == undefined) ? (new Map()) : map,
+            getCompetitionId()      {return this.params.get("CompetitionId");},
+            getCompetitionName()    {return this.params.get("CompetitionName");},
+            getDisciplines()        {return this.params.get("Disciplines");},
+            isAdmitted()            {return (this.params.get("Admition") == "yes" ? true : false);},
+            isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
+            getGroupsStats()        {return arrayToGs(this.params.get("GroupsStatistic"), this.params.get("CompetitionId"));},
+
+            setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
+            setCompetitionName(v)   {return this.params.set("CompetitionName", v);},
+            setDisciplines(v)       {return this.params.set("Disciplines", v);},
+            setAdmition(v)          {return this.params.set("Admition", v ? "yes" : "no");},
+            setActive(v)            {return this.params.set("IsActive", v ? "yes" : "no");},
+        };
+        res.push(compStat);
+    });
+    return res;
 }
 
 function mapToPair(map) {
@@ -193,19 +231,20 @@ function mapToDepatrment(map) {
 
 export const ops = {
     createSportsman(m)      {return mapToSportsman(m);},
-    createStatistics(m)     {return mapToStats(m);},
+    createStatistics(m)     {return arrayToCompStats(m);},
     createPair(m)           {return mapToPair(m);},
     createGroup(m)          {return mapToGroup(m);},
     createCompetition(m)    {return mapToCompetition(m);},
     createDepartmant(m)     {return mapToDepatrment(m);}
 }
 
-function sendRequest(request) {
+function sendRequest(request, waitArray) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', request, false);
     xhr.send();
     if (xhr.status != 200)   return new Map();
-    return parseAnswerParams(xhr.responseText);
+    var res = parseAnswerParams(xhr.responseText);
+    return waitArray ? res : res[0];
 }
 
 function sendParametersList(formName, paramsMap, refresh) {
@@ -348,10 +387,10 @@ function editSportsman(sid, sports){
 export const server = {
     access: {
         login(login, pass)                  {sendLogin(login, pass);},
-        getClientStatus()                   {return sendRequest(backendLinks.CLIENT_STATUS_GET).get("ClientStatus");}
+        getClientStatus()                   {return sendRequest(backendLinks.CLIENT_STATUS_GET, false).get("ClientStatus");}
     },
     department: {
-        get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET));},
+        get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET, false));},
         edit(name)                          {sendSingleValue(backendLinks.DEPARTMENT_EDIT, name, true);},
         addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, true)},
         deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, true);},
@@ -359,27 +398,28 @@ export const server = {
         deleteDiscipline(name)              {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_DEL, name, false);}
     },
     competition: {
-        get(cid)                            {return ops.createCompetition(sendRequest(backendLinks.COMPETITION_GET(cid)));},
+        get(cid)                            {return ops.createCompetition(sendRequest(backendLinks.COMPETITION_GET(cid), false));},
         edit(cid, name, desc)               {editCompetition(cid, name, desc);},
         create(cp)                          {createCompetition(cp);},
-        sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid));},
+        sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid), false);},
         addSprotsmans(cid, ids)             {addCpSportsmans(cid, ids);},
-        formPairs(cid)                      {return sendRequest(backendLinks.COMPETITION_GROUPS_PAIRS_FORM(cid));}
+        formPairs(cid)                      {return sendRequest(backendLinks.COMPETITION_GROUPS_PAIRS_FORM(cid), false);}
     },
     group: {
-        get(cid, gid)                       {return ops.createGroup(sendRequest(backendLinks.GROUP_GET(cid, gid)));},
+        get(cid, gid)                       {return ops.createGroup(sendRequest(backendLinks.GROUP_GET(cid, gid), false));},
         edit(cid, gid, gr)                  {editGroup(cid, gid, gr)},
         create(cid, gr)                     {createGroup(cid, gr)},
         remove(cid, gid)                    {return sendSingleValue(backendLinks.COMPETITION_GROUP_DEL(cid), gid, false);},
         excludeSportsman(cid, gid, sid)     {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
         includeSportsList(cid, gid, sids)   {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
-        refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid));},
+        refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid), false);},
         setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);}
     },
     sportsman: {
-        get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid)));},
-        getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_STAT_GET(sid)));},
+        get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid), false));},
+        getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_STAT_GET(sid), true));},
         create(sp)                          {createSportsman(sp);},
+        remove(sid)                         {return sendSingleValue(backendLinks.DEPARTMENT_SPORTSMEN_DEL(sid), sid, false);},
         edit(sid, sp)                       {editSportsman(sid, sp);}
     }
 }

@@ -275,124 +275,41 @@
                         </div>
                     </div>
                 </div>
-
                 <div id="Statistics" class="tabcontent">
-                    <div class="group-info-main">
-
-<button class="accordion">Competition 1</button>
-<div class="panel">
-  <ul class="list advantages-list">
-    <li class="sportsman-group-card--item">
-        <div class="sp-card-item">
-            <a id="competition-link" class="title-of-competition-list-item">
-                <div class="sportsman-group-card">
-
-                    <div class="caption">
-                        <div class="sp-card-title">
-                            <div class="sp-card-title-text--h">
-                                <h2 class="sp-card-title-text" id="competition-name">GROUP 1</h2>
+                    <div class="group-info-main" id="competitions-list-id">
+                        <template id="competition-item-template-id">
+                            <button class="accordion">#competition-name</button>
+                            <div class="panel">
+                                <ul class="list advantages-list" id="#groups-list-id"> </ul>   
                             </div>
-                            <div class="sp-card-title--img">
-                                <img src="./img/gold-m-2.png"/>
-                            </div>
-                        </div>
-                        
-                        <div class="sportsman-group-card-text">
-                            <p>Pairs num:</p>
-                            <p>Win num:</p>
-                            <p>Score:</p>
-                            <p>Place:</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </li>
-
-    <li class="sportsman-group-card--item">
-        <div class="sp-card-item">
-            <a id="competition-link" class="title-of-competition-list-item">
-                <div class="sportsman-group-card">
-
-                    <div class="caption">
-                        <h2 class="title-of-competition-list-item" id="competition-name">GROUP 1</h2>
-                        <div class="sportsman-group-card-text">
-                            <p>Pairs num:</p>
-                            <p>Win num:</p>
-                            <p>Score:</p>
-                            <p>Place:</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </li> <li class="sportsman-group-card--item">
-        <div class="sp-card-item">
-            <a id="competition-link" class="title-of-competition-list-item">
-                <div class="sportsman-group-card">
-
-                    <div class="caption">
-                        <h2 class="title-of-competition-list-item" id="competition-name">GROUP 1</h2>
-                        <div class="sportsman-group-card-text">
-                            <p>Pairs num:</p>
-                            <p>Win num:</p>
-                            <p>Score:</p>
-                            <p>Place:</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </li> <li class="sportsman-group-card--item">
-        <div class="sp-card-item">
-            <a id="competition-link" class="title-of-competition-list-item">
-                <div class="sportsman-group-card">
-
-                    <div class="caption">
-                        <h2 class="title-of-competition-list-item" id="competition-name">GROUP 1</h2>
-                        <div class="sportsman-group-card-text">
-                            <p>Pairs num:</p>
-                            <p>Win num:</p>
-                            <p>Score:</p>
-                            <p>Place:</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </li> <li class="sportsman-group-card--item">
-        <div class="sp-card-item">
-            <a id="competition-link" class="title-of-competition-list-item">
-                <div class="sportsman-group-card">
-
-                    <div class="caption">
-                        <h2 class="title-of-competition-list-item" id="competition-name">GROUP 1</h2>
-                        <div class="sportsman-group-card-text">
-                            <p>Pairs num:</p>
-                            <p>Win num:</p>
-                            <p>Score:</p>
-                            <p>Place:</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </li>
-
-  </ul>
-    
-</div>
-
-<button class="accordion">Competition 2</button>
-<div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-
-<button class="accordion">Competition 3</button>
-<div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-
+                        </template>
+                        <template id="group-item-template-id">
+                            <li class="sportsman-group-card--item">
+                                <div class="sp-card-item">
+                                    <div class="sportsman-group-card">
+                                        <div class="caption">
+                                            <a href="#group-link" class="title-of-competition-list-item">
+                                                <div class="sp-card-title">
+                                                    <div class="sp-card-title-text--h">
+                                                            <h2 class="sp-card-title-text" id="competition-name">#group-name</h2>
+                                                    </div>
+                                                    <div class="sp-card-title--img">
+                                                        <img src="#place-image"/>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="sportsman-group-card-text">
+                                                <p>Place:      #place-num</p>
+                                                <p>Discipline: #discipline</p>
+                                                <p>Pairs num:  #pairs-num</p>
+                                                <p>Win num:    #wins-num</p>
+                                                <p>Score:      #score</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
                     </div>
                 </div>
 

@@ -1,5 +1,5 @@
 
-import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick} from "./common.js"
+import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const pageParams        = getLinkParams(location.search);
@@ -15,206 +15,59 @@ var sportsmanStats      = server.sportsman.getStatistics(page.sid);
 console.log(sportsmanInfo);
 console.log(sportsmanStats);
 
-function divisionElementAddToPage(division , isOn){
-    if(division.localeCompare("\r\n") == 0) return "";
+/* ------------------- STATISTICS ----------------------------*/
 
-    var memberDivs = document.getElementById("create-member-divisions");
-    var memberDivsTemplate = document.getElementById("create-member-division-template").content.cloneNode(true);
-    var membDivId = memberDivsTemplate.getElementById("div-input");
-    membDivId.setAttribute("id", memberForm.get("divisionPrefix") + division);
-    membDivId.setAttribute("name", division);
-    membDivId.setAttribute("value", division);
-    memberDivsTemplate.getElementById("div-label").setAttribute("for", division);
-    memberDivsTemplate.getElementById("div-label").innerHTML = division;
-    if(isOn) membDivId.checked = true;
-    memberDivs.append(memberDivsTemplate);
+const statisticsObjects = {
+    competitionsListId:         "competitions-list-id",
+    groupsListId:               "groups-list-id-",
+    competitionStatTemplate:    "competition-item-template-id",
+    groupStatTemplate:          "group-item-template-id",
+
+    getCompStatsList()          {return document.getElementById(this.competitionsListId);},
+    getCompStatTemplate()       {return document.getElementById(this.competitionStatTemplate);},
+    getCompStatPlaceholders(cs) { return {
+            "#competition-name":    cs.getCompetitionName(),
+            "#groups-list-id":      this.groupsListId + cs.getCompetitionId(),
+        };
+    },
+
+    getGroupStatsList(cid)      {return document.getElementById(this.groupsListId + cid);},
+    getGroupStatTemplate()      {return document.getElementById(this.groupStatTemplate);},
+    getGroupstatPlaceholders(gs){ return {
+            "#group-name":          gs.getGroupName(),
+            "#group-link":          gs.getGroupLink(),
+            "#place-image":         getPlaceImage(gs.getPlace()),
+            "#pairs-num":           gs.getPairsNum(),
+            "#wins-num":            gs.getWinsNum(),
+            "#score":               gs.getScore(),
+            "#discipline":          gs.getDiscipline(),
+            "#place-num":           (gs.getPlace() == "-1") ? "" : gs.getPlace(),
+        };
+    },
 }
 
-function isMemberParamsOk() {
-    var name = memberForm.get("name").value;
-    var surname = memberForm.get("surname").value;
-    var weight = memberForm.get("weight").value;
-    var age = memberForm.get("age").value;
-
-    if(isEmptyString(name)){
-        alert("Empty member name!");
-        return false;
-    }
-    if(isEmptyString(surname)){
-        alert("Empty member surname!");
-        return false;
-    }
-    if(!isNumber(weight)){
-        alert("Bad weight value. Enter number only.");
-        return false;
-    }
-    if(!isNumber(age)){
-        alert("Bad age value. Enter number only.");
-        return false;
-    }
-    return true;
-}
-
-function getQualificationInterval(qMin, qMax){
-    var qMinName;
-    var qMaxName;
-    if((Number(qMin) < 0) && (Number(qMax) < 0)) return "-";
-
-    if(!isNumber(qMin) || (Number(qMin) < 0) || (qualsMap.get(qMin) == undefined)){
-        qMinName = "";
-    } else {
-        qMinName = qualsMap.get(qMin);
-    }
-    if(!isNumber(qMax) || (Number(qMax) < 0) || (qualsMap.get(qMax) == undefined)){
-        qMaxName = "";
-    } else {
-        qMaxName = qualsMap.get(qMax);
-    }
+function getPlaceImage(pl){
+    if(pl == "1")
+        return "./img/gold-m-2.png";
+    else if(pl == "2")
+        return "./img/silver-m.png";
+    else if(pl == "3")
+        return "./img/cooper-m.png";
+    return "";
     
-    if(Number(qMax) == Number(qMin)) return qMinName;
-    return qMinName + " - " + qMaxName;
 }
 
-function getNumberInterval(min, max){
-    if(!isNumber(min) || (Number(min) < 0)){
-        min = -1;
-    }
-    if(!isNumber(max) || (Number(max) < 0)){
-        max = -1;
-    }
-    if((min < 0) && (max < 0)) return "-";
-    if(max < 0) return min + "+";
-    if(min < 0) return "-" + max;
-    return min + " - " + max;
-}
-
-function sendMemberForm() {
-    if(!isMemberParamsOk()) return;
-
-    var paramsMap = new Map();
-    var divisions = "";
-    var qualification = memberForm.get("qualification").value;
-
-    competitionParams.get("Divisions").forEach(div => {
-        if(isEmptyString(div)) return;
-        if(document.getElementById(memberForm.get("divisionPrefix") + div).checked){
-            divisions += div + ", "
-        }
+function fillStatistics() {
+    sportsmanStats.forEach(cs => {
+        var ctemplate = statisticsObjects.getCompStatTemplate();
+        var cplaceholders = statisticsObjects.getCompStatPlaceholders(cs);
+        statisticsObjects.getCompStatsList().append(createPageItem(ctemplate, cplaceholders));
+        cs.getGroupsStats().forEach(gs => {
+            var gtemplate = statisticsObjects.getGroupStatTemplate();
+            var gplaceholders = statisticsObjects.getGroupstatPlaceholders(gs);
+            statisticsObjects.getGroupStatsList(cs.getCompetitionId()).append(createPageItem(gtemplate, gplaceholders));
+        });
     });
-
-    paramsMap.set("member-edit",    pageParams.get("mid"));
-    paramsMap.set("member-name",    memberForm.get("name").value);
-    paramsMap.set("member-surname", memberForm.get("surname").value);
-    paramsMap.set("member-weight",  memberForm.get("weight").value);
-    paramsMap.set("member-age",     memberForm.get("age").value);
-    paramsMap.set("member-team",    memberForm.get("team").value);
-    paramsMap.set("member-sex",     memberForm.get("is_male").checked ? "male" : "female");
-    paramsMap.set("admission",      memberForm.get("permit").checked ? "yes" : "no");
-    paramsMap.set("member-qual",    qualification);
-    paramsMap.set("member-divisions", divisions);
-
-    paramsMap.forEach(function(value, key) {
-        console.log(`${key} => ${value}`);
-      });
-
-    sendForm("/member-edit?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"), paramsMap, true);
-}
-
-function sendNotification(name, value) {
-    var paramsMap = new Map();
-    paramsMap.set(name, value);
-    sendForm('/member-edit?cid=' + pageParams.get("cid") + "&mid=" + pageParams.get("mid"), paramsMap, false);
-}
-
-function groupNameGet(id){
-    var group = pageInfo.get("Groups").find( gr => gr.get("id") == id );
-    return (group == undefined) ? "" : group.get("name");
-}
-
-function groupDelete(id){
-    var table = document.getElementById("groups-table");
-    var groupName = groupNameGet(id);
-
-    for(var i = 2; i < table.rows.length; i++) {
-        if(table.rows[i].cells[0].innerHTML.localeCompare(groupName) == 0){
-            table.deleteRow(i);
-            sendNotification("member-group-delete", id);
-            return;
-        }
-    }
-}
-
-function groupElementCreate(group){
-    if(group.get("id") == undefined) return "";
-    var template = document.getElementById("group-template").content.cloneNode(true);
-    console.log(group);
-    template.getElementById("group-name").innerHTML          = group.get("name"); 
-    template.getElementById("group-sex").innerHTML           = group.get("sex");
-    template.getElementById("group-division").innerHTML      = group.get("division");
-    template.getElementById("group-age").innerHTML           = getNumberInterval(group.get("ageMin"), group.get("ageMax"));
-    template.getElementById("group-weight").innerHTML        = getNumberInterval(group.get("weightMin"), group.get("weightMax"));
-    template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualificationMin"), group.get("qualificationMax"));
-    template.getElementById("group-members-num").innerHTML     = group.get("membersNum");
-    
-    template.getElementById("group-name").setAttribute("onclick", "window.location.href='"
-                                    + prevPage + "/group?gid=" + group.get("id") + "'; return false");
-    template.getElementById("group-dell-btn").addEventListener("click", function(){groupDelete(group.get("id"))}, false);
-    return template;
-}
-
-function deleteMember(){
-    sendNotification("member-delete", pageParams.get("mid"));
-}
-
-function putGroupToAdd(id){
-    var group = competitionParams.get("Groups").find( gr => gr.get("id") == id);
-    var groupRow = document.getElementById("comp-group-" + id);
-    if(group == undefined) return;
-
-    if(groupsToAdd.find( gr => gr.get("id") == id) == undefined){
-        groupsToAdd.push(group);
-        groupRow.setAttribute("class", "selected-row");
-    } else {
-        var pos = groupsToAdd.indexOf(group);
-        groupsToAdd.splice(pos, 1);
-        groupRow.setAttribute("class", "non-selected-row");
-    }
-}
-
-function addMemberToGroups()
-{
-    if(groupsToAdd.length < 1)
-        return;
-        
-    var paramsMap = new Map();
-    var first = true;
-    var groupsIds = "";
-
-    groupsToAdd.forEach(gr => {
-        groupsIds += (first ? gr.get("id") : ("," + gr.get("id")));
-        first = false;
-    });
-    paramsMap.set("member-groups-add",  groupsIds);
-
-    sendForm("/member-edit?cid=" + pageParams.get("cid") + "&mid=" + pageParams.get("mid"), paramsMap, true);
-}
-
-function competitionListGroupsAdd(group){
-    if(group.get("id") == undefined) return "";
-    var groupsTable = document.getElementById("groups-adding-table");
-    var template = document.getElementById("group-adding-template").content.cloneNode(true);
-
-    template.getElementById("group-name").innerHTML          = group.get("name"); 
-    template.getElementById("group-sex").innerHTML           = group.get("sex");
-    template.getElementById("group-division").innerHTML      = group.get("division");
-    template.getElementById("group-age").innerHTML           = getNumberInterval(group.get("age_min"), group.get("age_max"));
-    template.getElementById("group-weight").innerHTML        = getNumberInterval(group.get("weight_min"), group.get("weight_max"));
-    template.getElementById("group-qualification").innerHTML = getQualificationInterval(group.get("qualification_min"), group.get("qualification_max"));
-    template.getElementById("group-members-num").innerHTML     = group.get("members_num");
-
-    template.getElementById("group-row").addEventListener("click", function(){putGroupToAdd(group.get("id"))}, false);
-    template.getElementById("group-row").setAttribute("id", "comp-group-" + group.get("id"));
-    groupsTable.append(template);
 }
 
 /* ------------------- COMMON ----------------------------*/
@@ -354,32 +207,13 @@ function fillPageInfo(){
     sportsmanObjects.setInfoWeight( sportsmanInfo.getWeight());
     sportsmanObjects.setInfoQual(   qualificationsMap.get(sportsmanInfo.getQualification()));
     sportsmanObjects.setInfoTeam(   sportsmanInfo.getTeam());
-
-    /*
-    for (var [key, value] of qualsMap) {
-        var memberQualsTemplate = document.getElementById("create-member-qual-temp").content.cloneNode(true).getElementById("create-member-qual-item");
-        memberQualsTemplate.setAttribute("value", key);
-        memberQualsTemplate.innerHTML = value;
-        memberForm.get("qualification").append(memberQualsTemplate);
-        if(key == params.get("Qualification")){
-            memberQualsTemplate.selected = true;
-        }
-    }
-    competitionParams.get("Divisions").forEach(division => {
-    divisionElementAddToPage(division , (params.get("Divisions").find( div => div == division) == undefined) ? false : true);
-    });
-    params.get("Groups").forEach(gr => groupsTable.append(groupElementCreate(gr)));
-    */
-    /*--------------------------------Adding groups params--------------------------------------------------------------------------------*/
-    /*competitionParams.get("Groups").forEach(compGroup => {
-        if(params.get("Groups").find( memberGroup => memberGroup.get("id") == compGroup.get("id")) == undefined){
-            competitionListGroupsAdd(compGroup);
-        }
-    });*/
+    sportsmanObjects.setDelBtnLink(departmentLink);
+    fillStatistics();
 }
 
 function setBtnActions(){
     onClick(sportsmanObjects.getEditBtn(), sportsmanInfoEdit);
+    onClick(sportsmanObjects.getDelBtn(), function(){server.sportsman.remove(page.sid)});
 }
 
 fillPageInfo();
