@@ -1767,6 +1767,14 @@ body.lock {
   margin-top: 5px;
 }
 
+.bread-crumbs-comp-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
 .add-sportsman-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -2052,6 +2060,7 @@ body.lock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #c9e6ff;
 }
 
 .sp-card-title--img {
