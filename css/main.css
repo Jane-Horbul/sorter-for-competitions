@@ -1891,6 +1891,15 @@ body.lock {
   }
 }
 
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .label-to-choose-type--admition {
+    width: 140px;
+    height: 40px;
+    padding: 4px 0px 0px 35px;
+    font-size: 16px;
+  }
+}
+
 .label-to-choose-type--admition::before {
   content: '';
   position: absolute;
@@ -2209,8 +2218,8 @@ body.lock {
 }
 
 .comp-statistics-list--item {
-  margin-right: 40px;
-  margin-left: 40px;
+  margin-right: 25px;
+  margin-left: 25px;
 }
 
 .comp-statistics-btn {
@@ -2226,6 +2235,13 @@ body.lock {
   .comp-statistics-btn {
     width: 120px;
     height: 30px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .comp-statistics-btn {
+    width: 140px;
+    height: 40px;
   }
 }
 
@@ -2255,25 +2271,77 @@ body.lock {
   margin-top: 10px;
 }
 
+.comp-statistics-main-res {
+  width: 45%;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .comp-statistics-main-res {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .comp-statistics-main-res {
+    width: 30%;
+  }
+}
+
 .comp-statistics-main-res,
 .comp-statistics-main-discipline {
-  width: 40%;
   font-size: 18px;
   margin: 20px;
   margin-top: 0px;
 }
 
+.comp-statistics-main-discipline {
+  width: 33%;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .comp-statistics-main-discipline {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .comp-statistics-main-discipline {
+    width: 50%;
+  }
+}
+
 .comp-statistics-main-res--item {
   font-size: 16px;
-  line-height: 1.2;
+  line-height: 0.8;
 }
 
 .comp-statistics-main-res--table {
   width: 100%;
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+}
+
+.comp-statistics-main-res--td {
+  width: 25%;
+  border: 1px solid #dddddd;
+  padding-left: 7px;
 }
 
 .comp-statistics-main-admition {
+  width: 23%;
   font-size: 18px;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .comp-statistics-main-admition {
+    width: 17%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .comp-statistics-main-admition {
+    width: 15%;
+  }
 }
 
 .comp-statistics-main-admition-checkbox {

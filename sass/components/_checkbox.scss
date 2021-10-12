@@ -64,6 +64,12 @@
         padding: 0px 8px 0px 27px;
         font-size: 16px;
       }
+      @media screen and (min-width: 1200px) and (max-width: 1799px) {
+        width: 140px;
+        height: 40px;
+        padding: 4px 0px 0px 35px;
+        font-size: 16px;
+      }
 }
 .label-to-choose-type--admition::before {
     content: ''; 
