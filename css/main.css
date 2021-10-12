@@ -1977,6 +1977,7 @@ body.lock {
 
 .sportsman-group-card-text {
   margin-left: 15px;
+  line-height: 1;
 }
 
 .sportsman-group-card--item {
@@ -2060,7 +2061,8 @@ body.lock {
 
 .sp-card-title-text {
   margin-left: 30px;
-  font-size: 21px;
+  font-size: 20px;
+  color: #2196f3;
 }
 
 .sp-card-title-text--h {
@@ -3197,5 +3199,31 @@ body.lock {
   .sportsman-info-item--text {
     font-size: 20px;
   }
+}
+
+.sp-st-group-card-table {
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.sp-st-group-card-table--td,
+.sp-st-group-card-table-red,
+.sp-st-group-card-table-blue {
+  border: 1px solid #dddddd;
+  padding: 3px;
+  text-align: center;
+}
+
+.sp-st-group-card-table-red {
+  color: red;
+  font-weight: bold;
+}
+
+.sp-st-group-card-table-blue {
+  color: #3fa4f4;
+  font-weight: bold;
 }
 /*# sourceMappingURL=main.css.map */

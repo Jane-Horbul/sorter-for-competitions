@@ -133,5 +133,27 @@ font-size: 16px;
   }
 }
 
+.sp-st-group-card-table {
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-collapse: collapse;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+.sp-st-group-card-table--td,
+.sp-st-group-card-table-red,
+.sp-st-group-card-table-blue {
+  border: 1px solid #dddddd;
+  padding: 3px;
+  text-align: center;
+}
+.sp-st-group-card-table-red {
+  color: red;
+  font-weight: bold;
+}
+.sp-st-group-card-table-blue {
+  color: #3fa4f4;
+  font-weight: bold;
+}
 
 
