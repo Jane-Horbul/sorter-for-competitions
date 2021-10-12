@@ -127,3 +127,9 @@ html {
     font-size: 14px;
     color: $title-text-color;
   }
+input:active, 
+input:hover,
+input:focus {
+    outline: 0;
+    outline-offset: 0;
+}
