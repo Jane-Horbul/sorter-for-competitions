@@ -30,4 +30,16 @@
 display: inline;
 margin-right: 45px;
 }
-
+.new-member-pop-up-check-qual {
+        width: 479px;
+        border-radius: 0px;
+        background: white;
+        border: 1px solid #757575;
+        height: 32px;
+        margin-top: 9px;
+}
+.new-member-pop-up-check-qual:hover,
+.new-member-pop-up-check-qual:active,
+.new-member-pop-up-check-qual:focus {
+    border: 1px solid #2196f3;
+}
