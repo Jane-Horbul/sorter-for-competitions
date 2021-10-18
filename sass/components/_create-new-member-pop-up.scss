@@ -1,14 +1,21 @@
-.new-member-pop-up-mf {
-    margin-left: 5px;
+
+  .new-member-pop-up {
+    //position: relative;
+    //background-color: $white-color;
+    width: 525px;
+   //padding: 20px;
+  }
+  .new-member-pop-up-mf {
+    margin-left: 8px;
 }
 .new-member-pop-up-input {
-    width: 630px;
+    width: 480px;
     height: 32px;
     border: none;
     margin-left: 15px;
 }
 .new-member-pop-up-field {
-    width: 650px;
+    width: 500px;
     height: 34px;
     border: 1px solid;
     margin-bottom: 10px;
@@ -31,7 +38,7 @@ display: inline;
 margin-right: 45px;
 }
 .new-member-pop-up-check-qual {
-        width: 479px;
+        width: 328px;
         border-radius: 0px;
         background: white;
         border: 1px solid #757575;

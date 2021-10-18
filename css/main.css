@@ -1097,8 +1097,16 @@ body.lock {
 .popup__content {
   position: relative;
   background-color: #fff;
-  width: 710px;
   padding: 20px;
+}
+
+.add-group-popup__content,
+.add-sportsman-popup__content {
+  width: 710px;
+}
+
+.create-new-competition-popup__content {
+  width: 650px;
 }
 
 .popup__close {
@@ -2228,6 +2236,39 @@ body.lock {
   color: #bebebe;
 }
 
+::-webkit-datetime-edit {
+  padding: 1em;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+  background: silver;
+}
+
+::-webkit-datetime-edit-text {
+  color: #757575;
+  padding: 0 0.3em;
+}
+
+::-webkit-datetime-edit-month-field {
+  color: #bebebe;
+}
+
+::-webkit-datetime-edit-day-field {
+  color: #bebebe;
+}
+
+::-webkit-datetime-edit-year-field {
+  color: #bebebe;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  background: white;
+}
+
 .comp-statistics {
   width: 100%;
   border: 2px solid #757575;
@@ -2394,19 +2435,23 @@ body.lock {
       flex-wrap: wrap;
 }
 
+.new-member-pop-up {
+  width: 525px;
+}
+
 .new-member-pop-up-mf {
-  margin-left: 5px;
+  margin-left: 8px;
 }
 
 .new-member-pop-up-input {
-  width: 630px;
+  width: 480px;
   height: 32px;
   border: none;
   margin-left: 15px;
 }
 
 .new-member-pop-up-field {
-  width: 650px;
+  width: 500px;
   height: 34px;
   border: 1px solid;
   margin-bottom: 10px;
@@ -2434,7 +2479,7 @@ body.lock {
 }
 
 .new-member-pop-up-check-qual {
-  width: 479px;
+  width: 328px;
   border-radius: 0px;
   background: white;
   border: 1px solid #757575;
@@ -2646,7 +2691,7 @@ body.lock {
   width: 660px;
   padding-right: 10px;
   margin-right: 40px;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-top: 15px;
 }
 
