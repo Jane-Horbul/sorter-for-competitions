@@ -87,13 +87,14 @@
 }
 .comp-statistics-main-res--table {
     width: 100%;
-    border: 1px solid #dddddd;
     border-collapse: collapse;
 }
 .comp-statistics-main-res--td {
   width: 25%;
-  border: 1px solid #dddddd;
-  padding-left: 7px;
+}
+.comp-st-main-res--second-td {
+  border-left: 2px solid aliceblue;
+  padding-left: 15px;
 }
 .comp-statistics-main-admition {
   width: 23%;
@@ -112,3 +113,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+.comp-statistics-acc {
+  width: 100%;
+}
+.ss-edit-btn-icon {
+  //display: block;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  }

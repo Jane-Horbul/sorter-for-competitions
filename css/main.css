@@ -1003,6 +1003,7 @@ input:focus {
 .accordion {
   background-color: #eee;
   color: #444;
+  fill: #757575;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -1014,8 +1015,14 @@ input:focus {
   transition: 0.4s;
 }
 
-.active, .accordion:hover {
+.active, .accordion:hover,
+.ss-edit-btn-icon:hover {
   background-color: #ccc;
+  fill: #fff;
+  -webkit-box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+          box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+  -webkit-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .panel {
@@ -2396,14 +2403,16 @@ body.lock {
 
 .comp-statistics-main-res--table {
   width: 100%;
-  border: 1px solid #dddddd;
   border-collapse: collapse;
 }
 
 .comp-statistics-main-res--td {
   width: 25%;
-  border: 1px solid #dddddd;
-  padding-left: 7px;
+}
+
+.comp-st-main-res--second-td {
+  border-left: 2px solid aliceblue;
+  padding-left: 15px;
 }
 
 .comp-statistics-main-admition {
@@ -2433,6 +2442,17 @@ body.lock {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.comp-statistics-acc {
+  width: 100%;
+}
+
+.ss-edit-btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .new-member-pop-up {
