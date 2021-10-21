@@ -455,6 +455,14 @@ const groupObjects = {
     inputQualMinId:      "group-input-qulification-min",
     inputQualMaxId:      "group-input-qulification-max",
 
+    inputFormulaPrepare:    "add-formula-preparation",
+    inputFormulaRounsNum:   "add-formula-rounds-num",
+    inputFormulaRound:      "add-formula-rounds-dur",
+    inputFormulaRest:       "add-formula-rest-dur",
+    inputFormulaHold:       "add-formula-after-hold",
+    inputFormulaFinalMin:   "add-formula-final-min",
+    inputFormulaFinalMax:   "add-formula-final-max",
+
     getNameInput()          { return document.getElementById(this.inputNameId);},
     getSystemInput()        { return document.getElementById(this.inputSystemId);},
     getSexInput()           { return document.getElementById(this.inputSexId);},
@@ -466,6 +474,14 @@ const groupObjects = {
     getQualMinInput()       { return document.getElementById(this.inputQualMinId);},
     getQualMaxInput()       { return document.getElementById(this.inputQualMaxId);},
 
+    getFormulaPrepareInput()    { return document.getElementById(this.inputFormulaPrepare);},
+    getFormulaRoundsNumInput()  { return document.getElementById(this.inputFormulaRounsNum);},
+    getFormulaRoundInput()      { return document.getElementById(this.inputFormulaRound);},
+    getFormulaRestInput()       { return document.getElementById(this.inputFormulaRest);},
+    getFormulaHoldInput()       { return document.getElementById(this.inputFormulaHold);},
+    getFormulaFinalMinInput()   { return document.getElementById(this.inputFormulaFinalMin);},
+    getFormulaFinalMaxInput()   { return document.getElementById(this.inputFormulaFinalMax);},
+
     createInput(id)             { return document.getElementById((id + "-template")).cloneNode(true).content;},
     createOption(id, name, val) { var res = document.createElement("option");
                                     res.setAttribute("id", id);
@@ -474,19 +490,77 @@ const groupObjects = {
                                     return res;
                                 },
     getAndCleanPlace(id)        { var pl= document.getElementById(id); pl.innerHTML = ""; return pl;},
+    
+    getFormulasTable()          { return document.getElementById("formulas-table");},
+    getFormulaTemplate()        { return document.getElementById("formula-row-template");},
+    getFormulaPlaceholders(fmin, fmax)   { return {
+                                                    "#preparation": this.getFormulaPrepareInput().value,
+                                                    "#rounds-num":  this.getFormulaRoundsNumInput().value,
+                                                    "#round-dur":   this.getFormulaRoundInput().value,
+                                                    "#rest-dur":    this.getFormulaRestInput().value,
+                                                    "#after-hold":  this.getFormulaHoldInput().value,
+                                                    "#final-min":   fmin,
+                                                    "#final-max":   fmax
+                                                };
+                                            },
 
     delBtnId:           "del-btn-link",
     editBtnId:          "group-edit-btn",
     updatePairsBtnId:   "update-pairs-btn",
-    formGridBtnId:      "group-grid-btn",
+    addFormulaBtnId:    "formula-add-btn",
 
     setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
     getDelBtn()                 { return document.getElementById(this.delBtnId);},
     getEditBtn()                { return document.getElementById(this.editBtnId);},
     getUpdatePairsBtn()         { return document.getElementById(this.updatePairsBtnId);},
-    getFormGridBtn()            { return document.getElementById(this.formGridBtnId);},
+    getAddFormulaBtn()          { return document.getElementById(this.addFormulaBtnId);},
 
     pairsTableId:       "pairs-table",
+}
+
+function addNewFormula(){
+    var prepare     = groupObjects.getFormulaPrepareInput().value;
+    var rNum        = groupObjects.getFormulaRoundsNumInput().value;
+    var round       = groupObjects.getFormulaRoundInput().value;
+    var rest        = groupObjects.getFormulaRestInput().value;
+    var hold        = groupObjects.getFormulaHoldInput().value;
+    var finalMin    = groupObjects.getFormulaFinalMinInput().value;
+    var finalMax    = groupObjects.getFormulaFinalMaxInput().value;
+    
+    if(!isNumber(prepare)){
+        return;
+    } else if(!isNumber(rNum)){
+        return;
+    } else if(!isNumber(round)){
+        return;
+    } else if(!isNumber(rest)){
+        return;
+    } else if(!isNumber(hold)){
+        return;
+    } else if(!isNumber(finalMin) && finalMin != ""){
+        return;
+    } else if(!isNumber(finalMax) && finalMax != ""){
+        return;
+    }
+    var res = prepare + "/" + rNum + "/" + round + "/" + rest + "/" + hold + "/";
+    if(finalMin == ""){
+      res += "-1/";
+    } else{
+        res += finalMin + "/";
+        finalMin = "1/" + finalMin;
+    }
+    if(finalMax == ""){
+        res += "-1";
+      } else{
+          res += finalMax;
+          finalMax = "1/" + finalMax;
+      }
+    var fTable          = groupObjects.getFormulasTable();
+    var fTemplate       = groupObjects.getFormulaTemplate();
+    var placeholders    = groupObjects.getFormulaPlaceholders(finalMin, finalMax);
+    var newItem         = createPageItem(fTemplate, placeholders);
+    var fRow            =  fTable.insertRow(fTable.rows.length - 1);
+    fRow.append(newItem);
 }
 
 function groupInfoEdit(){
@@ -606,7 +680,7 @@ function setBtnActions(){
     onClick(groupObjects.getDelBtn(),           function(){server.group.remove(page.cid, page.gid)});
     onClick(groupObjects.getEditBtn(),          groupInfoEdit);
     onClick(groupObjects.getUpdatePairsBtn(),   refreshPairs);
-    onClick(groupObjects.getFormGridBtn(),      {});
+    onClick(groupObjects.getAddFormulaBtn(),   addNewFormula);
 }
 
 fillPageInfo();

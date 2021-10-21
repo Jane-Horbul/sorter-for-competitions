@@ -146,7 +146,7 @@ function sportsmanInfoEdit(){
         sp.setName(sportsmanObjects.getNameInput().value);
         sp.setSurname(sportsmanObjects.getSurnameInput().value);
         sp.setSex(sportsmanObjects.getSexInput().value);
-        sp.setAge(sportsmanObjects.getAgeInput().value);
+        sp.setBirth(sportsmanObjects.getAgeInput().value);
         sp.setWeight(sportsmanObjects.getWeightInput().value);
         sp.setQualification(sportsmanObjects.getQualInput().value);
         sp.setTeam(sportsmanObjects.getTeamInput().value);
@@ -172,7 +172,7 @@ function sportsmanInfoEdit(){
 
     sportsmanObjects.getNameInput().value       = sportsmanInfo.getName();
     sportsmanObjects.getSurnameInput().value    = sportsmanInfo.getSurname();
-    sportsmanObjects.getAgeInput().value        = sportsmanInfo.getAge();
+    sportsmanObjects.getAgeInput().value        = sportsmanInfo.getBirth();
     sportsmanObjects.getWeightInput().value     = sportsmanInfo.getWeight();
     sportsmanObjects.getTeamInput().value       = sportsmanInfo.getTeam();
     
@@ -203,7 +203,7 @@ function fillPageInfo(){
     sportsmanObjects.setInfoName(   sportsmanInfo.getName());
     sportsmanObjects.setInfoSurname(sportsmanInfo.getSurname());
     sportsmanObjects.setInfoSex(    sportsmanInfo.getSex());
-    sportsmanObjects.setInfoAge(    sportsmanInfo.getAge());
+    sportsmanObjects.setInfoAge(    sportsmanInfo.getFormatedBirth("dd MM yy"));
     sportsmanObjects.setInfoWeight( sportsmanInfo.getWeight());
     sportsmanObjects.setInfoQual(   qualificationsMap.get(sportsmanInfo.getQualification()));
     sportsmanObjects.setInfoTeam(   sportsmanInfo.getTeam());

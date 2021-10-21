@@ -349,46 +349,97 @@ function sendGroupForm() {
 const competitionObjects = {
     nameInputId:        "name-info-input",
     descInputId:        "desc-info-input",
+    startDateInputId:   "start-date-input",
+    endDateInputId:     "end-date-input",
+
     namePlaceId:        "competition-name-info",
     descPlaceId:        "competition-desc-info",
-    getInput(id)            { return document.getElementById(id);},
+    startDatePlaceId:   "competition-start-date-info",
+    endDatePlaceId:     "competition-end-date-info",
+
+    depLinkId:          "department-link-id",
+    compLinkId:         "competition-link-id",
     createInput(id)         { var res = document.createElement("input"); res.setAttribute("id", id); return res;},
 
-    getNameInput()          { return this.getInput(this.nameInputId);},
-    getDescInput()          { return this.getInput(this.descInputId);},
+    getNameInput()          { return document.getElementById(this.nameInputId);},
+    getDescInput()          { return document.getElementById(this.descInputId);},
+    getStartDateInput()     { return document.getElementById(this.startDateInputId);},
+    getEndDateInput()       { return document.getElementById(this.endDateInputId);},
+    
     createNameInput()       { return this.createInput(this.nameInputId);},
     createDescInput()       {   var res = document.createElement("textarea"); 
                                 res.setAttribute("id", this.descInputId); 
                                 res.setAttribute("rows", "3"); 
                                 return res;
                             },
+    createDateInput(id)     {
+                                var res = document.createElement("input"); 
+                                res.setAttribute("id",      id); 
+                                res.setAttribute("type",    "datetime-local");
+                                res.setAttribute("class",   "create-ng--interval-min sportsman-info-item--input");
+                                res.setAttribute("pattern", "[0-9]+");
+                                res.setAttribute("required","required");
+                                return res;
+                            },
 
     getNamePlace()          { return document.getElementById(this.namePlaceId);},
     getDescPlace()          { return document.getElementById(this.descPlaceId);},
+    getStartDatePlace()     {return document.getElementById(this.startDatePlaceId);},
+    getEndDatePlace()       {return document.getElementById(this.endDatePlaceId);},
+    
     setName(name)           {document.getElementById(this.namePlaceId).innerHTML = name;},
     setDescription(desc)    {document.getElementById(this.descPlaceId).innerHTML = desc;},
+    setStartDate(val)       {document.getElementById(this.startDatePlaceId).innerHTML = val;},
+    setEndDate(val)         {document.getElementById(this.endDatePlaceId).innerHTML = val;},
     setPageName(name)       {document.getElementById("competition-name").innerHTML = name;},
     setId(id)               {document.getElementById("competition-id-info").innerHTML = id;},
+    setDepartmentName(name) {document.getElementById(this.depLinkId).innerHTML = name;},
+    setDepartmentLink(link) {document.getElementById(this.depLinkId).setAttribute("href", link);},
+    setCompetitionName(name){document.getElementById(this.compLinkId).innerHTML = name;},
+    setCompetitionLink(link){document.getElementById(this.compLinkId).setAttribute("href", link);},
+
+
     getEditBtn()            { return document.getElementById("competition-edit-btn");}
 }
 
 function competitionEdit(){
     var nameInput = competitionObjects.getNameInput();
     var descInput = competitionObjects.getDescInput();
-    if(nameInput == null){
-        var namePlace = competitionObjects.getNamePlace();
-        var descPlace = competitionObjects.getDescPlace();
-        nameInput = competitionObjects.createNameInput();
-        descInput = competitionObjects.createDescInput();
+    var startDateInput = competitionObjects.getStartDateInput();
+    var endDateInput = competitionObjects.getEndDateInput();
 
-        nameInput.value = competition.getName();
-        descInput.value = competition.getDescription();
-        namePlace.innerHTML = "";
-        descPlace.innerHTML = "";
+    if(nameInput == null){
+        var namePlace       = competitionObjects.getNamePlace();
+        var descPlace       = competitionObjects.getDescPlace();
+        var startDatePlace  = competitionObjects.getStartDatePlace();
+        var endDatePlace    = competitionObjects.getEndDatePlace();
+
+        nameInput       = competitionObjects.createNameInput();
+        descInput       = competitionObjects.createDescInput();
+        startDateInput  = competitionObjects.createDateInput(competitionObjects.startDateInputId);
+        endDateInput    = competitionObjects.createDateInput(competitionObjects.endDateInputId);
+
+        nameInput.value             = competition.getName();
+        descInput.value             = competition.getDescription();
+        startDateInput.value        = competition.getStartDate();
+        endDateInput.value          = competition.getEndDate();
+
+        namePlace.innerHTML         = "";
+        descPlace.innerHTML         = "";
+        startDatePlace.innerHTML    = "";
+        endDatePlace.innerHTML      = "";
+        
         namePlace.appendChild(nameInput);
         descPlace.appendChild(descInput);
+        startDatePlace.appendChild(startDateInput);
+        endDatePlace.appendChild(endDateInput);
     } else {
-        server.competition.edit(page.cid, nameInput.value, descInput.value);
+        var cp = ops.createCompetition(competition.params);
+        cp.setName(nameInput.value);
+        cp.setDescription(descInput.value);
+        cp.setStartDate(startDateInput.value);
+        cp.setEndDate(endDateInput.value);
+        server.competition.edit(cp);
     }
 }
 
@@ -428,7 +479,13 @@ function fillPageInfo(){
     competitionObjects.setName(competition.getName());
     competitionObjects.setId(competition.getId());
     competitionObjects.setDescription(competition.getDescription());
-    
+    competitionObjects.setStartDate(competition.getFormatedStartDate("dd MM yy hh:min"));
+    competitionObjects.setEndDate(competition.getFormatedEndDate("dd MM yy hh:min"));
+    competitionObjects.setDepartmentName(department.getName());
+    competitionObjects.setDepartmentLink(departmentLink);
+    competitionObjects.setCompetitionName(competition.getName());
+    competitionObjects.setCompetitionLink(window.location.href);
+
     qualificationAddToPage();
     
     disciplinesAddToPage();

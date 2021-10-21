@@ -166,6 +166,9 @@ function deleteDiscipline(div){
 const competitionObjects = {
     getNameInput()          { return document.getElementById("competition-name-input").value;},
     getDescriptionInput()   { return document.getElementById("competition-desc-input").value;},
+    getStartDateInput()     { return document.getElementById("competition-start-date-input").value;},
+    getEndDateInput()       { return document.getElementById("competition-end-date-input" ).value;},
+
     getTable()              { return document.getElementById("competitions-list");},
     getTemplate()           { return document.getElementById("competition-template");},
     getAddBtn()             { return document.getElementById("send-competition-form-btn");},
@@ -174,11 +177,14 @@ const competitionObjects = {
                                     "#departmentId":        department.getId(),
                                     "#competitionId":       comp.getId(),
                                     "#competition-name":    comp.getName(),
+                                    "#competition-date":    getDateinterval(comp.getFormatedStartDate("dd.mm.yy"), comp.getFormatedEndDate("dd.mm.yy")),
                                     "#competition-desc":    comp.getDescription()
                                     };
                             }
 }
-
+function getDateinterval(date1, date2) {
+    return (0 == date1.localeCompare(date2)) ? date1 : date1 + " - " + date2;
+}
 function competitionPageElementAdd(competition){
     if(competition.getId() != undefined){
         var template = competitionObjects.getTemplate();
@@ -191,6 +197,9 @@ function sendCompetitionForm() {
     var cp = ops.createCompetition(undefined);
     cp.setName(competitionObjects.getNameInput());
     cp.setDescription(competitionObjects.getDescriptionInput());
+    cp.setStartDate(competitionObjects.getStartDateInput());
+    cp.setEndDate(competitionObjects.getEndDateInput());
+    
     server.competition.create(cp);
 }
 
@@ -281,7 +290,7 @@ function sendSportsmanForm() {
         sporsman.setName(sportsmanObjects.getNameInput());
         sporsman.setSurname(sportsmanObjects.getSurnameInput());
         sporsman.setWeight(sportsmanObjects.getWeightInput());
-        sporsman.setAge(sportsmanObjects.getAgeInput());
+        sporsman.setBirth(sportsmanObjects.getAgeInput());
         sporsman.setTeam(sportsmanObjects.getTeamInput());
         sporsman.setSex(sportsmanObjects.getSexInput());
         sporsman.setQualification(sportsmanObjects.getQualificationInput());

@@ -97,8 +97,8 @@
                                     </div>
                                 </div>
                                 <div class="caption">
+                                    <h5>#competition-date</h5>
                                     <h2 class="title-of-competition-list-item">#competition-name</h2>
-                            
                                 </div>
                             </div>
                         </a>
@@ -512,32 +512,39 @@
                                 <a href="" class="popup__close close-popup">X</a>
                                 <form class="modal-form">
         
-                                    <div>
-                                        <h2>Create a new competition</h2>
-                                    </div>
-            
-                                    <div class="form-add-comp">
-                                        <label for="competition-name" class="form-field-label">
-                                            <span class="form-field-title">The name of the competition</span>
-                                            <div class="form-field-add-comp">
-                                                <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
-                                            </div>
-                                        </label>
-        
-                                        <label>
-                                            <span class="form-field-title">Short description</span>
-                                            <div class="form-field-add-comp-message">
-                                                <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
-                                                    rows="3"></textarea>
-                                            </div>
-                                        </label>
-                                    </div>
-                                    
-                                    <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
-                                        <span class="modal-btn-submit-text">Add competition</span>
-                                    </button>
-                                </form>
-                            </div>
+                                <div class="form-add-comp">
+                                    <label for="competition-name" class="form-field-label">
+                                        <span class="form-field-title">The name of the competition</span>
+                                        <div class="form-field-add-comp">
+                                            <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
+                                        </div>
+                                    </label>
+    
+                                    <label>
+                                        <span class="form-field-title">Short description</span>
+                                        <div class="form-field-add-comp-message">
+                                            <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                                                rows="3"></textarea>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <span class="form-field-title">Start date</span>
+                                        <div class="form-field-add-comp-message">
+                                            <input type="datetime-local" id="competition-start-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <span class="form-field-title">End date</span>
+                                        <div class="form-field-add-comp-message">
+                                            <input type="datetime-local" id="competition-end-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
+                                    <span class="modal-btn-submit-text">Add competition</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
