@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./old-css/normalize.css">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="page-header">
+            
+            <div class="container flexbox">
+
+                <nav class="navigation">
+                    <!--site logo-->
+                    <img class="program-logo "
+                        src="./img/competition-logo-new.png"
+                        alt="Program logo">
+                </nav>
+
+                <div class="lang-panel">
+                    <ul class="list lang-panel-list">
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ru"> 
+                                    <img src="./img/ru.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-en"> 
+                                    <img src="./img/en.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ua"> 
+                                    <img src="./img/ua.png"> 
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+
+    <div class="conntainer">
+        <main>
+            <div class="bread-crumbs-comp-page">
+                <div class="bread-crumbs-item" >
+                    <a id="department-link-id" href=""></a>
+                </div>
+                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
+                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
+                </div>
+                <div class="bread-crumbs-item">
+                    <a id="competition-link-id" href=""></a>
+                </div>
+            </div>
+            <div class="tab">
+                <button class="tablinks" onclick="openPage(event, 'Members')" id="defaultOpen">Members</button>
+                <button class="tablinks" onclick="openPage(event, 'Groups')">Groups</button>
+            </div>
+            <div id="Members" class="tabcontent">gggggg</div>
+
+
+        </main>
+    </div>
+    
+    <script>
+        function openPage(evt, pageName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(pageName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        document.getElementById("defaultOpen").click();
+        </script>
+</body>
+</html>

@@ -46,19 +46,20 @@
                     </li>
                 </ul>
             </header>
-            <div class="bread-crumbs-comp-page">
-                <div class="bread-crumbs-item" >
-                    <a id="department-link-id" href=""></a>
-                </div>
-                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item">
-                    <a id="competition-link-id" href=""></a>
-                </div>
-            </div>
+
             <main>
                 <div class="container">
+                    <div class="bread-crumbs-comp-page">
+                        <div class="bread-crumbs-item" >
+                            <a id="department-link-id" href=""></a>
+                        </div>
+                        <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
+                            <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
+                        </div>
+                        <div class="bread-crumbs-item">
+                            <a id="competition-link-id" href=""></a>
+                        </div>
+                    </div>
                     <div class="tab">
                         <button class="tablinks" onclick="openPage(event, 'Members')" id="defaultOpen">Members</button>
                         <button class="tablinks" onclick="openPage(event, 'Groups')">Groups</button>
@@ -151,24 +152,43 @@
                         </div>
 
                         <div id="AllPairs" class="tabcontent">
-                            <button class="competition-page-main-btn" id="form-pairs-btn">Form pairs</button>
-                            <div id="competition-tab" class="tabcontent">
+                            <div id="competition-tab" class="">
                                 <section class="advantages container">
                                     <ul class="list advantages-list" id="competitions-list">
-                                        <li class="advantages-item js-hidden-element">
+                                        <li class="advantages-item">
                                             <div class="advantages-icon-bg">
                                                 <div class="add-new-competition-block">
-                                                    <a href="#popup_4" class="popup-link">
-                                                        <button class="add-new-competition-btn" type="button" data-open-modal>
+                                                    <a href="#" class="">
+                                                        <button class="add-new-competition-btn" type="button">
                                                             <svg class="sl-footer-icon">
                                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                             </svg>
-                                                            <span class="add-new-competition-btn-text">Add competitions</span>
+                                                            <span class="add-new-competition-btn-text">Add pairs list</span>
                                                         </button>
                                                     </a>
                                                 </div>
                                             </div>
                                         </li>
+                                        <!--start template of generated pairs list-->
+                                        <li class="advantages-item">
+                                            <div class="projects-item">
+                                                <a href="#" class="title-of-competition-list-item">
+                                                    <div class="project-card">
+                                                        <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
+                                                            alt="" />
+                                                            <div class="overlay">
+                                                                <p class="advantages-content">#pairs-list-desc</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="caption">
+                                                            <h2 class="title-of-competition-list-item">#pairs-list-name</h2>
+                                                    
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <!--end template of generated pairs list-->
                                     </ul>
                                 </section>  
                                 <!--<template id="competition-template">
