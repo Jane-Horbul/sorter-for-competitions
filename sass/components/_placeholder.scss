@@ -3,3 +3,12 @@
 .add-group-pop-up--input::-ms-input-placeholder { color: #bebebe; }
 .add-group-pop-up--input::placeholder { color: #bebebe; }
 .new-member-pop-up-input::placeholder {color: #bebebe;}
+
+::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-fields-wrapper { background: silver; }
+::-webkit-datetime-edit-text { color: #757575; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: #bebebe; }
+::-webkit-datetime-edit-day-field { color: #bebebe; }
+::-webkit-datetime-edit-year-field { color: #bebebe; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: white; }

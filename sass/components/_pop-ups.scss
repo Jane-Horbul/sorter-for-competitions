@@ -48,9 +48,15 @@ body.lock {
   .popup__content {
     position: relative;
     background-color: $white-color;
-    //color: #000;
-    width: 710px;
+    //width: 710px;
     padding: 20px;
+  }
+  .add-group-popup__content,
+  .add-sportsman-popup__content {
+    width: 710px;
+  }
+  .create-new-competition-popup__content {
+    width: 650px;
   }
   .popup__close {
     position: absolute;

@@ -1003,6 +1003,7 @@ input:focus {
 .accordion {
   background-color: #eee;
   color: #444;
+  fill: #757575;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -1014,8 +1015,14 @@ input:focus {
   transition: 0.4s;
 }
 
-.active, .accordion:hover {
+.active, .accordion:hover,
+.ss-edit-btn-icon:hover {
   background-color: #ccc;
+  fill: #fff;
+  -webkit-box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+          box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+  -webkit-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .panel {
@@ -1097,8 +1104,16 @@ body.lock {
 .popup__content {
   position: relative;
   background-color: #fff;
-  width: 710px;
   padding: 20px;
+}
+
+.add-group-popup__content,
+.add-sportsman-popup__content {
+  width: 710px;
+}
+
+.create-new-competition-popup__content {
+  width: 650px;
 }
 
 .popup__close {
@@ -2228,6 +2243,39 @@ body.lock {
   color: #bebebe;
 }
 
+::-webkit-datetime-edit {
+  padding: 1em;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+  background: silver;
+}
+
+::-webkit-datetime-edit-text {
+  color: #757575;
+  padding: 0 0.3em;
+}
+
+::-webkit-datetime-edit-month-field {
+  color: #bebebe;
+}
+
+::-webkit-datetime-edit-day-field {
+  color: #bebebe;
+}
+
+::-webkit-datetime-edit-year-field {
+  color: #bebebe;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  background: white;
+}
+
 .comp-statistics {
   width: 100%;
   border: 2px solid #757575;
@@ -2355,14 +2403,16 @@ body.lock {
 
 .comp-statistics-main-res--table {
   width: 100%;
-  border: 1px solid #dddddd;
   border-collapse: collapse;
 }
 
 .comp-statistics-main-res--td {
   width: 25%;
-  border: 1px solid #dddddd;
-  padding-left: 7px;
+}
+
+.comp-st-main-res--second-td {
+  border-left: 2px solid aliceblue;
+  padding-left: 15px;
 }
 
 .comp-statistics-main-admition {
@@ -2394,19 +2444,34 @@ body.lock {
       flex-wrap: wrap;
 }
 
+.comp-statistics-acc {
+  width: 100%;
+}
+
+.ss-edit-btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.new-member-pop-up {
+  width: 525px;
+}
+
 .new-member-pop-up-mf {
-  margin-left: 5px;
+  margin-left: 8px;
 }
 
 .new-member-pop-up-input {
-  width: 630px;
+  width: 480px;
   height: 32px;
   border: none;
   margin-left: 15px;
 }
 
 .new-member-pop-up-field {
-  width: 650px;
+  width: 500px;
   height: 34px;
   border: 1px solid;
   margin-bottom: 10px;
@@ -2431,6 +2496,21 @@ body.lock {
 .new-member-pop-up-check-gender {
   display: inline;
   margin-right: 45px;
+}
+
+.new-member-pop-up-check-qual {
+  width: 328px;
+  border-radius: 0px;
+  background: white;
+  border: 1px solid #757575;
+  height: 32px;
+  margin-top: 9px;
+}
+
+.new-member-pop-up-check-qual:hover,
+.new-member-pop-up-check-qual:active,
+.new-member-pop-up-check-qual:focus {
+  border: 1px solid #2196f3;
 }
 
 .form_radio_btn {
@@ -2631,7 +2711,7 @@ body.lock {
   width: 660px;
   padding-right: 10px;
   margin-right: 40px;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-top: 15px;
 }
 
