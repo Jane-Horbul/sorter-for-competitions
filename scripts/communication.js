@@ -40,6 +40,36 @@ const backendLinks = {
     CLIENT_STATUS_GET:                  "client-status-get"
 };
 
+const months = {
+    0: "Zeromonth",
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+};
+
+function formatDate(dateTime, format){
+    var parts = dateTime.split("T");
+    var date = parts[0].split("-");
+    var time = parts[1].split(":");
+    var res = format;
+    res = res.replace("yy", date[0]);
+    res = res.replace("mm", date[1]);
+    res = res.replace("MM", months[Number(date[1])]);
+    res = res.replace("dd", date[2]);
+    res = res.replace("hh", time[0]);
+    res = res.replace("min", time[1]);
+    return res;
+}
+
 function mapToObjArray(mapArr, createObj){
     var res = new Array(0);
     mapArr.forEach(map => {
@@ -54,7 +84,9 @@ function mapToSportsman(map) {
         getId()               {return this.params.get("Id");},
         getName()             {return this.params.get("Name");},
         getSurname()          {return this.params.get("Surname");},
-        getAge()              {return this.params.get("Birth");},
+        getBirth()            {return this.params.get("Birth");},
+        getFormatedBirth(f)   {return formatDate(this.params.get("Birth"), f)},
+        getAge()              {return this.params.get("Age");},
         getWeight()           {return this.params.get("Weight");},
         getSex()              {return this.params.get("Sex");},
         getTeam()             {return this.params.get("Team");},
@@ -66,7 +98,7 @@ function mapToSportsman(map) {
         setId(v)               {return this.params.set("Id", v);},
         setName(v)             {return this.params.set("Name", v);},
         setSurname(v)          {return this.params.set("Surname", v);},
-        setAge(v)              {return this.params.set("Birth", v);},
+        setBirth(v)            {return this.params.set("Birth", v);},
         setWeight(v)           {return this.params.set("Weight", v);},
         setSex(v)              {return this.params.set("Sex", v);},
         setTeam(v)             {return this.params.set("Team", v);},
@@ -195,15 +227,23 @@ function mapToGroup(map) {
 function mapToCompetition(map) {
     return {
         params: (map == undefined) ? (new Map()) : map,
-        getId()             {return this.params.get("Id");},
-        getName()           {return this.params.get("Name");},
-        getDescription()    {return this.params.get("Description");},
+        getId()                 {return this.params.get("Id");},
+        getName()               {return this.params.get("Name");},
+        getDescription()        {return this.params.get("Description");},
+        getStartDate()          {return this.params.get("StartDate");},
+        getFormatedStartDate(f) {return formatDate(this.params.get("StartDate"), f)},
+        getEndDate()            {return this.params.get("EndDate");},
+        getFormatedEndDate(f)   {return formatDate(this.params.get("EndDate"), f)},
+
         getSportsmans()     {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
         getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
 
         setId(v)             {return this.params.set("Id", v);},
         setName(v)           {return this.params.set("Name", v);},
         setDescription(v)    {return this.params.set("Description", v);},
+        setStartDate(v)      {return this.params.set("StartDate", v);},
+        setEndDate(v)        {return this.params.set("EndDate", v);},
+
         setSportsmans(v)     {return this.params.set("Sportsmans", v);},
         setGroups(v)         {return this.params.set("Groups", v);},
         
@@ -287,16 +327,22 @@ function sendLogin(login, pass){
 
 function createCompetition(cp){
     var params = new Map();
-     params.set("competition-name",  cp.getName());
-     params.set("description",       cp.getDescription());
+    params.set("competition-name",  cp.getName());
+    params.set("description",       cp.getDescription());
+    params.set("date-start",        cp.getStartDate());
+    params.set("date-end",          cp.getEndDate());
     sendParametersList(backendLinks.COMPETITION_CREATE, params, true);
 }
 
-function  editCompetition(cid, name, desc){
+function  editCompetition(cp){
     var params = new Map();
-     params.set("competition-name",  name);
-     params.set("description",       desc);
-    sendParametersList(backendLinks. COMPETITION_EDIT(cid), params, true);
+    params.set("competition-name",  cp.getName());
+    params.set("description",       cp.getDescription());
+    params.set("date-start",        cp.getStartDate());
+    params.set("date-end",          cp.getEndDate());
+    console.log(cp.getStartDate());
+     
+    sendParametersList(backendLinks.COMPETITION_EDIT(cp.getId()), params, true);
 }
 
 function addCpSportsmans(cid, spArray){
@@ -365,7 +411,7 @@ function createSportsman(sports){
     params.set("member-name",    sports.getName());
     params.set("member-surname", sports.getSurname());
     params.set("member-weight",  sports.getWeight());
-    params.set("member-age",     sports.getAge());
+    params.set("member-age",     sports.getBirth());
     params.set("member-team",    sports.getTeam());
     params.set("member-sex",     sports.getSex());
     params.set("member-qual",    sports.getQualification());
@@ -377,7 +423,7 @@ function editSportsman(sid, sports){
     params.set("member-name",    sports.getName());
     params.set("member-surname", sports.getSurname());
     params.set("member-weight",  sports.getWeight());
-    params.set("member-age",     sports.getAge());
+    params.set("member-age",     sports.getBirth());
     params.set("member-team",    sports.getTeam());
     params.set("member-sex",     sports.getSex());
     params.set("member-qual",    sports.getQualification());
@@ -399,7 +445,7 @@ export const server = {
     },
     competition: {
         get(cid)                            {return ops.createCompetition(sendRequest(backendLinks.COMPETITION_GET(cid), false));},
-        edit(cid, name, desc)               {editCompetition(cid, name, desc);},
+        edit(cp)                            {editCompetition(cp);},
         create(cp)                          {createCompetition(cp);},
         sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid), false);},
         addSprotsmans(cid, ids)             {addCpSportsmans(cid, ids);},

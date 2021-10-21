@@ -46,12 +46,16 @@
                     </li>
                 </ul>
             </header>
-            <div class="bread-crumbs-comp-page"> 
-                <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
+            <div class="bread-crumbs-comp-page">
+                <div class="bread-crumbs-item" >
+                    <a id="department-link-id" href=""></a>
+                </div>
                 <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
-                <div class="bread-crumbs-item"><a id="sportsman-link" href="#"></a></div>
+                <div class="bread-crumbs-item">
+                    <a id="competition-link-id" href=""></a>
+                </div>
             </div>
             <main>
                 <div class="container">
@@ -170,7 +174,9 @@
                                         <div class="">
                                             <div class="competition-info-fields--item"> ID:<span>&nbsp</span><div id="competition-id-info"></div></div>
                                             <div class="competition-info-fields--item"> Name:<span>&nbsp</span><div id="competition-name-info"></div></div>
-                                            <div class="competition-info-fields--item"> Description :<span>&nbsp</span><pre id="competition-desc-info"></pre></div>
+                                            <div class="competition-info-fields--item"> Description:<span>&nbsp</span><pre id="competition-desc-info"></pre></div>
+                                            <div class="competition-info-fields--item"> Start date:<span>&nbsp</span><pre id="competition-start-date-info"></pre></div>
+                                            <div class="competition-info-fields--item"> End date:<span>&nbsp</span><pre id="competition-end-date-info"></pre></div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,6 +245,12 @@
                                     <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
                                     <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
                                 </template>
+                                <template id="comp-input-date-template">
+                                    <div class="create-ng--interval">
+                                        <input type="datetime" id="#date-id" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
+                                    </div>
+                                </template>
+
                             </table>
                             <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
                                 <span class="modal-btn-submit-text">Add</span>

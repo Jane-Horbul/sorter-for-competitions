@@ -131,26 +131,82 @@
                                             <td> <div id="group-info-qulification-max"></div>  </td>
                                         </tr>
                                     </table>
-                                        
-                                        <ul class="list header-list">
-                                            <li class="header-item"> 
-                                                <div class="js-hidden-element">                
-                                                <button class="group-card-btn-submit js-hidden-element" type="button" id="group-grid-btn">
-                                                    <span class="group-card-btn-submit-text">Form pair grid</span>
+                                    </br>
+                                    <table class="dynamic-table" id="formulas-table">
+                                        <tr>
+                                            <th colspan="8" class="group-info-table-title all-table-title">
+                                                <span>Formulas</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Preparation</th>
+                                            <th>Round number</th>
+                                            <th>Round</th>
+                                            <th>Rest</th>
+                                            <th>After hold</th>
+                                            <th>Final part min</th>
+                                            <th>Final part max</th>
+                                            <th>   </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-tables--td">
+                                                <input class="" type="text" id="add-formula-preparation" placeholder="Enter preparation time in sec">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="" type="text" id="add-formula-rounds-num" placeholder="Enter rounds number">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="" type="text" id="add-formula-rounds-dur" placeholder="Enter rounds duration in sec">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="" type="text" id="add-formula-rest-dur" placeholder="Enter rest duration in sec">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="" type="text" id="add-formula-after-hold" placeholder="Enter afterhold in sec">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                1/<input class="" type="text" id="add-formula-final-min" placeholder="Enter final part min">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                1/<input class="" type="text" id="add-formula-final-max" placeholder="Enter final part max">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <button class="" type="button" id="formula-add-btn">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
                                                 </button>
-                                                </div>
-                                            </li>
-                                            <li class="header-item"> 
-                                                <div class="member-page-btn-del js-hidden-element">                
-                                                    <a id="del-btn-link">
-                                                        <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
-                                                        <span class="group-card-btn-del-text">Delete group</span>
-                                                        </button>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        </ul>
-
+                                            </td>
+                                            
+                                        </tr>
+                                        <template id="formula-row-template">
+                                            <td class="secondary-tables--td">#preparation</td>
+                                            <td class="secondary-tables--td">#rounds-num</td>
+                                            <td class="secondary-tables--td">#round-dur</td>
+                                            <td class="secondary-tables--td">#rest-dur</td>
+                                            <td class="secondary-tables--td">#after-hold</td>
+                                            <td class="secondary-tables--td">#final-min</td>
+                                            <td class="secondary-tables--td">#final-max </td>
+                                            <td class="secondary-tables--td">
+                                                <button class="member-page-dell-btn" type="button" id="formula-dell-btn">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </template>
+                                    </table>
+                                    <ul class="list header-list">
+                                        <li class="header-item"> 
+                                            <div class="member-page-btn-del js-hidden-element">                
+                                                <a id="del-btn-link">
+                                                    <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
+                                                    <span class="group-card-btn-del-text">Delete group</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                                 
                             </div>
