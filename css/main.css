@@ -1186,14 +1186,18 @@ body.lock {
   color: white;
 }
 
-/*
-.js-hidden-element{
-    visibility: hidden;
-  }
-.js-visible-element{
-    visibility: visible;
-  }
-*/
+.js-hidden-element {
+  visibility: hidden;
+}
+
+.js-visible-element {
+  visibility: visible;
+}
+
+.js-invizible-button {
+  display: none;
+}
+
 .main-tables {
   display: block;
 }

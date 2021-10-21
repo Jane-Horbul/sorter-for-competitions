@@ -72,12 +72,18 @@
                             <div class="member-info-title--siting">
 
                                 <div class="member-info-title">
-                                    <span>Member info</span>  
-                                    
-                                   <div>
+                                    <span>Member info</span>                                                                         
+                                   <div class="">
                                         <button class="member-info-edit-btn" type="button" id="group-edit-btn">
                                             <svg class="group-info-edit-btn-icon">
                                                 <use href="./img/icons.svg#icon-pencil2"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="js-invizible-button">
+                                        <button class="member-info-edit-btn" type="button" id="group-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-circle-down-checkmark.svg#icon-checkmark"></use>
                                             </svg>
                                         </button>
                                     </div>
@@ -317,64 +323,6 @@
                             </div>
                         <!--end-->
                     </div>
-<!--start
-                    <div class="group-info-main" id="competitions-list-id">
-                        
-                            <button class="accordion">#competition-name</button>
-                            <div class="panel">
-                                <ul class="list advantages-list" id="#groups-list-id"> 
-                                    <li class="sportsman-group-card--item">
-                                        <div class="sp-card-item">
-                                            <div class="sportsman-group-card">
-                                                <div class="caption">
-                                                    <a href="#group-link" class="title-of-competition-list-item">
-                                                        <div class="sp-card-title">
-                                                            <div class="sp-card-title-text--h">
-                                                                    <h2 class="sp-card-title-text" id="competition-name">#group-name</h2>
-                                                            </div>
-                                                            <div class="sp-card-title--img">
-                                                                <img src="#place-image"/>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <div class="sportsman-group-card-text">
-                                                        <p>Place:      #place-num</p>
-                                                        <p>Discipline: #discipline</p>
-                                                        <p>Pairs num:  #pairs-num</p>
-                                                        <p>Win num:    #wins-num</p>
-                                                        <p>Score:      #score</p>
-                                                    </div>
-                                                    <div>
-                                                        <button class="accordion">#more result</button>
-                                                        <div class="panel">
-                                                            <table class="dynamic-table sp-st-group-card-table">
-                                                                <tr>
-                                                                    <td class="sp-st-group-card-table-red">Red</td>
-                                                                    <td class="sp-st-group-card-table-blue">Blue</td>
-                                                                    <td class="sp-st-group-card-table--td"><strong>List</strong></strong></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="sp-st-group-card-table--td">1</td>
-                                                                    <td class="sp-st-group-card-table--td">2</td>
-                                                                    <td class="sp-st-group-card-table--td">0</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="sp-st-group-card-table--td">2</td>
-                                                                    <td class="sp-st-group-card-table--td">1</td>
-                                                                    <td class="sp-st-group-card-table--td">1</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-        
-                                </ul> 
-                            </div>
-end-->
-
                         <!-- <template id="competition-item-template-id">
                             <button class="accordion">#competition-name</button>
                             <div class="panel">
@@ -603,6 +551,7 @@ end-->
         </script>
 <script src="./scripts/tabs-bar.js" type="module"></script>  
 <script src="./scripts/accordion.js" type="module"></script>  
+<script src="./scripts/common.js" type="module"></script>  
 
     </body>
 </html>
