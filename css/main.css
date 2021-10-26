@@ -992,6 +992,14 @@ input:focus {
 @media screen and (min-width: 1200px) {
   .member-info-edit-btn {
     margin-top: 8px;
+    margin-right: 103px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .member-info-edit-btn {
+    margin-top: 8px;
+    margin-right: 108px;
   }
 }
 
@@ -1033,7 +1041,7 @@ input:focus {
 }
 
 .panel {
-  padding: 0 18px;
+  padding: 0 12px;
   display: none;
   background-color: white;
   overflow: hidden;
@@ -1788,6 +1796,13 @@ body.lock {
   border-left: none;
 }
 
+.tabcontent-sort {
+  float: left;
+  padding: 60px 12px;
+  width: 85%;
+  border-left: none;
+}
+
 .bread-crumbs {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2464,6 +2479,16 @@ body.lock {
   height: 20px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.sp-st-group-card-table--red {
+  background: rgba(255, 0, 0, 0.363);
+  color: #000;
+}
+
+.sp-st-group-card-table--blue {
+  background: rgba(0, 162, 255, 0.472);
+  color: #000;
 }
 
 .new-member-pop-up {
@@ -3430,5 +3455,69 @@ body.lock {
 .sp-st-group-card-table-blue {
   color: #3fa4f4;
   font-weight: bold;
+}
+
+.creating-pairs-list-name {
+  position: absolute;
+  margin-left: 130px;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1799px) {
+  .creating-pairs-list-name {
+    margin-left: 180px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .creating-pairs-list-name {
+    margin-left: 270px;
+  }
+}
+
+.pairs-list-name--title {
+  font-size: 26px;
+  color: #295e84;
+}
+
+.cp-list--input {
+  width: 350px;
+  height: 35px;
+  border: 1px solid gray;
+  border-radius: 0px;
+}
+
+.cp-list--input:hover,
+.cp-list--input:active,
+.cp-list--input:focus {
+  border: 1px solid #2196f3;
+}
+
+.cp-list--input-name {
+  border: transparent;
+  width: 300px;
+  height: 33px;
+  margin-left: 15px;
+}
+
+.cp-list--btn {
+  margin-top: -19px;
+  margin-left: 400px;
+}
+
+.cpl-manual-sorting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 900px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 15px;
+}
+
+.cpl-manual-sorting--item {
+  width: 200px;
+  height: 25px;
+  border: 1px solid gray;
+  border-radius: 0px;
 }
 /*# sourceMappingURL=main.css.map */

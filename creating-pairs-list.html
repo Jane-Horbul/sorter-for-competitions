@@ -1,85 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="./css/main.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="./old-css/normalize.css">
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-</head>
-
-<body>
-    <div class="wrapper">
-        <header class="page-header">
-            
-            <div class="container flexbox">
-
-                <nav class="navigation">
-                    <!--site logo-->
-                    <img class="program-logo "
-                        src="./img/competition-logo-new.png"
-                        alt="Program logo">
-                </nav>
-
-                <div class="lang-panel">
-                    <ul class="list lang-panel-list">
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ru"> 
-                                    <img src="./img/ru.png"> 
-                                </a>
-                            </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Creating pairs list</title>
+        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <div class="wrapper">
+        
+            <header class="page-header">
+                <div class="container">
+                    <ul class="group-page-header list">
+                        <li>
+                            <a class="link" id="page-name-link" href="#">
+                                <h1 id="page-name"></h1>
+                            </a>
                         </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-en"> 
-                                    <img src="./img/en.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ua"> 
-                                    <img src="./img/ua.png"> 
-                                </a>
+                        <li>
+                            <div class="lang-panel">
+                                <ul class="list lang-panel-list">
+                                    <li class="lang-panel-item">
+                                        <div class="lang-panel-flag">
+                                            <a type="button" id="lang-ru"> 
+                                                <img src="./img/ru.png"> 
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="lang-panel-item">
+                                        <div class="lang-panel-flag">
+                                            <a type="button" id="lang-en"> 
+                                                <img src="./img/en.png"> 
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="lang-panel-item">
+                                        <div class="lang-panel-flag">
+                                            <a type="button" id="lang-ua"> 
+                                                <img src="./img/ua.png"> 
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </header>
+            </header>
 
-
-    <div class="conntainer">
-        <main>
-            <div class="bread-crumbs-comp-page">
-                <div class="bread-crumbs-item" >
-                    <a id="department-link-id" href=""></a>
-                </div>
-                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
+            <div class="bread-crumbs container"> 
+                <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
+                <div class="bread-crumbs-item"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
-                <div class="bread-crumbs-item">
-                    <a id="competition-link-id" href=""></a>
+                <div class="bread-crumbs-item"><a id="competition-link" href="#"></a></div>
+                <div class="bread-crumbs-item"> 
+                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
+                <div class="bread-crumbs-item"><a id="group-link" href="#"></a></div>
             </div>
-            <div class="tab">
-                <button class="tablinks" onclick="openPage(event, 'Members')" id="defaultOpen">Members</button>
-                <button class="tablinks" onclick="openPage(event, 'Groups')">Groups</button>
-            </div>
-            <div id="Members" class="tabcontent">gggggg</div>
+            <main class="container">
+                
+                <div class="container">
+                    <ul class="group-page-header list">
+                        <li><h1 id="group-name-header"></h1></li>
+                       
+                    </ul>
+                </div>
 
+                    <div class="creating-pairs-list-name">
+                        <div class="cp-list--input">
+                            <input class="cp-list--input-name" type="text" placeholder="Enter the name of list">
+                        </div>
+                        <button class="member-page-dell-btn cp-list--btn" type="button" id="#">
+                            <svg class="group-info-edit-btn-icon">
+                                <use href="./img/icons.svg#icon-checkmark"></use>
+                            </svg>
+                        </button>
+                    </div>
+                <!-- name of list after enter
+                    <div class="creating-pairs-list-name">
+                        <div class="pairs-list-name--title">Name</div>
+                        <button class="member-page-dell-btn cp-list--btn" type="button" id="#">
+                            <svg class="group-info-edit-btn-icon">
+                                <use href="./img/icons.svg#icon-pencil2"></use>
+                            </svg>
+                        </button>
+                    </div>
+               end -->
+                    <div class="tab">
+                        <button class="tablinks" onclick="openPage(event, 'automatic-sorting')" id="defaultOpen">Automatic sorting </button>
+                        <button class="tablinks" onclick="openPage(event, 'manual-sorting')">Manual sorting </button>
+                    </div>
 
-        </main>
+                    <div id="automatic-sorting" class="tabcontent-sort">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius distinctio tenetur voluptatem fugiat tempore deleniti molestias. Quisquam veritatis aut optio laudantium veniam nihil blanditiis dolores doloribus hic atque, dicta illo!</div>
+                    <div id="manual-sorting" class="tabcontent-sort">
+                        <ul class="list cpl-manual-sorting">
+                            <div>
+                                <ul class="list">
+                                    <li class="cpl-manual-sorting--item">1</li>
+                                    <li class="cpl-manual-sorting--item">2</li>
+                                    <li class="cpl-manual-sorting--item">3</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="list">
+                                    <li class="cpl-manual-sorting--item">1</li>
+                                    <li class="cpl-manual-sorting--item">2</li>
+                                    <li class="cpl-manual-sorting--item">3</li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
+
+            </main>
     </div>
     
     <script>
         function openPage(evt, pageName) {
             var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
+            tabcontent = document.getElementsByClassName("tabcontent-sort");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
