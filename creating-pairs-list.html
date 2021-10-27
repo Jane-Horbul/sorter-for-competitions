@@ -94,11 +94,69 @@
                         <button class="tablinks" onclick="openPage(event, 'automatic-sorting')" id="defaultOpen">Automatic sorting </button>
                         <button class="tablinks" onclick="openPage(event, 'manual-sorting')">Manual sorting </button>
                     </div>
+                <!--Automatic sorting block start-->
+                    <div id="automatic-sorting" class="tabcontent-sort">
+                        <ul class="list cpl-automatic-sorting">
+                            <div class="cpl-sorting-first-column">
+                                <ul class="list">
+                                    <li class="cpl-automatic-sorting--item">1</li>
+                                    <li class="cpl-automatic-sorting--item">2</li>
+                                    <li class="cpl-automatic-sorting--item">3</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <button class="cpl-automatic-sorting-arrow-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="cpl-automatic-sorting-arrow-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="cpl-sorting-second-column">
+                                <ul class="list">
+                                    <li class="cpl-automatic-sorting--item">1</li>
+                                    <li class="cpl-automatic-sorting--item">2</li>
+                                    <li class="cpl-automatic-sorting--item">3</li>
+                                </ul>
+                            </div>
+                        </ul>
+                        
+                        <ul class="list cpl-auto-sort-criteria">
+                            <div>
+                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">Distance:</span></div>
+                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">Age:</span></div>
+                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title"> Weight:</span></div>
+                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">Final:</span></div>
+                            </div>
+                            <div>
+                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-mg"></span><input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                                <div class="cpl-auto-sort-criteria--item">Min: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                                <div class="cpl-auto-sort-criteria--item">Min: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                                <div class="cpl-auto-sort-criteria--item">Min: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            </div>
+                            <div>
+                                <div class="cpl-auto-sort-criteria--item"></div>
+                                <div class="cpl-auto-sort-criteria--item">Max: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                                <div class="cpl-auto-sort-criteria--item">Max: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                                <div class="cpl-auto-sort-criteria--item">Max: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            </div>
+                        </ul>
 
-                    <div id="automatic-sorting" class="tabcontent-sort">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius distinctio tenetur voluptatem fugiat tempore deleniti molestias. Quisquam veritatis aut optio laudantium veniam nihil blanditiis dolores doloribus hic atque, dicta illo!</div>
+                    </div>
+                <!--Manual sorting block start-->
                     <div id="manual-sorting" class="tabcontent-sort">
                         <ul class="list cpl-manual-sorting">
-                            <div>
+                            <div class="cpl-sorting-first-column">
                                 <ul class="list">
                                     <li class="cpl-manual-sorting--item">1</li>
                                     <li class="cpl-manual-sorting--item">2</li>
@@ -106,6 +164,24 @@
                                 </ul>
                             </div>
                             <div>
+                                <ul class="list">
+                                    <li>
+                                        <button class="cpl-manual-sorting-arrow-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="cpl-manual-sorting-arrow-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="cpl-sorting-second-column">
                                 <ul class="list">
                                     <li class="cpl-manual-sorting--item">1</li>
                                     <li class="cpl-manual-sorting--item">2</li>
