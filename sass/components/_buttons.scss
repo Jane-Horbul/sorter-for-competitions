@@ -390,7 +390,12 @@ height: 35px;
   }
   @media screen and (min-width: 1200px) {
     margin-top: 8px;
-}
+    margin-right: 103px;
+  }
+  @media screen and (min-width: 1800px) {
+    margin-top: 8px;
+    margin-right: 108px;
+  }
 .member-info-edit-btn:hover,
 .member-info-edit-btn:focus,
 .member-info-edit-btn-icon:hover,
