@@ -189,174 +189,135 @@
                     </div>
                 </div>
                 <div id="Statistics" class="tabcontent">
-
-                    <div class="comp-statistics">
-                        <div class="comp-statistics-name">
-                            <ul class="list comp-statistics-list">
-                                <li class="comp-statistics-list--item">
-                                    <h2 class="comp-statistics-title">Comp name</h2>
-                                </li>
-                                <li class="comp-statistics-list--item">
-                                    <button class="comp-statistics-btn">Apply</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="comp-statistics-main">
-                            <div class="comp-statistics-main-res">
-                                <h3 class="comp-statistics-main-title">Result</h3>
-                                <table class="comp-statistics-main-res--table">
-                                    <tbody>
-                                    <tr>
-                                    <td class="comp-statistics-main-res--td">
-                                        <p class="comp-statistics-main-res--item"><strong>Place:</strong></p>
-                                    </td>
-                                    <td class="comp-statistics-main-res--td">
-                                        <p class="comp-statistics-main-res--item">#place-num</p>
-                                    </td>
-                                    <td class="comp-st-main-res--second-td">
-                                        <p class="comp-statistics-main-res--item"><strong>Pairs num:</strong></p>
-                                    </td>
-                                    <td class="comp-statistics-main-res--td">
-                                        <p class="comp-statistics-main-res--item">#place-num</p>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <td class="comp-statistics-main-res--td">
-                                        <p class="comp-statistics-main-res--item"><strong>Win num:</strong></p>
-                                    </td>
-                                    <td class="comp-statistics-main-res--td">
-                                        <p class="comp-statistics-main-res--item">#wins-num</p>
-                                    </td>
-                                    <td class="comp-st-main-res--second-td">
-                                        <p class="comp-statistics-main-res--item"><strong>Score:</strong></p>
-                                    </td>
-                                    <td class="comp-statistics-main-res--td">
-                                        <p class="comp-statistics-main-res--item">#score</p>
-                                    </td>
-                                    </tr>
-                                    </tbody>
-                                    </table>
-                            </div>
-                            <div class="comp-statistics-main-discipline">
-                                <h3 class="comp-statistics-main-title">Discipline</h3>
-                                <ul class="list comp-statistics-main-discipline-list">
-                                    <li>                                
-                                        <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
-                                        <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                    <template id="competition-item-template-id">
+                        <div class="comp-statistics">
+                            <div class="comp-statistics-name">
+                                <ul class="list comp-statistics-list">
+                                    <li class="comp-statistics-list--item">
+                                        <h2 class="comp-statistics-title">#competition-name</h2>
                                     </li>
-                                    <li>                                
-                                        <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
-                                        <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                                    <li class="comp-statistics-list--item">
+                                        <button class="comp-statistics-btn">Apply</button>
                                     </li>
-
                                 </ul>
                             </div>
-                            <div class="comp-statistics-main-admition">
-                                <h3 class="comp-statistics-main-title"></h3>
-                                <div class="comp-statistics-main-admition-checkbox">
-                                    <input class="input-to-choose-type--admition" type="checkbox" id="admitted" name="admitted">
-                                    <label class="label-to-choose-type--admition" for="admitted">Admitted</label>
+                            <div class="comp-statistics-main">
+                                <div class="comp-statistics-main-res">
+                                    <h3 class="comp-statistics-main-title">Result</h3>
+                                    <table class="comp-statistics-main-res--table">
+                                        <tbody>
+                                        <tr>
+                                        <td class="comp-statistics-main-res--td">
+                                            <p class="comp-statistics-main-res--item"><strong>Place:</strong></p>
+                                        </td>
+                                        <td class="comp-statistics-main-res--td">
+                                            <p class="comp-statistics-main-res--item">#place-num</p>
+                                        </td>
+                                        <td class="comp-st-main-res--second-td">
+                                            <p class="comp-statistics-main-res--item"><strong>Pairs num:</strong></p>
+                                        </td>
+                                        <td class="comp-statistics-main-res--td">
+                                            <p class="comp-statistics-main-res--item">#place-num</p>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td class="comp-statistics-main-res--td">
+                                            <p class="comp-statistics-main-res--item"><strong>Win num:</strong></p>
+                                        </td>
+                                        <td class="comp-statistics-main-res--td">
+                                            <p class="comp-statistics-main-res--item">#wins-num</p>
+                                        </td>
+                                        <td class="comp-st-main-res--second-td">
+                                            <p class="comp-statistics-main-res--item"><strong>Score:</strong></p>
+                                        </td>
+                                        <td class="comp-statistics-main-res--td">
+                                            <p class="comp-statistics-main-res--item">#score</p>
+                                        </td>
+                                        </tr>
+                                        </tbody>
+                                        </table>
+                                </div>
+                                <div class="comp-statistics-main-discipline">
+                                    <h3 class="comp-statistics-main-title">Disciplines</h3>
+                                    <ul class="list comp-statistics-main-discipline-list" id="#disc-list-id">
+                                    </ul>
+                                </div>
+                                <div class="comp-statistics-main-admition">
+                                    <h3 class="comp-statistics-main-title"></h3>
+                                    <div class="comp-statistics-main-admition-checkbox">
+                                        <input class="input-to-choose-type--admition" type="checkbox" id="#admition-id" name="admitted">
+                                        <label class="label-to-choose-type--admition" for="#admition-id">Admitted</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!--start acc in block-->
-                        <div class="comp-statistics-acc" id="competitions-list-id">
-                            <!--start-->
+                            <!--start acc in block-->
+                            <div class="comp-statistics-acc">
                                 <button class="accordion">
                                     <svg class="ss-edit-btn-icon">
                                         <use href="./img/symbol-circle-down-checkmark.svg#icon-circle-down"></use>
                                     </svg>  
                                 </button>
                                 <div class="panel">
-                                    <ul class="list advantages-list" id="#groups-list-id"> 
-                                        <li class="sportsman-group-card--item">
-                                            <div class="sp-card-item">
-                                                <div class="sportsman-group-card">
-                                                    <div class="caption">
-                                                        <a href="#group-link" class="title-of-competition-list-item">
-                                                            <div class="sp-card-title">
-                                                                <div class="sp-card-title-text--h">
-                                                                        <h2 class="sp-card-title-text" id="competition-name">#group-name</h2>
-                                                                </div>
-                                                                <div class="sp-card-title--img">
-                                                                    <img src="#place-image"/>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="sportsman-group-card-text">
-                                                            <p>Place:      #place-num</p>
-                                                            <p>Discipline: #discipline</p>
-                                                            <p>Pairs num:  #pairs-num</p>
-                                                            <p>Win num:    #wins-num</p>
-                                                            <p>Score:      #score</p>
-                                                        </div>
-                                                        <div>
-                                                            <button class="accordion">#more result</button>
-                                                            <div class="panel">
-                                                                <table class="dynamic-table sp-st-group-card-table">
-                                                                    <tr>
-                                                                        <td class="sp-st-group-card-table-red">Red</td>
-                                                                        <td class="sp-st-group-card-table-blue">Blue</td>
-                                                                        <td class="sp-st-group-card-table--td"><strong>List</strong></strong></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="sp-st-group-card-table--td">1</td>
-                                                                        <td class="sp-st-group-card-table--td">2</td>
-                                                                        <td class="sp-st-group-card-table--td">0</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="sp-st-group-card-table--td">2</td>
-                                                                        <td class="sp-st-group-card-table--td">1</td>
-                                                                        <td class="sp-st-group-card-table--td">1</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-            
+                                    <ul class="list advantages-list" id="#groups-list-id">
                                     </ul> 
                                 </div>
                             </div>
-                        <!--end-->
-                    </div>
-                        <!-- <template id="competition-item-template-id">
-                            <button class="accordion">#competition-name</button>
-                            <div class="panel">
-                                <ul class="list advantages-list" id="#groups-list-id"> </ul>   
-                            </div>
-                        </template>
-                        <template id="group-item-template-id">
-                            <li class="sportsman-group-card--item">
-                                <div class="sp-card-item">
-                                    <div class="sportsman-group-card">
-                                        <div class="caption">
-                                            <a href="#group-link" class="title-of-competition-list-item">
-                                                <div class="sp-card-title">
-                                                    <div class="sp-card-title-text--h">
-                                                            <h2 class="sp-card-title-text" id="competition-name">#group-name</h2>
-                                                    </div>
-                                                    <div class="sp-card-title--img">
-                                                        <img src="#place-image"/>
-                                                    </div>
+                        </div>
+                    </template>
+                    <template id="discipline-item-template-id">
+                        <li>                                
+                            <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                            <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                        </li>
+                    </template>
+                    <template id="group-item-template-id">
+                        <li class="sportsman-group-card--item">
+                            <div class="sp-card-item">
+                                <div class="sportsman-group-card">
+                                    <div class="caption">
+                                        <a href="#group-link" class="title-of-competition-list-item">
+                                            <div class="sp-card-title">
+                                                <div class="sp-card-title-text--h">
+                                                        <h2 class="sp-card-title-text" id="competition-name">#group-name</h2>
                                                 </div>
-                                            </a>
-                                            <div class="sportsman-group-card-text">
-                                                <p>Place:      #place-num</p>
-                                                <p>Discipline: #discipline</p>
-                                                <p>Pairs num:  #pairs-num</p>
-                                                <p>Win num:    #wins-num</p>
-                                                <p>Score:      #score</p>
+                                                <div class="sp-card-title--img">
+                                                    <img src="#place-image"/>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="sportsman-group-card-text">
+                                            <p>Place:      #place-num</p>
+                                            <p>Discipline: #discipline</p>
+                                            <p>Pairs num:  #pairs-num</p>
+                                            <p>Win num:    #wins-num</p>
+                                            <p>Score:      #score</p>
+                                        </div>
+                                        <div>
+                                            <button class="accordion">Pairs</button>
+                                            <div class="panel">
+                                                <table class="dynamic-table sp-st-group-card-table" id="#pairs-list-id">
+                                                    <tr>
+                                                        <td class="sp-st-group-card-table--td"><strong>#</strong></strong></td>
+                                                        <td class="sp-st-group-card-table--td"><strong>List</strong></strong></td>
+                                                        <td class="sp-st-group-card-table--td"><strong>Time</strong></strong></td>
+                                                        <td class="sp-st-group-card-table--td"><strong>Result</strong></strong></td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        </template> -->
-                    </div>
+                            </div>
+                        </li>
+                    </template>
+                    <template id="pair-item-template-id">
+                        <tr>
+                            <td class="#pair-style">#pair-number</td>
+                            <td class="#pair-style">#pairs-list</td>
+                            <td class="#pair-style">#pair-time</td>
+                            <td class="#pair-style">#pair-result</td>
+                        </tr>
+                    </template>
                 </div>
 
             </main>

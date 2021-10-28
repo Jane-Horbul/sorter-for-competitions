@@ -1,5 +1,5 @@
 
-import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem} from "./common.js"
+import {getIfDefined, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const pageParams        = getLinkParams(location.search);
@@ -18,22 +18,39 @@ console.log(sportsmanStats);
 /* ------------------- STATISTICS ----------------------------*/
 
 const statisticsObjects = {
-    competitionsListId:         "competitions-list-id",
-    groupsListId:               "groups-list-id-",
+    competitionsListId:         "Statistics",
     competitionStatTemplate:    "competition-item-template-id",
-    groupStatTemplate:          "group-item-template-id",
-
-    getCompStatsList()          {return document.getElementById(this.competitionsListId);},
-    getCompStatTemplate()       {return document.getElementById(this.competitionStatTemplate);},
-    getCompStatPlaceholders(cs) { return {
+    getAdmitionId(cs)           { return "comp-admition-" + cs.getCompetitionId(); },
+    setAdmition(cs)             { document.getElementById(this.getAdmitionId(cs)).checked = cs.isAdmitted(); },
+    getCompStatsList()              { return document.getElementById(this.competitionsListId); },
+    createCompStatisticItem(cs)     { return createPageItem(document.getElementById(this.competitionStatTemplate), this.getCompStatPlaceholders(cs)); },
+    getCompStatPlaceholders(cs)     { return {
             "#competition-name":    cs.getCompetitionName(),
-            "#groups-list-id":      this.groupsListId + cs.getCompetitionId(),
+            "#groups-list-id":      this.getGroupsListId(cs),
+            "#disc-list-id":        this.getDiscListId(cs),
+            "#admition-id":         this.getAdmitionId(cs)
         };
     },
 
-    getGroupStatsList(cid)      {return document.getElementById(this.groupsListId + cid);},
-    getGroupStatTemplate()      {return document.getElementById(this.groupStatTemplate);},
-    getGroupstatPlaceholders(gs){ return {
+    disciplinesListId:          "competition-disciplines-list-",
+    disciplineStatTemplate:     "discipline-item-template-id",
+    getDiscListId(cs)           { return this.disciplinesListId + cs.getCompetitionId(); },
+    getDisciplineId(cs, d)      { return d + "-" + cs.getCompetitionId(); },
+    setDiscipline(cs, d)        { document.getElementById(this.getDisciplineId(cs, d)).checked = true;},
+    getDisciplinesList(cs)          { return document.getElementById(this.getDiscListId(cs)); },
+    createDisciplineItem(cs, d)     { return createPageItem(document.getElementById(this.disciplineStatTemplate), this.getDisciplinePlaceholders(cs, d)); },
+    getDisciplinePlaceholders(cs, d){ return {
+            "#disc-name":           d,
+            "#disc-id":             this.getDisciplineId(cs, d),
+        };
+    },
+    
+    groupsListId:               "comptition-groups-list-",
+    groupStatTemplate:          "group-item-template-id",
+    getGroupsListId(cs)         { return this.groupsListId + cs.getCompetitionId(); },
+    getGroupStatsList(cs)           { return document.getElementById(this.getGroupsListId(cs)); },
+    createGroupStatItem(cs, gs)     { return createPageItem(document.getElementById(this.groupStatTemplate), this.getGroupStatPlaceholders(cs, gs)); },
+    getGroupStatPlaceholders(cs, gs){ return { 
             "#group-name":          gs.getGroupName(),
             "#group-link":          gs.getGroupLink(),
             "#place-image":         getPlaceImage(gs.getPlace()),
@@ -42,8 +59,27 @@ const statisticsObjects = {
             "#score":               gs.getScore(),
             "#discipline":          gs.getDiscipline(),
             "#place-num":           (gs.getPlace() == "-1") ? "" : gs.getPlace(),
+            "#pairs-list-id":        this.getPairsListId(cs, gs)
         };
     },
+
+    pairsListId:                "group-pairs-list-",
+    pairStatTemplate:           "pair-item-template-id",
+    getPairsListId(cs, gs)      { return this.pairsListId + cs.getCompetitionId() + "-" + gs.getGroupId(); },
+    getPairsList(cs, gs)        { return document.getElementById(this.getPairsListId(cs, gs)); },
+    createPairsItem(pair)       { return createPageItem(document.getElementById(this.pairStatTemplate), this.getPairPlaceholders(pair)); },
+    getPairPlaceholders(pair)   { return {
+            "#pair-number":     getIfDefined(pair.getNumber(), ""),
+            "#pairs-list":      getIfDefined(pair.getPairsList(), ""),
+            "#pair-time":       "00:00 (20.10)",
+            "#pair-result":     "Lose",
+            "#pair-style":      "red-cell-style"
+        };
+    },
+
+    
+    
+    
 }
 
 function getPlaceImage(pl){
@@ -59,13 +95,21 @@ function getPlaceImage(pl){
 
 function fillStatistics() {
     sportsmanStats.forEach(cs => {
-        var ctemplate = statisticsObjects.getCompStatTemplate();
-        var cplaceholders = statisticsObjects.getCompStatPlaceholders(cs);
-        statisticsObjects.getCompStatsList().append(createPageItem(ctemplate, cplaceholders));
+        statisticsObjects.getCompStatsList().append(statisticsObjects.createCompStatisticItem(cs));
+        statisticsObjects.setAdmition(cs);
+
+        departmentInfo.getDisciplines().forEach(disc => {
+            var item = statisticsObjects.createDisciplineItem(cs, disc);
+            statisticsObjects.getDisciplinesList(cs).append(item);
+        });
+        cs.getDisciplines().forEach(disc => statisticsObjects.setDiscipline(cs, disc));
+        var csPairs = cs.getPairs();
         cs.getGroupsStats().forEach(gs => {
-            var gtemplate = statisticsObjects.getGroupStatTemplate();
-            var gplaceholders = statisticsObjects.getGroupstatPlaceholders(gs);
-            statisticsObjects.getGroupStatsList(cs.getCompetitionId()).append(createPageItem(gtemplate, gplaceholders));
+            statisticsObjects.getGroupStatsList(cs).append(statisticsObjects.createGroupStatItem(cs, gs));
+            var groupPairs = csPairs.filter(pair => gs.getGroupId() == pair.getGroupId());
+            groupPairs.forEach(pair => {
+                statisticsObjects.getPairsList(cs, gs).append(statisticsObjects.createPairsItem(pair));
+            });
         });
     });
 }

@@ -228,7 +228,7 @@ const sportsmanObjects = {
     getPlaceholders(sp)         { return {
                                         "#sp-surname":      sp.getSurname(),
                                         "#sp-name":         sp.getName(),
-                                        "#sp-age":          sp.getAge(),
+                                        "#sp-age":          sp.getFormatedBirth("dd.mm.yy"),
                                         "#sp-weight":       sp.getWeight(),
                                         "#sp-sex":          sp.getSex(),
                                         "#sp-team":         sp.getTeam(),

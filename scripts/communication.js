@@ -142,6 +142,15 @@ function arrayToGs(arr, cid) {
     return res;
 }
 
+function arrayToPairs(arr) {
+    var res = new Array(0);
+    arr.forEach(map => {
+        var pair = mapToPair(map); 
+        res.push(pair);
+    });
+    return res;
+}
+
 function arrayToCompStats(arr) {
     var res = new Array(0);
     console.log(arr);
@@ -154,6 +163,7 @@ function arrayToCompStats(arr) {
             isAdmitted()            {return (this.params.get("Admition") == "yes" ? true : false);},
             isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
             getGroupsStats()        {return arrayToGs(this.params.get("GroupsStatistic"), this.params.get("CompetitionId"));},
+            getPairs()              {return arrayToPairs(this.params.get("Pairs"));},
 
             setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
             setCompetitionName(v)   {return this.params.set("CompetitionName", v);},
@@ -170,10 +180,12 @@ function mapToPair(map) {
     return {
         params: (map == undefined) ? (new Map()) : map,
         getId()           {return this.params.get("Id");},
+        getGroupId()      {return this.params.get("Group_id");},
         getRedSp()        {return this.params.get("Sportsman_red");},
         getBlueSp()       {return this.params.get("Sportsman_blue");},
         getWinner()       {return this.params.get("Winner");},
         getNumber()       {return this.params.get("Number");},
+        getPairsList()    {return this.params.get("Pairs_list");},
         getFinalPart()    {return this.params.get("Final_part");},
         getChildPair()    {return this.params.get("Child_pair");},
 

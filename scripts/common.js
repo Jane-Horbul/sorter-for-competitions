@@ -4,6 +4,11 @@ export const commonStrings = {
     arrDivider: ", ",
     pairWinner(id)  {return "Winner of pair " + id;}  
 }
+
+export function getIfDefined(val, defVal){
+    return val == undefined ? defVal : val;
+}
+
 export function refreshPage(){
     var newLink = document.location.href.split("#")[0];
     document.location.replace(newLink);
