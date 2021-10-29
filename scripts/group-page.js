@@ -493,16 +493,16 @@ const groupObjects = {
     
     getFormulasTable()          { return document.getElementById("formulas-table");},
     getFormulaTemplate()        { return document.getElementById("formula-row-template");},
-    getFormulaPlaceholders(fmin, fmax)   { return {
-                                                    "#preparation": this.getFormulaPrepareInput().value,
-                                                    "#rounds-num":  this.getFormulaRoundsNumInput().value,
-                                                    "#round-dur":   this.getFormulaRoundInput().value,
-                                                    "#rest-dur":    this.getFormulaRestInput().value,
-                                                    "#after-hold":  this.getFormulaHoldInput().value,
-                                                    "#final-min":   fmin,
-                                                    "#final-max":   fmax
-                                                };
-                                            },
+    getFormulaPlaceholders(f)   { return {
+                                            "#preparation": f.getPreparation(),
+                                            "#rounds-num":  f.getRoundsNum(),
+                                            "#round-dur":   f.getRound(),
+                                            "#rest-dur":    f.getRest(),
+                                            "#after-hold":  f.getAfterhold(),
+                                            "#final-min":   Number(f.getFinalMin()) < 0 ? "" : f.getFinalMin(),
+                                            "#final-max":   Number(f.getFinalMax()) < 0 ? "" : f.getFinalMax()
+                                        };
+                                    },
 
     delBtnId:           "del-btn-link",
     editBtnId:          "group-edit-btn",
@@ -518,49 +518,47 @@ const groupObjects = {
     pairsTableId:       "pairs-table",
 }
 
-function addNewFormula(){
-    var prepare     = groupObjects.getFormulaPrepareInput().value;
-    var rNum        = groupObjects.getFormulaRoundsNumInput().value;
-    var round       = groupObjects.getFormulaRoundInput().value;
-    var rest        = groupObjects.getFormulaRestInput().value;
-    var hold        = groupObjects.getFormulaHoldInput().value;
-    var finalMin    = groupObjects.getFormulaFinalMinInput().value;
-    var finalMax    = groupObjects.getFormulaFinalMaxInput().value;
-    
-    if(!isNumber(prepare)){
-        return;
-    } else if(!isNumber(rNum)){
-        return;
-    } else if(!isNumber(round)){
-        return;
-    } else if(!isNumber(rest)){
-        return;
-    } else if(!isNumber(hold)){
-        return;
-    } else if(!isNumber(finalMin) && finalMin != ""){
-        return;
-    } else if(!isNumber(finalMax) && finalMax != ""){
-        return;
-    }
-    var res = prepare + "/" + rNum + "/" + round + "/" + rest + "/" + hold + "/";
-    if(finalMin == ""){
-      res += "-1/";
-    } else{
-        res += finalMin + "/";
-        finalMin = "1/" + finalMin;
-    }
-    if(finalMax == ""){
-        res += "-1";
-      } else{
-          res += finalMax;
-          finalMax = "1/" + finalMax;
-      }
-    var fTable          = groupObjects.getFormulasTable();
-    var fTemplate       = groupObjects.getFormulaTemplate();
-    var placeholders    = groupObjects.getFormulaPlaceholders(finalMin, finalMax);
-    var newItem         = createPageItem(fTemplate, placeholders);
-    var fRow            =  fTable.insertRow(fTable.rows.length - 1);
+function formulaPageElementAdd(formula){
+    var fTable  = groupObjects.getFormulasTable();
+    var newItem = createPageItem(groupObjects.getFormulaTemplate(), groupObjects.getFormulaPlaceholders(formula));
+    var fRow    =  fTable.insertRow(fTable.rows.length - 1);
     fRow.append(newItem);
+}
+
+function addNewFormula(){
+    var formula = server.group.createFormula(undefined);
+
+    formula.setPreparation(groupObjects.getFormulaPrepareInput().value);
+    formula.setRoundsNum(groupObjects.getFormulaRoundsNumInput().value);
+    formula.setRound(groupObjects.getFormulaRoundInput().value);
+    formula.setRest(groupObjects.getFormulaRestInput().value);
+    formula.setAfterhold(groupObjects.getFormulaHoldInput().value);
+    formula.setFinalMin(groupObjects.getFormulaFinalMinInput().value);
+    formula.setFinalMax(groupObjects.getFormulaFinalMaxInput().value);
+    if(formula.getFinalMin() == "")
+        formula.setFinalMin("-1");
+    if(formula.getFinalMax() == "")
+        formula.setFinalMax("-1");
+
+    if(!isNumber(formula.getPreparation())){
+        return;
+    } else if(!isNumber(formula.getRoundsNum())){
+        return;
+    } else if(!isNumber(formula.getRound())){
+        return;
+    } else if(!isNumber(formula.getRest())){
+        return;
+    } else if(!isNumber(formula.getAfterhold())){
+        return;
+    } else if(!isNumber(formula.getFinalMin())){
+        return;
+    } else if(!isNumber(formula.getFinalMax())){
+        return;
+    }
+    var res = formula.getPreparation() + "/" + formula.getRoundsNum() + "/" + formula.getRound() + "/" + formula.getRest() 
+                + "/" + formula.getAfterhold() + "/" + formula.getFinalMin() + "/" + formula.getFinalMax();
+    server.group.addFormula(page.cid, page.gid, res);
+    formulaPageElementAdd(formula);
 }
 
 function groupInfoEdit(){
@@ -670,6 +668,7 @@ function fillPageInfo(){
     groupObjects.setInfoQulificationMin((qualMin == undefined) ? "" : qualMin);
     groupObjects.setInfoQulificationMax((qualMax == undefined) ? "" : qualMax);
 
+    groupInfo.getFormulas().forEach(f => formulaPageElementAdd(f));
     groupInfo.getSportsmans().forEach(sp => sportsmanPageElementAdd(sp));
     competitionSportsmans.forEach(sp => competitionSportsmanElementAdd(sp));
     groupInfo.getPairs().forEach(pair =>   pairPageElementAdd(pair));

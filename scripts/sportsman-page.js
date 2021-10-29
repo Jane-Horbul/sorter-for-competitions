@@ -73,7 +73,7 @@ const statisticsObjects = {
             "#pairs-list":      getIfDefined(pair.getPairsList(), ""),
             "#pair-time":       "00:00 (20.10)",
             "#pair-result":     "Lose",
-            "#pair-style":      "red-cell-style"
+            "#pair-style":      "sp-st-group-card-table--red"
         };
     },
 

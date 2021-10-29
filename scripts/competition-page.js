@@ -504,8 +504,7 @@ function refreshPairs(){
 }
 
 function setBtnActions(){
-    onClick(competitionObjects.getEditBtn(), competitionEdit)
-    onClick(groupObjects.getFormPairsBtn(), refreshPairs);
+    onClick(competitionObjects.getEditBtn(), competitionEdit);
     onClick(groupObjects.getAddBtn(), sendGroupForm);
     onClick(sportsmanObjects.getSortSpBtn(), resortSportsmens);
     onClick(sportsmanObjects.getAddBtn(),sportsmansAddListSend)

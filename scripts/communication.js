@@ -1,43 +1,44 @@
 import {refreshPage, parseAnswerParams, commonStrings} from "./common.js"
 
 const backendLinks = {
-    DEPARTMENT_GET:                     "competition-list-get?",
-    DEPARTMENT_EDIT:                    "department-info-edit",
-    DEPARTMENT_QUALIFICATION_ADD:       "department-qual-add",
-    DEPARTMENT_QUALIFICATION_DEL:       "department-qual-del",
-    DEPARTMENT_DISCIPLINE_ADD:          "department-disc-add",
-    DEPARTMENT_DISCIPLINE_DEL:          "department-disc-del",
+    DEPARTMENT_GET:                             "competition-list-get?",
+    DEPARTMENT_EDIT:                            "department-info-edit",
+    DEPARTMENT_QUALIFICATION_ADD:               "department-qual-add",
+    DEPARTMENT_QUALIFICATION_DEL:               "department-qual-del",
+    DEPARTMENT_DISCIPLINE_ADD:                  "department-disc-add",
+    DEPARTMENT_DISCIPLINE_DEL:                  "department-disc-del",
+    DEPARTMENT_SPORTSMEN_GET(sid)               {return "department-sports-get?sid=" + sid;},
+    DEPARTMENT_SPORTSMEN_STAT_GET(sid)          {return "department-sports-stat-get?sid=" + sid;},
+    DEPARTMENT_SPORTSMEN_EDIT(sid)              {return "department-sports-edit?sid=" + sid;},
+    DEPARTMENT_SPORTSMEN_ADD:                   "department-sports-add",
+    DEPARTMENT_SPORTSMEN_DEL(sid)               {return "department-sports-del?sid=" + sid;},
+
+    COMPETITION_CREATE:                         "department-comp-add",
+    COMPETITION_GET(cid)                        {return "competition-get?cid=" + cid;},
+    COMPETITION_EDIT(cid)                       {return "competition-info-edit?cid=" + cid;},
+    COMPETITION_SPORTSMAN_ADD(cid)              {return "new-member-form?cid=" + cid;},
+    COMPETITION_SPORTSMAN_DEL(cid, sid)         {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
+    COMPETITION_GROUP_ADD(cid)                  {return "new-group-form?cid=" + cid;},
+    COMPETITION_GROUP_DEL(cid, gid)             {return "competition-group-del?cid=" + cid;},
+    COMPETITION_GROUPS_PAIRS_FORM(cid)          {return "competition-pairs-refresh?cid=" + cid;},
+    COMPETITION_MEMBERS_SORT(cid)               {return "competition-members-sort?cid=" + cid;},
+
+    GROUP_GET(cid, gid)                         {return "group-get?cid=" + cid + "&gid=" + gid;},
+    GROUP_INFO_EDIT(cid, gid)                   {return "group-info-edit?cid=" + cid + "&gid=" + gid;},
+    GROUP_SPORTSMENS_ADD(cid, gid)              {return "group-sportsmens-add?cid=" + cid + "&gid=" + gid;},
+    GROUP_SPORTSMEN_DEL(cid, gid)               {return "group-sportsmen-del?cid=" + cid + "&gid=" + gid;},
+    GROUP_PAIRS_REFRESH(cid, gid)               {return "group-pairs-refresh?cid=" + cid + "&gid=" + gid;},
+    GROUP_PAIR_WINNER(cid, gid, pid)            {return "pair-member-win?cid=" + cid + "&gid=" + gid + "&pid=" + pid;},
+    GROUP_FORMULA_ADD(cid, gid)                 {return "group-formula-add?cid=" + cid + "&gid=" + gid;},
+    GROUP_FORMULA_DEL(cid, gid)                 {return "group-formula-del?cid=" + cid + "&gid=" + gid;},
     
-    DEPARTMENT_SPORTSMEN_GET(sid)       {return "department-sports-get?sid=" + sid;},
-    DEPARTMENT_SPORTSMEN_STAT_GET(sid)  {return "department-sports-stat-get?sid=" + sid;},
-    DEPARTMENT_SPORTSMEN_EDIT(sid)      {return "department-sports-edit?sid=" + sid;},
-    DEPARTMENT_SPORTSMEN_ADD:           "department-sports-add",
-    DEPARTMENT_SPORTSMEN_DEL(sid)       {return "department-sports-del?sid=" + sid;},
-
-    COMPETITION_CREATE:                 "department-comp-add",
-    COMPETITION_GET(cid)                {return "competition-get?cid=" + cid;},
-    COMPETITION_EDIT(cid)               {return "competition-info-edit?cid=" + cid;},
-    COMPETITION_SPORTSMAN_ADD(cid)      {return "new-member-form?cid=" + cid;},
-    COMPETITION_SPORTSMAN_DEL(cid, sid) {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
-    COMPETITION_GROUP_ADD(cid)          {return "new-group-form?cid=" + cid;},
-    COMPETITION_GROUP_DEL(cid, gid)     {return "competition-group-del?cid=" + cid;},
-    COMPETITION_GROUPS_PAIRS_FORM(cid)  {return "competition-pairs-refresh?cid=" + cid;},
-    COMPETITION_MEMBERS_SORT(cid)       {return "competition-members-sort?cid=" + cid;},
-
-    GROUP_GET(cid, gid)                 {return "group-get?cid=" + cid + "&gid=" + gid;},
-    GROUP_INFO_EDIT(cid, gid)           {return "group-info-edit?cid=" + cid + "&gid=" + gid;},
-    GROUP_SPORTSMENS_ADD(cid, gid)      {return "group-sportsmens-add?cid=" + cid + "&gid=" + gid;},
-    GROUP_SPORTSMEN_DEL(cid, gid)       {return "group-sportsmen-del?cid=" + cid + "&gid=" + gid;},
-    GROUP_PAIRS_REFRESH(cid, gid)       {return "group-pairs-refresh?cid=" + cid + "&gid=" + gid;},
-    GROUP_PAIR_WINNER(cid, gid, pid)    {return "pair-member-win?cid=" + cid + "&gid=" + gid + "&pid=" + pid;},
-
     COMPETITION_SPORTSMEN_GET(cid, sid)         {return "competition-sports-get?cid=" + cid + "&sid=" + sid;},
     COMPETITION_SPORTSMEN_INFO_EDIT(cid, sid)   {return "competition-sports-info-edit?cid=" + cid + "&sid=" + sid;},
     COMPETITION_SPORTSMEN_GROUP_ADD(cid)        {return "competition-sports-group-add?cid=" + cid;},
     COMPETITION_SPORTSMEN_GROUP_DEL(cid, sid)   {return "competition-sports-group-del" + cid + "&sid=" + sid;},
 
-    LOGIN:                              "admin-login",
-    CLIENT_STATUS_GET:                  "client-status-get"
+    LOGIN:                                      "admin-login",
+    CLIENT_STATUS_GET:                          "client-status-get"
 };
 
 const months = {
@@ -199,6 +200,28 @@ function mapToPair(map) {
     };
 }
 
+function mapToFormula(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getAfterhold()      {return this.params.get("Afterhold");},
+        getRest()           {return this.params.get("Rest");},
+        getRoundsNum()      {return this.params.get("Rounds_num");},
+        getPreparation()    {return this.params.get("Preparation");},
+        getRound()          {return this.params.get("Round");},
+        getFinalMin()       {return this.params.get("Final_min");},
+        getFinalMax()       {return this.params.get("Final_max");},
+        
+        setAfterhold(v)      {return this.params.set("Afterhold", v);},
+        setRest(v)           {return this.params.set("Rest", v);},
+        setRoundsNum(v)      {return this.params.set("Rounds_num", v);},
+        setPreparation(v)    {return this.params.set("Preparation", v);},
+        setRound(v)          {return this.params.set("Round", v);},
+        setFinalMin(v)       {return this.params.set("Final_min", v);},
+        setFinalMax(v)       {return this.params.set("Final_max", v);}
+        
+    };
+}
+
 function mapToGroup(map) {
     return {
         params: (map == undefined) ? (new Map()) : map,
@@ -216,6 +239,7 @@ function mapToGroup(map) {
         getSportsmans()   {return mapToObjArray(this.params.get("Members"), mapToSportsman);},
         getSportsNum()    {return this.params.get("Members_num");},
         getPairs()        {return mapToObjArray(this.params.get("Pairs"), mapToPair);},
+        getFormulas()     {return mapToObjArray(this.params.get("Formulas"), mapToFormula);},
 
         setId(v)           {return this.params.set("Id", v);},
         setName(v)         {return this.params.set("Name", v);},
@@ -471,7 +495,10 @@ export const server = {
         excludeSportsman(cid, gid, sid)     {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
         includeSportsList(cid, gid, sids)   {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
         refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid), false);},
-        setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);}
+        setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);},
+        addFormula(cid, gid, formula)       {sendSingleValue(backendLinks.GROUP_FORMULA_ADD(cid, gid), formula, false);},
+        deleteFormula(cid, gid, formula)    {sendSingleValue(backendLinks.GROUP_FORMULA_DEL(cid, gid), formula, true);},
+        createFormula(map)                  {return mapToFormula(map);}
     },
     sportsman: {
         get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid), false));},
