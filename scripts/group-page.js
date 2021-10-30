@@ -28,7 +28,9 @@ const pairObjects = {
     getTemplate()               { return document.getElementById("pair-template");},
 
     getPlaceholders(p)          { return {
-                                        "#pair-id":         p.getId(),
+                                        "#pair-num":        Number(p.getNumber()) > 0 ? p.getNumber() : "",
+                                        "#pairs-list":      p.getPairsList() != undefined ? p.getPairsList() : "",
+                                        "#time":            p.getFormatedTime("hh:min (dd/mm)"),
                                         "#final-part":      "1/" + p.getFinalPart(),
                                         "#red-sportsman":   getSportsName(p.getRedSp()),
                                         "#blue-sportsman":  getSportsName(p.getBlueSp()),
@@ -491,16 +493,20 @@ const groupObjects = {
                                 },
     getAndCleanPlace(id)        { var pl= document.getElementById(id); pl.innerHTML = ""; return pl;},
     
+    getDelFrmlBtnId(num)        { return "formula-del-btn-" + num;},
+    setDelFormulaHandle(n, hndl){ onClick(document.getElementById(this.getDelFrmlBtnId(n)), hndl)},
+
     getFormulasTable()          { return document.getElementById("formulas-table");},
     getFormulaTemplate()        { return document.getElementById("formula-row-template");},
-    getFormulaPlaceholders(f)   { return {
+    getFormulaPlaceholders(f, n){ return {
                                             "#preparation": f.getPreparation(),
                                             "#rounds-num":  f.getRoundsNum(),
                                             "#round-dur":   f.getRound(),
                                             "#rest-dur":    f.getRest(),
                                             "#after-hold":  f.getAfterhold(),
                                             "#final-min":   Number(f.getFinalMin()) < 0 ? "" : f.getFinalMin(),
-                                            "#final-max":   Number(f.getFinalMax()) < 0 ? "" : f.getFinalMax()
+                                            "#final-max":   Number(f.getFinalMax()) < 0 ? "" : f.getFinalMax(),
+                                            "#dell-btn_id": this.getDelFrmlBtnId(n)
                                         };
                                     },
 
@@ -513,16 +519,28 @@ const groupObjects = {
     getDelBtn()                 { return document.getElementById(this.delBtnId);},
     getEditBtn()                { return document.getElementById(this.editBtnId);},
     getUpdatePairsBtn()         { return document.getElementById(this.updatePairsBtnId);},
-    getAddFormulaBtn()          { return document.getElementById(this.addFormulaBtnId);},
+    getAddFormulaBtn()          { return document.getElementById(this.addFormulaBtnId);}
+}
 
-    pairsTableId:       "pairs-table",
+function formulaToString(formula){
+    return formula.getPreparation() + "/" + formula.getRoundsNum() + "/" + formula.getRound() + "/" + formula.getRest() 
+    + "/" + formula.getAfterhold() + "/" + formula.getFinalMin() + "/" + formula.getFinalMax();
+}
+
+function removeFormula(indx, formula){
+    var fTable  = groupObjects.getFormulasTable();
+    server.group.deleteFormula(page.cid, page.gid, formulaToString(formula));
+    fTable.rows[indx].remove();
 }
 
 function formulaPageElementAdd(formula){
     var fTable  = groupObjects.getFormulasTable();
-    var newItem = createPageItem(groupObjects.getFormulaTemplate(), groupObjects.getFormulaPlaceholders(formula));
+    var indx = fTable.rows.length - 1;
+    var newItem = createPageItem(groupObjects.getFormulaTemplate(), groupObjects.getFormulaPlaceholders(formula, indx));
     var fRow    =  fTable.insertRow(fTable.rows.length - 1);
     fRow.append(newItem);
+    groupObjects.setDelFormulaHandle(indx, function(){removeFormula(indx, formula)});
+    
 }
 
 function addNewFormula(){
@@ -555,9 +573,7 @@ function addNewFormula(){
     } else if(!isNumber(formula.getFinalMax())){
         return;
     }
-    var res = formula.getPreparation() + "/" + formula.getRoundsNum() + "/" + formula.getRound() + "/" + formula.getRest() 
-                + "/" + formula.getAfterhold() + "/" + formula.getFinalMin() + "/" + formula.getFinalMax();
-    server.group.addFormula(page.cid, page.gid, res);
+    server.group.addFormula(page.cid, page.gid, formulaToString(formula));
     formulaPageElementAdd(formula);
 }
 

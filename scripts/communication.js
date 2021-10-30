@@ -58,6 +58,8 @@ const months = {
 };
 
 function formatDate(dateTime, format){
+    if(dateTime == undefined)
+        return "";
     var parts = dateTime.split("T");
     var date = parts[0].split("-");
     var time = parts[1].split(":");
@@ -187,6 +189,8 @@ function mapToPair(map) {
         getWinner()       {return this.params.get("Winner");},
         getNumber()       {return this.params.get("Number");},
         getPairsList()    {return this.params.get("Pairs_list");},
+        getTime()         {return this.params.get("Time");},
+        getFormatedTime(f){return formatDate(this.getTime(), f);},
         getFinalPart()    {return this.params.get("Final_part");},
         getChildPair()    {return this.params.get("Child_pair");},
 
