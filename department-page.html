@@ -283,28 +283,41 @@
                     <div class="new-member-pop-up">
                         <a href="" class="popup__close close-popup">X</a>
                         <form class="modal-form new-member-pop-up-mf">
-                                <h3>Create new member</h3>
+                                <span class="add-member-popup-title">Create new member</span>
 
                             <div class="new-member-field">
 
-                                <label for="new-member-name"><span class="form-field-title">Member name</span></label>
-                                <div class="new-member-pop-up-field">
-                                    <input type="text" id="new-member-name" name="new-member-name" class="new-member-pop-up-input" placeholder="Enter the member name">
+                                <div class="input-container ic1">
+                                    <input id="new-member-name" class="input" type="text" placeholder=" " />
+                                        <svg class="popup-form-fields-icon">
+                                            <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                        </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-member-name" class="placeholder">Member name</label>
                                 </div>
-                            
-                                <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
-                                <div class="new-member-pop-up-field">
-                                    <input type="text" id="new-member-surname" name="new-member-surname" class="new-member-pop-up-input" placeholder="Enter the member surname">
+                                <div class="input-container ic2">
+                                  <input id="new-member-surname" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                  <div class="cut"></div>
+                                  <label for="new-member-surname" class="placeholder">Member surname</label>
                                 </div>
-
-                                <label for="new-member-age"><span class="form-field-title">Member age</span></label>
-                                <div class="new-member-pop-up-field">
-                                    <input type="date" id="new-member-age" name="new-member-age" class="new-member-pop-up-input" placeholder="Enter the member age">
+                                <div class="input-container ic2">
+                                    <input id="new-member-age" class="input" type="date" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-member-age" class="placeholder"></label>
                                 </div>
-
-                                <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
-                                <div class="new-member-pop-up-field">
-                                    <input type="number" id="new-member-weight" name="new-member-weight" class="new-member-pop-up-input" placeholder="Enter the member weight">
+                                <div class="input-container ic2">
+                                    <input id="new-member-weight" class="input" type="number" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-meter"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-member-weight" class="placeholder">Member weight</label>
                                 </div>
                                 <div class="new-member-pop-up-check">
                                     <ul class="list new-member-gender-list">
@@ -326,10 +339,15 @@
                                         </label>
                                     </ul>
                                 </div>
-                                <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
-                                <div class="new-member-pop-up-field">
-                                    <input type="text" id="new-member-team" name="new-member-team" class="new-member-pop-up-input" placeholder="Enter the name of member`s team">
+                                <div class="">
+                                    <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
+                                    <select class="new-member-pop-up-check-team" name="new-member-team" id="new-member-team">
+                                        <template id="new-member-team-temp">
+                                            <option value="#sports-team-value">#sports-team-name</option>
+                                        </template>
+                                    </select>
                                 </div>
+
                                 <div class="">
                                     <label for="create-member-qualification"><span class="form-field-title">Choose a qualification:</span></label>
                                     <select class="new-member-pop-up-check-qual" name="create-member-qualification" id="new-member-qualifications">
@@ -341,27 +359,15 @@
                             </div>
 
                             <div class="form-field--option new-member-pop-up-check">
-                                <ul class="list nm-more-than-one-list">
-                                    <label for="nm-more-than-one" class="form-field-label">
-                                        <li class="nm-more-than-one-item">Enter more than one member</li>
-                                        <li class="nm-more-than-one-item">
-                                            <div class="form_radio_btn">
-                                                <input type="radio" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                                <label id="" for="nm-more-than-one-yes">Yes</label>
-                                            </div>
-                                        </li>
-
-                                        <li class="nm-more-than-one-item">
-                                            <div class="form_radio_btn">
-                                                <input type="radio" id="nm-more-than-one-no" name="nm-more-than-one" value="no">
-                                                <label id="" for="nm-more-than-one-no">No</label>
-                                            </div>
-                                        </li>
-                                    </label>
-                                </ul>
+                                <span class="form-field-title">Enter more than one member</span>
+                                    <div class="form_radio_btn">
+                                        <input class="input-to-choose-type--sportsmen" type="checkbox" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" >
+                                        <label class="label-to-choose-type--sportsmen" id="" for="nm-more-than-one-yes">Yes</label>
+                                    </div>
                             </div>
+
                             
-                            <button type="button" id="member-form-send-btn" class="modal-btn-submit modal-btn-submit--pop-up">
+                            <button type="button" id="member-form-send-btn" class="add-member-popup--send">
                                 <span class="modal-btn-submit-text">Send</span>
                             </button>
                         </form>

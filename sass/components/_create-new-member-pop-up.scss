@@ -38,16 +38,23 @@
 display: inline;
 margin-right: 45px;
 }
-.new-member-pop-up-check-qual {
-        width: 328px;
+.new-member-pop-up-check-qual,
+.new-member-pop-up-check-team {
+        width: 342px;
         border-radius: 0px;
         background: white;
-        border: 1px solid #757575;
-        height: 32px;
+        border: 1px solid #dfdfdf;
+        height: 54px;
         margin-top: 9px;
+}
+.new-member-pop-up-check-team {
+    width: 323px;
 }
 .new-member-pop-up-check-qual:hover,
 .new-member-pop-up-check-qual:active,
-.new-member-pop-up-check-qual:focus {
+.new-member-pop-up-check-qual:focus,
+.new-member-pop-up-check-team:hover,
+.new-member-pop-up-check-team:active,
+.new-member-pop-up-check-team:focus {
     border: 1px solid #2196f3;
 }
