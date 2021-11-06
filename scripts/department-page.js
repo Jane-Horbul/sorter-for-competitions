@@ -1,10 +1,12 @@
-import {getLinkParams, onClick, showAllIfAdmin, languageSwitchingOn, createPageItem, isEmptyString, isNumber, prepareTabs} from "./common.js"
+import {getLinkParams, onClick, showShadows, languageSwitchingOn, createPageItem, isEmptyString, isNumber, prepareTabs, unhideSubelements} from "./common.js"
 import {ops, server} from "./communication.js"
 import {markup} from "./department-page-markup.js"
 
 var pageParams = getLinkParams(location.search);
 const department = server.department.get();
+var client = server.access.getClient();
 console.log(department);
+console.log(client.getStatus());
 
 /* ------------------- QUALIFICATIONS ----------------------------*/
 var qualificationsMap = new Map();
@@ -19,6 +21,8 @@ function qualificationElementAddToPage(name, value){
         var placeholders = markup.qualifications.getPlaceholders(name, value);
         var newItem = createPageItem(template, placeholders);
         onClick(markup.qualifications.getDelBtn(newItem), function(){deleteQualification(value)});
+        if(client.isRoot() || client.isAdmin())
+            unhideSubelements(newItem);
         markup.qualifications.getTable().append(newItem); 
 
         template = markup.sportsman.getQualTemplate();
@@ -84,6 +88,8 @@ function disciplineAddToPage(division){
         var placeholders = markup.discipline.getPlaceholders(division);
         var newItem = createPageItem(template, placeholders);
         onClick(markup.discipline.getDelBtn(newItem), function(){deleteDiscipline(division)});
+        if(client.isRoot() || client.isAdmin())
+            unhideSubelements(newItem);
         markup.discipline.getTable().append(newItem);
     }
 }
@@ -240,17 +246,21 @@ function fillPageInfo(){
 }
 
 function setActions(){
-    onClick(markup.qualifications.getAddBtn(),   toogleQualificationAdding);
-    onClick(markup.discipline.getAddBtn(),     toogleDisciplineAdding);
-    onClick(markup.competition.getAddBtn(),     sendCompetitionForm);
-    onClick(markup.departament.getEditBtn(),    departamentEdit);
-    onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm);
-}
-/* ------------------- MAIN CHUNK ----------------------------*/
+    onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
+    if(client.isAdmin() || client.isRoot){
+        onClick(markup.qualifications.getAddBtn(),  toogleQualificationAdding);
+        onClick(markup.discipline.getAddBtn(),      toogleDisciplineAdding);
+        onClick(markup.competition.getAddBtn(),     sendCompetitionForm);
+        onClick(markup.departament.getEditBtn(),    departamentEdit);
+        onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm); 
+    } else if(client.isTrainer()){
+        onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm); 
+    }
+};
 
+/* ------------------- MAIN CHUNK ----------------------------*/
 prepareTabs();
-showAllIfAdmin();
-languageSwitchingOn();
 fillPageInfo();
 setActions();
-  
+showShadows(client);
+languageSwitchingOn();

@@ -1,4 +1,4 @@
-import {refreshPage, parseBodyParams, commonStrings} from "./common.js"
+import {parseBodyParams, commonStrings} from "./common.js"
 
 const backendLinks = {
     DEPARTMENT_GET:                             "competition-list-get?",
@@ -309,7 +309,19 @@ function mapToDepatrment(map) {
     };
 }
 
+function mapToClient(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        getStatus()         {return this.params.get("ClientStatus");},
+        isRoot()            {return this.getStatus().localeCompare("Root") == 0;},
+        isAdmin()           {return this.getStatus().localeCompare("Admin") == 0;},
+        isTrainer()           {return this.getStatus().localeCompare("Trainer") == 0;},
+        isJudge()           {return this.getStatus().localeCompare("Judge") == 0;}
+    };
+}
+
 export const ops = {
+    createClient(m)         {return mapToClient(m);},
     createSportsman(m)      {return mapToSportsman(m);},
     createStatistics(m)     {return arrayToCompStats(m);},
     createPair(m)           {return mapToPair(m);},
@@ -354,7 +366,7 @@ function sendParametersList(formName, paramsMap, refresh) {
             if(answer.code != 0)
                 alert(answer.body);
             if(refresh == true)
-                refreshPage();
+                location.reload();
         };
     };
     xhr.open('POST', "/" + formName, true);
@@ -488,7 +500,7 @@ function editSportsman(sid, sports){
 export const server = {
     access: {
         login(login, pass)                  {sendLogin(login, pass);},
-        getClientStatus()                   {return sendRequest(backendLinks.CLIENT_STATUS_GET, false).get("ClientStatus");}
+        getClient()                   {return ops.createClient(sendRequest(backendLinks.CLIENT_STATUS_GET, false));}
     },
     department: {
         get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET, false));},

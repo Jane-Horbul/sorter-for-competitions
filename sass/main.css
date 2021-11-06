@@ -1054,6 +1054,18 @@ input:focus {
   border: 1px solid #757575;
 }
 
+.log-in-btn {
+  border: 0px;
+  background: #fff;
+  color: #1d8fbd;
+  font-size: 16px;
+}
+
+.log-in-btn--placing {
+  margin-top: 45px;
+  margin-right: 15px;
+}
+
 body.lock {
   overflow: hidden;
 }
@@ -1129,6 +1141,10 @@ body.lock {
 
 .create-new-competition-popup__content {
   width: 650px;
+}
+
+.login_popup__content {
+  width: 450px;
 }
 
 .popup__close {
@@ -1485,6 +1501,22 @@ body.lock {
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.popup-form-fields-icon {
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  margin-right: auto;
+  margin-bottom: 12px;
+  margin-left: 18px;
+  margin-top: 3px;
+  fill: #a0a0a0;
+}
+
 .page-header {
   height: 100px;
   background: #1499f6;
@@ -1668,13 +1700,13 @@ body.lock {
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .lang-panel {
-    width: 130px;
+    width: 200px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .lang-panel {
-    width: 160px;
+    width: 240px;
   }
 }
 
@@ -1986,6 +2018,59 @@ body.lock {
   border: 0;
   background-color: green;
   color: #fff;
+}
+
+.input-to-choose-type--sportsmen[type=checkbox] {
+  display: none;
+}
+
+.label-to-choose-type--sportsmen {
+  position: relative;
+  width: 60px;
+  height: 36px;
+  line-height: 36px;
+  margin-right: 40px;
+  padding: 8px 8px 0px 62px;
+  display: inline-block;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  font-family: helvetica, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: #ffffff;
+  color: #757575;
+}
+
+.label-to-choose-type--sportsmen::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 32px;
+  height: 36px;
+  width: 2px;
+}
+
+.label-to-choose-type--sportsmen::after {
+  display: inline-block;
+  border-radius: 0px;
+  height: 26px;
+  line-height: 26px;
+  width: 24px;
+}
+
+.input-to-choose-type--sportsmen[type=checkbox]:checked + .label-to-choose-type--sportsmen {
+  border: 1px solid #2196f3;
+  color: #757575;
+  background: #99cefa;
+}
+
+.input-to-choose-type--sportsmen[type=checkbox]:checked + .label-to-choose-type--sportsmen::after {
+  border: 1px solid #2196f3;
+  background-color: #99cefa;
+  color: #757575;
 }
 
 .sportsman-group-card {
@@ -2530,24 +2615,33 @@ body.lock {
   margin-right: 45px;
 }
 
-.new-member-pop-up-check-qual {
-  width: 328px;
+.new-member-pop-up-check-qual,
+.new-member-pop-up-check-team {
+  width: 342px;
   border-radius: 0px;
   background: white;
-  border: 1px solid #757575;
-  height: 32px;
+  border: 1px solid #dfdfdf;
+  height: 54px;
   margin-top: 9px;
+}
+
+.new-member-pop-up-check-team {
+  width: 323px;
 }
 
 .new-member-pop-up-check-qual:hover,
 .new-member-pop-up-check-qual:active,
-.new-member-pop-up-check-qual:focus {
+.new-member-pop-up-check-qual:focus,
+.new-member-pop-up-check-team:hover,
+.new-member-pop-up-check-team:active,
+.new-member-pop-up-check-team:focus {
   border: 1px solid #2196f3;
 }
 
 .form_radio_btn {
   display: inline-block;
   margin-right: 10px;
+  margin-left: 30px;
 }
 
 .form_radio_btn input[type=radio] {
@@ -2581,6 +2675,112 @@ body.lock {
 .form_radio_btn input[type=radio]:disabled + label {
   background: #efefef;
   color: #666;
+}
+
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.ic2 {
+  margin-top: 30px;
+}
+
+.input,
+.inpul_login {
+  background-color: #fff;
+  border-radius: 0px;
+  color: #605f5f;
+  outline: 0;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  width: 512px;
+  height: 34px;
+  padding: 4px 51px 0;
+  border: 1px solid #dfdfdf;
+  height: 54px;
+}
+
+.input_login {
+  width: 440px;
+  padding: 4px 25px 0;
+}
+
+.cut {
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transition: -webkit-transform 200ms;
+  transition: -webkit-transform 200ms;
+  transition: transform 200ms;
+  transition: transform 200ms, -webkit-transform 200ms;
+  width: 76px;
+}
+
+.cut-short {
+  width: 50px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  -webkit-transform: translateY(8px);
+          transform: translateY(8px);
+}
+
+.placeholder {
+  color: #65657b;
+  left: 55px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+  -webkit-transition: color 200ms, -webkit-transform 200ms;
+  transition: color 200ms, -webkit-transform 200ms;
+  transition: transform 200ms, color 200ms;
+  transition: transform 200ms, color 200ms, -webkit-transform 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  -webkit-transform: translateY(-40px) translateX(10px) scale(0.75);
+          transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:focus ~ .placeholder {
+  color: #2196f3;
+}
+
+.submit {
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  background-color: #06b;
 }
 
 .group-info {
@@ -3208,13 +3408,10 @@ body.lock {
 }
 
 .login-page-btn {
-  background: #f7f7f7;
-  border: 22px solid #1d8fbd;
   width: 500px;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
 }
 
 .login-page-input-submit {
@@ -3235,15 +3432,17 @@ body.lock {
   outline-width: 0px;
 }
 
-.login-page-btn-submit {
+.login-page-btn-submit,
+.add-member-popup--send {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 350px;
+  width: 436px;
   height: 70px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 30px;
+  margin-bottom: 20px;
   background-color: #2196f3;
   border: none;
   color: #fff;
@@ -3255,7 +3454,14 @@ body.lock {
   outline-width: 0px;
 }
 
-.login-page-btn-submit:focus, .login-page-btn-submit:hover {
+.add-member-popup--send {
+  width: 514px;
+}
+
+.login-page-btn-submit:focus,
+.login-page-btn-submit:hover,
+.add-member-popup--send:focus,
+.add-member-popup--send:hover {
   background-color: #fff;
   color: #2196f3;
   -webkit-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -3264,6 +3470,12 @@ body.lock {
 
 .login-page-title {
   text-align: center;
+}
+
+.login-page-popup-title,
+.add-member-popup-title {
+  font-size: 26px;
+  color: #2196f3;
 }
 
 .sportsman-dynamic-table {

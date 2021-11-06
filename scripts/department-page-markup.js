@@ -1,6 +1,11 @@
 import {getQualNameByValue} from "./department-page.js"
 
 export const markup = {
+    login:          {
+        getLoginBtn()               { return document.getElementById("login-btn");},
+        getLogin()                  { return document.getElementById("login").value;},
+        getPass()                   { return document.getElementById("password").value;}
+    },
     qualifications: {
         getNameInput()                  { return document.getElementById("add-qualification-name").value;},
         getValueInput()                 { return document.getElementById("add-qualification-value").value;},
@@ -85,7 +90,7 @@ export const markup = {
                                                 "#sp-sex":          sp.getSex(),
                                                 "#sp-team":         sp.getTeam(),
                                                 "#sp-qual":         getQualNameByValue(sp.getQualification()),
-                                                "#sportsman-link":  window.location.href + sp.getLink()
+                                                "#sportsman-link":  window.location.href.split("#")[0] + sp.getLink()
                                             };
                                         },
         nameAlert()                     { alert("Empty member name!"); },

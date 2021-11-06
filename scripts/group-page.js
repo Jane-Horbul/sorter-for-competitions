@@ -1,4 +1,4 @@
-import {isNumber, isEmptyString, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem, commonStrings, refreshPage} from "./common.js"
+import {isNumber, isEmptyString, getLinkParams, showShadows, languageSwitchingOn, onClick, createPageItem, commonStrings} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -101,7 +101,7 @@ function pairPageElementAdd(pair){
 
 function refreshPairs(){
     server.group.refreshPairs(page.cid, page.gid);
-    refreshPage();
+    location.reload();
 }
 
 /* ------------------- SPORTSMANS ----------------------------*/
@@ -701,5 +701,5 @@ function setBtnActions(){
 fillPageInfo();
 setBtnActions();
 formPairsGrid();
-showAllIfAdmin();
+showShadows(client);
 languageSwitchingOn();

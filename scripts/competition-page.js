@@ -3,10 +3,9 @@ import {isNumber,
     isEmptyString, 
     getLinkParams, 
     onClick, 
-    showAllIfAdmin, 
+    showShadows, 
     languageSwitchingOn, 
-    createPageItem,
-    refreshPage} from "./common.js"
+    createPageItem} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const page = {
@@ -156,7 +155,7 @@ function departamentSportsmanElementAdd(sp){
 
 function resortSportsmens(){
     competition = server.competition.sortSportsmans(page.cid);
-    refreshPage();
+    location.reload();
 }
 
 
@@ -510,7 +509,7 @@ function setBtnActions(){
     onClick(sportsmanObjects.getAddBtn(),sportsmansAddListSend)
 }
 
-showAllIfAdmin();
+showShadows(client);
 fillPageInfo();
 
 setBtnActions();

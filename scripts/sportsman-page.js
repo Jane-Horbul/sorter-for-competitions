@@ -1,5 +1,5 @@
 
-import {getIfDefined, getLinkParams, showAllIfAdmin, languageSwitchingOn, onClick, createPageItem} from "./common.js"
+import {getIfDefined, getLinkParams, showShadows, languageSwitchingOn, onClick, createPageItem} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const pageParams        = getLinkParams(location.search);
@@ -263,5 +263,5 @@ function setBtnActions(){
 fillPageInfo();
 setBtnActions();
 
-showAllIfAdmin();
+showShadows(client);
 languageSwitchingOn();

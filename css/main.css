@@ -1668,13 +1668,13 @@ body.lock {
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .lang-panel {
-    width: 130px;
+    width: 200px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .lang-panel {
-    width: 160px;
+    width: 240px;
   }
 }
 
@@ -2293,10 +2293,6 @@ body.lock {
   color: #bebebe;
 }
 
-::-webkit-inner-spin-button {
-  display: none;
-}
-
 ::-webkit-calendar-picker-indicator {
   background: white;
 }
@@ -2508,14 +2504,15 @@ body.lock {
 .new-member-pop-up-field {
   width: 500px;
   height: 34px;
-  border: 1px solid;
+  border-bottom: 1px solid;
   margin-bottom: 10px;
+  border-style: dashed;
 }
 
 .new-member-pop-up-field:active,
 .new-member-pop-up-field:focus,
 .new-member-pop-up-field:hover {
-  border: 1px solid #2196f3;
+  border-bottom: 1px solid #2196f3;
 }
 
 .new-member-pop-up-check {

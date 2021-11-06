@@ -9,11 +9,6 @@ export function getIfDefined(val, defVal){
     return val == undefined ? defVal : val;
 }
 
-export function refreshPage(){
-    var newLink = document.location.href.split("#")[0];
-    document.location.replace(newLink);
-}
-
 export function isNumber(num){
     if(isNaN(Number(num)) || (num.localeCompare("") == 0)) return false;
     return true;
@@ -106,22 +101,26 @@ export function parseBodyParams(body){
     return blocksResult;
 }
 
-export function removeHiden(){
-    document.getElementById("testSec").classList.remove("js-hidden-element");
+export function unhideSubelements(elem){
+    var shadows = elem.querySelectorAll(".js-hidden-element");
+    for (let shadow of shadows)
+        shadow.classList.remove("js-hidden-element");
 }
 
-export function addHiden(){
-    document.getElementById("testSec").classList.add("js-hidden-element");
-}
-
-export function showAllIfAdmin(){
-    var clStatus = server.access.getClientStatus();
-    var shadows = document.querySelectorAll(".js-hidden-element");
-    if(clStatus == "admin"){
-        for (let shadow of shadows) {
-            shadow.classList.remove("js-hidden-element");
-        }
-    }
+export function showShadows(client){
+    var shadows = undefined;
+    if(client.isRoot())
+        shadows = document.querySelectorAll(".js-root-view");
+    else if(client.isAdmin())
+        shadows = document.querySelectorAll(".js-admin-view");
+    else if(client.isTrainer())
+        shadows = document.querySelectorAll(".js-trainer-view");
+    else if(client.isJudge())
+        shadows = document.querySelectorAll(".js-judge-view");
+    else
+        return;
+    for (let shadow of shadows)
+        shadow.classList.remove("js-hidden-element");
 }
 
 function langLinkForm(lang){
