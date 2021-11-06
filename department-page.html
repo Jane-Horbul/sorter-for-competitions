@@ -61,12 +61,12 @@
         </div>
 
         <div class="tab">
-            <button class="tablinks" onclick="openPage(event, 'competition-tab')"id="defaultOpen">Competitions</button>
-            <button class="tablinks" onclick="openPage(event, 'members-tab')">Members</button>
-            <button class="tablinks" onclick="openPage(event, 'settings-tab')">Settings</button>
+            <button class="tablinks" id="tab1">PH1_COMP_TAB</button>
+            <button class="tablinks" id="tab2">PH2_SPORTS_TAB</button>
+            <button class="tablinks" id="tab3">PH3_INFO_TAB</button>
         </div>
 
-        <div id="competition-tab" class="tabcontent">
+        <div id="tabcontent1" class="tabcontent" style= "display: none">
             <section class="advantages container">
                 <ul class="list advantages-list" id="competitions-list">
                     <li class="advantages-item js-hidden-element">
@@ -77,7 +77,7 @@
                                         <svg class="sl-footer-icon">
                                             <use href="./img/symbol-defs.svg#icon-plus"></use>
                                         </svg>
-                                        <span class="add-new-competition-btn-text">Add competitions</span>
+                                        <span class="add-new-competition-btn-text">PH4_ADD_COMP</span>
                                     </button>
                                 </a>
                             </div>
@@ -107,11 +107,11 @@
             </template>
         </div>
 
-        <div id="members-tab" class="tabcontent">
+        <div id="tabcontent2" class="tabcontent" style= "display: none">
             <div class="main-tables-item">
                 <table class="dynamic-table" id="members-table">
                     <tr>
-                        <th class="group-info-table-title all-table-title" colspan="8"><span>Members</span>
+                        <th class="group-info-table-title all-table-title" colspan="8"><span>PH5_SPORTS</span>
                             <!--Add member button start-->
                             <a href="#popup_1" class="popup-link">
                                 <button class="group-page-ref-btn" type="button">
@@ -125,13 +125,13 @@
                         </th>
                     </tr>
                     <tr>
-                        <td class="secondary-title-tables--text">Surname</td>
-                        <td class="secondary-title-tables--text">Name</td>
-                        <td class="secondary-title-tables--text">Age</td>
-                        <td class="secondary-title-tables--text">Weight</td>
-                        <td class="secondary-title-tables--text">Sex</td>
-                        <td class="secondary-title-tables--text">Team</td>
-                        <td class="secondary-title-tables--text">Qualification</td>
+                        <td class="secondary-title-tables--text">PH6_SURNAME</td>
+                        <td class="secondary-title-tables--text">PH7_NAME</td>
+                        <td class="secondary-title-tables--text">PH8_BD</td>
+                        <td class="secondary-title-tables--text">PH9_WEIGHT</td>
+                        <td class="secondary-title-tables--text">PH10_SEX</td>
+                        <td class="secondary-title-tables--text">PH11_TEAM</td>
+                        <td class="secondary-title-tables--text">PH12_QUAL</td>
                     </tr>
                 </table>
                 <template id="member-template">
@@ -149,14 +149,14 @@
             </div>
         </div>
 
-        <div id="settings-tab" class="tabcontent">
+        <div id="tabcontent3" class="tabcontent" style= "display: none">
             <div>
                 <section class="competition-info">
 
                             <div class="competition-info-main">
                                 <div id="member-info">
                                     <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>Department info</span></div>
+                                        <div class="group-info-title"><span>PH13_DP_INFO</span></div>
                                         <button class="group-info-edit-btn" type="button" id="department-edit-btn">
                                             <svg class="group-info-edit-btn-icon">
                                                 <use href="./img/icons.svg#icon-pencil2"></use>
@@ -166,8 +166,8 @@
                                 </div>
                                 <div class="group-info-fields">
                                     <div class="" id="member-info">
-                                        <div class="competition-info-fields--item">Name:<span>&nbsp</span><div id="department-name-set">            </div></div>
-                                        <div class="competition-info-fields--item">ID:<span>&nbsp</span><div id="department-id">      </div></div>
+                                        <div class="competition-info-fields--item">PH14_DP_NAME:<span>&nbsp</span><div id="department-name-set">            </div></div>
+                                        <div class="competition-info-fields--item">PH15_DP_ID:<span>&nbsp</span><div id="department-id">      </div></div>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                             <div class="secondary-tables--item">
                                 <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
                                     <tr>
-                                        <th colspan="3" class="group-info-table-title all-table-title"><span>Qualifications</span>
+                                        <th colspan="3" class="group-info-table-title all-table-title"><span>PH16_QUALS</span>
                                                 <button class="group-page-ref-btn" type="button" id="qual-add-btn">
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -203,8 +203,8 @@
                                     </template>
 
                                     <template id="qualification-adding-template">
-                                        <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="Enter value"> </td>
-                                        <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="Enter name">  </td>
+                                        <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="PH17_VALUE"> </td>
+                                        <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="PH18_NAME">  </td>
                                         <td class="secondary-tables--td">
                                             <button class="member-page-dell-btn" type="button" id="qual-ok-btn">
                                             <svg class="group-info-edit-btn-icon">
@@ -220,7 +220,7 @@
                             <div class="secondary-tables--item">
                                 <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
                                     <tr>
-                                        <th class="group-info-table-title all-table-title">Divisions</th>
+                                        <th class="group-info-table-title all-table-title">PH19_DISCIPLINES</th>
                                         <th class="group-info-table-title">
                                             <button class="group-page-ref-btn" type="button" id="div-add-btn">
                                                 <svg class="group-info-edit-btn-icon">
@@ -245,7 +245,7 @@
                                 </template>
                         
                                 <template id="division-adding-template">
-                                    <td class="secondary-tables--td"><input class="competition-page-division-input"  type="text" id="add-division" placeholder="Enter value"> </td>
+                                    <td class="secondary-tables--td"><input class="competition-page-division-input"  type="text" id="add-division" placeholder="PH20_DIS_NAME"> </td>
                                     <td class="secondary-tables--td">
                                         <button type="button" class="member-page-dell-btn" id="div-ok-btn">
                                             <svg class="group-info-edit-btn-icon">
@@ -263,7 +263,6 @@
         </div>
 
     </div>
-
         <!--Create new member-popup-window-start-->
         <div class="popup" id = "popup_1">
             <a href="" class="popup__area"></a>
@@ -272,50 +271,50 @@
                     <div class="new-member-pop-up">
                         <a href="" class="popup__close close-popup">X</a>
                         <form class="modal-form new-member-pop-up-mf">
-                                <h3>Create new member</h3>
+                                <h3>PH21_CREATE_SPORTS</h3>
 
                             <div class="new-member-field">
 
-                                <label for="new-member-name"><span class="form-field-title">Member name</span></label>
+                                <label for="new-member-name"><span class="form-field-title">PH22_SP_NAME</span></label>
                                 <div class="new-member-pop-up-field">
                                     <input type="text" id="new-member-name" name="new-member-name" class="new-member-pop-up-input" placeholder="Enter the member name">
                                 </div>
                             
-                                <label for="new-member-surname"><span class="form-field-title">Member surname</span></label>
+                                <label for="new-member-surname"><span class="form-field-title">PH23_SP_SURNAME</span></label>
                                 <div class="new-member-pop-up-field">
                                     <input type="text" id="new-member-surname" name="new-member-surname" class="new-member-pop-up-input" placeholder="Enter the member surname">
                                 </div>
 
-                                <label for="new-member-age"><span class="form-field-title">Member age</span></label>
+                                <label for="new-member-age"><span class="form-field-title">PH24_SP_BD</span></label>
                                 <div class="new-member-pop-up-field">
                                     <input type="date" id="new-member-age" name="new-member-age" class="new-member-pop-up-input" placeholder="Enter the member age">
                                 </div>
 
-                                <label for="new-member-weight"><span class="form-field-title">Member weight</span></label>
+                                <label for="new-member-weight"><span class="form-field-title">PH24_SP_WEIGHT</span></label>
                                 <div class="new-member-pop-up-field">
                                     <input type="number" id="new-member-weight" name="new-member-weight" class="new-member-pop-up-input" placeholder="Enter the member weight">
                                 </div>
                                 <div class="new-member-pop-up-check">
                                     <ul class="list new-member-gender-list">
                                         <label for="new-member-sex" class="form-field-label">
-                                            <li class="new-member-pop-up-check-gender">Member`s gender</li>
+                                            <li class="new-member-pop-up-check-gender">PH25_SP_SEX</li>
                                             <li class="new-member-pop-up-check-gender">
                                                 <div class="form_radio_btn">
                                                     <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                                    <label for="new-member-sex-male">Male</label>
+                                                    <label for="new-member-sex-male">PH26_SEX_MALE</label>
                                                 </div>
                                             </li>
 
                                             <li class="new-member-pop-up-check-gender">
                                                 <div class="form_radio_btn">
                                                     <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                                    <label for="new-member-sex-female">Female</label>
+                                                    <label for="new-member-sex-female">PH27_SEX_FEMALE</label>
                                                 </div>
                                             </li>
                                         </label>
                                     </ul>
                                 </div>
-                                <label for="new-member-team"><span class="form-field-title">Name of member`s team</span></label>
+                                <label for="new-member-team"><span class="form-field-title">PH28_SP_TEAM</span></label>
                                 <div class="new-member-pop-up-field">
                                     <input type="text" id="new-member-team" name="new-member-team" class="new-member-pop-up-input" placeholder="Enter the name of member`s team">
                                 </div>
@@ -332,18 +331,18 @@
                             <div class="form-field--option new-member-pop-up-check">
                                 <ul class="list nm-more-than-one-list">
                                     <label for="nm-more-than-one" class="form-field-label">
-                                        <li class="nm-more-than-one-item">Enter more than one member</li>
+                                        <li class="nm-more-than-one-item">PH29_SP_ADD_ONE_MORE</li>
                                         <li class="nm-more-than-one-item">
                                             <div class="form_radio_btn">
                                                 <input type="radio" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                                <label id="" for="nm-more-than-one-yes">Yes</label>
+                                                <label id="" for="nm-more-than-one-yes">PH30_YES</label>
                                             </div>
                                         </li>
 
                                         <li class="nm-more-than-one-item">
                                             <div class="form_radio_btn">
                                                 <input type="radio" id="nm-more-than-one-no" name="nm-more-than-one" value="no">
-                                                <label id="" for="nm-more-than-one-no">No</label>
+                                                <label id="" for="nm-more-than-one-no">PH31_NO</label>
                                             </div>
                                         </li>
                                     </label>
@@ -360,214 +359,53 @@
         </div>
         <!--Create new member-popup-window-end-->
 
-        <!--second-popup-window-start-->
-        <div class="popup" id = "popup_2">
+        <!--Add-competition-popup-window-start-->
+        <div class="popup" id = "popup_4">
             <a href="" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
-                    <div class="add-group-popup__content">
-                        <a href="#" class="popup__close close-popup">X</a>
+                    <div class="create-new-competition-popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
                         <form class="modal-form">
-                            <span class="modal-title">Add a group</span>
-                            <div class="new-member-field">
-                                <label for="new-group-name"><span class="form-field-title">Group name</span></label>
-                                <div class="form-field">
-                                    <input type="text" id="new-group-name" name="new-group-name" class="form-field-input" placeholder="Enter the group name">
+
+                        <div class="form-add-comp">
+                            <label for="competition-name" class="form-field-label">
+                                <span class="form-field-title">PH32_COMP_NAME</span>
+                                <div class="form-field-add-comp">
+                                    <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
                                 </div>
+                            </label>
 
-                                <div class="form-field--option">
-                                    <label for="division-of-group">
-                                        <label for="division-of-group"><span class="form-field-title">Choose division:</span></label>
-                                        <select name="division-of-group" id="create-group-division">
-                                            <template id="create-group-div-temp">
-                                                <option id="create-group-div-item" value="value">Name</option>
-                                            </template>
-                                        </select>
+                            <label>
+                                <span class="form-field-title">PH33_COMP_DESC</span>
+                                <div class="form-field-add-comp-message">
+                                    <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                                        rows="3"></textarea>
                                 </div>
-
-                                <div class="form-field--option">
-                                    <label for="form-system-of-group">
-                                        <label for="form-system-of-group"><span class="form-field-title">Choose pairs form system:</span></label>
-                                        <select name="form-system-of-group" id="pairs-form-system">
-                                            <option value="olimpic">Olimpic</option>
-                                            <option value="circle">Circle</option>
-                                        </select>
+                            </label>
+                            <label>
+                                <span class="form-field-title">PH33_COMP_START</span>
+                                <div class="form-field-add-comp-message">
+                                    <input type="datetime-local" id="competition-start-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
                                 </div>
-
-                                <div class="form-field--option">
-                                    <!-- acc-menu start -->
-                                    <div class="conntainer">
-                                        <section class="acc-conntainer">
-                                            <span class="create-ng-field-name">Choose required items:</span>
-                                            
-                                            <!-- acc-menu-1-item start -->
-                                            <div>
-                                                <input class="acc-item" id="gender-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label" for="gender-checkbox">Group gender</label>
-                                                    <article class="acc-medium">
-                                                        <div class="acc-menu-item-gender-list">    
-                                                            <div>
-                                                                <input class="acc-menu-item-gender-li" type="radio" id="create-ng-male" name="user-sex" value="male" checked>
-                                                                <label for="male">Male</label>
-                                                            </div>
-                                                            <div>
-                                                                <input class="acc-menu-item-gender-li" type="radio" id="create-ng-female" name="user-sex" value="female">
-                                                                <label for="female">Female</label>
-                                                            </div>
-                                                        </div>
-                                                    </article>
-                                                </label>
-                                            </div>
-                                            <!-- acc-menu-1-item end -->
-
-                                            <!-- acc-menu-2-item start -->
-                                            <div>
-                                                <input class="acc-item" id="age-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label"  for="age-checkbox">Age interval (number only)</label>
-                                                <article class="acc-medium">
-                                                    <div class="not-required-items conntainer">
-                                                        <div class="create-ng--interval">
-                                                            <input type="text" name="age-min" id="age-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                                                            &nbsp;<span>-</span>&nbsp;
-                                                            <input type="text" name="age-max" id="age-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                                                
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <!-- acc-menu-2-item end -->
-
-                                            <!-- acc-menu-3-item start -->
-                                            <div>
-                                                <input class="acc-item" id="weight-checkbox" name="accordion-1" type="checkbox" />
-                                                <label class="acc-menu-item-gender-label"  for="weight-checkbox">Weight interval, kg</label>
-                                                <article class="acc-medium">
-                                                    <div class="create-ng--interval">
-                                                        <input type="text" name="weight-min" id="weight-min" class="create-ng--interval-min" pattern="[0-9]+" required="required" />
-                                                        &nbsp;<span>-</span>&nbsp;
-                                                        <input type="text" name="weight-max" id="weight-max" class="create-ng--interval-max" pattern="[0-9]+" required="required" />
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <!-- acc-menu-3-item end -->
-
-                                            <!-- acc-menu-4-item start -->
-                                            <div>
-                                                <input class="acc-item" id="qualification-checkbox" name="accordion-1" type="checkbox" />
-                                                <label  class="acc-menu-item-gender-label"  for="qualification-checkbox">Qualification interval </label>
-                                                    <article class="acc-medium">
-                                                        <div class="create-ng--interval">
-                                                            <select name="ng-qualification-min" id="ng-members-qualification-min">
-                                                                <template id="create-group-qual-temp">
-                                                                    <option id="create-group-qual-item" value="value">Name</option>
-                                                                </template>
-                                                            </select>
-                                                            &nbsp;<span>-</span>&nbsp;
-                                                            <select name="ng-qualification-max" id="ng-members-qualification-max">
-                                                            </select>
-                                                        </div>
-                                                </article>
-                                            </div>
-                                            <!-- acc-menu-4-item end -->
-                                        </section>
-                                    </div>
+                            </label>
+                            <label>
+                                <span class="form-field-title">PH34_COMP_END</span>
+                                <div class="form-field-add-comp-message">
+                                    <input type="datetime-local" id="competition-end-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
                                 </div>
-
-                                <div class="form-field--option">
-                                    <ul class="list nm-more-than-one-list">
-                                        <label for="nm-more-than-one" class="form-field-label">
-                                            <span class="form-field-title">Enter more than one</span>
-                                            <li class="nm-more-than-one-item">
-                                                <input type="radio" id="ng-more-than-one-yes" name="nm-more-than-one" value="yes" checked>
-                                                <label for="yes">Yes</label>
-                                            </li>
-        
-                                            <li class="nm-more-than-one-item">
-                                            <input type="radio" id="ng-more-than-one-no" name="nm-more-than-one" value="no">
-                                            <label for="no">No</label>
-                                            </li>
-                                        </label>
-                                    </ul>
-                                </div>
-
-                                <button type="button" id="group-form-send-btn" class="modal-btn-submit">
-                                    <span class="modal-btn-submit-text">Send</span>
-                                </button>
-                            
-                            </div>
-                        </form>
-                    </div>
+                            </label>
+                        </div>
+                        
+                        <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
+                            <span class="modal-btn-submit-text">PH35_COMP_CREATE</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-        <!--second-popup-window-end-->
+        <!--Add-competition-popup-window-end-->
 
-                <!--Add-competition-popup-window-start-->
-
-                <div class="popup" id = "popup_4">
-                    <a href="" class="popup__area"></a>
-                    <div class="popup__body">
-                        <div class="popup__content">
-                            <div class="create-new-competition-popup__content">
-                                <a href="" class="popup__close close-popup">X</a>
-                                <form class="modal-form">
-        
-                                <div class="form-add-comp">
-                                    <label for="competition-name" class="form-field-label">
-                                        <span class="form-field-title">The name of the competition</span>
-                                        <div class="form-field-add-comp">
-                                            <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
-                                        </div>
-                                    </label>
-    
-                                    <label>
-                                        <span class="form-field-title">Short description</span>
-                                        <div class="form-field-add-comp-message">
-                                            <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
-                                                rows="3"></textarea>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <span class="form-field-title">Start date</span>
-                                        <div class="form-field-add-comp-message">
-                                            <input type="datetime-local" id="competition-start-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
-                                        </div>
-                                    </label>
-                                    <label>
-                                        <span class="form-field-title">End date</span>
-                                        <div class="form-field-add-comp-message">
-                                            <input type="datetime-local" id="competition-end-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
-                                        </div>
-                                    </label>
-                                </div>
-                                
-                                <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
-                                    <span class="modal-btn-submit-text">Add competition</span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!--Add-competition-popup-window-end-->
-
-  
-<script>
-function openPage(evt, pageName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(pageName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-document.getElementById("defaultOpen").click();
-</script>
 <script src="./scripts/department-page.js" type="module"></script>
 <script src="./scripts/open-close-popup.js" type="module"></script> 
      

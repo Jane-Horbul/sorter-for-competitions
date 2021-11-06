@@ -1,4 +1,4 @@
-import {refreshPage, parseAnswerParams, commonStrings} from "./common.js"
+import {refreshPage, parseBodyParams, commonStrings} from "./common.js"
 
 const backendLinks = {
     DEPARTMENT_GET:                             "competition-list-get?",
@@ -318,12 +318,23 @@ export const ops = {
     createDepartmant(m)     {return mapToDepatrment(m);}
 }
 
+function parseAnswer(answer){
+    var result = {code: 0, body: ""};
+    var blocks = answer.split("</AnswerCode><AnswerBody>");
+    result.code = Number(blocks[0].split("<AnswerCode>")[1]);
+    result.body = blocks[1].split("</AnswerBody>")[0];
+    return result;
+}
+
 function sendRequest(request, waitArray) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', request, false);
     xhr.send();
     if (xhr.status != 200)   return new Map();
-    var res = parseAnswerParams(xhr.responseText);
+    var answer = parseAnswer(xhr.responseText);
+    if(answer.code != 0)
+        alert(answer.body);
+    var res = parseBodyParams(answer.body);
     return waitArray ? res : res[0];
 }
 
@@ -338,8 +349,12 @@ function sendParametersList(formName, paramsMap, refresh) {
 
 
     xhr.onreadystatechange = function () {
-        if(refresh == true && xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            refreshPage();
+        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            var answer = parseAnswer(xhr.responseText);
+            if(answer.code != 0)
+                alert(answer.body);
+            if(refresh == true)
+                refreshPage();
         };
     };
     xhr.open('POST', "/" + formName, true);
@@ -478,7 +493,7 @@ export const server = {
     department: {
         get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET, false));},
         edit(name)                          {sendSingleValue(backendLinks.DEPARTMENT_EDIT, name, true);},
-        addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, true)},
+        addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, false)},
         deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, true);},
         addDiscipline(name)                 {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_ADD, name, false);},
         deleteDiscipline(name)              {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_DEL, name, false);}

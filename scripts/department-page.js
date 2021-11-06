@@ -1,5 +1,6 @@
-import {getLinkParams, onClick, showAllIfAdmin, languageSwitchingOn, createPageItem, isEmptyString, isNumber} from "./common.js"
+import {getLinkParams, onClick, showAllIfAdmin, languageSwitchingOn, createPageItem, isEmptyString, isNumber, prepareTabs} from "./common.js"
 import {ops, server} from "./communication.js"
+import {markup} from "./department-page-markup.js"
 
 var pageParams = getLinkParams(location.search);
 const department = server.department.get();
@@ -8,61 +9,40 @@ console.log(department);
 /* ------------------- QUALIFICATIONS ----------------------------*/
 var qualificationsMap = new Map();
 
-const qualificationObjects = {
-    getNameInput()                  { return document.getElementById("add-qualification-name").value;},
-    getValueInput()                 { return document.getElementById("add-qualification-value").value;},
-    getTable()                      { return document.getElementById("qualification-table");},
-    getTemplate()                   { return document.getElementById("qualification-template");},
-    getDelBtn(item)                 { return item.getElementById("qual-dell-btn");},
-    getAddBtn()                     { return document.getElementById("qual-add-btn");},
-
-    getPlaceholders(name, value)    { return {
-                                            "#qualification-value": value,
-                                            "#qualification-name":  name,
-                                            };
-                                    },
-    getAddingRow()                  { return document.getElementById("qualification-add-row");},
-    setAddingRowId(row)             { return row.setAttribute("id", "qualification-add-row");},
-    getAddingRowOkBtn()             { return document.getElementById("qual-ok-btn");},
-    getAddingRowTemplate()          { return document.getElementById("qualification-adding-template");},
-
-    getName(value)                  { return qualificationsMap.get(value) == undefined ? value : qualificationsMap.get(value)},
-
-    nameExistAlert()                     {alert("Qualification name already exists!");},
-    valueExistAlert()                    {alert("Qualification value already exists!");},
-    valueFormatAlert()                   {alert("Incorrect qualification value! Please, enter the number.");},
+export function getQualNameByValue(val){
+    return qualificationsMap.get(val) == undefined ? val : qualificationsMap.get(val);
 }
 
 function qualificationElementAddToPage(name, value){
     if(!isEmptyString(value)){
-        var template = qualificationObjects.getTemplate();
-        var placeholders = qualificationObjects.getPlaceholders(name, value);
+        var template = markup.qualifications.getTemplate();
+        var placeholders = markup.qualifications.getPlaceholders(name, value);
         var newItem = createPageItem(template, placeholders);
-        onClick(qualificationObjects.getDelBtn(newItem), function(){deleteQualification(value)});
-        qualificationObjects.getTable().append(newItem); 
+        onClick(markup.qualifications.getDelBtn(newItem), function(){deleteQualification(value)});
+        markup.qualifications.getTable().append(newItem); 
 
-        template = sportsmanObjects.getQualTemplate();
-        placeholders = sportsmanObjects.getQualPlaceholders(name, value)
-        sportsmanObjects.getQualList().append(createPageItem(template, placeholders));
+        template = markup.sportsman.getQualTemplate();
+        placeholders = markup.sportsman.getQualPlaceholders(name, value)
+        markup.sportsman.getQualList().append(createPageItem(template, placeholders));
     }
 }
 
 function addQualification(){
-    var value = qualificationObjects.getValueInput();
-    var name = qualificationObjects.getNameInput();
-    var qTable =  qualificationObjects.getTable();
+    var value = markup.qualifications.getValueInput();
+    var name = markup.qualifications.getNameInput();
+    var qTable =  markup.qualifications.getTable();
 
     if(!isNumber(value)){
-        qualificationObjects.valueFormatAlert();
+        markup.qualifications.valueFormatAlert();
         return;
     }
     for(var i = 1; i < qTable.rows.length; i++){
         if(value == qTable.rows[i].cells[0].innerHTML){
-            qualificationObjects.valueExistAlert();
+            markup.qualifications.valueExistAlert();
             return; 
         } 
         if(name == qTable.rows[i].cells[1].innerHTML){
-            qualificationObjects.nameExistAlert();
+            markup.qualifications.nameExistAlert();
             return;
         }
     }
@@ -72,20 +52,20 @@ function addQualification(){
 }
 
 function toogleQualificationAdding(){
-    var addingRow = qualificationObjects.getAddingRow();
+    var addingRow = markup.qualifications.getAddingRow();
     if(addingRow == null){
-        var template = qualificationObjects.getAddingRowTemplate();
-        addingRow =  qualificationObjects.getTable().insertRow(1);
+        var template = markup.qualifications.getAddingRowTemplate();
+        addingRow =  markup.qualifications.getTable().insertRow(1);
         addingRow.append(template.cloneNode(true).content);
-        qualificationObjects.setAddingRowId(addingRow);
-        onClick(qualificationObjects.getAddingRowOkBtn(), addQualification);
+        markup.qualifications.setAddingRowId(addingRow);
+        onClick(markup.qualifications.getAddingRowOkBtn(), addQualification);
     } else {
         addingRow.remove();
     }
 }
 
 function deleteQualification(value){
-    var qualTable =  qualificationObjects.getTable();
+    var qualTable =  markup.qualifications.getTable();
     for(var i = 1; i < qualTable.rows.length; i++){
         if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
             qualTable.rows[i].remove();
@@ -97,48 +77,34 @@ function deleteQualification(value){
 
 /* ------------------- DIVISIONS ----------------------------*/
 
-const disciplinesObjects = {
-    getDisciplineInput()            { return document.getElementById("add-division").value;},
-    getTable()                      { return document.getElementById("divisions-table");},
-    getTemplate()                   { return document.getElementById("division-template");},
-    getDelBtn(item)                 { return item.getElementById("div-dell-btn");},
-    getAddBtn()                     { return document.getElementById("div-add-btn")},
-    getPlaceholders(div)            { return {"#division-name": div};},
-
-    getAddingRow()                  { return document.getElementById("division-add-field");},
-    setAddingRowId(row)             { return row.setAttribute("id", "division-add-field");},
-    getAddingRowOkBtn()             { return document.getElementById("div-ok-btn");},
-    getAddingRowTemplate()          { return document.getElementById("division-adding-template");},
-}
-
 function disciplineAddToPage(division){
     if(!isEmptyString(division))
     {
-        var template = disciplinesObjects.getTemplate();
-        var placeholders = disciplinesObjects.getPlaceholders(division);
+        var template = markup.discipline.getTemplate();
+        var placeholders = markup.discipline.getPlaceholders(division);
         var newItem = createPageItem(template, placeholders);
-        onClick(disciplinesObjects.getDelBtn(newItem), function(){deleteDiscipline(division)});
-        disciplinesObjects.getTable().append(newItem);
+        onClick(markup.discipline.getDelBtn(newItem), function(){deleteDiscipline(division)});
+        markup.discipline.getTable().append(newItem);
     }
 }
 
 function toogleDisciplineAdding(){
-    var addingRow = disciplinesObjects.getAddingRow();
+    var addingRow = markup.discipline.getAddingRow();
     if(addingRow == null){
-        var template = disciplinesObjects.getAddingRowTemplate();
+        var template = markup.discipline.getAddingRowTemplate();
 
-        addingRow = disciplinesObjects.getTable().insertRow(1);
+        addingRow = markup.discipline.getTable().insertRow(1);
         addingRow.append(template.cloneNode(true).content);
-        disciplinesObjects.setAddingRowId(addingRow);
-        onClick(disciplinesObjects.getAddingRowOkBtn(), addDiscipline);
+        markup.discipline.setAddingRowId(addingRow);
+        onClick(markup.discipline.getAddingRowOkBtn(), addDiscipline);
     } else {
         addingRow.remove();
     }
 }
 
 function addDiscipline(){
-    var divTable = disciplinesObjects.getTable();
-    var div = disciplinesObjects.getDisciplineInput();
+    var divTable = markup.discipline.getTable();
+    var div = markup.discipline.getDisciplineInput();
 
     for(var i = 1; i < divTable.rows.length; i++){
         console.log(i);
@@ -150,7 +116,7 @@ function addDiscipline(){
 }
 
 function deleteDiscipline(div){
-    var divTable = disciplinesObjects.getTable();
+    var divTable = markup.discipline.getTable();
     for(var i = 1; i < divTable.rows.length; i++){
         if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0){
             divTable.rows[i].remove();
@@ -160,94 +126,33 @@ function deleteDiscipline(div){
     }
 }
 
-
-
 /* ------------------- COMPETITIONS ----------------------------*/
-const competitionObjects = {
-    getNameInput()          { return document.getElementById("competition-name-input").value;},
-    getDescriptionInput()   { return document.getElementById("competition-desc-input").value;},
-    getStartDateInput()     { return document.getElementById("competition-start-date-input").value;},
-    getEndDateInput()       { return document.getElementById("competition-end-date-input" ).value;},
 
-    getTable()              { return document.getElementById("competitions-list");},
-    getTemplate()           { return document.getElementById("competition-template");},
-    getAddBtn()             { return document.getElementById("send-competition-form-btn");},
-
-    getPlaceholders(comp)   { return {
-                                    "#departmentId":        department.getId(),
-                                    "#competitionId":       comp.getId(),
-                                    "#competition-name":    comp.getName(),
-                                    "#competition-date":    getDateinterval(comp.getFormatedStartDate("dd.mm.yy"), comp.getFormatedEndDate("dd.mm.yy")),
-                                    "#competition-desc":    comp.getDescription()
-                                    };
-                            }
-}
-function getDateinterval(date1, date2) {
-    return (0 == date1.localeCompare(date2)) ? date1 : date1 + " - " + date2;
-}
 function competitionPageElementAdd(competition){
     if(competition.getId() != undefined){
-        var template = competitionObjects.getTemplate();
-        var placeholders = competitionObjects.getPlaceholders(competition);
-        competitionObjects.getTable().prepend(createPageItem(template, placeholders)); 
+        var template = markup.competition.getTemplate();
+        var placeholders = markup.competition.getPlaceholders(competition, department);
+        markup.competition.getTable().prepend(createPageItem(template, placeholders)); 
     }
 }
 
 function sendCompetitionForm() {
     var cp = ops.createCompetition(undefined);
-    cp.setName(competitionObjects.getNameInput());
-    cp.setDescription(competitionObjects.getDescriptionInput());
-    cp.setStartDate(competitionObjects.getStartDateInput());
-    cp.setEndDate(competitionObjects.getEndDateInput());
+    cp.setName(markup.competition.getNameInput());
+    cp.setDescription(markup.competition.getDescriptionInput());
+    cp.setStartDate(markup.competition.getStartDateInput());
+    cp.setEndDate(markup.competition.getEndDateInput());
     
     server.competition.create(cp);
 }
 
 /* ------------------- SPORTSMANS ----------------------------*/
-const sportsmanObjects = {
-    getNameInput()              { return document.getElementById("new-member-name").value;},
-    getSurnameInput()           { return document.getElementById("new-member-surname").value;},
-    getAgeInput()               { return document.getElementById("new-member-age").value;},
-    getWeightInput()            { return document.getElementById("new-member-weight").value;},
-    getSexInput()               { return document.getElementById("new-member-sex-male").checked ? "male" : "female";},
-    getTeamInput()              { return document.getElementById("new-member-team").value;},
-    getQualificationInput()     { return document.getElementById("new-member-qualifications").value;},
-    
-    getQualList()               { return document.getElementById("new-member-qualifications");},
-    getQualTemplate()           { return document.getElementById("new-member-qual-temp");},
-    getQualPlaceholders(n, v)   { return {
-                                        "#sports-qual-value":      v,
-                                        "#sports-qual-name":       n
-                                        };
-                                },
-
-    getTable()                  { return document.getElementById("members-table");},
-    getTemplate()               { return document.getElementById("member-template");},
-    getAddBtn()                 { return document.getElementById("member-form-send-btn");},
-
-    getPlaceholders(sp)         { return {
-                                        "#sp-surname":      sp.getSurname(),
-                                        "#sp-name":         sp.getName(),
-                                        "#sp-age":          sp.getFormatedBirth("dd.mm.yy"),
-                                        "#sp-weight":       sp.getWeight(),
-                                        "#sp-sex":          sp.getSex(),
-                                        "#sp-team":         sp.getTeam(),
-                                        "#sp-qual":         qualificationObjects.getName(sp.getQualification()),
-                                        "#sportsman-link":  window.location.href + sp.getLink()
-                                    };
-                                },
-
-    nameAlert()                 {alert("Empty member name!");},
-    surnameAlert()              {alert("Empty member surname!");},
-    weightAlert()               {alert("Bad weight value. Enter number only.");},
-    ageAlert()                  {alert("Bad Date of Birth value. Enter it in format dd.mm.yy");},
-}
 
 function sportsmanPageElementAdd(sp){
     if(sp.getId() != undefined){
-        var template = sportsmanObjects.getTemplate();
-        var placeholders = sportsmanObjects.getPlaceholders(sp);
-        sportsmanObjects.getTable().append(createPageItem(template, placeholders)); 
+        var template = markup.sportsman.getTemplate();
+        var placeholders = markup.sportsman.getPlaceholders(sp);
+        markup.sportsman.getTable().append(createPageItem(template, placeholders)); 
     }
 }
 
@@ -263,22 +168,22 @@ function dateValidate(date){
 }
 
 function isSportsmansParamsOk() {
-    var name    = sportsmanObjects.getNameInput();
-    var surname = sportsmanObjects.getSurnameInput();
-    var weight  = sportsmanObjects.getWeightInput();
-    var age     = sportsmanObjects.getAgeInput();
+    var name    = markup.sportsman.getNameInput();
+    var surname = markup.sportsman.getSurnameInput();
+    var weight  = markup.sportsman.getWeightInput();
+    var age     = markup.sportsman.getAgeInput();
 
     if(isEmptyString(name)){
-        sportsmanObjects.nameAlert();
+        markup.sportsman.nameAlert();
         return false;
     } else if(isEmptyString(surname)){
-        sportsmanObjects.surnameAlert();
+        markup.sportsman.surnameAlert();
         return false;
     } else if(!isNumber(weight)){
-        sportsmanObjects.weightAlert();
+        markup.sportsman.weightAlert();
         return false;
     } else if(!dateValidate(age)){
-        sportsmanObjects.ageAlert();
+        markup.sportsman.ageAlert();
         return false;
     }
     return true;
@@ -287,36 +192,25 @@ function isSportsmansParamsOk() {
 function sendSportsmanForm() {
     if(isSportsmansParamsOk()) {
         var sporsman = ops.createSportsman(undefined);
-        sporsman.setName(sportsmanObjects.getNameInput());
-        sporsman.setSurname(sportsmanObjects.getSurnameInput());
-        sporsman.setWeight(sportsmanObjects.getWeightInput());
-        sporsman.setBirth(sportsmanObjects.getAgeInput());
-        sporsman.setTeam(sportsmanObjects.getTeamInput());
-        sporsman.setSex(sportsmanObjects.getSexInput());
-        sporsman.setQualification(sportsmanObjects.getQualificationInput());
+        sporsman.setName(markup.sportsman.getNameInput());
+        sporsman.setSurname(markup.sportsman.getSurnameInput());
+        sporsman.setWeight(markup.sportsman.getWeightInput());
+        sporsman.setBirth(markup.sportsman.getAgeInput());
+        sporsman.setTeam(markup.sportsman.getTeamInput());
+        sporsman.setSex(markup.sportsman.getSexInput());
+        sporsman.setQualification(markup.sportsman.getQualificationInput());
         server.sportsman.create(sporsman);
     }
     
 }
 
 /* ------------------- DEPARTMENT ----------------------------*/
-const departamentObjects = {
-    getNameInput()      { return document.getElementById("name-info-input");},
-    createNameInput()   { var res = document.createElement("input"); res.setAttribute("id", "name-info-input"); return res;},
-    getNamePlace()      { return document.getElementById("department-name-set");},
-    getEditBtn()        { return document.getElementById("department-edit-btn");},
-
-    setPageName(name)       {document.getElementById("department-name").innerHTML = name;},
-    setName(name)           {document.getElementById("department-name-set").innerHTML = name;},
-    setId(id)               {document.getElementById("department-id").innerHTML = id;}
-}
-
 
 function departamentEdit(){
-    var setLine = departamentObjects.getNameInput();
-    var namePlace = departamentObjects.getNamePlace();
+    var setLine = markup.departament.getNameInput();
+    var namePlace = markup.departament.getNamePlace();
     if(setLine == null){
-        setLine = departamentObjects.createNameInput();
+        setLine = markup.departament.createNameInput();
         setLine.value = department.getName();
         namePlace.innerHTML = "";
         namePlace.appendChild(setLine);
@@ -332,9 +226,9 @@ function fillPageInfo(){
     var qualifications  = department.getQualifications();
     var sportsmans      = department.getSportsmans();
 
-    departamentObjects.setPageName(departamentName);
-    departamentObjects.setName(departamentName);
-    departamentObjects.setId(department.getId());
+    markup.departament.setPageName(departamentName);
+    markup.departament.setName(departamentName);
+    markup.departament.setId(department.getId());
 
     for (var [value, name] of qualifications) {
         qualificationElementAddToPage(name, value);
@@ -342,18 +236,19 @@ function fillPageInfo(){
     }
     disciplines.forEach( disciplinne => disciplineAddToPage(disciplinne));
     competitions.forEach(competition => competitionPageElementAdd(competition));
-    sportsmans.forEach(  sportsman   => sportsmanPageElementAdd(sportsman));
+    sportsmans.forEach( sportsman   => sportsmanPageElementAdd(sportsman));
 }
 
 function setActions(){
-    onClick(qualificationObjects.getAddBtn(),   toogleQualificationAdding);
-    onClick(disciplinesObjects.getAddBtn(),     toogleDisciplineAdding);
-    onClick(competitionObjects.getAddBtn(),     sendCompetitionForm);
-    onClick(departamentObjects.getEditBtn(),    departamentEdit);
-    onClick(sportsmanObjects.getAddBtn(),       sendSportsmanForm);
+    onClick(markup.qualifications.getAddBtn(),   toogleQualificationAdding);
+    onClick(markup.discipline.getAddBtn(),     toogleDisciplineAdding);
+    onClick(markup.competition.getAddBtn(),     sendCompetitionForm);
+    onClick(markup.departament.getEditBtn(),    departamentEdit);
+    onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm);
 }
 /* ------------------- MAIN CHUNK ----------------------------*/
 
+prepareTabs();
 showAllIfAdmin();
 languageSwitchingOn();
 fillPageInfo();

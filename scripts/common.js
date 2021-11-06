@@ -72,9 +72,9 @@ export function parseMapArray(str){
     return result;
 }
 
-export function parseAnswerParams(answer){
+export function parseBodyParams(body){
     var blocksResult = new Array(0);
-    var blocks = answer.split("<Option block>");
+    var blocks = body.split("<Option block>");
     blocks.forEach(block => {
         const parseResult = new Map();
         var options = block.split("<Option name>");
@@ -152,4 +152,31 @@ export function createPageItem(item, values){
         template.innerHTML = template.innerHTML.replaceAll(ph, values[ph]);
     }
     return template.content;
+}
+
+function openTab(tabId, contentId) {
+    var tabcontent = document.getElementsByClassName("tabcontent");
+    var tablinks = document.getElementsByClassName("tablinks");
+
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(contentId).style.display = "block";
+    document.getElementById(tabId).classList.add("active");
+    window.location.href = window.location.href.split("#tab=")[0] + "#tab=" + tabId;
+}
+
+export function prepareTabs() {
+    var tablinks = document.getElementsByClassName("tablinks");
+    for (var i = 0; i < tablinks.length; i++) (function(i){
+        var tabId = tablinks[i].id;
+        var contentId = "tabcontent" + tabId.split("tab")[1];
+        document.getElementById(tabId).onclick = function(){ openTab(tabId, contentId) };
+      })(i);
+    var tab_parts = window.location.href.split("#tab=");
+    var currentTabId = (tab_parts.length > 1) ? tab_parts[1] : tablinks[0].id;
+    document.getElementById(currentTabId).click();
 }
