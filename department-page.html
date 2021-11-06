@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="./old-css/normalize.css">
-<link rel="stylesheet" href="./css/main.css" />
+<!--<link rel="stylesheet" href="./css/main.css" />-->
+<link rel="stylesheet" href="./sass/main.css" />
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 
 </head>
@@ -27,6 +28,15 @@
 
                 <div class="lang-panel">
                     <ul class="list lang-panel-list">
+                        <li class="lang-panel-item">
+                            <div class="log-in-btn--placing">
+                                <a href="#popup_7" class="popup-link"> 
+                                    <button class="log-in-btn">
+                                        <span>Log in</span> 
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
                         <li class="lang-panel-item">
                             <div class="lang-panel-flag">
                                 <a type="button" id="lang-ru"> 
@@ -116,8 +126,8 @@
                             <a href="#popup_1" class="popup-link">
                                 <button class="group-page-ref-btn" type="button">
                                         <svg class="group-info-edit-btn-icon">
-                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                    </svg>
+                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                        </svg>
                                     
                                 </button>
                             </a>
@@ -263,6 +273,7 @@
         </div>
 
     </div>
+
 
         <!--Create new member-popup-window-start-->
         <div class="popup" id = "popup_1">
@@ -545,10 +556,44 @@
                                     <span class="modal-btn-submit-text">Add competition</span>
                                 </button>
                             </form>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!--Add-competition-popup-window-end-->
+                <!--LogIn popup start-->
+                <div class="popup" id = "popup_7">
+                    <a href="" class="popup__area"></a>
+                    <div class="popup__body">
+                        <div class="popup__content">
+                            <div class="login_popup__content">
+                                <a href="" class="popup__close close-popup">X</a>
+                                <form class="modal-form">
+                                    <div class="">
+                                        <div class="login-page-title">
+                                            <span class="login-page-popup-title">LOGIN</span>
+
+                                        <div class="input-container ic1">
+                                            <input id="login" class="input input_login" type="text" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="login" class="placeholder">ENTER LOGIN</label>
+                                        </div>
+                                        <div class="input-container ic2">
+                                          <input id="password" class="input input_login" type="password" placeholder=" " />
+                                          <div class="cut"></div>
+                                          <label for="password" class="placeholder">ENTER PASSWORD</label>
+                                        </div>
+
+                                        <button type="button" id="login-btn" class="login-page-btn-submit">
+                                            <span class="modal-btn-submit-text">LOG IN</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--LogIn popup end-->
 
   
 <script>

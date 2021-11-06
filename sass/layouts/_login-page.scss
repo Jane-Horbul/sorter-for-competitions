@@ -12,13 +12,10 @@ height: 1000px;
 }
 
 .login-page-btn {
-    background: #f7f7f7;
-    border: 22px solid #1d8fbd;
     width: 500px;
     height: 500px;
     margin-left: auto;
-margin-right: auto;
-margin-top: 100px;
+    margin-right: auto;
 }
 
 .login-page-input-submit{
@@ -41,11 +38,12 @@ outline-width: 0px;
 
 .login-page-btn-submit{
     display: flex;
-width: 350px;
+width: 436px;
 height: 70px;
 margin-right: auto;
 margin-left: auto;
 margin-top: 30px;
+margin-bottom: 20px;
 background-color: #2196f3;
 border: none;
 color: #fff;
@@ -66,4 +64,8 @@ outline-width: 0px;
 
 .login-page-title{
     text-align: center;
+}
+.login-page-popup-title {
+    font-size: 26px;
+    color: #2196f3;
 }

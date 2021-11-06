@@ -1054,6 +1054,18 @@ input:focus {
   border: 1px solid #757575;
 }
 
+.log-in-btn {
+  border: 0px;
+  background: #fff;
+  color: #1d8fbd;
+  font-size: 16px;
+}
+
+.log-in-btn--placing {
+  margin-top: 45px;
+  margin-right: 15px;
+}
+
 body.lock {
   overflow: hidden;
 }
@@ -1129,6 +1141,10 @@ body.lock {
 
 .create-new-competition-popup__content {
   width: 650px;
+}
+
+.login_popup__content {
+  width: 450px;
 }
 
 .popup__close {
@@ -1668,13 +1684,13 @@ body.lock {
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .lang-panel {
-    width: 130px;
+    width: 200px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .lang-panel {
-    width: 160px;
+    width: 240px;
   }
 }
 
@@ -2583,6 +2599,112 @@ body.lock {
   color: #666;
 }
 
+.input-container {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.ic1 {
+  margin-top: 40px;
+}
+
+.ic2 {
+  margin-top: 30px;
+}
+
+.input,
+.inpul_login {
+  background-color: #fff;
+  border-radius: 0px;
+  color: #605f5f;
+  outline: 0;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  width: 512px;
+  height: 34px;
+  padding: 4px 51px 0;
+  border: 1px solid #dfdfdf;
+  height: 54px;
+}
+
+.input_login {
+  width: 440px;
+  padding: 4px 25px 0;
+}
+
+.cut {
+  border-radius: 10px;
+  height: 20px;
+  left: 20px;
+  position: absolute;
+  top: -20px;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transition: -webkit-transform 200ms;
+  transition: -webkit-transform 200ms;
+  transition: transform 200ms;
+  transition: transform 200ms, -webkit-transform 200ms;
+  width: 76px;
+}
+
+.cut-short {
+  width: 50px;
+}
+
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+  -webkit-transform: translateY(8px);
+          transform: translateY(8px);
+}
+
+.placeholder {
+  color: #65657b;
+  left: 55px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+  -webkit-transition: color 200ms, -webkit-transform 200ms;
+  transition: color 200ms, -webkit-transform 200ms;
+  transition: transform 200ms, color 200ms;
+  transition: transform 200ms, color 200ms, -webkit-transform 200ms;
+  top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+  -webkit-transform: translateY(-40px) translateX(10px) scale(0.75);
+          transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:focus ~ .placeholder {
+  color: #2196f3;
+}
+
+.submit {
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  text-align: center;
+  width: 100%;
+}
+
+.submit:active {
+  background-color: #06b;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3208,13 +3330,10 @@ body.lock {
 }
 
 .login-page-btn {
-  background: #f7f7f7;
-  border: 22px solid #1d8fbd;
   width: 500px;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
 }
 
 .login-page-input-submit {
@@ -3239,11 +3358,12 @@ body.lock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 350px;
+  width: 436px;
   height: 70px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 30px;
+  margin-bottom: 20px;
   background-color: #2196f3;
   border: none;
   color: #fff;
@@ -3264,6 +3384,11 @@ body.lock {
 
 .login-page-title {
   text-align: center;
+}
+
+.login-page-popup-title {
+  font-size: 26px;
+  color: #2196f3;
 }
 
 .sportsman-dynamic-table {
