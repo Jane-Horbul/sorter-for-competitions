@@ -5,9 +5,11 @@ import {isNumber,
     onClick, 
     showShadows, 
     languageSwitchingOn, 
-    createPageItem} from "./common.js"
+    createPageItem, 
+    prepareTabs} from "./common.js"
 import {ops, server} from "./communication.js"
 
+var client = server.access.getClient();
 const page = {
     cid: getLinkParams(location.search).get("cid")
 }
@@ -509,8 +511,8 @@ function setBtnActions(){
     onClick(sportsmanObjects.getAddBtn(),sportsmansAddListSend)
 }
 
-showShadows(client);
+prepareTabs();
 fillPageInfo();
-
 setBtnActions();
+showShadows(client);
 languageSwitchingOn();

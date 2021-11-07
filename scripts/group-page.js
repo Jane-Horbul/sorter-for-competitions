@@ -1,4 +1,12 @@
-import {isNumber, isEmptyString, getLinkParams, showShadows, languageSwitchingOn, onClick, createPageItem, commonStrings} from "./common.js"
+import {isNumber, 
+    isEmptyString, 
+    getLinkParams, 
+    showShadows, 
+    languageSwitchingOn,
+    onClick,
+    createPageItem,
+    commonStrings, 
+    prepareTabs} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -8,6 +16,7 @@ const page = {
     cid: pageParams.get("cid"),
     gid: pageParams.get("gid")
 }
+const client              = server.access.getClient();
 var groupInfo             = server.group.get(page.cid, page.gid);
 const departmentInfo      = server.department.get();
 const competitionInfo     = server.competition.get(page.cid);
@@ -698,6 +707,7 @@ function setBtnActions(){
     onClick(groupObjects.getAddFormulaBtn(),   addNewFormula);
 }
 
+prepareTabs()
 fillPageInfo();
 setBtnActions();
 formPairsGrid();

@@ -61,12 +61,12 @@
                 </div>
 
                 <div class="tab">
-                    <button class="tablinks" onclick="openPage(event, 'Settings')" id="defaultOpen">Settings</button>
-                    <button class="tablinks" onclick="openPage(event, 'Statistics')">Statistics</button>
+                    <button class="tablinks" id="tab1">Settings</button>
+                    <button class="tablinks" id="tab2">Statistics</button>
                 </div>
 
 
-                <div id="Settings" class="tabcontent">
+                <div id="tabcontent1" class="tabcontent">
                     <div class="group-info-main">
                         <div id="member-info">
                             <div class="member-info-title--siting">
@@ -188,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="Statistics" class="tabcontent">
+                <div id="tabcontent2" class="tabcontent">
                     <template id="competition-item-template-id">
                         <div class="comp-statistics">
                             <div class="comp-statistics-name">
@@ -488,32 +488,10 @@
                 </div>
             </div>
             <!--member-groups-edit-popup-window-end-->
-           <script src="./scripts/sportsman-page.js" type="module"></script>
+            <script src="./scripts/sportsman-page.js" type="module"></script>
             <script src="./scripts/open-close-popup.js" type="module"></script>
-            
         </div>
-
-        <script>
-            function openPage(evt, pageName) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(pageName).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
-            
-            document.getElementById("defaultOpen").click();
-        </script>
-<script src="./scripts/tabs-bar.js" type="module"></script>  
-<script src="./scripts/accordion.js" type="module"></script>  
-<script src="./scripts/common.js" type="module"></script>  
-
+        <script src="./scripts/accordion.js" type="module"></script>
     </body>
 </html>
   

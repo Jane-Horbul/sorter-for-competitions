@@ -1,10 +1,18 @@
-import {getLinkParams, onClick, showShadows, languageSwitchingOn, createPageItem, isEmptyString, isNumber, prepareTabs, unhideSubelements} from "./common.js"
+import {getLinkParams, 
+    onClick, 
+    showShadows, 
+    languageSwitchingOn, 
+    createPageItem, 
+    isEmptyString, 
+    isNumber, 
+    prepareTabs, 
+    unhideSubelements} from "./common.js"
 import {ops, server} from "./communication.js"
 import {markup} from "./department-page-markup.js"
 
 var pageParams = getLinkParams(location.search);
 const department = server.department.get();
-var client = server.access.getClient();
+const client = server.access.getClient();
 console.log(department);
 console.log(client.getStatus());
 
@@ -206,6 +214,10 @@ function sendSportsmanForm() {
         sporsman.setSex(markup.sportsman.getSexInput());
         sporsman.setQualification(markup.sportsman.getQualificationInput());
         server.sportsman.create(sporsman);
+        /*
+        if(markup.sportsman.getOneMoreInput().localeCompare("no") == 0){
+            location.reload();
+        }*/
     }
     
 }

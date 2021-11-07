@@ -11,199 +11,241 @@
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 
 </head>
-<body>
+    <body>
 
-    <div class="wrapper">
+        <div class="wrapper">
 
-        <header class="page-header">
-            
-            <div class="container flexbox">
+            <header class="page-header">
+                
+                <div class="container flexbox">
 
-                <nav class="navigation">
-                    <!--site logo-->
-                    <img class="program-logo "
-                        src="./img/competition-logo-new.png"
-                        alt="Program logo">
-                </nav>
+                    <nav class="navigation">
+                        <!--site logo-->
+                        <img class="program-logo "
+                            src="./img/competition-logo-new.png"
+                            alt="Program logo">
+                    </nav>
 
-                <div class="lang-panel">
-                    <ul class="list lang-panel-list">
-                        <li class="lang-panel-item">
-                            <div class="log-in-btn--placing">
-                                <a href="#popup_7" class="popup-link"> 
-                                    <button class="log-in-btn">
-                                        <span>Log in</span> 
-                                    </button>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ru"> 
-                                    <img src="./img/ru.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-en"> 
-                                    <img src="./img/en.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ua"> 
-                                    <img src="./img/ua.png"> 
-                                </a>
+                    <div class="lang-panel">
+                        <ul class="list lang-panel-list">
+                            <li class="lang-panel-item">
+                                <div class="log-in-btn--placing">
+                                    <a href="#popup_7" class="popup-link"> 
+                                        <button class="log-in-btn">
+                                            <span>Log in</span> 
+                                        </button>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="lang-panel-item">
+                                <div class="lang-panel-flag">
+                                    <a type="button" id="lang-ru"> 
+                                        <img src="./img/ru.png"> 
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="lang-panel-item">
+                                <div class="lang-panel-flag">
+                                    <a type="button" id="lang-en"> 
+                                        <img src="./img/en.png"> 
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="lang-panel-item">
+                                <div class="lang-panel-flag">
+                                    <a type="button" id="lang-ua"> 
+                                        <img src="./img/ua.png"> 
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </header>
+                
+            <div>
+                <h1 id="department-name"></h1>
+            </div>
+
+            <div class="tab">
+                <button class="tablinks" id="tab1">PH1_COMP_TAB</button>
+                <button class="tablinks" id="tab2">PH2_SPORTS_TAB</button>
+                <button class="tablinks" id="tab3">PH3_INFO_TAB</button>
+            </div>
+
+            <div id="tabcontent1" class="tabcontent" style= "display: none">
+                <section class="advantages container">
+                    <ul class="list advantages-list" id="competitions-list">
+                        <li class="advantages-item js-hidden-element js-root-view js-admin-view">
+                            <div class="advantages-icon-bg">
+                                <div class="add-new-competition-block">
+                                    <a href="#popup_4" class="popup-link">
+                                        <button class="add-new-competition-btn" type="button" data-open-modal>
+                                            <svg class="sl-footer-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                            <span class="add-new-competition-btn-text">PH4_ADD_COMP</span>
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
                         </li>
                     </ul>
-                </div>
-
-
-
-            </div>
-        </header>
-             
-        <div>
-            <h1 id="department-name"></h1>
-        </div>
-
-        <div class="tab">
-            <button class="tablinks" id="tab1">PH1_COMP_TAB</button>
-            <button class="tablinks" id="tab2">PH2_SPORTS_TAB</button>
-            <button class="tablinks" id="tab3">PH3_INFO_TAB</button>
-        </div>
-
-        <div id="tabcontent1" class="tabcontent" style= "display: none">
-            <section class="advantages container">
-                <ul class="list advantages-list" id="competitions-list">
-                    <li class="advantages-item js-hidden-element js-root-view js-admin-view">
-                        <div class="advantages-icon-bg">
-                            <div class="add-new-competition-block">
-                                <a href="#popup_4" class="popup-link">
-                                    <button class="add-new-competition-btn" type="button" data-open-modal>
-                                        <svg class="sl-footer-icon">
-                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                        </svg>
-                                        <span class="add-new-competition-btn-text">PH4_ADD_COMP</span>
-                                    </button>
-                                </a>
-                            </div>
+                </section>  
+                <template id="competition-template">
+                    <li class="advantages-item">
+                        <div class="projects-item">
+                            <a href="competition?clist=#departmentId&cid=#competitionId" class="title-of-competition-list-item">
+                                <div class="project-card">
+                                    <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
+                                        alt="" />
+                                        <div class="overlay">
+                                            <p class="advantages-content">#competition-desc</p>
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <h5>#competition-date</h5>
+                                        <h2 class="title-of-competition-list-item">#competition-name</h2>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </li>
-                </ul>
-            </section>  
-            <template id="competition-template">
-                <li class="advantages-item">
-                    <div class="projects-item">
-                        <a href="competition?clist=#departmentId&cid=#competitionId" class="title-of-competition-list-item">
-                            <div class="project-card">
-                                <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
-                                    alt="" />
-                                    <div class="overlay">
-                                        <p class="advantages-content">#competition-desc</p>
-                                    </div>
-                                </div>
-                                <div class="caption">
-                                    <h5>#competition-date</h5>
-                                    <h2 class="title-of-competition-list-item">#competition-name</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </li>
-            </template>
-        </div>
-
-        <div id="tabcontent2" class="tabcontent" style= "display: none">
-            <div class="main-tables-item">
-                <table class="dynamic-table" id="members-table">
-                    <tr>
-                        <th class="group-info-table-title all-table-title" colspan="8"><span>PH5_SPORTS</span>
-                            <!--Add member button start-->
-                            <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                <button class="group-page-ref-btn" type="button">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                        </svg>
-                                    
-                                </button>
-                            </a>
-                            <!--Add member button end-->
-                        </th>
-                    </tr>
-                    <tr>
-                        <td class="secondary-title-tables--text">PH6_SURNAME</td>
-                        <td class="secondary-title-tables--text">PH7_NAME</td>
-                        <td class="secondary-title-tables--text">PH8_BD</td>
-                        <td class="secondary-title-tables--text">PH9_WEIGHT</td>
-                        <td class="secondary-title-tables--text">PH10_SEX</td>
-                        <td class="secondary-title-tables--text">PH11_TEAM</td>
-                        <td class="secondary-title-tables--text">PH12_QUAL</td>
-                    </tr>
-                </table>
-                <template id="member-template">
-                    <tr onclick="window.location.href='#sportsman-link'; return false">
-                        <td class="secondary-tables--td">#sp-surname</td>
-                        <td class="secondary-tables--td">#sp-name</td>
-                        <td class="secondary-tables--td">#sp-age</td>
-                        <td class="secondary-tables--td">#sp-weight</td>
-                        <td class="secondary-tables--td">#sp-sex</td>
-                        <td class="secondary-tables--td">#sp-team</td>
-                        <td class="secondary-tables--td">#sp-qual</td>
-                    </tr>
                 </template>
-
             </div>
-        </div>
 
-        <div id="tabcontent3" class="tabcontent" style= "display: none">
-            <div>
-                <section class="competition-info">
-
-                            <div class="competition-info-main">
-                                <div id="member-info">
-                                    <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>PH13_DP_INFO</span></div>
-                                        <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="department-edit-btn">
+            <div id="tabcontent2" class="tabcontent" style= "display: none">
+                <div class="main-tables-item">
+                    <table class="dynamic-table" id="members-table">
+                        <tr>
+                            <th class="group-info-table-title all-table-title" colspan="8"><span>PH5_SPORTS</span>
+                                <!--Add member button start-->
+                                <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                    <button class="group-page-ref-btn" type="button">
                                             <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/icons.svg#icon-pencil2"></use>
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
                                             </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="group-info-fields">
-                                    <div class="" id="member-info">
-                                        <div class="competition-info-fields--item">PH14_DP_NAME:<span>&nbsp</span><div id="department-name-set">            </div></div>
-                                        <div class="competition-info-fields--item">PH15_DP_ID:<span>&nbsp</span><div id="department-id">      </div></div>
-                                    </div>
-                                </div>
-                            </div>
-                </section>
+                                        
+                                    </button>
+                                </a>
+                                <!--Add member button end-->
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="secondary-title-tables--text">PH6_SURNAME</td>
+                            <td class="secondary-title-tables--text">PH7_NAME</td>
+                            <td class="secondary-title-tables--text">PH8_BD</td>
+                            <td class="secondary-title-tables--text">PH9_WEIGHT</td>
+                            <td class="secondary-title-tables--text">PH10_SEX</td>
+                            <td class="secondary-title-tables--text">PH11_TEAM</td>
+                            <td class="secondary-title-tables--text">PH12_QUAL</td>
+                        </tr>
+                    </table>
+                    <template id="member-template">
+                        <tr onclick="window.location.href='#sportsman-link'; return false">
+                            <td class="secondary-tables--td">#sp-surname</td>
+                            <td class="secondary-tables--td">#sp-name</td>
+                            <td class="secondary-tables--td">#sp-age</td>
+                            <td class="secondary-tables--td">#sp-weight</td>
+                            <td class="secondary-tables--td">#sp-sex</td>
+                            <td class="secondary-tables--td">#sp-team</td>
+                            <td class="secondary-tables--td">#sp-qual</td>
+                        </tr>
+                    </template>
 
+                </div>
+            </div>
+
+            <div id="tabcontent3" class="tabcontent" style= "display: none">
                 <div>
-                    <ul class="list flexbox">
-                        <li class="competition-info-list-item">
-                            <div class="secondary-tables--item">
-                                <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
-                                    <tr>
-                                        <th colspan="3" class="group-info-table-title all-table-title"><span>PH16_QUALS</span>
-                                                <button class="group-page-ref-btn js-hidden-element js-root-view js-admin-view" type="button" id="qual-add-btn">
+                    <section class="competition-info">
+
+                                <div class="competition-info-main">
+                                    <div id="member-info">
+                                        <div class="group-info-title--siting">
+                                            <div class="group-info-title"><span>PH13_DP_INFO</span></div>
+                                            <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="department-edit-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/icons.svg#icon-pencil2"></use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="group-info-fields">
+                                        <div class="" id="member-info">
+                                            <div class="competition-info-fields--item">PH14_DP_NAME:<span>&nbsp</span><div id="department-name-set">            </div></div>
+                                            <div class="competition-info-fields--item">PH15_DP_ID:<span>&nbsp</span><div id="department-id">      </div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </section>
+
+                    <div>
+                        <ul class="list flexbox">
+                            <li class="competition-info-list-item">
+                                <div class="secondary-tables--item">
+                                    <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
+                                        <tr>
+                                            <th colspan="3" class="group-info-table-title all-table-title"><span>PH16_QUALS</span>
+                                                    <button class="group-page-ref-btn js-hidden-element js-root-view js-admin-view" type="button" id="qual-add-btn">
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                        </svg>
+                                                    </button>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                        <template id="qualification-template">
+                                            <tr>
+                                                <td class="secondary-tables--td">#qualification-value</td>
+                                                <td class="secondary-tables--td">#qualification-name</td>
+                                                <td class="secondary-tables--td column-for-button"> 
+                                                    <button class="member-page-dell-btn js-hidden-element" type="button" id="qual-dell-btn">
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </template>
+
+                                        <template id="qualification-adding-template">
+                                            <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="PH17_VALUE"> </td>
+                                            <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="PH18_NAME">  </td>
+                                            <td class="secondary-tables--td ">
+                                                <button class="member-page-dell-btn" type="button" id="qual-ok-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/icons.svg#icon-checkmark"></use>
+                                                </svg>
+                                                </button>
+                                            </td>
+                                        </template>
+
+                                </div>
+                            </li>
+                            <li class="competition-info-list-item">
+                                <div class="secondary-tables--item">
+                                    <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
+                                        <tr>
+                                            <th class="group-info-table-title all-table-title">PH19_DISCIPLINES</th>
+                                            <th class="group-info-table-title">
+                                                <button class="group-page-ref-btn js-hidden-element js-root-view js-admin-view" type="button" id="div-add-btn">
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                     </svg>
                                                 </button>
-                                        </th>
-                                    </tr>
-                                </table>
-                                    <template id="qualification-template">
+                                            </th>
+                                        </tr>
+                                    </table>
+
+                                    <template id="division-template">
                                         <tr>
-                                            <td class="secondary-tables--td">#qualification-value</td>
-                                            <td class="secondary-tables--td">#qualification-name</td>
-                                            <td class="secondary-tables--td column-for-button"> 
-                                                <button class="member-page-dell-btn js-hidden-element" type="button" id="qual-dell-btn">
+                                            <td class="secondary-tables--td">#division-name</td>
+                                            <td class="column-for-button secondary-tables--td">
+                                                <button class="member-page-dell-btn js-hidden-element" type="button" id="div-dell-btn">
                                                     <svg class="group-info-edit-btn-icon">
                                                         <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
                                                     </svg>
@@ -211,251 +253,209 @@
                                             </td>
                                         </tr>
                                     </template>
-
-                                    <template id="qualification-adding-template">
-                                        <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="PH17_VALUE"> </td>
-                                        <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="PH18_NAME">  </td>
-                                        <td class="secondary-tables--td ">
-                                            <button class="member-page-dell-btn" type="button" id="qual-ok-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/icons.svg#icon-checkmark"></use>
-                                            </svg>
+                            
+                                    <template id="division-adding-template">
+                                        <td class="secondary-tables--td"><input class="competition-page-division-input"  type="text" id="add-division" placeholder="PH20_DIS_NAME"> </td>
+                                        <td class="secondary-tables--td">
+                                            <button type="button" class="member-page-dell-btn" id="div-ok-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/icons.svg#icon-checkmark"></use>
+                                                </svg>
                                             </button>
                                         </td>
                                     </template>
 
-                            </div>
-                        </li>
-                        <li class="competition-info-list-item">
-                            <div class="secondary-tables--item">
-                                <table class="dynamic-table secondary-tables--divisions" id="divisions-table">
-                                    <tr>
-                                        <th class="group-info-table-title all-table-title">PH19_DISCIPLINES</th>
-                                        <th class="group-info-table-title">
-                                            <button class="group-page-ref-btn js-hidden-element js-root-view js-admin-view" type="button" id="div-add-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                            </button>
-                                        </th>
-                                    </tr>
-                                </table>
-
-                                <template id="division-template">
-                                    <tr>
-                                        <td class="secondary-tables--td">#division-name</td>
-                                        <td class="column-for-button secondary-tables--td">
-                                            <button class="member-page-dell-btn js-hidden-element" type="button" id="div-dell-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </template>
-                        
-                                <template id="division-adding-template">
-                                    <td class="secondary-tables--td"><input class="competition-page-division-input"  type="text" id="add-division" placeholder="PH20_DIS_NAME"> </td>
-                                    <td class="secondary-tables--td">
-                                        <button type="button" class="member-page-dell-btn" id="div-ok-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/icons.svg#icon-checkmark"></use>
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </template>
-
-                            </div>
-                        </li>
-                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </div>
+        <!--Create new member-popup-window-start-->
+        <div class="popup" id = "popup_1">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="new-member-pop-up">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form new-member-pop-up-mf">
+                                <span class="add-member-popup-title">PH21_CREATE_SPORTS</span>
 
-    </div>
-    <!--Create new member-popup-window-start-->
-    <div class="popup" id = "popup_1">
-        <a href="" class="popup__area"></a>
-        <div class="popup__body">
-            <div class="popup__content">
-                <div class="new-member-pop-up">
-                    <a href="" class="popup__close close-popup">X</a>
-                    <form class="modal-form new-member-pop-up-mf">
-                            <span class="add-member-popup-title">PH21_CREATE_SPORTS</span>
+                            <div class="new-member-field">
 
-                        <div class="new-member-field">
-
-                            <div class="input-container ic1">
-                                <input id="new-member-name" class="input" type="text" placeholder=" " />
+                                <div class="input-container ic1">
+                                    <input id="new-member-name" class="input" type="text" placeholder=" " />
+                                        <svg class="popup-form-fields-icon">
+                                            <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                        </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-member-name" class="placeholder">PH22_SP_NAME</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="new-member-surname" class="input" type="text" placeholder=" " />
                                     <svg class="popup-form-fields-icon">
                                         <use href="./img/register-and-popup-icons.svg#icon-user"></use>
                                     </svg>
-                                <div class="cut"></div>
-                                <label for="new-member-name" class="placeholder">PH22_SP_NAME</label>
-                            </div>
-                            <div class="input-container ic2">
-                                <input id="new-member-surname" class="input" type="text" placeholder=" " />
-                                <svg class="popup-form-fields-icon">
-                                    <use href="./img/register-and-popup-icons.svg#icon-user"></use>
-                                </svg>
-                                <div class="cut"></div>
-                                <label for="new-member-surname" class="placeholder">PH23_SP_SURNAME</label>
-                            </div>
-                            <div class="input-container ic2">
-                                <input id="new-member-age" class="input" type="date" placeholder=" " />
-                                <svg class="popup-form-fields-icon">
-                                    <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
-                                </svg>
-                                <div class="cut"></div>
-                                <label for="new-member-age" class="placeholder"></label>
-                            </div>
-                            <div class="input-container ic2">
-                                <input id="new-member-weight" class="input" type="number" placeholder=" " />
-                                <svg class="popup-form-fields-icon">
-                                    <use href="./img/register-and-popup-icons.svg#icon-meter"></use>
-                                </svg>
-                                <div class="cut"></div>
-                                <label for="new-member-weight" class="placeholder">PH24_SP_WEIGHT</label>
-                            </div>
-                            <div class="new-member-pop-up-check">
-                                <ul class="list new-member-gender-list">
-                                    <label for="new-member-sex" class="form-field-label">
-                                        <li class="new-member-pop-up-check-gender">PH25_SP_SEX</li>
-                                        <li class="new-member-pop-up-check-gender">
-                                            <div class="form_radio_btn">
-                                                <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                                <label for="new-member-sex-male">PH26_SEX_MALE</label>
-                                            </div>
-                                        </li>
-
-                                        <li class="new-member-pop-up-check-gender">
-                                            <div class="form_radio_btn">
-                                                <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                                <label for="new-member-sex-female">PH27_SEX_FEMALE</label>
-                                            </div>
-                                        </li>
-                                    </label>
-                                </ul>
-                            </div>
-                            <div class="">
-                                <label for="new-member-team"><span class="form-field-title">PH28_SP_TRAINER</span></label>
-                                <select class="new-member-pop-up-check-team" name="new-member-team" id="new-member-team">
-                                    <template id="new-member-team-temp">
-                                        <option value="#sports-team-value">#sports-team-name</option>
-                                    </template>
-                                </select>
-                            </div>
-
-                            <div class="">
-                                <label for="create-member-qualification"><span class="form-field-title">PH12_QUAL</span></label>
-                                <select class="new-member-pop-up-check-qual" name="create-member-qualification" id="new-member-qualifications">
-                                    <template id="new-member-qual-temp">
-                                        <option value="#sports-qual-value">#sports-qual-name</option>
-                                    </template>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-field--option new-member-pop-up-check">
-                            <span class="form-field-title">PH29_SP_ADD_ONE_MORE</span>
-                                <div class="form_radio_btn">
-                                    <input class="input-to-choose-type--sportsmen" type="checkbox" id="nm-more-than-one-yes" name="nm-more-than-one" value="yes" >
-                                    <label class="label-to-choose-type--sportsmen" id="" for="nm-more-than-one-yes">Yes</label>
+                                    <div class="cut"></div>
+                                    <label for="new-member-surname" class="placeholder">PH23_SP_SURNAME</label>
                                 </div>
-                        </div>
-
-                        
-                        <button type="button" id="member-form-send-btn" class="add-member-popup--send">
-                            <span class="modal-btn-submit-text">Send</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Create new member-popup-window-end-->
-
-    <!--Add-competition-popup-window-start-->
-    <div class="popup" id = "popup_4">
-        <a href="" class="popup__area"></a>
-        <div class="popup__body">
-            <div class="popup__content">
-                <div class="create-new-competition-popup__content">
-                    <a href="" class="popup__close close-popup">X</a>
-                    <form class="modal-form">
-                        <div class="form-add-comp">
-                            <label for="competition-name" class="form-field-label">
-                                <span class="form-field-title">PH32_COMP_NAME</span>
-                                <div class="form-field-add-comp">
-                                    <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
+                                <div class="input-container ic2">
+                                    <input id="new-member-age" class="input" type="date" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-member-age" class="placeholder"></label>
                                 </div>
-                            </label>
-
-                            <label>
-                                <span class="form-field-title">PH33_COMP_DESC</span>
-                                <div class="form-field-add-comp-message">
-                                    <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
-                                        rows="3"></textarea>
+                                <div class="input-container ic2">
+                                    <input id="new-member-weight" class="input" type="number" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-meter"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-member-weight" class="placeholder">PH24_SP_WEIGHT</label>
                                 </div>
-                            </label>
-                            <label>
-                                <span class="form-field-title">PH33_COMP_START</span>
-                                <div class="form-field-add-comp-message">
-                                    <input type="datetime-local" id="competition-start-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
-                                </div>
-                            </label>
-                            <label>
-                                <span class="form-field-title">PH34_COMP_END</span>
-                                <div class="form-field-add-comp-message">
-                                    <input type="datetime-local" id="competition-end-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
-                                </div>
-                            </label>
-                        </div>
-                        <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
-                            <span class="modal-btn-submit-text">PH35_COMP_CREATE</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--second-popup-window-end-->
+                                <div class="new-member-pop-up-check">
+                                    <ul class="list new-member-gender-list">
+                                        <label for="new-member-sex" class="form-field-label">
+                                            <li class="new-member-pop-up-check-gender">PH25_SP_SEX</li>
+                                            <li class="new-member-pop-up-check-gender">
+                                                <div class="form_radio_btn">
+                                                    <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
+                                                    <label for="new-member-sex-male">PH26_SEX_MALE</label>
+                                                </div>
+                                            </li>
 
-    <!--LogIn popup start-->
-    <div class="popup" id = "popup_7">
-        <a href="" class="popup__area"></a>
-        <div class="popup__body">
-            <div class="popup__content">
-                <div class="login_popup__content">
-                    <a href="" class="popup__close close-popup">X</a>
-                    <form class="modal-form">
-                        <div class="">
-                            <div class="login-page-title">
-                                <span class="login-page-popup-title">LOGIN</span>
+                                            <li class="new-member-pop-up-check-gender">
+                                                <div class="form_radio_btn">
+                                                    <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
+                                                    <label for="new-member-sex-female">PH27_SEX_FEMALE</label>
+                                                </div>
+                                            </li>
+                                        </label>
+                                    </ul>
+                                </div>
+                                <div class="">
+                                    <label for="new-member-team"><span class="form-field-title">PH28_SP_TRAINER</span></label>
+                                    <select class="new-member-pop-up-check-team" name="new-member-team" id="new-member-team">
+                                        <template id="new-member-team-temp">
+                                            <option value="#sports-team-value">#sports-team-name</option>
+                                        </template>
+                                    </select>
+                                </div>
 
-                            <div class="input-container ic1">
-                                <input id="login" class="input input_login" type="text" placeholder=" " />
-                                <div class="cut"></div>
-                                <label for="login" class="placeholder">ENTER LOGIN</label>
-                            </div>
-                            <div class="input-container ic2">
-                                <input id="password" class="input input_login" type="password" placeholder=" " />
-                                <div class="cut"></div>
-                                <label for="password" class="placeholder">ENTER PASSWORD</label>
+                                <div class="">
+                                    <label for="create-member-qualification"><span class="form-field-title">PH12_QUAL</span></label>
+                                    <select class="new-member-pop-up-check-qual" name="create-member-qualification" id="new-member-qualifications">
+                                        <template id="new-member-qual-temp">
+                                            <option value="#sports-qual-value">#sports-qual-name</option>
+                                        </template>
+                                    </select>
+                                </div>
                             </div>
 
-                            <button type="button" id="login-btn" class="login-page-btn-submit">
-                                <span class="modal-btn-submit-text">LOG IN</span>
+                            <div class="form-field--option new-member-pop-up-check">
+                                <span class="form-field-title">PH29_SP_ADD_ONE_MORE</span>
+                                    <div class="form_radio_btn">
+                                        <input class="input-to-choose-type--sportsmen" type="checkbox" id="nm-more-than-one" name="nm-more-than-one">
+                                        <label class="label-to-choose-type--sportsmen" id="" for="nm-more-than-one">Yes</label>
+                                    </div>
+                            </div>
+
+                            
+                            <button type="button" id="member-form-send-btn" class="add-member-popup--send">
+                                <span class="modal-btn-submit-text">Send</span>
                             </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--LogIn popup end-->
-<script src="./scripts/department-page.js" type="module"></script>
-<script src="./scripts/open-close-popup.js" type="module"></script> 
-     
-</body>
+        <!--Create new member-popup-window-end-->
+
+        <!--Add-competition-popup-window-start-->
+        <div class="popup" id = "popup_4">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="create-new-competition-popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="form-add-comp">
+                                <label for="competition-name" class="form-field-label">
+                                    <span class="form-field-title">PH32_COMP_NAME</span>
+                                    <div class="form-field-add-comp">
+                                        <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
+                                    </div>
+                                </label>
+
+                                <label>
+                                    <span class="form-field-title">PH33_COMP_DESC</span>
+                                    <div class="form-field-add-comp-message">
+                                        <textarea name="description" id="competition-desc-input" class="form-field-add-comp-comment" placeholder="Enter short description for competition"
+                                            rows="3"></textarea>
+                                    </div>
+                                </label>
+                                <label>
+                                    <span class="form-field-title">PH33_COMP_START</span>
+                                    <div class="form-field-add-comp-message">
+                                        <input type="datetime-local" id="competition-start-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
+                                    </div>
+                                </label>
+                                <label>
+                                    <span class="form-field-title">PH34_COMP_END</span>
+                                    <div class="form-field-add-comp-message">
+                                        <input type="datetime-local" id="competition-end-date-input" class="create-ng--interval-min sportsman-info-item--input" required/>
+                                    </div>
+                                </label>
+                            </div>
+                            <button type="button" id="send-competition-form-btn" class="modal-btn-submit">
+                                <span class="modal-btn-submit-text">PH35_COMP_CREATE</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--second-popup-window-end-->
+
+        <!--LogIn popup start-->
+        <div class="popup" id = "popup_7">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="login_popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="">
+                                <div class="login-page-title">
+                                    <span class="login-page-popup-title">LOGIN</span>
+
+                                <div class="input-container ic1">
+                                    <input id="login" class="input input_login" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="login" class="placeholder">ENTER LOGIN</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="password" class="input input_login" type="password" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="password" class="placeholder">ENTER PASSWORD</label>
+                                </div>
+
+                                <button type="button" id="login-btn" class="login-page-btn-submit">
+                                    <span class="modal-btn-submit-text">LOG IN</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LogIn popup end-->
+        <script src="./scripts/department-page.js" type="module"></script>
+        <script src="./scripts/open-close-popup.js" type="module"></script> 
+            
+    </body>
 </html> 

@@ -69,6 +69,7 @@ export const markup = {
         getSexInput()                   { return document.getElementById("new-member-sex-male").checked ? "male" : "female";},
         getTeamInput()                  { return document.getElementById("new-member-team").value;},
         getQualificationInput()         { return document.getElementById("new-member-qualifications").value;},
+        getOneMoreInput()               { return document.getElementById("nm-more-than-one").value;},
         
         getQualList()                   { return document.getElementById("new-member-qualifications");},
         getQualTemplate()               { return document.getElementById("new-member-qual-temp");},

@@ -1,5 +1,11 @@
 
-import {getIfDefined, getLinkParams, showShadows, languageSwitchingOn, onClick, createPageItem} from "./common.js"
+import {getIfDefined, 
+    getLinkParams, 
+    showShadows, 
+    languageSwitchingOn, 
+    onClick, 
+    createPageItem, 
+    prepareTabs} from "./common.js"
 import {ops, server} from "./communication.js"
 
 const pageParams        = getLinkParams(location.search);
@@ -7,6 +13,7 @@ const page = {
     sid: pageParams.get("sid")
 }
 
+const client            = server.access.getClient();
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -18,7 +25,7 @@ console.log(sportsmanStats);
 /* ------------------- STATISTICS ----------------------------*/
 
 const statisticsObjects = {
-    competitionsListId:         "Statistics",
+    competitionsListId:         "tabcontent2",
     competitionStatTemplate:    "competition-item-template-id",
     getAdmitionId(cs)           { return "comp-admition-" + cs.getCompetitionId(); },
     setAdmition(cs)             { document.getElementById(this.getAdmitionId(cs)).checked = cs.isAdmitted(); },
@@ -260,8 +267,8 @@ function setBtnActions(){
     onClick(sportsmanObjects.getDelBtn(), function(){server.sportsman.remove(page.sid)});
 }
 
+prepareTabs();
 fillPageInfo();
 setBtnActions();
-
 showShadows(client);
 languageSwitchingOn();

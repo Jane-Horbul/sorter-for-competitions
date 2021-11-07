@@ -71,13 +71,13 @@
                 </div>
 
                 <div class="tab">
-                    <button class="tablinks" onclick="openPage(event, 'GroupInfo')" id="defaultOpen">Group info</button>
-                    <button class="tablinks" onclick="openPage(event, 'Members')">Members</button>
-                    <button class="tablinks" onclick="openPage(event, 'Pairs')">Pairs</button>
-                    <button class="tablinks" onclick="openPage(event, 'Grid')">Grid</button>
+                    <button class="tablinks" id="tab1">Group info</button>
+                    <button class="tablinks" id="tab2">Members</button>
+                    <button class="tablinks" id="tab3">Pairs</button>
+                    <button class="tablinks" id="tab4">Grid</button>
                 </div>
                 
-                    <div id="GroupInfo" class="tabcontent">
+                    <div id="tabcontent1" class="tabcontent">
                         <div class="group-info-main">
                             <div id="member-info">
                                 <div class="group-info-title--siting">
@@ -212,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="Members" class="tabcontent">
+                    <div id="tabcontent2" class="tabcontent">
                         <div class="group-info-tables">
                         <div class="main-tables">
                             <div class="main-tables-group-item">
@@ -265,7 +265,7 @@
                         </div>
                         </div>
                     </div>
-                    <div id="Pairs" class="tabcontent">
+                    <div id="tabcontent3" class="tabcontent">
                         <div class="group-info-tables">
                             <div class="main-tables">
                                 <div class="main-tables-group-item">
@@ -305,7 +305,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="Grid" class="tabcontent">
+                    <div id="tabcontent4" class="tabcontent">
                         <div id="pairs-grid"></div>
 
                         <template id="pair-tab-temp">
@@ -465,28 +465,8 @@
                 </div>
             </div>
             <!--add-group-popup-window-end-->
-
             <script src="./scripts/group-page.js" type="module"></script>   
             <script src="./scripts/open-close-popup.js" type="module"></script>
-
-            <script>
-                function openPage(evt, pageName) {
-                    var i, tabcontent, tablinks;
-                    tabcontent = document.getElementsByClassName("tabcontent");
-                    for (i = 0; i < tabcontent.length; i++) {
-                        tabcontent[i].style.display = "none";
-                    }
-                    tablinks = document.getElementsByClassName("tablinks");
-                    for (i = 0; i < tablinks.length; i++) {
-                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                    }
-                    document.getElementById(pageName).style.display = "block";
-                    evt.currentTarget.className += " active";
-                }
-                
-                document.getElementById("defaultOpen").click();
-            </script>
-
         </div>
     </body>
 </html>
