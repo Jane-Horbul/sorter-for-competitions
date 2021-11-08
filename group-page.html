@@ -10,7 +10,6 @@
     </head>
     <body>
         <div class="wrapper">
-        
             <header class="page-header">
                 <div class="container">
                     <ul class="group-page-header list">
@@ -71,254 +70,252 @@
                 </div>
 
                 <div class="tab">
-                    <button class="tablinks" id="tab1">Group info</button>
-                    <button class="tablinks" id="tab2">Members</button>
-                    <button class="tablinks" id="tab3">Pairs</button>
-                    <button class="tablinks" id="tab4">Grid</button>
+                    <button class="tablinks" id="tab1">PH1_INFO_TAB</button>
+                    <button class="tablinks" id="tab2">PH2_SPORTS_TAB</button>
+                    <button class="tablinks" id="tab3">PH3_PAIRS_TAB</button>
+                    <button class="tablinks" id="tab4">PH4_GRID_TAB</button>
                 </div>
                 
-                    <div id="tabcontent1" class="tabcontent">
-                        <div class="group-info-main">
-                            <div id="member-info">
-                                <div class="group-info-title--siting">
-                                    <div class="group-info-title"><span>Group info</span></div>
-                                        <button class="group-info-edit-btn" type="button" id="group-edit-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/icons.svg#icon-pencil2"></use>
-                                            </svg>
-                                        </button>
-                                </div>
-                                <div class="group-info-fields">
-                                    <table class="dynamic-table">
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Name:</div> </td>
-                                            <td> <div id="group-info-name"></div>  </td>
-                                        </tr>   
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Form system:</div> </td>
-                                            <td> <div id="group-info-system"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Discipline:</div> </td>
-                                            <td> <div id="group-info-discipline"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Gender:</div> </td>
-                                            <td> <div id="group-info-sex"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Low age:</div> </td>
-                                            <td> <div id="group-info-age-min"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Top age:</div> </td>
-                                            <td> <div id="group-info-age-max"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Low weight:</div> </td>
-                                            <td> <div id="group-info-weight-min"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Top weight:</div> </td>
-                                            <td> <div id="group-info-weight-max"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Low qualification:</div> </td>
-                                            <td> <div id="group-info-qulification-min"></div>  </td>
-                                        </tr>
-                                        <tr class="group-info-table-pop-up">
-                                            <td class="group-info-table-pop-up-td"> <div class=""> Top qualification:</div> </td>
-                                            <td> <div id="group-info-qulification-max"></div>  </td>
-                                        </tr>
-                                    </table>
-                                    </br>
-                                    <table class="dynamic-table" id="formulas-table">
-                                        <tr>
-                                            <th colspan="8" class="group-info-table-title all-table-title">
-                                                <span>Formulas</span>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>Preparation</th>
-                                            <th>Round number</th>
-                                            <th>Round</th>
-                                            <th>Rest</th>
-                                            <th>After hold</th>
-                                            <th>Final part min</th>
-                                            <th>Final part max</th>
-                                            <th>   </th>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-tables--td">
-                                                <input class="" type="text" id="add-formula-preparation" placeholder="Enter preparation time in sec">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="" type="text" id="add-formula-rounds-num" placeholder="Enter rounds number">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="" type="text" id="add-formula-rounds-dur" placeholder="Enter rounds duration in sec">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="" type="text" id="add-formula-rest-dur" placeholder="Enter rest duration in sec">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="" type="text" id="add-formula-after-hold" placeholder="Enter afterhold in sec">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                1/<input class="" type="text" id="add-formula-final-min" placeholder="Enter final part min">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                1/<input class="" type="text" id="add-formula-final-max" placeholder="Enter final part max">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <button class="" type="button" id="formula-add-btn">
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                            
-                                        </tr>
-                                        <template id="formula-row-template">
-                                            <td class="secondary-tables--td">#preparation</td>
-                                            <td class="secondary-tables--td">#rounds-num</td>
-                                            <td class="secondary-tables--td">#round-dur</td>
-                                            <td class="secondary-tables--td">#rest-dur</td>
-                                            <td class="secondary-tables--td">#after-hold</td>
-                                            <td class="secondary-tables--td">#final-min</td>
-                                            <td class="secondary-tables--td">#final-max </td>
-                                            <td class="secondary-tables--td">
-                                                <button class="member-page-dell-btn" type="button" id="#dell-btn_id">
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                        </template>
-                                    </table>
-                                    <ul class="list header-list">
-                                        <li class="header-item"> 
-                                            <div class="member-page-btn-del js-hidden-element">                
-                                                <a id="del-btn-link">
-                                                    <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
-                                                    <span class="group-card-btn-del-text">Delete group</span>
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
+                <div id="tabcontent1" class="tabcontent">
+                    <div class="group-info-main">
+                        <div id="member-info">
+                            <div class="group-info-title--siting">
+                                <div class="group-info-title"><span>PH5_INFO_HEAD</span></div>
+                                    <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="group-edit-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/icons.svg#icon-pencil2"></use>
+                                        </svg>
+                                    </button>
                             </div>
-                        </div>
-                    </div>
-                    <div id="tabcontent2" class="tabcontent">
-                        <div class="group-info-tables">
-                        <div class="main-tables">
-                            <div class="main-tables-group-item">
-                                <table class="dynamic-table" id="members-table">
+                            <div class="group-info-fields">
+                                <table class="dynamic-table">
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH6_INFO_NAME:</div> </td>
+                                        <td> <div id="group-info-name"></div>  </td>
+                                    </tr>   
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH7_INFO_SYSTEM:</div> </td>
+                                        <td> <div id="group-info-system"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH8_INFO_DISCIPLINE:</div> </td>
+                                        <td> <div id="group-info-discipline"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH9_INFO_SEX:</div> </td>
+                                        <td> <div id="group-info-sex"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH10_INFO_LOW_AGE:</div> </td>
+                                        <td> <div id="group-info-age-min"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH11_INFO_TOP_AGE:</div> </td>
+                                        <td> <div id="group-info-age-max"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH12_INFO_LOW_WEIGHT:</div> </td>
+                                        <td> <div id="group-info-weight-min"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH13_INFO_TOP_WEIGHT:</div> </td>
+                                        <td> <div id="group-info-weight-max"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH14_INFO_LOW_QUAL:</div> </td>
+                                        <td> <div id="group-info-qulification-min"></div>  </td>
+                                    </tr>
+                                    <tr class="group-info-table-pop-up">
+                                        <td class="group-info-table-pop-up-td"> <div class=""> PH15_INFO_TOP_QUAL:</div> </td>
+                                        <td> <div id="group-info-qulification-max"></div>  </td>
+                                    </tr>
+                                </table>
+                                </br>
+                                <table class="dynamic-table" id="formulas-table">
                                     <tr>
-                                        <th colspan="9" class="all-table-title group-info-table-title"> Members 
-                                            <a href="#popup_1" class="popup-link js-hidden-element" id="member-add-btn" >
-                                                <button class="group-page-ref-btn" type="button" id="members-add-btn" data-open-modal>
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                    </svg>
-                                                </button>
-                                            </a>
+                                        <th colspan="8" class="group-info-table-title all-table-title">
+                                            <span>PH16_FORMULAS</span>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="secondary-title-two-tables">Surname</td>
-                                        <td class="secondary-title-two-tables">Name</td>
-                                        <td class="secondary-title-two-tables">Age</td>
-                                        <td class="secondary-title-two-tables">Weight</td>
-                                        <td class="secondary-title-two-tables">Sex</td>
-                                        <td class="secondary-title-two-tables">Team</td>
-                                        <td class="secondary-title-two-tables">Qualification</td>
-                                        <td class="secondary-title-two-tables">Adm</td>
-                                        <td class="column-for-button secondary-title-two-tables"></td>
+                                        <th>PH17_PREPARATION</th>
+                                        <th>PH18_ROUNDS_NUM</th>
+                                        <th>PH19_ROUND</th>
+                                        <th>PH20_REST</th>
+                                        <th>PH21_HOLD</th>
+                                        <th>PH22_FINAL_MIN</th>
+                                        <th>PH23_FINAL_MAX</th>
+                                        <th>   </th>
                                     </tr>
-
-                                    <template id="group-member-template">
-                                        <tr id="#sports-row-id">
-                                            <td class="secondary-tables--td" onclick="window.location.href='#sportsman-link'; return false">#sp-surname</td>
-                                            <td class="secondary-tables--td">#sp-name</td>
-                                            <td class="secondary-tables--td">#sp-age</td>
-                                            <td class="secondary-tables--td">#sp-weight</td>
-                                            <td class="secondary-tables--td">#sp-sex</td>
-                                            <td class="secondary-tables--td">#sp-team</td>
-                                            <td class="secondary-tables--td">#sp-qual</td>
-                                            <td class="secondary-tables--td">#sp-admit</td>
-                                            <td class="column-for-button secondary-title-two-tables"> 
-                                                <button class="member-page-dell-btn" id="remove-gr-sports-#sp-id"  type="button">
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                    </svg>
+                                    <tr class="js-hidden-element js-root-view js-admin-view">
+                                        <td class="secondary-tables--td">
+                                            <input class="" type="text" id="add-formula-preparation">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            <input class="" type="text" id="add-formula-rounds-num">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            <input class="" type="text" id="add-formula-rounds-dur">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            <input class="" type="text" id="add-formula-rest-dur">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            <input class="" type="text" id="add-formula-after-hold">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            1/<input class="" type="text" id="add-formula-final-min">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            1/<input class="" type="text" id="add-formula-final-max">
+                                        </td>
+                                        <td class="secondary-tables--td">
+                                            <button class="" type="button" id="formula-add-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <template id="formula-row-template">
+                                        <td class="secondary-tables--td">#preparation</td>
+                                        <td class="secondary-tables--td">#rounds-num</td>
+                                        <td class="secondary-tables--td">#round-dur</td>
+                                        <td class="secondary-tables--td">#rest-dur</td>
+                                        <td class="secondary-tables--td">#after-hold</td>
+                                        <td class="secondary-tables--td">#final-min</td>
+                                        <td class="secondary-tables--td">#final-max </td>
+                                        <td class="secondary-tables--td">
+                                            <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </template>
+                                </table>
+                                <ul class="list header-list">
+                                    <li class="header-item"> 
+                                        <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
+                                            <a id="del-btn-link">
+                                                <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
+                                                <span class="group-card-btn-del-text">PH24_DELETE_BTN</span>
                                                 </button>
-                                            </td>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="tabcontent2" class="tabcontent">
+                    <div class="group-info-tables">
+                    <div class="main-tables">
+                        <div class="main-tables-group-item">
+                            <table class="dynamic-table" id="members-table">
+                                <tr>
+                                    <th colspan="9" class="all-table-title group-info-table-title"> PH25_SPORTS_TBL 
+                                        <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view" id="member-add-btn" >
+                                            <button class="group-page-ref-btn" type="button" id="members-add-btn" data-open-modal>
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                </svg>
+                                            </button>
+                                        </a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="secondary-title-two-tables">PH26_SPORT_SURNAME</td>
+                                    <td class="secondary-title-two-tables">PH27_SPORT_NAME</td>
+                                    <td class="secondary-title-two-tables">PH28_SPORT_AGE</td>
+                                    <td class="secondary-title-two-tables">PH29_SPORT_WEIGHT</td>
+                                    <td class="secondary-title-two-tables">PH30_SPORT_SEX</td>
+                                    <td class="secondary-title-two-tables">PH31_SPORT_TEAM</td>
+                                    <td class="secondary-title-two-tables">PH32_SPORT_QUAL</td>
+                                    <td class="secondary-title-two-tables">PH33_SPORT_ADMIT</td>
+                                    <td class="column-for-button secondary-title-two-tables"></td>
+                                </tr>
+
+                                <template id="group-member-template">
+                                    <tr id="#sports-row-id">
+                                        <td class="secondary-tables--td" onclick="window.location.href='#sportsman-link'; return false">#sp-surname</td>
+                                        <td class="secondary-tables--td">#sp-name</td>
+                                        <td class="secondary-tables--td">#sp-age</td>
+                                        <td class="secondary-tables--td">#sp-weight</td>
+                                        <td class="secondary-tables--td">#sp-sex</td>
+                                        <td class="secondary-tables--td">#sp-team</td>
+                                        <td class="secondary-tables--td">#sp-qual</td>
+                                        <td class="secondary-tables--td">#sp-admit</td>
+                                        <td class="column-for-button secondary-title-two-tables"> 
+                                            <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" id="remove-gr-sports-#sp-id"  type="button">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div id="tabcontent3" class="tabcontent">
+                    <div class="group-info-tables">
+                        <div class="main-tables">
+                            <div class="main-tables-group-item">
+                                <table class="dynamic-table" id="pairs-table">
+                                    <tr>
+                                        <th class="all-table-title group-info-table-title" colspan="7"> PH34_PAIRS_TBL 
+                                            <button class="group-page-ref-btn  js-hidden-element js-root-view js-admin-view" type="button"  id="update-pairs-btn" data-open-modal>
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/icons.svg#icon-loop2"></use>
+                                                </svg>
+                                            </button>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="secondary-title-two-tables">PH35_PAIRS_NUM</td>
+                                        <td class="secondary-title-two-tables">PH36_PAIRS_LIST</td>
+                                        <td class="secondary-title-two-tables">PH37_PAIR_TIME</td>
+                                        <td class="secondary-title-two-tables">PH38_PAIR_FINAL</td>
+                                        <td class="secondary-title-two-tables">PH39_PAIR_RED</td>
+                                        <td class="secondary-title-two-tables">PH40_PAIR_BLUE</td>
+                                        <td class="secondary-title-two-tables">PH41_PAIR_WIN</td>
+                                    </tr>
+                                    <template id="pair-template">
+                                        <tr>
+                                            <td class="first-title-tables--text">#pair-num</td>
+                                            <td class="first-title-tables--text">#pairs-list</td>
+                                            <td class="first-title-tables--text">#time</td>
+                                            <td class="first-title-tables--text">#final-part</td>
+                                            <td class="first-title-tables--text group-page-pair-red red-cell-style">#red-sportsman</td>
+                                            <td class="first-title-tables--text group-page-pair-blue blue-cell-style">#blue-sportsman</td>
+                                            <td class="first-title-tables--text #winner-style">#pair-winner</td>
                                         </tr>
                                     </template>
-
                                 </table>
-                            </div>
-                        </div>
+                            </div> 
                         </div>
                     </div>
-                    <div id="tabcontent3" class="tabcontent">
-                        <div class="group-info-tables">
-                            <div class="main-tables">
-                                <div class="main-tables-group-item">
-                                    <table class="dynamic-table" id="pairs-table">
-                                        <tr>
-                                            <th class="all-table-title group-info-table-title" colspan="7"> Pairs 
-                                                <button class="group-page-ref-btn  js-hidden-element" type="button"  id="update-pairs-btn" data-open-modal>
-                                                    <svg class="group-info-edit-btn-icon">
-                                                        <use href="./img/icons.svg#icon-loop2"></use>
-                                                    </svg>
-                                                </button>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables">Pair number</td>
-                                            <td class="secondary-title-two-tables">Pairs list</td>
-                                            <td class="secondary-title-two-tables">Time</td>
-                                            <td class="secondary-title-two-tables">Final part</td>
-                                            <td class="secondary-title-two-tables">Red member</td>
-                                            <td class="secondary-title-two-tables">Blue member</td>
-                                            <td class="secondary-title-two-tables">Winner</td>
-                                        </tr>
-                                        <template id="pair-template">
-                                            <tr>
-                                                <td class="first-title-tables--text">#pair-num</td>
-                                                <td class="first-title-tables--text">#pairs-list</td>
-                                                <td class="first-title-tables--text">#time</td>
-                                                <td class="first-title-tables--text">#final-part</td>
-                                                <td class="first-title-tables--text group-page-pair-red red-cell-style">#red-sportsman</td>
-                                                <td class="first-title-tables--text group-page-pair-blue blue-cell-style">#blue-sportsman</td>
-                                                <td class="first-title-tables--text #winner-style">#pair-winner</td>
-                                            </tr>
-                                        </template>
+                </div>
+                <div id="tabcontent4" class="tabcontent">
+                    <div id="pairs-grid"></div>
 
-                                    </table>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tabcontent4" class="tabcontent">
-                        <div id="pairs-grid"></div>
-
-                        <template id="pair-tab-temp">
-                            <table id="pair-table" border="1">
-                                <tr>
-                                    <td id="member-red-name">Member 1</td>
-                                </tr>
-                                <tr>
-                                    <td id="member-blue-name">Member 2</td>
-                                </tr>
-                            </table>
-                        </template>
-                    </div>
+                    <template id="pair-tab-temp">
+                        <table id="pair-table" border="1">
+                            <tr>
+                                <td id="member-red-name"></td>
+                            </tr>
+                            <tr>
+                                <td id="member-blue-name"></td>
+                            </tr>
+                        </table>
+                    </template>
+                </div>
 
         </main>
         
@@ -350,8 +347,8 @@
             <template id="group-input-system-template">
                 <div class="form-field--option">
                     <select class="add-group-pop-up--form-system" name="form-system-of-group" id="group-input-system">
-                        <option value="olimpic">Olimpic</option>
-                        <option value="circle">Circle</option>
+                        <option value="olimpic">CPH05_OLIMPIC_SYSTEM</option>
+                        <option value="circle">CPH06_CIRCLE_SYSTEM</option>
                     </select>
                 </div>
             </template>
@@ -359,9 +356,9 @@
             <template id="group-input-sex-template">
                 <div class="form-field--option">
                     <select name="form-system-of-group" id="group-input-sex" class="add-group-pop-up--sex">
-                        <option selected value="Not applicable">Not applicable</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
+                        <option selected value="Not applicable">CPH09_NA</option>
+                        <option value="Male">CPH07_MALE_SEX</option>
+                        <option value="Female">CPH08_FEMALE_SEX</option>
                     </select>
                 </div>
             </template>
@@ -389,7 +386,7 @@
             <template id="group-input-qulification-min-template">
                 <div class="create-ng--interval">
                     <select class="add-group-pop-up--qual" id="group-input-qulification-min">
-                        <option value="Not applicable">Not applicable</option>
+                        <option value="Not applicable">CPH09_NA</option>
                     </select>
                     &nbsp;<span>-</span>&nbsp;
                 </div>
@@ -397,7 +394,7 @@
             <template id="group-input-qulification-max-template">
                 <div class="create-ng--interval">
                     <select class="add-group-pop-up--qual" id="group-input-qulification-max">
-                        <option value="Not applicable">Not applicable</option>
+                        <option value="Not applicable">CPH09_NA</option>
                     </select>
                 </div>
             </template>
@@ -417,17 +414,17 @@
                                     <table class="add-sportsman-table" id="add-sportsman-table">
                                         <tr>
                                             <th class="group-info-table-title all-table-title" colspan="7">
-                                                <span>Sportsmans</span>
+                                                <span>PH25_SPORTS_TBL</span>
                                             </th>
                                         </tr>
                                         <tr>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Surname</td>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Name</td>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Age</td>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Weight</td>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Sex</td>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Team</td>
-                                            <td class="add-sportsman-table--title secondary-title-tables--text">Qualification</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH26_SPORT_SURNAME</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH27_SPORT_NAME</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH28_SPORT_AGE</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH29_SPORT_WEIGHT</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH30_SPORT_SEX</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH31_SPORT_TEAM</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH32_SPORT_QUAL</td>
                                         </tr>
         
                                         <template id="add-sportsman-template">
@@ -451,12 +448,12 @@
                                             </td>
                                             <td class="secondary-tables--td" colspan="1">
                                                 <input class="input-to-choose-type" type="checkbox" id="admitted" name="admitted">
-                                                <label class="label-to-choose-type" for="admitted">Admitted</label>
+                                                <label class="label-to-choose-type" for="admitted">PH33_SPORT_ADMIT</label>
                                             </td>
                                         </template>
                                     </table>
                                     <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
-                                        <span class="modal-btn-submit-text">Add</span>
+                                        <span class="modal-btn-submit-text">PH42_ADD_SPORTS</span>
                                     </button>
                                 </div>
                             </form>
