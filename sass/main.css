@@ -2764,6 +2764,10 @@ body.lock {
   background-color: #06b;
 }
 
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;
