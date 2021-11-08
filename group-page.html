@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Group page</title>
         <link rel="stylesheet" href="./old-css/normalize.css">
-        <link rel="stylesheet" href="./css/main.css" />
+        <!--<link rel="stylesheet" href="./css/main.css" />-->
+        <link rel="stylesheet" href="./sass/main.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
@@ -49,7 +50,7 @@
                 </div>
             </header>
 
-            <div class="bread-crumbs"> 
+            <div class="bread-crumbs container"> 
                 <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
                 <div class="bread-crumbs-item"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
@@ -131,7 +132,7 @@
                                     </tr>
                                 </table>
                                 </br>
-                                <table class="dynamic-table" id="formulas-table">
+                                <table class="dynamic-table gp-formulas-table" id="formulas-table">
                                     <tr>
                                         <th colspan="8" class="group-info-table-title all-table-title">
                                             <span>PH16_FORMULAS</span>
@@ -198,7 +199,7 @@
                                     <li class="header-item"> 
                                         <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
                                             <a id="del-btn-link">
-                                                <button class="group-page-del-btn js-hidden-element" type="button" id="delete-group-btn">
+                                                <button class="group-page-del-btn" type="button" id="delete-group-btn">
                                                 <span class="group-card-btn-del-text">PH24_DELETE_BTN</span>
                                                 </button>
                                             </a>

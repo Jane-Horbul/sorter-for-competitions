@@ -2783,6 +2783,10 @@ body.lock {
   background-color: #06b;
 }
 
+.gp-formulas-table {
+  width: 870px;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;

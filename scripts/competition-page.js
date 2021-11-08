@@ -198,7 +198,7 @@ const groupObjects = {
                                         "#group-sex":           gr.getSex(),
                                         "#group-discipline":    gr.getDiscipline(),
                                         "#group-sp-num":        gr.getSportsNum(),
-                                        "#group-link":          window.location.href + gr.getLink()
+                                        "#group-link":          window.location.href.split("#")[0] + gr.getLink()
                                     };
                                 },
 
