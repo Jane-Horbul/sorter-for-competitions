@@ -1,0 +1,49 @@
+.formulas-table {
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    line-height: 2.625;
+    letter-spacing: 0.02em;
+    font-weight: normal;
+    border-collapse: collapse;
+    width: 99%;
+    margin-bottom: 10px;
+}
+.formulas-table--th {
+    border: 1px solid #ced7df;
+    font-size: 12px;
+    text-align: center;
+    background: #c9e6ff;
+    font-weight: normal;
+}
+.formulas-table--th-main {
+    border-bottom: 1px solid #ced7df;
+    color: #2196f3;
+    font-size: 20px;
+    text-align: left;
+    font-weight: normal;
+}
+.formulas-table--input {
+    width: 85px;
+}
+.formulas-table tr:hover {
+    background-color: aliceblue;
+}
+.formulas-table-add-btn--svg {
+    width: 14px;
+    height: 14px;
+    padding-top: 2px;
+}
+.formulas-table-add-btn {
+    border-radius: 0px;
+    border: 1px solid #2196f3;
+    justify-content: center;
+    margin-top: 0px;
+    background: aliceblue;
+}
+.formulas-table-add-btn:hover,
+.formulas-table-add-btn:focus {
+    border: 1px solid #2196f3;
+    background: #2196f3;
+    fill: #fff;
+}

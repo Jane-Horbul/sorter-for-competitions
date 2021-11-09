@@ -131,70 +131,71 @@
                                         <td> <div id="group-info-qulification-max"></div>  </td>
                                     </tr>
                                 </table>
-                                </br>
-                                <table class="dynamic-table gp-formulas-table" id="formulas-table">
-                                    <tr>
-                                        <th colspan="8" class="group-info-table-title all-table-title">
-                                            <span>PH16_FORMULAS</span>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th>PH17_PREPARATION</th>
-                                        <th>PH18_ROUNDS_NUM</th>
-                                        <th>PH19_ROUND</th>
-                                        <th>PH20_REST</th>
-                                        <th>PH21_HOLD</th>
-                                        <th>PH22_FINAL_MIN</th>
-                                        <th>PH23_FINAL_MAX</th>
-                                        <th>   </th>
-                                    </tr>
-                                    <tr class="js-hidden-element js-root-view js-admin-view">
-                                        <td class="secondary-tables--td">
-                                            <input class="" type="text" id="add-formula-preparation">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            <input class="" type="text" id="add-formula-rounds-num">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            <input class="" type="text" id="add-formula-rounds-dur">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            <input class="" type="text" id="add-formula-rest-dur">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            <input class="" type="text" id="add-formula-after-hold">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            1/<input class="" type="text" id="add-formula-final-min">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            1/<input class="" type="text" id="add-formula-final-max">
-                                        </td>
-                                        <td class="secondary-tables--td">
-                                            <button class="" type="button" id="formula-add-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <template id="formula-row-template">
-                                        <td class="secondary-tables--td">#preparation</td>
-                                        <td class="secondary-tables--td">#rounds-num</td>
-                                        <td class="secondary-tables--td">#round-dur</td>
-                                        <td class="secondary-tables--td">#rest-dur</td>
-                                        <td class="secondary-tables--td">#after-hold</td>
-                                        <td class="secondary-tables--td">#final-min</td>
-                                        <td class="secondary-tables--td">#final-max </td>
-                                        <td class="secondary-tables--td">
-                                            <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </template>
-                                </table>
+                                <div>
+                                    <table class="formulas-table" id="formulas-table">
+                                        <tr>
+                                            <th colspan="8" class="formulas-table--th-main">
+                                                <span>PH16_FORMULAS</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="formulas-table--th">PH17_PREPARATION</th>
+                                            <th class="formulas-table--th">PH18_ROUNDS_NUM</th>
+                                            <th class="formulas-table--th">PH19_ROUND</th>
+                                            <th class="formulas-table--th">PH20_REST</th>
+                                            <th class="formulas-table--th">PH21_HOLD</th>
+                                            <th class="formulas-table--th">PH22_FINAL_MIN</th>
+                                            <th class="formulas-table--th">PH23_FINAL_MAX</th>
+                                            <th class="formulas-table--th">   </th>
+                                        </tr>
+                                        <tr class="js-hidden-element js-root-view js-admin-view">
+                                            <td class="secondary-tables--td">
+                                                <input class="formulas-table--input" type="text" id="add-formula-preparation">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="formulas-table--input" type="text" id="add-formula-rounds-num">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="formulas-table--input" type="text" id="add-formula-rounds-dur">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="formulas-table--input" type="text" id="add-formula-rest-dur">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <input class="formulas-table--input" type="text" id="add-formula-after-hold">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                1/<input class="formulas-table--input" type="text" id="add-formula-final-min">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                1/<input class="formulas-table--input" type="text" id="add-formula-final-max">
+                                            </td>
+                                            <td class="secondary-tables--td">
+                                                <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
+                                                    <svg class="formulas-table-add-btn--svg">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <template id="formula-row-template">
+                                            <td class="secondary-tables--td">#preparation</td>
+                                            <td class="secondary-tables--td">#rounds-num</td>
+                                            <td class="secondary-tables--td">#round-dur</td>
+                                            <td class="secondary-tables--td">#rest-dur</td>
+                                            <td class="secondary-tables--td">#after-hold</td>
+                                            <td class="secondary-tables--td">#final-min</td>
+                                            <td class="secondary-tables--td">#final-max </td>
+                                            <td class="secondary-tables--td">
+                                                <button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">
+                                                    <svg class="formulas-table-add-btn--svg">
+                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </template>
+                                    </table>
+                                </div>
                                 <ul class="list header-list">
                                     <li class="header-item"> 
                                         <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
