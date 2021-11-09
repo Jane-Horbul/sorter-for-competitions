@@ -9,6 +9,19 @@
 <!--<link rel="stylesheet" href="./css/main.css" />-->
 <link rel="stylesheet" href="./sass/main.css" />
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <!--<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>-->
+  <script src="./scripts/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#new-member-age" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  } );
+  </script>
 
 </head>
     <body>
@@ -121,7 +134,7 @@
                         <tr>
                             <th class="group-info-table-title all-table-title" colspan="8"><span>PH5_SPORTS</span>
                                 <!--Add member button start-->
-                                <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
+                               <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
                                     <button class="group-page-ref-btn" type="button">
                                             <svg class="group-info-edit-btn-icon">
                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -298,12 +311,14 @@
                                     <label for="new-member-surname" class="placeholder">PH23_SP_SURNAME</label>
                                 </div>
                                 <div class="input-container ic2">
-                                    <input id="new-member-age" class="input" type="date" placeholder=" " />
-                                    <svg class="popup-form-fields-icon">
-                                        <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
-                                    </svg>
-                                    <div class="cut"></div>
-                                    <label for="new-member-age" class="placeholder"></label>
+                                    <div class="input">
+                                        <input type="text" id="new-member-age" class="input-celendar" placeholder=" " />
+                                        <svg class="popup-form-fields-icon">
+                                            <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
+                                        </svg>
+                                        <div class="cut"></div>
+                                        <label for="new-member-age" class="placeholder"></label>
+                                    </div>
                                 </div>
                                 <div class="input-container ic2">
                                     <input id="new-member-weight" class="input" type="number" placeholder=" " />

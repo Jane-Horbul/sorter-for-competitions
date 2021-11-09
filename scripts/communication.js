@@ -506,7 +506,7 @@ export const server = {
         get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET, false));},
         edit(name)                          {sendSingleValue(backendLinks.DEPARTMENT_EDIT, name, true);},
         addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, false)},
-        deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, true);},
+        deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, false);},
         addDiscipline(name)                 {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_ADD, name, false);},
         deleteDiscipline(name)              {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_DEL, name, false);}
     },
