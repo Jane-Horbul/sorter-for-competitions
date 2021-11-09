@@ -25,6 +25,8 @@
 }
 .formulas-table--input {
     width: 85px;
+    border-radius: 0px;
+    border: 1px solid #c9e6ff;
 }
 .formulas-table tr:hover {
     background-color: aliceblue;
@@ -40,10 +42,12 @@
     justify-content: center;
     margin-top: 0px;
     background: aliceblue;
+    fill: #2196f3;
 }
 .formulas-table-add-btn:hover,
 .formulas-table-add-btn:focus {
     border: 1px solid #2196f3;
     background: #2196f3;
     fill: #fff;
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
