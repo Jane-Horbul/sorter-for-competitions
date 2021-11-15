@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Competition page</title>
+        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./sass/main.css" />  
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <div class="wrapper">
+            <a href="#popup_1" class="popup-link" id="member-add-btn" >
+                <button class="group-page-ref-btn" type="button" id="members-add-btn" data-open-modal>
+                    <svg class="group-info-edit-btn-icon">
+                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                    </svg>
+                </button>
+            </a>
+            <div class="popup" id = "popup_1">
+                <a href="" class="popup__area"></a>
+                <div class="popup__body">
+                    <div class="popup__content">
+                        <div class="add-sportsman-popup__content">
+                            <a href="#" class="popup__close close-popup">X</a>
+                            <form class="modal-form">
+                                <span class="modal-title">
+                                    <h3>PH31_SPORTS_ADD</h3>
+                                </span>
+                                <div class="new-member-field">
+                                    
+                                    <table class="add-sportsman-table" id="add-sportsman-table">
+                                        <tr>
+                                            <th class="group-info-table-title all-table-title" colspan="7">
+                                                <span>PH6_SPORTS_TBL</span>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH7_SPORT_SURNAME</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH8_SPORT_NAME</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH9_SPORT_AGE</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH10_SPORT_WEIGHT</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH11_SPORT_SEX</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH12_SPORT_TEAM</td>
+                                            <td class="add-sportsman-table--title secondary-title-tables--text">PH13_SPORT_QUAL</td>
+                                        </tr>
+                                        <template id="add-sportsman-template">
+                                            <tr id="add-sports-#sp-id">
+                                                <td class="secondary-tables--td">#sp-surname</td>
+                                                <td class="secondary-tables--td">#sp-name</td>
+                                                <td class="secondary-tables--td">#sp-age</td>
+                                                <td class="secondary-tables--td">#sp-weight</td>
+                                                <td class="secondary-tables--td">#sp-sex</td>
+                                                <td class="secondary-tables--td">#sp-team</td>
+                                                <td class="secondary-tables--td">#sp-qual</td>
+                                            </tr>
+                                        </template>
+                                        <template id="add-settings-template">
+                                            <td class="secondary-tables--td" colspan="6" id="#disc-list-id"></td>
+                                            <td class="secondary-tables--td" colspan="1">
+                                                <input class="input-to-choose-type" type="checkbox" id="#admitted-id" name="#admitted-id">
+                                                <label class="label-to-choose-type" for="#admitted-id">PH14_SPORT_ADMIT</label>
+                                            </td>
+                                        </template>
+                                        <template id="add-discipline-template">
+                                            <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                                            <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
+                                        </template>
+                                        <template id="comp-input-date-template">
+                                            <div class="create-ng--interval">
+                                                <input type="datetime" id="#date-id" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
+                                            </div>
+                                        </template>
+                                    </table>
+                                
+                                </div>
+                                <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
+                                    <span class="modal-btn-submit-text">PH32_SPORTS_ADD</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./scripts/competition-page.js" type="module"></script> 
+        <script src="./scripts/open-close-popup.js" type="module"></script>
+    </body>
+</html>

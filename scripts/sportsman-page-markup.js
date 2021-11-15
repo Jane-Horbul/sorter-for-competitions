@@ -1,14 +1,9 @@
 import {getIfDefined, createPageItem} from "./common.js"
 
-function getPlaceImage(pl){
-    if(pl == "1")
-        return "./img/gold-m-2.png";
-    else if(pl == "2")
-        return "./img/silver-m.png";
-    else if(pl == "3")
-        return "./img/cooper-m.png";
-    return "";
-    
+const medals = {
+    "1": "./img/gold-m-2.png",
+    "2": "./img/silver-m.png",
+    "3": "./img/cooper-m.png"
 }
 
 export const markup = {
@@ -42,13 +37,14 @@ export const markup = {
         
         groupsListId:               "comptition-groups-list-",
         groupStatTemplate:          "group-item-template-id",
+
         getGroupsListId(cs)         { return this.groupsListId + cs.getCompetitionId(); },
         getGroupStatsList(cs)           { return document.getElementById(this.getGroupsListId(cs)); },
         createGroupStatItem(cs, gs)     { return createPageItem(document.getElementById(this.groupStatTemplate), this.getGroupStatPlaceholders(cs, gs)); },
         getGroupStatPlaceholders(cs, gs){ return { 
                 "#group-name":          gs.getGroupName(),
                 "#group-link":          gs.getGroupLink(),
-                "#place-image":         getPlaceImage(gs.getPlace()),
+                "#place-image":         medals[gs.getPlace()] == undefined ? "" : medals[gs.getPlace()],
                 "#pairs-num":           gs.getPairsNum(),
                 "#wins-num":            gs.getWinsNum(),
                 "#score":               gs.getScore(),
