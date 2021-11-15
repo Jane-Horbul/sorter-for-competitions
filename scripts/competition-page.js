@@ -8,6 +8,7 @@ import {isNumber,
     createPageItem, 
     prepareTabs} from "./common.js"
 import {ops, server} from "./communication.js"
+import { markup } from "./competition-page-markup.js";
 
 var client = server.access.getClient();
 const page = {
@@ -29,46 +30,6 @@ console.log(competition);
 console.log(department);
 
 /* ------------------- SPORTSMANS ----------------------------*/
-const sportsmanObjects = {
-    getTable()                  { return document.getElementById("members-table");},
-    getTemplate()               { return document.getElementById("member-template");},
-
-    getAddingTable()            { return document.getElementById("add-sportsman-table");},
-    getAddingTemplate()         { return document.getElementById("add-sportsman-template");},
-    getAddSportsRowId(id)       { return "add-sports-" + id},
-
-    getAddingRow(id)            { return document.getElementById("adding-row-sportsman-" + id);},
-    setAddingRowId(row, id)     { row.setAttribute("id", "adding-row-sportsman-" + id);},
-    getAddingRowTemplate()      { return document.getElementById("add-settings-template");},
-    getSportsAdmition(row, sid) { return row.querySelector('#admitted-' + sid).checked ? "true" : "false";},
-    isCheckedDisc(row, sid, num){ return row.querySelector("#discipline-" + sid + "-" + num).checked;},
-
-    getPlaceholders(sp)         { return {
-                                        "#sp-id":           sp.getId(),
-                                        "#sp-surname":      sp.getSurname(),
-                                        "#sp-name":         sp.getName(),
-                                        "#sp-age":          sp.getAge(),
-                                        "#sp-weight":       sp.getWeight(),
-                                        "#sp-sex":          sp.getSex(),
-                                        "#sp-team":         sp.getTeam(),
-                                        "#sp-qual":         qualificationsMap.get(sp.getQualification()),
-                                        "#sp-admit":        sp.getAdmition(),
-                                        "#sp-gr-num":       sp.getGroupsNum(),
-                                        "#sportsman-link":  departmentLink + sp.getLink(),
-                                        "#disc-list-id":    "sports-disc-list-" + sp.getId(),
-                                        "#admitted-id":     "admitted-" + sp.getId()
-                                    };
-                                },
-    getDisciplinesList(spId)            {return document.getElementById("sports-disc-list-" + spId);},
-    getDisciplineTemplate()             {return document.getElementById("add-discipline-template");},
-    getDiscPlaceholders(n, id, spId)    {return {   "#disc-name":   n, 
-                                                    "#disc-id":     ("discipline-" + spId + "-" + id)};
-                                            },
-    
-    getAddBtn()                 { return document.getElementById("sportsmans-add-list-send-btn");},
-    getSortSpBtn()              { return document.getElementById("sort-members-btn");}
-}
-
 function excludeDepSportsman(sp){
     for(var i = 0; i < departamentSportsmans.length; i++){
         if(sp.getId() == departamentSportsmans[i].getId()){
@@ -81,10 +42,10 @@ function excludeDepSportsman(sp){
 function sportsmanPageElementAdd(sp){
     if(sp.getId() != undefined){
         excludeDepSportsman(sp);
-        var template = sportsmanObjects.getTemplate();
-        var placeholders = sportsmanObjects.getPlaceholders(sp);
+        var template = markup.sportsmen.getTemplate();
+        var placeholders = markup.sportsmen.getPlaceholders(sp, departmentLink);
         var newItem = createPageItem(template, placeholders);
-        sportsmanObjects.getTable().append(newItem); 
+        markup.sportsmen.getTable().append(newItem); 
     }
 }
 
@@ -98,17 +59,17 @@ function findRowIndxById(table, id){
 }
 
 function sportsmanAddingSelect(sid){
-    var table = sportsmanObjects.getAddingTable();
-    var addingRow = sportsmanObjects.getAddingRow(sid);
-    var rowIndx = findRowIndxById(table, sportsmanObjects.getAddSportsRowId(sid)) + 1;
+    var table = markup.sportsmen.getAddingTable();
+    var addingRow = markup.sportsmen.getAddingRow(sid);
+    var rowIndx = findRowIndxById(table, markup.sportsmen.getAddSportsRowId(sid)) + 1;
     var sp = departamentSportsmans.find( curSp => curSp.getId() == sid);
     
     if(addingRow == undefined) {
-        var newItem = createPageItem(sportsmanObjects.getAddingRowTemplate(), sportsmanObjects.getPlaceholders(sp));
+        var newItem = createPageItem(markup.sportsmen.getAddingRowTemplate(), markup.sportsmen.getPlaceholders(sp, departmentLink));
         addingRow = table.insertRow(rowIndx);
         table.rows[rowIndx - 1].setAttribute("class", "add-sportsman-table-tr--selected");
         table.rows[rowIndx].setAttribute("class", "add-sportsman-table-tr--active");
-        sportsmanObjects.setAddingRowId(addingRow, sid);
+        markup.sportsmen.setAddingRowId(addingRow, sid);
         addingRow.append(newItem);
         disciplinesCheckboxesAdd(sid);
         sportsmansAddList.push(sp);
@@ -126,16 +87,16 @@ function sportsmanAddingSelect(sid){
 }
 
 function sportsmansAddListSend() {
-    var table = sportsmanObjects.getAddingTable();
+    var table = markup.sportsmen.getAddingTable();
     for(var i = 0; i < sportsmansAddList.length; i++){
         var sid = sportsmansAddList[i].getId();
-        var indx = findRowIndxById(table, sportsmanObjects.getAddSportsRowId(sid)) + 1;
+        var indx = findRowIndxById(table, markup.sportsmen.getAddSportsRowId(sid)) + 1;
         var settings = table.rows[indx];
-        sportsmansAddList[i].setAdmition(sportsmanObjects.getSportsAdmition(settings, sid));
+        sportsmansAddList[i].setAdmition(markup.sportsmen.getSportsAdmition(settings, sid));
 
         var sportsDisc = new Array(0);
         for(var j = 0; j < disciplines.length; j++){
-            if(sportsmanObjects.isCheckedDisc(settings, sid, j))
+            if(markup.sportsmen.isCheckedDisc(settings, sid, j))
                 sportsDisc.push(disciplines[j]);
         }
         sportsmansAddList[i].setDisciplines(sportsDisc);
@@ -145,12 +106,12 @@ function sportsmansAddListSend() {
 
 function departamentSportsmanElementAdd(sp){
     if(sp.getId() != undefined){
-        var template = sportsmanObjects.getAddingTemplate();
-        var placeholders = sportsmanObjects.getPlaceholders(sp);
+        var template = markup.sportsmen.getAddingTemplate();
+        var placeholders = markup.sportsmen.getPlaceholders(sp, departmentLink);
         var newItem = createPageItem(template, placeholders);
-        sportsmanObjects.getAddingTable().append(newItem);
+        markup.sportsmen.getAddingTable().append(newItem);
 
-        var row = document.getElementById(sportsmanObjects.getAddSportsRowId(sp.getId()));
+        var row = document.getElementById(markup.sportsmen.getAddSportsRowId(sp.getId()));
         onClick(row, function(){sportsmanAddingSelect(sp.getId())});
     }
 }
@@ -163,79 +124,11 @@ function resortSportsmens(){
 
 /* ------------------- GROUPS ----------------------------*/
 
-const groupObjects = {
-    inputNameId:         "group-input-name",
-    inputSystemId:       "group-input-system",
-    inputSexId:          "group-input-sex",
-    inputDisciplineId:   "group-input-discipline",
-    inputAgeMinId:       "group-input-age-min",
-    inputAgeMaxId:       "group-input-age-max",
-    inputWeightMinId:    "group-input-weight-min",
-    inputWeightMaxId:    "group-input-weight-max",
-    inputQualMinId:      "group-input-qulification-min",
-    inputQualMaxId:      "group-input-qulification-max",
-
-    getNameInput()          { return document.getElementById(this.inputNameId);},
-    getSystemInput()        { return document.getElementById(this.inputSystemId);},
-    getSexInput()           { return document.getElementById(this.inputSexId);},
-    getDisciplineInput()    { return document.getElementById(this.inputDisciplineId);},
-    getAgeMinInput()        { return document.getElementById(this.inputAgeMinId);},
-    getAgeMaxInput()        { return document.getElementById(this.inputAgeMaxId);},
-    getWeightMinInput()     { return document.getElementById(this.inputWeightMinId);},
-    getWeightMaxInput()     { return document.getElementById(this.inputWeightMaxId);},
-    getQualMinInput()       { return document.getElementById(this.inputQualMinId);},
-    getQualMaxInput()       { return document.getElementById(this.inputQualMaxId);},
-    
-    getTable()                  { return document.getElementById("groups-table");},
-    getTemplate()               { return document.getElementById("group-template");},
-    getAddBtn()                 { return document.getElementById("group-form-send-btn");},
-    getFormPairsBtn()           { return document.getElementById("form-pairs-btn");},
-    getPlaceholders(gr)         { return {
-                                        "#group-name":          gr.getName(),
-                                        "#group-age":           gr.getAgeMin() + " - " + gr.getAgeMax(),
-                                        "#group-weight":        gr.getWeightMin() + " - " + gr.getWeightMax(),
-                                        "#group-qualification": getQualificationInterval(gr.getQualMin(), gr.getQualMax()),
-                                        "#group-sex":           gr.getSex(),
-                                        "#group-discipline":    gr.getDiscipline(),
-                                        "#group-sp-num":        gr.getSportsNum(),
-                                        "#group-link":          window.location.href.split("#")[0] + gr.getLink()
-                                    };
-                                },
-
-    getDisciplinesList()        {return document.getElementById("group-input-discipline");},
-    getDisciplineTemplate()     {return document.getElementById("create-group-div-temp");},
-    getDiscPlaceholders(name)   {return {
-                                            "#group-disc-value": name,
-                                            "#group-disc-name": name
-                                        };
-                                },
-
-    getQualMinList()            {return document.getElementById("group-input-qulification-min");},
-    getQualMaxList()            {return document.getElementById("group-input-qulification-max");},
-    createOption(id, name, val) { var res = document.createElement("option");
-                                    res.setAttribute("id", id);
-                                    res.value = val;
-                                    res.innerHTML = name;
-                                    return res;
-                                },
-    getQualPlaceholders(v, n)   {return {  
-                                            "#qual-value-ph": v,
-                                            "#qual-name-ph": n
-                                        };
-                                },
-
-    alertNameFormat()           {alert("Empty group name!");},
-    alertAgeMinFormat()         {alert("Bad minimal age!");},
-    alertAgeMaxFormat()         {alert("Bad maximal age!");},
-    alertAgeIntervalFormat()    {alert("Maximal age must be greater than minimal!");},
-    alertWeightMinFormat()      {alert("Bad minimal weight!");},
-    alertWeightMaxFormat()      {alert("Bad maximal weight!");},
-    alertWeightIntervalFormat() {alert("Maximal weight must be greater than minimal!");},
-    alertQualificationFormat()  {alert("Undefined qualifications value!");},
-    alertQualificationInterval() {alert("Maximal value must greater than minimal!");}
+export function getQualNameByValue(val){
+    return qualificationsMap.get(val) == undefined ? val : qualificationsMap.get(val);
 }
 
-function getQualificationInterval(qMin, qMax){
+export function getQualificationInterval(qMin, qMax){
     var qMinName = "";
     var qMaxName = "";
     if(isNumber(qMin) && (Number(qMin) >= 0) && (qualificationsMap.get(qMin) != undefined)){
@@ -251,35 +144,35 @@ function getQualificationInterval(qMin, qMax){
 
 function groupPageElementAdd(group){
     if(group.getId() != undefined){
-        var template = groupObjects.getTemplate();
-        var placeholders = groupObjects.getPlaceholders(group);
-        groupObjects.getTable().append(createPageItem(template, placeholders)); 
+        var template = markup.groups.getTemplate();
+        var placeholders = markup.groups.getPlaceholders(group);
+        markup.groups.getTable().append(createPageItem(template, placeholders)); 
     }
 }
 
 function isMainGroupParamsOk(){
-    if(isEmptyString(groupObjects.getNameInput().value)){
-        groupObjects.alertNameFormat();
+    if(isEmptyString(markup.groups.getNameInput().value)){
+        markup.groups.alertNameFormat();
         return false;
     }
     return true;
 }
 
 function isAgeOk(){
-    var ageMin = groupObjects.getAgeMinInput().value;
-    var ageMax = groupObjects.getAgeMaxInput().value;
+    var ageMin = markup.groups.getAgeMinInput().value;
+    var ageMax = markup.groups.getAgeMaxInput().value;
     if(!isEmptyString(ageMin) && !isNumber(ageMin)){
-        groupObjects.alertAgeMinFormat();
+        markup.groups.alertAgeMinFormat();
         return false;
     }
     if(!isEmptyString(ageMax)){
         if(!isNumber(ageMax)){
-            groupObjects.alertAgeMaxFormat();
+            markup.groups.alertAgeMaxFormat();
             return false; 
         }
         if(!isEmptyString(ageMin) && (Number(ageMax) - Number(ageMin)) < 0)
         {
-            groupObjects.alertAgeIntervalFormat();
+            markup.groups.alertAgeIntervalFormat();
             return false; 
         }
     }
@@ -287,21 +180,21 @@ function isAgeOk(){
 }
 
 function isWeightOk(){
-    var weightMin = groupObjects.getWeightMinInput().value;
-    var weightMax = groupObjects.getWeightMaxInput().value;
+    var weightMin = markup.groups.getWeightMinInput().value;
+    var weightMax = markup.groups.getWeightMaxInput().value;
 
     if(!isEmptyString(weightMin) && !isNumber(weightMin)){
-        groupObjects.alertWeightMinFormat();
+        markup.groups.alertWeightMinFormat();
         return false;
     }
     if(!isEmptyString(weightMax)){
         if(!isNumber(weightMax)){
-            groupObjects.alertWeightMaxFormat();
+            markup.groups.alertWeightMaxFormat();
             return false; 
         }
         if(!isEmptyString(weightMin) && (Number(weightMax) - Number(weightMin)) < 0)
         {
-            groupObjects.alertWeightIntervalFormat();
+            markup.groups.alertWeightIntervalFormat();
             return false; 
         }
     }
@@ -309,13 +202,13 @@ function isWeightOk(){
 }
 
 function isQualificationOk(){
-    var qualMinVal = groupObjects.getQualMinInput().value;
-    var qualMaxVal = groupObjects.getQualMaxInput().value;
+    var qualMinVal = markup.groups.getQualMinInput().value;
+    var qualMaxVal = markup.groups.getQualMaxInput().value;
 
     if((qualMinVal != "Not applicable") 
             && (qualMaxVal != "Not applicable") 
             && (Number(qualMinVal) > Number(qualMaxVal))){
-        groupObjects.alertQualificationInterval();
+        markup.groups.alertQualificationInterval();
         return false;
     }
     return true;
@@ -325,100 +218,45 @@ function sendGroupForm() {
     if(!isMainGroupParamsOk() || !isAgeOk() || !isWeightOk() || !isQualificationOk())
         return;
     var newGroup = ops.createGroup(undefined);
-    newGroup.setName(groupObjects.getNameInput().value);
-    newGroup.setDiscipline(groupObjects.getDisciplineInput().value);
-    newGroup.setFormSystem(groupObjects.getSystemInput().value);
+    newGroup.setName(markup.groups.getNameInput().value);
+    newGroup.setDiscipline(markup.groups.getDisciplineInput().value);
+    newGroup.setFormSystem(markup.groups.getSystemInput().value);
 
-    if(groupObjects.getSexInput().value != "Not applicable")
-        newGroup.setSex(groupObjects.getSexInput().value);
-    if(groupObjects.getAgeMinInput().value != "")
-        newGroup.setAgeMin(groupObjects.getAgeMinInput().value);
-    if(groupObjects.getAgeMaxInput().value != "")
-        newGroup.setAgeMax(groupObjects.getAgeMaxInput().value);
-    if(groupObjects.getWeightMinInput().value != "")
-        newGroup.setWeightMin(groupObjects.getWeightMinInput().value);
-    if(groupObjects.getWeightMaxInput().value != "")
-        newGroup.setWeightMax(groupObjects.getWeightMaxInput().value);
-    if(groupObjects.getQualMinInput().value != "Not applicable")
-        newGroup.setQualMin(groupObjects.getQualMinInput().value);
-    if(groupObjects.getQualMaxInput().value != "Not applicable")
-        newGroup.setQualMax(groupObjects.getQualMaxInput().value);
+    if(markup.groups.getSexInput().value != "Not applicable")
+        newGroup.setSex(markup.groups.getSexInput().value);
+    if(markup.groups.getAgeMinInput().value != "")
+        newGroup.setAgeMin(markup.groups.getAgeMinInput().value);
+    if(markup.groups.getAgeMaxInput().value != "")
+        newGroup.setAgeMax(markup.groups.getAgeMaxInput().value);
+    if(markup.groups.getWeightMinInput().value != "")
+        newGroup.setWeightMin(markup.groups.getWeightMinInput().value);
+    if(markup.groups.getWeightMaxInput().value != "")
+        newGroup.setWeightMax(markup.groups.getWeightMaxInput().value);
+    if(markup.groups.getQualMinInput().value != "Not applicable")
+        newGroup.setQualMin(markup.groups.getQualMinInput().value);
+    if(markup.groups.getQualMaxInput().value != "Not applicable")
+        newGroup.setQualMax(markup.groups.getQualMaxInput().value);
     server.group.create(page.cid, newGroup);
 }
 
 /* ------------------- COMMON ----------------------------*/
-const competitionObjects = {
-    nameInputId:        "name-info-input",
-    descInputId:        "desc-info-input",
-    startDateInputId:   "start-date-input",
-    endDateInputId:     "end-date-input",
-
-    namePlaceId:        "competition-name-info",
-    descPlaceId:        "competition-desc-info",
-    startDatePlaceId:   "competition-start-date-info",
-    endDatePlaceId:     "competition-end-date-info",
-
-    depLinkId:          "department-link-id",
-    compLinkId:         "competition-link-id",
-    createInput(id)         { var res = document.createElement("input"); res.setAttribute("id", id); return res;},
-
-    getNameInput()          { return document.getElementById(this.nameInputId);},
-    getDescInput()          { return document.getElementById(this.descInputId);},
-    getStartDateInput()     { return document.getElementById(this.startDateInputId);},
-    getEndDateInput()       { return document.getElementById(this.endDateInputId);},
-    
-    createNameInput()       { return this.createInput(this.nameInputId);},
-    createDescInput()       {   var res = document.createElement("textarea"); 
-                                res.setAttribute("id", this.descInputId); 
-                                res.setAttribute("rows", "3"); 
-                                return res;
-                            },
-    createDateInput(id)     {
-                                var res = document.createElement("input"); 
-                                res.setAttribute("id",      id); 
-                                res.setAttribute("type",    "datetime-local");
-                                res.setAttribute("class",   "create-ng--interval-min sportsman-info-item--input");
-                                res.setAttribute("pattern", "[0-9]+");
-                                res.setAttribute("required","required");
-                                return res;
-                            },
-
-    getNamePlace()          { return document.getElementById(this.namePlaceId);},
-    getDescPlace()          { return document.getElementById(this.descPlaceId);},
-    getStartDatePlace()     {return document.getElementById(this.startDatePlaceId);},
-    getEndDatePlace()       {return document.getElementById(this.endDatePlaceId);},
-    
-    setName(name)           {document.getElementById(this.namePlaceId).innerHTML = name;},
-    setDescription(desc)    {document.getElementById(this.descPlaceId).innerHTML = desc;},
-    setStartDate(val)       {document.getElementById(this.startDatePlaceId).innerHTML = val;},
-    setEndDate(val)         {document.getElementById(this.endDatePlaceId).innerHTML = val;},
-    setPageName(name)       {document.getElementById("competition-name").innerHTML = name;},
-    setId(id)               {document.getElementById("competition-id-info").innerHTML = id;},
-    setDepartmentName(name) {document.getElementById(this.depLinkId).innerHTML = name;},
-    setDepartmentLink(link) {document.getElementById(this.depLinkId).setAttribute("href", link);},
-    setCompetitionName(name){document.getElementById(this.compLinkId).innerHTML = name;},
-    setCompetitionLink(link){document.getElementById(this.compLinkId).setAttribute("href", link);},
-
-
-    getEditBtn()            { return document.getElementById("competition-edit-btn");}
-}
 
 function competitionEdit(){
-    var nameInput = competitionObjects.getNameInput();
-    var descInput = competitionObjects.getDescInput();
-    var startDateInput = competitionObjects.getStartDateInput();
-    var endDateInput = competitionObjects.getEndDateInput();
+    var nameInput = markup.competitions.getNameInput();
+    var descInput = markup.competitions.getDescInput();
+    var startDateInput = markup.competitions.getStartDateInput();
+    var endDateInput = markup.competitions.getEndDateInput();
 
     if(nameInput == null){
-        var namePlace       = competitionObjects.getNamePlace();
-        var descPlace       = competitionObjects.getDescPlace();
-        var startDatePlace  = competitionObjects.getStartDatePlace();
-        var endDatePlace    = competitionObjects.getEndDatePlace();
+        var namePlace       = markup.competitions.getNamePlace();
+        var descPlace       = markup.competitions.getDescPlace();
+        var startDatePlace  = markup.competitions.getStartDatePlace();
+        var endDatePlace    = markup.competitions.getEndDatePlace();
 
-        nameInput       = competitionObjects.createNameInput();
-        descInput       = competitionObjects.createDescInput();
-        startDateInput  = competitionObjects.createDateInput(competitionObjects.startDateInputId);
-        endDateInput    = competitionObjects.createDateInput(competitionObjects.endDateInputId);
+        nameInput       = markup.competitions.createNameInput();
+        descInput       = markup.competitions.createDescInput();
+        startDateInput  = markup.competitions.createDateInput(markup.competitions.startDateInputId);
+        endDateInput    = markup.competitions.createDateInput(markup.competitions.endDateInputId);
 
         nameInput.value             = competition.getName();
         descInput.value             = competition.getDescription();
@@ -445,11 +283,11 @@ function competitionEdit(){
 }
 
 function qualificationAddToPage(){
-    var qualMinList = groupObjects.getQualMinList();
-    var qualMaxList = groupObjects.getQualMaxList();
+    var qualMinList = markup.groups.getQualMinList();
+    var qualMaxList = markup.groups.getQualMaxList();
     qualificationsMap.forEach(function(name, value) {
-        var optMin = groupObjects.createOption(name + "-min-id", name, value);
-        var optMax = groupObjects.createOption(name + "-max-id", name, value);
+        var optMin = markup.groups.createOption(name + "-min-id", name, value);
+        var optMax = markup.groups.createOption(name + "-max-id", name, value);
         qualMinList.appendChild(optMin);
         qualMaxList.appendChild(optMax);
     });
@@ -460,32 +298,32 @@ function disciplinesAddToPage(){
         if(isEmptyString(disciplines[i]))
             continue;
 
-        var opt = groupObjects.createOption(disciplines[i] + "-id", disciplines[i], disciplines[i]);
-        groupObjects.getDisciplinesList().appendChild(opt);
+        var opt = markup.groups.createOption(disciplines[i] + "-id", disciplines[i], disciplines[i]);
+        markup.groups.getDisciplinesList().appendChild(opt);
     }
 }
 function disciplinesCheckboxesAdd(spId){
     for(var i = 0; i < disciplines.length; i++){
         if(isEmptyString(disciplines[i]))
             continue;
-        var template = sportsmanObjects.getDisciplineTemplate();
-        var placeholders = sportsmanObjects.getDiscPlaceholders(disciplines[i], i, spId);
-        sportsmanObjects.getDisciplinesList(spId).append(createPageItem(template, placeholders));
+        var template = markup.sportsmen.getDisciplineTemplate();
+        var placeholders = markup.sportsmen.getDiscPlaceholders(disciplines[i], i, spId);
+        markup.sportsmen.getDisciplinesList(spId).append(createPageItem(template, placeholders));
         
     }
 }
 
 function fillPageInfo(){
-    competitionObjects.setPageName(competition.getName());
-    competitionObjects.setName(competition.getName());
-    competitionObjects.setId(competition.getId());
-    competitionObjects.setDescription(competition.getDescription());
-    competitionObjects.setStartDate(competition.getFormatedStartDate("dd MM yy hh:min"));
-    competitionObjects.setEndDate(competition.getFormatedEndDate("dd MM yy hh:min"));
-    competitionObjects.setDepartmentName(department.getName());
-    competitionObjects.setDepartmentLink(departmentLink);
-    competitionObjects.setCompetitionName(competition.getName());
-    competitionObjects.setCompetitionLink(window.location.href);
+    markup.competitions.setPageName(competition.getName());
+    markup.competitions.setName(competition.getName());
+    markup.competitions.setId(competition.getId());
+    markup.competitions.setDescription(competition.getDescription());
+    markup.competitions.setStartDate(competition.getFormatedStartDate("dd MM yy hh:min"));
+    markup.competitions.setEndDate(competition.getFormatedEndDate("dd MM yy hh:min"));
+    markup.competitions.setDepartmentName(department.getName());
+    markup.competitions.setDepartmentLink(departmentLink);
+    markup.competitions.setCompetitionName(competition.getName());
+    markup.competitions.setCompetitionLink(window.location.href);
 
     qualificationAddToPage();
     
@@ -497,7 +335,7 @@ function fillPageInfo(){
 
 function refreshPairs(){
     competition = server.competition.formPairs(page.cid);
-    var groupsTable = groupObjects.getTable();
+    var groupsTable = markup.groups.getTable();
     while(groupsTable.rows.length > 2){
         groupsTable.deleteRow(groupsTable.rows.length - 1);
     }
@@ -505,10 +343,10 @@ function refreshPairs(){
 }
 
 function setBtnActions(){
-    onClick(competitionObjects.getEditBtn(), competitionEdit);
-    onClick(groupObjects.getAddBtn(), sendGroupForm);
-    onClick(sportsmanObjects.getSortSpBtn(), resortSportsmens);
-    onClick(sportsmanObjects.getAddBtn(),sportsmansAddListSend)
+    onClick(markup.competitions.getEditBtn(), competitionEdit);
+    onClick(markup.groups.getAddBtn(), sendGroupForm);
+    onClick(markup.sportsmen.getSortSpBtn(), resortSportsmens);
+    onClick(markup.sportsmen.getAddBtn(),sportsmansAddListSend)
 }
 
 prepareTabs();
