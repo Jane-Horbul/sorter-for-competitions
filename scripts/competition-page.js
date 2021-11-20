@@ -27,7 +27,6 @@ var sportsmansAddList       = new Array(0);
 department.getSportsmans().forEach(sp => { departamentSportsmans.push(sp);});
 
 console.log(competition);
-console.log(department);
 
 /* ------------------- SPORTSMANS ----------------------------*/
 function excludeDepSportsman(sp){
@@ -325,6 +324,7 @@ function fillPageInfo(){
     markup.competitions.setDepartmentLink(departmentLink);
     markup.competitions.setCompetitionName(competition.getName());
     markup.competitions.setCompetitionLink(window.location.href);
+    markup.places.setAddLink();
 
     qualificationAddToPage();
     
@@ -344,10 +344,10 @@ function refreshPairs(){
 }
 
 function setBtnActions(){
-    onClick(markup.competitions.getEditBtn(), competitionEdit);
-    onClick(markup.groups.getAddBtn(), sendGroupForm);
-    onClick(markup.sportsmen.getSortSpBtn(), resortSportsmens);
-    onClick(markup.sportsmen.getAddBtn(),sportsmansAddListSend)
+    onClick(markup.competitions.getEditBtn(),   competitionEdit);
+    onClick(markup.groups.getAddBtn(),          sendGroupForm);
+    onClick(markup.sportsmen.getSortSpBtn(),    resortSportsmens);
+    onClick(markup.sportsmen.getAddBtn(),       sportsmansAddListSend);
 }
 
 prepareTabs();

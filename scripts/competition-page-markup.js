@@ -168,5 +168,10 @@ export const markup = {
     
     
         getEditBtn()            { return document.getElementById("competition-edit-btn");}
-    }    
+    },
+    
+    places: {
+        getAddBlock()   { return document.getElementById("add-place-link-id");},
+        setAddLink()    { this.getAddBlock().setAttribute("href", window.location.href.split("#")[0] + "/create-place");}
+    }
 }

@@ -10,13 +10,12 @@
     </head>
     <body>
         <div class="wrapper">
-        
             <header class="page-header">
                 <div class="container">
                     <ul class="group-page-header list">
                         <li>
-                            <a class="link" id="page-name-link" href="#">
-                                <h1 id="page-name"></h1>
+                            <a class="link" id="page-header-name-link" href="">
+                                <h1 id="page-header-name"></h1>
                             </a>
                         </li>
                         <li>
@@ -59,27 +58,19 @@
                 <div class="bread-crumbs-item"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
-                <div class="bread-crumbs-item"><a id="group-link" href="#"></a></div>
+                <div class="bread-crumbs-item"><a href="">PH15_PAGE_NAME</a></div>
             </div>
             <main class="container">
-                
                 <div class="container">
                     <ul class="group-page-header list">
                         <li><h1 id="group-name-header"></h1></li>
-                       
                     </ul>
                 </div>
-
-                    <div class="creating-pairs-list-name">
-                        <div class="cp-list--input">
-                            <input class="cp-list--input-name" type="text" placeholder="Enter the name of list">
-                        </div>
-                        <button class="member-page-dell-btn cp-list--btn" type="button" id="#">
-                            <svg class="group-info-edit-btn-icon">
-                                <use href="./img/icons.svg#icon-checkmark"></use>
-                            </svg>
-                        </button>
+                <div class="creating-pairs-list-name">
+                    <div class="cp-list--input">
+                        <input class="cp-list--input-name" type="text" placeholder="PH3_NAME_PLACEHOLDER">
                     </div>
+                </div>
                 <!-- name of list after enter
                     <div class="creating-pairs-list-name">
                         <div class="pairs-list-name--title">Name</div>
@@ -90,126 +81,108 @@
                         </button>
                     </div>
                end -->
-                    <div class="tab">
-                        <button class="tablinks" onclick="openPage(event, 'automatic-sorting')" id="defaultOpen">Automatic sorting </button>
-                        <button class="tablinks" onclick="openPage(event, 'manual-sorting')">Manual sorting </button>
-                    </div>
+                <div class="tab">
+                    <button class="tablinks" id="tab1">PH1_AUTOSORT_TAB</button>
+                    <button class="tablinks" id="tab2">PH2_MANUAL_TAB</button>
+                </div>
                 <!--Automatic sorting block start-->
-                    <div id="automatic-sorting" class="tabcontent-sort">
-                        <ul class="list cpl-automatic-sorting">
-                            <div class="cpl-sorting-first-column">
-                                <ul class="list">
-                                    <li class="cpl-automatic-sorting--item">1</li>
-                                    <li class="cpl-automatic-sorting--item">2</li>
-                                    <li class="cpl-automatic-sorting--item">3</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="list">
-                                    <li>
-                                        <button class="cpl-automatic-sorting-arrow-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="cpl-automatic-sorting-arrow-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="cpl-sorting-second-column">
-                                <ul class="list">
-                                    <li class="cpl-automatic-sorting--item">1</li>
-                                    <li class="cpl-automatic-sorting--item">2</li>
-                                    <li class="cpl-automatic-sorting--item">3</li>
-                                </ul>
-                            </div>
-                        </ul>
-                        
-                        <ul class="list cpl-auto-sort-criteria">
-                            <div>
-                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">Distance:</span></div>
-                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">Age:</span></div>
-                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title"> Weight:</span></div>
-                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">Final:</span></div>
-                            </div>
-                            <div>
-                                <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-mg"></span><input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                                <div class="cpl-auto-sort-criteria--item">Min: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                                <div class="cpl-auto-sort-criteria--item">Min: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                                <div class="cpl-auto-sort-criteria--item">Min: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                            </div>
-                            <div>
-                                <div class="cpl-auto-sort-criteria--item"></div>
-                                <div class="cpl-auto-sort-criteria--item">Max: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                                <div class="cpl-auto-sort-criteria--item">Max: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                                <div class="cpl-auto-sort-criteria--item">Max: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
-                            </div>
-                        </ul>
+                <div id="tabcontent1" class="tabcontent">
+                    <ul class="list cpl-automatic-sorting">
+                        <div class="cpl-sorting-first-column">
+                            <div>PH12_ACTIVE_GROUPS_LIST</div>
+                            <ul class="list" id="active-groups-list">
+                                <li class="cpl-automatic-sorting--item">#group-name</li>
+                                <template id="active-group-template"><li class="cpl-automatic-sorting--item">#group-name</li></template>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="list">
+                                <li>
+                                    <button class="cpl-automatic-sorting-arrow-btn" id="delete-all-groups-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="cpl-automatic-sorting-arrow-btn" id="add-all-groups-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cpl-sorting-second-column">
+                            <div>PH13_UNACTIVE_GROUPS_LIST</div>
+                            <ul class="list" id="unactive-groups-list">
+                                <li class="cpl-automatic-sorting--item">#group-name</li>
+                                <template id="unactive-group-template"><li class="cpl-automatic-sorting--item">#group-name</li></template>
+                            </ul>
+                        </div>
+                    </ul>
+                    
+                    <ul class="list cpl-auto-sort-criteria">
+                        <div>
+                            <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">PH4_DISTANCE:</span></div>
+                            <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">PH5_AGE:</span></div>
+                            <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">PH6_WEIGHT:</span></div>
+                            <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-title">PH7_FINAL:</span></div>
+                        </div>
+                        <div>
+                            <div class="cpl-auto-sort-criteria--item"><span class="cpl-auto-sort-criteria-mg"></span><input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            <div class="cpl-auto-sort-criteria--item">PH8_MIN: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            <div class="cpl-auto-sort-criteria--item">PH8_MIN: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            <div class="cpl-auto-sort-criteria--item">PH8_MIN: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                        </div>
+                        <div>
+                            <div class="cpl-auto-sort-criteria--item"></div>
+                            <div class="cpl-auto-sort-criteria--item">PH9_MAX: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            <div class="cpl-auto-sort-criteria--item">PH9_MAX: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                            <div class="cpl-auto-sort-criteria--item">PH9_MAX: <input class="cpl-auto-sort-criteria--item-input" type="text"></div>
+                        </div>
+                    </ul>
 
-                    </div>
+                </div>
                 <!--Manual sorting block start-->
-                    <div id="manual-sorting" class="tabcontent-sort">
-                        <ul class="list cpl-manual-sorting">
-                            <div class="cpl-sorting-first-column">
-                                <ul class="list">
-                                    <li class="cpl-manual-sorting--item">1</li>
-                                    <li class="cpl-manual-sorting--item">2</li>
-                                    <li class="cpl-manual-sorting--item">3</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="list">
-                                    <li>
-                                        <button class="cpl-manual-sorting-arrow-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="cpl-manual-sorting-arrow-btn">
-                                            <svg class="group-info-edit-btn-icon">
-                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="cpl-sorting-second-column">
-                                <ul class="list">
-                                    <li class="cpl-manual-sorting--item">1</li>
-                                    <li class="cpl-manual-sorting--item">2</li>
-                                    <li class="cpl-manual-sorting--item">3</li>
-                                </ul>
-                            </div>
-                        </ul>
-                    </div>
-
+                <div id="tabcontent2" class="tabcontent">
+                    <ul class="list cpl-manual-sorting">
+                        <div class="cpl-sorting-first-column">
+                            <div>PH10_ACTIVE_PAIRS_LIST</div>
+                            <ul class="list" id="active-pairs-list">
+                                <li class="cpl-manual-sorting--item">#pair-name</li>
+                                <template id="active-pair-template"><li class="cpl-manual-sorting--item">#pair-name</li></template>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="list">
+                                <li>
+                                    <button class="cpl-manual-sorting-arrow-btn" id="delete-all-pairs-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="cpl-manual-sorting-arrow-btn" id="add-all-pairs-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cpl-sorting-second-column">
+                            <div>PH11_UNACTIVE_PAIRS_LIST</div>
+                            <ul class="list" id="unactive-pairs-list">
+                                <li class="cpl-manual-sorting--item">#pair-name</li>
+                                <template id="unactive-pair-template"><li class="cpl-manual-sorting--item">#pair-name</li></template>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
             </main>
-    </div>
-    
-    <script>
-        function openPage(evt, pageName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent-sort");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(pageName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-        
-        document.getElementById("defaultOpen").click();
-        </script>
-</body>
+        </div>
+        <script src="./scripts/create-place-page.js" type="module"></script> 
+    </body>
 </html>
