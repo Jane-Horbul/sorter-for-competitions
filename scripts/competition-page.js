@@ -46,6 +46,7 @@ function sportsmanPageElementAdd(sp){
         var placeholders = markup.sportsmen.getPlaceholders(sp, departmentLink);
         var newItem = createPageItem(template, placeholders);
         markup.sportsmen.getTable().append(newItem); 
+        onClick(markup.sportsmen.getDelBtn(sp), function(){server.competition.delSprotsman(page.cid, sp.getId())});
     }
 }
 
@@ -101,7 +102,7 @@ function sportsmansAddListSend() {
         }
         sportsmansAddList[i].setDisciplines(sportsDisc);
     }
-    server.competition.addSprotsmans(page.cid, sportsmansAddList);
+    server.competition.addSprotsmen(page.cid, sportsmansAddList);
 }
 
 function departamentSportsmanElementAdd(sp){

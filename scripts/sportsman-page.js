@@ -21,17 +21,44 @@ console.log(sportsmanInfo);
 console.log(sportsmanStats);
 
 /* ------------------- STATISTICS ----------------------------*/
+function changeParmition(cs, permCheckbox){
+    console.log("Change admittion for " + cs.getCompetitionName());
+    server.sportsman.admitChange(page.sid, cs.getCompetitionId(), permCheckbox.checked ? "true" : "false");
+}
+
+function changeDiscipline(cs, discCheckbox){
+    if(discCheckbox.checked){
+        console.log("Add discipline " +  discCheckbox.name + " for "+ cs.getCompetitionName());
+        server.sportsman.addDiscipline(page.sid, cs.getCompetitionId(), discCheckbox.name);
+    } else {
+        console.log("Delete discipline " +  discCheckbox.name + " for "+ cs.getCompetitionName());
+        server.sportsman.delDiscipline(page.sid, cs.getCompetitionId(), discCheckbox.name);
+    }
+}
 
 function fillStatistics() {
     sportsmanStats.forEach(cs => {
-        markup.statistics.getCompStatsList().append(markup.statistics.createCompStatisticItem(cs));
+        markup.statistics.getCompStatsList().append(markup.statistics.createCompStatisticItem(cs, page.sid));
         markup.statistics.setAdmition(cs);
-
+        var admitCheckbox = markup.statistics.getAdmitionObj(cs);
+        if(client.isRoot() || client.isAdmin() || client.isTrainer())
+            onClick(admitCheckbox, function(){changeParmition(cs, admitCheckbox);});
+        
         departmentInfo.getDisciplines().forEach(disc => {
-            var item = markup.statistics.createDisciplineItem(cs, disc);
-            markup.statistics.getDisciplinesList(cs).append(item);
+            var isSet = cs.getDisciplines().find( csDisc => csDisc.localeCompare(disc) == 0) != undefined ? true : false;
+            if(client.isRoot() || client.isAdmin() || client.isTrainer()) {
+                var item = markup.statistics.createDisciplineItem(cs, disc);
+                markup.statistics.getDisciplinesList(cs).append(item);
+                var discBtn = markup.statistics.getDisciplineObj(cs, disc);
+                onClick(discBtn, function(){changeDiscipline(cs, discBtn);});
+                if(isSet)
+                    markup.statistics.setDiscipline(cs, disc);
+            } else if(isSet){
+                var item = markup.statistics.createDisciplineItem(cs, disc);
+                markup.statistics.getDisciplinesList(cs).append(item);
+                markup.statistics.setDiscipline(cs, disc);
+            }
         });
-        cs.getDisciplines().forEach(disc => markup.statistics.setDiscipline(cs, disc));
         var csPairs = cs.getPairs();
         cs.getGroupsStats().forEach(gs => {
             markup.statistics.getGroupStatsList(cs).append(markup.statistics.createGroupStatItem(cs, gs));

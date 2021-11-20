@@ -33,9 +33,11 @@ const backendLinks = {
     GROUP_FORMULA_DEL(cid, gid)                 {return "group-formula-del?cid=" + cid + "&gid=" + gid;},
     
     COMPETITION_SPORTSMEN_GET(cid, sid)         {return "competition-sports-get?cid=" + cid + "&sid=" + sid;},
-    COMPETITION_SPORTSMEN_INFO_EDIT(cid, sid)   {return "competition-sports-info-edit?cid=" + cid + "&sid=" + sid;},
     COMPETITION_SPORTSMEN_GROUP_ADD(cid)        {return "competition-sports-group-add?cid=" + cid;},
     COMPETITION_SPORTSMEN_GROUP_DEL(cid, sid)   {return "competition-sports-group-del" + cid + "&sid=" + sid;},
+    COMPETITION_SPORTSMEN_DISC_ADD(cid, sid)    {return "competition-stat-disc_add?cid=" + cid + "&sid=" + sid;},
+    COMPETITION_SPORTSMEN_DISC_DEL(cid, sid)    {return "competition-stat-disc_del?cid=" + cid + "&sid=" + sid;},
+    COMPETITION_SPORTSMEN_ADMIT_CHANGE(cid, sid){return "competition-stat-perm-change?cid=" + cid + "&sid=" + sid;},
 
     LOGIN:                                      "admin-login",
     CLIENT_STATUS_GET:                          "client-status-get"
@@ -154,6 +156,11 @@ function arrayToPairs(arr) {
     return res;
 }
 
+function formCompLink(cid)
+{
+    return window.location.href.substr(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid;
+}
+
 function arrayToCompStats(arr) {
     var res = new Array(0);
     console.log(arr);
@@ -167,6 +174,7 @@ function arrayToCompStats(arr) {
             isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
             getGroupsStats()        {return arrayToGs(this.params.get("GroupsStatistic"), this.params.get("CompetitionId"));},
             getPairs()              {return arrayToPairs(this.params.get("Pairs"));},
+            getCompetitionLink()    {return formCompLink(this.getCompetitionId())},
 
             setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
             setCompetitionName(v)   {return this.params.set("CompetitionName", v);},
@@ -515,7 +523,8 @@ export const server = {
         edit(cp)                            {editCompetition(cp);},
         create(cp)                          {createCompetition(cp);},
         sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid), false);},
-        addSprotsmans(cid, ids)             {addCpSportsmans(cid, ids);},
+        addSprotsmen(cid, ids)              {addCpSportsmans(cid, ids);},
+        delSprotsman(cid, sid)              {sendSingleValue(backendLinks.COMPETITION_SPORTSMAN_DEL(cid, sid), sid, true);},
         formPairs(cid)                      {return sendRequest(backendLinks.COMPETITION_GROUPS_PAIRS_FORM(cid), false);}
     },
     group: {
@@ -536,6 +545,9 @@ export const server = {
         getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_STAT_GET(sid), true));},
         create(sp)                          {createSportsman(sp);},
         remove(sid)                         {return sendSingleValue(backendLinks.DEPARTMENT_SPORTSMEN_DEL(sid), sid, false);},
-        edit(sid, sp)                       {editSportsman(sid, sp);}
+        edit(sid, sp)                       {editSportsman(sid, sp);},
+        addDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_ADD(cid, sid), disc, false);},
+        delDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_DEL(cid, sid), disc, false);},
+        admitChange(sid, cid, stat)         {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_ADMIT_CHANGE(cid, sid), stat, false);},
     }
 }

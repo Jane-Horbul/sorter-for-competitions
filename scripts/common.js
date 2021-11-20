@@ -103,8 +103,10 @@ export function parseBodyParams(body){
 
 export function unhideSubelements(elem){
     var shadows = elem.querySelectorAll(".js-hidden-element");
-    for (let shadow of shadows)
+    for (let shadow of shadows){
         shadow.classList.remove("js-hidden-element");
+        shadow.disabled = false;
+    }
 }
 
 export function showShadows(client){
@@ -119,8 +121,10 @@ export function showShadows(client){
         shadows = document.querySelectorAll(".js-judge-view");
     else
         return;
-    for (let shadow of shadows)
+    for (let shadow of shadows){
         shadow.classList.remove("js-hidden-element");
+        shadow.disabled = false;
+    }
 }
 
 function langLinkForm(lang){

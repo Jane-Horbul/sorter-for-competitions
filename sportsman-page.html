@@ -193,10 +193,9 @@
                             <div class="comp-statistics-name">
                                 <ul class="list comp-statistics-list">
                                     <li class="comp-statistics-list--item">
-                                        <h2 class="comp-statistics-title">#competition-name</h2>
-                                    </li>
-                                    <li class="comp-statistics-list--item">
-                                        <button class="comp-statistics-btn">PH13_APPLY_BTN</button>
+                                        <a href="#competiton-link" class="title-of-competition-list-item">
+                                            <h2 class="comp-statistics-title">#competition-name</h2>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -205,34 +204,34 @@
                                     <h3 class="comp-statistics-main-title">PH14_COMP_RES</h3>
                                     <table class="comp-statistics-main-res--table">
                                         <tbody>
-                                        <tr>
-                                        <td class="comp-statistics-main-res--td">
-                                            <p class="comp-statistics-main-res--item"><strong>PH15_PLACE:</strong></p>
-                                        </td>
-                                        <td class="comp-statistics-main-res--td">
-                                            <p class="comp-statistics-main-res--item">#place-num</p>
-                                        </td>
-                                        <td class="comp-st-main-res--second-td">
-                                            <p class="comp-statistics-main-res--item"><strong>PH16_PAIRS_NUM:</strong></p>
-                                        </td>
-                                        <td class="comp-statistics-main-res--td">
-                                            <p class="comp-statistics-main-res--item">#place-num</p>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td class="comp-statistics-main-res--td">
-                                            <p class="comp-statistics-main-res--item"><strong>PH17_WINS_NUM:</strong></p>
-                                        </td>
-                                        <td class="comp-statistics-main-res--td">
-                                            <p class="comp-statistics-main-res--item">#wins-num</p>
-                                        </td>
-                                        <td class="comp-st-main-res--second-td">
-                                            <p class="comp-statistics-main-res--item"><strong>PH18_SCORE:</strong></p>
-                                        </td>
-                                        <td class="comp-statistics-main-res--td">
-                                            <p class="comp-statistics-main-res--item">#score</p>
-                                        </td>
-                                        </tr>
+                                            <tr>
+                                                <td class="comp-st-main-res--second-td">
+                                                    <p class="comp-statistics-main-res--item"><strong>PH15_GROUPS_NUM:</strong></p>
+                                                </td>
+                                                <td class="comp-statistics-main-res--td">
+                                                    <p class="comp-statistics-main-res--item">#groups-num</p>
+                                                </td>
+                                                <td class="comp-statistics-main-res--td">
+                                                    <p class="comp-statistics-main-res--item"><strong>PH18_SCORE:</strong></p>
+                                                </td>
+                                                <td class="comp-statistics-main-res--td">
+                                                    <p class="comp-statistics-main-res--item">#score</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="comp-st-main-res--second-td">
+                                                    <p class="comp-statistics-main-res--item"><strong>PH16_PAIRS_NUM:</strong></p>
+                                                </td>
+                                                <td class="comp-statistics-main-res--td">
+                                                    <p class="comp-statistics-main-res--item">#pairs-num</p>
+                                                </td>
+                                                <td class="comp-statistics-main-res--td">
+                                                    <p class="comp-statistics-main-res--item"><strong>PH17_WINS_NUM:</strong></p>
+                                                </td>
+                                                <td class="comp-statistics-main-res--td">
+                                                    <p class="comp-statistics-main-res--item">#wins-num</p>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                         </table>
                                 </div>
@@ -244,7 +243,7 @@
                                 <div class="comp-statistics-main-admition">
                                     <h3 class="comp-statistics-main-title"></h3>
                                     <div class="comp-statistics-main-admition-checkbox">
-                                        <input class="input-to-choose-type--admition" type="checkbox" id="#admition-id" name="admitted">
+                                        <input class="input-to-choose-type--admition js-root-view js-admin-view" type="checkbox" id="#admition-id" name="admitted" disabled>
                                         <label class="label-to-choose-type--admition" for="#admition-id">PH20_ADMIT</label>
                                     </div>
                                 </div>
@@ -265,7 +264,7 @@
                     </template>
                     <template id="discipline-item-template-id">
                         <li>                                
-                            <input class="input-to-choose-type" type="checkbox" id="#disc-id" name="#disc-name">
+                            <input class="input-to-choose-type js-root-view js-admin-view" type="checkbox" id="#disc-id" name="#disc-name" disabled>
                             <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
                         </li>
                     </template>

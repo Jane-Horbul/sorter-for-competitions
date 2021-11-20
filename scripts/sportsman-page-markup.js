@@ -3,19 +3,25 @@ import {getIfDefined, createPageItem} from "./common.js"
 const medals = {
     "1": "./img/gold-m-2.png",
     "2": "./img/silver-m.png",
-    "3": "./img/cooper-m.png"
+    "3": "./img/copper-m.png"
 }
 
 export const markup = {
     statistics: {
         competitionsListId:         "tabcontent2",
         competitionStatTemplate:    "competition-item-template-id",
-        getAdmitionId(cs)           { return "comp-admition-" + cs.getCompetitionId(); },
-        setAdmition(cs)             { document.getElementById(this.getAdmitionId(cs)).checked = cs.isAdmitted(); },
-        getCompStatsList()              { return document.getElementById(this.competitionsListId); },
-        createCompStatisticItem(cs)     { return createPageItem(document.getElementById(this.competitionStatTemplate), this.getCompStatPlaceholders(cs)); },
-        getCompStatPlaceholders(cs)     { return {
+        getAdmitionId(cs)                   { return "comp-admition-" + cs.getCompetitionId(); },
+        getAdmitionObj(cs)                  { return document.getElementById(this.getAdmitionId(cs)); },
+        setAdmition(cs)                     { this.getAdmitionObj(cs).checked = cs.isAdmitted(); },
+        getCompStatsList()                  { return document.getElementById(this.competitionsListId); },
+        createCompStatisticItem(cs, spId)   { return createPageItem(document.getElementById(this.competitionStatTemplate), this.getCompStatPlaceholders(cs, spId)); },
+        getCompStatPlaceholders(cs, spId)   { return {
+                "#competiton-link":     cs.getCompetitionLink(),
                 "#competition-name":    cs.getCompetitionName(),
+                "#groups-num":          "" + cs.getGroupsStats().length,
+                "#pairs-num":           "" + cs.getPairs().length,
+                "#wins-num":            "" + cs.getPairs().filter(pair => pair.getWinner().localeCompare(spId) == 0).length,
+                "#score":               "" + 0,
                 "#groups-list-id":      this.getGroupsListId(cs),
                 "#disc-list-id":        this.getDiscListId(cs),
                 "#admition-id":         this.getAdmitionId(cs)
@@ -26,7 +32,8 @@ export const markup = {
         disciplineStatTemplate:     "discipline-item-template-id",
         getDiscListId(cs)           { return this.disciplinesListId + cs.getCompetitionId(); },
         getDisciplineId(cs, d)      { return d + "-" + cs.getCompetitionId(); },
-        setDiscipline(cs, d)        { document.getElementById(this.getDisciplineId(cs, d)).checked = true;},
+        getDisciplineObj(cs, d)     { return document.getElementById(this.getDisciplineId(cs, d)); },
+        setDiscipline(cs, d)        { this.getDisciplineObj(cs, d).checked = true;},
         getDisciplinesList(cs)          { return document.getElementById(this.getDiscListId(cs)); },
         createDisciplineItem(cs, d)     { return createPageItem(document.getElementById(this.disciplineStatTemplate), this.getDisciplinePlaceholders(cs, d)); },
         getDisciplinePlaceholders(cs, d){ return {

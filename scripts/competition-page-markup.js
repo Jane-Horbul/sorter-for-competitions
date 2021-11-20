@@ -36,7 +36,8 @@ export const markup = {
         getDiscPlaceholders(n, id, spId)    {return {   "#disc-name":   n, 
                                                         "#disc-id":     ("discipline-" + spId + "-" + id)};
                                                 },
-        
+
+        getDelBtn(sp)               { return document.getElementById("remove-comp-sport-" + sp.getId());},
         getAddBtn()                 { return document.getElementById("sportsmans-add-list-send-btn");},
         getSortSpBtn()              { return document.getElementById("sort-members-btn");}
     },

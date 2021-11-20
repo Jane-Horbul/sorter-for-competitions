@@ -78,7 +78,6 @@ function sportsmanRemove(id){
             break;
         }
     }
-    console.log("Del id: " + id);
     server.group.excludeSportsman(page.cid, page.gid, id);
 }
 

@@ -71,7 +71,7 @@
                         <div class="main-tables-item">
                             <table class="dynamic-table" id="members-table">
                                 <tr>
-                                    <th class="group-info-table-title all-table-title" colspan="9"><span>PH6_SPORTS_TBL</span>
+                                    <th class="group-info-table-title all-table-title" colspan="10"><span>PH6_SPORTS_TBL</span>
                                         <!--Add member button start-->
                                         <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
                                             <button class="group-page-ref-btn" type="button">
@@ -93,19 +93,27 @@
                                     <td class="secondary-title-tables--text">PH13_SPORT_QUAL</td>
                                     <td class="secondary-title-tables--text">PH14_SPORT_ADMIT</td>
                                     <td class="secondary-title-tables--text">PH15_SPORT_GR_NUM</td>
+                                    <td class="column-for-button secondary-title-two-tables"></td>
                                 </tr>
                             </table>
                             <template id="member-template">
-                                <tr onclick="window.location.href='#sportsman-link'; return false">
-                                    <td class="secondary-tables--td">#sp-surname</td>
-                                    <td class="secondary-tables--td">#sp-name</td>
-                                    <td class="secondary-tables--td">#sp-age</td>
-                                    <td class="secondary-tables--td">#sp-weight</td>
-                                    <td class="secondary-tables--td">#sp-sex</td>
-                                    <td class="secondary-tables--td">#sp-team</td>
-                                    <td class="secondary-tables--td">#sp-qual</td>
-                                    <td class="secondary-tables--td">#sp-admit</td>
-                                    <td class="secondary-tables--td">#sp-gr-num</td>
+                                <tr>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-surname</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-name</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-age</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-weight</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-sex</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-team</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-qual</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-admit</td>
+                                    <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-gr-num</td>
+                                    <td class="column-for-button secondary-title-two-tables"> 
+                                        <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" id="remove-comp-sport-#sp-id"  type="button">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                            </svg>
+                                        </button>
+                                    </td>
                                 </tr>
                             </template>
 
