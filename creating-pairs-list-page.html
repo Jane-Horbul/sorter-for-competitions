@@ -91,8 +91,11 @@
                         <div class="cpl-sorting-first-column">
                             <div>PH12_ACTIVE_GROUPS_LIST</div>
                             <ul class="list" id="active-groups-list">
-                                <li class="cpl-automatic-sorting--item">#group-name</li>
-                                <template id="active-group-template"><li class="cpl-automatic-sorting--item">#group-name</li></template>
+                                <template id="active-group-template">
+                                    <li id="active-group-id-#group-id" class="cpl-automatic-sorting--item">
+                                        <button>#group-name</button>
+                                    </li>
+                                </template>
                             </ul>
                         </div>
                         <div>
@@ -116,8 +119,11 @@
                         <div class="cpl-sorting-second-column">
                             <div>PH13_UNACTIVE_GROUPS_LIST</div>
                             <ul class="list" id="unactive-groups-list">
-                                <li class="cpl-automatic-sorting--item">#group-name</li>
-                                <template id="unactive-group-template"><li class="cpl-automatic-sorting--item">#group-name</li></template>
+                                <template id="unactive-group-template">
+                                    <li id="unactive-group-id-#group-id" class="cpl-automatic-sorting--item">
+                                        <button >#group-name</button>
+                                    </li>
+                                </template>
                             </ul>
                         </div>
                     </ul>
@@ -150,8 +156,11 @@
                         <div class="cpl-sorting-first-column">
                             <div>PH10_ACTIVE_PAIRS_LIST</div>
                             <ul class="list" id="active-pairs-list">
-                                <li class="cpl-manual-sorting--item">#pair-name</li>
-                                <template id="active-pair-template"><li class="cpl-manual-sorting--item">#pair-name</li></template>
+                                <template id="attached-pair-template">
+                                    <li id="attached-pair-id-#pair-id" class="cpl-manual-sorting--item">
+                                        <button >#pair-id</button>
+                                    </li>
+                                </template>
                             </ul>
                         </div>
                         <div>
@@ -175,8 +184,11 @@
                         <div class="cpl-sorting-second-column">
                             <div>PH11_UNACTIVE_PAIRS_LIST</div>
                             <ul class="list" id="unactive-pairs-list">
-                                <li class="cpl-manual-sorting--item">#pair-name</li>
-                                <template id="unactive-pair-template"><li class="cpl-manual-sorting--item">#pair-name</li></template>
+                                <template id="unactive-pair-template">
+                                    <li id="detached-pair-id-#pair-id" class="cpl-manual-sorting--item">
+                                        <button >#pair-id</button>
+                                    </li>
+                                </template>
                             </ul>
                         </div>
                     </ul>

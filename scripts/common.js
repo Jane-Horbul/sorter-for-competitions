@@ -1,5 +1,3 @@
-import {server} from "./communication.js"
-
 export const commonStrings = {
     arrDivider: ", ",
     pairWinner(id)  {return "Winner of pair " + id;}  

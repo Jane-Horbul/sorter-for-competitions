@@ -444,20 +444,13 @@ function createGroup(cid, gr){
      params.set("group-name",        gr.getName());
      params.set("group-division",    gr.getDiscipline());
      params.set("form-system",       gr.getFormSystem());
-    if(gr.getSex() != undefined)
-         params.set("sex", gr.getSex());
-    if(gr.getAgeMin() != undefined){
-         params.set("age-min", gr.getAgeMin());
-         params.set("age-max", gr.getAgeMax());
-    }
-    if(gr.getWeightMin() != undefined){
-         params.set("weight-min", gr.getWeightMin());
-         params.set("weight-max", gr.getWeightMax());
-    }
-    if(gr.getQualMin() != undefined){
-         params.set("qualification-min", gr.getQualMin());
-         params.set("qualification-max", gr.getQualMax());
-    }
+    if(gr.getSex() != undefined)        params.set("sex", gr.getSex());
+    if(gr.getAgeMin() != undefined)     params.set("age-min", gr.getAgeMin());
+    if(gr.getAgeMax() != undefined)     params.set("age-max", gr.getAgeMax());
+    if(gr.getWeightMin() != undefined)  params.set("weight-min", gr.getWeightMin());
+    if(gr.getWeightMax() != undefined)  params.set("weight-max", gr.getWeightMax());
+    if(gr.getQualMin() != undefined)    params.set("qualification-min", gr.getQualMin());
+    if(gr.getQualMax() != undefined)    params.set("qualification-max", gr.getQualMax());
     sendParametersList(backendLinks.COMPETITION_GROUP_ADD(cid), params, true);
 }
 

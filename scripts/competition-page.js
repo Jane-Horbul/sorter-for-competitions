@@ -214,6 +214,12 @@ function isQualificationOk(){
     return true;
 }
 
+function isEmptyField(val){
+    if(val == "" || val == undefined || val.localeCompare("Not applicable") == 0)
+        return true;
+    return false;
+}
+
 function sendGroupForm() {
     if(!isMainGroupParamsOk() || !isAgeOk() || !isWeightOk() || !isQualificationOk())
         return;
@@ -222,19 +228,19 @@ function sendGroupForm() {
     newGroup.setDiscipline(markup.groups.getDisciplineInput().value);
     newGroup.setFormSystem(markup.groups.getSystemInput().value);
 
-    if(markup.groups.getSexInput().value != "Not applicable")
+    if(!isEmptyField(markup.groups.getSexInput().value))
         newGroup.setSex(markup.groups.getSexInput().value);
-    if(markup.groups.getAgeMinInput().value != "")
+    if(!isEmptyField(markup.groups.getAgeMinInput().value))
         newGroup.setAgeMin(markup.groups.getAgeMinInput().value);
-    if(markup.groups.getAgeMaxInput().value != "")
+    if(!isEmptyField(markup.groups.getAgeMaxInput().value))
         newGroup.setAgeMax(markup.groups.getAgeMaxInput().value);
-    if(markup.groups.getWeightMinInput().value != "")
+    if(!isEmptyField(markup.groups.getWeightMinInput().value))
         newGroup.setWeightMin(markup.groups.getWeightMinInput().value);
-    if(markup.groups.getWeightMaxInput().value != "")
+    if(!isEmptyField(markup.groups.getWeightMaxInput().value))
         newGroup.setWeightMax(markup.groups.getWeightMaxInput().value);
-    if(markup.groups.getQualMinInput().value != "Not applicable")
+    if(!isEmptyField(markup.groups.getQualMinInput().value))
         newGroup.setQualMin(markup.groups.getQualMinInput().value);
-    if(markup.groups.getQualMaxInput().value != "Not applicable")
+    if(!isEmptyField(markup.groups.getQualMaxInput().value))
         newGroup.setQualMax(markup.groups.getQualMaxInput().value);
     server.group.create(page.cid, newGroup);
 }
