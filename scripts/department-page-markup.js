@@ -1,4 +1,5 @@
 import {getQualNameByValue} from "./department-page.js"
+import {checkers} from "./common.js"
 
 export const markup = {
     login:          {
@@ -51,7 +52,7 @@ export const markup = {
         getTemplate()                   { return document.getElementById("competition-template");},
         getAddBtn()                     { return document.getElementById("send-competition-form-btn");},
     
-        getDateInterval(d1, d2)         { return (0 == d1.localeCompare(d2)) ? d1 : d1 + " - " + d2;},
+        getDateInterval(d1, d2)         { return checkers.strEquals(d1, d2) ? d1 : (d1 + " - " + d2);},
         getPlaceholders(cp, dp)         { return {
                                                 "#departmentId":        dp.getId(),
                                                 "#competitionId":       cp.getId(),
@@ -67,10 +68,17 @@ export const markup = {
         getAgeInput()                   { return document.getElementById("new-member-age").value;},
         getWeightInput()                { return document.getElementById("new-member-weight").value;},
         getSexInput()                   { return document.getElementById("new-member-sex-male").checked ? "male" : "female";},
-        getTeamInput()                  { return document.getElementById("new-member-team").value;},
+        getTrainerInput()               { return document.getElementById("new-member-trainer").value;},
         getQualificationInput()         { return document.getElementById("new-member-qualifications").value;},
-        getOneMoreInput()               { return document.getElementById("nm-more-than-one").value;},
+        getOneMoreInput()               { return document.getElementById("add-one-more-sp").value;},
         
+        getTrainersList()               { return document.getElementById("new-member-trainer");},
+        getTrainerTemplate()            { return document.getElementById("new-member-trainer-temp");},
+        getTrainerPlaceholders(tr)      { return {
+                                                "#sports-trainer-id":      tr.getId(),
+                                                "#sports-trainer-name":    tr.getSurname() + " " + tr.getName()
+                                                };
+                                        },
         getQualList()                   { return document.getElementById("new-member-qualifications");},
         getQualTemplate()               { return document.getElementById("new-member-qual-temp");},
         getQualPlaceholders(n, v)       { return {
@@ -94,10 +102,31 @@ export const markup = {
                                                 "#sportsman-link":  window.location.href.split("#")[0] + sp.getLink()
                                             };
                                         },
-        nameAlert()                     { alert("Empty member name!"); },
-        surnameAlert()                  { alert("Empty member surname!"); },
-        weightAlert()                   { alert("Bad weight value. Enter number only."); },
-        ageAlert()                      { alert("Bad Date of Birth value. Enter it in format dd.mm.yy"); },
+    },
+    trainer: {
+        getNameInput()                  { return document.getElementById("new-trainer-name").value;},
+        getSurnameInput()               { return document.getElementById("new-trainer-surname").value;},
+        getAgeInput()                   { return document.getElementById("new-trainer-age").value;},
+        getSexInput()                   { return document.getElementById("new-trainer-sex-male").checked ? "male" : "female";},
+        getTeamInput()                  { return document.getElementById("new-trainer-team").value;},
+        getRegionInput()                { return document.getElementById("new-trainer-region").value;},
+        getEmailInput()                 { return document.getElementById("new-trainer-email").value;},
+        getOneMoreInput()               { return document.getElementById("add-one-more-tr").value;},
+        
+        getTable()                      { return document.getElementById("trainers-table");},
+        getTemplate()                   { return document.getElementById("trainer-template");},
+        getAddBtn()                     { return document.getElementById("trainer-form-send-btn");},
+    
+        getPlaceholders(tr)             { return {
+                                                "#tr-surname":      tr.getSurname(),
+                                                "#tr-name":         tr.getName(),
+                                                "#tr-bd":           tr.getFormatedBirth("dd.mm.yy"),
+                                                "#tr-sex":          tr.getSex(),
+                                                "#tr-team":         tr.getTeam(),
+                                                "#tr-region":       tr.getRegion(),
+                                                "#trainer-link":    window.location.href.split("#")[0] + tr.getLink()
+                                            };
+                                        }
     },
     departament: {
         getNameInput()                  { return document.getElementById("name-info-input");},

@@ -1,4 +1,4 @@
-import {getIfDefined, createPageItem} from "./common.js"
+import {checkers, createPageItem} from "./common.js"
 
 const medals = {
     "1": "./img/gold-m-2.png",
@@ -67,8 +67,8 @@ export const markup = {
         getPairsList(cs, gs)        { return document.getElementById(this.getPairsListId(cs, gs)); },
         createPairsItem(pair)       { return createPageItem(document.getElementById(this.pairStatTemplate), this.getPairPlaceholders(pair)); },
         getPairPlaceholders(pair)   { return {
-                "#pair-number":     getIfDefined(pair.getNumber(), ""),
-                "#pairs-list":      getIfDefined(pair.getPairsList(), ""),
+                "#pair-number":     checkers.getIfDefined(pair.getNumber(), ""),
+                "#pairs-list":      checkers.getIfDefined(pair.getPairsList(), ""),
                 "#pair-time":       "00:00 (20.10)",
                 "#pair-result":     "Lose",
                 "#pair-style":      "sp-st-group-card-table--red"
@@ -77,65 +77,48 @@ export const markup = {
     },
 
     sportsman: {
-        pageNameId:         "page-name",
-        pageNameLinkId:     "page-name-link",
-        depLinkId:          "department-link",
-        sportsLinkId:       "sportsman-link",
-        sportsHeaderId:     "sportsman-header",
+        setPageName(name)           {document.getElementById("page-name").innerHTML = name;},
+        setPageNameLink(link)       {document.getElementById("page-name-link").setAttribute("href", link);},
+        setDepartmentName(name)     {document.getElementById("department-link").innerHTML = name;},
+        setDepartmentLink(link)     {document.getElementById("department-link").setAttribute("href", link);},
+        setSportsmanName(name)      {document.getElementById("sportsman-link").innerHTML = name;},
+        setSportsmanLink(link)      {document.getElementById("sportsman-link").setAttribute("href", link);},
+        setSportsmanHeader(name)    {document.getElementById("sportsman-header").innerHTML = name;},
+        
+        getInfoId()                 {return document.getElementById("sportsman-info-id");},
+        getInfoName()               {return document.getElementById("sportsman-info-name");},
+        getInfoSurname()            {return document.getElementById("sportsman-info-surname");},
+        getInfoSex()                {return document.getElementById("sportsman-info-sex");},
+        getInfoAge()                {return document.getElementById("sportsman-info-age");},
+        getInfoWeight()             {return document.getElementById("sportsman-info-weight");},
+        getInfoQual()               {return document.getElementById("sportsman-info-qual");},
+        getInfoTrainer()            {return document.getElementById("sportsman-info-trainer");},
+        getInfoTeam()               {return document.getElementById("sportsman-info-team");},
+        getInfoRegion()             {return document.getElementById("sportsman-info-region");},
+
+        getNameInput()              { return document.getElementById("sports-input-name");},
+        getNameInputTemplate()      { return document.getElementById("sports-input-name-template").cloneNode(true).content;},
+        getSurnameInput()           { return document.getElementById("sports-input-surname");},
+        getSurnameInputTemplate()   { return document.getElementById("sports-input-surname-template").cloneNode(true).content;},
+        getSexInput()               { return document.getElementById("sports-input-sex");},
+        getSexInputTemplate()       { return document.getElementById("sports-input-sex-template").cloneNode(true).content;},
+        getAgeInput()               { return document.getElementById("sports-input-age");},
+        getAgeInputTemplate()       { return document.getElementById("sports-input-age-template").cloneNode(true).content;},
+        getWeightInput()            { return document.getElementById("sports-input-weight");},
+        getWeightInputTemplate()    { return document.getElementById("sports-input-weight-template").cloneNode(true).content;},
+        getQualInput()              { return document.getElementById("sports-input-qulification");},
+        getQualInputTemplate()      { return document.getElementById("sports-input-qulification-template").cloneNode(true).content;},
+        getTrainerInput()           { return document.getElementById("sports-input-trainer");},
+        getTrainerInputTemplate()   { return document.getElementById("sports-input-trainer-template").cloneNode(true).content;},
     
-        setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
-        setPageNameLink(link)       {document.getElementById(this.pageNameLinkId).setAttribute("href", link);},
-        setDepartmentName(name)     {document.getElementById(this.depLinkId).innerHTML = name;},
-        setDepartmentLink(link)     {document.getElementById(this.depLinkId).setAttribute("href", link);},
-        setSportsmanName(name)      {document.getElementById(this.sportsLinkId).innerHTML = name;},
-        setSportsmanLink(link)      {document.getElementById(this.sportsLinkId).setAttribute("href", link);},
-        setSportsmanHeader(name)    {document.getElementById(this.sportsHeaderId).innerHTML = name;},
-    
-        infoIdId:           "sportsman-info-id",
-        infoNameId:         "sportsman-info-name",
-        infoSurnameId:      "sportsman-info-surname",
-        infoSexId:          "sportsman-info-sex",
-        infoAgeId:          "sportsman-info-age",
-        infoWeightId:       "sportsman-info-weight",
-        infoQualId:         "sportsman-info-qual",
-        infoTeamId:         "sportsman-info-team",
-    
-        setInfoId(val)              {document.getElementById(this.infoIdId).innerHTML = val;},
-        setInfoName(val)            {document.getElementById(this.infoNameId).innerHTML = val;},
-        setInfoSurname(val)         {document.getElementById(this.infoSurnameId).innerHTML = val;},
-        setInfoSex(val)             {document.getElementById(this.infoSexId).innerHTML = val;},
-        setInfoAge(val)             {document.getElementById(this.infoAgeId).innerHTML = val;},
-        setInfoWeight(val)          {document.getElementById(this.infoWeightId).innerHTML = val;},
-        setInfoQual(val)            {document.getElementById(this.infoQualId).innerHTML = val;},
-        setInfoTeam(val)            {document.getElementById(this.infoTeamId).innerHTML = val;},
-    
-        inputNameId:         "sports-input-name",
-        inputSurnameId:      "sports-input-surname",
-        inputSexId:          "sports-input-sex",
-        inputAgeId:          "sports-input-age",
-        inputWeightId:       "sports-input-weight",
-        inputQualId:         "sports-input-qulification",
-        inputTeamId:         "sports-input-team",
-    
-        getNameInput()          { return document.getElementById(this.inputNameId);},
-        getSurnameInput()       { return document.getElementById(this.inputSurnameId);},
-        getSexInput()           { return document.getElementById(this.inputSexId);},
-        getAgeInput()           { return document.getElementById(this.inputAgeId);},
-        getWeightInput()        { return document.getElementById(this.inputWeightId);},
-        getQualInput()          { return document.getElementById(this.inputQualId);},
-        getTeamInput()          { return document.getElementById(this.inputTeamId);},
-    
-        createInput(id)             { return document.getElementById((id + "-template")).cloneNode(true).content;},
-        createOption(id, name, val) { var res = document.createElement("option");
-                                        res.setAttribute("id", id);
+        createOption(name, val) { var res = document.createElement("option");
                                         res.value = val;
                                         res.innerHTML = name;
                                         return res;
                                     },
-        getAndCleanPlace(id)        { var pl= document.getElementById(id); pl.innerHTML = ""; return pl;},
     
         delBtnId:           "del-btn-link",
-        editBtnId:          "group-edit-btn",
+        editBtnId:          "sportsman-edit-btn",
     
         setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
         getDelBtn()                 { return document.getElementById(this.delBtnId);},

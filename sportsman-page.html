@@ -74,14 +74,14 @@
                                 <div class="member-info-title">
                                     <span>PH3_SPORT_INFO</span>                                                                         
                                    <div class="js-hidden-element js-root-view js-admin-view">
-                                        <button class="member-info-edit-btn" type="button" id="group-edit-btn">
+                                        <button class="member-info-edit-btn" type="button" id="sportsman-edit-btn">
                                             <svg class="group-info-edit-btn-icon">
                                                 <use href="./img/icons.svg#icon-pencil2"></use>
                                             </svg>
                                         </button>
                                     </div>
                                     <div class="js-invizible-button js-hidden-element js-root-view js-admin-view">
-                                        <button class="member-info-edit-btn" type="button" id="group-edit-btn">
+                                        <button class="member-info-edit-btn" type="button" id="sportsman-edit-btn">
                                             <svg class="group-info-edit-btn-icon">
                                                 <use href="./img/symbol-circle-down-checkmark.svg#icon-checkmark"></use>
                                             </svg>
@@ -94,86 +94,92 @@
                                             <div class="sportsman-foto">
                                                 <img src="./img/sportsman-foto.png" alt="sportsman foto">
                                             </div>
-                                            </li>
-                                    <li>
-                                    <table class="dynamic-table">
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH4_INFO_ID:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--id" id="sportsman-info-id"></div></td>
-                                        </tr>   
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH5_INFO_SURNAME:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-surname"></div></td>
-                                            <template id="sports-input-surname-template">
-                                                <div class="form-field">
-                                                    <input type="text" class="sportsman-info-item--input" id="sports-input-surname"  placeholder="Enter sportsman surname">
-                                                </div>
-                                            </template>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH6_INFO_NAME:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-name"></div>  </td>
-                                            <template id="sports-input-name-template">
-                                                <div class="form-field">
-                                                    <input type="text" class="sportsman-info-item--input" id="sports-input-name"  placeholder="Enter sportsman name">
-                                                </div>
-                                            </template>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH7_INFO_SEX:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-sex"></div> </td>
-                                            <template id="sports-input-sex-template">
-                                                <div class="form-field--option">
-                                                    <select class="sportsman-info-item--sex" name="form-system-of-group" id="sports-input-sex">
-                                                        <option value="Male">CPH07_MALE_SEX</option>
-                                                        <option value="Female">CPH08_FEMALE_SEX</option>
-                                                    </select>
-                                                </div>
-                                            </template>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH8_INFO_BD:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-age"></div>  </td>
-                                            <template id="sports-input-age-template">
-                                                <div class="create-ng--interval">
-                                                    <input type="date" name="age-min" id="sports-input-age" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
-                                                </div>
-                                            </template>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH9_INFO_WEIGHT:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-weight"></div>  </td>
-                                            <template id="sports-input-weight-template">
-                                                <div class="create-ng--interval">
-                                                    <input type="text" name="weight-min" id="sports-input-weight" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
-                                                </div>
-                                            </template>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH10_INFO_QUAL:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-qual"></div> </td>
-                                            <template id="sports-input-qulification-template">
-                                                <div class="create-ng--interval">
-                                                    <select class="sportsman-info-item--qual" id="sports-input-qulification">
-                                                    </select>
-                                                    
-                                                </div>
-                                            </template>
-                                        </tr>
-                                        <tr>
-                                            <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH11_INFO_TEAM:</div> </td>
-                                            <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-team"></div>  </td>
-                                            <template id="sports-input-team-template">
-                                                <div class="form-field">
-                                                    <input type="text" class="sportsman-info-item--input" id="sports-input-team"  placeholder="Enter sportsman team">
-                                                </div>
-                                            </template>
-                                        </tr>
-                                    </table>
-                                    </li>
-                                </ul>
-                                    
-                                
+                                        </li>
+                                        <li>
+                                            <table class="dynamic-table">
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH19_ID:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--id" id="sportsman-info-id"></div></td>
+                                                </tr>   
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH11_HUMAN_SURNAME:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-surname"></div></td>
+                                                    <template id="sports-input-surname-template">
+                                                        <div class="form-field">
+                                                            <input type="text" class="sportsman-info-item--input" id="sports-input-surname"  placeholder="Enter sportsman surname">
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH10_HUMAN_NAME:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-name"></div>  </td>
+                                                    <template id="sports-input-name-template">
+                                                        <div class="form-field">
+                                                            <input type="text" class="sportsman-info-item--input" id="sports-input-name"  placeholder="Enter sportsman name">
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH14_HUMAN_SEX:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-sex"></div> </td>
+                                                    <template id="sports-input-sex-template">
+                                                        <div class="form-field--option">
+                                                            <select class="sportsman-info-item--sex" name="form-system-of-group" id="sports-input-sex">
+                                                                <option value="Male">CPH07_MALE_SEX</option>
+                                                                <option value="Female">CPH08_FEMALE_SEX</option>
+                                                            </select>
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH12_HUMAN_BD:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-age"></div>  </td>
+                                                    <template id="sports-input-age-template">
+                                                        <div class="create-ng--interval">
+                                                            <input type="text" id="sports-input-age" class="input-celendar create-ng--interval-min sportsman-info-item--input" placeholder=" " />
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH9_INFO_WEIGHT:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-weight"></div>  </td>
+                                                    <template id="sports-input-weight-template">
+                                                        <div class="create-ng--interval">
+                                                            <input type="text" name="weight-min" id="sports-input-weight" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH10_INFO_QUAL:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-qual"></div> </td>
+                                                    <template id="sports-input-qulification-template">
+                                                        <div class="create-ng--interval">
+                                                            <select class="sportsman-info-item--qual" id="sports-input-qulification">
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> PH31_INFO_TRAINER:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-trainer"></div> </td>
+                                                    <template id="sports-input-trainer-template">
+                                                        <div class="create-ng--interval">
+                                                            <select class="sportsman-info-item--trainer" id="sports-input-trainer"></select>
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH15_HUMAN_TEAM:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-team"></div>  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH16_HUMAN_REGION:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-region"></div>  </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
@@ -486,6 +492,7 @@
                 </div>
             </div>
             <!--member-groups-edit-popup-window-end-->
+            
             <script src="./scripts/sportsman-page.js" type="module"></script>
             <script src="./scripts/open-close-popup.js" type="module"></script>
         </div>

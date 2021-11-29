@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Member page</title>
+        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./css/main.min.css" />
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <div class="wrapper">
+            <header class="page-header container">
+                <ul class="group-page-header list">
+                    <li>
+                        <a class="link" id="page-name-link" href="#">
+                            <h1 id="page-name"></h1>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="lang-panel">
+                            <ul class="list lang-panel-list">
+                                <li class="lang-panel-item">
+                                    <div class="lang-panel-flag">
+                                        <a type="button" id="lang-ru"> 
+                                            <img src="./img/ru.png"> 
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="lang-panel-item">
+                                    <div class="lang-panel-flag">
+                                        <a type="button" id="lang-en"> 
+                                            <img src="./img/en.png"> 
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="lang-panel-item">
+                                    <div class="lang-panel-flag">
+                                        <a type="button" id="lang-ua"> 
+                                            <img src="./img/ua.png"> 
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </header>
+            <div class="bread-crumbs container"> 
+                <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
+                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
+                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
+                </div>
+                <div class="bread-crumbs-item"><a id="trainer-link" href="#"></a></div>
+            </div>
+            <main class="container">
+                <div class="container">
+                    <ul class="group-page-header list">
+                        <li><h1 id="trainer-header"></h1></li>
+                    </ul>
+                </div>
+
+                <div class="tab">
+                    <button class="tablinks" id="tab1">PH1_INFO_TAB</button>
+                    <button class="tablinks" id="tab2">PH2_TEAM_TAB</button>
+                </div>
+
+
+                <div id="tabcontent1" class="tabcontent">
+                    <div class="group-info-main">
+                        <div id="trainer-info">
+                            <div class="member-info-title--siting">
+
+                                <div class="member-info-title">
+                                    <span>PH3_TRAINER_INFO</span>                                                                         
+                                   <div class="js-hidden-element js-root-view js-admin-view">
+                                        <button class="member-info-edit-btn" type="button" id="trainer-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/icons.svg#icon-pencil2"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="js-invizible-button js-hidden-element js-root-view js-admin-view">
+                                        <button class="member-info-edit-btn" type="button" id="trainer-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-circle-down-checkmark.svg#icon-checkmark"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="group-info-fields">
+                                    <ul class="list sportsman-info-list">
+                                        <li>
+                                            <div class="sportsman-foto">
+                                                <img src="./img/sportsman-foto.png" alt="trainer foto">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <table class="dynamic-table">
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH19_ID:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--id" id="trainer-info-id"></div></td>
+                                                </tr>   
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH11_HUMAN_SURNAME:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="trainer-info-surname"></div></td>
+                                                    <template id="trainer-input-surname-template">
+                                                        <div class="form-field">
+                                                            <input type="text" class="sportsman-info-item--input" id="trainer-input-surname"  placeholder="Enter trainer surname">
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH10_HUMAN_NAME:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="trainer-info-name"></div>  </td>
+                                                    <template id="trainer-input-name-template">
+                                                        <div class="form-field">
+                                                            <input type="text" class="sportsman-info-item--input" id="trainer-input-name"  placeholder="Enter trainer name">
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH14_HUMAN_SEX:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="trainer-info-sex"></div> </td>
+                                                    <template id="trainer-input-sex-template">
+                                                        <div class="form-field--option">
+                                                            <select class="sportsman-info-item--sex" name="form-system-of-group" id="trainer-input-sex">
+                                                                <option value="Male">CPH07_MALE_SEX</option>
+                                                                <option value="Female">CPH08_FEMALE_SEX</option>
+                                                            </select>
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH12_HUMAN_BD:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="trainer-info-age"></div>  </td>
+                                                    <template id="trainer-input-age-template">
+                                                        <div class="create-ng--interval">
+                                                            <input type="text" id="trainer-input-age" class="input-celendar create-ng--interval-min sportsman-info-item--input" placeholder=" " />
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH15_HUMAN_TEAM:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="trainer-info-team"></div>  </td>
+                                                    <template id="trainer-input-team-template">
+                                                        <div class="form-field">
+                                                            <input type="text" class="sportsman-info-item--input" id="trainer-input-team"  placeholder="Enter trainer team">
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH16_HUMAN_REGION:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="trainer-info-region"></div>  </td>
+                                                    <template id="trainer-input-region-template">
+                                                        <div class="form-field">
+                                                            <input type="text" class="sportsman-info-item--input" id="trainer-input-region"  placeholder="Enter trainer region">
+                                                        </div>
+                                                    </template>
+                                                </tr>
+                                                <tr>
+                                                    <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> CPH24_EMAIL:</div> </td>
+                                                    <td class="secondary-title-two-tables sportsman-info-table-info"> 
+                                                        <div class="sportsman-info-item--text js-hidden-element js-root-view js-admin-view" id="trainer-info-email"></div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="member-page-btn-del js-hidden-element">                
+                                    <a href="#popup_1" class="popup-link">
+                                        <button class="group-page-del-btn" type="button" id="change-email-btn">
+                                            <span class="group-card-btn-del-text">CPH25_CHNG_EMAIL_BTN</span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="member-page-btn-del js-hidden-element">                
+                                    <a href="#popup_2" class="popup-link">
+                                        <button class="group-page-del-btn" type="button" id="change-pass-btn">
+                                            <span class="group-card-btn-del-text">CPH26_CHNG_PASS_BTN</span>
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view js-hiden-strict">                
+                                    <a id="del-btn-link">
+                                        <button class="group-page-del-btn" type="button" id="delete-member-btn">
+                                        <span class="group-card-btn-del-text">PH12_DEL_BTN</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabcontent2" class="tabcontent">
+                </div>
+
+            </main>
+            <footer>
+                <div class="container flexbox">
+                    <address class="contacts-box">
+                    </address>
+                    <div class="container sl">
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <div class="popup" id="popup_1">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="login_popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="">
+                                <div class="login-page-title">
+                                    <span class="login-page-popup-title">CPH27_CHNG_EMAIL_POPUP</span>
+                                </div>
+                                <div class="input-container ic1">
+                                    <input id="new-login" class="input input_login" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="new-login" class="placeholder">CPH28_NEW_EMAIL</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="password" class="input input_login" type="password" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="password" class="placeholder">CPH03_PASS_INPUT</label>
+                                </div>
+                                <button type="button" id="change-email-btn" class="login-page-btn-submit">
+                                    <span class="modal-btn-submit-text">CPH27_CHNG_EMAIL_POPUP</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="popup" id="popup_2">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="login_popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="">
+                                <div class="login-page-title">
+                                    <span class="login-page-popup-title">CPH29_CHNG_PASS_POPUP</span>
+                                </div>
+                                <div class="input-container ic1">
+                                    <input id="old-password" class="input input_login" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="old-password" class="placeholder">СЗР30_OLD_PASS</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="new-password" class="input input_login" type="password" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="new-password" class="placeholder">СЗР31_NEW_PASS</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="new-password-again" class="input input_login" type="password" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="new-password-again" class="placeholder">СЗР31_NEW_PASS_AGAIN</label>
+                                </div>
+
+                                <button type="button" id="change-pass-btn" class="login-page-btn-submit">
+                                    <span class="modal-btn-submit-text">CPH29_CHNG_PASS_POPUP</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./scripts/trainer-page.js" type="module"></script>
+    </body>
+</html>
+  

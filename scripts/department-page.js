@@ -2,9 +2,8 @@ import {getLinkParams,
     onClick, 
     showShadows, 
     languageSwitchingOn, 
-    createPageItem, 
-    isEmptyString, 
-    isNumber, 
+    createPageItem,
+    checkers, 
     prepareTabs, 
     unhideSubelements} from "./common.js"
 import {ops, server} from "./communication.js"
@@ -24,7 +23,7 @@ export function getQualNameByValue(val){
 }
 
 function qualificationElementAddToPage(name, value){
-    if(!isEmptyString(value)){
+    if(!checkers.isEmptyString(value)){
         var template = markup.qualifications.getTemplate();
         var placeholders = markup.qualifications.getPlaceholders(name, value);
         var newItem = createPageItem(template, placeholders);
@@ -44,7 +43,7 @@ function addQualification(){
     var name = markup.qualifications.getNameInput();
     var qTable =  markup.qualifications.getTable();
 
-    if(!isNumber(value)){
+    if(!checkers.isNumber(value)){
         markup.qualifications.valueFormatAlert();
         return;
     }
@@ -79,7 +78,7 @@ function toogleQualificationAdding(){
 function deleteQualification(value){
     var qualTable =  markup.qualifications.getTable();
     for(var i = 1; i < qualTable.rows.length; i++){
-        if(qualTable.rows[i].cells[0].innerHTML.localeCompare(String(value)) == 0){
+        if(checkers.strEquals(qualTable.rows[i].cells[0].innerHTML, String(value))){
             qualTable.rows[i].remove();
             server.department.deleteQualification(value);
             return;
@@ -90,7 +89,7 @@ function deleteQualification(value){
 /* ------------------- DIVISIONS ----------------------------*/
 
 function disciplineAddToPage(division){
-    if(!isEmptyString(division))
+    if(!checkers.isEmptyString(division))
     {
         var template = markup.discipline.getTemplate();
         var placeholders = markup.discipline.getPlaceholders(division);
@@ -170,37 +169,12 @@ function sportsmanPageElementAdd(sp){
     }
 }
 
-function dateValidate(date){
-    var dt = date.split("-");
-    if(dt.length < 3) return false;
-    dt[1] -= 1;
-
-    var d = new Date(dt[0], dt[1], dt[2]);
-    if ((d.getFullYear() == dt[0]) && (d.getMonth() == dt[1]) && (d.getDate() == dt[2]))
-        return true;
-    return false;
-}
-
 function isSportsmansParamsOk() {
-    var name    = markup.sportsman.getNameInput();
-    var surname = markup.sportsman.getSurnameInput();
-    var weight  = markup.sportsman.getWeightInput();
-    var age     = markup.sportsman.getAgeInput();
-
-    if(isEmptyString(name)){
-        markup.sportsman.nameAlert();
-        return false;
-    } else if(isEmptyString(surname)){
-        markup.sportsman.surnameAlert();
-        return false;
-    } else if(!isNumber(weight)){
-        markup.sportsman.weightAlert();
-        return false;
-    } else if(!dateValidate(age)){
-        markup.sportsman.ageAlert();
-        return false;
-    }
-    return true;
+    return (!checkers.checkName("Name", markup.sportsman.getNameInput()) 
+        || !checkers.checkName("Surname", markup.sportsman.getSurnameInput())
+        || !checkers.checkNumber("Weight", markup.sportsman.getWeightInput())
+        || !checkers.checkDate(markup.sportsman.getAgeInput())) 
+        ? false : true;
 }
 
 function sendSportsmanForm() {
@@ -210,7 +184,7 @@ function sendSportsmanForm() {
         sporsman.setSurname(markup.sportsman.getSurnameInput());
         sporsman.setWeight(markup.sportsman.getWeightInput());
         sporsman.setBirth(markup.sportsman.getAgeInput());
-        sporsman.setTeam(markup.sportsman.getTeamInput());
+        sporsman.setTrainer(markup.sportsman.getTrainerInput());
         sporsman.setSex(markup.sportsman.getSexInput());
         sporsman.setQualification(markup.sportsman.getQualificationInput());
         server.sportsman.create(sporsman);
@@ -220,6 +194,43 @@ function sendSportsmanForm() {
         }*/
     }
     
+}
+
+/* ------------------- TRAINERS ----------------------------*/
+
+function isTrainerParamsOk() {
+    return (!checkers.checkName("Name", markup.trainer.getNameInput()) 
+        || !checkers.checkName("Surname", markup.trainer.getSurnameInput())
+        || !checkers.checkDate(markup.trainer.getAgeInput())) 
+        ? false : true;
+}
+
+function sendTrainerForm() {
+    if(isTrainerParamsOk()) {
+        var trainer = ops.createTrainer(undefined);
+        trainer.setName(   markup.trainer.getNameInput());
+        trainer.setSurname(markup.trainer.getSurnameInput());
+        trainer.setBirth(  checkers.prepareDate(markup.trainer.getAgeInput()));
+        trainer.setSex(    markup.trainer.getSexInput());
+        trainer.setTeam(   markup.trainer.getTeamInput());
+        trainer.setRegion( markup.trainer.getRegionInput());
+        trainer.setEmail(  markup.trainer.getEmailInput());
+        server.trainer.create(trainer);
+        /*
+        if(markup.sportsman.getOneMoreInput().localeCompare("no") == 0){
+            location.reload();
+        }*/
+    }
+    
+}
+
+function trainerPageElementAdd(tr){
+    if(tr.getId() != undefined){
+        markup.trainer.getTable().append(createPageItem(markup.trainer.getTemplate(), markup.trainer.getPlaceholders(tr)));
+        markup.sportsman.getTrainersList().append(
+            createPageItem(markup.sportsman.getTrainerTemplate(), markup.sportsman.getTrainerPlaceholders(tr))
+            );
+    }
 }
 
 /* ------------------- DEPARTMENT ----------------------------*/
@@ -243,6 +254,7 @@ function fillPageInfo(){
     var disciplines     = department.getDisciplines();
     var qualifications  = department.getQualifications();
     var sportsmans      = department.getSportsmans();
+    var trainers        = department.getTrainers();
 
     markup.departament.setPageName(departamentName);
     markup.departament.setName(departamentName);
@@ -255,6 +267,7 @@ function fillPageInfo(){
     disciplines.forEach( disciplinne => disciplineAddToPage(disciplinne));
     competitions.forEach(competition => competitionPageElementAdd(competition));
     sportsmans.forEach( sportsman   => sportsmanPageElementAdd(sportsman));
+    trainers.forEach( trainer   => trainerPageElementAdd(trainer));
 }
 
 function setActions(){
@@ -265,6 +278,7 @@ function setActions(){
         onClick(markup.competition.getAddBtn(),     sendCompetitionForm);
         onClick(markup.departament.getEditBtn(),    departamentEdit);
         onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm); 
+        onClick(markup.trainer.getAddBtn(),       sendTrainerForm);
     } else if(client.isTrainer()){
         onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm); 
     }

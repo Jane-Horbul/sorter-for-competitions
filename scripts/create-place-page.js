@@ -1,4 +1,5 @@
 import {
+    checkers,
     showShadows,
     getLinkParams,
     languageSwitchingOn,
@@ -36,7 +37,7 @@ function activateGroup(gr){
     if(unactGr != null)
         unactGr.remove();
     for(var i = 0; i < unactiveGroups.length; i++){
-        if(unactiveGroups[i].getId().localeCompare(gr.getId()) == 0){
+        if(checkers.strEquals(unactiveGroups[i].getId(), gr.getId())){
             unactiveGroups.splice(i, 1);
             break;
         }
@@ -53,7 +54,7 @@ function deactivateGroup(gr){
     if(actGr != null)
         actGr.remove();
     for(var i = 0; i < activeGroups.length; i++){
-        if(activeGroups[i].getId().localeCompare(gr.getId()) == 0){
+        if(checkers.strEquals(activeGroups[i].getId(), gr.getId())){
             activeGroups.splice(i, 1);
             break;
         }
@@ -82,7 +83,7 @@ function attachPair(pair){
     if(detachedPair != null) detachedPair.remove();
 
     for(var i = 0; i < detachedPairs.length; i++){
-        if(detachedPairs[i].getId().localeCompare(pair.getId()) == 0){
+        if(checkers.strEquals(detachedPairs[i].getId(), pair.getId())){
             detachedPairs.splice(i, 1);
             break;
         }
@@ -102,7 +103,7 @@ function detachPair(pair){
     if(attachedPair != null) attachedPair.remove();
 
     for(var i = 0; i < attachedPairs.length; i++){
-        if(attachedPairs[i].getId().localeCompare(pair.getId()) == 0){
+        if(checkers.strEquals(attachedPairs[i].getId(), pair.getId())){
             attachedPairs.splice(i, 1);
             break;
         }

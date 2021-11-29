@@ -20,6 +20,12 @@
       changeYear: true
     });
   } );
+  $( function() {
+    $( "#new-trainer-age" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  } );
   </script>
 
 </head>
@@ -85,7 +91,8 @@
             <div class="tab">
                 <button class="tablinks" id="tab1">PH1_COMP_TAB</button>
                 <button class="tablinks" id="tab2">PH2_SPORTS_TAB</button>
-                <button class="tablinks" id="tab3">PH3_INFO_TAB</button>
+                <button class="tablinks" id="tab3">PH37_TRAINERS_TAB</button>
+                <button class="tablinks" id="tab4">PH3_INFO_TAB</button>
             </div>
             <div id="tabcontent1" class="tabcontent" style= "display: none">
                 <section class="advantages container">
@@ -133,42 +140,77 @@
                         <tr>
                             <th class="group-info-table-title all-table-title" colspan="8"><span>PH5_SPORTS</span>
                                 <!--Add member button start-->
-                               <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">-
+                               <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
                                     <button class="group-page-ref-btn" type="button">
                                             <svg class="group-info-edit-btn-icon">
                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                             </svg>
-                                        
                                     </button>
                                 </a>
                                 <!--Add member button end-->
                             </th>
                         </tr>
                         <tr>
-                            <td class="secondary-title-tables--text">PH6_SURNAME</td>
-                            <td class="secondary-title-tables--text">PH7_NAME</td>
-                            <td class="secondary-title-tables--text">PH8_BD</td>
-                            <td class="secondary-title-tables--text">PH9_WEIGHT</td>
-                            <td class="secondary-title-tables--text">PH10_SEX</td>
-                            <td class="secondary-title-tables--text">PH11_TEAM</td>
-                            <td class="secondary-title-tables--text">PH12_QUAL</td>
+                            <td class="secondary-title-tables--text">CPH11_HUMAN_SURNAME</td>
+                            <td class="secondary-title-tables--text">CPH10_HUMAN_NAME</td>
+                            <td class="secondary-title-tables--text">CPH12_HUMAN_BD</td>
+                            <td class="secondary-title-tables--text">CPH13_HUMAN_WEIGHT</td>
+                            <td class="secondary-title-tables--text">CPH14_HUMAN_SEX</td>
+                            <td class="secondary-title-tables--text">CPH15_HUMAN_TEAM</td>
+                            <td class="secondary-title-tables--text">CPH17_QUAL</td>
                         </tr>
+                        <template id="member-template">
+                            <tr onclick="window.location.href='#sportsman-link'; return false">
+                                <td class="secondary-tables--td">#sp-surname</td>
+                                <td class="secondary-tables--td">#sp-name</td>
+                                <td class="secondary-tables--td">#sp-age</td>
+                                <td class="secondary-tables--td">#sp-weight</td>
+                                <td class="secondary-tables--td">#sp-sex</td>
+                                <td class="secondary-tables--td">#sp-team</td>
+                                <td class="secondary-tables--td">#sp-qual</td>
+                            </tr>
+                        </template>
                     </table>
-                    <template id="member-template">
-                        <tr onclick="window.location.href='#sportsman-link'; return false">
-                            <td class="secondary-tables--td">#sp-surname</td>
-                            <td class="secondary-tables--td">#sp-name</td>
-                            <td class="secondary-tables--td">#sp-age</td>
-                            <td class="secondary-tables--td">#sp-weight</td>
-                            <td class="secondary-tables--td">#sp-sex</td>
-                            <td class="secondary-tables--td">#sp-team</td>
-                            <td class="secondary-tables--td">#sp-qual</td>
-                        </tr>
-                    </template>
-
                 </div>
             </div>
             <div id="tabcontent3" class="tabcontent" style= "display: none">
+                <div class="main-tables-item">
+                    <table class="dynamic-table" id="trainers-table">
+                        <tr>
+                            <th class="group-info-table-title all-table-title" colspan="8"><span>PH38_TRAINERS</span>
+                                <!--Add member button start-->
+                               <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                    <button class="group-page-ref-btn" type="button">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                    </button>
+                                </a>
+                                <!--Add member button end-->
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="secondary-title-tables--text">CPH11_HUMAN_SURNAME</td>
+                            <td class="secondary-title-tables--text">CPH10_HUMAN_NAME</td>
+                            <td class="secondary-title-tables--text">CPH12_HUMAN_BD</td>
+                            <td class="secondary-title-tables--text">CPH14_HUMAN_SEX</td>
+                            <td class="secondary-title-tables--text">CPH15_HUMAN_TEAM</td>
+                            <td class="secondary-title-tables--text">CPH16_HUMAN_REGION</td>
+                        </tr>
+                        <template id="trainer-template">
+                            <tr onclick="window.location.href='#trainer-link'; return false">
+                                <td class="secondary-tables--td">#tr-surname</td>
+                                <td class="secondary-tables--td">#tr-name</td>
+                                <td class="secondary-tables--td">#tr-bd</td>
+                                <td class="secondary-tables--td">#tr-sex</td>
+                                <td class="secondary-tables--td">#tr-team</td>
+                                <td class="secondary-tables--td">#tr-region</td>
+                            </tr>
+                        </template>
+                    </table>
+                </div>
+            </div>
+            <div id="tabcontent4" class="tabcontent" style= "display: none">
                 <div>
                     <section class="competition-info">
 
@@ -185,8 +227,8 @@
                                     </div>
                                     <div class="group-info-fields">
                                         <div class="" id="member-info">
-                                            <div class="competition-info-fields--item">PH14_DP_NAME:<span>&nbsp</span><div id="department-name-set">            </div></div>
-                                            <div class="competition-info-fields--item">PH15_DP_ID:<span>&nbsp</span><div id="department-id">      </div></div>
+                                            <div class="competition-info-fields--item">CPH18_NOT_HUMAN_NAME:<span>&nbsp</span><div id="department-name-set">            </div></div>
+                                            <div class="competition-info-fields--item">CPH19_ID:<span>&nbsp</span><div id="department-id">      </div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +240,7 @@
                                 <div class="secondary-tables--item">
                                     <table class="dynamic-table secondary-tables--qualifications" id="qualification-table">
                                         <tr>
-                                            <th colspan="3" class="group-info-table-title all-table-title"><span>PH16_QUALS</span>
+                                            <th colspan="3" class="group-info-table-title all-table-title"><span>CPH20_QUALS</span>
                                                     <button class="group-page-ref-btn js-hidden-element js-root-view js-admin-view" type="button" id="qual-add-btn">
                                                         <svg class="group-info-edit-btn-icon">
                                                             <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -281,6 +323,7 @@
                 </div>
             </div>
         </div>
+
         <!--Create new member-popup-window-start-->
         <div class="popup" id = "popup_1">
             <a href="" class="popup__area"></a>
@@ -289,8 +332,7 @@
                     <div class="new-member-pop-up">
                         <a href="" class="popup__close close-popup">X</a>
                         <form class="modal-form new-member-pop-up-mf">
-                                <span class="add-member-popup-title">PH21_CREATE_SPORTS</span>
-
+                            <span class="add-member-popup-title">PH21_CREATE_SPORTS</span>
                             <div class="new-member-field">
 
                                 <div class="input-container ic1">
@@ -299,7 +341,7 @@
                                             <use href="./img/register-and-popup-icons.svg#icon-user"></use>
                                         </svg>
                                     <div class="cut"></div>
-                                    <label for="new-member-name" class="placeholder">PH22_SP_NAME</label>
+                                    <label for="new-member-name" class="placeholder">CPH10_HUMAN_NAME</label>
                                 </div>
                                 <div class="input-container ic2">
                                     <input id="new-member-surname" class="input" type="text" placeholder=" " />
@@ -307,7 +349,7 @@
                                         <use href="./img/register-and-popup-icons.svg#icon-user"></use>
                                     </svg>
                                     <div class="cut"></div>
-                                    <label for="new-member-surname" class="placeholder">PH23_SP_SURNAME</label>
+                                    <label for="new-member-surname" class="placeholder">CPH11_HUMAN_SURNAME</label>
                                 </div>
                                 <div class="input-container ic2">
                                     <div class="input">
@@ -325,39 +367,38 @@
                                         <use href="./img/register-and-popup-icons.svg#icon-meter"></use>
                                     </svg>
                                     <div class="cut"></div>
-                                    <label for="new-member-weight" class="placeholder">PH24_SP_WEIGHT</label>
+                                    <label for="new-member-weight" class="placeholder">CPH13_HUMAN_WEIGHT</label>
                                 </div>
                                 <div class="new-member-pop-up-check">
                                     <ul class="list new-member-gender-list">
                                         <label for="new-member-sex" class="form-field-label">
-                                            <li class="new-member-pop-up-check-gender">PH25_SP_SEX</li>
+                                            <li class="new-member-pop-up-check-gender">CPH14_HUMAN_SEX</li>
                                             <li class="new-member-pop-up-check-gender">
                                                 <div class="form_radio_btn">
                                                     <input type="radio" id="new-member-sex-male" name="new-member-sex" value="male" checked>
-                                                    <label for="new-member-sex-male">PH26_SEX_MALE</label>
+                                                    <label for="new-member-sex-male">CPH07_MALE_SEX</label>
                                                 </div>
                                             </li>
 
                                             <li class="new-member-pop-up-check-gender">
                                                 <div class="form_radio_btn">
                                                     <input type="radio" id="new-member-sex-female" name="new-member-sex" value="female">
-                                                    <label for="new-member-sex-female">PH27_SEX_FEMALE</label>
+                                                    <label for="new-member-sex-female">CPH08_FEMALE_SEX</label>
                                                 </div>
                                             </li>
                                         </label>
                                     </ul>
                                 </div>
                                 <div class="">
-                                    <label for="new-member-team"><span class="form-field-title">PH28_SP_TRAINER</span></label>
-                                    <select class="new-member-pop-up-check-team" name="new-member-team" id="new-member-team">
-                                        <template id="new-member-team-temp">
-                                            <option value="#sports-team-value">#sports-team-name</option>
+                                    <label for="new-member-trainer"><span class="form-field-title">PH28_SP_TRAINER</span></label>
+                                    <select class="new-member-pop-up-check-team" name="new-member-trainer" id="new-member-trainer">
+                                        <template id="new-member-trainer-temp">
+                                            <option value="#sports-trainer-id">#sports-trainer-name</option>
                                         </template>
                                     </select>
                                 </div>
-
                                 <div class="">
-                                    <label for="create-member-qualification"><span class="form-field-title">PH12_QUAL</span></label>
+                                    <label for="create-member-qualification"><span class="form-field-title">CPH17_QUAL</span></label>
                                     <select class="new-member-pop-up-check-qual" name="create-member-qualification" id="new-member-qualifications">
                                         <template id="new-member-qual-temp">
                                             <option value="#sports-qual-value">#sports-qual-name</option>
@@ -367,16 +408,15 @@
                             </div>
 
                             <div class="form-field--option new-member-pop-up-check">
-                                <span class="form-field-title">PH29_SP_ADD_ONE_MORE</span>
-                                    <div class="form_radio_btn">
-                                        <input class="input-to-choose-type--sportsmen" type="checkbox" id="nm-more-than-one" name="nm-more-than-one">
-                                        <label class="label-to-choose-type--sportsmen" id="" for="nm-more-than-one">Yes</label>
-                                    </div>
+                                <div class="form_radio_btn">
+                                    <input class="input-to-choose-type--sportsmen" type="checkbox" id="add-one-more-sp" name="add-one-more-sp">
+                                    <label class="label-to-choose-type--sportsmen" id="" for="add-one-more-sp">PH29_SP_ADD_ONE_MORE</label>
+                                </div>
                             </div>
 
                             
                             <button type="button" id="member-form-send-btn" class="add-member-popup--send">
-                                <span class="modal-btn-submit-text">PH36_SP_CREATE</span>
+                                <span class="modal-btn-submit-text">PH36_CREATE_BTN</span>
                             </button>
                         </form>
                     </div>
@@ -384,6 +424,104 @@
             </div>
         </div>
         <!--Create new member-popup-window-end-->
+
+        <!--Create new member-popup-window-start-->
+        <div class="popup" id = "popup_2">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="new-member-pop-up">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form new-member-pop-up-mf">
+                            <span class="add-member-popup-title">PH39_CREATE_TRAINER</span>
+                            <div class="new-member-field">
+
+                                <div class="input-container ic1">
+                                    <input id="new-trainer-name" class="input" type="text" placeholder=" " />
+                                        <svg class="popup-form-fields-icon">
+                                            <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                        </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-trainer-name" class="placeholder">CPH10_HUMAN_NAME</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="new-trainer-surname" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-trainer-surname" class="placeholder">CPH11_HUMAN_SURNAME</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="new-trainer-email" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-trainer-email" class="placeholder">CPH24_EMAIL</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <div class="input">
+                                        <input type="text" id="new-trainer-age" class="input-celendar" placeholder=" " />
+                                        <svg class="popup-form-fields-icon">
+                                            <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
+                                        </svg>
+                                        <div class="cut"></div>
+                                        <label for="new-trainer-age" class="placeholder"></label>
+                                    </div>
+                                </div>
+                                <div class="new-member-pop-up-check">
+                                    <ul class="list new-member-gender-list">
+                                        <label for="new-trainer-sex" class="form-field-label">
+                                            <li class="new-member-pop-up-check-gender">CPH14_HUMAN_SEX</li>
+                                            <li class="new-member-pop-up-check-gender">
+                                                <div class="form_radio_btn">
+                                                    <input type="radio" id="new-trainer-sex-male" name="new-trainer-sex" value="male" checked>
+                                                    <label for="new-trainer-sex-male">CPH07_MALE_SEX</label>
+                                                </div>
+                                            </li>
+                                            <li class="new-member-pop-up-check-gender">
+                                                <div class="form_radio_btn">
+                                                    <input type="radio" id="new-trainer-sex-female" name="new-trainer-sex" value="female">
+                                                    <label for="new-trainer-sex-female">CPH08_FEMALE_SEX</label>
+                                                </div>
+                                            </li>
+                                        </label>
+                                    </ul>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="new-trainer-team" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-trainer-team" class="placeholder">CPH15_HUMAN_TEAM</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="new-trainer-region" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="new-trainer-region" class="placeholder">CPH16_HUMAN_REGION</label>
+                                </div>
+                                <div class="form-field--option new-member-pop-up-check">
+                                    <div class="form_radio_btn">
+                                        <input class="input-to-choose-type--sportsmen" type="checkbox" id="add-one-more-tr" name="add-one-more-tr">
+                                        <label class="label-to-choose-type--sportsmen" id="" for="add-one-more-tr">PH29_SP_ADD_ONE_MORE</label>
+                                    </div>
+                                </div>
+                                <button type="button" id="trainer-form-send-btn" class="add-member-popup--send">
+                                    <span class="modal-btn-submit-text">PH36_CREATE_BTN</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Create new member-popup-window-end-->
+
 
         <!--Add-competition-popup-window-start-->
         <div class="popup" id = "popup_4">
@@ -395,7 +533,7 @@
                         <form class="modal-form">
                             <div class="form-add-comp">
                                 <label for="competition-name" class="form-field-label">
-                                    <span class="form-field-title">PH32_COMP_NAME</span>
+                                    <span class="form-field-title">CPH18_NOT_HUMAN_NAME</span>
                                     <div class="form-field-add-comp">
                                         <input type="text" name="competition-name" id="competition-name-input" class="form-field-input-comp-add" required />
                                     </div>

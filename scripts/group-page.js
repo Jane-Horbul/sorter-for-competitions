@@ -1,5 +1,4 @@
-import {isNumber, 
-    isEmptyString, 
+import {checkers,
     getLinkParams, 
     showShadows, 
     languageSwitchingOn,
@@ -30,8 +29,8 @@ console.log(groupInfo);
 
 function pairPageElementAdd(pair){
     if(pair.getId() == undefined) return;
-    var unknowWinner = isEmptyString(pair.getWinner());
-    var unknowMember = !isNumber(pair.getRedSp()) || !isNumber(pair.getBlueSp());
+    var unknowWinner = checkers.isEmptyString(pair.getWinner());
+    var unknowMember = !checkers.isNumber(pair.getRedSp()) || !checkers.isNumber(pair.getBlueSp());
     var template = markup.pairs.getTemplate();
     var placeholders = markup.pairs.getPlaceholders(pair);
     var newItem = createPageItem(template, placeholders);
@@ -50,7 +49,7 @@ function refreshPairs(){
 /* ------------------- SPORTSMANS ----------------------------*/
 
 export function getSportsName(id){
-    if(!isNumber(id)){
+    if(!checkers.isNumber(id)){
         return "Winner of " + id;
     }
     var sports = groupInfo.getSportsmans().find( sp => sp.getId() == id);
@@ -320,19 +319,19 @@ function addNewFormula(){
     if(formula.getFinalMax() == "")
         formula.setFinalMax("-1");
 
-    if(!isNumber(formula.getPreparation())){
+    if(!checkers.isNumber(formula.getPreparation())){
         return;
-    } else if(!isNumber(formula.getRoundsNum())){
+    } else if(!checkers.isNumber(formula.getRoundsNum())){
         return;
-    } else if(!isNumber(formula.getRound())){
+    } else if(!checkers.isNumber(formula.getRound())){
         return;
-    } else if(!isNumber(formula.getRest())){
+    } else if(!checkers.isNumber(formula.getRest())){
         return;
-    } else if(!isNumber(formula.getAfterhold())){
+    } else if(!checkers.isNumber(formula.getAfterhold())){
         return;
-    } else if(!isNumber(formula.getFinalMin())){
+    } else if(!checkers.isNumber(formula.getFinalMin())){
         return;
-    } else if(!isNumber(formula.getFinalMax())){
+    } else if(!checkers.isNumber(formula.getFinalMax())){
         return;
     }
     server.group.addFormula(page.cid, page.gid, formulaToString(formula));

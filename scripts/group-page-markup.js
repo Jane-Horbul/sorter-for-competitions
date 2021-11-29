@@ -1,17 +1,17 @@
 
 
 import {getSportsName} from "./group-page.js"
-import {isEmptyString, isNumber} from "./common.js"
+import {checkers.isEmptyString, checkers.isNumber} from "./common.js"
 
 function getWinStyle(pair){
     var winner = pair.getWinner();
-    return isEmptyString(winner) ? "" : ((winner == pair.getRedSp()) ? markup.pairs.redWinStyle : markup.pairs.blueWinStyle);
+    return checkers.isEmptyString(winner) ? "" : ((winner == pair.getRedSp()) ? markup.pairs.redWinStyle : markup.pairs.blueWinStyle);
 }
 
 function getPairWinner(pair){
     var winner = pair.getWinner();
-    if(isEmptyString(winner)){
-        if(!isNumber(pair.getRedSp()) || !isNumber(pair.getBlueSp()))
+    if(checkers.isEmptyString(winner)){
+        if(!checkers.isNumber(pair.getRedSp()) || !checkers.isNumber(pair.getBlueSp()))
             return "";
         return markup.pairs.createWinBtns(pair.getId());
     } else {

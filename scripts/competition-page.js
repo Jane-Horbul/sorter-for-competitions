@@ -1,6 +1,5 @@
 
-import {isNumber, 
-    isEmptyString, 
+import {checkers,
     getLinkParams, 
     onClick, 
     showShadows, 
@@ -131,10 +130,10 @@ export function getQualNameByValue(val){
 export function getQualificationInterval(qMin, qMax){
     var qMinName = "";
     var qMaxName = "";
-    if(isNumber(qMin) && (Number(qMin) >= 0) && (qualificationsMap.get(qMin) != undefined)){
+    if(checkers.isNumber(qMin) && (Number(qMin) >= 0) && (qualificationsMap.get(qMin) != undefined)){
         qMinName = qualificationsMap.get(qMin);
     }
-    if(isNumber(qMax) && (Number(qMax) >= 0) && (qualificationsMap.get(qMax) != undefined)){
+    if(checkers.isNumber(qMax) && (Number(qMax) >= 0) && (qualificationsMap.get(qMax) != undefined)){
         qMaxName = qualificationsMap.get(qMax);
     }
     if(Number(qMax) == Number(qMin)) return qMinName;
@@ -151,7 +150,7 @@ function groupPageElementAdd(group){
 }
 
 function isMainGroupParamsOk(){
-    if(isEmptyString(markup.groups.getNameInput().value)){
+    if(checkers.isEmptyString(markup.groups.getNameInput().value)){
         markup.groups.alertNameFormat();
         return false;
     }
@@ -161,16 +160,16 @@ function isMainGroupParamsOk(){
 function isAgeOk(){
     var ageMin = markup.groups.getAgeMinInput().value;
     var ageMax = markup.groups.getAgeMaxInput().value;
-    if(!isEmptyString(ageMin) && !isNumber(ageMin)){
+    if(!checkers.isEmptyString(ageMin) && !checkers.isNumber(ageMin)){
         markup.groups.alertAgeMinFormat();
         return false;
     }
-    if(!isEmptyString(ageMax)){
-        if(!isNumber(ageMax)){
+    if(!checkers.isEmptyString(ageMax)){
+        if(!checkers.isNumber(ageMax)){
             markup.groups.alertAgeMaxFormat();
             return false; 
         }
-        if(!isEmptyString(ageMin) && (Number(ageMax) - Number(ageMin)) < 0)
+        if(!checkers.isEmptyString(ageMin) && (Number(ageMax) - Number(ageMin)) < 0)
         {
             markup.groups.alertAgeIntervalFormat();
             return false; 
@@ -183,16 +182,16 @@ function isWeightOk(){
     var weightMin = markup.groups.getWeightMinInput().value;
     var weightMax = markup.groups.getWeightMaxInput().value;
 
-    if(!isEmptyString(weightMin) && !isNumber(weightMin)){
+    if(!checkers.isEmptyString(weightMin) && !checkers.isNumber(weightMin)){
         markup.groups.alertWeightMinFormat();
         return false;
     }
-    if(!isEmptyString(weightMax)){
-        if(!isNumber(weightMax)){
+    if(!checkers.isEmptyString(weightMax)){
+        if(!checkers.isNumber(weightMax)){
             markup.groups.alertWeightMaxFormat();
             return false; 
         }
-        if(!isEmptyString(weightMin) && (Number(weightMax) - Number(weightMin)) < 0)
+        if(!checkers.isEmptyString(weightMin) && (Number(weightMax) - Number(weightMin)) < 0)
         {
             markup.groups.alertWeightIntervalFormat();
             return false; 
@@ -215,7 +214,7 @@ function isQualificationOk(){
 }
 
 function isEmptyField(val){
-    if(val == "" || val == undefined || val.localeCompare("Not applicable") == 0)
+    if(val == "" || val == undefined || checkers.strEquals(val, "Not applicable"))
         return true;
     return false;
 }
@@ -301,7 +300,7 @@ function qualificationAddToPage(){
 
 function disciplinesAddToPage(){
     for(var i = 0; i < disciplines.length; i++){
-        if(isEmptyString(disciplines[i]))
+        if(checkers.isEmptyString(disciplines[i]))
             continue;
 
         var opt = markup.groups.createOption(disciplines[i] + "-id", disciplines[i], disciplines[i]);
@@ -310,7 +309,7 @@ function disciplinesAddToPage(){
 }
 function disciplinesCheckboxesAdd(spId){
     for(var i = 0; i < disciplines.length; i++){
-        if(isEmptyString(disciplines[i]))
+        if(checkers.isEmptyString(disciplines[i]))
             continue;
         var template = markup.sportsmen.getDisciplineTemplate();
         var placeholders = markup.sportsmen.getDiscPlaceholders(disciplines[i], i, spId);

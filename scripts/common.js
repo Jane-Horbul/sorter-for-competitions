@@ -3,24 +3,33 @@ export const commonStrings = {
     pairWinner(id)  {return "Winner of pair " + id;}  
 }
 
-export function getIfDefined(val, defVal){
-    return val == undefined ? defVal : val;
+const errors = {
+    emptyField(field)     { errorMessage("Empty field '" + field + "'"); },
+    badNumber(field)      { errorMessage("Bad number in field '" + field + "'"); },
+    badDate()             { errorMessage("Bad number in field '" + field + "'"); }
+    
+}
+function errorMessage(mess) {
+    alert(mess);
+}
+function dateValidate(date){
+    var dt = date.split("/");
+    if(dt.length < 3) return false;
+    dt[1] -= 1;
+    var d = new Date(dt[2], dt[0], dt[1]);
+    return ((d.getFullYear() == dt[2]) && (d.getMonth() == dt[0]) && (d.getDate() == dt[1])) ? true : false;
 }
 
-export function isNumber(num){
-    if(isNaN(Number(num)) || (num.localeCompare("") == 0)) return false;
-    return true;
-}
+export const checkers = {   
+    getIfDefined(val, defVal)   { return val == undefined ? defVal : val;},
+    strEquals(s1, s2)           { return (s1.localeCompare(s2) == 0); },
+    isNumber(num)               { return (isNaN(Number(num)) || this.strEquals(num, "")) ? false : true; },
+    isEmptyString(str)          { return this.strEquals(str, "") || this.strEquals(str, "\r\n") ? true : false; },
+    checkName(field, value)     { if(this.isEmptyString(value)) { errors.emptyField(field); return false; } return true; },
+    checkNumber(field, value)   { if(!this.isNumber(value))     { errors.badNumber(field);  return false; } return true; },
+    checkDate(date)             { if(!dateValidate(date))       { errors.badDate(field);    return false; } return true;},
+    prepareDate(date)           { var dt = date.split("/");     return dt[2] + "-" + dt[0] + "-" + dt[1]; }
 
-export function isEmptyString(str){
-    if((str.localeCompare("") == 0)){
-       return true; 
-    }
-
-    if((str.localeCompare("\r\n") == 0)){
-        return true; 
-    }
-    return false;
 }
 
 export function onClick(object, action){
@@ -102,6 +111,8 @@ export function parseBodyParams(body){
 export function unhideSubelements(elem){
     var shadows = elem.querySelectorAll(".js-hidden-element");
     for (let shadow of shadows){
+        if(shadow.classList.contains("js-hiden-strict"))
+            continue;
         shadow.classList.remove("js-hidden-element");
         shadow.disabled = false;
     }
