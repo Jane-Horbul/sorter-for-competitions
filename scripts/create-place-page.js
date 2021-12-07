@@ -128,11 +128,17 @@ function fillPageInfo(){
     markup.common.setPageHeaderLink(competitionLink);
     markup.common.setDepartmentLink(departmentInfo.getName(), departmentLink);
     markup.common.setCompetitionLink(competition.getName(), competitionLink);
+    console.log(competition);
     competition.getGroups().forEach(gr => {
         deactivateGroup(gr);
-        gr.getPairs().forEach(pair => detachPair(pair));
     });
-    
+}
+
+function fillPairsList(){
+    competition.getGroups().forEach(gr => {
+        var group = server.group.get(competition.getId(), gr.getId());
+        group.getPairs().forEach(pair => detachPair(pair));
+    });
 }
 
 function setBtnActions(){
@@ -148,3 +154,4 @@ fillPageInfo();
 setBtnActions();
 showShadows(client);
 languageSwitchingOn();
+fillPairsList();

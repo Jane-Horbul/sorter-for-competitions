@@ -1,7 +1,7 @@
 
 
 import {getSportsName} from "./group-page.js"
-import {checkers.isEmptyString, checkers.isNumber} from "./common.js"
+import {checkers} from "./common.js"
 
 function getWinStyle(pair){
     var winner = pair.getWinner();

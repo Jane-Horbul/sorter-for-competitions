@@ -42,9 +42,12 @@ const backendLinks = {
     TRAINER_CREATE()                            {return "trainer-create";},
     TRAINER_REMOVE(tid)                         {return "trainer-remove?tid=" + tid;},
     TRAINER_EDIT(tid)                           {return "trainer-edit?tid=" + tid;},
+    TRAINER_CHANGE_PHOTO(tid)                   {return "trainer-photo-change?tid=" + tid;},
 
-    LOGIN:                                      "admin-login",
-    CLIENT_STATUS_GET:                          "client-status-get"
+    LOGIN:                                      "client-login",
+    CLIENT_STATUS_GET:                          "client-status-get",
+    CLIENT_LOGIN_CHANGE:                        "client-change-login",
+    CLIENT_PASSWORD_CHANGE:                     "client-change-pass"
 };
 
 const months = {
@@ -392,6 +395,23 @@ function sendRequest(request, waitArray) {
     return waitArray ? res : res[0];
 }
 
+function sendFormData(formName, data, refresh) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            var answer = parseAnswer(xhr.responseText);
+            if(answer.code != 0)
+                alert(answer.body);
+            if(refresh == true)
+                location.reload();
+        };
+    };
+    xhr.open('POST', "/" + formName, true);
+    xhr.send(data);
+    return true;
+}
+
 function sendParametersList(formName, paramsMap, refresh) {
     var xhr = new XMLHttpRequest();
     var boundary = String(Math.random()).slice(2);
@@ -427,9 +447,23 @@ function sendSingleValue(link, value, refresh){
 
 function sendLogin(login, pass){
     var paramsMap = new Map();
-    paramsMap.set("login",     login);
-    paramsMap.set("password",  pass);
+    paramsMap.set("client-login",     login);
+    paramsMap.set("client-password",  pass);
     sendParametersList(backendLinks.LOGIN, paramsMap, true);
+}
+
+function loginChange(login, pass){
+    var paramsMap = new Map();
+    paramsMap.set("new-client-login", login);
+    paramsMap.set("client-password",  pass);
+    sendParametersList(backendLinks.CLIENT_LOGIN_CHANGE, paramsMap, true);
+}
+
+function passwordChange(newPass, pass){
+    var paramsMap = new Map();
+    paramsMap.set("new-client-password", newPass);
+    paramsMap.set("client-password",  pass);
+    sendParametersList(backendLinks.CLIENT_PASSWORD_CHANGE, paramsMap, true);
 }
 
 /* ------------------- COMPETITION ----------------------------*/
@@ -520,6 +554,7 @@ function createSportsmanForm(sports){
     params.set("trainer",        sports.getTrainer());
     return params;
 }
+
 /* ------------------- TRAINER ----------------------------*/
 function createTrainerForm(trainer){
     var params = new Map();
@@ -537,7 +572,9 @@ function createTrainerForm(trainer){
 export const server = {
     access: {
         login(login, pass)                  {sendLogin(login, pass);},
-        getClient()                   {return ops.createClient(sendRequest(backendLinks.CLIENT_STATUS_GET, false));}
+        getClient()                         {return ops.createClient(sendRequest(backendLinks.CLIENT_STATUS_GET, false));},
+        changeLogin(login, pass)            {loginChange(login, pass);},
+        changePass(newPass, pass)           {passwordChange(newPass, pass);}
     },
     department: {
         get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET(), false));},
@@ -584,6 +621,7 @@ export const server = {
         get(tid)                            {return ops.createTrainer(sendRequest(backendLinks.TRAINER_GET(tid), false));},
         create(tr)                          {sendParametersList(backendLinks.TRAINER_CREATE(), createTrainerForm(tr), true);},
         remove(tid)                         {return sendSingleValue(backendLinks.TRAINER_REMOVE(tid), tid, false);},
-        edit(tid, tr)                       {sendParametersList(backendLinks.TRAINER_EDIT(tid), createTrainerForm(tr), true);}
+        edit(tid, tr)                       {sendParametersList(backendLinks.TRAINER_EDIT(tid), createTrainerForm(tr), true);},
+        changePhoto(tid, data)              {sendFormData(backendLinks.TRAINER_CHANGE_PHOTO(tid), data, true);}
     }
 }

@@ -6,7 +6,7 @@ export const commonStrings = {
 const errors = {
     emptyField(field)     { errorMessage("Empty field '" + field + "'"); },
     badNumber(field)      { errorMessage("Bad number in field '" + field + "'"); },
-    badDate()             { errorMessage("Bad number in field '" + field + "'"); }
+    badDate(dt)           { errorMessage("Bad date input " + dt); }
     
 }
 function errorMessage(mess) {
@@ -15,9 +15,11 @@ function errorMessage(mess) {
 function dateValidate(date){
     var dt = date.split("/");
     if(dt.length < 3) return false;
-    dt[1] -= 1;
-    var d = new Date(dt[2], dt[0], dt[1]);
-    return ((d.getFullYear() == dt[2]) && (d.getMonth() == dt[0]) && (d.getDate() == dt[1])) ? true : false;
+    var year    = Number(dt[2]);
+    var month   = Number(dt[0]) - 1;
+    var day     = Number(dt[1]);
+    var d       = new Date(year, month, day);
+    return ((d.getFullYear() == year) && (d.getMonth() == month) && (d.getDate() == day)) ? true : false;
 }
 
 export const checkers = {   
@@ -27,7 +29,7 @@ export const checkers = {
     isEmptyString(str)          { return this.strEquals(str, "") || this.strEquals(str, "\r\n") ? true : false; },
     checkName(field, value)     { if(this.isEmptyString(value)) { errors.emptyField(field); return false; } return true; },
     checkNumber(field, value)   { if(!this.isNumber(value))     { errors.badNumber(field);  return false; } return true; },
-    checkDate(date)             { if(!dateValidate(date))       { errors.badDate(field);    return false; } return true;},
+    checkDate(date)             { if(!dateValidate(date))       { errors.badDate(date);    return false; } return true;},
     prepareDate(date)           { var dt = date.split("/");     return dt[2] + "-" + dt[0] + "-" + dt[1]; }
 
 }

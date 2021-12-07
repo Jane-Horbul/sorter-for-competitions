@@ -5,7 +5,8 @@ import { getLinkParams,
     onClick,
     prepareTabs,
     unhideSubelements,
-    checkers} from "./common.js"
+    checkers,
+    createPageItem} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./trainer-page-markup.js"
 
@@ -21,6 +22,23 @@ var trainerInfo         = server.trainer.get(page.tid);
 
 console.log(trainerInfo);
 console.log(client);
+
+function changeEmail(){
+    var newEmail = markup.trainer.getNewEmail();
+    var pass = markup.trainer.getLoginConfirmPassword();
+    server.access.changeLogin(newEmail, pass);
+}
+
+function changePass(){
+    var pass = markup.trainer.getOldPassword();
+    var newPass = markup.trainer.getNewPassword();
+    var newPassConfirm = markup.trainer.getNewPasswordConfirm();
+    if(!checkers.strEquals(newPass, newPassConfirm)){
+        alert("Not equal confirm password");
+        return;
+    }
+    server.access.changePass(newPass, pass);
+}
 
 function trainerInfoEdit(){
     if(markup.trainer.getNameInput() != null){
@@ -67,6 +85,85 @@ function trainerInfoEdit(){
     markup.trainer.getRegionInput().value = trainerInfo.getRegion();
 }
 
+function changeFoto(){
+    var form = document.forms.namedItem("fileinfo");
+    var oData = new FormData(form);
+    server.trainer.changePhoto(page.tid, oData);
+    /*
+    var oReq = new XMLHttpRequest();
+    oReq.open("POST", "stash.php", true);
+    oReq.send(oData);
+    
+    
+    form.addEventListener('submit', 
+    function(ev) {
+        var oOutput = document.querySelector("div");
+        
+        oData.append("CustomField", "This is some extra data");
+
+        
+
+        oReq.onload = function(oEvent) {
+            if (oReq.status == 200) {
+                oOutput.innerHTML = "Uploaded!";
+            } else {
+                oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+            }
+        };
+
+        
+        ev.preventDefault();
+    }, false);
+    */
+}
+
+export function getQualNameByValue(val){
+    return qualificationsMap.get(val) == undefined ? val : qualificationsMap.get(val);
+}
+
+function qualificationElementAddToPage(name, value){
+    if(!checkers.isEmptyString(value)){
+        var template = markup.sportsman.getQualTemplate();
+        var placeholders = markup.sportsman.getQualPlaceholders(name, value)
+        markup.sportsman.getQualList().append(createPageItem(template, placeholders));
+    }
+}
+
+function sportsmanPageElementAdd(sp){
+    if(sp.getId() != undefined){
+        var template = markup.sportsman.getTemplate();
+        var placeholders = markup.sportsman.getPlaceholders(sp);
+        markup.sportsman.getTable().append(createPageItem(template, placeholders)); 
+    }
+}
+
+function isSportsmansParamsOk() {
+    return (!checkers.checkName("Name", markup.sportsman.getNameInput()) 
+        || !checkers.checkName("Surname", markup.sportsman.getSurnameInput())
+        || !checkers.checkNumber("Weight", markup.sportsman.getWeightInput())
+        || !checkers.checkDate(markup.sportsman.getAgeInput())) 
+        ? false : true;
+}
+
+function createSportsman() {
+    if(isSportsmansParamsOk()) {
+        var sporsman = ops.createSportsman(undefined);
+        sporsman.setName(markup.sportsman.getNameInput());
+        sporsman.setSurname(markup.sportsman.getSurnameInput());
+        sporsman.setWeight(markup.sportsman.getWeightInput());
+        sporsman.setBirth(markup.sportsman.getAgeInput());
+        sporsman.setTrainer(markup.sportsman.getTrainerInput());
+        sporsman.setSex(markup.sportsman.getSexInput());
+        sporsman.setQualification(markup.sportsman.getQualificationInput());
+        server.sportsman.create(sporsman);
+        /*
+        if(markup.sportsman.getOneMoreInput().localeCompare("no") == 0){
+            location.reload();
+        }*/
+    }
+    
+}
+
 function fillPageInfo(){
 
     var trainerName = trainerInfo.getSurname() + " " + trainerInfo.getName();
@@ -87,6 +184,16 @@ function fillPageInfo(){
     markup.trainer.getInfoRegion().innerHTML    = trainerInfo.getRegion();
     markup.trainer.getInfoEmail().innerHTML     = trainerInfo.getEmail();
     markup.trainer.setDelBtnLink(departmentLink);
+    
+    markup.sportsman.getTrainersList()
+        .append(createPageItem(markup.sportsman.getTrainerTemplate(), 
+        markup.sportsman.getTrainerPlaceholders(trainerInfo)));
+    var team = departmentInfo.getSportsmans().filter(sp => checkers.strEquals(sp.getTrainer(), page.tid));
+    team.forEach( sportsman   => sportsmanPageElementAdd(sportsman));
+    for (var [value, name] of qualificationsMap)
+        qualificationElementAddToPage(name, value);
+    
+
 
     if(client.isTrainer() && checkers.strEquals(trainerInfo.getId(), client.getId()))
         unhideSubelements(document);
@@ -95,6 +202,11 @@ function fillPageInfo(){
 function setBtnActions(){
     onClick(markup.trainer.getEditBtn(), trainerInfoEdit);
     onClick(markup.trainer.getDelBtn(), function(){server.trainer.remove(page.tid)});
+    onClick(markup.trainer.getChangeEmailBtn(), changeEmail);
+    onClick(markup.trainer.getChangePassBtn(), changePass);
+    onClick(markup.trainer.getChangePhotoBtn(), changeFoto);
+    onClick(markup.sportsman.getAddBtn(), createSportsman);
+    
 }
 
 

@@ -1,3 +1,4 @@
+import {getQualNameByValue} from "./trainer-page.js"
 
 export const markup = {
     trainer: {
@@ -39,5 +40,57 @@ export const markup = {
         setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
         getDelBtn()                 { return document.getElementById("del-btn-link");},
         getEditBtn()                { return document.getElementById("trainer-edit-btn");},
+
+        getNewEmail()               { return document.getElementById("new-login").value;},
+        getLoginConfirmPassword()   { return document.getElementById("login-confirm-password").value;},
+        getChangeEmailBtn()         { return document.getElementById("change-email-btn");},
+
+        getOldPassword()            { return document.getElementById("old-password").value;},
+        getNewPassword()            { return document.getElementById("new-password").value;},
+        getNewPasswordConfirm()     { return document.getElementById("new-password-again").value;},
+        getChangePassBtn()          { return document.getElementById("change-pass-btn");},
+        getChangePhotoBtn()         { return document.getElementById("change-photo-btn");}
+    },
+    sportsman:{
+        getNameInput()                  { return document.getElementById("new-sportsman-name").value;},
+        getSurnameInput()               { return document.getElementById("new-sportsman-surname").value;},
+        getAgeInput()                   { return document.getElementById("new-sportsman-age").value;},
+        getWeightInput()                { return document.getElementById("new-sportsman-weight").value;},
+        getSexInput()                   { return document.getElementById("new-sportsman-sex-male").checked ? "male" : "female";},
+        getTrainerInput()               { return document.getElementById("new-sportsman-trainer").value;},
+        getQualificationInput()         { return document.getElementById("new-sportsman-qualifications").value;},
+        getOneMoreInput()               { return document.getElementById("add-one-more-sp").value;},
+
+        getTrainersList()               { return document.getElementById("new-sportsman-trainer");},
+        getTrainerTemplate()            { return document.getElementById("new-sportsman-trainer-temp");},
+        getTrainerPlaceholders(tr)      { return {
+                                                "#sports-trainer-id":      tr.getId(),
+                                                "#sports-trainer-name":    tr.getSurname() + " " + tr.getName()
+                                                };
+                                        },
+
+        getQualList()                   { return document.getElementById("new-sportsman-qualifications");},
+        getQualTemplate()               { return document.getElementById("new-sportsman-qual-temp");},
+        getQualPlaceholders(n, v)       { return {
+                                                "#sports-qual-value":      v,
+                                                "#sports-qual-name":       n
+                                                };
+                                        },
+    
+        getTable()                      { return document.getElementById("sportsmen-table");},
+        getTemplate()                   { return document.getElementById("sportsman-template");},
+        getAddBtn()                     { return document.getElementById("sportsman-form-send-btn");},
+    
+        getPlaceholders(sp)             { return {
+                                                "#sp-surname":      sp.getSurname(),
+                                                "#sp-name":         sp.getName(),
+                                                "#sp-age":          sp.getFormatedBirth("dd.mm.yy"),
+                                                "#sp-weight":       sp.getWeight(),
+                                                "#sp-sex":          sp.getSex(),
+                                                "#sp-team":         sp.getTeam(),
+                                                "#sp-qual":         getQualNameByValue(sp.getQualification()),
+                                                "#sportsman-link":  window.location.href.split("#")[0] + sp.getLink()
+                                            };
+                                        },
     }
 }
