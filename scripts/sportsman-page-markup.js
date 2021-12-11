@@ -7,6 +7,12 @@ const medals = {
 }
 
 export const markup = {
+    login:          {
+        getLoginBtn()               { return document.getElementById("login-btn");},
+        getLogin()                  { return document.getElementById("login").value;},
+        getPass()                   { return document.getElementById("password").value;}
+    },
+
     statistics: {
         competitionsListId:         "tabcontent2",
         competitionStatTemplate:    "competition-item-template-id",
@@ -84,7 +90,8 @@ export const markup = {
         setSportsmanName(name)      {document.getElementById("sportsman-link").innerHTML = name;},
         setSportsmanLink(link)      {document.getElementById("sportsman-link").setAttribute("href", link);},
         setSportsmanHeader(name)    {document.getElementById("sportsman-header").innerHTML = name;},
-        
+        setPhoto(link)              {if(link != undefined) document.getElementById("sportsman-photo-img").setAttribute("src", link);},
+
         getInfoId()                 {return document.getElementById("sportsman-info-id");},
         getInfoName()               {return document.getElementById("sportsman-info-name");},
         getInfoSurname()            {return document.getElementById("sportsman-info-surname");},
@@ -95,7 +102,8 @@ export const markup = {
         getInfoTrainer()            {return document.getElementById("sportsman-info-trainer");},
         getInfoTeam()               {return document.getElementById("sportsman-info-team");},
         getInfoRegion()             {return document.getElementById("sportsman-info-region");},
-
+        getPhotoForm()              {return new FormData(document.forms.namedItem("fileinfo"));},
+        
         getNameInput()              { return document.getElementById("sports-input-name");},
         getNameInputTemplate()      { return document.getElementById("sports-input-name-template").cloneNode(true).content;},
         getSurnameInput()           { return document.getElementById("sports-input-surname");},
@@ -123,5 +131,6 @@ export const markup = {
         setDelBtnLink(link)         {this.getDelBtn().setAttribute("href", link);},
         getDelBtn()                 { return document.getElementById(this.delBtnId);},
         getEditBtn()                { return document.getElementById(this.editBtnId);},
+        getChangePhotoBtn()         { return document.getElementById("change-photo-btn");}
     }
 }

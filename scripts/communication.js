@@ -7,11 +7,13 @@ const backendLinks = {
     DEPARTMENT_QUALIFICATION_DEL:               "department-qual-del",
     DEPARTMENT_DISCIPLINE_ADD:                  "department-disc-add",
     DEPARTMENT_DISCIPLINE_DEL:                  "department-disc-del",
-    DEPARTMENT_SPORTSMEN_GET(sid)               {return "department-sports-get?sid=" + sid;},
-    DEPARTMENT_SPORTSMEN_STAT_GET(sid)          {return "department-sports-stat-get?sid=" + sid;},
-    DEPARTMENT_SPORTSMEN_EDIT(sid)              {return "department-sports-edit?sid=" + sid;},
-    DEPARTMENT_SPORTSMEN_ADD:                   "department-sports-add",
-    DEPARTMENT_SPORTSMEN_DEL(sid)               {return "department-sports-del?sid=" + sid;},
+
+    SPORTSMAN_GET(sid)                          {return "department-sports-get?sid=" + sid;},
+    SPORTSMAN_STAT_GET(sid)                     {return "department-sports-stat-get?sid=" + sid;},
+    SPORTSMAN_EDIT(sid)                         {return "department-sports-edit?sid=" + sid;},
+    SPORTSMAN_CREATE:                           "department-sports-add",
+    SPORTSMAN_DELETE(sid)                       {return "department-sports-del?sid=" + sid;},
+    SPORTSMAN_CHANGE_PHOTO(sid)                 {return "sportsman-photo-change?sid=" + sid;},
 
     COMPETITION_CREATE:                         "department-comp-add",
     COMPETITION_GET(cid)                        {return "competition-get?cid=" + cid;},
@@ -108,6 +110,7 @@ function mapToSportsman(map) {
         getAdmition()         {return this.params.get("Admited");},
         getDisciplines()      {return this.params.get("Disciplines");},
         getGroupsNum()        {return this.params.get("Groups_num");},
+        getPhoto()            {return this.params.get("Photo");},
 
         setId(v)               {return this.params.set("Id", v);},
         setName(v)             {return this.params.set("Name", v);},
@@ -138,6 +141,7 @@ function mapToTrainer(map) {
         getTeam()             {return this.params.get("Team");},
         getRegion()           {return this.params.get("Region");},
         getEmail()            {return this.params.get("Email");},
+        getPhoto()            {return this.params.get("Photo");},
         getLink()             {return "/trainer?tid=" + this. getId(this.params);},
 
         setId(v)               {return this.params.set("Id", v);},
@@ -607,14 +611,15 @@ export const server = {
         createFormula(map)                  {return mapToFormula(map);}
     },
     sportsman: {
-        get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_GET(sid), false));},
-        getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.DEPARTMENT_SPORTSMEN_STAT_GET(sid), true));},
-        create(sp)                          {sendParametersList(backendLinks.DEPARTMENT_SPORTSMEN_ADD, createSportsmanForm(sp), true);},
-        remove(sid)                         {return sendSingleValue(backendLinks.DEPARTMENT_SPORTSMEN_DEL(sid), sid, false);},
-        edit(sid, sp)                       {sendParametersList(backendLinks.DEPARTMENT_SPORTSMEN_EDIT(sid), createSportsmanForm(sp), true);},
+        get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.SPORTSMAN_GET(sid), false));},
+        getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.SPORTSMAN_STAT_GET(sid), true));},
+        create(sp)                          {sendParametersList(backendLinks.SPORTSMAN_CREATE, createSportsmanForm(sp), true);},
+        remove(sid)                         {return sendSingleValue(backendLinks.SPORTSMAN_DELETE(sid), sid, false);},
+        edit(sid, sp)                       {sendParametersList(backendLinks.SPORTSMAN_EDIT(sid), createSportsmanForm(sp), true);},
         addDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_ADD(cid, sid), disc, false);},
         delDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_DEL(cid, sid), disc, false);},
         admitChange(sid, cid, stat)         {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_ADMIT_CHANGE(cid, sid), stat, false);},
+        changePhoto(sid, data)              {sendFormData(backendLinks.SPORTSMAN_CHANGE_PHOTO(sid), data, true);}
     },
 
     trainer: {

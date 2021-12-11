@@ -109,10 +109,10 @@
                                     <ul class="list sportsman-info-list">
                                         <li>
                                             <div class="sportsman-foto">
-                                                <img src="./img/sportsman-foto.png" alt="trainer foto">
+                                                <img id="trainer-photo-img" src="./img/sportsman-foto.png" alt="trainer foto">
                                             </div>
-                                            <form enctype="multipart/form-data" method="post" name="fileinfo">
-                                                <input type="file" name="trainer-photo-change?" id="new-photo-input" required />
+                                            <form enctype="multipart/form-data" method="post" name="fileinfo" class="js-hidden-element js-root-view js-admin-view">
+                                                <input type="file" name="trainer-photo" id="new-photo-input" required />
                                                 <button class="group-page-del-btn" type="button" id="change-photo-btn">
                                                     <span class="group-card-btn-del-text">PH33_CHANGE_PHOTO</span>
                                                 </button>

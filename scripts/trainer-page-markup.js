@@ -9,7 +9,8 @@ export const markup = {
         setTrainerName(name)        {document.getElementById("trainer-link").innerHTML = name;},
         setTrainerLink(link)        {document.getElementById("trainer-link").setAttribute("href", link);},
         setTrainerHeader(name)      {document.getElementById("trainer-header").innerHTML = name;},
-        
+        setPhoto(link)              {if(link != undefined) document.getElementById("trainer-photo-img").setAttribute("src", link);},
+
         getInfoId()                 {return document.getElementById("trainer-info-id");},
         getInfoName()               {return document.getElementById("trainer-info-name");},
         getInfoSurname()            {return document.getElementById("trainer-info-surname");},
@@ -18,6 +19,7 @@ export const markup = {
         getInfoTeam()               {return document.getElementById("trainer-info-team");},
         getInfoRegion()             {return document.getElementById("trainer-info-region");},
         getInfoEmail()              {return document.getElementById("trainer-info-email");},
+        getPhotoForm()              {return new FormData(document.forms.namedItem("fileinfo"));},
 
         getNameInput()              { return document.getElementById("trainer-input-name");},
         getNameInputTemplate()      { return document.getElementById("trainer-input-name-template").cloneNode(true).content;},
@@ -89,7 +91,7 @@ export const markup = {
                                                 "#sp-sex":          sp.getSex(),
                                                 "#sp-team":         sp.getTeam(),
                                                 "#sp-qual":         getQualNameByValue(sp.getQualification()),
-                                                "#sportsman-link":  window.location.href.split("#")[0] + sp.getLink()
+                                                "#sportsman-link":  window.location.href.split("/")[0] + sp.getLink()
                                             };
                                         },
     }
