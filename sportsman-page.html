@@ -21,6 +21,15 @@
                         <div class="lang-panel">
                             <ul class="list lang-panel-list">
                                 <li class="lang-panel-item">
+                                    <div class="log-in-btn--placing">
+                                        <a href="#popup_7" class="popup-link"> 
+                                            <button class="log-in-btn">
+                                                <span>Log in</span> 
+                                            </button>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="lang-panel-item">
                                     <div class="lang-panel-flag">
                                         <a type="button" id="lang-ru"> 
                                             <img src="./img/ru.png"> 
@@ -92,8 +101,14 @@
                                     <ul class="list sportsman-info-list">
                                         <li>
                                             <div class="sportsman-foto">
-                                                <img src="./img/sportsman-foto.png" alt="sportsman foto">
+                                                <img id="sportsman-photo-img" src="./img/sportsman-foto.png" alt="sportsman foto">
                                             </div>
+                                            <form enctype="multipart/form-data" method="post" name="fileinfo" class="js-hidden-element js-root-view js-admin-view">
+                                                <input type="file" name="trainer-photo" id="new-photo-input" required />
+                                                <button class="group-page-del-btn" type="button" id="change-photo-btn">
+                                                    <span class="group-card-btn-del-text">PH33_CHANGE_PHOTO</span>
+                                                </button>
+                                            </form>
                                         </li>
                                         <li>
                                             <table class="dynamic-table">
@@ -492,6 +507,40 @@
                 </div>
             </div>
             <!--member-groups-edit-popup-window-end-->
+            
+            <!--LogIn popup start-->
+            <div class="popup" id = "popup_7">
+                <a href="" class="popup__area"></a>
+                <div class="popup__body">
+                    <div class="popup__content">
+                        <div class="login_popup__content">
+                            <a href="" class="popup__close close-popup">X</a>
+                            <form class="modal-form">
+                                <div class="">
+                                    <div class="login-page-title">
+                                        <span class="login-page-popup-title">CPH01_LOGIN</span>
+
+                                    <div class="input-container ic1">
+                                        <input id="login" class="input input_login" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="login" class="placeholder">CPH02_LOGIN_INPUT</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="password" class="input input_login" type="password" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="password" class="placeholder">CPH03_PASS_INPUT</label>
+                                    </div>
+
+                                    <button type="button" id="login-btn" class="login-page-btn-submit">
+                                        <span class="modal-btn-submit-text">CPH04_LOGIN_BTN</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--LogIn popup end-->
             
             <script src="./scripts/sportsman-page.js" type="module"></script>
             <script src="./scripts/open-close-popup.js" type="module"></script>

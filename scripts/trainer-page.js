@@ -85,38 +85,6 @@ function trainerInfoEdit(){
     markup.trainer.getRegionInput().value = trainerInfo.getRegion();
 }
 
-function changeFoto(){
-    var form = document.forms.namedItem("fileinfo");
-    var oData = new FormData(form);
-    server.trainer.changePhoto(page.tid, oData);
-    /*
-    var oReq = new XMLHttpRequest();
-    oReq.open("POST", "stash.php", true);
-    oReq.send(oData);
-    
-    
-    form.addEventListener('submit', 
-    function(ev) {
-        var oOutput = document.querySelector("div");
-        
-        oData.append("CustomField", "This is some extra data");
-
-        
-
-        oReq.onload = function(oEvent) {
-            if (oReq.status == 200) {
-                oOutput.innerHTML = "Uploaded!";
-            } else {
-                oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
-            }
-        };
-
-        
-        ev.preventDefault();
-    }, false);
-    */
-}
-
 export function getQualNameByValue(val){
     return qualificationsMap.get(val) == undefined ? val : qualificationsMap.get(val);
 }
@@ -165,7 +133,6 @@ function createSportsman() {
 }
 
 function fillPageInfo(){
-
     var trainerName = trainerInfo.getSurname() + " " + trainerInfo.getName();
     markup.trainer.setPageName(departmentInfo.getName());
     markup.trainer.setPageNameLink(departmentLink);
@@ -174,7 +141,8 @@ function fillPageInfo(){
     markup.trainer.setTrainerHeader(trainerName);
     markup.trainer.setTrainerName(trainerName);
     markup.trainer.setTrainerLink(window.location.href);
-    
+    markup.trainer.setPhoto(trainerInfo.getPhoto());
+
     markup.trainer.getInfoId().innerHTML        = trainerInfo.getId();
     markup.trainer.getInfoName().innerHTML      = trainerInfo.getName();
     markup.trainer.getInfoSurname().innerHTML   = trainerInfo.getSurname();
@@ -193,8 +161,6 @@ function fillPageInfo(){
     for (var [value, name] of qualificationsMap)
         qualificationElementAddToPage(name, value);
     
-
-
     if(client.isTrainer() && checkers.strEquals(trainerInfo.getId(), client.getId()))
         unhideSubelements(document);
 }
@@ -204,7 +170,7 @@ function setBtnActions(){
     onClick(markup.trainer.getDelBtn(), function(){server.trainer.remove(page.tid)});
     onClick(markup.trainer.getChangeEmailBtn(), changeEmail);
     onClick(markup.trainer.getChangePassBtn(), changePass);
-    onClick(markup.trainer.getChangePhotoBtn(), changeFoto);
+    onClick(markup.trainer.getChangePhotoBtn(), function(){server.trainer.changePhoto(page.tid, markup.getPhotoForm());});
     onClick(markup.sportsman.getAddBtn(), createSportsman);
     
 }

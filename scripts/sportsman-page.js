@@ -151,7 +151,8 @@ function fillPageInfo(){
     markup.sportsman.setSportsmanHeader(sportsName);
     markup.sportsman.setSportsmanName(sportsName);
     markup.sportsman.setSportsmanLink(window.location.href);
-    
+    markup.sportsman.setPhoto(sportsmanInfo.getPhoto());
+
     markup.sportsman.getInfoId().innerHTML        = sportsmanInfo.getId();
     markup.sportsman.getInfoName().innerHTML      = sportsmanInfo.getName();
     markup.sportsman.getInfoSurname().innerHTML   = sportsmanInfo.getSurname();
@@ -168,8 +169,10 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
-    onClick(markup.sportsman.getEditBtn(), sportsmanInfoEdit);
-    onClick(markup.sportsman.getDelBtn(), function(){server.sportsman.remove(page.sid)});
+    onClick(markup.sportsman.getEditBtn(),          sportsmanInfoEdit);
+    onClick(markup.sportsman.getDelBtn(),           function(){ server.sportsman.remove(page.sid); });
+    onClick(markup.sportsman.getChangePhotoBtn(),   function(){ server.sportsman.changePhoto(page.sid, markup.sportsman.getPhotoForm()); });
+    onClick(markup.login.getLoginBtn(),             function(){ server.access.login(markup.login.getLogin(), markup.login.getPass()); });
 }
 
 prepareTabs();
