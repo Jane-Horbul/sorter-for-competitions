@@ -5,6 +5,7 @@ export const markup = {
         setPageHeaderLink(link)         {document.getElementById("page-header-name-link").setAttribute("href", link);},
         setDepartmentLink(name, link)   {var d = document.getElementById("department-link"); d.setAttribute("href", link); d.innerHTML = name;},
         setCompetitionLink(name, link)  {var c = document.getElementById("competition-link"); c.setAttribute("href", link); c.innerHTML = name;},
+        getArenaName()                  {return document.getElementById("arena-name-input").value;}
     },
     automation: {
         getActiveGroupsList()           { return document.getElementById("active-groups-list");},
@@ -19,7 +20,17 @@ export const markup = {
         getActiveGroup(gr)              { return document.getElementById("active-group-id-" + gr.getId()); },
         getUnactiveGroup(gr)            { return document.getElementById("unactive-group-id-" + gr.getId()); },
         getAddAllGroupsBtn()            { return document.getElementById("add-all-groups-btn"); },
-        getDelAllGroupsBtn()            { return document.getElementById("delete-all-groups-btn"); }
+        getDelAllGroupsBtn()            { return document.getElementById("delete-all-groups-btn"); },
+
+        getDistanceValue()              { return document.getElementById("cpl-auto-sort-criteria--dist").value;},
+        getAgeMinValue()                { return document.getElementById("age-min-input").value;},
+        getAgeMaxValue()                { return document.getElementById("age-max-input").value;},
+        getWeightMinValue()             { return document.getElementById("weight-min-input").value;},
+        getWeightMaxValue()             { return document.getElementById("weight-max-input").value;},
+        getFinalMinValue()              { return document.getElementById("final-min-input").value;},
+        getFinalMaxValue()              { return document.getElementById("final-max-input").value;},
+
+        getApplyBtn()                   { return document.getElementById("automatic-apply-btn" );}
     },
     manual: {
         getDetachedPairsList()          { return document.getElementById("unactive-pairs-list"); },
@@ -36,6 +47,7 @@ export const markup = {
                                         },
 
         getAttachAllPairsBtn()          { return document.getElementById("add-all-pairs-btn"); },
-        getDetachAllPairsBtn()          { return document.getElementById("delete-all-pairs-btn"); }
+        getDetachAllPairsBtn()          { return document.getElementById("delete-all-pairs-btn"); },
+        getApplyBtn()                   { return document.getElementById("manual-apply-btn" );}
     }
 }

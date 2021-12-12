@@ -5,10 +5,11 @@ import {
     languageSwitchingOn,
     createPageItem,
     prepareTabs,
-    onClick
+    onClick,
+    commonStrings
 } from "./common.js"
 import { markup } from "./create-place-page-markup.js";
-import {server} from "./communication.js" //закоментувати перед початком роботи
+import {server, ops} from "./communication.js" //закоментувати перед початком роботи
 //import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
 
 
@@ -122,6 +123,50 @@ function detachAllPairs(){
     }
 }
 
+function createArenaAutomatic(){
+    var name = markup.common.getArenaName();
+    var distance = markup.automation.getDistanceValue();
+    var ageMin = markup.automation.getAgeMinValue();
+    var ageMax = markup.automation.getAgeMaxValue();
+    var weightMin = markup.automation.getWeightMinValue();
+    var weightMax = markup.automation.getWeightMaxValue();
+    var finalMin = markup.automation.getFinalMinValue();
+    var finalMax = markup.automation.getFinalMaxValue();
+    var arena = ops.createArena(undefined);
+
+    if(!checkers.checkName("Arena name", name) || !checkers.checkNumber("One member pair distance", distance))
+        return;
+    arena.setName(name);
+
+    var groupsIds = "";
+    var first = true;
+    activeGroups.forEach(gr => {
+        if(first) 
+            first = false;
+        else 
+            groupsIds += commonStrings.arrDivider;
+        groupsIds += gr.getId();
+    });
+    arena.setGroups(groupsIds);
+    arena.setDistance(distance);
+    if(checkers.isNumber(ageMin))       arena.setAgeMin(ageMin);
+    if(checkers.isNumber(ageMax))       arena.setAgeMax(ageMax);
+    if(checkers.isNumber(weightMin))    arena.setWeightMin(weightMin);
+    if(checkers.isNumber(weightMax))    arena.setWeightMax(weightMax);
+    if(checkers.isNumber(finalMin))     arena.setFinalMin(finalMin);
+    if(checkers.isNumber(finalMax))     arena.setFinalMax(finalMax);
+    server.arena.create(page.cid, arena.params);
+}
+
+function createArenaManual(){
+    var name = markup.common.getArenaName();
+    var arena = ops.createArena(undefined);
+    if(!checkers.checkName("Arena name", name))
+        return;
+    arena.setName(name);
+    arena.setPairs(attachedPairs);
+    server.arena.create(page.cid, arena.params);
+}
 
 function fillPageInfo(){
     markup.common.setPageHeader(competition.getName());
@@ -144,8 +189,12 @@ function fillPairsList(){
 function setBtnActions(){
     onClick(markup.automation.getAddAllGroupsBtn(), activateAllGroups);
     onClick(markup.automation.getDelAllGroupsBtn(), deactivateAllGroups);
+    onClick(markup.automation.getApplyBtn(), createArenaAutomatic);
+
+
     onClick(markup.manual.getAttachAllPairsBtn(), attachAllPairs);
     onClick(markup.manual.getDetachAllPairsBtn(), detachAllPairs);
+    onClick(markup.manual.getApplyBtn(), createArenaManual);
 }
 
 

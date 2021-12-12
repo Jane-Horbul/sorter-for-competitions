@@ -160,7 +160,7 @@
                     <div id="tabcontent3" class="tabcontent">
                         <div id="competition-tab" class="">
                             <section class="advantages container">
-                                <ul class="list advantages-list" id="competitions-list">
+                                <ul class="list advantages-list" id="arenas-list">
                                     <li class="advantages-item js-hidden-element js-root-view js-admin-view">
                                         <a id="add-place-link-id" href= "">
                                             <div class="advantages-icon-bg">
@@ -175,26 +175,26 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!--start template of generated pairs list-->
-                                    <li class="advantages-item">
-                                        <div class="projects-item">
-                                            <a href="#" class="title-of-competition-list-item">
-                                                <div class="project-card">
-                                                    <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
-                                                        alt="" />
-                                                        <div class="overlay">
-                                                            <p class="advantages-content">#pairs-list-desc</p>
+                                    <template id="arena-item-template">
+                                        <li class="advantages-item">
+                                            <div class="projects-item">
+                                                <a href="#arena-link" class="title-of-competition-list-item">
+                                                    <div class="project-card">
+                                                        <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
+                                                            alt="" />
+                                                            <div class="overlay">
+                                                                <p class="advantages-content">#arena-desc</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="caption">
+                                                            <h2 class="title-of-competition-list-item">#arena-name</h2>
+                                                    
                                                         </div>
                                                     </div>
-                                                    <div class="caption">
-                                                        <h2 class="title-of-competition-list-item">#pairs-list-name</h2>
-                                                
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <!--end template of generated pairs list-->
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </template>
                                 </ul>
                             </section>  
                             <!--<template id="competition-template">
