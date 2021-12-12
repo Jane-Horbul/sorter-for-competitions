@@ -20,13 +20,13 @@ const backendLinks = {
     COMPETITION_EDIT(cid)                       {return "competition-info-edit?cid=" + cid;},
     COMPETITION_SPORTSMAN_ADD(cid)              {return "new-member-form?cid=" + cid;},
     COMPETITION_SPORTSMAN_DEL(cid, sid)         {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
-    COMPETITION_GROUP_ADD(cid)                  {return "new-group-form?cid=" + cid;},
-    COMPETITION_GROUP_DEL(cid, gid)             {return "competition-group-del?cid=" + cid;},
     COMPETITION_GROUPS_PAIRS_FORM(cid)          {return "competition-pairs-refresh?cid=" + cid;},
     COMPETITION_MEMBERS_SORT(cid)               {return "competition-members-sort?cid=" + cid;},
 
     GROUP_GET(cid, gid)                         {return "group-get?cid=" + cid + "&gid=" + gid;},
+    GROUP_CREATE(cid)                           {return "new-group-form?cid=" + cid;},
     GROUP_INFO_EDIT(cid, gid)                   {return "group-info-edit?cid=" + cid + "&gid=" + gid;},
+    GROUP_DELETE(cid, gid)                      {return "competition-group-del?cid=" + cid + "&gid=" + gid;},
     GROUP_SPORTSMENS_ADD(cid, gid)              {return "group-sportsmens-add?cid=" + cid + "&gid=" + gid;},
     GROUP_SPORTSMEN_DEL(cid, gid)               {return "group-sportsmen-del?cid=" + cid + "&gid=" + gid;},
     GROUP_PAIRS_REFRESH(cid, gid)               {return "group-pairs-refresh?cid=" + cid + "&gid=" + gid;},
@@ -45,6 +45,8 @@ const backendLinks = {
     TRAINER_REMOVE(tid)                         {return "trainer-remove?tid=" + tid;},
     TRAINER_EDIT(tid)                           {return "trainer-edit?tid=" + tid;},
     TRAINER_CHANGE_PHOTO(tid)                   {return "trainer-photo-change?tid=" + tid;},
+
+    ARENA_CREATE(cid)                           {return "arena-create?cid=" + cid;},
 
     LOGIN:                                      "client-login",
     CLIENT_STATUS_GET:                          "client-status-get",
@@ -310,6 +312,56 @@ function mapToGroup(map) {
     };
 }
 
+function mapToArena(map) {
+    return {
+        params: (map == undefined) ? (new Map()) : map,
+        name:       "ArenaName",
+        id:         "ArenaId",
+        groups:     "ArenaGroups",
+        pairs:      "ArenaPairs",
+        distance:   "ArenaDistance",
+        ageMin:     "ArenaAgeMin",
+        ageMax:     "ArenaAgeMax",
+        weightMin:  "ArenaWeightMin",
+        weightMax:  "ArenaWeightMax",
+        qualMin:    "ArenaQualMin",
+        qualMax:    "ArenaQualMax",
+        finalMin:   "ArenaFinalMin",
+        finalMax:   "ArenaFinalMax",
+        pairsNum:   "ArenaPairsNum",
+        
+        getName()         {return this.params.get(this.name);},
+        getId()           {return this.params.get(this.id);},
+        getGroups()       {return this.params.get(this.groups);},
+        getPairs()        {return this.params.get(this.pairs);},
+        getDistance()     {return this.params.get(this.distance);},
+        getAgeMin()       {return this.params.get(this.ageMin);},
+        getAgeMax()       {return this.params.get(this.ageMax);},
+        getWeightMin()    {return this.params.get(this.weightMin);},
+        getWeightMax()    {return this.params.get(this.weightMax);},
+        getQualMin()      {return this.params.get(this.qualMin);},
+        getQualMax()      {return this.params.get(this.qualMax);},
+        getFinalMin()     {return this.params.get(this.finalMin);},
+        getFinalMax()     {return this.params.get(this.finalMax);},
+        getPairsNum()     {return this.params.get(this.pairsNum);},
+        getLink()         {return "/arena?aid=" + this.getId();},
+
+        setName(v)         {return this.params.set(this.name, v);},
+        setId(v)           {return this.params.set(this.id, v);},
+        setGroups(v)       {return this.params.set(this.groups, v);},
+        setPairs(v)        {return this.params.set(this.pairs, v);},
+        setDistance(v)     {return this.params.set(this.distance, v);},
+        setAgeMin(v)       {return this.params.set(this.ageMin, v);},
+        setAgeMax(v)       {return this.params.set(this.ageMax, v);},
+        setWeightMin(v)    {return this.params.set(this.weightMin, v);},
+        setWeightMax(v)    {return this.params.set(this.weightMax, v);},
+        setQualMin(v)      {return this.params.set(this.qualMin, v);},
+        setQualMax(v)      {return this.params.set(this.qualMax, v);},
+        setFinalMin(v)     {return this.params.set(this.finalMin, v);},
+        setFinalMax(v)     {return this.params.set(this.finalMax, v);},  
+    };
+}
+
 function mapToCompetition(map) {
     return {
         params: (map == undefined) ? (new Map()) : map,
@@ -323,6 +375,7 @@ function mapToCompetition(map) {
 
         getSportsmans()     {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
         getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
+        getArenas()         {return mapToObjArray(this.params.get("Arenas"), mapToArena);},
 
         setId(v)             {return this.params.set("Id", v);},
         setName(v)           {return this.params.set("Name", v);},
@@ -375,6 +428,7 @@ export const ops = {
     createStatistics(m)     {return arrayToCompStats(m);},
     createPair(m)           {return mapToPair(m);},
     createGroup(m)          {return mapToGroup(m);},
+    createArena(m)          {return mapToArena(m);},
     createCompetition(m)    {return mapToCompetition(m);},
     createDepartmant(m)     {return mapToDepatrment(m);}
 }
@@ -523,7 +577,7 @@ function createGroup(cid, gr){
     if(gr.getWeightMax() != undefined)  params.set("weight-max", gr.getWeightMax());
     if(gr.getQualMin() != undefined)    params.set("qualification-min", gr.getQualMin());
     if(gr.getQualMax() != undefined)    params.set("qualification-max", gr.getQualMax());
-    sendParametersList(backendLinks.COMPETITION_GROUP_ADD(cid), params, true);
+    sendParametersList(backendLinks.GROUP_CREATE(cid), params, true);
 }
 
 function editGroup(cid, gid, gr){
@@ -573,6 +627,20 @@ function createTrainerForm(trainer){
     return params;
 }
 
+/* ------------------- TRAINER ----------------------------*/
+function createArenaForm(arena){
+    var params = new Map();
+    params.set("trainer-name",    trainer.getName());
+    params.set("trainer-surname", trainer.getSurname());
+    params.set("trainer-birth",   trainer.getBirth());
+    params.set("trainer-team",    trainer.getTeam());
+    params.set("trainer-sex",     trainer.getSex());
+    params.set("trainer-region",  trainer.getRegion());
+    params.set("trainer-email",   trainer.getEmail());
+    
+    return params;
+}
+
 export const server = {
     access: {
         login(login, pass)                  {sendLogin(login, pass);},
@@ -601,7 +669,7 @@ export const server = {
         get(cid, gid)                       {return ops.createGroup(sendRequest(backendLinks.GROUP_GET(cid, gid), false));},
         edit(cid, gid, gr)                  {editGroup(cid, gid, gr)},
         create(cid, gr)                     {createGroup(cid, gr)},
-        remove(cid, gid)                    {return sendSingleValue(backendLinks.COMPETITION_GROUP_DEL(cid), gid, false);},
+        remove(cid, gid)                    {return sendSingleValue(backendLinks.GROUP_DELETE(cid), gid, false);},
         excludeSportsman(cid, gid, sid)     {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
         includeSportsList(cid, gid, sids)   {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
         refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid), false);},
@@ -628,5 +696,10 @@ export const server = {
         remove(tid)                         {return sendSingleValue(backendLinks.TRAINER_REMOVE(tid), tid, false);},
         edit(tid, tr)                       {sendParametersList(backendLinks.TRAINER_EDIT(tid), createTrainerForm(tr), true);},
         changePhoto(tid, data)              {sendFormData(backendLinks.TRAINER_CHANGE_PHOTO(tid), data, true);}
+    },
+
+    arena: {
+        get(tid)                            {return ops.createTrainer(sendRequest(backendLinks.TRAINER_GET(tid), false));},
+        create(cid, arena)                  {sendParametersList(backendLinks.ARENA_CREATE(cid), arena, false);},
     }
 }

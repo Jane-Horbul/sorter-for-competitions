@@ -170,8 +170,18 @@ export const markup = {
         getEditBtn()            { return document.getElementById("competition-edit-btn");}
     },
     
-    places: {
+    arenas: {
         getAddBlock()   { return document.getElementById("add-place-link-id");},
-        setAddLink()    { this.getAddBlock().setAttribute("href", window.location.href.split("#")[0] + "/create-place");}
+        setAddLink()    { this.getAddBlock().setAttribute("href", window.location.href.split("#")[0] + "/create-place");},
+        
+        getList()                   { return document.getElementById("arenas-list");},
+        getTemplate()               { return document.getElementById("arena-item-template");},
+        getPlaceholders(ar)         { return {
+                                            "#arena-link":        window.location.href.split("#")[0] + ar.getLink(),
+                                            "#arena-desc":        ar.getPairsNum(),
+                                            "#arena-name":        ar.getName(),
+                                        };
+                                    },
+
     }
 }
