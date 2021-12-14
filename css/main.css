@@ -3013,6 +3013,52 @@ body.lock {
   background-color: #06b;
 }
 
+.cpl-start-end-table {
+  width: 900px;
+  border-collapse: collapse;
+  margin-top: 60px;
+  margin-left: 15px;
+}
+
+.cpl-start-end-table td {
+  border: 1px solid gray;
+  text-align: center;
+}
+
+.cpl-start-end-table th {
+  border-bottom: 1px solid gray;
+  color: #295e84;
+  font-size: 20px;
+  text-align: left;
+  font-weight: normal;
+}
+
+.cpl-start-end-table input {
+  width: 100%;
+  border: 0px;
+  text-align: center;
+}
+
+.lp-list-num-round {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  margin-left: 80px;
+  margin-right: 80px;
+  font-size: 32px;
+}
+
+.lp-group-name {
+  font-size: 28px;
+  color: #295e84;
+  text-align: center;
+}
+
 .group-info {
   display: -webkit-box;
   display: -ms-flexbox;

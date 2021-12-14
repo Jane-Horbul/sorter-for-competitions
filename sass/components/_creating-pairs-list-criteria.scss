@@ -103,3 +103,25 @@
   .submit:active {
     background-color: #06b;
   }
+  .cpl-start-end-table {
+    width: 900px;
+    border-collapse: collapse;
+    margin-top: 60px;
+    margin-left: 15px;
+  }
+  .cpl-start-end-table td {
+    border: 1px solid gray;
+    text-align: center;
+  }
+  .cpl-start-end-table th {
+    border-bottom: 1px solid gray;
+    color: #295e84;
+    font-size: 20px;
+    text-align: left;
+    font-weight: normal;
+  }
+  .cpl-start-end-table input {
+      width: 100%;
+      border: 0px;
+      text-align: center;
+  }
