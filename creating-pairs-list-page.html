@@ -58,7 +58,7 @@
                 <div class="bread-crumbs-item"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
-                <div class="bread-crumbs-item"><a href="">PH15_PAGE_NAME</a></div>
+                <div class="bread-crumbs-item"><a href="">PHX_PAGE_NAME</a></div>
             </div>
             <main class="container">
                 <div class="container">
@@ -68,7 +68,7 @@
                 </div>
                 <div class="creating-pairs-list-name">
                     <div class="cp-list--input">
-                        <input class="cp-list--input-name" type="text" placeholder="PH3_NAME_PLACEHOLDER">
+                        <input id="arena-name-input" class="cp-list--input-name" type="text" placeholder="PHX_PLACE_NAME">
                     </div>
                 </div>
                 <!-- name of list after enter
@@ -82,8 +82,8 @@
                     </div>
                end -->
                 <div class="tab">
-                    <button class="tablinks" id="tab1">PH1_AUTOSORT_TAB</button>
-                    <button class="tablinks" id="tab2">PH2_MANUAL_TAB</button>
+                    <button class="tablinks" id="tab1">PHX_AUTOSORT_TAB</button>
+                    <button class="tablinks" id="tab2">PHX_MANUAL_TAB</button>
                 </div>
                 <!--Automatic sorting block start-->
                 <div id="tabcontent1" class="tabcontent">
@@ -123,7 +123,7 @@
                     </div>
                     <ul class="list cpl-automatic-sorting">
                         <div>
-                            <div class="cpl-auto-sort-list-title">PH12_ACTIVE_GROUPS_LIST</div>
+                            <div class="cpl-auto-sort-list-title">PHX_ACTIVE_GROUPS_LIST</div>
                             <div class="cpl-auto-sort-list">
                                 <div class="cpl-sorting-first-column"> 
                                     <ul class="list" id="active-groups-list">
@@ -155,7 +155,7 @@
                             </ul>
                         </div>
                         <div>
-                            <div class="cpl-auto-sort-list-title">PH13_UNACTIVE_GROUPS_LIST</div>
+                            <div class="cpl-auto-sort-list-title">PHX_UNACTIVE_GROUPS_LIST</div>
                             <div class="cpl-auto-sort-list">
                                 <div class="cpl-sorting-second-column">
                                     <ul class="list" id="unactive-groups-list">
@@ -174,23 +174,23 @@
                             <div class="input-criteria-container ic1-cpl ">
                                 <input id="cpl-auto-sort-criteria--dist" class="input input_cpl-auto-sort-criteria--dist" type="text" placeholder=" " />
                                 <div class="cut"></div>
-                                <label for="cpl-auto-sort-criteria--dist" class="placeholder">PH4_DISTANCE:</label>
+                                <label for="cpl-auto-sort-criteria--dist" class="placeholder">PHX_DISTANCE:</label>
                             </div>
                         </div>
 
                         <ul class="list cpl-auto-sort-criteria">
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="input-criteria-container ic1">
-                                    <input id="cpl-auto-sort-criteria--age" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
+                                    <input id="age-min-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="cpl-auto-sort-criteria--age" class="placeholder">PH8_MIN:</label>
+                                    <label for="age-min-input" class="placeholder">PHX_AGE_MIN:</label>
                                 </div>
                             </div>
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="input-criteria-container ic1">
-                                    <input id="cpl-auto-sort-criteria--age" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
+                                    <input id="age-max-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="cpl-auto-sort-criteria--age" class="placeholder">PH8_MAX:</label>
+                                    <label for="age-max-input" class="placeholder">PHX_AGE_MAX:</label>
                                 </div>
                             </div>
                         </ul>
@@ -198,16 +198,16 @@
                         <ul class="list cpl-auto-sort-criteria">
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="input-criteria-container ic1 ">
-                                    <input id="cpl-auto-sort-criteria--weight" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
+                                    <input id="weight-min-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="cpl-auto-sort-criteria--weight" class="placeholder">PH9_MIN:</label>
+                                    <label for="weight-min-input" class="placeholder">PHX_WEIGHT_MIN:</label>
                                 </div>
                             </div>
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="input-criteria-container ic1 ">
-                                    <input id="cpl-auto-sort-criteria-weight" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
+                                    <input id="weight-max-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="cpl-auto-sort-criteria-weight" class="placeholder">PH9_MAX:</label>
+                                    <label for="weight-max-input" class="placeholder">PHX_WEIGHT_MAX:</label>
                                 </div>
                             </div>
                         </ul>
@@ -215,28 +215,28 @@
                         <ul class="list cpl-auto-sort-criteria">
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="input-criteria-container ic1 ">
-                                    <input id="cpl-auto-sort-criteria--final" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
+                                    <input id="final-min-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="cpl-auto-sort-criteria--final" class="placeholder">PH8_MIN:</label>
+                                    <label for="final-min-input" class="placeholder">PHX_FINAL_MIN:</label>
                                 </div>
                             </div>
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="input-criteria-container ic1 ">
-                                    <input id="cpl-auto-sort-criteria--final" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
+                                    <input id="final-max-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="cpl-auto-sort-criteria--final" class="placeholder">PH8_MAX:</label>
+                                    <label for="final-max-input" class="placeholder">PHX_FINAL_MAX:</label>
                                 </div>
                             </div>
                         </ul>
                     </section>
-                    <button class="cpl-sorting-btn">Send</button>
+                    <button id="automatic-apply-btn" class="cpl-sorting-btn">PHX_APPLY_BTN</button>
 
                 </div>
                 <!--Manual sorting block start-->
                 <div id="tabcontent2" class="tabcontent">
                     <ul class="list cpl-manual-sorting">
                         <div>
-                            <div class="cpl-auto-sort-list-title">PH10_ACTIVE_PAIRS_LIST</div>
+                            <div class="cpl-auto-sort-list-title">PHX_ACTIVE_PAIRS_LIST</div>
                             <div class="cpl-auto-manual-list">
                                 <ul class="list" id="active-pairs-list">
                                     <template id="attached-pair-template">
@@ -266,7 +266,7 @@
                             </ul>
                         </div>
                         <div>
-                            <div class="cpl-auto-sort-list-title">PH11_UNACTIVE_PAIRS_LIST</div>
+                            <div class="cpl-auto-sort-list-title">PHX_UNACTIVE_PAIRS_LIST</div>
                             <div class="cpl-auto-manual-list">
                                 <ul class="list" id="unactive-pairs-list">
                                     <template id="unactive-pair-template">
@@ -278,7 +278,7 @@
                             </div>
                         </div>
                     </ul>
-                    <button class="cpl-sorting-btn">Send</button>
+                    <button id="manual-apply-btn" class="cpl-sorting-btn">PHX_APPLY_BTN</button>
                 </div>
             </main>
         </div>

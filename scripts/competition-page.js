@@ -244,6 +244,18 @@ function sendGroupForm() {
     server.group.create(page.cid, newGroup);
 }
 
+
+
+function arenaPageElementAdd(ar){
+    if(ar.getId() != undefined){
+        var template = markup.arenas.getTemplate();
+        var placeholders = markup.arenas.getPlaceholders(ar);
+        var newItem = createPageItem(template, placeholders);
+        markup.arenas.getList().prepend(newItem);
+    }
+}
+
+
 /* ------------------- COMMON ----------------------------*/
 
 function competitionEdit(){
@@ -329,13 +341,15 @@ function fillPageInfo(){
     markup.competitions.setDepartmentLink(departmentLink);
     markup.competitions.setCompetitionName(competition.getName());
     markup.competitions.setCompetitionLink(window.location.href);
-    markup.places.setAddLink();
+    markup.arenas.setAddLink();
 
     qualificationAddToPage();
     
     disciplinesAddToPage();
-    competition.getGroups(competition).forEach(gr =>   groupPageElementAdd(gr));
-    competition.getSportsmans(competition).forEach(sp => sportsmanPageElementAdd(sp));
+    competition.getGroups().forEach(gr =>   groupPageElementAdd(gr));
+    competition.getSportsmans().forEach(sp => sportsmanPageElementAdd(sp));
+    competition.getArenas().forEach(ar => arenaPageElementAdd(ar));
+    
     departamentSportsmans.forEach(sp => departamentSportsmanElementAdd(sp));
 }
 
