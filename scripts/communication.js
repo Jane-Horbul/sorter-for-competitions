@@ -47,6 +47,7 @@ const backendLinks = {
     TRAINER_CHANGE_PHOTO(tid)                   {return "trainer-photo-change?tid=" + tid;},
 
     ARENA_CREATE(cid)                           {return "arena-create?cid=" + cid;},
+    ARENA_GET(cid, aid)                         {return "arena-get?cid=" + cid + "&aid=" + aid;},
 
     LOGIN:                                      "client-login",
     CLIENT_STATUS_GET:                          "client-status-get",
@@ -242,6 +243,10 @@ function mapToPair(map) {
         getFinalPart()    {return this.params.get("Final_part");},
         getChildPair()    {return this.params.get("Child_pair");},
 
+        getRound()        {return this.params.get("Round");},
+        getRedScore()     {return this.params.get("Red_score");},
+        getBlueScore()    {return this.params.get("Blue_score");},
+
         setId(v)           {return this.params.set("Id", v);},
         setRedSp(v)        {return this.params.set("Sportsman_red", v);},
         setBlueSp(v)       {return this.params.set("Sportsman_blue", v);},
@@ -288,7 +293,7 @@ function mapToGroup(map) {
         getQualMax()      {return this.params.get("Qualification_max");},
         getSex()          {return this.params.get("Sex");},
         getDiscipline()   {return this.params.get("Division");},
-        getSportsmans()   {return mapToObjArray(this.params.get("Members"), mapToSportsman);},
+        getSportsmen()   {return mapToObjArray(this.params.get("Members"), mapToSportsman);},
         getSportsNum()    {return this.params.get("Members_num");},
         getPairs()        {return mapToObjArray(this.params.get("Pairs"), mapToPair);},
         getFormulas()     {return mapToObjArray(this.params.get("Formulas"), mapToFormula);},
@@ -308,7 +313,10 @@ function mapToGroup(map) {
         setSportsNum(v)    {return this.params.set("Members_num", v);},
         setPairs(v)        {return this.params.set("Pairs", v);},
 
-        getLink()         {return "/group?gid=" + this.getId();} 
+        getLink()         {return "/group?gid=" + this.getId();},
+        getPairById(id)    { 
+            return this.getPairs().find(pr => checkers.strEquals(pr.getId(), id));
+        }
     };
 }
 
@@ -329,11 +337,12 @@ function mapToArena(map) {
         finalMin:   "ArenaFinalMin",
         finalMax:   "ArenaFinalMax",
         pairsNum:   "ArenaPairsNum",
-        
+        activePair: "ActivePair",
+
         getName()         {return this.params.get(this.name);},
         getId()           {return this.params.get(this.id);},
         getGroups()       {return this.params.get(this.groups);},
-        getPairs()        {return this.params.get(this.pairs);},
+        getPairs()        {return arrayToPairs(this.params.get(this.pairs));},
         getDistance()     {return this.params.get(this.distance);},
         getAgeMin()       {return this.params.get(this.ageMin);},
         getAgeMax()       {return this.params.get(this.ageMax);},
@@ -344,6 +353,7 @@ function mapToArena(map) {
         getFinalMin()     {return this.params.get(this.finalMin);},
         getFinalMax()     {return this.params.get(this.finalMax);},
         getPairsNum()     {return this.params.get(this.pairsNum);},
+        getActivePair()   {return this.params.get(this.activePair);},
         getLink()         {return "/arena?aid=" + this.getId();},
 
         setName(v)         {return this.params.set(this.name, v);},
@@ -358,7 +368,11 @@ function mapToArena(map) {
         setQualMin(v)      {return this.params.set(this.qualMin, v);},
         setQualMax(v)      {return this.params.set(this.qualMax, v);},
         setFinalMin(v)     {return this.params.set(this.finalMin, v);},
-        setFinalMax(v)     {return this.params.set(this.finalMax, v);},  
+        setFinalMax(v)     {return this.params.set(this.finalMax, v);},
+
+        getPairById(id)    { 
+            return this.getPairs().find(pr => checkers.strEquals(pr.getId(), id));
+        }
     };
 }
 
@@ -373,7 +387,7 @@ function mapToCompetition(map) {
         getEndDate()            {return this.params.get("EndDate");},
         getFormatedEndDate(f)   {return formatDate(this.params.get("EndDate"), f)},
 
-        getSportsmans()     {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
+        getSportsmen()     {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
         getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
         getArenas()         {return mapToObjArray(this.params.get("Arenas"), mapToArena);},
 
@@ -386,6 +400,9 @@ function mapToCompetition(map) {
         setSportsmans(v)     {return this.params.set("Sportsmans", v);},
         setGroups(v)         {return this.params.set("Groups", v);},
         
+        getGroupById(id)    { 
+            return this.getGroups().find(gr => checkers.strEquals(gr.getId(), id));
+        }
     };
 }
 
@@ -395,17 +412,21 @@ function mapToDepatrment(map) {
         getId()             {return this.params.get("Id");},
         getName()           {return this.params.get("Name");},
         getCompetitions()   {return mapToObjArray(this.params.get("Competitions"), mapToCompetition);},
-        getSportsmans()     {return mapToObjArray(this.params.get("Sportsmens"), mapToSportsman);},
+        getSportsmen()     {return mapToObjArray(this.params.get("Sportsmens"), mapToSportsman);},
         getTrainers()       {return mapToObjArray(this.params.get("Trainers"), mapToTrainer);},
         getDisciplines()    {return this.params.get("Divisions");},
         getQualifications() {return this.params.get("Qualifications");},
-
+        
         setId(v)             {return this.params.set("Id", v);},
         setName(v)           {return this.params.set("Name", v);},
         setCompetitions(v)   {return this.params.set("Competitions", v);},
         setSportsmans(v)     {return this.params.set("Sportsmens", v);},
         setDisciplines(v)    {return this.params.set("Divisions", v);},
         setQualifications(v) {return this.params.set("Qualifications", v);},
+
+        getSportsmanById(id)    { 
+            return this.getSportsmen().find(sp => checkers.strEquals(sp.getId(), id));
+        }
     };
 }
 
@@ -699,7 +720,7 @@ export const server = {
     },
 
     arena: {
-        get(tid)                            {return ops.createTrainer(sendRequest(backendLinks.TRAINER_GET(tid), false));},
+        get(cid, aid)                       {return ops.createArena(sendRequest(backendLinks.ARENA_GET(cid, aid), false));},
         create(cid, arena)                  {sendParametersList(backendLinks.ARENA_CREATE(cid), arena, false);},
     }
 }

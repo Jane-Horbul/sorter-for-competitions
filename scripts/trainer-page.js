@@ -156,7 +156,7 @@ function fillPageInfo(){
     markup.sportsman.getTrainersList()
         .append(createPageItem(markup.sportsman.getTrainerTemplate(), 
         markup.sportsman.getTrainerPlaceholders(trainerInfo)));
-    var team = departmentInfo.getSportsmans().filter(sp => checkers.strEquals(sp.getTrainer(), page.tid));
+    var team = departmentInfo.getSportsmen().filter(sp => checkers.strEquals(sp.getTrainer(), page.tid));
     team.forEach( sportsman   => sportsmanPageElementAdd(sportsman));
     for (var [value, name] of qualificationsMap)
         qualificationElementAddToPage(name, value);

@@ -3,14 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Creating pairs list</title>
+        <title>Arena</title>
         <link rel="stylesheet" href="./old-css/normalize.css">
         <link rel="stylesheet" href="./css/main.min.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     </head>
     <body>
         <div class="wrapper">
-        
             <header class="page-header">
                 <div class="container">
                     <ul class="group-page-header list">
@@ -50,108 +49,100 @@
                 </div>
             </header>
 
-            <div class="bread-crumbs container"> 
-                <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
-                <div class="bread-crumbs-item"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item"><a id="competition-link" href="#"></a></div>
-                <div class="bread-crumbs-item"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item"><a id="group-link" href="#"></a></div>
+            <div class="bread-crumbs container" id="bread-crumbs-container"> 
+                <template id="bread-crumbs-template">
+                    <div class="bread-crumbs-item"> <a href="#depart-link">#depart-name</a> </div>
+                    <div class="bread-crumbs-item"> <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc"> </div>
+                    <div class="bread-crumbs-item"> <a href="#competition-link">#competition-name</a> </div>
+                    <div class="bread-crumbs-item"><img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc"> </div>
+                    <div class="bread-crumbs-item"><a href="#arena-link"></a>#arena-name</div>
+                </template>
             </div>
             <main class="container">
                 
                 <div class="container">
-                    <h1 id="list-name">LIST NAME</h1>
+                    <h1 id="list-name"></h1>
                 </div>
 
-                    <div class="tab">
-                        <button class="tablinks" onclick="openPage(event, 'lp-list')" id="defaultOpen">List</button>
-                        <button class="tablinks" onclick="openPage(event, 'lp-setting')">Settings</button>
-                    </div>
+                <div class="tab">
+                    <button class="tablinks" id="tab1">PHX_PAIRS_LIST</button>
+                    <button class="tablinks" id="tab2">PHX_SETTINGS</button>
+                </div>
+
                 <!--List start-->
-                    <div id="lp-list" class="tabcontent">
-                        <div class="lp-group-name">Group name</div>
-                        <ul class="list lp-list-num-round">
-                            <li>№ 0035</li>
-                            <li>ROUND: 3</li>
-                        </ul>
-                        <table class="lp-list-table-current-fight">
-                            <tbody>
-                                <tr>
-                                    <td class="lp-list-table-current-fight--red">Гребенюк Олексій</td>
-                                    <td><span class="lp-list-table-current-fight--red">2</span>:<span class="lp-list-table-current-fight--blue">0</span></td>
-                                    <td class="lp-list-table-current-fight--blue">Радченко Дмитро</td>
-                                </tr>
-                            </tbody>
-                        </table> 
-                        <table class="lp-list-table">
-                            <tbody>
-                                <tr>
-                                    <th class="lp-list-table-th--t1">№</th>
-                                    <th class="lp-list-table-th--t1">Time</th>
-                                    <th class="lp-list-table-th--t2">Red</th>
-                                    <th class="lp-list-table-th--t2">Blue</th>
-                                    <th class="lp-list-table-th--t2">Group</th>
-                                    <th class="lp-list-table-th--t2">Winner</th>                           
-                                    <th class="lp-list-table-th--t3">Red score</th>
-                                    <th class="lp-list-table-th--t3">Blue score</th>
-                                    <th class="lp-list-table-th--t1">
-                                        <!--<a href="#popup_8" class="popup-link js-hidden-element js-root-view js-admin-view">-->
-                                            <a href="#popup_8" class="popup-link">
-                                            <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
-                                                <svg class="formulas-table-add-btn--svg">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                            </button>
-                                        </a>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>0035</td>
-                                    <td>12:15</br>12:22</td>
-                                    <td>Гребенюк Олексій</td>
-                                    <td>Радченко Дмитро</td>
-                                    <td> </td>
-                                    <td>Гребенюк Олексій</td>
-                                    <td>2</td>
-                                    <td>0</td>
-                                    <td>
-                                        <!--<button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">-->
-                                        <button class="formulas-table-add-btn" type="button" id="#dell-btn_id">
-                                            <svg class="formulas-table-add-btn--svg">
-                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="lp-active-pair">
-                                    <td>0036</td>
-                                    <td>12:23</br>12:30</td>
-                                    <td>Гребенюк Олексій</td>
-                                    <td>Радченко Дмитро</td>
-                                    <td> </td>
-                                    <td>Гребенюк Олексій</td>
-                                    <td>2</td>
-                                    <td>0</td>
-                                    <td>
-                                        <!--<button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">-->
-                                        <button class="formulas-table-add-btn" type="button" id="#dell-btn_id">
-                                            <svg class="formulas-table-add-btn--svg">
-                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                <div id="tabcontent1" class="tabcontent">
+                    <div id="active-pair-container"> 
+                        <template id="active-pair-template">
+                            <div class="lp-group-name">#pair-group-name</div>
+                            <ul class="list lp-list-num-round">
+                                <li>№ #pair-num</li>
+                                <li>PHX_ROUND: #pair-round-num</li>
+                            </ul>
+                            <table class="lp-list-table-current-fight">
+                                <tbody>
+                                    <tr>
+                                        <td class="lp-list-table-current-fight--red">#pair-red-sports</td>
+                                        <td><span class="lp-list-table-current-fight--red">#pair-red-score</span>:<span class="lp-list-table-current-fight--blue">#pair-blue-score</span></td>
+                                        <td class="lp-list-table-current-fight--blue">#pair-blue-sports</td>
+                                    </tr>
+                                </tbody>
                             </table>
-                    </div>
-                <!--Settings start-->
-                    <div id="lp-setting" class="tabcontent">
+                        </template>
                         
                     </div>
+
+                    <table class="lp-list-table">
+                        <tbody id="arena-pairs-container">
+                            <tr>
+                                <th class="lp-list-table-th--t1">№</th>
+                                <th class="lp-list-table-th--t1">PHX_TIME</th>
+                                <th class="lp-list-table-th--t2">PHX_RED_SPORTS</th>
+                                <th class="lp-list-table-th--t2">PHX_BLUE_SPORTS</th>
+                                <th class="lp-list-table-th--t2">PHX_GROUP</th>
+                                <th class="lp-list-table-th--t2">PHX_WINNER</th>                           
+                                <th class="lp-list-table-th--t3">PHX_RED_SCORE</th>
+                                <th class="lp-list-table-th--t3">PHX_BLUE_SCORE</th>
+                                <th class="lp-list-table-th--t1">
+                                    <!--<a href="#popup_8" class="popup-link js-hidden-element js-root-view js-admin-view">-->
+                                        <a href="#popup_8" class="popup-link">
+                                        <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
+                                            <svg class="formulas-table-add-btn--svg">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </a>
+                                </th>
+                            </tr>
+                            <template id="pair-item-template">
+                                <tr>
+                                    <td>#pair-num</td>
+                                    <td>#pair-time</td>
+                                    <td>#pair-red-sports</td>
+                                    <td>#pair-blue-sports</td>
+                                    <td>#pair-group-name</td>
+                                    <td>
+                                        #pair-winner
+                                        <template id="pair-winner-text">PHX_PAIR_WINNER</template>
+                                    </td>
+                                    <td>#pair-red-score</td>
+                                    <td>#pair-blue-score</td>
+                                    <td>
+                                        <!--<button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">-->
+                                        <button class="formulas-table-add-btn" type="button" id="#dell-btn_id">
+                                            <svg class="formulas-table-add-btn--svg">
+                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Settings start-->
+                <div id="tabcontent2" class="tabcontent">
+                </div>
 
             </main>
     </div>
@@ -197,24 +188,7 @@
         </div>
     </div>
     <!--Fix-list popup end-->
-    
-    <script>
-        function openPage(evt, pageName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent-sort");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(pageName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-        
-        document.getElementById("defaultOpen").click();
-    </script>
     <script src="./scripts/open-close-popup.js" type="module"></script>
+    <script src="./scripts/arena.js" type="module"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ var groupInfo             = server.group.get(page.cid, page.gid);
 const departmentInfo      = server.department.get();
 const competitionInfo     = server.competition.get(page.cid);
 const qualificationsMap   = departmentInfo.getQualifications();
-var competitionSportsmans = competitionInfo.getSportsmans();
+var competitionSportsmans = competitionInfo.getSportsmen();
 var sportsmansAddList     = new Array(0);
 
 console.log(groupInfo);
@@ -52,7 +52,7 @@ export function getSportsName(id){
     if(!checkers.isNumber(id)){
         return "Winner of " + id;
     }
-    var sports = groupInfo.getSportsmans().find( sp => sp.getId() == id);
+    var sports = groupInfo.getSportsmen().find( sp => sp.getId() == id);
     if(sports == undefined) return "";
     return sports.getSurname() + " " + sports.getName();
 }
@@ -68,7 +68,7 @@ function excludeCompetitionSportsman(sp){
 
 function sportsmanRemove(id){
     var spRow = markup.sportsmen.getSportsRow(id);
-    var sportsmans = groupInfo.getSportsmans();
+    var sportsmans = groupInfo.getSportsmen();
     if(null != spRow)
         spRow.parentElement.removeChild(spRow);
     for(var i = 0; i < sportsmans.length; i++){
@@ -213,8 +213,8 @@ function getGridPairNames(pair)
 {
     var redId = pair.getRedSp();
     var blueId = pair.getBlueSp();
-    var spRed    = groupInfo.getSportsmans().find( sp => (sp.getId() == redId));
-    var spBlue   = groupInfo.getSportsmans().find( sp => (sp.getId() == blueId));
+    var spRed    = groupInfo.getSportsmen().find( sp => (sp.getId() == redId));
+    var spBlue   = groupInfo.getSportsmen().find( sp => (sp.getId() == blueId));
     var names = {red: "", blue: ""}; 
 
     if(spRed == undefined)
@@ -446,7 +446,7 @@ function fillPageInfo(){
     markup.group.setInfoQulificationMax((qualMax == undefined) ? "" : qualMax);
 
     groupInfo.getFormulas().forEach(f => formulaPageElementAdd(f));
-    groupInfo.getSportsmans().forEach(sp => sportsmanPageElementAdd(sp));
+    groupInfo.getSportsmen().forEach(sp => sportsmanPageElementAdd(sp));
     competitionSportsmans.forEach(sp => competitionSportsmanElementAdd(sp));
     groupInfo.getPairs().forEach(pair =>   pairPageElementAdd(pair));
 }
