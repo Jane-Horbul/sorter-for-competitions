@@ -8,9 +8,15 @@ import {
     onClick,
     commonStrings
 } from "./common.js"
+<<<<<<< HEAD:scripts/create-place-page.js
 import { markup } from "./create-place-page-markup.js";
 //import {server, ops} from "./communication.js" //закоментувати перед початком роботи
 import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
+=======
+import { markup } from "./arena-create-markup.js";
+import {server, ops} from "./communication.js" //закоментувати перед початком роботи
+//import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
+>>>>>>> 4d82e8fe3f08feac885ca54c2838678997712c0d:scripts/arena-create.js
 
 
 const page = {
@@ -164,7 +170,16 @@ function createArenaManual(){
     if(!checkers.checkName("Arena name", name))
         return;
     arena.setName(name);
-    arena.setPairs(attachedPairs);
+    var pids = "";
+    var first = true;
+    attachedPairs.forEach(pr => {
+        if(first) 
+            first = false;
+        else 
+            pids += commonStrings.arrDivider;
+        pids += pr.getId();
+    });
+    arena.setPairs(pids);
     server.arena.create(page.cid, arena.params);
 }
 

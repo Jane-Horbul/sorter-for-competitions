@@ -23,7 +23,7 @@ var departamentSportsmans   = new Array(0);
 var sportsmansAddList       = new Array(0);
 
 
-department.getSportsmans().forEach(sp => { departamentSportsmans.push(sp);});
+department.getSportsmen().forEach(sp => { departamentSportsmans.push(sp);});
 
 console.log(competition);
 
@@ -347,7 +347,7 @@ function fillPageInfo(){
     
     disciplinesAddToPage();
     competition.getGroups().forEach(gr =>   groupPageElementAdd(gr));
-    competition.getSportsmans().forEach(sp => sportsmanPageElementAdd(sp));
+    competition.getSportsmen().forEach(sp => sportsmanPageElementAdd(sp));
     competition.getArenas().forEach(ar => arenaPageElementAdd(ar));
     
     departamentSportsmans.forEach(sp => departamentSportsmanElementAdd(sp));

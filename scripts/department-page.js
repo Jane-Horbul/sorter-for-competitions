@@ -253,7 +253,7 @@ function fillPageInfo(){
     var competitions    = department.getCompetitions();
     var disciplines     = department.getDisciplines();
     var qualifications  = department.getQualifications();
-    var sportsmans      = department.getSportsmans();
+    var sportsmans      = department.getSportsmen();
     var trainers        = department.getTrainers();
 
     markup.departament.setPageName(departamentName);
