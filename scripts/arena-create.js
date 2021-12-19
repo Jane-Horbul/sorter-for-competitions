@@ -8,15 +8,10 @@ import {
     onClick,
     commonStrings
 } from "./common.js"
-<<<<<<< HEAD:scripts/create-place-page.js
-import { markup } from "./create-place-page-markup.js";
-//import {server, ops} from "./communication.js" //закоментувати перед початком роботи
-import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
-=======
 import { markup } from "./arena-create-markup.js";
-import {server, ops} from "./communication.js" //закоментувати перед початком роботи
-//import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
->>>>>>> 4d82e8fe3f08feac885ca54c2838678997712c0d:scripts/arena-create.js
+//import {server, ops} from "./communication.js" //закоментувати перед початком роботи
+import {ops} from "./communication.js" //закоментувати перед початком роботи
+import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
 
 
 const page = {
