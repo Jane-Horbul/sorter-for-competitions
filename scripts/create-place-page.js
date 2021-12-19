@@ -9,8 +9,8 @@ import {
     commonStrings
 } from "./common.js"
 import { markup } from "./create-place-page-markup.js";
-import {server, ops} from "./communication.js" //закоментувати перед початком роботи
-//import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
+//import {server, ops} from "./communication.js" //закоментувати перед початком роботи
+import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
 
 
 const page = {
