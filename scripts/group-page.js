@@ -448,7 +448,9 @@ function fillPageInfo(){
     groupInfo.getFormulas().forEach(f => formulaPageElementAdd(f));
     groupInfo.getSportsmen().forEach(sp => sportsmanPageElementAdd(sp));
     competitionSportsmans.forEach(sp => competitionSportsmanElementAdd(sp));
-    groupInfo.getPairs().forEach(pair =>   pairPageElementAdd(pair));
+    
+    var sortedPairs = groupInfo.getPairs().sort(function (p1, p2) { return Number(p1.getNumber()) - Number(p2.getNumber()); });
+    sortedPairs.forEach(pair =>   pairPageElementAdd(pair));
 }
 
 function setBtnActions(){

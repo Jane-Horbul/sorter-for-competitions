@@ -110,9 +110,8 @@
                                 <th class="lp-list-table-th--t3">PHX_RED_SCORE</th>
                                 <th class="lp-list-table-th--t3">PHX_BLUE_SCORE</th>
                                 <th class="lp-list-table-th--t1">
-                                    <!--<a href="#popup_8" class="popup-link js-hidden-element js-root-view js-admin-view">-->
-                                        <a href="#popup_8" class="popup-link">
-                                        <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
+                                        <a href="#popup_8" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                        <button class="formulas-table-add-btn" type="button" id="add-pairs-btn">
                                             <svg class="formulas-table-add-btn--svg">
                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                             </svg>
@@ -121,21 +120,17 @@
                                 </th>
                             </tr>
                             <template id="pair-item-template">
-                                <tr>
+                                <tr id="pair-row-#pair-id">
                                     <td>#pair-num</td>
                                     <td>#pair-time</td>
                                     <td>#pair-red-sports</td>
                                     <td>#pair-blue-sports</td>
                                     <td>#pair-group-name</td>
-                                    <td>
-                                        #pair-winner
-                                        <template id="pair-winner-text">PHX_PAIR_WINNER</template>
-                                    </td>
+                                    <td>#pair-winner</td>
                                     <td>#pair-red-score</td>
                                     <td>#pair-blue-score</td>
                                     <td>
-                                        <!--<button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">-->
-                                        <button class="formulas-table-add-btn" type="button" id="#dell-btn_id">
+                                        <button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="delete-pair-#pair-id">
                                             <svg class="formulas-table-add-btn--svg">
                                                 <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
                                             </svg>
@@ -143,6 +138,7 @@
                                     </td>
                                 </tr>
                             </template>
+                            <template id="pair-winner-text">PHX_PAIR_WINNER</template>
                         </tbody>
                     </table>
                     <button class="lp-list-btn--delete-arena">PHX_DELETE_ARENA</button>
@@ -163,32 +159,28 @@
                     <a href="#" class="popup__close close-popup">X</a>
                     <form class="modal-form">
                         <span class="login-page-popup-title">
-                            LP-popup-name
+                            PHX_ADD_PAIRS_TO_LIST
                         </span>
                         <table class="lp-list-table lp-list-table-popup">
-                            <tbody>
+                            <tbody id="unattached-pairs-container">
                                 <tr>
-                                    <th class="lp-list-table-th--t2">Red</th>
-                                    <th class="lp-list-table-th--t2">Blue</th>
-                                    <th class="lp-list-table-th--t2">Group</th>
-                                    <th class="lp-list-table-th--t2">Winner</th> 
+                                    <th class="lp-list-table-th--t2">PHX_RED_SPORTS</th>
+                                    <th class="lp-list-table-th--t2">PHX_BLUE_SPORTS</th>
+                                    <th class="lp-list-table-th--t2">PHX_GROUP</th>
+                                    <th class="lp-list-table-th--t2">PHX_WINNER</th> 
                                 </tr>
-                                <tr class="lp-select-pair">
-                                    <td>Гребенюк Олексій</td>
-                                    <td>Радченко Дмитро</td>
-                                    <td>Group</td>
-                                    <td>Winner</td>
-                                </tr>
-                                <tr>
-                                    <td>Гребенюк Олексій</td>
-                                    <td>Радченко Дмитро</td>
-                                    <td>Group</td>
-                                    <td>Winner</td>
-                                </tr>
+                                <template id="unattached-pair-template">
+                                    <tr id="unattached-pair-#pair-id">
+                                        <td>#pair-red-sports</td>
+                                        <td>#pair-blue-sports</td>
+                                        <td>#pair-group-name</td>
+                                        <td>#pair-winner</td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
-                        <button type="button" id="member-form-send-btn" class="lp-list-table-popup-btn">
-                            <span class="modal-btn-submit-text">ADD PAIR</span>
+                        <button type="button" id="pairs-add-btn" class="lp-list-table-popup-btn">
+                            <span class="modal-btn-submit-text">PHX_ADD_PAIRS_BTN</span>
                         </button>
                     </form>
                 </div>

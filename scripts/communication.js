@@ -48,6 +48,9 @@ const backendLinks = {
 
     ARENA_CREATE(cid)                           {return "arena-create?cid=" + cid;},
     ARENA_GET(cid, aid)                         {return "arena-get?cid=" + cid + "&aid=" + aid;},
+    ARENA_REMOVE(cid, aid)                      {return "arena-remove?cid=" + cid + "&aid=" + aid;},
+    ARENA_PAIR_REMOVE(cid, aid)                 {return "arena-pair-remove?cid=" + cid + "&aid=" + aid;},
+    ARENA_PAIRS_REBUILD(cid, aid)               {return "arena-pairs-rebuild?cid=" + cid + "&aid=" + aid;},
 
     LOGIN:                                      "client-login",
     CLIENT_STATUS_GET:                          "client-status-get",
@@ -722,5 +725,8 @@ export const server = {
     arena: {
         get(cid, aid)                       {return ops.createArena(sendRequest(backendLinks.ARENA_GET(cid, aid), false));},
         create(cid, arena)                  {sendParametersList(backendLinks.ARENA_CREATE(cid), arena, false);},
+        remove(cid, aid)                    {sendSingleValue(backendLinks.ARENA_REMOVE(cid, aid), aid, false);},
+        pairRemove(cid, aid, pid)           {sendSingleValue(backendLinks.ARENA_PAIR_REMOVE(cid, aid), pid, false);},
+        pairsListRebuild(cid, aid, pids)    {sendSingleValue(backendLinks.ARENA_PAIRS_REBUILD(cid, aid), pids, true);},
     }
 }
