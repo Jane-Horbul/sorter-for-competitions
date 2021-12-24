@@ -82,6 +82,11 @@ function fillUnattachedPairsList(){
     });
 }
 
+function deleteArena(){
+    server.arena.remove(page.cid, page.aid);
+    document.location.href = markup.competitionLink;
+}
+
 function fillPageInfo(){
     var bc = createPageItem(markup.breadcrumbs.getTemplate(), 
                     markup.breadcrumbs.getPlaceholders(department, competition, arena));
@@ -102,6 +107,8 @@ function fillPageInfo(){
 
 function setBtnActions(){
     onClick(markup.pair.getAddBtn(), addPairs);
+    onClick(markup.common.getDeleteBtn(), deleteArena);
+    onClick(markup.common.getRefilterBtn(), function(){server.arena.filterPairs(page.cid, page.aid);});
 }
 
 prepareTabs();

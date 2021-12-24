@@ -28,6 +28,7 @@ var activeGroups        = new Array(0);
 var unactiveGroups      = new Array(0);
 var detachedPairs       = new Array(0);
 var attachedPairs       = new Array(0);
+var intervals           = new Array(0);
 
 function activateGroup(gr){
     var item = createPageItem(markup.automation.getActiveGroupTemplate(), markup.automation.getGroupPlaceholders(gr));
@@ -124,6 +125,38 @@ function detachAllPairs(){
     }
 }
 
+function deleteInterval(rowNum){
+    var table = markup.automation.schedule.getContainer();
+    table.deleteRow(rowNum);
+}
+
+function createInterval(){
+    var start = markup.automation.schedule.getStartIntervalInput().value;
+    var end = markup.automation.schedule.getEndIntervalInput().value;
+    
+    if(!checkers.checkDateTime(start) || !checkers.checkDateTime(end)) return;
+    if(checkers.compareDateTimes(start, end) > 0){
+        alert("Start time bigger than end time.")
+        return;
+    }
+    for(var i = 0; i < intervals.length; i++){
+        if((checkers.compareDateTimes(start, intervals[i].start) >= 0) && (checkers.compareDateTimes(start, intervals[i].end) <= 0)){
+            alert("Intersection with " + intervals[i].start + " - " + intervals[i].end + " interval found.")
+            return;
+        } 
+    }
+    
+    var table = markup.automation.schedule.getContainer();
+    var rowNum = table.rows.length - 1;
+
+    var item = createPageItem(markup.automation.schedule.getTemplate(), 
+                        markup.automation.schedule.getPlaceholders(start, end, rowNum));
+    markup.automation.schedule.insertNewInterval(item);
+    onClick(markup.automation.schedule.getDelBtn(rowNum), function(){ deleteInterval(rowNum); });
+    intervals.push({start: start, end: end});
+
+}
+
 function createArenaAutomatic(){
     var name = markup.common.getArenaName();
     var distance = markup.automation.getDistanceValue();
@@ -148,6 +181,17 @@ function createArenaAutomatic(){
             groupsIds += commonStrings.arrDivider;
         groupsIds += gr.getId();
     });
+    
+    var scheduleStr = "";
+    first = true;
+    intervals.forEach(interval => {
+        if(first) 
+            first = false;
+        else 
+            scheduleStr += commonStrings.arrDivider;
+        scheduleStr += interval.start + "-" + interval.end;
+    });
+
     arena.setGroups(groupsIds);
     arena.setDistance(distance);
     if(checkers.isNumber(ageMin))       arena.setAgeMin(ageMin);
@@ -200,11 +244,13 @@ function setBtnActions(){
     onClick(markup.automation.getAddAllGroupsBtn(), activateAllGroups);
     onClick(markup.automation.getDelAllGroupsBtn(), deactivateAllGroups);
     onClick(markup.automation.getApplyBtn(), createArenaAutomatic);
-
+    onClick(markup.automation.schedule.getAddBtn(), createInterval);
 
     onClick(markup.manual.getAttachAllPairsBtn(), attachAllPairs);
     onClick(markup.manual.getDetachAllPairsBtn(), detachAllPairs);
     onClick(markup.manual.getApplyBtn(), createArenaManual);
+
+
 }
 
 

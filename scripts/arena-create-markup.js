@@ -8,6 +8,23 @@ export const markup = {
         getArenaName()                  {return document.getElementById("arena-name-input").value;}
     },
     automation: {
+        schedule: {
+            getContainer()              { return document.getElementById("schedule-container");},
+            getStartIntervalInput()     { return document.getElementById("schedule-interval-start");},
+            getEndIntervalInput()       { return document.getElementById("schedule-interval-end");},
+            getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
+            getTemplate()               { return document.getElementById("schedule-interval-template");},
+            insertNewInterval(interv)   {   var before = document.getElementById("interval-input-row");
+                                            before.parentNode.insertBefore(interv, before);
+                                        },
+            getPlaceholders(s, e, i)    { return {
+                                                "#interval-start-time": s,
+                                                "#interval-end-time":   e,
+                                                "#row-num":             i
+                                            }; 
+                                        },
+            getDelBtn(rn)               { return document.getElementById("interval-delete-btn-" + rn);},
+        },
         getActiveGroupsList()           { return document.getElementById("active-groups-list");},
         getActiveGroupTemplate()        { return document.getElementById("active-group-template");},
         getUnactiveGroupsList()         { return document.getElementById("unactive-groups-list");},

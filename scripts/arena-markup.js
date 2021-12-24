@@ -17,6 +17,7 @@ function getSpName(sid){
 }
 
 export const markup = {
+    competitionLink:                cLink,
     breadcrumbs: {
         getContainer()              { return document.getElementById("bread-crumbs-container");},
         getTemplate()               { return document.getElementById("bread-crumbs-template");},
@@ -31,8 +32,10 @@ export const markup = {
                                     }
     },
     common: {
-        setListName(name)           {document.getElementById("list-name").innerHTML = name;},
-        getPairWinnerText()         {return document.getElementById("pair-winner-text").innerHTML;}
+        setListName(name)           { document.getElementById("list-name").innerHTML = name;},
+        getPairWinnerText()         { return document.getElementById("pair-winner-text").innerHTML;},
+        getDeleteBtn()              { return document.getElementById("delete-arena-btn");}, 
+        getRefilterBtn()            { return document.getElementById("refilter-pairs-btn");}, 
     },
     pair: {
         selectedStyle:              "lp-select-pair",

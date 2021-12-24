@@ -22,6 +22,48 @@ function dateValidate(date){
     return ((d.getFullYear() == year) && (d.getMonth() == month) && (d.getDate() == day)) ? true : false;
 }
 
+function datetimeValidate(datetime){
+    var parts = datetime.split(" ");
+    var date = parts[0].split("/");
+    var time = parts.length > 1 ? parts[1].split(":") : undefined;
+
+    if((time == undefined) || (date.length < 3)) return false;
+    var year    = Number(date[0]);
+    var month   = Number(date[1]) - 1;
+    var day     = Number(date[2]);
+    var hours   = Number(time[0]);
+    var mins    = Number(time[1]);
+    var d       = new Date(year, month, day);
+    return ((d.getFullYear() == year) 
+                && (d.getMonth() == month)
+                && (d.getDate() == day)
+                && (hours < 24) 
+                && (mins < 60))
+            ? true : false;
+        
+}
+
+function datetimesCompare(dt1, dt2){
+    var parts1 = dt1.split(" ");
+    var date1 = parts1[0].split("/");
+    var time1 = parts1.length > 1 ? parts1[1].split(":") : undefined;
+    var parts2 = dt2.split(" ");
+    var date2 = parts2[0].split("/");
+    var time2 = parts2.length > 1 ? parts2[1].split(":") : undefined;
+
+    if((time1 == undefined) || (date1.length < 3)) return -1;
+    if((time2 == undefined) || (date2.length < 3)) return 1;
+    for(var i = 0; i < 3; i++){
+        if(Number(date1[i]) > Number(date2[i])) return 1;
+        if(Number(date1[i]) < Number(date2[i])) return -1; 
+    }
+    for(var i = 0; i < 2; i++){
+        if(Number(time1[i]) > Number(time2[i])) return 1;
+        if(Number(time1[i]) < Number(time2[i])) return -1; 
+    }
+    return 0;
+}
+
 export const checkers = {   
     getIfDefined(val, defVal)   { return val == undefined ? defVal : val;},
     strEquals(s1, s2)           { return (s1.localeCompare(s2) == 0); },
@@ -29,7 +71,9 @@ export const checkers = {
     isEmptyString(str)          { return this.strEquals(str, "") || this.strEquals(str, "\r\n") ? true : false; },
     checkName(field, value)     { if(this.isEmptyString(value)) { errors.emptyField(field); return false; } return true; },
     checkNumber(field, value)   { if(!this.isNumber(value))     { errors.badNumber(field);  return false; } return true; },
-    checkDate(date)             { if(!dateValidate(date))       { errors.badDate(date);    return false; } return true;},
+    checkDate(date)             { if(!dateValidate(date))       { errors.badDate(date);     return false; } return true;},
+    checkDateTime(dateime)      { if(!datetimeValidate(dateime)){ errors.badDate(dateime);  return false; } return true;},
+    compareDateTimes(dt1, dt2)  { return datetimesCompare(dt1, dt2);},
     prepareDate(date)           { var dt = date.split("/");     return dt[2] + "-" + dt[0] + "-" + dt[1]; }
 
 }

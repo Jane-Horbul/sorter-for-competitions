@@ -51,6 +51,7 @@ const backendLinks = {
     ARENA_REMOVE(cid, aid)                      {return "arena-remove?cid=" + cid + "&aid=" + aid;},
     ARENA_PAIR_REMOVE(cid, aid)                 {return "arena-pair-remove?cid=" + cid + "&aid=" + aid;},
     ARENA_PAIRS_REBUILD(cid, aid)               {return "arena-pairs-rebuild?cid=" + cid + "&aid=" + aid;},
+    ARENA_PAIRS_FILTER(cid, aid)                {return "arena-pairs-filter?cid=" + cid + "&aid=" + aid;},
 
     LOGIN:                                      "client-login",
     CLIENT_STATUS_GET:                          "client-status-get",
@@ -728,5 +729,6 @@ export const server = {
         remove(cid, aid)                    {sendSingleValue(backendLinks.ARENA_REMOVE(cid, aid), aid, false);},
         pairRemove(cid, aid, pid)           {sendSingleValue(backendLinks.ARENA_PAIR_REMOVE(cid, aid), pid, false);},
         pairsListRebuild(cid, aid, pids)    {sendSingleValue(backendLinks.ARENA_PAIRS_REBUILD(cid, aid), pids, true);},
+        filterPairs(cid, aid)               {sendSingleValue(backendLinks.ARENA_PAIRS_FILTER(cid, aid), aid, true);},
     }
 }

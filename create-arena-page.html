@@ -16,7 +16,10 @@
 
         <script>
             $(function () {
-                $('#datetimepicker').datetimepicker();
+                $('#schedule-interval-start').datetimepicker();
+            });
+            $(function () {
+                $('#schedule-interval-end').datetimepicker();
             });
         </script>
 
@@ -101,7 +104,7 @@
                 <!--Automatic sorting block start-->
                 <div id="tabcontent1" class="tabcontent">
                     <div>
-                        <table class="cpl-start-end-table">
+                        <table class="cpl-start-end-table" id="schedule-container">
                             <tr>
                                 <th colspan="3" class="formulas-table--th-main">
                                     <span>NAME</span>
@@ -112,25 +115,27 @@
                                 <td>End</td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr id="interval-input-row">
                                 <td>
-                                    <input class="date" id="datetimepicker" type="text" >
+                                    <input class="date" id="schedule-interval-start" type="text" >
                                 </td>
-                                <td>#cpl-schedule-end-row</td>
                                 <td>
-                                    <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
+                                    <input class="date" id="schedule-interval-end" type="text" >
+                                </td>
+                                <td>
+                                    <button class="formulas-table-add-btn" type="button" id="schedule-interval-add-btn">
                                         <svg class="formulas-table-add-btn--svg">
-                                            <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
                                         </svg>
                                     </button>
                                 </td>
                             </tr>
-                            <template id="cpl-schedule-row">
+                            <template id="schedule-interval-template">
                                 <tr>
-                                    <td>#cpl-schedule-start-row</td>
-                                    <td>#cpl-schedule-end-row</td>
+                                    <td>#interval-start-time</td>
+                                    <td>#interval-end-time</td>
                                     <td>
-                                        <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
+                                        <button class="formulas-table-add-btn" type="button" id="interval-delete-btn-#row-num">
                                             <svg class="formulas-table-add-btn--svg">
                                                 <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
                                             </svg>
@@ -138,35 +143,6 @@
                                     </td>
                                 </tr>
                             </template>
-                            <tr>
-                                <td>
-                                    <ul class="list cpl-start-end-table-date-time-list">
-                                        <li>
-                                            <input type="date" id="">
-                                        </li>
-                                        <li>
-                                            <input type="time" id="">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul class="list cpl-start-end-table-date-time-list">
-                                        <li>
-                                            <input type="date" id="">
-                                        </li>
-                                        <li>
-                                            <input type="time" id="">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
-                                        <svg class="formulas-table-add-btn--svg">
-                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                     <ul class="list cpl-automatic-sorting">
