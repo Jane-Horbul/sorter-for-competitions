@@ -6,6 +6,14 @@ const medals = {
     "3": "./img/copper-m.png"
 }
 
+function getWinLoseStatus(pr, sp){
+    if(checkers.isEmptyString(pr.getWinner()))
+        return "";
+    if(pr.getWinner() == sp.getId())
+        return "Win";
+    return "Lose";
+}
+
 export const markup = {
     login:          {
         getLoginBtn()               { return document.getElementById("login-btn");},
@@ -71,14 +79,14 @@ export const markup = {
         pairStatTemplate:           "pair-item-template-id",
         getPairsListId(cs, gs)      { return this.pairsListId + cs.getCompetitionId() + "-" + gs.getGroupId(); },
         getPairsList(cs, gs)        { return document.getElementById(this.getPairsListId(cs, gs)); },
-        createPairsItem(pair)       { return createPageItem(document.getElementById(this.pairStatTemplate), this.getPairPlaceholders(pair)); },
-        getPairPlaceholders(pair)   { return {
-                "#pair-number":     checkers.getIfDefined(pair.getNumber(), ""),
-                "#pairs-list":      checkers.getIfDefined(pair.getPairsList(), ""),
-                "#pair-time":       "00:00 (20.10)",
-                "#pair-result":     "Lose",
-                "#pair-style":      "sp-st-group-card-table--red"
-            };
+        createPairsItem(pair, sp)   { return createPageItem(document.getElementById(this.pairStatTemplate), this.getPairPlaceholders(pair, sp)); },
+        getPairPlaceholders(pair, sp){ return {
+                                        "#pair-number":     checkers.getIfDefined(pair.getNumber(), ""),
+                                        "#pairs-list":      checkers.getIfDefined(pair.getPairsList(), ""),
+                                        "#pair-time":       pair.getFormatedTime("hh:min (dd/mm)"),
+                                        "#pair-result":     getWinLoseStatus(pair, sp),
+                                        "#pair-style":      pair.getRedSp() == sp.getId() ? "sp-st-group-card-table--red" : "sp-st-group-card-table--blue"
+                                    };
         },
     },
 

@@ -65,7 +65,7 @@ function fillStatistics() {
             markup.statistics.getGroupStatsList(cs).append(markup.statistics.createGroupStatItem(cs, gs));
             var groupPairs = csPairs.filter(pair => gs.getGroupId() == pair.getGroupId());
             groupPairs.forEach(pair => {
-                markup.statistics.getPairsList(cs, gs).append(markup.statistics.createPairsItem(pair));
+                markup.statistics.getPairsList(cs, gs).append(markup.statistics.createPairsItem(pair, sportsmanInfo));
             });
         });
     });

@@ -78,8 +78,8 @@ const months = {
 function formatDate(dateTime, format){
     if(dateTime == undefined)
         return "";
-    var parts = dateTime.split("T");
-    var date = parts[0].split("-");
+    var parts = dateTime.split(" ");
+    var date = parts[0].split("/");
     var time = parts[1].split(":");
     var res = format;
     res = res.replace("yy", date[0]);

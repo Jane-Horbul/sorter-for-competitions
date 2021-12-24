@@ -107,20 +107,20 @@
                         <table class="cpl-start-end-table" id="schedule-container">
                             <tr>
                                 <th colspan="3" class="formulas-table--th-main">
-                                    <span>NAME</span>
+                                    <span>PHX_SCHEDULE_NAME</span>
                                 </th>
                             </tr>
                             <tr>
-                                <td>Start</td>
-                                <td>End</td>
+                                <td>PHX_SCHEDULE_START</td>
+                                <td>PHX_SCHEDULE_END</td>
                                 <td></td>
                             </tr>
                             <tr id="interval-input-row">
                                 <td>
-                                    <input class="date" id="schedule-interval-start" type="text" >
+                                    <input class="date" id="schedule-interval-start" type="text" value="__/__/__ __:__">
                                 </td>
                                 <td>
-                                    <input class="date" id="schedule-interval-end" type="text" >
+                                    <input class="date" id="schedule-interval-end" type="text" value="__/__/__ __:__">
                                 </td>
                                 <td>
                                     <button class="formulas-table-add-btn" type="button" id="schedule-interval-add-btn">
@@ -257,20 +257,15 @@
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="select-criteria-container">
                                     <select name="type" id="qualification-min" class="select-criteria-container--item">
-                                        <option value="none">PHX_QUALIFICATION_MIN:</option>
-                                       <option value="kms">KMS</option>
-                                        <option value="ms">MS</option>
-                                        <option value="ms2">MS2</option>
+                                        <option value="">PHX_QUALIFICATION_MIN:</option>
+                                        <template id="qual-item-template"><option value="#qual-value">#qual-name</option></template>
                                     </select>
                                 </div>
                             </div>
                             <div class="cpl-auto-sort-criteria--item">
                                 <div class="select-criteria-container">
                                     <select name="type" id="qualification-max" class="select-criteria-container--item">
-                                        <option value="none">PHX_QUALIFICATION_MAX:</option>
-                                       <option value="kms">KMS</option>
-                                        <option value="ms">MS</option>
-                                        <option value="ms2">MS2</option>
+                                        <option value="">PHX_QUALIFICATION_MAX:</option>
                                     </select>
                                 </div>
                             </div>

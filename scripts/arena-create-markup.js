@@ -25,19 +25,33 @@ export const markup = {
                                         },
             getDelBtn(rn)               { return document.getElementById("interval-delete-btn-" + rn);},
         },
-        getActiveGroupsList()           { return document.getElementById("active-groups-list");},
-        getActiveGroupTemplate()        { return document.getElementById("active-group-template");},
-        getUnactiveGroupsList()         { return document.getElementById("unactive-groups-list");},
-        getUnactiveGroupTemplate()      { return document.getElementById("unactive-group-template");},
-        getGroupPlaceholders(gr)        { return {
+        groups: {
+            getActiveList()             { return document.getElementById("active-groups-list");},
+            getActiveTemplate()         { return document.getElementById("active-group-template");},
+            getActive(gr)               { return document.getElementById("active-group-id-" + gr.getId()); },
+
+            getUnactiveList()           { return document.getElementById("unactive-groups-list");},
+            getUnactiveTemplate()       { return document.getElementById("unactive-group-template");},
+            getUnactive(gr)             { return document.getElementById("unactive-group-id-" + gr.getId()); },
+
+            getPlaceholders(gr)         { return {
                                                 "#group-name":          gr.getName(),
                                                 "#group-id":            gr.getId(),
                                             };
                                         },
-        getActiveGroup(gr)              { return document.getElementById("active-group-id-" + gr.getId()); },
-        getUnactiveGroup(gr)            { return document.getElementById("unactive-group-id-" + gr.getId()); },
-        getAddAllGroupsBtn()            { return document.getElementById("add-all-groups-btn"); },
-        getDelAllGroupsBtn()            { return document.getElementById("delete-all-groups-btn"); },
+            getAddAllBtn()              { return document.getElementById("add-all-groups-btn"); },
+            getDelAllBtn()              { return document.getElementById("delete-all-groups-btn"); }
+        },
+        qualifications: {
+            getMinList()                { return document.getElementById("qualification-min");},
+            getMaxList()                { return document.getElementById("qualification-max");},
+            getTemplate()               { return document.getElementById("qual-item-template");},
+            getPlaceholders(name, val)  { return {
+                                                "#qual-name":         name,
+                                                "#qual-value":         val,
+                                            };
+                                        },
+        },
 
         getDistanceValue()              { return document.getElementById("cpl-auto-sort-criteria--dist").value;},
         getAgeMinValue()                { return document.getElementById("age-min-input").value;},

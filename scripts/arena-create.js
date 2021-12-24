@@ -31,12 +31,12 @@ var attachedPairs       = new Array(0);
 var intervals           = new Array(0);
 
 function activateGroup(gr){
-    var item = createPageItem(markup.automation.getActiveGroupTemplate(), markup.automation.getGroupPlaceholders(gr));
-    markup.automation.getActiveGroupsList().append(item);
-    onClick(markup.automation.getActiveGroup(gr), function(){deactivateGroup(gr);});
+    var item = createPageItem(markup.automation.groups.getActiveTemplate(), markup.automation.groups.getPlaceholders(gr));
+    markup.automation.groups.getActiveList().append(item);
+    onClick(markup.automation.groups.getActive(gr), function(){deactivateGroup(gr);});
     activeGroups.push(gr);
 
-    var unactGr = markup.automation.getUnactiveGroup(gr)
+    var unactGr = markup.automation.groups.getUnactive(gr)
     if(unactGr != null)
         unactGr.remove();
     for(var i = 0; i < unactiveGroups.length; i++){
@@ -48,12 +48,12 @@ function activateGroup(gr){
 }
 
 function deactivateGroup(gr){
-    var item = createPageItem(markup.automation.getUnactiveGroupTemplate(), markup.automation.getGroupPlaceholders(gr));
-    markup.automation.getUnactiveGroupsList().append(item);
-    onClick(markup.automation.getUnactiveGroup(gr), function(){activateGroup(gr);});
+    var item = createPageItem(markup.automation.groups.getUnactiveTemplate(), markup.automation.groups.getPlaceholders(gr));
+    markup.automation.groups.getUnactiveList().append(item);
+    onClick(markup.automation.groups.getUnactive(gr), function(){activateGroup(gr);});
     unactiveGroups.push(gr);
     
-    var actGr = markup.automation.getActiveGroup(gr)
+    var actGr = markup.automation.groups.getActive(gr)
     if(actGr != null)
         actGr.remove();
     for(var i = 0; i < activeGroups.length; i++){
@@ -96,7 +96,6 @@ function attachPair(pair){
 function detachPair(pair){
     if(pair.getPairsList() != undefined)
         return;
-    console.log("detach "+ pair.getId())
     var item = createPageItem(markup.manual.getDetachedPairTemplate(), markup.manual.getPairPlaceholders(pair));
     markup.manual.getDetachedPairsList().append(item);
     onClick(markup.manual.getDetachedPair(pair), function(){attachPair(pair);});
@@ -164,12 +163,18 @@ function createArenaAutomatic(){
     var ageMax = markup.automation.getAgeMaxValue();
     var weightMin = markup.automation.getWeightMinValue();
     var weightMax = markup.automation.getWeightMaxValue();
+    var qualMin = markup.automation.qualifications.getMinList().value;
+    var qualMax = markup.automation.qualifications.getMaxList().value;
     var finalMin = markup.automation.getFinalMinValue();
     var finalMax = markup.automation.getFinalMaxValue();
     var arena = ops.createArena(undefined);
 
-    if(!checkers.checkName("Arena name", name) || !checkers.checkNumber("One member pair distance", distance))
+    if(!checkers.checkName("Arena name", name))
         return;
+    if(Number(qualMin) > Number(qualMax)){
+        console.log("Minimal qualification must be lower or equal than maximal");
+        return;
+    }
     arena.setName(name);
 
     var groupsIds = "";
@@ -194,13 +199,16 @@ function createArenaAutomatic(){
 
     arena.setGroups(groupsIds);
     arena.setSchedule(scheduleStr);
-    arena.setDistance(distance);
+    if(checkers.isNumber(distance))     arena.setDistance(distance);
     if(checkers.isNumber(ageMin))       arena.setAgeMin(ageMin);
     if(checkers.isNumber(ageMax))       arena.setAgeMax(ageMax);
     if(checkers.isNumber(weightMin))    arena.setWeightMin(weightMin);
     if(checkers.isNumber(weightMax))    arena.setWeightMax(weightMax);
     if(checkers.isNumber(finalMin))     arena.setFinalMin(finalMin);
     if(checkers.isNumber(finalMax))     arena.setFinalMax(finalMax);
+    if(checkers.isNumber(qualMin))      arena.setQualMin(qualMin);
+    if(checkers.isNumber(qualMax))      arena.setQualMax(qualMax);
+    
     server.arena.create(page.cid, arena.params);
     document.location.href = competitionLink;
 }
@@ -225,6 +233,7 @@ function createArenaManual(){
     document.location.href = competitionLink;
 }
 
+
 function fillPageInfo(){
     markup.common.setPageHeader(competition.getName());
     markup.common.setPageHeaderLink(competitionLink);
@@ -233,6 +242,13 @@ function fillPageInfo(){
     console.log(competition);
     competition.getGroups().forEach(gr => {
         deactivateGroup(gr);
+    });
+
+    var qTemp = markup.automation.qualifications.getTemplate();
+    departmentInfo.getQualifications().forEach(function(name, value) {
+        var ph = markup.automation.qualifications.getPlaceholders(name, value);
+        markup.automation.qualifications.getMinList().append(createPageItem(qTemp, ph));
+        markup.automation.qualifications.getMaxList().append(createPageItem(qTemp, ph));
     });
 }
 
@@ -244,8 +260,8 @@ function fillPairsList(){
 }
 
 function setBtnActions(){
-    onClick(markup.automation.getAddAllGroupsBtn(), activateAllGroups);
-    onClick(markup.automation.getDelAllGroupsBtn(), deactivateAllGroups);
+    onClick(markup.automation.groups.getAddAllBtn(), activateAllGroups);
+    onClick(markup.automation.groups.getDelAllBtn(), deactivateAllGroups);
     onClick(markup.automation.getApplyBtn(), createArenaAutomatic);
     onClick(markup.automation.schedule.getAddBtn(), createInterval);
 
