@@ -1,5 +1,6 @@
 export const commonStrings = {
     arrDivider: ", ",
+    mapDivider: "-",
     pairWinner(id)  {return "Winner of pair " + id;}  
 }
 

@@ -189,10 +189,11 @@ function createArenaAutomatic(){
             first = false;
         else 
             scheduleStr += commonStrings.arrDivider;
-        scheduleStr += interval.start + "-" + interval.end;
+        scheduleStr += interval.start + commonStrings.mapDivider + interval.end;
     });
 
     arena.setGroups(groupsIds);
+    arena.setSchedule(scheduleStr);
     arena.setDistance(distance);
     if(checkers.isNumber(ageMin))       arena.setAgeMin(ageMin);
     if(checkers.isNumber(ageMax))       arena.setAgeMax(ageMax);
@@ -201,6 +202,7 @@ function createArenaAutomatic(){
     if(checkers.isNumber(finalMin))     arena.setFinalMin(finalMin);
     if(checkers.isNumber(finalMax))     arena.setFinalMax(finalMax);
     server.arena.create(page.cid, arena.params);
+    document.location.href = competitionLink;
 }
 
 function createArenaManual(){
@@ -220,6 +222,7 @@ function createArenaManual(){
     });
     arena.setPairs(pids);
     server.arena.create(page.cid, arena.params);
+    document.location.href = competitionLink;
 }
 
 function fillPageInfo(){

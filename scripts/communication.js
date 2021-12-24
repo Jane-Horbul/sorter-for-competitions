@@ -342,6 +342,7 @@ function mapToArena(map) {
         finalMax:   "ArenaFinalMax",
         pairsNum:   "ArenaPairsNum",
         activePair: "ActivePair",
+        schedule:   "ArenaSchedule",
 
         getName()         {return this.params.get(this.name);},
         getId()           {return this.params.get(this.id);},
@@ -358,6 +359,7 @@ function mapToArena(map) {
         getFinalMax()     {return this.params.get(this.finalMax);},
         getPairsNum()     {return this.params.get(this.pairsNum);},
         getActivePair()   {return this.params.get(this.activePair);},
+        getSchedule()     {return this.params.get(this.schedule);},
         getLink()         {return "/arena?aid=" + this.getId();},
 
         setName(v)         {return this.params.set(this.name, v);},
@@ -373,6 +375,7 @@ function mapToArena(map) {
         setQualMax(v)      {return this.params.set(this.qualMax, v);},
         setFinalMin(v)     {return this.params.set(this.finalMin, v);},
         setFinalMax(v)     {return this.params.set(this.finalMax, v);},
+        setSchedule(v)     {return this.params.set(this.schedule, v);},
 
         getPairById(id)    { 
             return this.getPairs().find(pr => checkers.strEquals(pr.getId(), id));
