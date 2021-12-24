@@ -150,10 +150,10 @@
                             <div class="cpl-auto-sort-list-title">PHX_ACTIVE_GROUPS_LIST</div>
                             <div class="cpl-auto-sort-list">
                                 <div class="cpl-sorting-first-column"> 
-                                    <ul class="list" id="active-groups-list">
+                                    <ul class="list active-groups-list" id="active-groups-list">
                                         <template id="active-group-template">
-                                            <li id="active-group-id-#group-id" class="cpl-automatic-sorting--item">
-                                                <button>#group-name</button>
+                                            <li id="active-group-id-#group-id" class="cpl-automatic-sorting--item cpl-automatic-sorting--item__active">
+                                                <button class="active-groups-list--item-btn">#group-name</button>
                                             </li>
                                         </template>
                                     </ul>
@@ -182,10 +182,10 @@
                             <div class="cpl-auto-sort-list-title">PHX_UNACTIVE_GROUPS_LIST</div>
                             <div class="cpl-auto-sort-list">
                                 <div class="cpl-sorting-second-column">
-                                    <ul class="list" id="unactive-groups-list">
+                                    <ul class="list unactive-groups-list" id="unactive-groups-list">
                                         <template id="unactive-group-template">
-                                            <li id="unactive-group-id-#group-id" class="cpl-automatic-sorting--item">
-                                                <button >#group-name</button>
+                                            <li id="unactive-group-id-#group-id" class="cpl-automatic-sorting--item cpl-automatic-sorting--item__unactive">
+                                                <button class="unactive-groups-list--item-btn">#group-name</button>
                                             </li>
                                         </template>
                                     </ul>
@@ -252,6 +252,30 @@
                                 </div>
                             </div>
                         </ul>
+
+                        <ul class="list cpl-auto-sort-criteria">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="select-criteria-container">
+                                    <select name="type" id="qualification-min" class="select-criteria-container--item">
+                                        <option value="none">PHX_QUALIFICATION_MIN:</option>
+                                       <option value="kms">KMS</option>
+                                        <option value="ms">MS</option>
+                                        <option value="ms2">MS2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="select-criteria-container">
+                                    <select name="type" id="qualification-max" class="select-criteria-container--item">
+                                        <option value="none">PHX_QUALIFICATION_MAX:</option>
+                                       <option value="kms">KMS</option>
+                                        <option value="ms">MS</option>
+                                        <option value="ms2">MS2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ul>
+
                     </section>
                     <button id="automatic-apply-btn" class="cpl-sorting-btn">PHX_APPLY_BTN</button>
 
