@@ -9,9 +9,9 @@ import {
     commonStrings
 } from "./common.js"
 import { markup } from "./arena-create-markup.js";
-//import {server, ops} from "./communication.js" //закоментувати перед початком роботи
-import {ops} from "./communication.js" //закоментувати перед початком роботи
-import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
+import {server, ops} from "./communication.js" //закоментувати перед початком роботи
+//import {ops} from "./communication.js" //закоментувати перед початком роботи
+//import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
 
 
 const page = {
