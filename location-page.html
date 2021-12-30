@@ -7,6 +7,30 @@
         <link rel="stylesheet" href="./old-css/normalize.css">
         <link rel="stylesheet" href="./css/main.min.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
+        <link rel="stylesheet" href="./css/sortable-jquery-ui.css">
+
+        <script src="./datetimepicker-master/jquery.js"></script>
+
+        <script src="./datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+
+        <script>
+            $(function () {
+                $('#schedule-interval-start').datetimepicker();
+            });
+            $(function () {
+                $('#schedule-interval-end').datetimepicker();
+            });
+        </script>
+
+        <!--<script src="./scripts/jquery-3.6.0.js"></script>-->
+        <script src="./scripts/sortable-jquery-ui.js"></script>
+        <script>
+            $( function() {
+            $( "#arena-pairs-container" ).sortable();
+            } );
+        </script>
+
     </head>
     <body>
         <div class="wrapper">
@@ -99,18 +123,18 @@
                     </div>
 
                     <table class="lp-list-table">
-                        <tbody id="arena-pairs-container">
+                        <tbody> <!--<tbody id="arena-pairs-container">-->
                             <tr>
                                 <th class="lp-list-table-th--t1">№</th>
-                                <th class="lp-list-table-th--t1">PHX_TIME</th>
-                                <th class="lp-list-table-th--t2">PHX_RED_SPORTS</th>
-                                <th class="lp-list-table-th--t2">PHX_BLUE_SPORTS</th>
-                                <th class="lp-list-table-th--t2">PHX_GROUP</th>
-                                <th class="lp-list-table-th--t2">PHX_WINNER</th>                           
-                                <th class="lp-list-table-th--t3">PHX_RED_SCORE</th>
-                                <th class="lp-list-table-th--t3">PHX_BLUE_SCORE</th>
-                                <th class="lp-list-table-th--t1">
-                                        <a href="#popup_8" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                <th class="lp-list-table-th--t2">PHX_TIME</th>
+                                <th class="lp-list-table-th--t3">PHX_RED_SPORTS</th>
+                                <th class="lp-list-table-th--t4">PHX_BLUE_SPORTS</th>
+                                <th class="lp-list-table-th--t5">PHX_GROUP</th>
+                                <th class="lp-list-table-th--t6">PHX_WINNER</th>                           
+                                <th class="lp-list-table-th--t7">PHX_RED_SCORE</th>
+                                <th class="lp-list-table-th--t8">PHX_BLUE_SCORE</th>
+                                <th class="lp-list-table-th--t9">
+                                    <a href="#popup_8" class="popup-link js-hidden-element js-root-view js-admin-view">
                                         <button class="formulas-table-add-btn" type="button" id="add-pairs-btn">
                                             <svg class="formulas-table-add-btn--svg">
                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
@@ -119,18 +143,81 @@
                                     </a>
                                 </th>
                             </tr>
-                            <template id="pair-item-template">
-                                <tr id="pair-row-#pair-id">
-                                    <td>#pair-num</td>
-                                    <td>#pair-time</td>
-                                    <td>#pair-red-sports</td>
-                                    <td>#pair-blue-sports</td>
-                                    <td>#pair-group-name</td>
-                                    <td>#pair-winner</td>
-                                    <td>#pair-red-score</td>
-                                    <td>#pair-blue-score</td>
+                        </tbody>
+                    </table>
+
+                    <table class="lp-list-table">
+                        <tbody id="arena-pairs-container">
+                            <tr>
+                                <ul id="arena-pairs-container" class="list">
+                                    <template id="pair-item-template">
+                                        <li class="ui-state-default" id="pair-row-#pair-id">
+                                            <table class="lp-list-table">
+                                                <tbody id="">
+                                                    <tr>
+                                                        <td class="lp-list-table-td1">#pair-num</td>
+                                                        <td class="lp-list-table-td2">#pair-time</td>
+                                                        <td class="lp-list-table-td3">#pair-red-sports</td>
+                                                        <td class="lp-list-table-td4">#pair-blue-sports</td>
+                                                        <td class="lp-list-table-td5">#pair-group-name</td>
+                                                        <td class="lp-list-table-td6">#pair-winner</td>
+                                                        <td class="lp-list-table-td7">#pair-red-score</td>
+                                                        <td class="lp-list-table-td8">#pair-blue-score</td>
+                                                        <td class="lp-list-table-td9">
+                                                            <button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="delete-pair-#pair-id">
+                                                                <svg class="formulas-table-add-btn--svg">
+                                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </tr>
+                            <template id="pair-winner-text">PHX_PAIR_WINNER</template>
+                        </tbody>
+                    </table>
+
+                    
+
+                    <button class="lp-list-btn--delete-arena" id="delete-arena-btn">PHX_DELETE_ARENA</button>
+                </div>
+
+                <!--Settings start-->
+                <div id="tabcontent2" class="tabcontent">
+                    <input id="arena-name-input" class="location-name" type="text" placeholder="PHX_PLACE_NAME">
+                    <div>
+                        <span class="lp-start-end-table-title">PHX_SCHEDULE_NAME</span>
+                        <table class="lp-start-end-table" id="schedule-container">
+                            <tr>
+                                <th>PHX_SCHEDULE_START</th>
+                                <th>PHX_SCHEDULE_END</th>
+                                <th class="lp-list-table-settings--last"></th>
+                            </tr>
+                            <tr id="interval-input-row">
+                                <td>
+                                    <input class="date" id="schedule-interval-start" type="text" value="__/__/__ __:__">
+                                </td>
+                                <td>
+                                    <input class="date" id="schedule-interval-end" type="text" value="__/__/__ __:__">
+                                </td>
+                                <td>
+                                    <button class="formulas-table-add-btn" type="button" id="schedule-interval-add-btn">
+                                        <svg class="formulas-table-add-btn--svg">
+                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <template id="schedule-interval-template">
+                                <tr>
+                                    <td>#interval-start-time</td>
+                                    <td>#interval-end-time</td>
                                     <td>
-                                        <button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="delete-pair-#pair-id">
+                                        <button class="formulas-table-add-btn" type="button" id="interval-delete-btn-#row-num">
                                             <svg class="formulas-table-add-btn--svg">
                                                 <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
                                             </svg>
@@ -138,14 +225,117 @@
                                     </td>
                                 </tr>
                             </template>
-                            <template id="pair-winner-text">PHX_PAIR_WINNER</template>
-                        </tbody>
-                    </table>
-                    <button class="lp-list-btn--delete-arena" id="delete-arena-btn">PHX_DELETE_ARENA</button>
-                </div>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="lp-list-table-settings">
+                            <tbody>
+                                <tr>
+                                <th>GROUP_NAME</th>
+                                <th class="lp-list-table-settings--last">
+                                    <a href="#popup_9" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                        <button class="formulas-table-add-btn" type="button" id="">
+                                            <svg class="formulas-table-add-btn--svg">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </a>
+                                </th>
+                                </tr>
+                                <tr>
+                                <td>GROUP_01</td>
+                                <td>
+                                    <button class="formulas-table-add-btn" type="button" id="">
+                                        <svg class="formulas-table-add-btn--svg">
+                                            <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                        </svg>
+                                    </button>
+                                </td>
+                                </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                    <section class="cpl-auto-sort-criteria-list">
+                        <div class="cpl-auto-sort-criteria--item">
+                            <div class="input-criteria-container ic1-cpl ">
+                                <input id="cpl-auto-sort-criteria--dist" class="input input_cpl-auto-sort-criteria--dist" type="text" placeholder=" " />
+                                <div class="cut"></div>
+                                <label for="cpl-auto-sort-criteria--dist" class="placeholder">PHX_DISTANCE:</label>
+                            </div>
+                        </div>
 
-                <!--Settings start-->
-                <div id="tabcontent2" class="tabcontent">
+                        <ul class="list cpl-auto-sort-criteria">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1">
+                                    <input id="age-min-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="age-min-input" class="placeholder">PHX_AGE_MIN:</label>
+                                </div>
+                            </div>
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1">
+                                    <input id="age-max-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="age-max-input" class="placeholder">PHX_AGE_MAX:</label>
+                                </div>
+                            </div>
+                        </ul>
+
+                        <ul class="list cpl-auto-sort-criteria">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1 ">
+                                    <input id="weight-min-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="weight-min-input" class="placeholder">PHX_WEIGHT_MIN:</label>
+                                </div>
+                            </div>
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1 ">
+                                    <input id="weight-max-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="weight-max-input" class="placeholder">PHX_WEIGHT_MAX:</label>
+                                </div>
+                            </div>
+                        </ul>
+
+                        <ul class="list cpl-auto-sort-criteria">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1 ">
+                                    <input id="final-min-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="final-min-input" class="placeholder">PHX_FINAL_MIN:</label>
+                                </div>
+                            </div>
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1 ">
+                                    <input id="final-max-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="final-max-input" class="placeholder">PHX_FINAL_MAX:</label>
+                                </div>
+                            </div>
+                        </ul>
+
+                        <ul class="list cpl-auto-sort-criteria">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="select-criteria-container">
+                                    <select name="type" id="qualification-min" class="select-criteria-container--item">
+                                        <option value="">PHX_QUALIFICATION_MIN:</option>
+                                        <template id="qual-item-template"><option value="#qual-value">#qual-name</option></template>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="select-criteria-container">
+                                    <select name="type" id="qualification-max" class="select-criteria-container--item">
+                                        <option value="">PHX_QUALIFICATION_MAX:</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ul>
+
+                    </section>
+                    <button id="automatic-apply-btn" class="cpl-sorting-btn">PHX_APPLY_BTN</button>
+
                 </div>
 
             </main>
@@ -188,6 +378,52 @@
         </div>
     </div>
     <!--Fix-list popup end-->
+    <!--Group-list popup start-->
+    <div class="popup" id = "popup_9">
+        <a href="" class="popup__area"></a>
+        <div class="popup__body">
+            <div class="popup__content">
+                <div class="add-group-popup__content">
+                    <a href="#" class="popup__close close-popup">X</a>
+                    <form class="modal-form">
+                        <span class="login-page-popup-title">
+                            PHX_ADD_GROUPS_TO_LIST
+                        </span>
+                        <table class="lp-list-table lp-list-table-popup">
+                            <tbody id="">
+                                <tr>
+                                    <th class="lp-list-table-settings">PHX_GROUP</th>
+                                    <th class="lp-list-table-settings--last">
+                                        <button class="formulas-table-add-btn" type="button" id="">
+                                            <svg class="formulas-table-add-btn--svg">
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                            </svg>
+                                        </button>
+                                    </th>
+                                </tr>
+                                <template id="unattached-pair-template">
+                                    <tr id="">
+                                        <td>#group-name</td>
+                                        <td>
+                                            <button class="formulas-table-add-btn" type="button" id="">
+                                                <svg class="formulas-table-add-btn--svg">
+                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <button type="button" id="" class="lp-list-table-popup-btn">
+                            <span class="modal-btn-submit-text">PHX_ADD_GROUPS_BTN</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Group-list popup end-->
     <script src="./scripts/open-close-popup.js" type="module"></script>
     <script src="./scripts/arena.js" type="module"></script>
 </body>
