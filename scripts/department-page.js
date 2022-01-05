@@ -120,7 +120,6 @@ function addDiscipline(){
     var div = markup.discipline.getDisciplineInput();
 
     for(var i = 1; i < divTable.rows.length; i++){
-        console.log(i);
         if(divTable.rows[i].cells[0].innerHTML.localeCompare(div) == 0) return;
     }
     toogleDisciplineAdding();
