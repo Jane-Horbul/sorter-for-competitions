@@ -171,8 +171,8 @@ function createArenaAutomatic(){
 
     if(!checkers.checkName("Arena name", name))
         return;
-    if(Number(qualMin) > Number(qualMax)){
-        console.log("Minimal qualification must be lower or equal than maximal");
+    if(checkers.isNumber(qualMin) && checkers.isNumber(qualMax) && Number(qualMin) > Number(qualMax)){
+        alert("Minimal qualification must be lower or equal than maximal");
         return;
     }
     arena.setName(name);

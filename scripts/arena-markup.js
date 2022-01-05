@@ -67,5 +67,36 @@ export const markup = {
         
         getUnattachedItem(pair)     { return document.getElementById("unattached-pair-" + pair.getId()); },
         getAddBtn()                 { return document.getElementById("pairs-add-btn");}, 
-    }
+    },
+    settings: {
+        getNameInput()      { return document.getElementById("arena-name-input");},
+        getDistanceInput()  { return document.getElementById("distance-filter-input");},
+        getAgeMinInput()    { return document.getElementById("age-min-input");},
+        getAgeMaxInput()    { return document.getElementById("age-max-input");},
+        getWeightMinInput() { return document.getElementById("weight-min-input");},
+        getWeightMaxInput() { return document.getElementById("weight-max-input");},
+        getFinalMinInput()  { return document.getElementById("final-min-input");},
+        getFinalMaxInput()  { return document.getElementById("final-max-input");},
+        getQualMinInput()   { return document.getElementById("qualification-min");},
+        getQualMaxInput()   { return document.getElementById("qualification-max");},
+        getQualTemplate()   { return document.getElementById("qual-item-template");},
+        getQualPlaceholders(n, v)   { return { "#qual-name": n, "#qual-value": v }; },
+    },
+    schedule: {
+        getContainer()              { return document.getElementById("schedule-container");},
+        getStartIntervalInput()     { return document.getElementById("schedule-interval-start");},
+        getEndIntervalInput()       { return document.getElementById("schedule-interval-end");},
+        getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
+        getTemplate()               { return document.getElementById("schedule-interval-template");},
+        insertNewInterval(interv)   {   var before = document.getElementById("interval-input-row");
+                                        before.parentNode.insertBefore(interv, before);
+                                    },
+        getPlaceholders(s, e, i)    { return {
+                                            "#interval-start-time": s,
+                                            "#interval-end-time":   e,
+                                            "#row-num":             i
+                                        }; 
+                                    },
+        getDelBtn(rn)               { return document.getElementById("interval-delete-btn-" + rn);},
+    },
 }
