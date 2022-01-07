@@ -51,46 +51,58 @@
         <div class="wrapper">
 
             <header class="page-header">
-                
                 <div class="container flexbox">
-
                     <nav class="navigation">
-                        <!--site logo-->
                         <img class="program-logo "
                             src="./img/competition-logo-new.png"
                             alt="Program logo">
                     </nav>
-
-                    <div class="login-panel">
-                        <ul class="list lang-panel-list">
-                            <li class="lang-panel-item">
-                                <div class="log-in-btn--placing">
-                                    <a href="#popup_7" class="popup-link"> 
-                                        <button class="log-in-btn">
-                                            <span>Log in</span> 
-                                        </button>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="header__account-avatar"> 
-                                    <div>
-                                        <svg class="sl-footer-icon">
-                                            <use href="./img//icons.svg#icon-user"></use>
-                                        </svg>
+                    <div id="client-cred-container">
+                        <div id="sing-in-btn-container" class="login-panel">
+                            <ul class="list login-panel-list">
+                                <li class="login-panel-item">
+                                    <div class="log-in-btn--placing">
+                                        <a href="#popup_7" class="popup-link"> 
+                                            <button class="log-in-btn">
+                                                <span>PHX_SIGN_IN</span> 
+                                            </button>
+                                        </a>
                                     </div>
-                                    <div>name/status</div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-
-
+                    <template id="client-data-template">
+                        <div class="login-panel">
+                            <ul class="list login-panel-list">
+                                <li class="login-panel-item">
+                                    <div class="log-out-btn--placing">
+                                        <button id="sign-out-btn" class="log-out-btn">
+                                            <span>PHX_SIGN_OUT</span> 
+                                        </button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header__account-avatar"> 
+                                        <div class="header__account-avatar-icon">
+                                            <div class="header__account-avatar-icon img-cover">
+                                                <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="header__account-avatar-text">
+                                            <span class="account-name">#client-name</span> </br>
+                                            <span class="account-status">#client-status</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
                 </div>
             </header>
             
-            <div class="container">
+            <div class="container main">
                 <div>
                     <h1 id="department-name"></h1>
                 </div>
@@ -109,7 +121,7 @@
                                     <div class="add-new-competition-block">
                                         <a href="#popup_4" class="popup-link">
                                             <button class="add-new-competition-btn" type="button" data-open-modal>
-                                                <svg class="sl-footer-icon">
+                                                <svg class="add-icon">
                                                     <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                 </svg>
                                                 <span class="add-new-competition-btn-text">PH4_ADD_COMP</span>

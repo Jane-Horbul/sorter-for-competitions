@@ -60,8 +60,8 @@
     margin-right: auto;
     width: 270px;
     height: 160px;
-    background: #f5f4fa;
-    border-radius: 4px;
+    border: 1px solid #1D8FBD;
+    background: #fff;
   }
   .advantages-icon {
     width: 65px;
@@ -70,9 +70,14 @@
     margin-bottom: 30px;
     margin-left: 100px;
   }
-
-  .add-new-competition-block {
+/*add blocks*/
+  .add-new-competition-block,
+  .add-new-place-btn {
     display: block;
+  }
+  .add-new-competition-block:hover,
+  .add-new-place-btn:hover {
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.12),0px 4px 4px rgba(0,0,0,0.06),1px 4px 6px rgba(0,0,0,0.16);
   }
   .title-of-competition-list-item {
     text-decoration: none;

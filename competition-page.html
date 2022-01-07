@@ -10,41 +10,56 @@
     </head>
     <body>
         <div class="wrapper">
-            <header class="page-header container">
-                <ul class="list header-list">
-                    <li class="header-item">
-                        <div>
-                            <h1 id="competition-name"></h1>
-                        </div>
-                    </li>
-                    <li class="header-item">
-                        <div class="lang-panel">
-                            <ul class="list lang-panel-list">
-                                <li class="lang-panel-item">
-                                    <div class="lang-panel-flag">
-                                        <a type="button" id="lang-ru"> 
-                                            <img src="./img/ru.png"> 
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="lang-panel-item">
-                                    <div class="lang-panel-flag">
-                                        <a type="button" id="lang-en"> 
-                                            <img src="./img/en.png"> 
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="lang-panel-item">
-                                    <div class="lang-panel-flag">
-                                        <a type="button" id="lang-ua"> 
-                                            <img src="./img/ua.png"> 
+            <header class="page-header">
+                <div class="container flexbox">
+                    <nav class="navigation">
+                        <img class="program-logo "
+                            src="./img/competition-logo-new.png"
+                            alt="Program logo">
+                    </nav>
+                    <div id="client-cred-container">
+                        <div id="sing-in-btn-container" class="login-panel">
+                            <ul class="list login-panel-list">
+                                <li class="login-panel-item">
+                                    <div class="log-in-btn--placing">
+                                        <a href="#popup_7" class="popup-link"> 
+                                            <button class="log-in-btn">
+                                                <span>PHX_SIGN_IN</span> 
+                                            </button>
                                         </a>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+
+                    <template id="client-data-template">
+                        <div class="login-panel">
+                            <ul class="list login-panel-list">
+                                <li class="login-panel-item">
+                                    <div class="log-out-btn--placing">
+                                        <button id="sign-out-btn" class="log-out-btn">
+                                            <span>PHX_SIGN_OUT</span> 
+                                        </button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header__account-avatar"> 
+                                        <div class="header__account-avatar-icon">
+                                            <div class="header__account-avatar-icon img-cover">
+                                                <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="header__account-avatar-text">
+                                            <span class="account-name">#client-name</span> </br>
+                                            <span class="account-status">#client-status</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
             </header>
             <div class="bread-crumbs-comp-page container">
                 <div class="bread-crumbs-item" >
@@ -165,12 +180,14 @@
                                         <a id="add-place-link-id" href= "">
                                             <div class="advantages-icon-bg">
                                                 <div class="add-new-place-block">
-                                                    <button class="add-new-place-btn" type="button">
-                                                        <svg class="sl-footer-icon">
-                                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                        </svg>
-                                                        <span class="add-new-competition-btn-text">PH24_ADD_PAIRS_LIST</span>
-                                                    </button>
+                                                    <a href="">
+                                                        <button class="add-new-place-btn" type="button">
+                                                            <svg class="add-icon">
+                                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                            </svg>
+                                                            <span class="add-new-competition-btn-text">PH24_ADD_PAIRS_LIST</span>
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </a>
@@ -542,6 +559,39 @@
             </div>
         </div>
         <!--add-group-popup-window-end-->
+        <!--LogIn popup start-->
+        <div class="popup" id = "popup_7">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="login_popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="">
+                                <div class="login-page-title">
+                                    <span class="login-page-popup-title">CPH01_LOGIN</span>
+
+                                <div class="input-container ic1">
+                                    <input id="login" class="input input_login" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="login" class="placeholder">CPH02_LOGIN_INPUT</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="password" class="input input_login" type="password" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="password" class="placeholder">CPH03_PASS_INPUT</label>
+                                </div>
+
+                                <button type="button" id="login-btn" class="login-page-btn-submit">
+                                    <span class="modal-btn-submit-text">CPH04_LOGIN_BTN</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--LogIn popup end-->
         <script src="./scripts/competition-page.js" type="module"></script> 
         <script src="./scripts/open-close-popup.js" type="module"></script>
     </body>

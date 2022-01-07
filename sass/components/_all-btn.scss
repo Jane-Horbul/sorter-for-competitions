@@ -1,0 +1,28 @@
+.log-in-btn,
+.log-out-btn {
+    width: 150px;
+    height: 36px;
+    border: 1px solid #1D8FBD;
+    background: #fff;
+    color: #2F2929;
+    font-size: 16px;
+}
+.log-out-btn {
+    margin-right: 20px;
+}
+.log-out-btn--placing {
+    margin-right: 15px;
+}
+.log-in-btn:hover,
+.log-out-btn:hover,
+.log-in-btn:focus,
+.log-out-btn:focus,
+.log-in-btn:active,
+.log-out-btn:active {
+    width: 150px;
+    height: 36px;
+    background: #1D8FBD;
+    color: #fff;
+    font-size: 16px;
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
