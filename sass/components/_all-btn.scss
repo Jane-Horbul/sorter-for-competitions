@@ -2,9 +2,9 @@
 .log-out-btn {
     width: 150px;
     height: 36px;
-    border: 1px solid #1D8FBD;
-    background: #fff;
-    color: #2F2929;
+    border: 0px;
+    background: #1D8FBD;
+    color: #fff;
     font-size: 16px;
 }
 .log-out-btn {
@@ -19,10 +19,31 @@
 .log-out-btn:focus,
 .log-in-btn:active,
 .log-out-btn:active {
-    width: 150px;
-    height: 36px;
-    background: #1D8FBD;
-    color: #fff;
-    font-size: 16px;
+    border: 1px solid #1D8FBD;
+    background: #fff;
+    color: #2F2929;
     transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+.add-item-btn {
+    position: absolute;
+    top: 22px;
+    right: -9px;
+    width: 50px;
+    height: 30px;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: $assent-color;
+    border: none;
+    fill: $white-color;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    outline-width: 0px;
+  }
+  
+  .add-item-btn:hover,
+  .add-item-btn:focus {
+    outline-width: 0px;
+    background-color: $white-color;
+    border: 1px solid $assent-color;
+    fill: $assent-color;
+  }

@@ -73,10 +73,10 @@
                 </div>
             </div>
             <main>
-                <div class="container">
-                    <div>
+                    <div class="container">
                         <h1 id="competition-name"></h1>
                     </div>
+                <div class="container-main">
                     <div class="tab">
                         <button class="tablinks" id="tab1">PH1_SPORTS</button>
                         <button class="tablinks" id="tab2">PH2_GROUPS</button>
@@ -87,30 +87,30 @@
                         <button class="competition-page-main-btn" id="sort-members-btn">PH5_SORT_BTN</button>
                         <div class="main-tables-item">
                             <table class="dynamic-table" id="members-table">
-                                <tr>
-                                    <th class="group-info-table-title all-table-title" colspan="10"><span>PH6_SPORTS_TBL</span>
+                                <tr class="title-row">
+                                    <td class="title-row" colspan="10"><span>PH6_SPORTS_TBL</span>
                                         <!--Add member button start-->
                                         <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                            <button class="group-page-ref-btn" type="button">
-                                                    <svg class="group-info-edit-btn-icon">
+                                            <button class="add-item-btn" type="button">
+                                                    <svg class="add-item-icon">
                                                     <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                 </svg>
                                             </button>
                                         </a>
                                         <!--Add member button end-->
-                                    </th>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="secondary-title-tables--text">PH7_SPORT_SURNAME</td>
-                                    <td class="secondary-title-tables--text">PH8_SPORT_NAME</td>
-                                    <td class="secondary-title-tables--text">PH9_SPORT_AGE</td>
-                                    <td class="secondary-title-tables--text">PH10_SPORT_WEIGHT</td>
-                                    <td class="secondary-title-tables--text">PH11_SPORT_SEX</td>
-                                    <td class="secondary-title-tables--text">PH12_SPORT_TEAM</td>
-                                    <td class="secondary-title-tables--text">PH13_SPORT_QUAL</td>
-                                    <td class="secondary-title-tables--text">PH14_SPORT_ADMIT</td>
-                                    <td class="secondary-title-tables--text">PH15_SPORT_GR_NUM</td>
-                                    <td class="column-for-button secondary-title-two-tables"></td>
+                                    <th>PH7_SPORT_SURNAME</th>
+                                    <th>PH8_SPORT_NAME</th>
+                                    <th>PH9_SPORT_AGE</th>
+                                    <th>PH10_SPORT_WEIGHT</th>
+                                    <th>PH11_SPORT_SEX</th>
+                                    <th>PH12_SPORT_TEAM</th>
+                                    <th>PH13_SPORT_QUAL</th>
+                                    <th>PH14_SPORT_ADMIT</th>
+                                    <th>PH15_SPORT_GR_NUM</th>
+                                    <th class="column-for-button secondary-title-two-tables"></th>
                                 </tr>
                             </table>
                             <template id="member-template">
@@ -182,14 +182,12 @@
                                         <a id="add-place-link-id" href= "">
                                             <div class="advantages-icon-bg">
                                                 <div class="add-new-place-block">
-                                                    <a href="">
                                                         <button class="add-new-place-btn" type="button">
                                                             <svg class="add-icon">
                                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                             </svg>
                                                             <span class="add-new-competition-btn-text">PH24_ADD_PAIRS_LIST</span>
                                                         </button>
-                                                    </a>
                                                 </div>
                                             </div>
                                         </a>
@@ -323,6 +321,7 @@
                                         <td class="add-sportsman-table--title secondary-title-tables--text">PH12_SPORT_TEAM</td>
                                         <td class="add-sportsman-table--title secondary-title-tables--text">PH13_SPORT_QUAL</td>
                                     </tr>
+
                                     <template id="add-sportsman-template">
                                         <tr id="add-sports-#sp-id">
                                             <td class="secondary-tables--td">#sp-surname</td>
