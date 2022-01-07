@@ -172,11 +172,12 @@
   justify-content: center;
 }
 
-.add-new-competition-btn {
-  margin-top: 50px;
-  margin-left: 70px;
+.add-new-competition-btn,
+.add-new-place-btn {
+  width: 268px;
+  height: 158px;
   border:0px;
-  background-color: #f5f4fa;
+  background-color: #fff;
 }
 .add-new-competition-btn-text {
   margin-top: 15px;
@@ -184,8 +185,13 @@
 }
 .add-new-competition-btn-text:hover,
 .add-new-competition-btn:hover {
-  color: $assent-color;
-  fill: $assent-color;
+  color: #1d8fbd;
+  fill: #1d8fbd;
+}
+.add-new-competition-btn .add-icon:hover,
+.add-new-place-btn .add-icon:hover {
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  fill: #1d8fbd;
 }
 
 /*grop page*/
