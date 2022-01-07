@@ -709,7 +709,7 @@ export const server = {
     sportsman: {
         get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.SPORTSMAN_GET(sid), false));},
         getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.SPORTSMAN_STAT_GET(sid), true));},
-        create(sp)                          {sendParametersList(backendLinks.SPORTSMAN_CREATE, createSportsmanForm(sp), true);},
+        create(sp)                          {sendParametersList(backendLinks.SPORTSMAN_CREATE, createSportsmanForm(sp), false);},
         remove(sid)                         {return sendSingleValue(backendLinks.SPORTSMAN_DELETE(sid), sid, false);},
         edit(sid, sp)                       {sendParametersList(backendLinks.SPORTSMAN_EDIT(sid), createSportsmanForm(sp), true);},
         addDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_ADD(cid, sid), disc, false);},

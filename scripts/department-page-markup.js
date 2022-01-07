@@ -71,6 +71,12 @@ export const markup = {
         getTrainerInput()               { return document.getElementById("new-member-trainer").value;},
         getQualificationInput()         { return document.getElementById("new-member-qualifications").value;},
         getOneMoreInput()               { return document.getElementById("add-one-more-sp").value;},
+        clearInputs()                   {
+                                            document.getElementById("new-member-name").value = "";
+                                            document.getElementById("new-member-surname").value = "";
+                                            document.getElementById("new-member-age").value = "";
+                                            document.getElementById("new-member-weight").value = "";
+                                        },
         
         getTrainersList()               { return document.getElementById("new-member-trainer");},
         getTrainerTemplate()            { return document.getElementById("new-member-trainer-temp");},
@@ -94,7 +100,7 @@ export const markup = {
         getPlaceholders(sp)             { return {
                                                 "#sp-surname":      sp.getSurname(),
                                                 "#sp-name":         sp.getName(),
-                                                "#sp-age":          sp.getFormatedBirth("dd.mm.yy"),
+                                                "#sp-age":          sp.getAge(),
                                                 "#sp-weight":       sp.getWeight(),
                                                 "#sp-sex":          sp.getSex(),
                                                 "#sp-team":         sp.getTeam(),

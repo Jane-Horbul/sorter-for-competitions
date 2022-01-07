@@ -187,10 +187,12 @@ function sendSportsmanForm() {
         sporsman.setSex(markup.sportsman.getSexInput());
         sporsman.setQualification(markup.sportsman.getQualificationInput());
         server.sportsman.create(sporsman);
-        /*
-        if(markup.sportsman.getOneMoreInput().localeCompare("no") == 0){
+     
+        if(checkers.strEquals(markup.sportsman.getOneMoreInput(), "no")){
             location.reload();
-        }*/
+        } else {
+            markup.sportsman.clearInputs();
+        }
     }
     
 }
@@ -209,7 +211,7 @@ function sendTrainerForm() {
         var trainer = ops.createTrainer(undefined);
         trainer.setName(   markup.trainer.getNameInput());
         trainer.setSurname(markup.trainer.getSurnameInput());
-        trainer.setBirth(  checkers.prepareDate(markup.trainer.getAgeInput()));
+        trainer.setBirth(  markup.trainer.getAgeInput());
         trainer.setSex(    markup.trainer.getSexInput());
         trainer.setTeam(   markup.trainer.getTeamInput());
         trainer.setRegion( markup.trainer.getRegionInput());

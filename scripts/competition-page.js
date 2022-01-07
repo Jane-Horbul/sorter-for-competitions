@@ -17,6 +17,7 @@ const department        = server.department.get();
 var competition         = server.competition.get(page.cid);
 const qualificationsMap = department.getQualifications();
 const disciplines       = department.getDisciplines();
+var acttiveDisciplines = disciplines.filter(disc => (undefined != competition.getGroups().find(gr => checkers.strEquals(gr.getDiscipline(), disc))));
 const departmentLink    = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
 
 var departamentSportsmans   = new Array(0);
@@ -94,9 +95,10 @@ function sportsmansAddListSend() {
         sportsmansAddList[i].setAdmition(markup.sportsmen.getSportsAdmition(settings, sid));
 
         var sportsDisc = new Array(0);
-        for(var j = 0; j < disciplines.length; j++){
+        
+        for(var j = 0; j < acttiveDisciplines.length; j++){
             if(markup.sportsmen.isCheckedDisc(settings, sid, j))
-                sportsDisc.push(disciplines[j]);
+                sportsDisc.push(acttiveDisciplines[j]);
         }
         sportsmansAddList[i].setDisciplines(sportsDisc);
     }
@@ -320,11 +322,11 @@ function disciplinesAddToPage(){
     }
 }
 function disciplinesCheckboxesAdd(spId){
-    for(var i = 0; i < disciplines.length; i++){
-        if(checkers.isEmptyString(disciplines[i]))
+    for(var i = 0; i < acttiveDisciplines.length; i++){
+        if(checkers.isEmptyString(acttiveDisciplines[i]))
             continue;
         var template = markup.sportsmen.getDisciplineTemplate();
-        var placeholders = markup.sportsmen.getDiscPlaceholders(disciplines[i], i, spId);
+        var placeholders = markup.sportsmen.getDiscPlaceholders(acttiveDisciplines[i], i, spId);
         markup.sportsmen.getDisciplinesList(spId).append(createPageItem(template, placeholders));
         
     }

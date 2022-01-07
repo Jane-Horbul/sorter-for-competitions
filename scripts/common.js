@@ -17,8 +17,8 @@ function dateValidate(date){
     var dt = date.split("/");
     if(dt.length < 3) return false;
     var year    = Number(dt[2]);
-    var month   = Number(dt[0]) - 1;
-    var day     = Number(dt[1]);
+    var month   = Number(dt[1]) - 1;
+    var day     = Number(dt[0]);
     var d       = new Date(year, month, day);
     return ((d.getFullYear() == year) && (d.getMonth() == month) && (d.getDate() == day)) ? true : false;
 }
@@ -29,9 +29,9 @@ function datetimeValidate(datetime){
     var time = parts.length > 1 ? parts[1].split(":") : undefined;
 
     if((time == undefined) || (date.length < 3)) return false;
-    var year    = Number(date[0]);
+    var year    = Number(date[2]);
     var month   = Number(date[1]) - 1;
-    var day     = Number(date[2]);
+    var day     = Number(date[0]);
     var hours   = Number(time[0]);
     var mins    = Number(time[1]);
     var d       = new Date(year, month, day);
@@ -74,9 +74,7 @@ export const checkers = {
     checkNumber(field, value)   { if(!this.isNumber(value))     { errors.badNumber(field);  return false; } return true; },
     checkDate(date)             { if(!dateValidate(date))       { errors.badDate(date);     return false; } return true;},
     checkDateTime(dateime)      { if(!datetimeValidate(dateime)){ errors.badDate(dateime);  return false; } return true;},
-    compareDateTimes(dt1, dt2)  { return datetimesCompare(dt1, dt2);},
-    prepareDate(date)           { var dt = date.split("/");     return dt[2] + "-" + dt[0] + "-" + dt[1]; }
-
+    compareDateTimes(dt1, dt2)  { return datetimesCompare(dt1, dt2);}
 }
 
 export function onClick(object, action){
