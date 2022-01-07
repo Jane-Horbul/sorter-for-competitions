@@ -17,6 +17,12 @@ function getSpName(sid){
 }
 
 export const markup = {
+    login:          {
+        getLoginBtn()               { return document.getElementById("login-btn");},
+        getLogin()                  { return document.getElementById("login").value;},
+        getPass()                   { return document.getElementById("password").value;}
+    },
+    
     competitionLink:                cLink,
     breadcrumbs: {
         getContainer()              { return document.getElementById("bread-crumbs-container");},

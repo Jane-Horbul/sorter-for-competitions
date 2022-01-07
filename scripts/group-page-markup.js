@@ -20,6 +20,11 @@ function getPairWinner(pair){
 }
 
 export const markup = {
+    login:          {
+        getLoginBtn()               { return document.getElementById("login-btn");},
+        getLogin()                  { return document.getElementById("login").value;},
+        getPass()                   { return document.getElementById("password").value;}
+    },
     pairs: {
         redBtnStyle:     "red-button-style",
         blueBtnStyle:    "blue-button-style",

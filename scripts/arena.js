@@ -158,6 +158,7 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
+    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.pair.getAddBtn(), addPairs);
     onClick(markup.common.getDeleteBtn(), deleteArena);
     onClick(markup.common.getRefilterBtn(), function(){server.arena.filterPairs(page.cid, page.aid);});

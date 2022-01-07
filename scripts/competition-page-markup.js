@@ -1,6 +1,11 @@
 import {getQualificationInterval, getQualNameByValue} from "./competition-page.js"
 
 export const markup = {
+    login:          {
+        getLoginBtn()               { return document.getElementById("login-btn");},
+        getLogin()                  { return document.getElementById("login").value;},
+        getPass()                   { return document.getElementById("password").value;}
+    },
     sportsmen: {
         getTable()                  { return document.getElementById("members-table");},
         getTemplate()               { return document.getElementById("member-template");},

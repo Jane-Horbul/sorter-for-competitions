@@ -454,6 +454,7 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
+    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.sportsmen.getAddBtn(),       addSportsmansList);
     onClick(markup.group.getDelBtn(),           function(){server.group.remove(page.cid, page.gid)});
     onClick(markup.group.getEditBtn(),          groupInfoEdit);

@@ -365,6 +365,7 @@ function refreshPairs(){
 }
 
 function setBtnActions(){
+    onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.competitions.getEditBtn(),   competitionEdit);
     onClick(markup.groups.getAddBtn(),          sendGroupForm);
     onClick(markup.sportsmen.getSortSpBtn(),    resortSportsmens);

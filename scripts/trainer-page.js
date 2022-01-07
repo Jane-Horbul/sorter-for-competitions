@@ -166,6 +166,7 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
+    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.trainer.getEditBtn(), trainerInfoEdit);
     onClick(markup.trainer.getDelBtn(), function(){server.trainer.remove(page.tid)});
     onClick(markup.trainer.getChangeEmailBtn(), changeEmail);

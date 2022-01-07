@@ -260,6 +260,7 @@ function fillPairsList(){
 }
 
 function setBtnActions(){
+    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.automation.groups.getAddAllBtn(), activateAllGroups);
     onClick(markup.automation.groups.getDelAllBtn(), deactivateAllGroups);
     onClick(markup.automation.getApplyBtn(), createArenaAutomatic);
@@ -268,8 +269,6 @@ function setBtnActions(){
     onClick(markup.manual.getAttachAllPairsBtn(), attachAllPairs);
     onClick(markup.manual.getDetachAllPairsBtn(), detachAllPairs);
     onClick(markup.manual.getApplyBtn(), createArenaManual);
-
-
 }
 
 
