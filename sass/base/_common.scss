@@ -70,6 +70,31 @@ html {
       width: 1700px;
     }
   }
+  .container-main {
+    width: 100%;
+    margin-right: 25px;
+  
+    @include for-size(mobile) {
+      width: 320px;
+      overflow-x: scroll;
+    }
+  
+    @include for-size(tablet) {
+      width: 768px;
+      padding-left: 4px;
+      overflow-x: hidden;
+    }
+  
+    @include for-size(desktop) {
+      width: 1180px;
+      margin-right: 35px;
+    }
+
+    @include for-size(max-desktop) {
+      width: 1780px;
+      margin-right: 50px;
+    }
+  }
   .section {
     padding-top: 110px;
   }
