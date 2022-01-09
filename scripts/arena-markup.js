@@ -1,5 +1,5 @@
 import { department, competition, arena} from "./arena.js";
-import { checkers } from "./common.js";
+import { checkers, formatDate } from "./common.js";
 
 var aLink = window.location.href;
 var cLink = aLink.substring(0, aLink.lastIndexOf("/"));
@@ -24,6 +24,7 @@ export const markup = {
     },
     
     competitionLink:                cLink,
+    selectedStyle:                  "lp-select-pair",
     breadcrumbs: {
         getContainer()              { return document.getElementById("bread-crumbs-container");},
         getTemplate()               { return document.getElementById("bread-crumbs-template");},
@@ -44,8 +45,6 @@ export const markup = {
         getRefilterBtn()            { return document.getElementById("refilter-pairs-btn");}, 
     },
     pair: {
-        selectedStyle:              "lp-select-pair",
-
         getActiveContainer()        { return document.getElementById("active-pair-container");},
         getActiveTemplate()         { return document.getElementById("active-pair-template");},
 
@@ -63,7 +62,7 @@ export const markup = {
                                             "#pair-blue-sports":getSpName(pair.getBlueSp()),
                                             "#pair-red-score":  pair.getRedScore(),
                                             "#pair-blue-score": pair.getBlueScore(),
-                                            "#pair-time":       checkers.getIfDefined(pair.getFormatedTime("hh:min (dd/mm)"), ""),
+                                            "#pair-time":       checkers.getIfDefined(pair.getFormatedTime("hh:min dd/mm"), ""),
                                             "#pair-winner":     getSpName(pair.getWinner()),
                                             "#pair-id":         pair.getId(),
                                         };
@@ -73,6 +72,14 @@ export const markup = {
         
         getUnattachedItem(pair)     { return document.getElementById("unattached-pair-" + pair.getId()); },
         getAddBtn()                 { return document.getElementById("pairs-add-btn");}, 
+        setUpdateCallback(cback)    { $("#arena-pairs-container").sortable({ update: function( event, ui ){ cback(); }}); },
+        getNumbers()                {
+                                        var items = this.getContainer().getElementsByTagName("li");
+                                        var res = new Array(0);
+                                        for(var i = 0; i < items.length; i++)
+                                            res.push(Number(items[i].querySelectorAll(".lp-list-table-td1")[0].innerHTML));
+                                        return res;
+                                    },                            
     },
     settings: {
         getNameInput()      { return document.getElementById("arena-name-input");},
@@ -94,15 +101,41 @@ export const markup = {
         getEndIntervalInput()       { return document.getElementById("schedule-interval-end");},
         getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
         getTemplate()               { return document.getElementById("schedule-interval-template");},
-        insertNewInterval(interv)   {   var before = document.getElementById("interval-input-row");
-                                        before.parentNode.insertBefore(interv, before);
+        insertNewInterval(interv)   {   var header = document.getElementById("intervals-header");
+                                        header.after(interv);
                                     },
         getPlaceholders(s, e, i)    { return {
-                                            "#interval-start-time": s,
-                                            "#interval-end-time":   e,
+                                            "#interval-start-time": formatDate(s, "hh:min dd SM"),
+                                            "#interval-end-time":   formatDate(e, "hh:min dd SM"),
                                             "#row-num":             i
                                         }; 
                                     },
         getDelBtn(rn)               { return document.getElementById("interval-delete-btn-" + rn);},
+    },
+    groups: {
+        getContainer()              { return document.getElementById("groups-container");},
+        getTemplate()               { return document.getElementById("group-item-template");},
+
+        getUnattachedContainer()    { return document.getElementById("unattached-grous-container");},
+        getUnattachedTemplate()     { return document.getElementById("unattached-group-template");},
+        getUnattachedItem(gp)       { return document.getElementById("unattached-group-" + gp.getId()); },
+        getPlaceholders(gp)         { return {
+                                            "#group-name": gp.getName(),
+                                            "#group-id":   gp.getId()
+                                        }; 
+                                    },
+        
+        getAttached(gid)            { return document.getElementById(gid); },
+        setUpdateCallback(cback)    { $("#groups-container").sortable({ update: function( event, ui ){ cback(); }}); },
+        getAddBtn()                 { return document.getElementById("groups-add-btn");},
+        getApplyBtn()                 { return document.getElementById("apply-configs-btn");},
+        getDelBtn(gp)               { return document.getElementById("group-del-btn-" + gp.getId());},
+        getContainerIds()           {
+                                        var items = this.getContainer().getElementsByTagName("li");
+                                        var res = new Array(0);
+                                        for(var i = 0; i < items.length; i++)
+                                            res.push(items[i].id);
+                                        return res;
+                                    },   
     },
 }

@@ -356,18 +356,15 @@ function fillPageInfo(){
 }
 
 function refreshPairs(){
-    competition = server.competition.formPairs(page.cid);
-    var groupsTable = markup.groups.getTable();
-    while(groupsTable.rows.length > 2){
-        groupsTable.deleteRow(groupsTable.rows.length - 1);
-    }
-    competition.getGroups().forEach(gr =>   groupPageElementAdd(gr));
+    server.competition.formPairs(page.cid);
 }
 
 function setBtnActions(){
     onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.competitions.getEditBtn(),   competitionEdit);
     onClick(markup.groups.getAddBtn(),          sendGroupForm);
+    onClick(markup.groups.getPairsRefreshBtn(), refreshPairs);
+    
     onClick(markup.sportsmen.getSortSpBtn(),    resortSportsmens);
     onClick(markup.sportsmen.getAddBtn(),       sportsmansAddListSend);
 }

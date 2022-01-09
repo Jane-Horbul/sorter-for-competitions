@@ -107,6 +107,7 @@ export const markup = {
                                                 "#qual-name-ph": n
                                             };
                                     },
+        getPairsRefreshBtn()        { return document.getElementById("update-pairs-btn");},
 
         alertNameFormat()           {alert("Empty group name!");},
         alertAgeMinFormat()         {alert("Bad minimal age!");},

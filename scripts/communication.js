@@ -1,4 +1,4 @@
-import {parseBodyParams, commonStrings, checkers} from "./common.js"
+import {parseBodyParams, commonStrings, checkers, formatDate} from "./common.js"
 
 const backendLinks = {
     DEPARTMENT_GET()                            {return "competition-list-get?"; },
@@ -49,6 +49,7 @@ const backendLinks = {
     ARENA_CREATE(cid)                           {return "arena-create?cid=" + cid;},
     ARENA_GET(cid, aid)                         {return "arena-get?cid=" + cid + "&aid=" + aid;},
     ARENA_REMOVE(cid, aid)                      {return "arena-remove?cid=" + cid + "&aid=" + aid;},
+    ARENA_EDIT(cid, aid)                        {return "arena-edit?cid=" + cid + "&aid=" + aid;},
     ARENA_PAIR_REMOVE(cid, aid)                 {return "arena-pair-remove?cid=" + cid + "&aid=" + aid;},
     ARENA_PAIRS_REBUILD(cid, aid)               {return "arena-pairs-rebuild?cid=" + cid + "&aid=" + aid;},
     ARENA_PAIRS_FILTER(cid, aid)                {return "arena-pairs-filter?cid=" + cid + "&aid=" + aid;},
@@ -59,37 +60,6 @@ const backendLinks = {
     CLIENT_PASSWORD_CHANGE:                     "client-change-pass"
 };
 
-const months = {
-    0: "Zeromonth",
-    1: "January",
-    2: "February",
-    3: "March",
-    4: "April",
-    5: "May",
-    6: "June",
-    7: "July",
-    8: "August",
-    9: "September",
-    10: "October",
-    11: "November",
-    12: "December"
-};
-
-function formatDate(dateTime, format){
-    if(dateTime == undefined)
-        return "";
-    var parts = dateTime.split(" ");
-    var date = parts[0].split("/");
-    var time = parts[1].split(":");
-    var res = format;
-    res = res.replace("yy", date[0]);
-    res = res.replace("mm", date[1]);
-    res = res.replace("MM", months[Number(date[1])]);
-    res = res.replace("dd", date[2]);
-    res = res.replace("hh", time[0]);
-    res = res.replace("min", time[1]);
-    return res;
-}
 
 function mapToObjArray(mapArr, createObj){
     var res = new Array(0);
@@ -192,11 +162,10 @@ function arrayToGs(arr, cid) {
     return res;
 }
 
-function arrayToPairs(arr) {
+function mapsToObjects(arr, mapToObj) {
     var res = new Array(0);
-    arr.forEach(map => {
-        var pair = mapToPair(map); 
-        res.push(pair);
+    arr.forEach(obj => {
+        res.push(mapToObj(obj));
     });
     return res;
 }
@@ -218,7 +187,7 @@ function arrayToCompStats(arr) {
             isAdmitted()            {return (this.params.get("Admition") == "yes" ? true : false);},
             isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
             getGroupsStats()        {return arrayToGs(this.params.get("GroupsStatistic"), this.params.get("CompetitionId"));},
-            getPairs()              {return arrayToPairs(this.params.get("Pairs"));},
+            getPairs()              {return mapsToObjects(this.params.get("Pairs"), mapToPair);},
             getCompetitionLink()    {return formCompLink(this.getCompetitionId())},
 
             setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
@@ -346,8 +315,8 @@ function mapToArena(map) {
 
         getName()         {return this.params.get(this.name);},
         getId()           {return this.params.get(this.id);},
-        getGroups()       {return this.params.get(this.groups);},
-        getPairs()        {return arrayToPairs(this.params.get(this.pairs));},
+        getGroups()       {return mapsToObjects(this.params.get(this.groups), mapToGroup);},
+        getPairs()        {return mapsToObjects(this.params.get(this.pairs), mapToPair);},
         getDistance()     {return this.params.get(this.distance);},
         getAgeMin()       {return this.params.get(this.ageMin);},
         getAgeMax()       {return this.params.get(this.ageMax);},
@@ -394,7 +363,7 @@ function mapToCompetition(map) {
         getEndDate()            {return this.params.get("EndDate");},
         getFormatedEndDate(f)   {return formatDate(this.params.get("EndDate"), f)},
 
-        getSportsmen()     {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
+        getSportsmen()      {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
         getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
         getArenas()         {return mapToObjArray(this.params.get("Arenas"), mapToArena);},
 
@@ -729,6 +698,7 @@ export const server = {
     arena: {
         get(cid, aid)                       {return ops.createArena(sendRequest(backendLinks.ARENA_GET(cid, aid), false));},
         create(cid, arena)                  {sendParametersList(backendLinks.ARENA_CREATE(cid), arena, false);},
+        edit(cid, aid, arena)               {sendParametersList(backendLinks.ARENA_EDIT(cid, aid), arena, true);},
         remove(cid, aid)                    {sendSingleValue(backendLinks.ARENA_REMOVE(cid, aid), aid, false);},
         pairRemove(cid, aid, pid)           {sendSingleValue(backendLinks.ARENA_PAIR_REMOVE(cid, aid), pid, false);},
         pairsListRebuild(cid, aid, pids)    {sendSingleValue(backendLinks.ARENA_PAIRS_REBUILD(cid, aid), pids, true);},
