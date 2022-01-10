@@ -358,10 +358,14 @@ function fillPageInfo(){
 function refreshPairs(){
     server.competition.formPairs(page.cid);
 }
-
+function deleteCompetition(){
+    server.competition.delete(page.cid);
+    document.location.href = departmentLink;
+}
 function setBtnActions(){
     onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.competitions.getEditBtn(),   competitionEdit);
+    onClick(markup.competitions.getDeleteBtn(), deleteCompetition);
     onClick(markup.groups.getAddBtn(),          sendGroupForm);
     onClick(markup.groups.getPairsRefreshBtn(), refreshPairs);
     
