@@ -49,9 +49,10 @@ function refreshPairs(){
 /* ------------------- SPORTSMANS ----------------------------*/
 
 export function getSportsName(id){
-    if(!checkers.isNumber(id)){
+    if(!checkers.isSportsmanId(id)){
         return "Winner of " + id;
     }
+
     var sports = groupInfo.getSportsmen().find( sp => sp.getId() == id);
     if(sports == undefined) return "";
     return sports.getSurname() + " " + sports.getName();

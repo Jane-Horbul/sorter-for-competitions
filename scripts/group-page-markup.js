@@ -11,7 +11,7 @@ function getWinStyle(pair){
 function getPairWinner(pair){
     var winner = pair.getWinner();
     if(checkers.isEmptyString(winner)){
-        if(!checkers.isNumber(pair.getRedSp()) || !checkers.isNumber(pair.getBlueSp()))
+        if(!checkers.isSportsmanId(pair.getRedSp()) || !checkers.isSportsmanId(pair.getBlueSp()))
             return "";
         return markup.pairs.createWinBtns(pair.getId());
     } else {

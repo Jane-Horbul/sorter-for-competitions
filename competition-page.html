@@ -24,7 +24,7 @@
                                     <div class="log-in-btn--placing">
                                         <a href="#popup_7" class="popup-link"> 
                                             <button class="log-in-btn">
-                                                <span>PHX_SIGN_IN</span> 
+                                                <span>СPHX_SIGN_IN</span> 
                                             </button>
                                         </a>
                                     </div>
@@ -39,7 +39,7 @@
                                 <li class="login-panel-item">
                                     <div class="log-out-btn--placing">
                                         <button id="sign-out-btn" class="log-out-btn">
-                                            <span>PHX_SIGN_OUT</span> 
+                                            <span>СPHX_SIGN_OUT</span> 
                                         </button>
                                     </div>
                                 </li>
@@ -78,17 +78,17 @@
                     </div>
                 <div class="container-main">
                     <div class="tab">
-                        <button class="tablinks" id="tab1">PH1_SPORTS</button>
-                        <button class="tablinks" id="tab2">PH2_GROUPS</button>
-                        <button class="tablinks" id="tab3">PH3_PAIRS_LISTS</button>
-                        <button class="tablinks" id="tab4">PH4_INFO</button>
+                        <button class="tablinks" id="tab1">PHX_SPORTS</button>
+                        <button class="tablinks" id="tab2">PHX_GROUPS</button>
+                        <button class="tablinks" id="tab3">PHX_PAIRS_LISTS</button>
+                        <button class="tablinks" id="tab4">PHX_INFORM</button>
                     </div>
                     <div id="tabcontent1" class="tabcontent" style="display: none">
-                        <button class="competition-page-main-btn" id="sort-members-btn">PH5_SORT_BTN</button>
+                        <button class="competition-page-main-btn" id="sort-members-btn">PHX_SORT_BTN</button>
                         <div class="main-tables-item">
                             <table class="dynamic-table" id="members-table">
                                 <tr class="title-row">
-                                    <td class="title-row" colspan="10"><span>PH6_SPORTS_TBL</span>
+                                    <td class="title-row" colspan="10"><span>PHX_TBL_SPORTS</span>
                                         <!--Add member button start-->
                                         <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
                                             <button class="add-item-btn" type="button">
@@ -101,15 +101,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>PH7_SPORT_SURNAME</th>
-                                    <th>PH8_SPORT_NAME</th>
-                                    <th>PH9_SPORT_AGE</th>
-                                    <th>PH10_SPORT_WEIGHT</th>
-                                    <th>PH11_SPORT_SEX</th>
-                                    <th>PH12_SPORT_TEAM</th>
-                                    <th>PH13_SPORT_QUAL</th>
-                                    <th>PH14_SPORT_ADMIT</th>
-                                    <th>PH15_SPORT_GR_NUM</th>
+                                    <th>PHX_SPORT_SURNAME</th>
+                                    <th>PHX_SPORT_NAME</th>
+                                    <th>PHX_SPORT_AGE</th>
+                                    <th>PHX_SPORT_WEIGHT</th>
+                                    <th>PHX_SPORT_SEX</th>
+                                    <th>PHX_SPORT_TEAM</th>
+                                    <th>PHX_SPORT_QUAL</th>
+                                    <th>PHX_SPORT_ADMIT</th>
+                                    <th>PHX_SPORT_GR_NUM</th>
                                     <th class="column-for-button secondary-title-two-tables"></th>
                                 </tr>
                             </table>
@@ -140,24 +140,29 @@
                                     <div class="main-tables-item">
                                         <table class="dynamic-table" id="groups-table">
                                             <tr>
-                                                <th class="group-info-table-title all-table-title" colspan="7">PH16_GROUPS_TBL
+                                                <th class="group-info-table-title all-table-title" colspan="7">PHX_TBL_GROUPS
                                                     <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
                                                         <button class="group-page-ref-btn" type="button">
                                                             <svg class="group-info-edit-btn-icon">
                                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                             </svg>
                                                         </button>
-                                                    </a>    
+                                                    </a>
+                                                    <button class="js-hidden-element js-root-view js-admin-view" type="button"  id="update-pairs-btn" data-open-modal>
+                                                        <svg class="group-info-edit-btn-icon">
+                                                            <use href="./img/icons.svg#icon-loop2"></use>
+                                                        </svg>
+                                                    </button>
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <td class="secondary-title-tables--text">PH17_GROUP_NAME</td>
-                                                <td class="secondary-title-tables--text">PH18_GROUP_AGE</td>
-                                                <td class="secondary-title-tables--text">PH19_GROUP_SEX</td>
-                                                <td class="secondary-title-tables--text">PH20_GROUP_DISC</td>
-                                                <td class="secondary-title-tables--text">PH21_GROUP_WEIGHT</td>
-                                                <td class="secondary-title-tables--text">PH22_GROUP_QUAL</td>
-                                                <td class="secondary-title-tables--text">PH23_GROUP_SP_NUM</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_NAME</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_AGE</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_SEX</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_DISC</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_WEIGHT</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_QUAL</td>
+                                                <td class="secondary-title-tables--text">PHX_GROUP_SP_NUM</td>
                                             </tr>
                                         </table>
                                         
@@ -186,7 +191,7 @@
                                                             <svg class="add-icon">
                                                                 <use href="./img/symbol-defs.svg#icon-plus"></use>
                                                             </svg>
-                                                            <span class="add-new-competition-btn-text">PH24_ADD_PAIRS_LIST</span>
+                                                            <span class="add-new-competition-btn-text">PHX_ADD_PAIRS_LIST</span>
                                                         </button>
                                                 </div>
                                             </div>
@@ -213,27 +218,7 @@
                                         </li>
                                     </template>
                                 </ul>
-                            </section>  
-                            <!--<template id="competition-template">
-                                <li class="advantages-item">
-                                    <div class="projects-item">
-                                        <a href="competition?clist=#departmentId&cid=#competitionId" class="title-of-competition-list-item">
-                                            <div class="project-card">
-                                                <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
-                                                    alt="" />
-                                                    <div class="overlay">
-                                                        <p class="advantages-content">#competition-desc</p>
-                                                    </div>
-                                                </div>
-                                                <div class="caption">
-                                                    <h2 class="title-of-competition-list-item">#competition-name</h2>
-                                            
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </template>-->
+                            </section>
                         </div>
                     </div>
                     <div id="tabcontent4" class="tabcontent" style="display: none">
@@ -242,8 +227,8 @@
                             <div class="competition-info-main">
                                 <div>
                                     <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>PH25_INFO_HEAD</span></div>
-                                        <div class="js-hidden-element">
+                                        <div class="group-info-title"><span>PHX_INFO_HEAD</span></div>
+                                        <div class="js-hidden-element js-root-view js-admin-view">
                                             <button class="group-info-edit-btn" type="button", id="competition-edit-btn">
                                                 <svg class="group-info-edit-btn-icon">
                                                     <use href="./img/icons.svg#icon-pencil2"></use>
@@ -254,13 +239,14 @@
                                 </div>
                                 <div class="group-info-fields">
                                     <div class="">
-                                        <div class="competition-info-fields--item"> PH26_INFO_ID:<span>&nbsp</span><div id="competition-id-info"></div></div>
-                                        <div class="competition-info-fields--item"> PH27_INFO_NAME:<span>&nbsp</span><div id="competition-name-info"></div></div>
-                                        <div class="competition-info-fields--item"> PH28_INFO_DESC:<span>&nbsp</span><pre id="competition-desc-info"></pre></div>
-                                        <div class="competition-info-fields--item"> PH29_INFO_START:<span>&nbsp</span><pre id="competition-start-date-info"></pre></div>
-                                        <div class="competition-info-fields--item"> PH30_INFO_END:<span>&nbsp</span><pre id="competition-end-date-info"></pre></div>
+                                        <div class="competition-info-fields--item"> PHX_INFO_ID:<span>&nbsp</span><div id="competition-id-info"></div></div>
+                                        <div class="competition-info-fields--item"> PHX_INFO_NAME:<span>&nbsp</span><div id="competition-name-info"></div></div>
+                                        <div class="competition-info-fields--item"> PHX_INFO_DESC:<span>&nbsp</span><pre id="competition-desc-info"></pre></div>
+                                        <div class="competition-info-fields--item"> PHX_INFO_START:<span>&nbsp</span><pre id="competition-start-date-info"></pre></div>
+                                        <div class="competition-info-fields--item"> PHX_INFO_END:<span>&nbsp</span><pre id="competition-end-date-info"></pre></div>
                                     </div>
                                 </div>
+                                <button class="lp-list-btn--delete-arena js-hidden-element js-root-view js-admin-view" id="delete-comp-btn">PHX_DELETE_COMPETITION</button>
                             </div>
                         </section>
                     </div>
@@ -303,23 +289,23 @@
                         <a href="#" class="popup__close close-popup">X</a>
                         <form class="modal-form">
                             <span class="modal-title">
-                                <h3>PH31_SPORTS_ADD</h3>
+                                <h3>PHX_SPORTS_ADD</h3>
                             </span>
                             <div class="new-member-field">
                                 <table class="add-sportsman-table" id="add-sportsman-table">
                                     <tr>
                                         <th class="group-info-table-title all-table-title" colspan="7">
-                                            <span>PH6_SPORTS_TBL</span>
+                                            <span>PHX_TBL_SPORTS</span>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH7_SPORT_SURNAME</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH8_SPORT_NAME</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH9_SPORT_AGE</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH10_SPORT_WEIGHT</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH11_SPORT_SEX</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH12_SPORT_TEAM</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">PH13_SPORT_QUAL</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_SURNAME</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_NAME</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_AGE</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_WEIGHT</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_SEX</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_TEAM</td>
+                                        <td class="add-sportsman-table--title secondary-title-tables--text">PHX_SPORT_QUAL</td>
                                     </tr>
 
                                     <template id="add-sportsman-template">
@@ -337,7 +323,7 @@
                                         <td class="secondary-tables--td" colspan="6" id="#disc-list-id"></td>
                                         <td class="secondary-tables--td" colspan="1">
                                             <input class="input-to-choose-type" type="checkbox" id="#admitted-id" name="#admitted-id">
-                                            <label class="label-to-choose-type" for="#admitted-id">PH14_SPORT_ADMIT</label>
+                                            <label class="label-to-choose-type" for="#admitted-id">PHX_SPORT_ADMIT</label>
                                         </td>
                                     </template>
                                     <template id="add-discipline-template">
@@ -352,7 +338,7 @@
                                 </table>
                             </div>
                             <button type="button" id="sportsmans-add-list-send-btn" class="modal-btn-submit">
-                                <span class="modal-btn-submit-text">PH32_SPORTS_ADD</span>
+                                <span class="modal-btn-submit-text">PHX_SPORTS_ADD</span>
                             </button>
                         </form>
                     </div>
@@ -389,9 +375,9 @@
         <template id="group-input-sex-template">
             <div class="form-field--option">
                 <select name="form-system-of-group" id="group-input-sex" class="add-group-pop-up--sex">
-                    <option selected value="Not applicable">CPH09_NA</option>
-                    <option value="Male">CPH07_MALE_SEX</option>
-                    <option value="Female">CPH08_FEMALE_SEX</option>
+                    <option selected value="Not applicable">CPHX_NA</option>
+                    <option value="Male">CPHX_MALE_SEX</option>
+                    <option value="Female">CPHX_FEMALE_SEX</option>
                 </select>
             </div>
         </template>
@@ -419,7 +405,7 @@
         <template id="group-input-qulification-min-template">
             <div class="create-ng--interval">
                 <select class="add-group-pop-up--qual" id="group-input-qulification-min">
-                    <option value="Not applicable">CPH09_NA</option>
+                    <option value="Not applicable">CPHX_NA</option>
                 </select>
                 &nbsp;<span>-</span>&nbsp;
             </div>
@@ -427,7 +413,7 @@
         <template id="group-input-qulification-max-template">
             <div class="create-ng--interval">
                 <select class="add-group-pop-up--qual" id="group-input-qulification-max">
-                    <option value="Not applicable">CPH09_NA</option>
+                    <option value="Not applicable">CPHX_NA</option>
                 </select>
             </div>
         </template>
@@ -445,12 +431,12 @@
                             <div class="add-group-pop-up-info-main">
                                 <div id="member-info">
                                     <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>PH33_GROUPS_ADD</span></div>
+                                        <div class="group-info-title"><span>PHX_GROUPS_ADD</span></div>
                                     </div>
                                     <div class="group-info-fields">
                                         <table class="dynamic-table-pop-up">
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH17_GROUP_NAME:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_NAME:</div> </td>
                                                 <td> 
                                                     <div id="group-info-name">
                                                         <div class="form-field">
@@ -460,20 +446,20 @@
                                                 </td>
                                             </tr>   
                                             <tr class="group-info-table-pop-up"> 
-                                                <td class="group-info-table-pop-up-td"> <div> PH34_GROUP_SYSTEM:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_SYSTEM:</div> </td>
                                                 <td> 
                                                     <div id="group-info-system">
                                                         <div class="form-field--option">
                                                             <select class="add-group-pop-up--form-system" name="form-system-of-group" id="group-input-system">
-                                                                <option value="olimpic">CPH05_OLIMPIC_SYSTEM</option>
-                                                                <option value="circle">CPH06_CIRCLE_SYSTEM</option>
+                                                                <option value="olimpic">CPHX_OLIMPIC_SYSTEM</option>
+                                                                <option value="circle">CPHX_CIRCLE_SYSTEM</option>
                                                             </select>
                                                         </div>
                                                     </div>  
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH20_GROUP_DISC:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_DISC:</div> </td>
                                                 <td> 
                                                     <div id="group-info-discipline">
                                                         <div class="form-field--option">
@@ -487,21 +473,21 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH19_GROUP_SEX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_SEX:</div> </td>
                                                 <td>
                                                     <div id="group-info-sex">
                                                         <div class="form-field--option">
                                                             <select name="form-system-of-group" id="group-input-sex" class="add-group-pop-up--sex">
-                                                                <option selected value="Not applicable">CPH09_NA</option>
-                                                                <option value="Male">CPH07_MALE_SEX</option>
-                                                                <option value="Female">CPH08_FEMALE_SEX</option>
+                                                                <option selected value="Not applicable">CPHX_NA</option>
+                                                                <option value="Male">CPHX_MALE_SEX</option>
+                                                                <option value="Female">CPHX_FEMALE_SEX</option>
                                                             </select>
                                                         </div>
                                                     </div>  
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH35_GROUP_AGE_MIN:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_AGE_MIN:</div> </td>
                                                 <td> 
                                                     <div id="group-info-age-min">
                                                         <div class="create-ng--interval">
@@ -511,7 +497,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH36_GROUP_AGE_MAX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_AGE_MAX:</div> </td>
                                                 <td> 
                                                     <div id="group-info-age-max">
                                                         <div class="create-ng--interval">
@@ -521,7 +507,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up"> 
-                                                <td class="group-info-table-pop-up-td"> <div> PH37_GROUP_WEIGHT_MIN:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_WEIGHT_MIN:</div> </td>
                                                 <td> 
                                                     <div id="group-info-weight-min">
                                                         <div class="create-ng--interval">
@@ -531,7 +517,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH38_GROUP_WEIGHT_MAX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_WEIGHT_MAX:</div> </td>
                                                 <td> 
                                                     <div id="group-info-weight-max">
                                                         <div class="create-ng--interval">
@@ -541,24 +527,24 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH39_GROUP_QUAL_MIN:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_QUAL_MIN:</div> </td>
                                                 <td> 
                                                     <div id="group-info-qulification-min">
                                                         <div class="create-ng--interval">
                                                             <select class="add-group-pop-up--qual" id="group-input-qulification-min">
-                                                                <option value="Not applicable">CPH09_NA</option>
+                                                                <option value="Not applicable">CPHX_NA</option>
                                                             </select>
                                                         </div>
                                                     </div>  
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PH40_GROUP_QUAL_MAX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_QUAL_MAX:</div> </td>
                                                 <td> 
                                                     <div id="group-info-qulification-max">
                                                         <div class="create-ng--interval">
                                                             <select class="add-group-pop-up--qual" id="group-input-qulification-max">
-                                                                <option value="Not applicable">CPH09_NA</option>
+                                                                <option value="Not applicable">CPHX_NA</option>
                                                             </select>
                                                         </div>
                                                     </div>  
@@ -567,7 +553,7 @@
                                         </table>
                                         <div class="block-for-button">
                                             <button class="add-group-pop-up-btn-submit js-hidden-element js-root-view js-admin-view" type="button" id="group-form-send-btn">
-                                                <span class="group-card-btn-submit-text">PH41_GROUP_CREATE</span>
+                                                <span class="group-card-btn-submit-text">PHX_GROUP_CREATE</span>
                                             </button>
                                         </div>                                      
                                     </div>
@@ -589,21 +575,21 @@
                         <form class="modal-form">
                             <div class="">
                                 <div class="login-page-title">
-                                    <span class="login-page-popup-title">CPH01_LOGIN</span>
-
+                                    <span class="login-page-popup-title">CPHX_LOG_IN</span>
+                                </div>
                                 <div class="input-container ic1">
                                     <input id="login" class="input input_login" type="text" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="login" class="placeholder">CPH02_LOGIN_INPUT</label>
+                                    <label for="login" class="placeholder">CPHX_LOGIN_INPUT</label>
                                 </div>
                                 <div class="input-container ic2">
                                     <input id="password" class="input input_login" type="password" placeholder=" " />
                                     <div class="cut"></div>
-                                    <label for="password" class="placeholder">CPH03_PASS_INPUT</label>
+                                    <label for="password" class="placeholder">CPHX_PASS_INPUT</label>
                                 </div>
 
                                 <button type="button" id="login-btn" class="login-page-btn-submit">
-                                    <span class="modal-btn-submit-text">CPH04_LOGIN_BTN</span>
+                                    <span class="modal-btn-submit-text">CPHX_LOGIN_BTN</span>
                                 </button>
                             </div>
                         </form>

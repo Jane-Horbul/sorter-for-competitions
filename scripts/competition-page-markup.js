@@ -107,6 +107,7 @@ export const markup = {
                                                 "#qual-name-ph": n
                                             };
                                     },
+        getPairsRefreshBtn()        { return document.getElementById("update-pairs-btn");},
 
         alertNameFormat()           {alert("Empty group name!");},
         alertAgeMinFormat()         {alert("Bad minimal age!");},
@@ -172,7 +173,8 @@ export const markup = {
         setCompetitionLink(link){document.getElementById(this.compLinkId).setAttribute("href", link);},
     
     
-        getEditBtn()            { return document.getElementById("competition-edit-btn");}
+        getEditBtn()            { return document.getElementById("competition-edit-btn");},
+        getDeleteBtn()          { return document.getElementById("delete-comp-btn");},
     },
     
     arenas: {

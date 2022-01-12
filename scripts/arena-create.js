@@ -124,9 +124,10 @@ function detachAllPairs(){
     }
 }
 
-function deleteInterval(rowNum){
+function deleteInterval(rowNum, interv){
     var table = markup.automation.schedule.getContainer();
     table.deleteRow(rowNum);
+    intervals.splice(intervals.indexOf(interv), 1);
 }
 
 function createInterval(){
@@ -151,8 +152,9 @@ function createInterval(){
     var item = createPageItem(markup.automation.schedule.getTemplate(), 
                         markup.automation.schedule.getPlaceholders(start, end, rowNum));
     markup.automation.schedule.insertNewInterval(item);
-    onClick(markup.automation.schedule.getDelBtn(rowNum), function(){ deleteInterval(rowNum); });
-    intervals.push({start: start, end: end});
+    var elem = {start: start, end: end};
+    onClick(markup.automation.schedule.getDelBtn(rowNum), function(){ deleteInterval(rowNum, elem); });
+    intervals.push(elem);
 
 }
 
@@ -239,7 +241,6 @@ function fillPageInfo(){
     markup.common.setPageHeaderLink(competitionLink);
     markup.common.setDepartmentLink(departmentInfo.getName(), departmentLink);
     markup.common.setCompetitionLink(competition.getName(), competitionLink);
-    console.log(competition);
     competition.getGroups().forEach(gr => {
         deactivateGroup(gr);
     });

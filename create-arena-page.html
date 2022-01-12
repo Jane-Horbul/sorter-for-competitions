@@ -9,17 +9,19 @@
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 
         <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
-
         <script src="./datetimepicker-master/jquery.js"></script>
-
         <script src="./datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 
         <script>
             $(function () {
-                $('#schedule-interval-start').datetimepicker();
+                $('#schedule-interval-start').datetimepicker({
+                format: "d/m/Y H:i"
+            });
             });
             $(function () {
-                $('#schedule-interval-end').datetimepicker();
+                $('#schedule-interval-end').datetimepicker({
+                format: "d/m/Y H:i"
+            });
             });
         </script>
 

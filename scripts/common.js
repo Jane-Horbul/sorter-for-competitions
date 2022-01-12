@@ -10,6 +10,56 @@ const errors = {
     badDate(dt)           { errorMessage("Bad date input " + dt); }
     
 }
+
+const months = {
+    0: "Zeromonth",
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December"
+};
+
+const shortMonths = {
+    0: "Zeromonth",
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec"
+};
+
+export function formatDate(dateTime, format){
+    if(dateTime == undefined)
+        return "";
+    var parts = dateTime.split(" ");
+    var date = parts[0].split("/");
+    var time = parts[1].split(":");
+    var res = format;
+    res = res.replace("yy", date[2]);
+    res = res.replace("mm", date[1]);
+    res = res.replace("MM", months[Number(date[1])]);
+    res = res.replace("SM", shortMonths[Number(date[1])]);
+    res = res.replace("dd", date[0]);
+    res = res.replace("hh", time[0]);
+    res = res.replace("min", time[1]);
+    return res;
+}
+
 function errorMessage(mess) {
     alert(mess);
 }
@@ -65,6 +115,10 @@ function datetimesCompare(dt1, dt2){
     return 0;
 }
 
+function isSportsmanId(id){
+    return id.indexOf("S") < 0 ? false : true;
+}
+
 export const checkers = {   
     getIfDefined(val, defVal)   { return val == undefined ? defVal : val;},
     strEquals(s1, s2)           { return (s1.localeCompare(s2) == 0); },
@@ -74,7 +128,8 @@ export const checkers = {
     checkNumber(field, value)   { if(!this.isNumber(value))     { errors.badNumber(field);  return false; } return true; },
     checkDate(date)             { if(!dateValidate(date))       { errors.badDate(date);     return false; } return true;},
     checkDateTime(dateime)      { if(!datetimeValidate(dateime)){ errors.badDate(dateime);  return false; } return true;},
-    compareDateTimes(dt1, dt2)  { return datetimesCompare(dt1, dt2);}
+    compareDateTimes(dt1, dt2)  { return datetimesCompare(dt1, dt2);},
+    isSportsmanId(id)           { return id.indexOf("S") < 0 ? false : true;}
 }
 
 export function onClick(object, action){
@@ -173,11 +228,16 @@ export function showShadows(client){
         shadows = document.querySelectorAll(".js-trainer-view");
     else if(client.isJudge())
         shadows = document.querySelectorAll(".js-judge-view");
-    else
-        return;
-    for (let shadow of shadows){
-        shadow.classList.remove("js-hidden-element");
-        shadow.disabled = false;
+
+    if(shadows != undefined){
+        for (let shadow of shadows){
+            shadow.disabled = false;
+            shadow.classList.remove("js-hidden-element");
+        }
+    }
+    var hiddens = document.querySelectorAll(".js-hidden-element");
+    for (var i = 0; i <  hiddens.length; i++){
+        hiddens[i].remove();
     }
 }
 
