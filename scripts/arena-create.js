@@ -6,7 +6,8 @@ import {
     createPageItem,
     prepareTabs,
     onClick,
-    commonStrings
+    commonStrings,
+    prepareClient
 } from "./common.js"
 import { markup } from "./arena-create-markup.js";
 import {server, ops} from "./communication.js" //закоментувати перед початком роботи
@@ -18,7 +19,9 @@ const page = {
     cid: getLinkParams(location.search).get("cid")
 }
 
-var client              = server.access.getClient();
+const client = server.access.getClient();
+prepareClient(client);
+
 const departmentInfo    = server.department.get();
 const competition       = server.competition.get(page.cid);
 const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -261,7 +264,6 @@ function fillPairsList(){
 }
 
 function setBtnActions(){
-    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.automation.groups.getAddAllBtn(), activateAllGroups);
     onClick(markup.automation.groups.getDelAllBtn(), deactivateAllGroups);
     onClick(markup.automation.getApplyBtn(), createArenaAutomatic);

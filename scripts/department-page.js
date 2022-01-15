@@ -5,13 +5,15 @@ import {getLinkParams,
     createPageItem,
     checkers, 
     prepareTabs, 
-    unhideSubelements} from "./common.js"
+    unhideSubelements,
+    prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import {markup} from "./department-page-markup.js"
 
-var pageParams = getLinkParams(location.search);
-const department = server.department.get();
 const client = server.access.getClient();
+prepareClient(client);
+
+const department = server.department.get();
 console.log(department);
 console.log(client.getStatus());
 
@@ -272,8 +274,7 @@ function fillPageInfo(){
 }
 
 function setActions(){
-    onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
-    if(client.isAdmin() || client.isRoot){
+    if(client.isAdmin() || client.isRoot()){
         onClick(markup.qualifications.getAddBtn(),  toogleQualificationAdding);
         onClick(markup.discipline.getAddBtn(),      toogleDisciplineAdding);
         onClick(markup.competition.getAddBtn(),     sendCompetitionForm);

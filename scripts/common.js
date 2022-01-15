@@ -1,3 +1,5 @@
+import {server} from "./communication.js"
+
 export const commonStrings = {
     arrDivider: ", ",
     mapDivider: "-",
@@ -9,6 +11,38 @@ const errors = {
     badNumber(field)      { errorMessage("Bad number in field '" + field + "'"); },
     badDate(dt)           { errorMessage("Bad date input " + dt); }
     
+}
+
+function getClientLink(cl){
+    var res = window.location.href.split("/")[0];
+    if(cl.isRoot()){
+        return "";
+    } else if(cl.isAdmin()){
+        return "";
+    } else if(cl.isJudge()){
+        return "";
+    } else if(cl.isTrainer()){
+        return res + "/trainer?tid=" + cl.getId();
+    }
+    return "";
+}
+
+const markup = {
+    client:          {
+        getLoginBtn()               { return document.getElementById("login-btn");},
+        getSignOutBtn()             { return document.getElementById("sign-out-btn");},
+        getLogin()                  { return document.getElementById("login").value;},
+        getPass()                   { return document.getElementById("password").value;},
+        getClientContainer()        { return document.getElementById("client-cred-container");},
+        getTemplate()               { return document.getElementById("client-data-template");},
+        getPlaceholders(client)     { return {
+                                            "#client-name":     client.getName() + " " + client.getSurname(),
+                                            "#client-status":   client.getStatus(),
+                                            "#client-link":     getClientLink(client)
+                                            };
+                                    },
+        setPhoto(link)              { document.getElementById("client-photo").src = link;}
+        }
 }
 
 const months = {
@@ -206,6 +240,18 @@ export function parseBodyParams(body){
             blocksResult.push(parseResult);
     });
     return blocksResult;
+}
+
+export function prepareClient(cl){
+    onClick(markup.client.getLoginBtn(), function(){server.access.login(markup.client.getLogin(), markup.client.getPass())});
+    if(!cl.isGuest()){
+        var clContainer =  markup.client.getClientContainer();
+        clContainer.innerHTML = "";
+        clContainer.append(createPageItem(markup.client.getTemplate(), markup.client.getPlaceholders(cl)));
+        onClick(markup.client.getSignOutBtn(), server.access.logout);
+        if(cl.getPhoto() != undefined)
+            markup.client.setPhoto(cl.getPhoto());
+    }
 }
 
 export function unhideSubelements(elem){

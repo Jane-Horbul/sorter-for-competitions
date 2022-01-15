@@ -56,6 +56,7 @@ const backendLinks = {
     ARENA_PAIRS_FILTER(cid, aid)                {return "arena-pairs-filter?cid=" + cid + "&aid=" + aid;},
 
     LOGIN:                                      "client-login",
+    LOGOUT:                                     "client-logout",
     CLIENT_STATUS_GET:                          "client-status-get",
     CLIENT_LOGIN_CHANGE:                        "client-change-login",
     CLIENT_PASSWORD_CHANGE:                     "client-change-pass"
@@ -412,10 +413,15 @@ function mapToClient(map) {
         params: (map == undefined) ? (new Map()) : map,
         getStatus()         {return this.params.get("ClientStatus");},
         getId()             {return this.params.get("ClientId");},
+        getName()           {return this.params.get("Name");},
+        getSurname()        {return this.params.get("Surname");},
+        getPhoto()          {return this.params.get("Photo");},
+        
         isRoot()            {return checkers.strEquals(this.getStatus(), "Root");},
         isAdmin()           {return checkers.strEquals(this.getStatus(), "Admin");},
         isTrainer()         {return checkers.strEquals(this.getStatus(), "Trainer");},
-        isJudge()           {return checkers.strEquals(this.getStatus(), "Judge");}
+        isJudge()           {return checkers.strEquals(this.getStatus(), "Judge");},
+        isGuest()           {return checkers.strEquals(this.getStatus(), "Guest");},
     };
 }
 
@@ -642,6 +648,7 @@ function createArenaForm(arena){
 export const server = {
     access: {
         login(login, pass)                  {sendLogin(login, pass);},
+        logout()                            {sendSingleValue(backendLinks.LOGOUT, "", true);},
         getClient()                         {return ops.createClient(sendRequest(backendLinks.CLIENT_STATUS_GET, false));},
         changeLogin(login, pass)            {loginChange(login, pass);},
         changePass(newPass, pass)           {passwordChange(newPass, pass);}
