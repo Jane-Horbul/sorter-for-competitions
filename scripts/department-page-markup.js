@@ -2,11 +2,6 @@ import {getQualNameByValue} from "./department-page.js"
 import {checkers} from "./common.js"
 
 export const markup = {
-    login:          {
-        getLoginBtn()               { return document.getElementById("login-btn");},
-        getLogin()                  { return document.getElementById("login").value;},
-        getPass()                   { return document.getElementById("password").value;}
-    },
     qualifications: {
         getNameInput()                  { return document.getElementById("add-qualification-name").value;},
         getValueInput()                 { return document.getElementById("add-qualification-value").value;},
@@ -140,7 +135,7 @@ export const markup = {
         getNamePlace()                  { return document.getElementById("department-name-set");},
         getEditBtn()                    { return document.getElementById("department-edit-btn");},
     
-        setPageName(name)               {document.getElementById("department-name").innerHTML = name;},
+        setPageName(name)               {document.getElementById("page-name").innerHTML = name;},
         setName(name)                   {document.getElementById("department-name-set").innerHTML = name;},
         setId(id)                       {document.getElementById("department-id").innerHTML = id;}
     }

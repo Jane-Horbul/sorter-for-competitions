@@ -5,7 +5,9 @@ import {checkers,
     onClick,
     createPageItem,
     commonStrings, 
-    prepareTabs} from "./common.js"
+    prepareTabs,
+    prepareClient} from "./common.js"
+
 import {ops, server} from "./communication.js"
 import {markup} from "./group-page-markup.js"
 const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -15,7 +17,10 @@ const page = {
     cid: pageParams.get("cid"),
     gid: pageParams.get("gid")
 }
-const client              = server.access.getClient();
+
+const client = server.access.getClient();
+prepareClient(client);
+
 var groupInfo             = server.group.get(page.cid, page.gid);
 const departmentInfo      = server.department.get();
 const competitionInfo     = server.competition.get(page.cid);
@@ -424,7 +429,6 @@ function fillPageInfo(){
     var qualMin = qualificationsMap.get(groupInfo.getQualMin());
 
     markup.group.setPageName(competitionInfo.getName());
-    markup.group.setPageNameLink(competitionLink);
     markup.group.setCompetitionName(competitionInfo.getName());
     markup.group.setCompetitionLink(competitionLink);
     markup.group.setDepartmentName(departmentInfo.getName());
@@ -455,7 +459,6 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
-    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.sportsmen.getAddBtn(),       addSportsmansList);
     onClick(markup.group.getDelBtn(),           function(){server.group.remove(page.cid, page.gid)});
     onClick(markup.group.getEditBtn(),          groupInfoEdit);

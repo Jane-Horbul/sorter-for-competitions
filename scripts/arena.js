@@ -6,7 +6,8 @@ import {
     createPageItem,
     prepareTabs,
     onClick,
-    commonStrings
+    commonStrings,
+    prepareClient
 } from "./common.js"
 import { markup } from "./arena-markup.js";
 import {server, ops} from "./communication.js"
@@ -17,7 +18,9 @@ const page = {
     aid: getLinkParams(location.search).get("aid"),
 }
 
-var client                  = server.access.getClient();
+const client = server.access.getClient();
+prepareClient(client);
+
 export const department     = server.department.get();
 export const competition    = server.competition.get(page.cid);
 export const arena          = server.arena.get(page.cid, page.aid);
@@ -261,7 +264,6 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
-    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     if(client.isAdmin() || client.isRoot()){
         onClick(markup.pair.getAddBtn(), addPairs);
         onClick(markup.schedule.getAddBtn(), function() {

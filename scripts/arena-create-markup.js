@@ -1,10 +1,5 @@
 
 export const markup = {
-    login:          {
-        getLoginBtn()               { return document.getElementById("login-btn");},
-        getLogin()                  { return document.getElementById("login").value;},
-        getPass()                   { return document.getElementById("password").value;}
-    },
     common: {
         setPageHeader(name)             {document.getElementById("page-header-name").innerHTML = name;},
         setPageHeaderLink(link)         {document.getElementById("page-header-name-link").setAttribute("href", link);},

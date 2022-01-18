@@ -1,14 +1,8 @@
 import {getQualNameByValue} from "./trainer-page.js"
 
 export const markup = {
-    login:          {
-        getLoginBtn()               { return document.getElementById("login-btn");},
-        getLogin()                  { return document.getElementById("login").value;},
-        getPass()                   { return document.getElementById("password").value;}
-    },
     trainer: {
         setPageName(name)           {document.getElementById("page-name").innerHTML = name;},
-        setPageNameLink(link)       {document.getElementById("page-name-link").setAttribute("href", link);},
         setDepartmentName(name)     {document.getElementById("department-link").innerHTML = name;},
         setDepartmentLink(link)     {document.getElementById("department-link").setAttribute("href", link);},
         setTrainerName(name)        {document.getElementById("trainer-link").innerHTML = name;},

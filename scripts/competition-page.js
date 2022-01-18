@@ -5,14 +5,18 @@ import {checkers,
     showShadows, 
     languageSwitchingOn, 
     createPageItem, 
-    prepareTabs} from "./common.js"
+    prepareTabs,
+    prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./competition-page-markup.js";
 
-var client = server.access.getClient();
 const page = {
     cid: getLinkParams(location.search).get("cid")
 }
+
+const client = server.access.getClient();
+prepareClient(client);
+
 const department        = server.department.get();
 var competition         = server.competition.get(page.cid);
 const qualificationsMap = department.getQualifications();
@@ -363,7 +367,6 @@ function deleteCompetition(){
     document.location.href = departmentLink;
 }
 function setBtnActions(){
-    onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.competitions.getEditBtn(),   competitionEdit);
     onClick(markup.competitions.getDeleteBtn(), deleteCompetition);
     onClick(markup.groups.getAddBtn(),          sendGroupForm);

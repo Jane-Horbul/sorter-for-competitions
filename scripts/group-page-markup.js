@@ -20,11 +20,6 @@ function getPairWinner(pair){
 }
 
 export const markup = {
-    login:          {
-        getLoginBtn()               { return document.getElementById("login-btn");},
-        getLogin()                  { return document.getElementById("login").value;},
-        getPass()                   { return document.getElementById("password").value;}
-    },
     pairs: {
         redBtnStyle:     "red-button-style",
         blueBtnStyle:    "blue-button-style",
@@ -137,7 +132,6 @@ export const markup = {
         groupHeaderId:      "group-name-header",
     
         setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
-        setPageNameLink(link)       {document.getElementById(this.pageNameLinkId).setAttribute("href", link);},
         setDepartmentName(name)     {document.getElementById(this.depLinkId).innerHTML = name;},
         setDepartmentLink(link)     {document.getElementById(this.depLinkId).setAttribute("href", link);},
         setCompetitionName(name)    {document.getElementById(this.compLinkId).innerHTML = name;},
