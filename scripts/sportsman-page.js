@@ -4,7 +4,8 @@ import { getLinkParams,
     languageSwitchingOn, 
     onClick,
     prepareTabs,
-    checkers} from "./common.js"
+    checkers,
+    prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./sportsman-page-markup.js"
 
@@ -12,7 +13,10 @@ const pageParams        = getLinkParams(location.search);
 const page = {
     sid: pageParams.get("sid")
 }
-const client            = server.access.getClient();
+
+const client = server.access.getClient();
+prepareClient(client);
+
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -145,7 +149,6 @@ function fillPageInfo(){
     var trainerName = trainer != undefined ? trainer.getSurname() + " " + trainer.getName() : "";
 
     markup.sportsman.setPageName(departmentInfo.getName());
-    markup.sportsman.setPageNameLink(departmentLink);
     markup.sportsman.setDepartmentName(departmentInfo.getName());
     markup.sportsman.setDepartmentLink(departmentLink);
     markup.sportsman.setSportsmanHeader(sportsName);
@@ -172,7 +175,6 @@ function setBtnActions(){
     onClick(markup.sportsman.getEditBtn(),          sportsmanInfoEdit);
     onClick(markup.sportsman.getDelBtn(),           function(){ server.sportsman.remove(page.sid); });
     onClick(markup.sportsman.getChangePhotoBtn(),   function(){ server.sportsman.changePhoto(page.sid, markup.sportsman.getPhotoForm()); });
-    onClick(markup.login.getLoginBtn(),             function(){ server.access.login(markup.login.getLogin(), markup.login.getPass()); });
 }
 
 prepareTabs();

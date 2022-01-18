@@ -29,44 +29,63 @@
     <body>
         <div class="wrapper">
             <header class="page-header">
-                <div class="container">
-                    <ul class="group-page-header list">
-                        <li>
-                            <a class="link" id="page-name-link" href="#">
-                                <h1 id="page-name"></h1>
-                            </a>
-                        </li>
-                        <li>
-                            <div class="lang-panel">
-                                <ul class="list lang-panel-list">
-                                    <li class="lang-panel-item">
-                                        <div class="lang-panel-flag">
-                                            <a type="button" id="lang-ru"> 
-                                                <img src="./img/ru.png"> 
-                                            </a>
+                <div class="container flexbox">
+                    <nav class="navigation">
+                        <img class="program-logo "
+                            src="./img/competition-logo-new.png"
+                            alt="Program logo">
+                    </nav>
+                    <div id="client-cred-container">
+                        <div id="sing-in-btn-container" class="login-panel">
+                            <ul class="list login-panel-list">
+                                <li class="login-panel-item">
+                                    <div class="log-in-btn--placing">
+                                        <a href="#popup_7" class="popup-link"> 
+                                            <button class="log-in-btn">
+                                                <span>СPHX_SIGN_IN</span> 
+                                            </button>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <template id="client-data-template">
+                        <div class="login-panel">
+                            <ul class="list login-panel-list">
+                                <li class="login-panel-item">
+                                    <div class="log-out-btn--placing">
+                                        <button id="sign-out-btn" class="log-out-btn">
+                                            <span>СPHX_SIGN_OUT</span> 
+                                        </button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#client-link">
+                                        <div class="header__account-avatar"> 
+                                            <div class="header__account-avatar-icon">
+                                                <div class="header__account-avatar-icon img-cover">
+                                                    <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="header__account-avatar-text">
+                                                <span class="account-name">#client-name</span> </br>
+                                                <span class="account-status">#client-status</span>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li class="lang-panel-item">
-                                        <div class="lang-panel-flag">
-                                            <a type="button" id="lang-en"> 
-                                                <img src="./img/en.png"> 
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="lang-panel-item">
-                                        <div class="lang-panel-flag">
-                                            <a type="button" id="lang-ua"> 
-                                                <img src="./img/ua.png"> 
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
                 </div>
             </header>
-
+            <div class="container main">
+                <div>
+                    <h1 id="page-name"></h1>
+                </div>
+            </div>
             <div class="bread-crumbs container" id="bread-crumbs-container"> 
                 <template id="bread-crumbs-template">
                     <div class="bread-crumbs-item"> <a href="#depart-link">#depart-name</a> </div>
@@ -344,78 +363,139 @@
                 </div>
 
             </main>
-    </div>
-    <!--Fix-list popup start-->
-    <div class="popup" id = "popup_8">
-        <a href="" class="popup__area"></a>
-        <div class="popup__body">
-            <div class="popup__content">
-                <div class="add-group-popup__content">
-                    <a href="#" class="popup__close close-popup">X</a>
-                    <form class="modal-form">
-                        <span class="login-page-popup-title">
-                            PHX_ADD_PAIRS_TO_LIST
-                        </span>
-                        <table class="lp-list-table lp-list-table-popup">
-                            <tbody id="unattached-pairs-container">
-                                <tr>
-                                    <th class="lp-list-table-th--t2">PHX_RED_SPORTS</th>
-                                    <th class="lp-list-table-th--t2">PHX_BLUE_SPORTS</th>
-                                    <th class="lp-list-table-th--t2">PHX_GROUP</th>
-                                    <th class="lp-list-table-th--t2">PHX_WINNER</th> 
-                                </tr>
-                                <template id="unattached-pair-template">
-                                    <tr id="unattached-pair-#pair-id">
-                                        <td>#pair-red-sports</td>
-                                        <td>#pair-blue-sports</td>
-                                        <td>#pair-group-name</td>
-                                        <td>#pair-winner</td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                        <button type="button" id="pairs-add-btn" class="lp-list-table-popup-btn">
-                            <span class="modal-btn-submit-text">PHX_ADD_PAIRS_BTN</span>
-                        </button>
-                    </form>
+            <footer class="footer">
+                <div class="lang-panel">
+                    <ul class="list lang-panel-list">
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ru"> 
+                                    <img src="./img/ru.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-en"> 
+                                    <img src="./img/en.png"> 
+                                </a>
+                            </div>
+                        </li>
+                        <li class="lang-panel-item">
+                            <div class="lang-panel-flag">
+                                <a type="button" id="lang-ua"> 
+                                    <img src="./img/ua.png"> 
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+        <!--LogIn popup start-->
+        <div class="popup" id = "popup_7">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="login_popup__content">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <div class="">
+                                <div class="login-page-title">
+                                    <span class="login-page-popup-title">CPHX_LOG_IN</span>
+
+                                <div class="input-container ic1">
+                                    <input id="login" class="input input_login" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="login" class="placeholder">CPHX_LOGIN_INPUT</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="password" class="input input_login" type="password" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="password" class="placeholder">CPHX_PASS_INPUT</label>
+                                </div>
+
+                                <button type="button" id="login-btn" class="login-page-btn-submit">
+                                    <span class="modal-btn-submit-text">CPHX_LOGIN_BTN</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--Fix-list popup end-->
-    <!--Group-list popup start-->
-    <div class="popup" id = "popup_9">
-        <a href="" class="popup__area"></a>
-        <div class="popup__body">
-            <div class="popup__content">
-                <div class="add-group-popup__content">
-                    <a href="#" class="popup__close close-popup">X</a>
-                    <form class="modal-form">
-                        <span class="login-page-popup-title">
-                            PHX_ADD_GROUPS_TO_LIST
-                        </span>
-                        <table class="lp-list-table lp-list-table-popup">
-                            <tbody id="unattached-grous-container">
-                                <tr>
-                                    <th class="lp-list-table-settings">PHX_GROUP</th>
-                                </tr>
-                                <template id="unattached-group-template">
-                                    <tr id="unattached-group-#group-id">
-                                        <td>#group-name</td>
+        <!--LogIn popup end-->
+        <!--Fix-list popup start-->
+        <div class="popup" id = "popup_8">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="add-group-popup__content">
+                        <a href="#" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <span class="login-page-popup-title">
+                                PHX_ADD_PAIRS_TO_LIST
+                            </span>
+                            <table class="lp-list-table lp-list-table-popup">
+                                <tbody id="unattached-pairs-container">
+                                    <tr>
+                                        <th class="lp-list-table-th--t2">PHX_RED_SPORTS</th>
+                                        <th class="lp-list-table-th--t2">PHX_BLUE_SPORTS</th>
+                                        <th class="lp-list-table-th--t2">PHX_GROUP</th>
+                                        <th class="lp-list-table-th--t2">PHX_WINNER</th> 
                                     </tr>
-                                </template>
-                            </tbody>
-                        </table>
-                        <button type="button" id="groups-add-btn" class="lp-list-table-popup-btn">
-                            <span class="modal-btn-submit-text">PHX_ADD_GROUPS_BTN</span>
-                        </button>
-                    </form>
+                                    <template id="unattached-pair-template">
+                                        <tr id="unattached-pair-#pair-id">
+                                            <td>#pair-red-sports</td>
+                                            <td>#pair-blue-sports</td>
+                                            <td>#pair-group-name</td>
+                                            <td>#pair-winner</td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <button type="button" id="pairs-add-btn" class="lp-list-table-popup-btn">
+                                <span class="modal-btn-submit-text">PHX_ADD_PAIRS_BTN</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--Group-list popup end-->
-    <script src="./scripts/open-close-popup.js" type="module"></script>
-    <script src="./scripts/arena.js" type="module"></script>
-</body>
+        <!--Fix-list popup end-->
+
+        <!--Group-list popup start-->
+        <div class="popup" id = "popup_9">
+            <a href="" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="add-group-popup__content">
+                        <a href="#" class="popup__close close-popup">X</a>
+                        <form class="modal-form">
+                            <span class="login-page-popup-title">
+                                PHX_ADD_GROUPS_TO_LIST
+                            </span>
+                            <table class="lp-list-table lp-list-table-popup">
+                                <tbody id="unattached-grous-container">
+                                    <tr>
+                                        <th class="lp-list-table-settings">PHX_GROUP</th>
+                                    </tr>
+                                    <template id="unattached-group-template">
+                                        <tr id="unattached-group-#group-id">
+                                            <td>#group-name</td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            <button type="button" id="groups-add-btn" class="lp-list-table-popup-btn">
+                                <span class="modal-btn-submit-text">PHX_ADD_GROUPS_BTN</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Group-list popup end-->
+        <script src="./scripts/open-close-popup.js" type="module"></script>
+        <script src="./scripts/arena.js" type="module"></script>
+    </body>
 </html>

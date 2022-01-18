@@ -6,7 +6,8 @@ import { getLinkParams,
     prepareTabs,
     unhideSubelements,
     checkers,
-    createPageItem} from "./common.js"
+    createPageItem,
+    prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./trainer-page-markup.js"
 
@@ -14,7 +15,10 @@ const pageParams        = getLinkParams(location.search);
 const page = {
     tid: pageParams.get("tid")
 }
-const client            = server.access.getClient();
+
+const client = server.access.getClient();
+prepareClient(client);
+
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
@@ -135,7 +139,6 @@ function createSportsman() {
 function fillPageInfo(){
     var trainerName = trainerInfo.getSurname() + " " + trainerInfo.getName();
     markup.trainer.setPageName(departmentInfo.getName());
-    markup.trainer.setPageNameLink(departmentLink);
     markup.trainer.setDepartmentName(departmentInfo.getName());
     markup.trainer.setDepartmentLink(departmentLink);
     markup.trainer.setTrainerHeader(trainerName);
@@ -166,12 +169,11 @@ function fillPageInfo(){
 }
 
 function setBtnActions(){
-    //onClick(markup.login.getLoginBtn(),         function(){server.access.login(markup.login.getLogin(), markup.login.getPass())});
     onClick(markup.trainer.getEditBtn(), trainerInfoEdit);
     onClick(markup.trainer.getDelBtn(), function(){server.trainer.remove(page.tid)});
     onClick(markup.trainer.getChangeEmailBtn(), changeEmail);
     onClick(markup.trainer.getChangePassBtn(), changePass);
-    onClick(markup.trainer.getChangePhotoBtn(), function(){server.trainer.changePhoto(page.tid, markup.getPhotoForm());});
+    onClick(markup.trainer.getChangePhotoBtn(), function(){server.trainer.changePhoto(page.tid, markup.trainer.getPhotoForm());});
     onClick(markup.sportsman.getAddBtn(), createSportsman);
     
 }

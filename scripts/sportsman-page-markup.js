@@ -15,12 +15,6 @@ function getWinLoseStatus(pr, sp){
 }
 
 export const markup = {
-    login:          {
-        getLoginBtn()               { return document.getElementById("login-btn");},
-        getLogin()                  { return document.getElementById("login").value;},
-        getPass()                   { return document.getElementById("password").value;}
-    },
-
     statistics: {
         competitionsListId:         "tabcontent2",
         competitionStatTemplate:    "competition-item-template-id",
@@ -92,7 +86,6 @@ export const markup = {
 
     sportsman: {
         setPageName(name)           {document.getElementById("page-name").innerHTML = name;},
-        setPageNameLink(link)       {document.getElementById("page-name-link").setAttribute("href", link);},
         setDepartmentName(name)     {document.getElementById("department-link").innerHTML = name;},
         setDepartmentLink(link)     {document.getElementById("department-link").setAttribute("href", link);},
         setSportsmanName(name)      {document.getElementById("sportsman-link").innerHTML = name;},

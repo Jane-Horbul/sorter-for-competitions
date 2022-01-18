@@ -44,23 +44,30 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="header__account-avatar"> 
-                                        <div class="header__account-avatar-icon">
-                                            <div class="header__account-avatar-icon img-cover">
-                                                <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
+                                    <a href="#client-link">
+                                        <div class="header__account-avatar"> 
+                                            <div class="header__account-avatar-icon">
+                                                <div class="header__account-avatar-icon img-cover">
+                                                    <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="header__account-avatar-text">
+                                                <span class="account-name">#client-name</span> </br>
+                                                <span class="account-status">#client-status</span>
                                             </div>
                                         </div>
-                                        <div class="header__account-avatar-text">
-                                            <span class="account-name">#client-name</span> </br>
-                                            <span class="account-status">#client-status</span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </template>
                 </div>
             </header>
+            <div class="container main">
+                <div>
+                    <h1 id="page-name"></h1>
+                </div>
+            </div>
             <div class="bread-crumbs-comp-page container">
                 <div class="bread-crumbs-item" >
                     <a id="department-link-id" href=""></a>
@@ -252,7 +259,7 @@
                     </div>
                 </div>
             </main>
-            <footer class="container">
+            <footer class="footer">
                 <div class="lang-panel">
                     <ul class="list lang-panel-list">
                         <li class="lang-panel-item">
@@ -576,7 +583,7 @@
                             <div class="">
                                 <div class="login-page-title">
                                     <span class="login-page-popup-title">CPHX_LOG_IN</span>
-                                </div>
+
                                 <div class="input-container ic1">
                                     <input id="login" class="input input_login" type="text" placeholder=" " />
                                     <div class="cut"></div>
