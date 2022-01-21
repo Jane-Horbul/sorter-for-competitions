@@ -25,16 +25,18 @@
 .tab {
     float: left;
     //border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: #2196F3;
     width: 15%;
     height: 100vh;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
+    position: relative;
+    cursor: pointer;
     display: block;
     background-color: inherit;
-    color: black;
+    color: white;
     padding: 22px 16px;
     width: 100%;
     border: none;
@@ -43,6 +45,7 @@
     cursor: pointer;
     transition: 0.3s;
     font-size: 13px;
+    border-bottom: 1px solid white ;
 
     @media screen and (min-width: 900px) {
         font-size: 15px;
@@ -51,15 +54,41 @@
         font-size: 17px;
       }
 }
+.tab button::before {
+    content: '';
+    position: absolute;
+    //top: 0;
+    //bottom: 0;
+    //width: 14px;
+    //height: 14px;
+    //transform: rotate(45deg);
+    //background-color: #2196F3;
+    //right: -7px;
+    //margin: auto 0;
+    display: none;
+    left: 265px; 
+    bottom: 0px;
+    border: 32px solid transparent; 
+    border-left: 10px solid #2196F3; 
+  }
+
+  .tab button:hover::before,
+  .tab button:active::before {
+    display: block;
+  }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #fff;
+    color: black;
+    border: 1px solid #2196F3;
 }
 
 /* Create an active/current "tab button" class */
 .tab button.active {
-    background-color: #ccc;
+    background-color: #fff;
+    color: black;
+    border: 1px solid #2196F3;
 }
 
 /* Style the tab content */

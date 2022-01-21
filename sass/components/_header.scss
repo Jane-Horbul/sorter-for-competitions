@@ -7,17 +7,17 @@
         margin-bottom: 0px; 
       }
     
-      @include for-size(tablet) {
-        margin-bottom: 20px; 
-      }
+      //@include for-size(tablet) {
+      //  margin-bottom: 20px; 
+      //}
     
-      @include for-size(desktop) {
-        margin-bottom: 30px; 
-      }
+      //@include for-size(desktop) {
+      //  margin-bottom: 30px; 
+      //}
   
-      @include for-size(max-desktop) {
-        margin-bottom: 30px; 
-      } 
+      //@include for-size(max-desktop) {
+      //  margin-bottom: 30px; 
+      //} 
   }
   .page-header .flexbox {
     justify-content: space-between;
@@ -99,3 +99,7 @@ margin-right: 30px;
 .header__account-avatar-icon.img-cover {
   border: 1px solid #777777;
   }
+.header-logo {
+  width: 265px;
+  height: 65px;
+}

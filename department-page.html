@@ -51,10 +51,13 @@
             <header class="page-header">
                 <div class="container flexbox">
                     <nav class="navigation">
-                        <img class="program-logo "
-                            src="./img/competition-logo-new.png"
-                            alt="Program logo">
+                        <svg class="header-logo">
+                            <use href="./img/icons.svg#arena"></use>
+                        </svg>
                     </nav>
+                    <div>
+                        <h1 id="page-name"></h1>
+                    </div>
                     <div id="client-cred-container">
                         <div id="sing-in-btn-container" class="login-panel">
                             <ul class="list login-panel-list">
@@ -102,9 +105,7 @@
                 </div>
             </header>
             <div class="container main">
-                <div>
-                    <h1 id="page-name"></h1>
-                </div>
+
             </div>
             <div class="container-main">
                 <div class="tab">
@@ -154,79 +155,83 @@
                     </template>
                 </div>
                 <div id="tabcontent2" class="tabcontent" style= "display: none">
-                    <div class="main-tables-item">
-                        <table class="dynamic-table" id="members-table">
-                            <tr>
-                                <th class="group-info-table-title all-table-title" colspan="8"><span>PHX_SPORTS</span>
-                                    <!--Add member button start-->
-                                <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                        <button class="group-page-ref-btn" type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                        </button>
-                                    </a>
-                                    <!--Add member button end-->
-                                </th>
-                            </tr>
-                            <tr>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_SURNAME</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_NAME</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_AGE</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_WEIGHT</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_SEX</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_TEAM</td>
-                                <td class="secondary-title-tables--text">CPHX_QUALIFICATION</td>
-                            </tr>
-                            <template id="member-template">
-                                <tr onclick="window.location.href='#sportsman-link'; return false">
-                                    <td class="secondary-tables--td">#sp-surname</td>
-                                    <td class="secondary-tables--td">#sp-name</td>
-                                    <td class="secondary-tables--td">#sp-age</td>
-                                    <td class="secondary-tables--td">#sp-weight</td>
-                                    <td class="secondary-tables--td">#sp-sex</td>
-                                    <td class="secondary-tables--td">#sp-team</td>
-                                    <td class="secondary-tables--td">#sp-qual</td>
+                    <div class="dp-sports-tab">
+                        <div class="main-tables-item">
+                            <table class="dynamic-table" id="members-table">
+                                <tr>
+                                    <th class="group-info-table-title all-table-title" colspan="8"><span>PHX_SPORTS</span>
+                                        <!--Add member button start-->
+                                    <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                            <button class="group-page-ref-btn" type="button">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                            </button>
+                                        </a>
+                                        <!--Add member button end-->
+                                    </th>
                                 </tr>
-                            </template>
-                        </table>
+                                <tr>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_SURNAME</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_NAME</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_AGE</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_WEIGHT</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_SEX</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_TEAM</td>
+                                    <td class="secondary-title-tables--text">CPHX_QUALIFICATION</td>
+                                </tr>
+                                <template id="member-template">
+                                    <tr onclick="window.location.href='#sportsman-link'; return false">
+                                        <td class="secondary-tables--td">#sp-surname</td>
+                                        <td class="secondary-tables--td">#sp-name</td>
+                                        <td class="secondary-tables--td">#sp-age</td>
+                                        <td class="secondary-tables--td">#sp-weight</td>
+                                        <td class="secondary-tables--td">#sp-sex</td>
+                                        <td class="secondary-tables--td">#sp-team</td>
+                                        <td class="secondary-tables--td">#sp-qual</td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div id="tabcontent3" class="tabcontent" style= "display: none">
-                    <div class="main-tables-item">
-                        <table class="dynamic-table" id="trainers-table">
-                            <tr>
-                                <th class="group-info-table-title all-table-title" colspan="8"><span>PHX_TRAINERS</span>
-                                    <!--Add member button start-->
-                                <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                        <button class="group-page-ref-btn" type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                        </button>
-                                    </a>
-                                    <!--Add member button end-->
-                                </th>
-                            </tr>
-                            <tr>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_SURNAME</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_NAME</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_BD</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_SEX</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_TEAM</td>
-                                <td class="secondary-title-tables--text">CPHX_HUMAN_REGION</td>
-                            </tr>
-                            <template id="trainer-template">
-                                <tr onclick="window.location.href='#trainer-link'; return false">
-                                    <td class="secondary-tables--td">#tr-surname</td>
-                                    <td class="secondary-tables--td">#tr-name</td>
-                                    <td class="secondary-tables--td">#tr-bd</td>
-                                    <td class="secondary-tables--td">#tr-sex</td>
-                                    <td class="secondary-tables--td">#tr-team</td>
-                                    <td class="secondary-tables--td">#tr-region</td>
+                    <div class="dp-trainers-tab">
+                        <div class="main-tables-item">
+                            <table class="dynamic-table" id="trainers-table">
+                                <tr>
+                                    <th class="group-info-table-title all-table-title" colspan="8"><span>PHX_TRAINERS</span>
+                                        <!--Add member button start-->
+                                    <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                            <button class="group-page-ref-btn" type="button">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                            </button>
+                                        </a>
+                                        <!--Add member button end-->
+                                    </th>
                                 </tr>
-                            </template>
-                        </table>
+                                <tr>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_SURNAME</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_NAME</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_BD</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_SEX</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_TEAM</td>
+                                    <td class="secondary-title-tables--text">CPHX_HUMAN_REGION</td>
+                                </tr>
+                                <template id="trainer-template">
+                                    <tr onclick="window.location.href='#trainer-link'; return false">
+                                        <td class="secondary-tables--td">#tr-surname</td>
+                                        <td class="secondary-tables--td">#tr-name</td>
+                                        <td class="secondary-tables--td">#tr-bd</td>
+                                        <td class="secondary-tables--td">#tr-sex</td>
+                                        <td class="secondary-tables--td">#tr-team</td>
+                                        <td class="secondary-tables--td">#tr-region</td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <div id="tabcontent4" class="tabcontent" style= "display: none">

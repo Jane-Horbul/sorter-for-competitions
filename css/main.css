@@ -404,7 +404,7 @@ textarea {
 .container {
   width: 100%;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: 0px;
 }
 
 @media (min-width: 320px) {
@@ -1670,24 +1670,6 @@ body.lock {
   }
 }
 
-@media (min-width: 768px) {
-  .page-header {
-    margin-bottom: 20px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .page-header {
-    margin-bottom: 30px;
-  }
-}
-
-@media (min-width: 1800px) {
-  .page-header {
-    margin-bottom: 30px;
-  }
-}
-
 .page-header .flexbox {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -1796,6 +1778,11 @@ body.lock {
 
 .header__account-avatar-icon.img-cover {
   border: 1px solid #777777;
+}
+
+.header-logo {
+  width: 265px;
+  height: 65px;
 }
 
 .competition-page-input {
@@ -1975,16 +1962,18 @@ body.lock {
 
 .tab {
   float: left;
-  background-color: #f1f1f1;
+  background-color: #2196F3;
   width: 15%;
   height: 100vh;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
+  position: relative;
+  cursor: pointer;
   display: block;
   background-color: inherit;
-  color: black;
+  color: white;
   padding: 22px 16px;
   width: 100%;
   border: none;
@@ -1994,6 +1983,7 @@ body.lock {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   font-size: 13px;
+  border-bottom: 1px solid white;
 }
 
 @media screen and (min-width: 900px) {
@@ -2008,14 +1998,33 @@ body.lock {
   }
 }
 
+.tab button::before {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 265px;
+  bottom: 0px;
+  border: 32px solid transparent;
+  border-left: 10px solid #2196F3;
+}
+
+.tab button:hover::before,
+.tab button:active::before {
+  display: block;
+}
+
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #fff;
+  color: black;
+  border: 1px solid #2196F3;
 }
 
 /* Create an active/current "tab button" class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: #fff;
+  color: black;
+  border: 1px solid #2196F3;
 }
 
 /* Style the tab content */
@@ -2052,6 +2061,9 @@ body.lock {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #2196f3;
+  padding-left: 282px;
+  margin-left: 4px;
 }
 
 .add-sportsman-table {
@@ -3296,6 +3308,109 @@ footer {
   background: linear-gradient(180deg, rgba(20, 153, 246, 0.417787) 0%, #fff 6%);
 }
 
+.dp-sports-tab,
+.dp-trainers-tab,
+.competition-info,
+.cp-tbl-groups {
+  margin-top: 65px;
+}
+
+.cp-tbl-sports {
+  margin-top: 14px;
+}
+
+.cp-location-card {
+  width: 270px;
+  height: 160px;
+  border: 1px solid #1D8FBD;
+}
+
+.cp-location-card-name {
+  height: 40px;
+  text-align: center;
+  background: #1D8FBD;
+  color: white;
+  font-size: 22px;
+  padding-top: 6px;
+}
+
+.cp-location-card-triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 135px solid transparent;
+  border-right: 135px solid transparent;
+  border-top: 17px solid #1D8FBD;
+}
+
+.cp-location-card-amount {
+  height: 30px;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.cp-location-card-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.cp-location-card-date,
+.cp-location-card-loading {
+  width: 135px;
+  text-align: center;
+  font-family: 'Teko', sans-serif;
+}
+
+.cp-location-card-date--time {
+  font-size: 36px;
+  height: 40px;
+  vertical-align: text-top;
+}
+
+.cp-location-card-date--date {
+  font-size: 14px;
+}
+
+.cp-location-card-loading {
+  font-size: 24px;
+}
+
+progress {
+  background-color: #f3f3f3;
+  border: 0;
+  height: 6px;
+  border-radius: 0px;
+  width: 107px;
+  margin-bottom: 17px;
+}
+
+.cp-location-card-loading-progress {
+  margin-top: -8px;
+  border: 1px solid #1D8FBD;
+  width: 115px;
+  height: 12px;
+}
+
+.cp-location-card-loading-text {
+  width: 115px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.cp-location-card:hover,
+.cp-location-card:focus,
+.cp-location-card:active {
+  border: 1px solid #2196f3;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0px 4px 4px 2px rgba(33, 150, 243, 0.15);
+          box-shadow: 0px 4px 4px 2px rgba(33, 150, 243, 0.15);
+}
+
 .log-in-btn,
 .log-out-btn {
   width: 150px;
@@ -3319,7 +3434,10 @@ footer {
 .log-in-btn:focus,
 .log-out-btn:focus,
 .log-in-btn:active,
-.log-out-btn:active {
+.log-out-btn:active,
+.sportsmen-registration-btn:hover,
+.sportsmen-registration-btn:focus,
+.sportsmen-registration-btn:active {
   border: 1px solid #1D8FBD;
   background: #fff;
   color: #2F2929;
@@ -3350,6 +3468,53 @@ footer {
   background-color: #fff;
   border: 1px solid #2196f3;
   fill: #2196f3;
+}
+
+.sportsmen-registration-btn {
+  position: absolute;
+  right: -130px;
+  top: 23px;
+  border: none;
+  padding: 15px 32px;
+  margin-top: 2px;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  background-color: #1d8fbd;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  letter-spacing: 0.06em;
+  outline-width: 0px;
+}
+
+.cp-btn-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.cp-btn-sort,
+.cp-btn-add-group,
+.cp-btn-group-update {
+  border: none;
+  padding: 15px 32px;
+  margin-top: 15px;
+  margin-left: 170px;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  background-color: #1d8fbd;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  letter-spacing: 0.06em;
+  outline-width: 0px;
 }
 
 .group-info {
@@ -3712,6 +3877,10 @@ footer {
   .member-info-title {
     width: 1484px;
   }
+}
+
+.advantages {
+  margin-top: 35px;
 }
 
 .advantages-title {
