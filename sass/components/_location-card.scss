@@ -1,0 +1,73 @@
+.cp-location-card {
+    width: 270px;
+    height: 160px;
+    border: 1px solid #1D8FBD;
+}
+.cp-location-card-name {
+    height: 40px;
+    text-align: center;
+    background: #1D8FBD;
+    color: white;
+    font-size: 22px;
+    padding-top: 6px;
+}
+.cp-location-card-triangle-down {
+        width: 0;
+        height: 0;
+        border-left: 135px solid transparent;
+        border-right: 135px solid transparent;
+        border-top: 17px solid #1D8FBD;
+}
+.cp-location-card-amount {
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 5px;
+}
+.cp-location-card-footer {
+    display: flex;
+    justify-content: space-between;
+}
+.cp-location-card-date,
+.cp-location-card-loading {
+    width: 135px;
+    text-align: center;
+    font-family: 'Teko', sans-serif;
+}
+.cp-location-card-date--time {
+    font-size: 36px;
+    height: 40px;
+    vertical-align: text-top;
+}
+.cp-location-card-date--date {
+    font-size: 14px;
+}
+.cp-location-card-loading {
+    font-size: 24px;
+}
+progress {
+    background-color: #f3f3f3;
+    border: 0;
+    height: 6px;
+    border-radius: 0px;
+    width: 107px;
+    margin-bottom: 17px;
+}
+.cp-location-card-loading-progress {
+    margin-top: -8px;
+    border: 1px solid #1D8FBD;
+    width: 115px;
+    height: 12px;
+}
+.cp-location-card-loading-text {
+    width: 115px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+.cp-location-card:hover,
+.cp-location-card:focus,
+.cp-location-card:active {
+    border: 1px solid #2196f3;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px 2px rgba(33, 150, 243, 0.15);
+}
