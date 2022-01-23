@@ -53,7 +53,8 @@ export const markup = {
                                                 "#competitionId":       cp.getId(),
                                                 "#competition-name":    cp.getName(),
                                                 "#competition-date":    this.getDateInterval(cp.getFormatedStartDate("dd.mm.yy"), cp.getFormatedEndDate("dd.mm.yy")),
-                                                "#competition-desc":    cp.getDescription()
+                                                "#competition-desc":    cp.getDescription(),
+                                                "#competition-link":    window.location.href.split("#")[0] + cp.getLink()
                                                 };
                                         }
     },

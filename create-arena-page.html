@@ -31,10 +31,13 @@
             <header class="page-header">
                 <div class="container flexbox">
                     <nav class="navigation">
-                        <img class="program-logo "
-                            src="./img/competition-logo-new.png"
-                            alt="Program logo">
+                        <svg class="header-logo">
+                            <use href="./img/icons.svg#arena"></use>
+                        </svg>
                     </nav>
+                    <div>
+                        <h1 id="competition-name"></h1>
+                    </div>
                     <div id="client-cred-container">
                         <div id="sing-in-btn-container" class="login-panel">
                             <ul class="list login-panel-list">
@@ -86,17 +89,24 @@
                     <h1 id="page-name"></h1>
                 </div>
             </div>
-            <div class="bread-crumbs container"> 
-                <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
-                <div class="bread-crumbs-item"> 
+            <div class="bread-crumbs-comp-page">
+                <div class="bread-crumbs-item" >
+                    <a id="department-link-id" href=""></a>
+                </div>
+                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
-                <div class="bread-crumbs-item"><a id="competition-link" href="#"></a></div>
-                <div class="bread-crumbs-item"> 
+                <div class="bread-crumbs-item">
+                    <a id="competition-link-id" href=""></a>
+                </div>
+                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
                     <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
                 </div>
-                <div class="bread-crumbs-item"><a href="">PHX_PAGE_NAME</a></div>
+                <div class="bread-crumbs-item">
+                    PHX_CREATE_ARENA
+                </div>
             </div>
+
             <main class="container">
                 <div class="container">
                     <ul class="group-page-header list">

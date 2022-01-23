@@ -135,7 +135,7 @@ function mapToTrainer(map) {
 }
 function formGroupLink(cid, gid)
 {
-    return window.location.href.substr(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid + "/group?gid=" + gid;
+    return window.location.href.substring(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid + "/group?gid=" + gid;
 }
 
 function arrayToGs(arr, cid) {
@@ -174,7 +174,7 @@ function mapsToObjects(arr, mapToObj) {
 
 function formCompLink(cid)
 {
-    return window.location.href.substr(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid;
+    return window.location.href.substring(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid;
 }
 
 function arrayToCompStats(arr) {
@@ -207,12 +207,13 @@ function mapToPair(map) {
     return {
         params: (map == undefined) ? (new Map()) : map,
         getId()           {return this.params.get("Id");},
+        getShortId()      {return "G" + this.params.get("Id").split("G")[0];},
         getGroupId()      {return this.params.get("Group_id");},
         getRedSp()        {return this.params.get("Sportsman_red");},
         getBlueSp()       {return this.params.get("Sportsman_blue");},
         getWinner()       {return this.params.get("Winner");},
         getNumber()       {return this.params.get("Number");},
-        getPairsList()    {return this.params.get("Pairs_list");},
+        getArena()    {return this.params.get("Pairs_list");},
         getTime()         {return this.params.get("Time");},
         getFormatedTime(f){return formatDate(this.getTime(), f);},
         getFinalPart()    {return this.params.get("Final_part");},
@@ -314,6 +315,8 @@ function mapToArena(map) {
         pairsNum:   "ArenaPairsNum",
         activePair: "ActivePair",
         schedule:   "ArenaSchedule",
+        start:      "ArenaStart",
+        load:       "ArenaLoad",
 
         getName()         {return this.params.get(this.name);},
         getId()           {return this.params.get(this.id);},
@@ -331,6 +334,8 @@ function mapToArena(map) {
         getPairsNum()     {return this.params.get(this.pairsNum);},
         getActivePair()   {return this.params.get(this.activePair);},
         getSchedule()     {return this.params.get(this.schedule);},
+        getStart(f)       {return formatDate(this.params.get(this.start), f);},
+        getLoad()         {return this.params.get(this.load);},
         getLink()         {return "/arena?aid=" + this.getId();},
 
         setName(v)         {return this.params.set(this.name, v);},
@@ -364,7 +369,8 @@ function mapToCompetition(map) {
         getFormatedStartDate(f) {return formatDate(this.params.get("StartDate"), f)},
         getEndDate()            {return this.params.get("EndDate");},
         getFormatedEndDate(f)   {return formatDate(this.params.get("EndDate"), f)},
-
+        getLink()               {return "/competition?cid=" + this.getId();},
+        
         getSportsmen()      {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
         getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
         getArenas()         {return mapToObjArray(this.params.get("Arenas"), mapToArena);},

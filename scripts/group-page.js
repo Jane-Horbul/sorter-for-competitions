@@ -10,8 +10,8 @@ import {checkers,
 
 import {ops, server} from "./communication.js"
 import {markup} from "./group-page-markup.js"
-const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
-const departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
+const competitionLink   = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
+const departmentLink    = competitionLink.substring(0, competitionLink.lastIndexOf("/"));
 const pageParams        = getLinkParams(location.search);
 const page = {
     cid: pageParams.get("cid"),
@@ -35,7 +35,7 @@ console.log(groupInfo);
 function pairPageElementAdd(pair){
     if(pair.getId() == undefined) return;
     var unknowWinner = checkers.isEmptyString(pair.getWinner());
-    var unknowMember = !checkers.isNumber(pair.getRedSp()) || !checkers.isNumber(pair.getBlueSp());
+    var unknowMember = !checkers.isSportsmanId(pair.getRedSp()) || !checkers.isSportsmanId(pair.getBlueSp());
     var template = markup.pairs.getTemplate();
     var placeholders = markup.pairs.getPlaceholders(pair);
     var newItem = createPageItem(template, placeholders);
@@ -221,7 +221,7 @@ function getGridPairNames(pair)
     var blueId = pair.getBlueSp();
     var spRed    = groupInfo.getSportsmen().find( sp => (sp.getId() == redId));
     var spBlue   = groupInfo.getSportsmen().find( sp => (sp.getId() == blueId));
-    var names = {red: "", blue: ""}; 
+    var names = {red: "", blue: "", num: "", arena: "", time: ""}; 
 
     if(spRed == undefined)
         names.red = commonStrings.pairWinner(redId);
@@ -232,6 +232,12 @@ function getGridPairNames(pair)
         names.blue = commonStrings.pairWinner(blueId);
     else
         names.blue = spBlue.getSurname() + " " + spBlue.getName();
+    if(pair.getNumber() != undefined)
+        names.num = pair.getNumber();
+    if(pair.getArena() != undefined)
+        names.arena = pair.getArena();
+    if(pair.getTime() != undefined)
+        names.time = pair.getFormatedTime("hh:min");
     return names;
 }
 
@@ -244,7 +250,7 @@ function drawPair(ctx, shiftX, shiftY, pair){
     
     ctx.fillStyle = markup.grid.redFillColor;
     ctx.fillRect(shiftX, shiftY, width, midleHeight);
-    ctx.fillStyle = markup.grid.blueFillColor;;
+    ctx.fillStyle = markup.grid.blueFillColor;
     ctx.fillRect(shiftX, midleY, width, midleHeight);
 
     ctx.fillStyle   = "black";
@@ -254,6 +260,8 @@ function drawPair(ctx, shiftX, shiftY, pair){
 
     markup.grid.printText(ctx, names.red,  shiftX, shiftY + midleHeight);
     markup.grid.printText(ctx, names.blue, shiftX, midleY + midleHeight);
+    markup.grid.printText(ctx, names.time + " " + names.arena, shiftX, shiftY);
+    markup.grid.printText(ctx, names.num, shiftX + width, shiftY + midleHeight);
 }
 
 function drawGrid(ctx, grid){
@@ -267,8 +275,7 @@ function drawGrid(ctx, grid){
         var stepY = powNum * (pairH + distH);
         var shiftY = firstSpace;
         for(var row = 0; row < grid[col].length; row++){
-            if(grid[col][row] != undefined)
-            {
+            if(grid[col][row] != undefined){
                 drawPair(ctx, shiftX, shiftY, grid[col][row]);
                 if(!markup.grid.isFinalPair(grid[col][row]))
                     drawConnection(ctx, shiftX, shiftY, row, stepY / 2);
@@ -428,7 +435,7 @@ function fillPageInfo(){
     var qualMax = qualificationsMap.get(groupInfo.getQualMax());
     var qualMin = qualificationsMap.get(groupInfo.getQualMin());
 
-    markup.group.setPageName(competitionInfo.getName());
+    markup.group.setPageName(groupInfo.getName());
     markup.group.setCompetitionName(competitionInfo.getName());
     markup.group.setCompetitionLink(competitionLink);
     markup.group.setDepartmentName(departmentInfo.getName());
@@ -437,7 +444,6 @@ function fillPageInfo(){
     markup.group.setGroupLink(window.location.href);
 
     markup.group.setDelBtnLink(competitionLink);
-    markup.group.setGroupHeader(groupInfo.getName());
 
     markup.group.setInfoName(       groupInfo.getName());
     markup.group.setInfoSystem(     groupInfo.getFormSystem());

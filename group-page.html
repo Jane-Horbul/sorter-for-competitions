@@ -14,10 +14,13 @@
             <header class="page-header">
                 <div class="container flexbox">
                     <nav class="navigation">
-                        <img class="program-logo "
-                            src="./img/competition-logo-new.png"
-                            alt="Program logo">
+                        <svg class="header-logo">
+                            <use href="./img/icons.svg#arena"></use>
+                        </svg>
                     </nav>
+                    <div>
+                        <h1 id="page-name"></h1>
+                    </div>
                     <div id="client-cred-container">
                         <div id="sing-in-btn-container" class="login-panel">
                             <ul class="list login-panel-list">
@@ -64,11 +67,6 @@
                     </template>
                 </div>
             </header>
-            <div class="container main">
-                <div>
-                    <h1 id="page-name"></h1>
-                </div>
-            </div>
             <div class="bread-crumbs container"> 
                 <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
                 <div class="bread-crumbs-item"> 
@@ -81,14 +79,6 @@
                 <div class="bread-crumbs-item"><a id="group-link" href="#"></a></div>
             </div>
             <main class="container">
-                
-                <div class="container">
-                    <ul class="group-page-header list">
-                        <li><h1 id="group-name-header"></h1></li>
-                       
-                    </ul>
-                </div>
-
                 <div class="tab">
                     <button class="tablinks" id="tab1">PHX_INFO_TAB</button>
                     <button class="tablinks" id="tab2">PHX_SPORTS_TAB</button>
@@ -316,6 +306,12 @@
                                             <td class="first-title-tables--text group-page-pair-blue blue-cell-style">#blue-sportsman</td>
                                             <td class="first-title-tables--text #winner-style">#pair-winner</td>
                                         </tr>
+                                    </template>
+                                    <template id="win-btn-template">
+                                        <div class="js-hidden-element js-root-view js-admin-view">
+                                            <button type="button" class="red-button-style" id="red-btn-#pair-id"></button>
+                                            <button type="button" class="blue-button-style" id="blue-btn-#pair-id"></button>
+                                        </div>
                                     </template>
                                 </table>
                             </div> 

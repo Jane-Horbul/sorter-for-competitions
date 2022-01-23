@@ -8506,7 +8506,7 @@ $.extend( Datepicker.prototype, {
 
 				$.each( names, function( i, pair ) {
 					var name = pair[ 1 ];
-					if ( value.substr( iValue, name.length ).toLowerCase() === name.toLowerCase() ) {
+					if ( value.substring( iValue, name.length ).toLowerCase() === name.toLowerCase() ) {
 						index = pair[ 0 ];
 						iValue += name.length;
 						return false;
@@ -8580,7 +8580,7 @@ $.extend( Datepicker.prototype, {
 		}
 
 		if ( iValue < value.length ) {
-			extra = value.substr( iValue );
+			extra = value.substring( iValue );
 			if ( !/^\s+/.test( extra ) ) {
 				throw "Extra/unparsed characters found in date: " + extra;
 			}

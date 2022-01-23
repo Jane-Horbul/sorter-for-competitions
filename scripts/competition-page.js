@@ -22,7 +22,7 @@ var competition         = server.competition.get(page.cid);
 const qualificationsMap = department.getQualifications();
 const disciplines       = department.getDisciplines();
 var acttiveDisciplines = disciplines.filter(disc => (undefined != competition.getGroups().find(gr => checkers.strEquals(gr.getDiscipline(), disc))));
-const departmentLink    = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+const departmentLink    = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 
 var departamentSportsmans   = new Array(0);
 var sportsmansAddList       = new Array(0);

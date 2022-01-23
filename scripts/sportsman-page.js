@@ -19,7 +19,7 @@ prepareClient(client);
 
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
-var departmentLink      = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+var departmentLink      = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 var sportsmanInfo       = server.sportsman.get(page.sid);
 var sportsmanStats      = server.sportsman.getStatistics(page.sid);
 console.log(sportsmanInfo);
@@ -69,7 +69,7 @@ function fillStatistics() {
             markup.statistics.getGroupStatsList(cs).append(markup.statistics.createGroupStatItem(cs, gs));
             var groupPairs = csPairs.filter(pair => gs.getGroupId() == pair.getGroupId());
             groupPairs.forEach(pair => {
-                markup.statistics.getPairsList(cs, gs).append(markup.statistics.createPairsItem(pair, sportsmanInfo));
+                markup.statistics.getArena(cs, gs).append(markup.statistics.createPairsItem(pair, sportsmanInfo));
             });
         });
     });

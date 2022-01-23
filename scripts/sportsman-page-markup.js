@@ -72,11 +72,11 @@ export const markup = {
         pairsListId:                "group-pairs-list-",
         pairStatTemplate:           "pair-item-template-id",
         getPairsListId(cs, gs)      { return this.pairsListId + cs.getCompetitionId() + "-" + gs.getGroupId(); },
-        getPairsList(cs, gs)        { return document.getElementById(this.getPairsListId(cs, gs)); },
+        getArena(cs, gs)        { return document.getElementById(this.getPairsListId(cs, gs)); },
         createPairsItem(pair, sp)   { return createPageItem(document.getElementById(this.pairStatTemplate), this.getPairPlaceholders(pair, sp)); },
         getPairPlaceholders(pair, sp){ return {
                                         "#pair-number":     checkers.getIfDefined(pair.getNumber(), ""),
-                                        "#pairs-list":      checkers.getIfDefined(pair.getPairsList(), ""),
+                                        "#pairs-list":      checkers.getIfDefined(pair.getArena(), ""),
                                         "#pair-time":       pair.getFormatedTime("hh:min (dd/mm)"),
                                         "#pair-result":     getWinLoseStatus(pair, sp),
                                         "#pair-style":      pair.getRedSp() == sp.getId() ? "sp-st-group-card-table--red" : "sp-st-group-card-table--blue"

@@ -21,7 +21,7 @@ prepareClient(client);
 
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
-var departmentLink      = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
+var departmentLink      = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 var trainerInfo         = server.trainer.get(page.tid);
 
 console.log(trainerInfo);

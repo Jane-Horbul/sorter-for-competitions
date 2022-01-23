@@ -1,7 +1,7 @@
 
 
 import {getSportsName} from "./group-page.js"
-import {checkers} from "./common.js"
+import {checkers, createPageItem} from "./common.js"
 
 function getWinStyle(pair){
     var winner = pair.getWinner();
@@ -30,7 +30,7 @@ export const markup = {
         getTemplate()               { return document.getElementById("pair-template");},
         getPlaceholders(p)          { return {
                                             "#pair-num":        Number(p.getNumber()) > 0 ? p.getNumber() : "",
-                                            "#pairs-list":      p.getPairsList() != undefined ? p.getPairsList() : "",
+                                            "#pairs-list":      p.getArena() != undefined ? p.getArena() : "",
                                             "#time":            p.getFormatedTime("hh:min (dd/mm)"),
                                             "#final-part":      "1/" + p.getFinalPart(),
                                             "#red-sportsman":   getSportsName(p.getRedSp()),
@@ -39,19 +39,7 @@ export const markup = {
                                             "#winner-style":    getWinStyle(p)
                                         };
                                     },
-        createWinBtn(stl, id)       {   var res = document.createElement("button");
-                                        res.setAttribute("class", stl);
-                                        res.setAttribute("type", "button");
-                                        res.setAttribute("id", ((stl == this.redBtnStyle) ? "red-btn-" : "blue-btn-") + id);
-                                        return res;
-                                    },
-        createWinBtns(id)           {   var redBtn = this.createWinBtn(this.redBtnStyle, id);
-                                        var blueBtn = this.createWinBtn(this.blueBtnStyle, id);
-                                        var ctnr = document.createElement("div");
-                                        ctnr.append(redBtn);
-                                        ctnr.append(blueBtn);
-                                        return ctnr.innerHTML;
-                                    },
+        createWinBtns(id)           { return document.getElementById("win-btn-template").innerHTML.replaceAll("#pair-id", id);},
         getRedBtnId(spId)           { return document.getElementById("red-btn-" + spId); },
         getBlueBtnId(spId)          { return document.getElementById("blue-btn-" + spId); }       
     },
@@ -89,6 +77,7 @@ export const markup = {
     grid: {
         scale:          30,
         final:          1,
+        whiteFillColor: "rgb(255,255,255)",
         redFillColor:   "rgb(255,96,90)",
         blueFillColor:  "rgb(0,148,204)",
         shiftTextX:     10,
@@ -112,7 +101,7 @@ export const markup = {
         getContainer()              { return document.getElementById("pairs-grid"); },
         createCanvas(pairs_num)     { 
                                         var canvas              = document.createElement('canvas');
-                                        canvas.style.position   = 'fixed'
+                                        canvas.style.position   = 'relative'
                                         canvas.width            = this.getGridWidh(pairs_num);
                                         canvas.height           = this.getGridHeight(pairs_num);
                                         
@@ -129,7 +118,6 @@ export const markup = {
         compLinkId:         "competition-link",
         depLinkId:          "department-link",
         groupLinkId:        "group-link",
-        groupHeaderId:      "group-name-header",
     
         setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
         setDepartmentName(name)     {document.getElementById(this.depLinkId).innerHTML = name;},
@@ -138,7 +126,6 @@ export const markup = {
         setCompetitionLink(link)    {document.getElementById(this.compLinkId).setAttribute("href", link);},
         setGroupName(name)          {document.getElementById(this.groupLinkId).innerHTML = name;},
         setGroupLink(link)          {document.getElementById(this.groupLinkId).setAttribute("href", link);},
-        setGroupHeader(name)        {document.getElementById(this.groupHeaderId).innerHTML = name;},
     
         infoNameId:         "group-info-name",
         infoSystemId:       "group-info-system",

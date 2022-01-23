@@ -1,10 +1,10 @@
 
 export const markup = {
     common: {
-        setPageHeader(name)             {document.getElementById("page-header-name").innerHTML = name;},
+        setPageHeader(name)             {document.getElementById("page-name").innerHTML = name;},
         setPageHeaderLink(link)         {document.getElementById("page-header-name-link").setAttribute("href", link);},
-        setDepartmentLink(name, link)   {var d = document.getElementById("department-link"); d.setAttribute("href", link); d.innerHTML = name;},
-        setCompetitionLink(name, link)  {var c = document.getElementById("competition-link"); c.setAttribute("href", link); c.innerHTML = name;},
+        setDepartmentLink(name, link)   {var d = document.getElementById("department-link-id"); d.setAttribute("href", link); d.innerHTML = name;},
+        setCompetitionLink(name, link)  {var c = document.getElementById("competition-link-id"); c.setAttribute("href", link); c.innerHTML = name;},
         getArenaName()                  {return document.getElementById("arena-name-input").value;}
     },
     automation: {

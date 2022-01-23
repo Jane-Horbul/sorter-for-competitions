@@ -21,7 +21,7 @@
                         </svg>
                     </nav>
                     <div>
-                        <h1 id="competition-name"></h1>
+                        <h1 id="page-name"></h1>
                     </div>
                     <div id="client-cred-container">
                         <div id="sing-in-btn-container" class="login-panel">
@@ -69,11 +69,6 @@
                     </template>
                 </div>
             </header>
-            <!--<div class="container main">
-                <div>
-                    <h1 id="page-name"></h1>
-                </div>
-            </div>-->
             
             <main>
                 <div class="bread-crumbs-comp-page">
@@ -100,18 +95,11 @@
                                 <table class="dynamic-table" id="members-table">
                                     <tr class="title-row">
                                         <td class="title-row" colspan="10"><span>PHX_TBL_SPORTS</span>
-                                            <!--Add member button start-->
                                             <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
                                                 <button class="sportsmen-registration-btn" type="button">
                                                     <span>PHX_SPORT_REG_BTN</span>
                                                 </button>
-                                                <!--<button class="add-item-btn" type="button">
-                                                        <svg class="add-item-icon">
-                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                    </svg>
-                                                </button>-->
                                             </a>
-                                            <!--Add member button end-->
                                         </td>
                                     </tr>
                                     <tr>
@@ -124,7 +112,7 @@
                                         <th>PHX_SPORT_QUAL</th>
                                         <th>PHX_SPORT_ADMIT</th>
                                         <th>PHX_SPORT_GR_NUM</th>
-                                        <th class="column-for-button secondary-title-two-tables"></th>
+                                        <th class="column-for-button secondary-title-two-tables js-hidden-element js-root-view js-admin-view"></th>
                                     </tr>
                                 </table>
                                 <template id="member-template">
@@ -138,8 +126,8 @@
                                         <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-qual</td>
                                         <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-admit</td>
                                         <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-gr-num</td>
-                                        <td class="column-for-button secondary-title-two-tables"> 
-                                            <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" id="remove-comp-sport-#sp-id"  type="button">
+                                        <td class="column-for-button secondary-title-two-tables js-hidden-element js-root-view js-admin-view"> 
+                                            <button class="member-page-dell-btn" id="remove-comp-sport-#sp-id"  type="button">
                                                 <svg class="group-info-edit-btn-icon">
                                                     <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
                                                 </svg>
@@ -162,7 +150,7 @@
                                                         <span>PHX_TBL_GROUPS</span>
                                                     </li>
                                                     <li>
-                                                        <button class="cp-btn-sort" id="sort-members-btn">PHX_SORT_BTN</button>
+                                                        <button class="cp-btn-sort js-hidden-element js-root-view js-admin-view" id="sort-members-btn">PHX_SORT_BTN</button>
                                                     </li>
                                                     <li>
                                                         <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
@@ -218,45 +206,27 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!--start new card-->
-                                    <li>
-                                        <div class="cp-location-card">
-                                            <div class="cp-location-card-name"><span>Name</span></div>
-                                            <div class="cp-location-card-triangle-down"></div>
-                                            <div class="cp-location-card-amount"><span>Amount of pairs: </span><span>5</span></div>
-                                            <div class="cp-location-card-footer">
-                                                <div class="cp-location-card-date">
-                                                    <div class="cp-location-card-date--time">12:30</div>
-                                                    <div class="cp-location-card-date--date">22/01</div>
-                                                </div>
-                                                <div class="cp-location-card-loading">
-                                                    <div class="cp-location-card-loading-text">56%</div>
-                                                    <div class="cp-location-card-loading-progress">
-                                                        <progress value="56" max="100">56%</progress>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <!--end new card-->
                                     <template id="arena-item-template">
-                                        <li class="advantages-item">
-                                            <div class="projects-item">
-                                                <a href="#arena-link" class="title-of-competition-list-item">
-                                                    <div class="project-card">
-                                                        <div class="project-overlay"><img src="./img/competition-logo.png" width="270px;"
-                                                            alt="" />
-                                                            <div class="overlay">
-                                                                <p class="advantages-content">#arena-desc</p>
+                                        <li>
+                                            <a href="#arena-link" class="title-of-competition-list-item">
+                                                <div class="cp-location-card">
+                                                    <div class="cp-location-card-name"><span>#arena-name</span></div>
+                                                    <div class="cp-location-card-triangle-down"></div>
+                                                    <div class="cp-location-card-amount"><span>PHX_ARENA_PAIRS_NUM: </span><span>#arena-pairs-num</span></div>
+                                                    <div class="cp-location-card-footer">
+                                                        <div class="cp-location-card-date">
+                                                            <div class="cp-location-card-date--time">#arena-time</div>
+                                                            <div class="cp-location-card-date--date">#arena-date</div>
+                                                        </div>
+                                                        <div class="cp-location-card-loading">
+                                                            <div class="cp-location-card-loading-text">#arena-load%</div>
+                                                            <div class="cp-location-card-loading-progress">
+                                                                <progress value="#arena-load" max="100">#arena-load%</progress>
                                                             </div>
                                                         </div>
-                                                        <div class="caption">
-                                                            <h2 class="title-of-competition-list-item">#arena-name</h2>
-                                                    
-                                                        </div>
                                                     </div>
-                                                </a>
-                                            </div>
+                                                </div>
+                                            </a>
                                         </li>
                                     </template>
                                 </ul>
@@ -473,7 +443,7 @@
                             <div class="add-group-pop-up-info-main">
                                 <div id="member-info">
                                     <div class="group-info-title--siting">
-                                        <div class="group-info-title"><span>PHX_GROUPS_ADD</span></div>
+                                        <div class="group-info-title"><span>PHX_ADD_GROUPS</span></div>
                                     </div>
                                     <div class="group-info-fields">
                                         <table class="dynamic-table-pop-up">
@@ -529,7 +499,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_AGE_MIN:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_MIN_AGE:</div> </td>
                                                 <td> 
                                                     <div id="group-info-age-min">
                                                         <div class="create-ng--interval">
@@ -539,7 +509,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_AGE_MAX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_MAX_AGE:</div> </td>
                                                 <td> 
                                                     <div id="group-info-age-max">
                                                         <div class="create-ng--interval">
@@ -549,7 +519,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up"> 
-                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_WEIGHT_MIN:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_MIN_WEIGHT:</div> </td>
                                                 <td> 
                                                     <div id="group-info-weight-min">
                                                         <div class="create-ng--interval">
@@ -559,7 +529,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_WEIGHT_MAX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_MAX_WEIGHT:</div> </td>
                                                 <td> 
                                                     <div id="group-info-weight-max">
                                                         <div class="create-ng--interval">
@@ -569,7 +539,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_QUAL_MIN:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_MIN_QUAL:</div> </td>
                                                 <td> 
                                                     <div id="group-info-qulification-min">
                                                         <div class="create-ng--interval">
@@ -581,7 +551,7 @@
                                                 </td>
                                             </tr>
                                             <tr class="group-info-table-pop-up">
-                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_QUAL_MAX:</div> </td>
+                                                <td class="group-info-table-pop-up-td"> <div> PHX_GROUP_MAX_QUAL:</div> </td>
                                                 <td> 
                                                     <div id="group-info-qulification-max">
                                                         <div class="create-ng--interval">

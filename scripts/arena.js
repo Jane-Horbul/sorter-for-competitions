@@ -172,7 +172,7 @@ function fillUnattached(){
             onClick(markup.groups.getUnattachedItem(group), function(){changeGroupSelection(group)});
         }
         group.getPairs().forEach(pair => {
-            if(pair.getPairsList() == undefined){
+            if(pair.getArena() == undefined){
                 var item = createPageItem(markup.pair.getUnattachedTemplate(), markup.pair.getPlaceholders(pair));
                 markup.pair.getUnattachedContainer().append(item); 
                 onClick(markup.pair.getUnattachedItem(pair), function(){changePairSelection(pair)});

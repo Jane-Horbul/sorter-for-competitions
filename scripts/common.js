@@ -1,9 +1,17 @@
 import {server} from "./communication.js"
 
+
+function cutPairId(id){
+    var indx = id.indexOf("G")
+    if(indx >= 0)
+        return id.substring(indx)
+    return id;
+}
+
 export const commonStrings = {
     arrDivider: ", ",
     mapDivider: "-",
-    pairWinner(id)  {return "Winner of pair " + id;}  
+    pairWinner(id)  {return "Winner of pair " + cutPairId(id);}  
 }
 
 const errors = {
@@ -201,7 +209,7 @@ export function parseMap(str){
 export function parseMapArray(str){
     var result = new Array(0);
     str.split("}, ").forEach(mapStr => {
-        var resMap = parseMap(mapStr.substr(1).split("}")[0]);
+        var resMap = parseMap(mapStr.substring(1).split("}")[0]);
         if(resMap.size > 0)
             result.push(resMap);   
     });
@@ -291,13 +299,13 @@ function langLinkForm(lang){
     var indx = window.location.href.indexOf("lang=");
     if(indx < 0){
         indx = window.location.href.indexOf("pp.ua/") + 6;
-        var mainLink = window.location.href.substr(0, indx);
-        var afterLink =  window.location.href.substr(indx);
+        var mainLink = window.location.href.substring(0, indx);
+        var afterLink =  window.location.href.substring(indx);
         return mainLink + "?lang=" + lang + "/" + afterLink;
     } else{
         indx += "?lang=".length - 1;
-        var mainLink = window.location.href.substr(0, indx)
-        var afterLink =  window.location.href.substr(indx + 2);
+        var mainLink = window.location.href.substring(0, indx)
+        var afterLink =  window.location.href.substring(indx + 2);
         return mainLink + lang + afterLink;
     }
 }

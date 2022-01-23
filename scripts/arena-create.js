@@ -24,8 +24,8 @@ prepareClient(client);
 
 const departmentInfo    = server.department.get();
 const competition       = server.competition.get(page.cid);
-const competitionLink   = window.location.href.substr(0, window.location.href.lastIndexOf("/"));
-const departmentLink    = competitionLink.substr(0, competitionLink.lastIndexOf("/"));
+const competitionLink   = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
+const departmentLink    = competitionLink.substring(0, competitionLink.lastIndexOf("/"));
 
 var activeGroups        = new Array(0);
 var unactiveGroups      = new Array(0);
@@ -97,7 +97,7 @@ function attachPair(pair){
 }
 
 function detachPair(pair){
-    if(pair.getPairsList() != undefined)
+    if(pair.getArena() != undefined)
         return;
     var item = createPageItem(markup.manual.getDetachedPairTemplate(), markup.manual.getPairPlaceholders(pair));
     markup.manual.getDetachedPairsList().append(item);
@@ -241,7 +241,6 @@ function createArenaManual(){
 
 function fillPageInfo(){
     markup.common.setPageHeader(competition.getName());
-    markup.common.setPageHeaderLink(competitionLink);
     markup.common.setDepartmentLink(departmentInfo.getName(), departmentLink);
     markup.common.setCompetitionLink(competition.getName(), competitionLink);
     competition.getGroups().forEach(gr => {

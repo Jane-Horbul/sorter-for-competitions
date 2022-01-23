@@ -160,7 +160,7 @@ export const markup = {
         setDescription(desc)    {document.getElementById(this.descPlaceId).innerHTML = desc;},
         setStartDate(val)       {document.getElementById(this.startDatePlaceId).innerHTML = val;},
         setEndDate(val)         {document.getElementById(this.endDatePlaceId).innerHTML = val;},
-        setPageName(name)       {document.getElementById("competition-name").innerHTML = name;},
+        setPageName(name)       {document.getElementById("page-name").innerHTML = name;},
         setId(id)               {document.getElementById("competition-id-info").innerHTML = id;},
         setDepartmentName(name) {document.getElementById(this.depLinkId).innerHTML = name;},
         setDepartmentLink(link) {document.getElementById(this.depLinkId).setAttribute("href", link);},
@@ -180,8 +180,11 @@ export const markup = {
         getTemplate()               { return document.getElementById("arena-item-template");},
         getPlaceholders(ar)         { return {
                                             "#arena-link":        window.location.href.split("#")[0] + ar.getLink(),
-                                            "#arena-desc":        ar.getPairsNum(),
+                                            "#arena-pairs-num":   ar.getPairsNum(),
                                             "#arena-name":        ar.getName(),
+                                            "#arena-time":        ar.getStart("hh") != undefined ? ar.getStart("hh:min") : "--:--",
+                                            "#arena-date":        ar.getStart("dd") != undefined ? ar.getStart("dd/mm") : "--/--",
+                                            "#arena-load":        ar.getLoad() != undefined ? ar.getLoad() : "0",
                                         };
                                     },
 
