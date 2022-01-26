@@ -1,6 +1,5 @@
 import {getQualNameByValue} from "./department-page.js"
-import {checkers} from "./common.js"
-
+import {helpers, commonStrings} from "./common.js"
 export const markup = {
     qualifications: {
         getNameInput()                  { return document.getElementById("add-qualification-name").value;},
@@ -47,12 +46,12 @@ export const markup = {
         getTemplate()                   { return document.getElementById("competition-template");},
         getAddBtn()                     { return document.getElementById("send-competition-form-btn");},
     
-        getDateInterval(d1, d2)         { return checkers.strEquals(d1, d2) ? d1 : (d1 + " - " + d2);},
+        getDateInterval(d1, d2)         { return helpers.strEquals(d1, d2) ? d1 : (d1 + commonStrings.mapDivider + d2);},
         getPlaceholders(cp, dp)         { return {
                                                 "#departmentId":        dp.getId(),
                                                 "#competitionId":       cp.getId(),
                                                 "#competition-name":    cp.getName(),
-                                                "#competition-date":    this.getDateInterval(cp.getFormatedStartDate("dd.mm.yy"), cp.getFormatedEndDate("dd.mm.yy")),
+                                                "#competition-date":    this.getDateInterval(cp.getStartDate("dd.mm.yy"), cp.getEndDate("dd.mm.yy")),
                                                 "#competition-desc":    cp.getDescription(),
                                                 "#competition-link":    window.location.href.split("#")[0] + cp.getLink()
                                                 };
@@ -66,7 +65,7 @@ export const markup = {
         getSexInput()                   { return document.getElementById("new-member-sex-male").checked ? "male" : "female";},
         getTrainerInput()               { return document.getElementById("new-member-trainer").value;},
         getQualificationInput()         { return document.getElementById("new-member-qualifications").value;},
-        getOneMoreInput()               { return document.getElementById("add-one-more-sp").value;},
+        getOneMoreInput()               { return document.getElementById("add-one-more-sp").checked;},
         clearInputs()                   {
                                             document.getElementById("new-member-name").value = "";
                                             document.getElementById("new-member-surname").value = "";
@@ -100,7 +99,7 @@ export const markup = {
                                                 "#sp-weight":       sp.getWeight(),
                                                 "#sp-sex":          sp.getSex(),
                                                 "#sp-team":         sp.getTeam(),
-                                                "#sp-qual":         getQualNameByValue(sp.getQualification()),
+                                                "#sp-qual":         getQualNameByValue("" + sp.getQualification()),
                                                 "#sportsman-link":  window.location.href.split("#")[0] + sp.getLink()
                                             };
                                         },
@@ -113,7 +112,7 @@ export const markup = {
         getTeamInput()                  { return document.getElementById("new-trainer-team").value;},
         getRegionInput()                { return document.getElementById("new-trainer-region").value;},
         getEmailInput()                 { return document.getElementById("new-trainer-email").value;},
-        getOneMoreInput()               { return document.getElementById("add-one-more-tr").value;},
+        getOneMoreInput()               { return document.getElementById("add-one-more-tr").checked;},
         
         getTable()                      { return document.getElementById("trainers-table");},
         getTemplate()                   { return document.getElementById("trainer-template");},
@@ -122,7 +121,7 @@ export const markup = {
         getPlaceholders(tr)             { return {
                                                 "#tr-surname":      tr.getSurname(),
                                                 "#tr-name":         tr.getName(),
-                                                "#tr-bd":           tr.getFormatedBirth("dd.mm.yy"),
+                                                "#tr-bd":           tr.getBirth("dd.mm.yy"),
                                                 "#tr-sex":          tr.getSex(),
                                                 "#tr-team":         tr.getTeam(),
                                                 "#tr-region":       tr.getRegion(),

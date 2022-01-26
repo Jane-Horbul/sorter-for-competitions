@@ -4,7 +4,7 @@ import { getLinkParams,
     languageSwitchingOn, 
     onClick,
     prepareTabs,
-    checkers,
+    helpers,
     prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./sportsman-page-markup.js"
@@ -21,9 +21,8 @@ const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 var sportsmanInfo       = server.sportsman.get(page.sid);
-var sportsmanStats      = server.sportsman.getStatistics(page.sid);
+
 console.log(sportsmanInfo);
-console.log(sportsmanStats);
 
 /* ------------------- STATISTICS ----------------------------*/
 function changeParmition(cs, permCheckbox){
@@ -42,7 +41,7 @@ function changeDiscipline(cs, discCheckbox){
 }
 
 function fillStatistics() {
-    sportsmanStats.forEach(cs => {
+    sportsmanInfo.getStatistics().forEach(cs => {
         markup.statistics.getCompStatsList().append(markup.statistics.createCompStatisticItem(cs, page.sid));
         markup.statistics.setAdmition(cs);
         var admitCheckbox = markup.statistics.getAdmitionObj(cs);
@@ -81,7 +80,7 @@ function sportsmanInfoEdit(){
     var nameInput = markup.sportsman.getNameInput();
     
     if(nameInput != null){
-        var sp = ops.createSportsman(undefined);
+        var sp = ops.createSportsman();
         sp.setName(markup.sportsman.getNameInput().value);
         sp.setSurname(markup.sportsman.getSurnameInput().value);
         sp.setSex(markup.sportsman.getSexInput().value);
@@ -108,12 +107,14 @@ function sportsmanInfoEdit(){
     sexPlace.appendChild(markup.sportsman.getSexInputTemplate());
     if(sportsmanInfo.getSex() != "")
         markup.sportsman.getSexInput().value = sportsmanInfo.getSex();
-
+/*
     var agePlace = markup.sportsman.getInfoAge();
     agePlace.innerHTML = "";
-    agePlace.appendChild(markup.sportsman.getAgeInputTemplate());
+    var elem = markup.sportsman.getAgeInputTemplate()
+    agePlace.appendChild(elem);
     markup.sportsman.getAgeInput().value = sportsmanInfo.getBirth();
-
+*/
+    markup.sportsman.getAgeInput().disabled = false;
     var weightPlace = markup.sportsman.getInfoWeight();
     weightPlace.innerHTML = "";
     weightPlace.appendChild(markup.sportsman.getWeightInputTemplate());
@@ -138,14 +139,14 @@ function sportsmanInfoEdit(){
         var id = trainer.getId();
         var trOpt = markup.sportsman.createOption(trainer.getSurname() + " " + trainer.getName(), id);
         trainersList.appendChild(trOpt);
-        if(checkers.strEquals(sportsmanInfo.getTrainer(), id))
+        if(helpers.strEquals(sportsmanInfo.getTrainer(), id))
             trainersList.value = id;
     });
 }
 
 function fillPageInfo(){
     var sportsName = sportsmanInfo.getSurname() + " " + sportsmanInfo.getName();
-    var trainer = departmentInfo.getTrainers().find(tr => checkers.strEquals(tr.getId(), sportsmanInfo.getTrainer()));
+    var trainer = departmentInfo.getTrainers().find(tr => helpers.strEquals(tr.getId(), sportsmanInfo.getTrainer()));
     var trainerName = trainer != undefined ? trainer.getSurname() + " " + trainer.getName() : "";
 
     markup.sportsman.setPageName(departmentInfo.getName());
@@ -160,9 +161,9 @@ function fillPageInfo(){
     markup.sportsman.getInfoName().innerHTML      = sportsmanInfo.getName();
     markup.sportsman.getInfoSurname().innerHTML   = sportsmanInfo.getSurname();
     markup.sportsman.getInfoSex().innerHTML       = sportsmanInfo.getSex();
-    markup.sportsman.getInfoAge().innerHTML       = sportsmanInfo.getFormatedBirth("dd MM yy");
+    markup.sportsman.getAgeInput().value          = sportsmanInfo.getBirth("dd/mm/yy");
     markup.sportsman.getInfoWeight().innerHTML    = sportsmanInfo.getWeight();
-    markup.sportsman.getInfoQual().innerHTML      = qualificationsMap.get(sportsmanInfo.getQualification());
+    markup.sportsman.getInfoQual().innerHTML      = qualificationsMap.get("" + sportsmanInfo.getQualification());
     markup.sportsman.getInfoTeam().innerHTML      = sportsmanInfo.getTeam();
     markup.sportsman.getInfoTrainer().innerHTML   = trainerName;
     markup.sportsman.getInfoRegion().innerHTML    = sportsmanInfo.getRegion();

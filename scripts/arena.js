@@ -1,5 +1,5 @@
 import {
-    checkers,
+    helpers,
     showShadows,
     getLinkParams,
     languageSwitchingOn,
@@ -33,7 +33,7 @@ var intervals     = new Array(0);
 
 function deletePairFromList(pair){
     for( var i = 0; i < attachedPairs.length; i++){
-        if(checkers.strEquals(pair.getId(), attachedPairs[i].getId())){
+        if(helpers.strEquals(pair.getId(), attachedPairs[i].getId())){
             attachedPairs.splice(i, 1);
         }
     }
@@ -43,10 +43,10 @@ function deletePairFromList(pair){
 
 function changePairSelection(pair){
     var pairRow = markup.pair.getUnattachedItem(pair);
-    if(checkers.strEquals(pairRow.className, markup.selectedStyle)){
+    if(helpers.strEquals(pairRow.className, markup.selectedStyle)){
         pairRow.className = "";
         for(var i = 0; i < pairsToAttach.length; i++){
-            if(checkers.strEquals(pairsToAttach[i].getId(), pair.getId())){
+            if(helpers.strEquals(pairsToAttach[i].getId(), pair.getId())){
                 pairsToAttach.splice(i, 1);
                 break;
             }
@@ -66,33 +66,15 @@ function attachPair(pair){
 }
 
 function addPairs(){
-    var pids = "";
-    var first = true;
-
-    attachedPairs.forEach(pair => {
-        if(!first)  pids += commonStrings.arrDivider;
-        else        first = false;
-        pids += pair.getId();
-    });
-    pairsToAttach.forEach(pair => { 
-        if(!first)  pids += commonStrings.arrDivider;
-        else        first = false;
-        pids += pair.getId();
-    });
+    var pids = helpers.arrayToString(attachedPairs, function(pr){return pr.getId()})
+                + helpers.arrayToString(pairsToAttach, function(pr){return pr.getId()});
     server.arena.pairsListRebuild(page.cid, page.aid, pids);
 }
 
 function resortPairs(){
-    var nums = markup.pair.getNumbers();
-    var pids = "";
-    var first = true;
-
-    nums.forEach(num => {
-        if(!first)  pids += commonStrings.arrDivider;
-        else        first = false;
-        pids += attachedPairs[num - 1].getId();
-    });
-    server.arena.pairsListRebuild(page.cid, page.aid, pids);
+    var pids = new Array(0);
+    markup.pair.getNumbers().forEach(num => pids.push(attachedPairs[num - 1].getId()));
+    server.arena.pairsListRebuild(page.cid, page.aid, helpers.arrayToString(pids));
 }
 
 function deleteArena(){
@@ -108,14 +90,14 @@ function deleteInterval(rowNum, intervalNum){
 }
 
 function createInterval(start, end){
-    if(!checkers.checkDateTime(start) || !checkers.checkDateTime(end)) return;
-   if(checkers.compareDateTimes(start, end) > 0){
+    if(!helpers.checkDateTime(start) || !helpers.checkDateTime(end)) return;
+   if(helpers.compareDateTimes(start, end) > 0){
         alert("Start time bigger than end time.")
         return;
     }
     for(var i = 0; i < intervals.length; i++){
-        if((checkers.compareDateTimes(start, intervals[i].start) >= 0) && (checkers.compareDateTimes(start, intervals[i].end) <= 0)){
-            alert("Intersection with " + intervals[i].start + " - " + intervals[i].end + " interval found.")
+        if((helpers.compareDateTimes(start, intervals[i].start) >= 0) && (helpers.compareDateTimes(start, intervals[i].end) <= 0)){
+            alert("Intersection with " + intervals[i].start + commonStrings.mapDivider + intervals[i].end + " interval found.")
             return;
         } 
     }
@@ -143,10 +125,10 @@ function attachGroup(gp){
 
 function changeGroupSelection(gp){
     var row = markup.groups.getUnattachedItem(gp);
-    if(checkers.strEquals(row.className, markup.selectedStyle)){
+    if(helpers.strEquals(row.className, markup.selectedStyle)){
         row.className = "";
         for(var i = 0; i < groupsToAttach.length; i++){
-            if(checkers.strEquals(groupsToAttach[i].getId(), gp.getId())){
+            if(helpers.strEquals(groupsToAttach[i].getId(), gp.getId())){
                 groupsToAttach.splice(i, 1);
                 break;
             }
@@ -182,7 +164,7 @@ function fillUnattached(){
 }
 
 function setIfNumber(val, set){
-    if(checkers.isNumber(val))     set(val);
+    if(helpers.isNumber(val))     set(val);
 }
 
 function editArena(){
@@ -191,9 +173,9 @@ function editArena(){
     var qualMin = markup.settings.getQualMinInput().value;
     var qualMax = markup.settings.getQualMaxInput().value;
     
-    if(!checkers.checkName("Arena name", name))
+    if(!helpers.checkName("Arena name", name))
         return;
-    if(checkers.isNumber(qualMin) && checkers.isNumber(qualMax) && Number(qualMin) > Number(qualMax)){
+    if(helpers.isNumber(qualMin) && helpers.isNumber(qualMax) && Number(qualMin) > Number(qualMax)){
         alert("Minimal qualification must be lower or equal than maximal");
         return;
     }
@@ -238,21 +220,17 @@ function fillPageInfo(){
         markup.settings.getQualMaxInput().append(createPageItem(qTemp, ph));
     });
     markup.settings.getNameInput().value = arena.getName(); 
-    markup.settings.getDistanceInput().value = checkers.getIfDefined(arena.getDistance(), "-");
-    markup.settings.getAgeMinInput().value = checkers.getIfDefined(arena.getAgeMin(), "-");
-    markup.settings.getAgeMaxInput().value = checkers.getIfDefined(arena.getAgeMax(), "-");
-    markup.settings.getWeightMinInput().value = checkers.getIfDefined(arena.getWeightMin(), "-");
-    markup.settings.getWeightMaxInput().value = checkers.getIfDefined(arena.getWeightMax(), "-");
-    markup.settings.getFinalMinInput().value = checkers.getIfDefined(arena.getFinalMin(), "-");
-    markup.settings.getFinalMaxInput().value = checkers.getIfDefined(arena.getFinalMax(), "-");
-    markup.settings.getQualMinInput().value = checkers.getIfDefined(arena.getQualMin(), "Not applicable");
-    markup.settings.getQualMaxInput().value = checkers.getIfDefined(arena.getQualMax(), "Not applicable");
+    markup.settings.getDistanceInput().value = helpers.getIfDefined(arena.getDistance(), "-");
+    markup.settings.getAgeMinInput().value = helpers.getIfDefined(arena.getAgeMin(), "-");
+    markup.settings.getAgeMaxInput().value = helpers.getIfDefined(arena.getAgeMax(), "-");
+    markup.settings.getWeightMinInput().value = helpers.getIfDefined(arena.getWeightMin(), "-");
+    markup.settings.getWeightMaxInput().value = helpers.getIfDefined(arena.getWeightMax(), "-");
+    markup.settings.getFinalMinInput().value = helpers.getIfDefined(arena.getFinalMin(), "-");
+    markup.settings.getFinalMaxInput().value = helpers.getIfDefined(arena.getFinalMax(), "-");
+    markup.settings.getQualMinInput().value = helpers.getIfDefined(arena.getQualMin(), "Not applicable");
+    markup.settings.getQualMaxInput().value = helpers.getIfDefined(arena.getQualMax(), "Not applicable");
 
-    arena.getSchedule().forEach(sch => {
-        var intervals = sch.split("-");
-        createInterval(intervals[0], intervals[1])
-    });
-
+    arena.getSchedule().forEach(sch => createInterval(sch.start, sch.end));
     arena.getGroups().forEach(gp => attachGroup(gp));
 
     if(undefined != arena.getActivePair()){

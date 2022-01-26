@@ -5,7 +5,7 @@ import { getLinkParams,
     onClick,
     prepareTabs,
     unhideSubelements,
-    checkers,
+    helpers,
     createPageItem,
     prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
@@ -28,20 +28,23 @@ console.log(trainerInfo);
 console.log(client);
 
 function changeEmail(){
-    var newEmail = markup.trainer.getNewEmail();
-    var pass = markup.trainer.getLoginConfirmPassword();
-    server.access.changeLogin(newEmail, pass);
+    var client = ops.createClient();
+    client.setNewLogin(markup.trainer.getNewEmail());
+    client.setPassword(markup.trainer.getLoginConfirmPassword())
+    server.access.changeLogin(client);
 }
 
 function changePass(){
-    var pass = markup.trainer.getOldPassword();
     var newPass = markup.trainer.getNewPassword();
     var newPassConfirm = markup.trainer.getNewPasswordConfirm();
-    if(!checkers.strEquals(newPass, newPassConfirm)){
+    if(!helpers.strEquals(newPass, newPassConfirm)){
         alert("Not equal confirm password");
         return;
     }
-    server.access.changePass(newPass, pass);
+    var client = ops.createClient();
+    client.setNewPassword(newPass);
+    client.setPassword(markup.trainer.getOldPassword())
+    server.access.changePass(client);
 }
 
 function trainerInfoEdit(){
@@ -94,7 +97,7 @@ export function getQualNameByValue(val){
 }
 
 function qualificationElementAddToPage(name, value){
-    if(!checkers.isEmptyString(value)){
+    if(!helpers.isEmptyString(value)){
         var template = markup.sportsman.getQualTemplate();
         var placeholders = markup.sportsman.getQualPlaceholders(name, value)
         markup.sportsman.getQualList().append(createPageItem(template, placeholders));
@@ -110,16 +113,16 @@ function sportsmanPageElementAdd(sp){
 }
 
 function isSportsmansParamsOk() {
-    return (!checkers.checkName("Name", markup.sportsman.getNameInput()) 
-        || !checkers.checkName("Surname", markup.sportsman.getSurnameInput())
-        || !checkers.checkNumber("Weight", markup.sportsman.getWeightInput())
-        || !checkers.checkDate(markup.sportsman.getAgeInput())) 
+    return (!helpers.checkName("Name", markup.sportsman.getNameInput()) 
+        || !helpers.checkName("Surname", markup.sportsman.getSurnameInput())
+        || !helpers.checkNumber("Weight", markup.sportsman.getWeightInput())
+        || !helpers.checkDate(markup.sportsman.getAgeInput())) 
         ? false : true;
 }
 
 function createSportsman() {
     if(isSportsmansParamsOk()) {
-        var sporsman = ops.createSportsman(undefined);
+        var sporsman = ops.createSportsman();
         sporsman.setName(markup.sportsman.getNameInput());
         sporsman.setSurname(markup.sportsman.getSurnameInput());
         sporsman.setWeight(markup.sportsman.getWeightInput());
@@ -150,7 +153,7 @@ function fillPageInfo(){
     markup.trainer.getInfoName().innerHTML      = trainerInfo.getName();
     markup.trainer.getInfoSurname().innerHTML   = trainerInfo.getSurname();
     markup.trainer.getInfoSex().innerHTML       = trainerInfo.getSex();
-    markup.trainer.getInfoAge().innerHTML       = trainerInfo.getFormatedBirth("dd MM yy");
+    markup.trainer.getInfoAge().innerHTML       = trainerInfo.getBirth("dd MM yy");
     markup.trainer.getInfoTeam().innerHTML      = trainerInfo.getTeam();
     markup.trainer.getInfoRegion().innerHTML    = trainerInfo.getRegion();
     markup.trainer.getInfoEmail().innerHTML     = trainerInfo.getEmail();
@@ -159,12 +162,12 @@ function fillPageInfo(){
     markup.sportsman.getTrainersList()
         .append(createPageItem(markup.sportsman.getTrainerTemplate(), 
         markup.sportsman.getTrainerPlaceholders(trainerInfo)));
-    var team = departmentInfo.getSportsmen().filter(sp => checkers.strEquals(sp.getTrainer(), page.tid));
+    var team = departmentInfo.getSportsmen().filter(sp => helpers.strEquals(sp.getTrainer(), page.tid));
     team.forEach( sportsman   => sportsmanPageElementAdd(sportsman));
     for (var [value, name] of qualificationsMap)
         qualificationElementAddToPage(name, value);
     
-    if(client.isTrainer() && checkers.strEquals(trainerInfo.getId(), client.getId()))
+    if(client.isTrainer() && helpers.strEquals(trainerInfo.getId(), client.getId()))
         unhideSubelements(document);
 }
 

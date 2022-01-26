@@ -1,4 +1,5 @@
 import {getQualificationInterval, getQualNameByValue} from "./competition-page.js"
+import {commonStrings} from "./common.js"
 
 export const markup = {
     sportsmen: {
@@ -39,7 +40,8 @@ export const markup = {
 
         getDelBtn(sp)               { return document.getElementById("remove-comp-sport-" + sp.getId());},
         getAddBtn()                 { return document.getElementById("sportsmans-add-list-send-btn");},
-        getSortSpBtn()              { return document.getElementById("sort-members-btn");}
+        getSortSpBtn()              { return document.getElementById("sort-members-btn");},
+        getSearchInput()            { return document.getElementById("sportsmen-search-input");}
     },
 
     groups: {
@@ -71,8 +73,8 @@ export const markup = {
         getFormPairsBtn()           { return document.getElementById("form-pairs-btn");},
         getPlaceholders(gr)         { return {
                                             "#group-name":          gr.getName(),
-                                            "#group-age":           gr.getAgeMin() + " - " + gr.getAgeMax(),
-                                            "#group-weight":        gr.getWeightMin() + " - " + gr.getWeightMax(),
+                                            "#group-age":           gr.getAgeMin() + commonStrings.mapDivider + gr.getAgeMax(),
+                                            "#group-weight":        gr.getWeightMin() + commonStrings.mapDivider + gr.getWeightMax(),
                                             "#group-qualification": getQualificationInterval(gr.getQualMin(), gr.getQualMax()),
                                             "#group-sex":           gr.getSex(),
                                             "#group-discipline":    gr.getDiscipline(),
@@ -174,7 +176,7 @@ export const markup = {
     
     arenas: {
         getAddBlock()   { return document.getElementById("add-place-link-id");},
-        setAddLink()    { this.getAddBlock().setAttribute("href", window.location.href.split("#")[0] + "/create-place");},
+        setAddLink()    { this.getAddBlock().setAttribute("href", window.location.href.split("#")[0] + "/create-arena");},
         
         getList()                   { return document.getElementById("arenas-list");},
         getTemplate()               { return document.getElementById("arena-item-template");},
@@ -182,8 +184,8 @@ export const markup = {
                                             "#arena-link":        window.location.href.split("#")[0] + ar.getLink(),
                                             "#arena-pairs-num":   ar.getPairsNum(),
                                             "#arena-name":        ar.getName(),
-                                            "#arena-time":        ar.getStart("hh") != undefined ? ar.getStart("hh:min") : "--:--",
-                                            "#arena-date":        ar.getStart("dd") != undefined ? ar.getStart("dd/mm") : "--/--",
+                                            "#arena-time":        ar.getStart() != undefined ? ar.getStart("hh:min") : "--:--",
+                                            "#arena-date":        ar.getStart() != undefined ? ar.getStart("dd/mm") : "--/--",
                                             "#arena-load":        ar.getLoad() != undefined ? ar.getLoad() : "0",
                                         };
                                     },

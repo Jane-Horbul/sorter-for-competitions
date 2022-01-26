@@ -3,7 +3,7 @@ import {getLinkParams,
     showShadows, 
     languageSwitchingOn, 
     createPageItem,
-    checkers, 
+    helpers, 
     prepareTabs, 
     unhideSubelements,
     prepareClient} from "./common.js"
@@ -25,7 +25,7 @@ export function getQualNameByValue(val){
 }
 
 function qualificationElementAddToPage(name, value){
-    if(!checkers.isEmptyString(value)){
+    if(!helpers.isEmptyString(value)){
         var template = markup.qualifications.getTemplate();
         var placeholders = markup.qualifications.getPlaceholders(name, value);
         var newItem = createPageItem(template, placeholders);
@@ -45,7 +45,7 @@ function addQualification(){
     var name = markup.qualifications.getNameInput();
     var qTable =  markup.qualifications.getTable();
 
-    if(!checkers.isNumber(value)){
+    if(!helpers.isNumber(value)){
         markup.qualifications.valueFormatAlert();
         return;
     }
@@ -80,7 +80,7 @@ function toogleQualificationAdding(){
 function deleteQualification(value){
     var qualTable =  markup.qualifications.getTable();
     for(var i = 1; i < qualTable.rows.length; i++){
-        if(checkers.strEquals(qualTable.rows[i].cells[0].innerHTML, String(value))){
+        if(helpers.strEquals(qualTable.rows[i].cells[0].innerHTML, String(value))){
             qualTable.rows[i].remove();
             server.department.deleteQualification(value);
             return;
@@ -91,7 +91,7 @@ function deleteQualification(value){
 /* ------------------- DIVISIONS ----------------------------*/
 
 function disciplineAddToPage(division){
-    if(!checkers.isEmptyString(division))
+    if(!helpers.isEmptyString(division))
     {
         var template = markup.discipline.getTemplate();
         var placeholders = markup.discipline.getPlaceholders(division);
@@ -151,7 +151,7 @@ function competitionPageElementAdd(competition){
 }
 
 function sendCompetitionForm() {
-    var cp = ops.createCompetition(undefined);
+    var cp = ops.createCompetition();
     cp.setName(markup.competition.getNameInput());
     cp.setDescription(markup.competition.getDescriptionInput());
     cp.setStartDate(markup.competition.getStartDateInput());
@@ -171,16 +171,16 @@ function sportsmanPageElementAdd(sp){
 }
 
 function isSportsmansParamsOk() {
-    return (!checkers.checkName("Name", markup.sportsman.getNameInput()) 
-        || !checkers.checkName("Surname", markup.sportsman.getSurnameInput())
-        || !checkers.checkNumber("Weight", markup.sportsman.getWeightInput())
-        || !checkers.checkDate(markup.sportsman.getAgeInput())) 
+    return (!helpers.checkName("Name", markup.sportsman.getNameInput()) 
+        || !helpers.checkName("Surname", markup.sportsman.getSurnameInput())
+        || !helpers.checkNumber("Weight", markup.sportsman.getWeightInput())
+        || !helpers.checkDate(markup.sportsman.getAgeInput())) 
         ? false : true;
 }
 
 function sendSportsmanForm() {
     if(isSportsmansParamsOk()) {
-        var sporsman = ops.createSportsman(undefined);
+        var sporsman = ops.createSportsman();
         sporsman.setName(markup.sportsman.getNameInput());
         sporsman.setSurname(markup.sportsman.getSurnameInput());
         sporsman.setWeight(markup.sportsman.getWeightInput());
@@ -190,10 +190,11 @@ function sendSportsmanForm() {
         sporsman.setQualification(markup.sportsman.getQualificationInput());
         server.sportsman.create(sporsman);
      
-        if(checkers.strEquals(markup.sportsman.getOneMoreInput(), "no")){
-            location.reload();
-        } else {
+        if(markup.sportsman.getOneMoreInput()){
             markup.sportsman.clearInputs();
+            
+        } else {
+            location.reload();
         }
     }
     
@@ -202,9 +203,9 @@ function sendSportsmanForm() {
 /* ------------------- TRAINERS ----------------------------*/
 
 function isTrainerParamsOk() {
-    return (!checkers.checkName("Name", markup.trainer.getNameInput()) 
-        || !checkers.checkName("Surname", markup.trainer.getSurnameInput())
-        || !checkers.checkDate(markup.trainer.getAgeInput())) 
+    return (!helpers.checkName("Name", markup.trainer.getNameInput()) 
+        || !helpers.checkName("Surname", markup.trainer.getSurnameInput())
+        || !helpers.checkDate(markup.trainer.getAgeInput())) 
         ? false : true;
 }
 
@@ -219,10 +220,12 @@ function sendTrainerForm() {
         trainer.setRegion( markup.trainer.getRegionInput());
         trainer.setEmail(  markup.trainer.getEmailInput());
         server.trainer.create(trainer);
-        /*
-        if(markup.sportsman.getOneMoreInput().localeCompare("no") == 0){
+        
+        if(markup.sportsman.getOneMoreInput()){
+            //markup.sportsman.clearInputs();
+        } else {
             location.reload();
-        }*/
+        }
     }
     
 }

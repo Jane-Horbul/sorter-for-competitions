@@ -1,12 +1,15 @@
 
-import {checkers,
+import {helpers,
     getLinkParams, 
     onClick, 
     showShadows, 
     languageSwitchingOn, 
     createPageItem, 
     prepareTabs,
-    prepareClient} from "./common.js"
+    prepareClient,
+    filtration,
+    rowsComparator,
+    commonStrings} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./competition-page-markup.js";
 
@@ -21,7 +24,7 @@ const department        = server.department.get();
 var competition         = server.competition.get(page.cid);
 const qualificationsMap = department.getQualifications();
 const disciplines       = department.getDisciplines();
-var acttiveDisciplines = disciplines.filter(disc => (undefined != competition.getGroups().find(gr => checkers.strEquals(gr.getDiscipline(), disc))));
+var acttiveDisciplines = disciplines.filter(disc => (undefined != competition.getGroups().find(gr => helpers.strEquals(gr.getDiscipline(), disc))));
 const departmentLink    = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 
 var departamentSportsmans   = new Array(0);
@@ -130,21 +133,22 @@ function resortSportsmens(){
 /* ------------------- GROUPS ----------------------------*/
 
 export function getQualNameByValue(val){
-    return qualificationsMap.get(val) == undefined ? val : qualificationsMap.get(val);
+    var qval = "" + val;
+    return qualificationsMap.get(qval) == undefined ? qval : qualificationsMap.get(qval);
 }
 
 export function getQualificationInterval(qMin, qMax){
     var qMinName = "";
     var qMaxName = "";
-    if(checkers.isNumber(qMin) && (Number(qMin) >= 0) && (qualificationsMap.get(qMin) != undefined)){
+    if(helpers.isNumber(qMin) && (Number(qMin) >= 0) && (qualificationsMap.get(qMin) != undefined)){
         qMinName = qualificationsMap.get(qMin);
     }
-    if(checkers.isNumber(qMax) && (Number(qMax) >= 0) && (qualificationsMap.get(qMax) != undefined)){
+    if(helpers.isNumber(qMax) && (Number(qMax) >= 0) && (qualificationsMap.get(qMax) != undefined)){
         qMaxName = qualificationsMap.get(qMax);
     }
     if(Number(qMax) == Number(qMin)) return qMinName;
 
-    return qMinName + " - " + qMaxName;
+    return qMinName + commonStrings.mapDivider + qMaxName;
 }
 
 function groupPageElementAdd(group){
@@ -156,7 +160,7 @@ function groupPageElementAdd(group){
 }
 
 function isMainGroupParamsOk(){
-    if(checkers.isEmptyString(markup.groups.getNameInput().value)){
+    if(helpers.isEmptyString(markup.groups.getNameInput().value)){
         markup.groups.alertNameFormat();
         return false;
     }
@@ -166,16 +170,16 @@ function isMainGroupParamsOk(){
 function isAgeOk(){
     var ageMin = markup.groups.getAgeMinInput().value;
     var ageMax = markup.groups.getAgeMaxInput().value;
-    if(!checkers.isEmptyString(ageMin) && !checkers.isNumber(ageMin)){
+    if(!helpers.isEmptyString(ageMin) && !helpers.isNumber(ageMin)){
         markup.groups.alertAgeMinFormat();
         return false;
     }
-    if(!checkers.isEmptyString(ageMax)){
-        if(!checkers.isNumber(ageMax)){
+    if(!helpers.isEmptyString(ageMax)){
+        if(!helpers.isNumber(ageMax)){
             markup.groups.alertAgeMaxFormat();
             return false; 
         }
-        if(!checkers.isEmptyString(ageMin) && (Number(ageMax) - Number(ageMin)) < 0)
+        if(!helpers.isEmptyString(ageMin) && (Number(ageMax) - Number(ageMin)) < 0)
         {
             markup.groups.alertAgeIntervalFormat();
             return false; 
@@ -188,16 +192,16 @@ function isWeightOk(){
     var weightMin = markup.groups.getWeightMinInput().value;
     var weightMax = markup.groups.getWeightMaxInput().value;
 
-    if(!checkers.isEmptyString(weightMin) && !checkers.isNumber(weightMin)){
+    if(!helpers.isEmptyString(weightMin) && !helpers.isNumber(weightMin)){
         markup.groups.alertWeightMinFormat();
         return false;
     }
-    if(!checkers.isEmptyString(weightMax)){
-        if(!checkers.isNumber(weightMax)){
+    if(!helpers.isEmptyString(weightMax)){
+        if(!helpers.isNumber(weightMax)){
             markup.groups.alertWeightMaxFormat();
             return false; 
         }
-        if(!checkers.isEmptyString(weightMin) && (Number(weightMax) - Number(weightMin)) < 0)
+        if(!helpers.isEmptyString(weightMin) && (Number(weightMax) - Number(weightMin)) < 0)
         {
             markup.groups.alertWeightIntervalFormat();
             return false; 
@@ -220,7 +224,7 @@ function isQualificationOk(){
 }
 
 function isEmptyField(val){
-    if(val == "" || val == undefined || checkers.strEquals(val, "Not applicable"))
+    if(val == "" || val == undefined || helpers.strEquals(val, "Not applicable"))
         return true;
     return false;
 }
@@ -296,7 +300,7 @@ function competitionEdit(){
         startDatePlace.appendChild(startDateInput);
         endDatePlace.appendChild(endDateInput);
     } else {
-        var cp = ops.createCompetition(competition.params);
+        var cp = ops.createCompetition();
         cp.setName(nameInput.value);
         cp.setDescription(descInput.value);
         cp.setStartDate(startDateInput.value);
@@ -318,7 +322,7 @@ function qualificationAddToPage(){
 
 function disciplinesAddToPage(){
     for(var i = 0; i < disciplines.length; i++){
-        if(checkers.isEmptyString(disciplines[i]))
+        if(helpers.isEmptyString(disciplines[i]))
             continue;
 
         var opt = markup.groups.createOption(disciplines[i] + "-id", disciplines[i], disciplines[i]);
@@ -327,7 +331,7 @@ function disciplinesAddToPage(){
 }
 function disciplinesCheckboxesAdd(spId){
     for(var i = 0; i < acttiveDisciplines.length; i++){
-        if(checkers.isEmptyString(acttiveDisciplines[i]))
+        if(helpers.isEmptyString(acttiveDisciplines[i]))
             continue;
         var template = markup.sportsmen.getDisciplineTemplate();
         var placeholders = markup.sportsmen.getDiscPlaceholders(acttiveDisciplines[i], i, spId);
@@ -341,8 +345,8 @@ function fillPageInfo(){
     markup.competitions.setName(competition.getName());
     markup.competitions.setId(competition.getId());
     markup.competitions.setDescription(competition.getDescription());
-    markup.competitions.setStartDate(competition.getFormatedStartDate("dd MM yy hh:min"));
-    markup.competitions.setEndDate(competition.getFormatedEndDate("dd MM yy hh:min"));
+    markup.competitions.setStartDate(competition.getStartDate("dd MM yy hh:min"));
+    markup.competitions.setEndDate(competition.getEndDate("dd MM yy hh:min"));
     markup.competitions.setDepartmentName(department.getName());
     markup.competitions.setDepartmentLink(departmentLink);
     markup.competitions.setCompetitionName(competition.getName());
@@ -374,6 +378,8 @@ function setBtnActions(){
     
     onClick(markup.sportsmen.getSortSpBtn(),    resortSportsmens);
     onClick(markup.sportsmen.getAddBtn(),       sportsmansAddListSend);
+
+    filtration(markup.sportsmen.getSearchInput(), markup.sportsmen.getTable(), rowsComparator);
 }
 
 prepareTabs();

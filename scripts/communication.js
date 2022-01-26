@@ -1,466 +1,451 @@
-import {parseBodyParams, commonStrings, checkers, formatDate} from "./common.js"
-
-const backendLinks = {
-    DEPARTMENT_GET()                            {return "competition-list-get?"; },
-    DEPARTMENT_EDIT()                           { return "department-info-edit"; },
-    DEPARTMENT_QUALIFICATION_ADD:               "department-qual-add",
-    DEPARTMENT_QUALIFICATION_DEL:               "department-qual-del",
-    DEPARTMENT_DISCIPLINE_ADD:                  "department-disc-add",
-    DEPARTMENT_DISCIPLINE_DEL:                  "department-disc-del",
-
-    SPORTSMAN_GET(sid)                          {return "department-sports-get?sid=" + sid;},
-    SPORTSMAN_STAT_GET(sid)                     {return "department-sports-stat-get?sid=" + sid;},
-    SPORTSMAN_EDIT(sid)                         {return "department-sports-edit?sid=" + sid;},
-    SPORTSMAN_CREATE:                           "department-sports-add",
-    SPORTSMAN_DELETE(sid)                       {return "department-sports-del?sid=" + sid;},
-    SPORTSMAN_CHANGE_PHOTO(sid)                 {return "sportsman-photo-change?sid=" + sid;},
-
-    COMPETITION_CREATE:                         "department-comp-add",
-    COMPETITION_GET(cid)                        {return "competition-get?cid=" + cid;},
-    COMPETITION_EDIT(cid)                       {return "competition-info-edit?cid=" + cid;},
-    COMPETITION_DELETE(cid)                     {return "competition-remove?cid=" + cid;},
-    COMPETITION_SPORTSMAN_ADD(cid)              {return "new-member-form?cid=" + cid;},
-    COMPETITION_SPORTSMAN_DEL(cid, sid)         {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
-    COMPETITION_GROUPS_PAIRS_FORM(cid)          {return "competition-pairs-refresh?cid=" + cid;},
-    COMPETITION_MEMBERS_SORT(cid)               {return "competition-members-sort?cid=" + cid;},
-
-    GROUP_GET(cid, gid)                         {return "group-get?cid=" + cid + "&gid=" + gid;},
-    GROUP_CREATE(cid)                           {return "new-group-form?cid=" + cid;},
-    GROUP_INFO_EDIT(cid, gid)                   {return "group-info-edit?cid=" + cid + "&gid=" + gid;},
-    GROUP_DELETE(cid, gid)                      {return "competition-group-del?cid=" + cid + "&gid=" + gid;},
-    GROUP_SPORTSMENS_ADD(cid, gid)              {return "group-sportsmens-add?cid=" + cid + "&gid=" + gid;},
-    GROUP_SPORTSMEN_DEL(cid, gid)               {return "group-sportsmen-del?cid=" + cid + "&gid=" + gid;},
-    GROUP_PAIRS_REFRESH(cid, gid)               {return "group-pairs-refresh?cid=" + cid + "&gid=" + gid;},
-    GROUP_PAIR_WINNER(cid, gid, pid)            {return "pair-member-win?cid=" + cid + "&gid=" + gid + "&pid=" + pid;},
-    GROUP_FORMULA_ADD(cid, gid)                 {return "group-formula-add?cid=" + cid + "&gid=" + gid;},
-    GROUP_FORMULA_DEL(cid, gid)                 {return "group-formula-del?cid=" + cid + "&gid=" + gid;},
-    
-    COMPETITION_SPORTSMEN_GROUP_ADD(cid)        {return "competition-sports-group-add?cid=" + cid;},
-    COMPETITION_SPORTSMEN_GROUP_DEL(cid, sid)   {return "competition-sports-group-del" + cid + "&sid=" + sid;},
-    COMPETITION_SPORTSMEN_DISC_ADD(cid, sid)    {return "competition-stat-disc_add?cid=" + cid + "&sid=" + sid;},
-    COMPETITION_SPORTSMEN_DISC_DEL(cid, sid)    {return "competition-stat-disc_del?cid=" + cid + "&sid=" + sid;},
-    COMPETITION_SPORTSMEN_ADMIT_CHANGE(cid, sid){return "competition-stat-perm-change?cid=" + cid + "&sid=" + sid;},
-
-    TRAINER_GET(tid)                            {return "trainer-get?tid=" + tid;},
-    TRAINER_CREATE()                            {return "trainer-create";},
-    TRAINER_REMOVE(tid)                         {return "trainer-remove?tid=" + tid;},
-    TRAINER_EDIT(tid)                           {return "trainer-edit?tid=" + tid;},
-    TRAINER_CHANGE_PHOTO(tid)                   {return "trainer-photo-change?tid=" + tid;},
-
-    ARENA_CREATE(cid)                           {return "arena-create?cid=" + cid;},
-    ARENA_GET(cid, aid)                         {return "arena-get?cid=" + cid + "&aid=" + aid;},
-    ARENA_REMOVE(cid, aid)                      {return "arena-remove?cid=" + cid + "&aid=" + aid;},
-    ARENA_EDIT(cid, aid)                        {return "arena-edit?cid=" + cid + "&aid=" + aid;},
-    ARENA_PAIR_REMOVE(cid, aid)                 {return "arena-pair-remove?cid=" + cid + "&aid=" + aid;},
-    ARENA_PAIRS_REBUILD(cid, aid)               {return "arena-pairs-rebuild?cid=" + cid + "&aid=" + aid;},
-    ARENA_PAIRS_FILTER(cid, aid)                {return "arena-pairs-filter?cid=" + cid + "&aid=" + aid;},
-
-    LOGIN:                                      "client-login",
-    LOGOUT:                                     "client-logout",
-    CLIENT_STATUS_GET:                          "client-status-get",
-    CLIENT_LOGIN_CHANGE:                        "client-change-login",
-    CLIENT_PASSWORD_CHANGE:                     "client-change-pass"
-};
+import {commonStrings, helpers, formatDate} from "./common.js"
 
 
-function mapToObjArray(mapArr, createObj){
-    var res = new Array(0);
-    mapArr.forEach(map => {
-        res.push(createObj(map));
-    });
-    return res;
+var dpLink = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
+
+function castToGroupStat(object, cid) {
+    return {
+        obj:        object,
+        group:      "ParentGroup",
+        groupName:  "GroupName",
+        discipline: "Discipline",
+        score:      "Score",
+        pairsNum:   "PairsNum",
+        winsNum:    "Wins",
+        place:      "Place",
+        link:      "/competition?cid=" + cid + "/group?gid=",
+
+        getGroupId()          {return this.obj[this.group];},
+        getGroupName()        {return this.obj[this.groupName];},
+        getDiscipline()       {return this.obj[this.discipline];},
+        getScore()            {return this.obj[this.score];},
+        getPairsNum()         {return this.obj[this.pairsNum];},
+        getWinsNum()          {return this.obj[this.winsNum];},
+        getPlace()            {return this.obj[this.place];},
+        getGroupLink()        {return dpLink + this.link + this.getGroupId();}
+    };
 }
 
-function mapToSportsman(map) {
+function castToCompetitionStat(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        getId()               {return this.params.get("Id");},
-        getName()             {return this.params.get("Name");},
-        getSurname()          {return this.params.get("Surname");},
-        getBirth()            {return this.params.get("Birth");},
-        getFormatedBirth(f)   {return formatDate(this.params.get("Birth"), f)},
-        getAge()              {return this.params.get("Age");},
-        getWeight()           {return this.params.get("Weight");},
-        getSex()              {return this.params.get("Sex");},
-        getTeam()             {return this.params.get("Team");},
-        getTrainer()          {return this.params.get("Trainer");},
-        getRegion()           {return this.params.get("Region");},
-        getQualification()    {return this.params.get("Qualification");},
-        getAdmition()         {return this.params.get("Admited");},
-        getDisciplines()      {return this.params.get("Disciplines");},
-        getGroupsNum()        {return this.params.get("Groups_num");},
-        getPhoto()            {return this.params.get("Photo");},
+        obj:                object,
+        competitionId:      "Competition",
+        competitionName:    "CompetitionName",
+        disciplines:        "Disciplines",
+        admit:              "Admitted",
+        groupsStats:        "GroupStats",
+        pairs:              "Pairs",
+        link:               "/competition?cid=",
 
-        setId(v)               {return this.params.set("Id", v);},
-        setName(v)             {return this.params.set("Name", v);},
-        setSurname(v)          {return this.params.set("Surname", v);},
-        setBirth(v)            {return this.params.set("Birth", v);},
-        setWeight(v)           {return this.params.set("Weight", v);},
-        setSex(v)              {return this.params.set("Sex", v);},
-        setTeam(v)             {return this.params.set("Team", v);},
-        setQualification(v)    {return this.params.set("Qualification", v);},
-        setTrainer(v)           {return this.params.set("Trainer", v);},
-        setAdmition(v)         {return this.params.set("Admited", v);},
-        setDisciplines(v)      {return this.params.set("Disciplines", v);},
-        setGroupsNum(v)        {return this.params.set("Groups_num", v);},
+        getCompetitionId()      {return this.obj[this.competitionId];},
+        getCompetitionName()    {return this.obj[this.competitionName];},
+        getDisciplines()        {return this.obj[this.disciplines];},
+        isAdmitted()            {return this.obj[this.admit];},
+        getGroupsStats()        {
+                                    var cid = this.getCompetitionId();
+                                    return this.obj[this.groupsStats].map( function(gs){ return castToGroupStat(gs, cid);});
+                                },
+        getPairs()              {return this.obj[this.pairs].map(castToPair);},
+        getCompetitionLink()    {return dpLink + this.link + this.getCompetitionId(); }
+    };
+}
+
+function castToSportsman(object) {
+    return {
+        obj:    object,
+        id:         "Id",
+        name:       "Name",
+        surname:    "Surname",
+        birth:      "BirthDate",
+        age:        "Age",
+        weight:     "Weight",
+        sex:        "Sex",
+        qual:       "Qualification",
+        team:       "Team",
+        region:     "Region",
+        trainer:    "Trainer",
+        photo:      "Photo",
+        admit:      "Admitted",
+        disciplines:"Disciplines",
+        groupsNum:  "GroupStatsNum",
+        compStats:  "Statistics",
+        link:       "/sportsman?sid=",
+
+        getId()               {return this.obj[this.id];},
+        getName()             {return this.obj[this.name];},
+        getSurname()          {return this.obj[this.surname];},
+        getBirth(f)           {return formatDate(this.obj[this.birth], f);},
+        getAge()              {return this.obj[this.age];},
+        getWeight()           {return this.obj[this.weight];},
+        getSex()              {return this.obj[this.sex];},
+        getTeam()             {return this.obj[this.team];},
+        getTrainer()          {return this.obj[this.trainer];},
+        getRegion()           {return this.obj[this.region];},
+        getQualification()    {return this.obj[this.qual];},
+        getAdmition()         {return this.obj[this.admit];},
+        getDisciplines()      {return this.obj[this.disciplines];},
+        getGroupsNum()        {return this.obj[this.groupsNum];},
+        getPhoto()            {return this.obj[this.photo];},
+        getStatistics()       {return this.obj[this.compStats].map(castToCompetitionStat);},
+
+        setName(v)             {this.obj[this.name] = v;},
+        setSurname(v)          {this.obj[this.surname] = v;},
+        setBirth(v)            {this.obj[this.birth] = v;},
+        setWeight(v)           {this.obj[this.weight] = v;},
+        setSex(v)              {this.obj[this.sex] = v;},
+        setTeam(v)             {this.obj[this.team] = v;},
+        setQualification(v)    {this.obj[this.qual] = v;},
+        setTrainer(v)          {this.obj[this.trainer] = v;},
+        setAdmition(v)         {this.obj[this.admit] = v;},
+        setDisciplines(v)      {this.obj[this.disciplines] = v;},
 
         getLink()              {return "/sportsman?sid=" + this. getId(this.params);}
     };
 }
 
-function mapToTrainer(map) {
+function castToTrainer(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        getId()               {return this.params.get("Id");},
-        getName()             {return this.params.get("Name");},
-        getSurname()          {return this.params.get("Surname");},
-        getBirth()            {return this.params.get("Birth");},
-        getFormatedBirth(f)   {return formatDate(this.params.get("Birth"), f)},
-        getSex()              {return this.params.get("Sex");},
-        getTeam()             {return this.params.get("Team");},
-        getRegion()           {return this.params.get("Region");},
-        getEmail()            {return this.params.get("Email");},
-        getPhoto()            {return this.params.get("Photo");},
-        getLink()             {return "/trainer?tid=" + this. getId(this.params);},
+        obj:    object,
+        id:         "Id",
+        name:       "Name",
+        surname:    "Surname",
+        birth:      "BirthDate",
+        sex:        "Sex",
+        team:       "Team",
+        region:     "Region",
+        email:      "Email",
+        photo:      "Photo",
+        link:       "/trainer?tid=",
 
-        setId(v)               {return this.params.set("Id", v);},
-        setName(v)             {return this.params.set("Name", v);},
-        setSurname(v)          {return this.params.set("Surname", v);},
-        setBirth(v)            {return this.params.set("Birth", v);},
-        setSex(v)              {return this.params.set("Sex", v);},
-        setTeam(v)             {return this.params.set("Team", v);},
-        setRegion(v)           {return this.params.set("Region", v);},
-        setEmail(v)            {return this.params.set("Email", v);}
-    };
-}
-function formGroupLink(cid, gid)
-{
-    return window.location.href.substring(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid + "/group?gid=" + gid;
-}
+        getId()               {return this.obj[this.id];},
+        getName()             {return this.obj[this.name];},
+        getSurname()          {return this.obj[this.surname];},
+        getBirth(f)           {return formatDate(this.obj[this.birth], f);},
+        getSex()              {return this.obj[this.sex];},
+        getTeam()             {return this.obj[this.team];},
+        getRegion()           {return this.obj[this.region];},
+        getEmail()            {return this.obj[this.email];},
+        getPhoto()            {return this.obj[this.photo];},
+        getLink()             {return this.link + this.getId(this.params);},
 
-function arrayToGs(arr, cid) {
-    var res = new Array(0);
-    arr.forEach(map => {
-        var groupStat = {
-            params:               (map == undefined) ? (new Map()) : map,
-            getGroupId()          {return this.params.get("GroupId");},
-            getGroupName()        {return this.params.get("GroupName");},
-            getDiscipline()       {return this.params.get("Discipline");},
-            getScore()            {return this.params.get("Score");},
-            getPairsNum()         {return this.params.get("PairsNum");},
-            getWinsNum()          {return this.params.get("WinsNum");},
-            getPlace()            {return this.params.get("Place");},
-            getGroupLink()        {return formGroupLink(cid, this.params.get("GroupId"));},
-
-            setGroupId(v)          {return this.params.set("GroupId", v);},
-            setGroupName(v)        {return this.params.set("GroupName", v);},
-            setDiscipline(v)       {return this.params.set("Discipline", v);},
-            setScore(v)            {return this.params.set("Score", v);},
-            setPairsNum(v)         {return this.params.set("PairsNum", v);},
-            setWinsNum(v)          {return this.params.set("WinsNum", v);}
-        };
-        res.push(groupStat);
-    });
-    return res;
-}
-
-function mapsToObjects(arr, mapToObj) {
-    var res = new Array(0);
-    arr.forEach(obj => {
-        res.push(mapToObj(obj));
-    });
-    return res;
-}
-
-function formCompLink(cid)
-{
-    return window.location.href.substring(0, window.location.href.lastIndexOf("/")) + "/competition?cid=" + cid;
-}
-
-function arrayToCompStats(arr) {
-    var res = new Array(0);
-    console.log(arr);
-    arr.forEach(map => {
-        var compStat = {
-            params: (map == undefined) ? (new Map()) : map,
-            getCompetitionId()      {return this.params.get("CompetitionId");},
-            getCompetitionName()    {return this.params.get("CompetitionName");},
-            getDisciplines()        {return this.params.get("Disciplines");},
-            isAdmitted()            {return (this.params.get("Admition") == "yes" ? true : false);},
-            isActive()              {return (this.params.get("IsActive") == "yes" ? true : false);},
-            getGroupsStats()        {return arrayToGs(this.params.get("GroupsStatistic"), this.params.get("CompetitionId"));},
-            getPairs()              {return mapsToObjects(this.params.get("Pairs"), mapToPair);},
-            getCompetitionLink()    {return formCompLink(this.getCompetitionId())},
-
-            setCompetitionId(v)     {return this.params.set("CompetitionId", v);},
-            setCompetitionName(v)   {return this.params.set("CompetitionName", v);},
-            setDisciplines(v)       {return this.params.set("Disciplines", v);},
-            setAdmition(v)          {return this.params.set("Admition", v ? "yes" : "no");},
-            setActive(v)            {return this.params.set("IsActive", v ? "yes" : "no");},
-        };
-        res.push(compStat);
-    });
-    return res;
-}
-
-function mapToPair(map) {
-    return {
-        params: (map == undefined) ? (new Map()) : map,
-        getId()           {return this.params.get("Id");},
-        getShortId()      {return "G" + this.params.get("Id").split("G")[0];},
-        getGroupId()      {return this.params.get("Group_id");},
-        getRedSp()        {return this.params.get("Sportsman_red");},
-        getBlueSp()       {return this.params.get("Sportsman_blue");},
-        getWinner()       {return this.params.get("Winner");},
-        getNumber()       {return this.params.get("Number");},
-        getArena()    {return this.params.get("Pairs_list");},
-        getTime()         {return this.params.get("Time");},
-        getFormatedTime(f){return formatDate(this.getTime(), f);},
-        getFinalPart()    {return this.params.get("Final_part");},
-        getChildPair()    {return this.params.get("Child_pair");},
-
-        getRound()        {return this.params.get("Round");},
-        getRedScore()     {return this.params.get("Red_score");},
-        getBlueScore()    {return this.params.get("Blue_score");},
-
-        setId(v)           {return this.params.set("Id", v);},
-        setRedSp(v)        {return this.params.set("Sportsman_red", v);},
-        setBlueSp(v)       {return this.params.set("Sportsman_blue", v);},
-        setWinner(v)       {return this.params.set("Winner", v);},
-        setNumber(v)       {return this.params.set("Number", v);},
-        setFinalPart(v)    {return this.params.set("Final_part", v);},
-        setChildPair(v)    {return this.params.set("Child_pair", v);},
+        setId(v)               {this.obj[this.id] = v;},
+        setName(v)             {this.obj[this.name] = v;},
+        setSurname(v)          {this.obj[this.surname] = v;},
+        setBirth(v)            {this.obj[this.birth] = v;},
+        setSex(v)              {this.obj[this.sex] = v;},
+        setTeam(v)             {this.obj[this.team] = v;},
+        setRegion(v)           {this.obj[this.region] = v;},
+        setEmail(v)            {this.obj[this.email] = v;}
     };
 }
 
-function mapToFormula(map) {
+function castToPair(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        getAfterhold()      {return this.params.get("Afterhold");},
-        getRest()           {return this.params.get("Rest");},
-        getRoundsNum()      {return this.params.get("Rounds_num");},
-        getPreparation()    {return this.params.get("Preparation");},
-        getRound()          {return this.params.get("Round");},
-        getFinalMin()       {return this.params.get("Final_min");},
-        getFinalMax()       {return this.params.get("Final_max");},
+        obj:        object,
+        id:         "Id",
+        group:      "ParentGroup",
+        resSports:  "RedSportsman",
+        blueSports: "BlueSportsman",
+        winner:     "Winner",
+        number:     "Number",
+        arena:      "Arena",
+        time:       "Time",
+        final:      "FinalPart",
+        child:      "ChildPair",
+        redScore:   "RedScore",
+        blueScore:  "BlueScore",
+        round:      "Round",
+
+        getId()             {return this.obj[this.id];},
+        getGroupId()        {return this.obj[this.group];},
+        getRedSp()          {return this.obj[this.resSports];},
+        getBlueSp()         {return this.obj[this.blueSports];},
+        getWinner()         {return this.obj[this.winner];},
+        getNumber()         {return this.obj[this.number];},
+        getArena()          {return this.obj[this.arena];},
+        getTime(f)          {return formatDate(this.obj[this.name], f);},
+        getFinalPart()      {return this.obj[this.final];},
+        getChildPair()      {return this.obj[this.child];},
+        getRound()          {return this.obj[this.round];},
+        getRedScore()       {return this.obj[this.redScore];},
+        getBlueScore()      {return this.obj[this.blueScore];}
+    };
+}
+
+function castToFormula(object) {
+    return {
+        obj:        object,
+        prepare:    "Preparation",
+        roundsNum:  "RoundsNum",
+        round:      "RoundDuration",
+        rest:       "Rest",
+        hold:       "Hold",
+        finalMin:   "Name",
+        finalMax:   "FinalMax",
         
-        setAfterhold(v)      {return this.params.set("Afterhold", v);},
-        setRest(v)           {return this.params.set("Rest", v);},
-        setRoundsNum(v)      {return this.params.set("Rounds_num", v);},
-        setPreparation(v)    {return this.params.set("Preparation", v);},
-        setRound(v)          {return this.params.set("Round", v);},
-        setFinalMin(v)       {return this.params.set("Final_min", v);},
-        setFinalMax(v)       {return this.params.set("Final_max", v);}
+        getPreparation()    {return this.obj[this.prepare];},
+        getRoundsNum()      {return this.obj[this.roundsNum];},
+        getRound()          {return this.obj[this.round];},
+        getRest()           {return this.obj[this.rest];},
+        getAfterhold()      {return this.obj[this.hold];},
+        getFinalMin()       {return this.obj[this.finalMin];},
+        getFinalMax()       {return this.obj[this.finalMax];},
+        
+        setPreparation(v)    {this.obj[this.prepare] = v;},
+        setRoundsNum(v)      {this.obj[this.roundsNum] = v;},
+        setRound(v)          {this.obj[this.round] = v;},
+        setRest(v)           {this.obj[this.rest] = v;},
+        setAfterhold(v)      {this.obj[this.hold] = v;},
+        setFinalMin(v)       {this.obj[this.finalMin] = v;},
+        setFinalMax(v)       {this.obj[this.finalMax] = v;}
         
     };
 }
 
-function mapToGroup(map) {
+function castToGroup(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        getId()           {return this.params.get("Id");},
-        getName()         {return this.params.get("Name");},
-        getFormSystem()   {return this.params.get("Form_sys");},
-        getAgeMin()       {return this.params.get("Age_min");},
-        getAgeMax()       {return this.params.get("Age_max");},
-        getWeightMin()    {return this.params.get("Weight_min");},
-        getWeightMax()    {return this.params.get("Weight_max");},
-        getQualMin()      {return this.params.get("Qualification_min");},
-        getQualMax()      {return this.params.get("Qualification_max");},
-        getSex()          {return this.params.get("Sex");},
-        getDiscipline()   {return this.params.get("Division");},
-        getSportsmen()   {return mapToObjArray(this.params.get("Members"), mapToSportsman);},
-        getSportsNum()    {return this.params.get("Members_num");},
-        getPairs()        {return mapToObjArray(this.params.get("Pairs"), mapToPair);},
-        getFormulas()     {return mapToObjArray(this.params.get("Formulas"), mapToFormula);},
+        obj:            object,
+        name:           "Name",
+        id:             "Id",
+        system:         "System",
+        ageMin:         "AgeMin",
+        ageMax:         "AgeMax",
+        weightMin:      "WeightMin",
+        weightMax:      "WeightMax",
+        qualMin:        "QualificationMin",
+        qualMax:        "QualificationMax",
+        sex:            "Sex",
+        discipline:     "Discipline",
+        sportsmen:      "Sportsmen",
+        sportsmenNum:   "SportsmenNumber",
+        pairs:          "Pairs",
+        formulas:       "Formulas",
+        link:           "/group?gid=",
+        getId()           {return this.obj[this.id];},
+        getName()         {return this.obj[this.name];},
+        getFormSystem()   {return this.obj[this.system];},
+        getAgeMin()       {return this.obj[this.ageMin];},
+        getAgeMax()       {return this.obj[this.ageMax];},
+        getWeightMin()    {return this.obj[this.weightMin];},
+        getWeightMax()    {return this.obj[this.weightMax];},
+        getQualMin()      {return this.obj[this.qualMin];},
+        getQualMax()      {return this.obj[this.qualMax];},
+        getSex()          {return this.obj[this.sex];},
+        getDiscipline()   {return this.obj[this.discipline];},
+        getSportsNum()    {return this.obj[this.sportsmenNum];},
+        getSportsmen()    {return this.obj[this.sportsmen].map(castToSportsman);},
+        getPairs()        {return this.obj[this.pairs].map(castToPair);},
+        getFormulas()     {return this.obj[this.formulas].map(castToFormula);},
+        getLink()         {return this.link + this.getId();},
 
-        setId(v)           {return this.params.set("Id", v);},
-        setName(v)         {return this.params.set("Name", v);},
-        setFormSystem(v)   {return this.params.set("Form_sys", v);},
-        setAgeMin(v)       {return this.params.set("Age_min", v);},
-        setAgeMax(v)       {return this.params.set("Age_max", v);},
-        setWeightMin(v)    {return this.params.set("Weight_min", v);},
-        setWeightMax(v)    {return this.params.set("Weight_max", v);},
-        setQualMin(v)      {return this.params.set("Qualification_min", v);},
-        setQualMax(v)      {return this.params.set("Qualification_max", v);},
-        setSex(v)          {return this.params.set("Sex", v);},
-        setDiscipline(v)   {return this.params.set("Division", v);},
-        setSportsmans(v)   {return this.params.set("Members", v);},
-        setSportsNum(v)    {return this.params.set("Members_num", v);},
-        setPairs(v)        {return this.params.set("Pairs", v);},
+        getPairById(id)   { return this.getPairs().find(pr => helpers.strEquals(pr.getId(), id));},
 
-        getLink()         {return "/group?gid=" + this.getId();},
-        getPairById(id)    { 
-            return this.getPairs().find(pr => checkers.strEquals(pr.getId(), id));
-        }
+        setId(v)           {this.obj[this.id] = v;},
+        setName(v)         {this.obj[this.name] = v;},
+        setFormSystem(v)   {this.obj[this.system] = v;},
+        setAgeMin(v)       {this.obj[this.ageMin] = v;},
+        setAgeMax(v)       {this.obj[this.ageMax] = v;},
+        setWeightMin(v)    {this.obj[this.weightMin] = v;},
+        setWeightMax(v)    {this.obj[this.weightMax] = v;},
+        setQualMin(v)      {this.obj[this.qualMin] = v;},
+        setQualMax(v)      {this.obj[this.qualMax] = v;},
+        setSex(v)          {this.obj[this.sex] = v;},
+        setDiscipline(v)   {this.obj[this.discipline] = v;}
     };
 }
 
-function mapToArena(map) {
+function castToSchedule(sch){
+    var intervals = sch.split(commonStrings.mapDivider);
+    return {start: intervals[0], end: intervals[1]};
+}
+
+function castToArena(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        name:       "ArenaName",
-        id:         "ArenaId",
-        groups:     "ArenaGroups",
-        pairs:      "ArenaPairs",
-        distance:   "ArenaDistance",
-        ageMin:     "ArenaAgeMin",
-        ageMax:     "ArenaAgeMax",
-        weightMin:  "ArenaWeightMin",
-        weightMax:  "ArenaWeightMax",
-        qualMin:    "ArenaQualMin",
-        qualMax:    "ArenaQualMax",
-        finalMin:   "ArenaFinalMin",
-        finalMax:   "ArenaFinalMax",
-        pairsNum:   "ArenaPairsNum",
+        obj:        object,
+        name:       "Name",
+        id:         "Id",
+        groups:     "Groups",
+        distance:   "Distance",
+        ageMin:     "AgeMin",
+        ageMax:     "AgeMax",
+        weightMin:  "WeightMin",
+        weightMax:  "WeightMax",
+        qualMin:    "QualMin",
+        qualMax:    "QualMax",
+        finalMin:   "FinalMin",
+        finalMax:   "FinalMax",
+        pairs:      "Pairs",
+        pairsNum:   "PairsNum",
+        schedule:   "Schedule",
+        start:      "Start",
+        load:       "Load",
         activePair: "ActivePair",
-        schedule:   "ArenaSchedule",
-        start:      "ArenaStart",
-        load:       "ArenaLoad",
+        link:       "/arena?aid=",
 
-        getName()         {return this.params.get(this.name);},
-        getId()           {return this.params.get(this.id);},
-        getGroups()       {return mapsToObjects(this.params.get(this.groups), mapToGroup);},
-        getPairs()        {return mapsToObjects(this.params.get(this.pairs), mapToPair);},
-        getDistance()     {return this.params.get(this.distance);},
-        getAgeMin()       {return this.params.get(this.ageMin);},
-        getAgeMax()       {return this.params.get(this.ageMax);},
-        getWeightMin()    {return this.params.get(this.weightMin);},
-        getWeightMax()    {return this.params.get(this.weightMax);},
-        getQualMin()      {return this.params.get(this.qualMin);},
-        getQualMax()      {return this.params.get(this.qualMax);},
-        getFinalMin()     {return this.params.get(this.finalMin);},
-        getFinalMax()     {return this.params.get(this.finalMax);},
-        getPairsNum()     {return this.params.get(this.pairsNum);},
-        getActivePair()   {return this.params.get(this.activePair);},
-        getSchedule()     {return this.params.get(this.schedule);},
-        getStart(f)       {return formatDate(this.params.get(this.start), f);},
-        getLoad()         {return this.params.get(this.load);},
-        getLink()         {return "/arena?aid=" + this.getId();},
+        getName()         {return this.obj[this.name];},
+        getId()           {return this.obj[this.id];},
+        getDistance()     {return this.obj[this.distance];},
+        getAgeMin()       {return this.obj[this.ageMin];},
+        getAgeMax()       {return this.obj[this.ageMax];},
+        getWeightMin()    {return this.obj[this.weightMin];},
+        getWeightMax()    {return this.obj[this.weightMax];},
+        getQualMin()      {return this.obj[this.qualMin];},
+        getQualMax()      {return this.obj[this.qualMax];},
+        getFinalMin()     {return this.obj[this.finalMin];},
+        getFinalMax()     {return this.obj[this.finalMax];},
+        getPairsNum()     {return this.obj[this.pairsNum];},
+        getActivePair()   {return this.obj[this.activePair];},
+        getStart(f)       {return formatDate(this.obj[this.start], f);},
+        getLoad()         {return this.obj[this.load];},
+        getSchedule()     {return this.obj[this.schedule].map(castToSchedule);},
+        getGroups()       {return this.obj[this.groups].map(castToGroup);},
+        getPairs()        {return this.obj[this.pairs].map(castToPair);},
+        getLink()         {return this.link + this.getId();},
 
-        setName(v)         {return this.params.set(this.name, v);},
-        setId(v)           {return this.params.set(this.id, v);},
-        setGroups(v)       {return this.params.set(this.groups, v);},
-        setPairs(v)        {return this.params.set(this.pairs, v);},
-        setDistance(v)     {return this.params.set(this.distance, v);},
-        setAgeMin(v)       {return this.params.set(this.ageMin, v);},
-        setAgeMax(v)       {return this.params.set(this.ageMax, v);},
-        setWeightMin(v)    {return this.params.set(this.weightMin, v);},
-        setWeightMax(v)    {return this.params.set(this.weightMax, v);},
-        setQualMin(v)      {return this.params.set(this.qualMin, v);},
-        setQualMax(v)      {return this.params.set(this.qualMax, v);},
-        setFinalMin(v)     {return this.params.set(this.finalMin, v);},
-        setFinalMax(v)     {return this.params.set(this.finalMax, v);},
-        setSchedule(v)     {return this.params.set(this.schedule, v);},
+        setName(v)         {this.obj[this.name] = v;},
+        setId(v)           {this.obj[this.id] = v;},
+        setGroups(v)       {this.obj[this.groups] = v;},
+        setPairs(v)        {this.obj[this.pairs] = v;},
+        setDistance(v)     {this.obj[this.distance] = v;},
+        setAgeMin(v)       {this.obj[this.ageMin] = v;},
+        setAgeMax(v)       {this.obj[this.ageMax] = v;},
+        setWeightMin(v)    {this.obj[this.weightMin] = v;},
+        setWeightMax(v)    {this.obj[this.weightMax] = v;},
+        setQualMin(v)      {this.obj[this.qualMin] = v;},
+        setQualMax(v)      {this.obj[this.qualMax] = v;},
+        setFinalMin(v)     {this.obj[this.finalMin] = v;},
+        setFinalMax(v)     {this.obj[this.finalMax] = v;},
+        setSchedule(v)     {this.obj[this.schedule] = v;},
 
         getPairById(id)    { 
-            return this.getPairs().find(pr => checkers.strEquals(pr.getId(), id));
+            return this.getPairs().find(pr => helpers.strEquals(pr.getId(), id));
         }
     };
 }
 
-function mapToCompetition(map) {
+function castToCompetition(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        getId()                 {return this.params.get("Id");},
-        getName()               {return this.params.get("Name");},
-        getDescription()        {return this.params.get("Description");},
-        getStartDate()          {return this.params.get("StartDate");},
-        getFormatedStartDate(f) {return formatDate(this.params.get("StartDate"), f)},
-        getEndDate()            {return this.params.get("EndDate");},
-        getFormatedEndDate(f)   {return formatDate(this.params.get("EndDate"), f)},
-        getLink()               {return "/competition?cid=" + this.getId();},
-        
-        getSportsmen()      {return mapToObjArray(this.params.get("Sportsmans"), mapToSportsman);},
-        getGroups()         {return mapToObjArray(this.params.get("Groups"), mapToGroup);},
-        getArenas()         {return mapToObjArray(this.params.get("Arenas"), mapToArena);},
+        obj:        object,
+        name:       "Name",
+        id:         "Id",
+        desc:       "Description",
+        start:      "StartDateTime",
+        end:        "EndDateTime",
+        sportsmen:  "Sportsmen",
+        groups:     "Groups",
+        arenas:     "Arenas",
+        link:       "/competition?cid=",
 
-        setId(v)             {return this.params.set("Id", v);},
-        setName(v)           {return this.params.set("Name", v);},
-        setDescription(v)    {return this.params.set("Description", v);},
-        setStartDate(v)      {return this.params.set("StartDate", v);},
-        setEndDate(v)        {return this.params.set("EndDate", v);},
+        getId()                 {return this.obj[this.id];},
+        getName()               {return this.obj[this.name];},
+        getDescription()        {return this.obj[this.desc];},
+        getStartDate(f)         {return formatDate(this.obj[this.start], f);},
+        getEndDate(f)           {return formatDate(this.obj[this.end], f);},
+        getLink()               {return this.link + this.getId();},
+        getSportsmen()          {return this.obj[this.sportsmen].map(castToSportsman);},
+        getGroups()             {return this.obj[this.groups].map(castToGroup);},
+        getArenas()             {return this.obj[this.arenas].map(castToArena);},
 
-        setSportsmans(v)     {return this.params.set("Sportsmans", v);},
-        setGroups(v)         {return this.params.set("Groups", v);},
-        
-        getGroupById(id)    { 
-            return this.getGroups().find(gr => checkers.strEquals(gr.getId(), id));
-        }
+        setName(v)              {this.obj[this.name] = v;},
+        setDescription(v)       {this.obj[this.desc] = v;},
+        setStartDate(v)         {this.obj[this.start] = v;},
+        setEndDate(v)           {this.obj[this.end] = v;},
+
+        getGroupById(id)        { return this.getGroups().find(gr => helpers.strEquals(gr.getId(), id));}
     };
 }
 
-function mapToDepatrment(map) {
-    return {
-        params: (map == undefined) ? (new Map()) : map,
-        getId()             {return this.params.get("Id");},
-        getName()           {return this.params.get("Name");},
-        getCompetitions()   {return mapToObjArray(this.params.get("Competitions"), mapToCompetition);},
-        getSportsmen()     {return mapToObjArray(this.params.get("Sportsmens"), mapToSportsman);},
-        getTrainers()       {return mapToObjArray(this.params.get("Trainers"), mapToTrainer);},
-        getDisciplines()    {return this.params.get("Divisions");},
-        getQualifications() {return this.params.get("Qualifications");},
-        
-        setId(v)             {return this.params.set("Id", v);},
-        setName(v)           {return this.params.set("Name", v);},
-        setCompetitions(v)   {return this.params.set("Competitions", v);},
-        setSportsmans(v)     {return this.params.set("Sportsmens", v);},
-        setDisciplines(v)    {return this.params.set("Divisions", v);},
-        setQualifications(v) {return this.params.set("Qualifications", v);},
+function castToMap(obj){
+    var map = new Map();
+    for(const [key, value] of Object.entries(obj)){
+        map.set(key, value);
+    }
+    return map;
+}
 
-        getSportsmanById(id)    { 
-            return this.getSportsmen().find(sp => checkers.strEquals(sp.getId(), id));
-        }
+function castToDepatrment(object) {
+    return {
+        obj:            object,
+        name:           "Name",
+        id:             "Id",
+        competitions:   "Competitions",
+        sportsmen:      "Sportsmen",
+        trainers:       "Trainers",
+        disciplines:    "Disciplines",
+        quals:          "Qualifications",
+        
+        getId()                 {return this.obj[this.id];},
+        getName()               {return this.obj[this.name];},
+        getDisciplines()        {return this.obj[this.disciplines];},
+        getQualifications()     {return castToMap(this.obj[this.quals]);},
+        getCompetitions()       {return this.obj[this.competitions].map(castToCompetition);},
+        getSportsmen()          {return this.obj[this.sportsmen].map(castToSportsman);},
+        getTrainers()           {return this.obj[this.trainers].map(castToTrainer);},
+
+        getSportsmanById(id)    { return this.getSportsmen().find(sp => helpers.strEquals(sp.getId(), id));}
     };
 }
 
-function mapToClient(map) {
+function castToClient(object) {
     return {
-        params: (map == undefined) ? (new Map()) : map,
-        getStatus()         {return this.params.get("ClientStatus");},
-        getId()             {return this.params.get("ClientId");},
-        getName()           {return this.params.get("Name");},
-        getSurname()        {return this.params.get("Surname");},
-        getPhoto()          {return this.params.get("Photo");},
+        obj:        object,
+        status:     "Status",
+        id:         "Id",
+        name:       "Name",
+        surname:    "Surname",
+        photo:      "Photo",
+        login:      "Login",
+        pass:       "Password",
+        newLogin:   "NewLogin",
+        newPass:    "NewPassword",
         
-        isRoot()            {return checkers.strEquals(this.getStatus(), "Root");},
-        isAdmin()           {return checkers.strEquals(this.getStatus(), "Admin");},
-        isTrainer()         {return checkers.strEquals(this.getStatus(), "Trainer");},
-        isJudge()           {return checkers.strEquals(this.getStatus(), "Judge");},
-        isGuest()           {return checkers.strEquals(this.getStatus(), "Guest");},
+
+        root:   "Root",
+        admin:  "Admin",
+        tariner:"Trainer",
+        judge:  "Judge",
+        guest:  "Guest",
+
+        getStatus()         {return this.obj[this.status];},
+        getId()             {return this.obj[this.id];},
+        getName()           {return this.obj[this.name];},
+        getSurname()        {return this.obj[this.surname];},
+        getPhoto()          {return this.obj[this.photo];},
+        
+        isRoot()            {return helpers.strEquals(this.getStatus(), this.root);},
+        isAdmin()           {return helpers.strEquals(this.getStatus(), this.admin);},
+        isTrainer()         {return helpers.strEquals(this.getStatus(), this.trainer);},
+        isJudge()           {return helpers.strEquals(this.getStatus(), this.judge);},
+        isGuest()           {return helpers.strEquals(this.getStatus(), this.guest);},
+
+        setLogin(v)         {this.obj[this.login] = v;},
+        setNewLogin(v)      {this.obj[this.newLogin] = v;},
+        setPassword(v)      {this.obj[this.pass] = v;},
+        setNewPassword(v)   {this.obj[this.newPass] = v;}
     };
 }
 
 export const ops = {
-    createClient(m)         {return mapToClient(m);},
-    createSportsman(m)      {return mapToSportsman(m);},
-    createTrainer(m)        {return mapToTrainer(m);},
-    createStatistics(m)     {return arrayToCompStats(m);},
-    createPair(m)           {return mapToPair(m);},
-    createGroup(m)          {return mapToGroup(m);},
-    createArena(m)          {return mapToArena(m);},
-    createCompetition(m)    {return mapToCompetition(m);},
-    createDepartmant(m)     {return mapToDepatrment(m);}
+    createClient(o)         {return castToClient        (o == undefined ? {} : o);},
+    createDepartmant(o)     {return castToDepatrment    (o == undefined ? {} : o);},
+    createSportsman(o)      {return castToSportsman     (o == undefined ? {} : o);},
+    createTrainer(o)        {return castToTrainer       (o == undefined ? {} : o);},
+    createPair(o)           {return castToPair          (o == undefined ? {} : o);},
+    createGroup(o)          {return castToGroup         (o == undefined ? {} : o);},
+    createArena(o)          {return castToArena         (o == undefined ? {} : o);},
+    createCompetition(o)    {return castToCompetition   (o == undefined ? {} : o);}, 
 }
 
-function parseAnswer(answer){
-    var result = {code: 0, body: ""};
-    var blocks = answer.split("</AnswerCode><AnswerBody>");
-    result.code = Number(blocks[0].split("<AnswerCode>")[1]);
-    result.body = blocks[1].split("</AnswerBody>")[0];
-    return result;
-}
 
-function sendRequest(request, waitArray) {
+function sendRequest(request, createF) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', request, false);
     xhr.send();
     if (xhr.status != 200)   return new Map();
-    var answer = parseAnswer(xhr.responseText);
-    if(answer.code != 0)
-        alert(answer.body);
-    var res = parseBodyParams(answer.body);
-    return waitArray ? res : res[0];
+    var answer = JSON.parse(xhr.responseText);
+    if(answer.ErrorCode != 0)
+        alert(answer.Body);
+    return createF == undefined ? answer.Body : createF(answer.Body);
 }
 
 function sendFormData(formName, data, refresh) {
@@ -468,9 +453,9 @@ function sendFormData(formName, data, refresh) {
 
     xhr.onreadystatechange = function () {
         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            var answer = parseAnswer(xhr.responseText);
-            if(answer.code != 0)
-                alert(answer.body);
+            var answer = JSON.parse(xhr.responseText);
+            if(answer.ErrorCode != 0)
+                alert(answer.Body);
             if(refresh == true)
                 location.reload();
         };
@@ -480,21 +465,20 @@ function sendFormData(formName, data, refresh) {
     return true;
 }
 
-function sendParametersList(formName, paramsMap, refresh) {
+function sendList(formName, obj, refresh) {
     var xhr = new XMLHttpRequest();
     var boundary = String(Math.random()).slice(2);
     var body = ['\r\n'];
-    paramsMap.forEach(function(value, key) {
+    for(const [key, value] of Object.entries(obj)){
         body.push('Content-Disposition: form-data; name="' + key + '"\r\n\r\n' + value + '\r\n');
-    });
+    }
     body = body.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
-
 
     xhr.onreadystatechange = function () {
         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            var answer = parseAnswer(xhr.responseText);
-            if(answer.code != 0)
-                alert(answer.body);
+            var answer = JSON.parse(xhr.responseText);
+            if(answer.ErrorCode != 0)
+                alert(answer.Body);
             if(refresh == true)
                 location.reload();
         };
@@ -505,218 +489,141 @@ function sendParametersList(formName, paramsMap, refresh) {
     return true;
 }
 
-function sendSingleValue(link, value, refresh){
-    var paramsMap = new Map();
-    paramsMap.set(link, value);
-    sendParametersList(link, paramsMap, refresh);
+function sendSingle(link, value, refresh){
+    sendList(link, {[link]: value}, refresh);
 }
 
-/* ------------------- ACCESS ----------------------------*/
 
-function sendLogin(login, pass){
-    var paramsMap = new Map();
-    paramsMap.set("client-login",     login);
-    paramsMap.set("client-password",  pass);
-    sendParametersList(backendLinks.LOGIN, paramsMap, true);
-}
-
-function loginChange(login, pass){
-    var paramsMap = new Map();
-    paramsMap.set("new-client-login", login);
-    paramsMap.set("client-password",  pass);
-    sendParametersList(backendLinks.CLIENT_LOGIN_CHANGE, paramsMap, true);
-}
-
-function passwordChange(newPass, pass){
-    var paramsMap = new Map();
-    paramsMap.set("new-client-password", newPass);
-    paramsMap.set("client-password",  pass);
-    sendParametersList(backendLinks.CLIENT_PASSWORD_CHANGE, paramsMap, true);
-}
-
-/* ------------------- COMPETITION ----------------------------*/
-
-function createCompetition(cp){
-    var params = new Map();
-    params.set("competition-name",  cp.getName());
-    params.set("description",       cp.getDescription());
-    params.set("date-start",        cp.getStartDate());
-    params.set("date-end",          cp.getEndDate());
-    sendParametersList(backendLinks.COMPETITION_CREATE, params, true);
-}
-
-function  editCompetition(cp){
-    var params = new Map();
-    params.set("competition-name",  cp.getName());
-    params.set("description",       cp.getDescription());
-    params.set("date-start",        cp.getStartDate());
-    params.set("date-end",          cp.getEndDate());
-    console.log(cp.getStartDate());
-     
-    sendParametersList(backendLinks.COMPETITION_EDIT(cp.getId()), params, true);
-}
-
-function addCpSportsmans(cid, spArray){
-    var params = new Map();
-
+function addCompStatistics(spArray, link, reload){
+    var list = {};
     spArray.forEach(sp => {
-        var value = "admition=" + sp.getAdmition() + "<paramDivider>disciplines="
-        var disciplines = sp.getDisciplines();
-        var first = true;
-        disciplines.forEach(d => {
-            value += first ? d : (commonStrings.arrDivider + d);
-            first = false;
-        });
-         params.set(sp.getId(), value);
+        list[sp.getId() + "=" + sp.getAdmition()] = helpers.arrayToString(sp.getDisciplines());
     });
-    console.log(params);
-    sendParametersList(backendLinks. COMPETITION_SPORTSMAN_ADD(cid), params, true);
-}
-
-/* ------------------- GROUP ----------------------------*/
-
-function createGroup(cid, gr){
-    var params = new Map();
-     params.set("group-name",        gr.getName());
-     params.set("group-division",    gr.getDiscipline());
-     params.set("form-system",       gr.getFormSystem());
-    if(gr.getSex() != undefined)        params.set("sex", gr.getSex());
-    if(gr.getAgeMin() != undefined)     params.set("age-min", gr.getAgeMin());
-    if(gr.getAgeMax() != undefined)     params.set("age-max", gr.getAgeMax());
-    if(gr.getWeightMin() != undefined)  params.set("weight-min", gr.getWeightMin());
-    if(gr.getWeightMax() != undefined)  params.set("weight-max", gr.getWeightMax());
-    if(gr.getQualMin() != undefined)    params.set("qualification-min", gr.getQualMin());
-    if(gr.getQualMax() != undefined)    params.set("qualification-max", gr.getQualMax());
-    sendParametersList(backendLinks.GROUP_CREATE(cid), params, true);
-}
-
-function editGroup(cid, gid, gr){
-    var params = new Map();
-
-     params.set("group-name",        gr.getName());
-     params.set("group-division",    gr.getDiscipline());
-     params.set("form-system",       gr.getFormSystem());
-
-    if(gr.getSex() != undefined)         params.set("sex", gr.getSex());
-    if(gr.getAgeMin() != undefined)      params.set("age-min", gr.getAgeMin());
-    if(gr.getAgeMax() != undefined)      params.set("age-max", gr.getAgeMax());
-    if(gr.getWeightMin() != undefined)   params.set("weight-min", gr.getWeightMin());
-    if(gr.getWeightMax() != undefined)   params.set("weight-max", gr.getWeightMax());
-    if(gr.getQualMin() != undefined)     params.set("qualification-min", gr.getQualMin());
-    if(gr.getQualMax() != undefined)     params.set("qualification-max", gr.getQualMax());
-
-    sendParametersList(backendLinks.GROUP_INFO_EDIT(cid, gid), params, true);
-}
-
-/* ------------------- SPORTSMAN ----------------------------*/
-
-function createSportsmanForm(sports){
-    var params = new Map();
-    params.set("member-name",    sports.getName());
-    params.set("member-surname", sports.getSurname());
-    params.set("member-weight",  sports.getWeight());
-    params.set("member-age",     sports.getBirth());
-    params.set("member-team",    sports.getTeam());
-    params.set("member-sex",     sports.getSex());
-    params.set("member-qual",    sports.getQualification());
-    params.set("trainer",        sports.getTrainer());
-    return params;
-}
-
-/* ------------------- TRAINER ----------------------------*/
-function createTrainerForm(trainer){
-    var params = new Map();
-    params.set("trainer-name",    trainer.getName());
-    params.set("trainer-surname", trainer.getSurname());
-    params.set("trainer-birth",   trainer.getBirth());
-    params.set("trainer-team",    trainer.getTeam());
-    params.set("trainer-sex",     trainer.getSex());
-    params.set("trainer-region",  trainer.getRegion());
-    params.set("trainer-email",   trainer.getEmail());
-    
-    return params;
-}
-
-/* ------------------- TRAINER ----------------------------*/
-function createArenaForm(arena){
-    var params = new Map();
-    params.set("trainer-name",    trainer.getName());
-    params.set("trainer-surname", trainer.getSurname());
-    params.set("trainer-birth",   trainer.getBirth());
-    params.set("trainer-team",    trainer.getTeam());
-    params.set("trainer-sex",     trainer.getSex());
-    params.set("trainer-region",  trainer.getRegion());
-    params.set("trainer-email",   trainer.getEmail());
-    
-    return params;
+    sendList(link, list, reload);
 }
 
 export const server = {
     access: {
-        login(login, pass)                  {sendLogin(login, pass);},
-        logout()                            {sendSingleValue(backendLinks.LOGOUT, "", true);},
-        getClient()                         {return ops.createClient(sendRequest(backendLinks.CLIENT_STATUS_GET, false));},
-        changeLogin(login, pass)            {loginChange(login, pass);},
-        changePass(newPass, pass)           {passwordChange(newPass, pass);}
+        loginLink:          "client-login",
+        logoutLink:         "client-logout",
+        getStatusLink:      "client-status-get",
+        changeLoginLink:    "client-change-login",
+        changePassLink:     "client-change-pass",
+
+        logout()            {sendSingle(this.logoutLink,        "",     true);},
+        login(cl)           {sendList(  this.loginLink,         cl.obj, true);},
+        changeLogin(cl)     {sendList(  this.changeLoginLink,   cl.obj, true);},
+        changePass(cl)      {sendList(  this.changePassLink,    cl.obj, true);},
+        getClient()         {return sendRequest(this.getStatusLink, ops.createClient);},
     },
     department: {
-        get()                               {return ops.createDepartmant(sendRequest(backendLinks.DEPARTMENT_GET(), false));},
-        edit(name)                          {sendSingleValue(backendLinks.DEPARTMENT_EDIT(), name, true);},
-        addQualification(value, name)       {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_ADD, value + " - " + name, false)},
-        deleteQualification(value)          {sendSingleValue(backendLinks.DEPARTMENT_QUALIFICATION_DEL, value, false);},
-        addDiscipline(name)                 {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_ADD, name, false);},
-        deleteDiscipline(name)              {sendSingleValue(backendLinks.DEPARTMENT_DISCIPLINE_DEL, name, false);}
+        getLink:                        "competition-list-get?",
+        editLink:                       "department-info-edit",
+        qualAddLink:                    "department-qual-add",
+        qualRemoveLink:                 "department-qual-del",
+        discAddLink:                    "department-disc-add",
+        discRemoveLink:                 "department-disc-del",
+
+        get()                           {return sendRequest(this.getLink, ops.createDepartmant);},
+        edit(name)                      {sendSingle(this.editLink,          name,                 true);},
+        addQualification(value, name)   {sendSingle(this.qualAddLink,       value + commonStrings.mapDivider + name, false)},
+        deleteQualification(value)      {sendSingle(this.qualRemoveLink,    value,                false);},
+        addDiscipline(name)             {sendSingle(this.discAddLink,       name,                 false);},
+        deleteDiscipline(name)          {sendSingle(this.discRemoveLink,    name,                 false);}
     },
     competition: {
-        get(cid)                            {return ops.createCompetition(sendRequest(backendLinks.COMPETITION_GET(cid), false));},
-        edit(cp)                            {editCompetition(cp);},
-        create(cp)                          {createCompetition(cp);},
-        delete(cid)                         {return sendSingleValue(backendLinks.COMPETITION_DELETE(cid), cid, false);},
-        sortSportsmans(cid)                 {return sendRequest(backendLinks.COMPETITION_MEMBERS_SORT(cid), false);},
-        addSprotsmen(cid, ids)              {addCpSportsmans(cid, ids);},
-        delSprotsman(cid, sid)              {sendSingleValue(backendLinks.COMPETITION_SPORTSMAN_DEL(cid, sid), sid, true);},
-        formPairs(cid)                      {return sendRequest(backendLinks.COMPETITION_GROUPS_PAIRS_FORM(cid), false);}
+        createLink:                     "department-comp-add",
+        getLink(cid)                    {return "competition-get?cid=" + cid;},
+        editLink(cid)                   {return "competition-info-edit?cid=" + cid;},
+        removeLink(cid)                 {return "competition-remove?cid=" + cid;},
+        addSportsLink(cid)              {return "new-member-form?cid=" + cid;},
+        removeSportsLink(cid, sid)      {return "competition-member-del?cid=" + cid + "&sid=" + sid;},
+        updatePairsLink(cid)            {return "competition-pairs-refresh?cid=" + cid;},
+        sortSportsLink(cid)             {return "competition-members-sort?cid=" + cid;},
+
+        get(cid)                        {return sendRequest(this.getLink(cid),          ops.createCompetition);},
+        sortSportsmans(cid)             {return sendRequest(this.sortSportsLink(cid),   ops.createCompetition);},
+        formPairs(cid)                  {return sendRequest(this.updatePairsLink(cid),  ops.createCompetition);},
+        create(cp)                      {sendList(this.createLink,                   cp.obj, true);},
+        edit(cp)                        {sendList(this.editLink(cp.getId()),         cp.obj, true);},
+        delete(cid)                     {sendSingle(this.removeLink(cid),            cid,    false);},
+        delSprotsman(cid, sid)          {sendSingle(this.removeSportsLink(cid, sid), sid,    true);},
+        addSprotsmen(cid, ids)          {addCompStatistics(ids, this.addSportsLink(cid), true);},   
     },
     group: {
-        get(cid, gid)                       {return ops.createGroup(sendRequest(backendLinks.GROUP_GET(cid, gid), false));},
-        edit(cid, gid, gr)                  {editGroup(cid, gid, gr)},
-        create(cid, gr)                     {createGroup(cid, gr)},
-        remove(cid, gid)                    {return sendSingleValue(backendLinks.GROUP_DELETE(cid), gid, false);},
-        excludeSportsman(cid, gid, sid)     {sendSingleValue(backendLinks.GROUP_SPORTSMEN_DEL(cid, gid), sid, false);},
-        includeSportsList(cid, gid, sids)   {sendSingleValue(backendLinks.GROUP_SPORTSMENS_ADD(cid, gid), sids, true);},
-        refreshPairs(cid, gid)              {return sendRequest(backendLinks.GROUP_PAIRS_REFRESH(cid, gid), false);},
-        setPairWinner(cid, gid, pid, color) {sendSingleValue(backendLinks.GROUP_PAIR_WINNER(cid, gid, pid), color, true);},
-        addFormula(cid, gid, formula)       {sendSingleValue(backendLinks.GROUP_FORMULA_ADD(cid, gid), formula, false);},
-        deleteFormula(cid, gid, formula)    {sendSingleValue(backendLinks.GROUP_FORMULA_DEL(cid, gid), formula, true);},
-        createFormula(map)                  {return mapToFormula(map);}
+        getLink(cid, gid)                   {return "group-get?cid="                + cid + "&gid=" + gid;},
+        createLink(cid)                     {return "new-group-form?cid="           + cid;},
+        editLink(cid, gid)                  {return "group-info-edit?cid="          + cid + "&gid=" + gid;},
+        removeLink(cid, gid)                {return "competition-group-del?cid="    + cid + "&gid=" + gid;},
+        addSportsLink(cid, gid)             {return "group-sportsmens-add?cid="     + cid + "&gid=" + gid;},
+        removeSportsLink(cid, gid)          {return "group-sportsmen-del?cid="      + cid + "&gid=" + gid;},
+        updatePairsLink(cid, gid)           {return "group-pairs-refresh?cid="      + cid + "&gid=" + gid;},
+        setWinnerLink(cid, gid, pid)        {return "pair-member-win?cid="          + cid + "&gid=" + gid + "&pid=" + pid;},
+        addFormulaLink(cid, gid)            {return "group-formula-add?cid="        + cid + "&gid=" + gid;},
+        removeFormulaLink(cid, gid)         {return "group-formula-del?cid="        + cid + "&gid=" + gid;},
+
+        get(cid, gid)                       {return sendRequest(this.getLink(cid, gid),         ops.createGroup);},
+        refreshPairs(cid, gid)              {return sendRequest(this.updatePairsLink(cid, gid), ops.createGroup);},
+        edit(cid, gid, gr)                  {sendList(this.editLink(cid, gid), gr.obj, true)},
+        create(cid, gr)                     {sendList(this.createLink(cid), gr.obj, true);},
+        remove(cid, gid)                    {sendSingle(this.removeLink(cid), gid, false);},
+        excludeSportsman(cid, gid, sid)     {sendSingle(this.removeSportsLink(cid, gid), sid, false);},
+        includeSportsList(cid, gid, sids)   {sendSingle(this.addSportsLink(cid, gid), sids, true);},
+        setPairWinner(cid, gid, pid, color) {sendSingle(this.setWinnerLink(cid, gid, pid), color, true);},
+        addFormula(cid, gid, formula)       {sendSingle(this.addFormulaLink(cid, gid), formula, false);},
+        deleteFormula(cid, gid, formula)    {sendSingle(this.removeFormulaLink(cid, gid), formula, true);},
+        createFormula()                     {return castToFormula({});}
     },
     sportsman: {
-        get(sid)                            {return ops.createSportsman(sendRequest(backendLinks.SPORTSMAN_GET(sid), false));},
-        getStatistics(sid)                  {return ops.createStatistics(sendRequest(backendLinks.SPORTSMAN_STAT_GET(sid), true));},
-        create(sp)                          {sendParametersList(backendLinks.SPORTSMAN_CREATE, createSportsmanForm(sp), false);},
-        remove(sid)                         {return sendSingleValue(backendLinks.SPORTSMAN_DELETE(sid), sid, false);},
-        edit(sid, sp)                       {sendParametersList(backendLinks.SPORTSMAN_EDIT(sid), createSportsmanForm(sp), true);},
-        addDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_ADD(cid, sid), disc, false);},
-        delDiscipline(sid, cid, disc)       {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_DISC_DEL(cid, sid), disc, false);},
-        admitChange(sid, cid, stat)         {sendSingleValue(backendLinks.COMPETITION_SPORTSMEN_ADMIT_CHANGE(cid, sid), stat, false);},
-        changePhoto(sid, data)              {sendFormData(backendLinks.SPORTSMAN_CHANGE_PHOTO(sid), data, true);}
+        createLink:                     "department-sports-add",
+        getLink(sid)                    {return "department-sports-get?sid="    + sid;},
+        editLink(sid)                   {return "department-sports-edit?sid="   + sid;},
+        deleteLink(sid)                 {return "department-sports-del?sid="    + sid;},
+        changePhotoLink(sid)            {return "sportsman-photo-change?sid="   + sid;},
+        addDisciplineLink(cid, sid)     {return "competition-stat-disc_add?cid="    + cid + "&sid=" + sid;},
+        removeDisciplineLink(cid, sid)  {return "competition-stat-disc_del?cid="    + cid + "&sid=" + sid;},
+        changeAdmitLink(cid, sid)       {return "competition-stat-perm-change?cid=" + cid + "&sid=" + sid;},
+
+        get(sid)                        {return sendRequest(this.getLink(sid), ops.createSportsman);},
+        create(sp)                      {sendList(  this.createLink,                    sp.obj, false);},
+        edit(sid, sp)                   {sendList(  this.getLink(sid),                  sp.obj, true);},
+        remove(sid)                     {sendSingle(this.deleteLink(sid),               sid,  false);},
+        addDiscipline(sid, cid, disc)   {sendSingle(this.addDisciplineLink(cid, sid),   disc, false);},
+        delDiscipline(sid, cid, disc)   {sendSingle(this.removeDisciplineLink(cid, sid),disc, false);},
+        admitChange(sid, cid, stat)     {sendSingle(this.changeAdmitLink(cid, sid),     stat, false);},
+        changePhoto(sid, data)          {sendFormData(this.changePhotoLink(sid),        data, true);}
     },
 
     trainer: {
-        get(tid)                            {return ops.createTrainer(sendRequest(backendLinks.TRAINER_GET(tid), false));},
-        create(tr)                          {sendParametersList(backendLinks.TRAINER_CREATE(), createTrainerForm(tr), true);},
-        remove(tid)                         {return sendSingleValue(backendLinks.TRAINER_REMOVE(tid), tid, false);},
-        edit(tid, tr)                       {sendParametersList(backendLinks.TRAINER_EDIT(tid), createTrainerForm(tr), true);},
-        changePhoto(tid, data)              {sendFormData(backendLinks.TRAINER_CHANGE_PHOTO(tid), data, true);}
+        getLink(tid)            {return "trainer-get?tid=" + tid;},
+        createLink()            {return "trainer-create";},
+        removeLink(tid)         {return "trainer-remove?tid=" + tid;},
+        editLink(tid)           {return "trainer-edit?tid=" + tid;},
+        changePhotoLink(tid)    {return "trainer-photo-change?tid=" + tid;},
+
+        get(tid)                {return sendRequest(this.getLink(tid), ops.createTrainer);},
+        create(tr)              {sendList(      this.createLink(),          tr.obj, true);},
+        edit(tid, tr)           {sendList(      this.editLink(tid),         tr.obj, true);},
+        remove(tid)             {sendSingle(    this.removeLink(tid),       tid, false);},
+        changePhoto(tid, data)  {sendFormData(  this.changePhotoLink(tid),  data, true);}
     },
 
     arena: {
-        get(cid, aid)                       {return ops.createArena(sendRequest(backendLinks.ARENA_GET(cid, aid), false));},
-        create(cid, arena)                  {sendParametersList(backendLinks.ARENA_CREATE(cid), arena, false);},
-        edit(cid, aid, arena)               {sendParametersList(backendLinks.ARENA_EDIT(cid, aid), arena, true);},
-        remove(cid, aid)                    {sendSingleValue(backendLinks.ARENA_REMOVE(cid, aid), aid, false);},
-        pairRemove(cid, aid, pid)           {sendSingleValue(backendLinks.ARENA_PAIR_REMOVE(cid, aid), pid, false);},
-        pairsListRebuild(cid, aid, pids)    {sendSingleValue(backendLinks.ARENA_PAIRS_REBUILD(cid, aid), pids, true);},
-        filterPairs(cid, aid)               {sendSingleValue(backendLinks.ARENA_PAIRS_FILTER(cid, aid), aid, true);},
+        createLink(cid)                     {return "arena-create?cid=" + cid;},
+        getLink(cid, aid)                   {return "arena-get?cid="    + cid + "&aid=" + aid;},
+        removeLink(cid, aid)                {return "arena-remove?cid=" + cid + "&aid=" + aid;},
+        editLink(cid, aid)                  {return "arena-edit?cid="   + cid + "&aid=" + aid;},
+        pairRemoveLink(cid, aid)            {return "arena-pair-remove?cid="    + cid + "&aid=" + aid;},
+        pairsRebuildLink(cid, aid)          {return "arena-pairs-rebuild?cid="  + cid + "&aid=" + aid;},
+        pairsFilterLink(cid, aid)           {return "arena-pairs-filter?cid="   + cid + "&aid=" + aid;},
+
+
+        get(cid, aid)                       {return sendRequest(this.getLink(cid, aid), ops.createArena);},
+        create(cid, arena)                  {sendList(this.createLink(cid),     arena.obj, false);},
+        edit(cid, aid, arena)               {sendList(this.editLink(cid, aid),  arena.obj, true);},
+        remove(cid, aid)                    {sendSingle(this.removeLink(cid, aid),          aid,  false);},
+        pairRemove(cid, aid, pid)           {sendSingle(this.pairRemoveLink(cid, aid),      pid,  false);},
+        pairsListRebuild(cid, aid, pids)    {sendSingle(this.pairsRebuildLink(cid, aid),    pids, true);},
+        filterPairs(cid, aid)               {sendSingle(this.pairsFilterLink(cid, aid),     aid,  true);},
     }
 }

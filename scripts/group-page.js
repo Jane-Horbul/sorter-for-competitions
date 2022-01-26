@@ -1,4 +1,4 @@
-import {checkers,
+import {helpers,
     getLinkParams, 
     showShadows, 
     languageSwitchingOn,
@@ -34,8 +34,8 @@ console.log(groupInfo);
 
 function pairPageElementAdd(pair){
     if(pair.getId() == undefined) return;
-    var unknowWinner = checkers.isEmptyString(pair.getWinner());
-    var unknowMember = !checkers.isSportsmanId(pair.getRedSp()) || !checkers.isSportsmanId(pair.getBlueSp());
+    var unknowWinner = helpers.isEmptyString(pair.getWinner());
+    var unknowMember = !helpers.isSportsmanId(pair.getRedSp()) || !helpers.isSportsmanId(pair.getBlueSp());
     var template = markup.pairs.getTemplate();
     var placeholders = markup.pairs.getPlaceholders(pair);
     var newItem = createPageItem(template, placeholders);
@@ -54,7 +54,7 @@ function refreshPairs(){
 /* ------------------- SPORTSMANS ----------------------------*/
 
 export function getSportsName(id){
-    if(!checkers.isSportsmanId(id)){
+    if(!helpers.isSportsmanId(id)){
         return "Winner of " + id;
     }
 
@@ -237,7 +237,7 @@ function getGridPairNames(pair)
     if(pair.getArena() != undefined)
         names.arena = pair.getArena();
     if(pair.getTime() != undefined)
-        names.time = pair.getFormatedTime("hh:min");
+        names.time = pair.getTime("hh:min");
     return names;
 }
 
@@ -318,7 +318,7 @@ function formulaPageElementAdd(formula){
 }
 
 function addNewFormula(){
-    var formula = server.group.createFormula(undefined);
+    var formula = server.group.createFormula();
 
     formula.setPreparation(markup.group.getFormulaPrepareInput().value);
     formula.setRoundsNum(markup.group.getFormulaRoundsNumInput().value);
@@ -332,19 +332,19 @@ function addNewFormula(){
     if(formula.getFinalMax() == "")
         formula.setFinalMax("-1");
 
-    if(!checkers.isNumber(formula.getPreparation())){
+    if(!helpers.isNumber(formula.getPreparation())){
         return;
-    } else if(!checkers.isNumber(formula.getRoundsNum())){
+    } else if(!helpers.isNumber(formula.getRoundsNum())){
         return;
-    } else if(!checkers.isNumber(formula.getRound())){
+    } else if(!helpers.isNumber(formula.getRound())){
         return;
-    } else if(!checkers.isNumber(formula.getRest())){
+    } else if(!helpers.isNumber(formula.getRest())){
         return;
-    } else if(!checkers.isNumber(formula.getAfterhold())){
+    } else if(!helpers.isNumber(formula.getAfterhold())){
         return;
-    } else if(!checkers.isNumber(formula.getFinalMin())){
+    } else if(!helpers.isNumber(formula.getFinalMin())){
         return;
-    } else if(!checkers.isNumber(formula.getFinalMax())){
+    } else if(!helpers.isNumber(formula.getFinalMax())){
         return;
     }
     server.group.addFormula(page.cid, page.gid, formulaToString(formula));
@@ -355,7 +355,7 @@ function groupInfoEdit(){
     var nameInput = markup.group.getNameInput();
     
     if(nameInput != null){
-        var newGroup = ops.createGroup(undefined);
+        var newGroup = ops.createGroup();
         newGroup.setName(nameInput.value);
         newGroup.setDiscipline(markup.group.getDisciplineInput().value);
         newGroup.setFormSystem(markup.group.getSystemInput().value);
@@ -469,7 +469,7 @@ function setBtnActions(){
     onClick(markup.group.getDelBtn(),           function(){server.group.remove(page.cid, page.gid)});
     onClick(markup.group.getEditBtn(),          groupInfoEdit);
     onClick(markup.group.getUpdatePairsBtn(),   refreshPairs);
-    onClick(markup.group.getAddFormulaBtn(),   addNewFormula);
+    onClick(markup.group.getAddFormulaBtn(),    addNewFormula);
 }
 
 prepareTabs()

@@ -1,4 +1,4 @@
-import {server} from "./communication.js"
+import {server, ops} from "./communication.js"
 
 
 function cutPairId(id){
@@ -10,7 +10,7 @@ function cutPairId(id){
 
 export const commonStrings = {
     arrDivider: ", ",
-    mapDivider: "-",
+    mapDivider: " - ",
     pairWinner(id)  {return "Winner of pair " + cutPairId(id);}  
 }
 
@@ -88,6 +88,8 @@ const shortMonths = {
 export function formatDate(dateTime, format){
     if(dateTime == undefined)
         return "";
+    else if(format == undefined)
+        return dateTime;
     var parts = dateTime.split(" ");
     var date = parts[0].split("/");
     var time = parts[1].split(":");
@@ -119,8 +121,8 @@ function datetimeValidate(datetime){
     var parts = datetime.split(" ");
     var date = parts[0].split("/");
     var time = parts.length > 1 ? parts[1].split(":") : undefined;
-
-    if((time == undefined) || (date.length < 3)) return false;
+    if((time == undefined) || (date.length < 3))
+        return false;
     var year    = Number(date[2]);
     var month   = Number(date[1]) - 1;
     var day     = Number(date[0]);
@@ -128,12 +130,11 @@ function datetimeValidate(datetime){
     var mins    = Number(time[1]);
     var d       = new Date(year, month, day);
     return ((d.getFullYear() == year) 
-                && (d.getMonth() == month)
-                && (d.getDate() == day)
-                && (hours < 24) 
-                && (mins < 60))
-            ? true : false;
-        
+            && (d.getMonth() == month)
+            && (d.getDate() == day)
+            && (hours < 24) 
+            && (mins < 60))
+        ? true : false;
 }
 
 function datetimesCompare(dt1, dt2){
@@ -157,11 +158,15 @@ function datetimesCompare(dt1, dt2){
     return 0;
 }
 
-function isSportsmanId(id){
-    return id.indexOf("S") < 0 ? false : true;
+function arrToStr(arr, getter){
+    var res = "";
+    for(var i = 0; i < arr.length; i++)
+        res += getter == undefined ? arr[i] : getter(arr[i]);
+        
+    return res;
 }
 
-export const checkers = {   
+export const helpers = {   
     getIfDefined(val, defVal)   { return val == undefined ? defVal : val;},
     strEquals(s1, s2)           { return (s1.localeCompare(s2) == 0); },
     isNumber(num)               { return (isNaN(Number(num)) || this.strEquals(num, "")) ? false : true; },
@@ -169,13 +174,29 @@ export const checkers = {
     checkName(field, value)     { if(this.isEmptyString(value)) { errors.emptyField(field); return false; } return true; },
     checkNumber(field, value)   { if(!this.isNumber(value))     { errors.badNumber(field);  return false; } return true; },
     checkDate(date)             { if(!dateValidate(date))       { errors.badDate(date);     return false; } return true;},
-    checkDateTime(dateime)      { if(!datetimeValidate(dateime)){ errors.badDate(dateime);  return false; } return true;},
+    checkDateTime(dateTime)     { if(!datetimeValidate(dateTime)){ errors.badDate(dateTime);  return false; } return true;},
     compareDateTimes(dt1, dt2)  { return datetimesCompare(dt1, dt2);},
-    isSportsmanId(id)           { return id.indexOf("S") < 0 ? false : true;}
+    isSportsmanId(id)           { return id.indexOf("S") < 0 ? false : true;},
+    arrayToString(arr, getter)  {return arrToStr(arr, getter);}
 }
 
 export function onClick(object, action){
     object.addEventListener("click", action, false);
+}
+
+export function rowsComparator(row, val){
+    for(let cell of row.cells)
+        if(cell.innerHTML.includes(val))
+            return "table-row";
+    return "none";
+}
+
+export function filtration(object, container, comparator){
+    object.addEventListener("keyup", (e) => {
+        var items = container.querySelectorAll('.filter-item');
+        for (let item of items)
+            item.style.display = comparator(item, e.target.value);
+    }, false);
 }
 
 export function getLinkParams(link){
@@ -195,63 +216,15 @@ export function getLinkParams(link){
     return paramsMap;
 }
 
-export function parseMap(str){
-    var result = new Map();
-    str.split(commonStrings.arrDivider).forEach(field => {
-        var params =  field.split(" - ");
-        if(params.length > 1){
-            result.set(params[0], params[1]);
-        } 
-    });
-    return result;
-}
-
-export function parseMapArray(str){
-    var result = new Array(0);
-    str.split("}, ").forEach(mapStr => {
-        var resMap = parseMap(mapStr.substring(1).split("}")[0]);
-        if(resMap.size > 0)
-            result.push(resMap);   
-    });
-    return result;
-}
-
-export function parseBodyParams(body){
-    var blocksResult = new Array(0);
-    var blocks = body.split("<Option block>");
-    blocks.forEach(block => {
-        const parseResult = new Map();
-        var options = block.split("<Option name>");
-        options.forEach(option => {
-            var params = option.split("<Option value>");
-            if(params.length < 2) return;
-            
-            if(params[1].split("<Type single>").length > 1) {
-                params[1] = params[1].split("<Type single>")[1];
-                parseResult.set(params[0], params[1]);
-            } else if(params[1].split("<Type array>").length > 1) {
-                params[1] = params[1].split("<Type array>")[1];
-                var array = params[1].split(commonStrings.arrDivider);
-                if(array[0].length > 0)
-                    parseResult.set(params[0], array);
-                else
-                    parseResult.set(params[0], new Array(0));
-            } else if(params[1].split("<Type map>").length > 1) {
-                params[1] = params[1].split("<Type map>")[1];
-                parseResult.set(params[0], parseMap(params[1]));
-            } else if(params[1].split("<Type mapArray>").length > 1) {
-                params[1] = params[1].split("<Type mapArray>")[1];
-                parseResult.set(params[0], parseMapArray(params[1]));
-            }
-        });
-        if(parseResult.size > 0)
-            blocksResult.push(parseResult);
-    });
-    return blocksResult;
+function logIn(){
+    var client = ops.createClient();
+    client.setLogin(markup.client.getLogin());
+    client.setPassword(markup.client.getPass());
+    server.access.login(client)
 }
 
 export function prepareClient(cl){
-    onClick(markup.client.getLoginBtn(), function(){server.access.login(markup.client.getLogin(), markup.client.getPass())});
+    onClick(markup.client.getLoginBtn(), logIn);
     if(!cl.isGuest()){
         var clContainer =  markup.client.getClientContainer();
         clContainer.innerHTML = "";

@@ -1,4 +1,4 @@
-import {checkers, createPageItem} from "./common.js"
+import {helpers, createPageItem} from "./common.js"
 
 const medals = {
     "1": "./img/gold-m-2.png",
@@ -7,7 +7,7 @@ const medals = {
 }
 
 function getWinLoseStatus(pr, sp){
-    if(checkers.isEmptyString(pr.getWinner()))
+    if(helpers.isEmptyString(pr.getWinner()))
         return "";
     if(pr.getWinner() == sp.getId())
         return "Win";
@@ -75,9 +75,9 @@ export const markup = {
         getArena(cs, gs)        { return document.getElementById(this.getPairsListId(cs, gs)); },
         createPairsItem(pair, sp)   { return createPageItem(document.getElementById(this.pairStatTemplate), this.getPairPlaceholders(pair, sp)); },
         getPairPlaceholders(pair, sp){ return {
-                                        "#pair-number":     checkers.getIfDefined(pair.getNumber(), ""),
-                                        "#pairs-list":      checkers.getIfDefined(pair.getArena(), ""),
-                                        "#pair-time":       pair.getFormatedTime("hh:min (dd/mm)"),
+                                        "#pair-number":     helpers.getIfDefined(pair.getNumber(), ""),
+                                        "#pairs-list":      helpers.getIfDefined(pair.getArena(), ""),
+                                        "#pair-time":       pair.getTime("hh:min (dd/mm)"),
                                         "#pair-result":     getWinLoseStatus(pair, sp),
                                         "#pair-style":      pair.getRedSp() == sp.getId() ? "sp-st-group-card-table--red" : "sp-st-group-card-table--blue"
                                     };
@@ -112,7 +112,6 @@ export const markup = {
         getSexInput()               { return document.getElementById("sports-input-sex");},
         getSexInputTemplate()       { return document.getElementById("sports-input-sex-template").cloneNode(true).content;},
         getAgeInput()               { return document.getElementById("sports-input-age");},
-        getAgeInputTemplate()       { return document.getElementById("sports-input-age-template").cloneNode(true).content;},
         getWeightInput()            { return document.getElementById("sports-input-weight");},
         getWeightInputTemplate()    { return document.getElementById("sports-input-weight-template").cloneNode(true).content;},
         getQualInput()              { return document.getElementById("sports-input-qulification");},

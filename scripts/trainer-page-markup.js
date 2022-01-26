@@ -60,7 +60,7 @@ export const markup = {
         getSexInput()                   { return document.getElementById("new-sportsman-sex-male").checked ? "male" : "female";},
         getTrainerInput()               { return document.getElementById("new-sportsman-trainer").value;},
         getQualificationInput()         { return document.getElementById("new-sportsman-qualifications").value;},
-        getOneMoreInput()               { return document.getElementById("add-one-more-sp").value;},
+        getOneMoreInput()               { return document.getElementById("add-one-more-sp").checked;},
 
         getTrainersList()               { return document.getElementById("new-sportsman-trainer");},
         getTrainerTemplate()            { return document.getElementById("new-sportsman-trainer-temp");},
@@ -85,7 +85,7 @@ export const markup = {
         getPlaceholders(sp)             { return {
                                                 "#sp-surname":      sp.getSurname(),
                                                 "#sp-name":         sp.getName(),
-                                                "#sp-age":          sp.getFormatedBirth("dd.mm.yy"),
+                                                "#sp-age":          sp.getBirth("dd.mm.yy"),
                                                 "#sp-weight":       sp.getWeight(),
                                                 "#sp-sex":          sp.getSex(),
                                                 "#sp-team":         sp.getTeam(),

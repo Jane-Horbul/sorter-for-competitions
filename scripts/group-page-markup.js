@@ -1,17 +1,17 @@
 
 
 import {getSportsName} from "./group-page.js"
-import {checkers, createPageItem} from "./common.js"
+import {helpers, createPageItem} from "./common.js"
 
 function getWinStyle(pair){
     var winner = pair.getWinner();
-    return checkers.isEmptyString(winner) ? "" : ((winner == pair.getRedSp()) ? markup.pairs.redWinStyle : markup.pairs.blueWinStyle);
+    return helpers.isEmptyString(winner) ? "" : ((winner == pair.getRedSp()) ? markup.pairs.redWinStyle : markup.pairs.blueWinStyle);
 }
 
 function getPairWinner(pair){
     var winner = pair.getWinner();
-    if(checkers.isEmptyString(winner)){
-        if(!checkers.isSportsmanId(pair.getRedSp()) || !checkers.isSportsmanId(pair.getBlueSp()))
+    if(helpers.isEmptyString(winner)){
+        if(!helpers.isSportsmanId(pair.getRedSp()) || !helpers.isSportsmanId(pair.getBlueSp()))
             return "";
         return markup.pairs.createWinBtns(pair.getId());
     } else {
@@ -31,7 +31,7 @@ export const markup = {
         getPlaceholders(p)          { return {
                                             "#pair-num":        Number(p.getNumber()) > 0 ? p.getNumber() : "",
                                             "#pairs-list":      p.getArena() != undefined ? p.getArena() : "",
-                                            "#time":            p.getFormatedTime("hh:min (dd/mm)"),
+                                            "#time":            p.getTime("hh:min (dd/mm)"),
                                             "#final-part":      "1/" + p.getFinalPart(),
                                             "#red-sportsman":   getSportsName(p.getRedSp()),
                                             "#blue-sportsman":  getSportsName(p.getBlueSp()),

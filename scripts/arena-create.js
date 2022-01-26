@@ -1,5 +1,5 @@
 import {
-    checkers,
+    helpers,
     showShadows,
     getLinkParams,
     languageSwitchingOn,
@@ -43,7 +43,7 @@ function activateGroup(gr){
     if(unactGr != null)
         unactGr.remove();
     for(var i = 0; i < unactiveGroups.length; i++){
-        if(checkers.strEquals(unactiveGroups[i].getId(), gr.getId())){
+        if(helpers.strEquals(unactiveGroups[i].getId(), gr.getId())){
             unactiveGroups.splice(i, 1);
             break;
         }
@@ -60,7 +60,7 @@ function deactivateGroup(gr){
     if(actGr != null)
         actGr.remove();
     for(var i = 0; i < activeGroups.length; i++){
-        if(checkers.strEquals(activeGroups[i].getId(), gr.getId())){
+        if(helpers.strEquals(activeGroups[i].getId(), gr.getId())){
             activeGroups.splice(i, 1);
             break;
         }
@@ -89,7 +89,7 @@ function attachPair(pair){
     if(detachedPair != null) detachedPair.remove();
 
     for(var i = 0; i < detachedPairs.length; i++){
-        if(checkers.strEquals(detachedPairs[i].getId(), pair.getId())){
+        if(helpers.strEquals(detachedPairs[i].getId(), pair.getId())){
             detachedPairs.splice(i, 1);
             break;
         }
@@ -108,7 +108,7 @@ function detachPair(pair){
     if(attachedPair != null) attachedPair.remove();
 
     for(var i = 0; i < attachedPairs.length; i++){
-        if(checkers.strEquals(attachedPairs[i].getId(), pair.getId())){
+        if(helpers.strEquals(attachedPairs[i].getId(), pair.getId())){
             attachedPairs.splice(i, 1);
             break;
         }
@@ -137,14 +137,14 @@ function createInterval(){
     var start = markup.automation.schedule.getStartIntervalInput().value;
     var end = markup.automation.schedule.getEndIntervalInput().value;
     
-    if(!checkers.checkDateTime(start) || !checkers.checkDateTime(end)) return;
-    if(checkers.compareDateTimes(start, end) > 0){
+    if(!helpers.checkDateTime(start) || !helpers.checkDateTime(end)) return;
+    if(helpers.compareDateTimes(start, end) > 0){
         alert("Start time bigger than end time.")
         return;
     }
     for(var i = 0; i < intervals.length; i++){
-        if((checkers.compareDateTimes(start, intervals[i].start) >= 0) && (checkers.compareDateTimes(start, intervals[i].end) <= 0)){
-            alert("Intersection with " + intervals[i].start + " - " + intervals[i].end + " interval found.")
+        if((helpers.compareDateTimes(start, intervals[i].start) >= 0) && (helpers.compareDateTimes(start, intervals[i].end) <= 0)){
+            alert("Intersection with " + intervals[i].start + commonStrings.mapDivider + intervals[i].end + " interval found.")
             return;
         } 
     }
@@ -174,67 +174,42 @@ function createArenaAutomatic(){
     var finalMax = markup.automation.getFinalMaxValue();
     var arena = ops.createArena(undefined);
 
-    if(!checkers.checkName("Arena name", name))
+    if(!helpers.checkName("Arena name", name))
         return;
-    if(checkers.isNumber(qualMin) && checkers.isNumber(qualMax) && Number(qualMin) > Number(qualMax)){
+    if(helpers.isNumber(qualMin) && helpers.isNumber(qualMax) && Number(qualMin) > Number(qualMax)){
         alert("Minimal qualification must be lower or equal than maximal");
         return;
     }
     arena.setName(name);
 
-    var groupsIds = "";
-    var first = true;
-    activeGroups.forEach(gr => {
-        if(first) 
-            first = false;
-        else 
-            groupsIds += commonStrings.arrDivider;
-        groupsIds += gr.getId();
-    });
-    
-    var scheduleStr = "";
-    first = true;
-    intervals.forEach(interval => {
-        if(first) 
-            first = false;
-        else 
-            scheduleStr += commonStrings.arrDivider;
-        scheduleStr += interval.start + commonStrings.mapDivider + interval.end;
-    });
+    var groupsIds   = helpers.arrayToString(activeGroups, function(gr){return gr.getId()});
+    var scheduleStr = helpers.arrayToString(intervals, function(it){return it.start + commonStrings.mapDivider + it.end;});
 
     arena.setGroups(groupsIds);
     arena.setSchedule(scheduleStr);
-    if(checkers.isNumber(distance))     arena.setDistance(distance);
-    if(checkers.isNumber(ageMin))       arena.setAgeMin(ageMin);
-    if(checkers.isNumber(ageMax))       arena.setAgeMax(ageMax);
-    if(checkers.isNumber(weightMin))    arena.setWeightMin(weightMin);
-    if(checkers.isNumber(weightMax))    arena.setWeightMax(weightMax);
-    if(checkers.isNumber(finalMin))     arena.setFinalMin(finalMin);
-    if(checkers.isNumber(finalMax))     arena.setFinalMax(finalMax);
-    if(checkers.isNumber(qualMin))      arena.setQualMin(qualMin);
-    if(checkers.isNumber(qualMax))      arena.setQualMax(qualMax);
+    if(helpers.isNumber(distance))     arena.setDistance(distance);
+    if(helpers.isNumber(ageMin))       arena.setAgeMin(ageMin);
+    if(helpers.isNumber(ageMax))       arena.setAgeMax(ageMax);
+    if(helpers.isNumber(weightMin))    arena.setWeightMin(weightMin);
+    if(helpers.isNumber(weightMax))    arena.setWeightMax(weightMax);
+    if(helpers.isNumber(finalMin))     arena.setFinalMin(finalMin);
+    if(helpers.isNumber(finalMax))     arena.setFinalMax(finalMax);
+    if(helpers.isNumber(qualMin))      arena.setQualMin(qualMin);
+    if(helpers.isNumber(qualMax))      arena.setQualMax(qualMax);
     
-    server.arena.create(page.cid, arena.params);
+    server.arena.create(page.cid, arena);
     document.location.href = competitionLink;
 }
 
 function createArenaManual(){
     var name = markup.common.getArenaName();
     var arena = ops.createArena(undefined);
-    if(!checkers.checkName("Arena name", name))
+    if(!helpers.checkName("Arena name", name))
         return;
     arena.setName(name);
-    var pids = "";
-    var first = true;
-    attachedPairs.forEach(pr => {
-        if(first) 
-            first = false;
-        else 
-            pids += commonStrings.arrDivider;
-        pids += pr.getId();
-    });
+    var pids = helpers.arrayToString(attachedPairs, function(pr){return pr.getId()});
     arena.setPairs(pids);
-    server.arena.create(page.cid, arena.params);
+    server.arena.create(page.cid, arena);
     document.location.href = competitionLink;
 }
 
