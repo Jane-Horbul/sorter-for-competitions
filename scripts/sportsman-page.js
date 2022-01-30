@@ -26,7 +26,6 @@ console.log(sportsmanInfo);
 
 /* ------------------- STATISTICS ----------------------------*/
 function changeParmition(cs, permCheckbox){
-    console.log("Change admittion for " + cs.getCompetitionName());
     server.sportsman.admitChange(page.sid, cs.getCompetitionId(), permCheckbox.checked ? "true" : "false");
 }
 

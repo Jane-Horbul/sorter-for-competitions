@@ -25,7 +25,6 @@ export const markup = {
                                             "#sp-sex":          sp.getSex(),
                                             "#sp-team":         sp.getTeam(),
                                             "#sp-qual":         getQualNameByValue(sp.getQualification()),
-                                            "#sp-admit":        sp.getAdmition(),
                                             "#sp-gr-num":       sp.getGroupsNum(),
                                             "#sportsman-link":  dpLink + sp.getLink(),
                                             "#disc-list-id":    "sports-disc-list-" + sp.getId(),
@@ -38,10 +37,14 @@ export const markup = {
                                                         "#disc-id":     ("discipline-" + spId + "-" + id)};
                                                 },
 
+        getAdmitLabel(sp)           { return document.getElementById("label-admit-sp-" + sp.getId());},
+        getAdmitBtn(sp)             { return document.getElementById("admit-sp-" + sp.getId());},
         getDelBtn(sp)               { return document.getElementById("remove-comp-sport-" + sp.getId());},
         getAddBtn()                 { return document.getElementById("sportsmans-add-list-send-btn");},
         getSortSpBtn()              { return document.getElementById("sort-members-btn");},
-        getSearchInput()            { return document.getElementById("sportsmen-search-input");}
+        getSearchInput()            { return document.getElementById("sportsmen-search-input");},
+
+        getYesNoWord(val)           {return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;}
     },
 
     groups: {

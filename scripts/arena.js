@@ -203,9 +203,7 @@ function editArena(){
         scheduleStr += (i > 0 ? commonStrings.arrDivider : "") + intervals[i].start + commonStrings.mapDivider + intervals[i].end
     }
     eArena.setSchedule(scheduleStr);
-
-    console.log(eArena.params);
-    server.arena.edit(page.cid, page.aid, eArena.params);
+    server.arena.edit(page.cid, page.aid, eArena);
 }
 
 function fillPageInfo(){

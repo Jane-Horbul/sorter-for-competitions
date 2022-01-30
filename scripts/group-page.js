@@ -117,6 +117,11 @@ function competitionSportsmanElementAdd(sp){
     }
 }
 
+function sportsmanAdmitChange(sp, admitCheckbox){
+    markup.sportsmen.getAdmitLabel(sp).innerHTML = markup.sportsmen.getYesNoWord(admitCheckbox.checked);
+    server.sportsman.admitChange(sp.getId(), page.cid, "" + admitCheckbox.checked);
+}
+
 function sportsmanPageElementAdd(sp){
     if(sp.getId() != undefined){
         excludeCompetitionSportsman(sp);
@@ -124,7 +129,16 @@ function sportsmanPageElementAdd(sp){
         var placeholders = markup.sportsmen.getPlaceholders(sp, qualificationsMap, departmentLink);
         var newItem = createPageItem(template, placeholders);
         markup.sportsmen.getTable().append(newItem); 
-        onClick(markup.sportsmen.getDelBtn(sp), function(){sportsmanRemove(sp.getId())});
+        
+
+        var admitCheckbox = markup.sportsmen.getAdmitBtn(sp);
+        admitCheckbox.checked = sp.getAdmition();
+        markup.sportsmen.getAdmitLabel(sp).innerHTML = markup.sportsmen.getYesNoWord(admitCheckbox.checked);
+        if(client.isRoot() || client.isAdmin()){
+            admitCheckbox.disabled = false;
+            onClick(admitCheckbox, function(){sportsmanAdmitChange(sp, admitCheckbox);});
+            onClick(markup.sportsmen.getDelBtn(sp), function(){sportsmanRemove(sp.getId())});
+        }
     }
 }
 
@@ -431,7 +445,7 @@ function groupInfoEdit(){
 
 
 function fillPageInfo(){
-    /*--------------------------------Main tables params--------------------------------------------------------------------------------*/
+    /*--------------------------------Main tables--------------------------------------------------------------------------------*/
     var qualMax = qualificationsMap.get(groupInfo.getQualMax());
     var qualMin = qualificationsMap.get(groupInfo.getQualMin());
 

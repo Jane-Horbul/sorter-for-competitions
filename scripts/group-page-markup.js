@@ -63,7 +63,7 @@ export const markup = {
                                             "#sp-weight":       sp.getWeight(),
                                             "#sp-sex":          sp.getSex(),
                                             "#sp-team":         sp.getTeam(),
-                                            "#sp-qual":         quals.get(sp.getQualification()),
+                                            "#sp-qual":         quals.get("" + sp.getQualification()),
                                             "#sp-admit":        sp.getAdmition(),
                                             "#sp-gr-num":       sp.getGroupsNum(),
                                             "#sportsman-link":  dlink + sp.getLink(),
@@ -72,7 +72,10 @@ export const markup = {
                                     },
         getSportsRow(id)            { return document.getElementById(this.sportsmanRowId + id);},
         getAddBtn()                 { return document.getElementById(this.addBtnId);},
-        getDelBtn(sp)               { return document.getElementById(markup.sportsmen.removeBtnId + sp.getId());}
+        getDelBtn(sp)               { return document.getElementById(markup.sportsmen.removeBtnId + sp.getId());},
+        getAdmitLabel(sp)           { return document.getElementById("label-admit-sp-" + sp.getId());},
+        getAdmitBtn(sp)             { return document.getElementById("admit-sp-" + sp.getId());},
+        getYesNoWord(val)           { return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;}
     },
     grid: {
         scale:          30,

@@ -224,12 +224,13 @@ function logIn(){
 }
 
 export function prepareClient(cl){
-    onClick(markup.client.getLoginBtn(), logIn);
-    if(!cl.isGuest()){
+    if(cl.isGuest())
+        onClick(markup.client.getLoginBtn(), logIn);
+    else {
         var clContainer =  markup.client.getClientContainer();
         clContainer.innerHTML = "";
         clContainer.append(createPageItem(markup.client.getTemplate(), markup.client.getPlaceholders(cl)));
-        onClick(markup.client.getSignOutBtn(), server.access.logout);
+        onClick(markup.client.getSignOutBtn(), function(){server.access.logout();});
         if(cl.getPhoto() != undefined)
             markup.client.setPhoto(cl.getPhoto());
     }

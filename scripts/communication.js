@@ -99,7 +99,7 @@ function castToSportsman(object) {
         setAdmition(v)         {this.obj[this.admit] = v;},
         setDisciplines(v)      {this.obj[this.disciplines] = v;},
 
-        getLink()              {return "/sportsman?sid=" + this. getId(this.params);}
+        getLink()              {return "/sportsman?sid=" + this.getId();}
     };
 }
 
@@ -126,7 +126,7 @@ function castToTrainer(object) {
         getRegion()           {return this.obj[this.region];},
         getEmail()            {return this.obj[this.email];},
         getPhoto()            {return this.obj[this.photo];},
-        getLink()             {return this.link + this.getId(this.params);},
+        getLink()             {return this.link + this.getId();},
 
         setId(v)               {this.obj[this.id] = v;},
         setName(v)             {this.obj[this.name] = v;},
@@ -490,6 +490,7 @@ function sendList(formName, obj, refresh) {
 }
 
 function sendSingle(link, value, refresh){
+    console.log("Link: " + link + " value: "  + value)
     sendList(link, {[link]: value}, refresh);
 }
 
@@ -505,12 +506,12 @@ function addCompStatistics(spArray, link, reload){
 export const server = {
     access: {
         loginLink:          "client-login",
-        logoutLink:         "client-logout",
+        llogoutLink:         "client-logout",
         getStatusLink:      "client-status-get",
         changeLoginLink:    "client-change-login",
         changePassLink:     "client-change-pass",
 
-        logout()            {sendSingle(this.logoutLink,        "",     true);},
+        logout()            {sendSingle(this.llogoutLink,        "",     true);},
         login(cl)           {sendList(  this.loginLink,         cl.obj, true);},
         changeLogin(cl)     {sendList(  this.changeLoginLink,   cl.obj, true);},
         changePass(cl)      {sendList(  this.changePassLink,    cl.obj, true);},
@@ -586,7 +587,7 @@ export const server = {
 
         get(sid)                        {return sendRequest(this.getLink(sid), ops.createSportsman);},
         create(sp)                      {sendList(  this.createLink,                    sp.obj, false);},
-        edit(sid, sp)                   {sendList(  this.getLink(sid),                  sp.obj, true);},
+        edit(sid, sp)                   {sendList(  this.editLink(sid),                 sp.obj, true);},
         remove(sid)                     {sendSingle(this.deleteLink(sid),               sid,  false);},
         addDiscipline(sid, cid, disc)   {sendSingle(this.addDisciplineLink(cid, sid),   disc, false);},
         delDiscipline(sid, cid, disc)   {sendSingle(this.removeDisciplineLink(cid, sid),disc, false);},

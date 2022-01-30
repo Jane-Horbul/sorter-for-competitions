@@ -45,6 +45,11 @@ function excludeDepSportsman(sp){
     }
 }
 
+function sportsmanAdmitChange(sp, admitCheckbox){
+    markup.sportsmen.getAdmitLabel(sp).innerHTML = markup.sportsmen.getYesNoWord(admitCheckbox.checked);
+    server.sportsman.admitChange(sp.getId(), page.cid, "" + admitCheckbox.checked);
+}
+
 function sportsmanPageElementAdd(sp){
     if(sp.getId() != undefined){
         excludeDepSportsman(sp);
@@ -52,7 +57,18 @@ function sportsmanPageElementAdd(sp){
         var placeholders = markup.sportsmen.getPlaceholders(sp, departmentLink);
         var newItem = createPageItem(template, placeholders);
         markup.sportsmen.getTable().append(newItem); 
-        onClick(markup.sportsmen.getDelBtn(sp), function(){server.competition.delSprotsman(page.cid, sp.getId())});
+
+        var admitCheckbox = markup.sportsmen.getAdmitBtn(sp);
+        admitCheckbox.checked = sp.getAdmition();
+        markup.sportsmen.getAdmitLabel(sp).innerHTML = markup.sportsmen.getYesNoWord(admitCheckbox.checked);
+        if(!client.isGuest())
+            onClick(markup.sportsmen.getDelBtn(sp), function(){server.competition.delSprotsman(page.cid, sp.getId())});
+        if(client.isRoot() || client.isAdmin()){
+            admitCheckbox.disabled = false;
+            onClick(admitCheckbox, function(){sportsmanAdmitChange(sp, admitCheckbox);});
+        }
+            
+            
     }
 }
 

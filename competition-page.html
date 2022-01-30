@@ -111,7 +111,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>-PHX_SPORT_SURNAME-</th>
+                                        <th class="secondary-tables--th">-PHX_SPORT_SURNAME-</th>
                                         <th>-PHX_SPORT_NAME-</th>
                                         <th>-PHX_SPORT_AGE-</th>
                                         <th>-PHX_SPORT_WEIGHT-</th>
@@ -132,8 +132,11 @@
                                         <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-sex</td>
                                         <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-team</td>
                                         <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-qual</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-admit</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-gr-num</td>
+                                        <td class="secondary-tables--td">
+                                            <input class="input-to-choose-type" type="checkbox" id="admit-sp-#sp-id" name="admit-sp-#sp-id" disabled>
+                                            <label class="label-to-choose-type" for="admit-sp-#sp-id" id="label-admit-sp-#sp-id"></label>
+                                        </td>
+                                        <td class="secondary-tables--td">#sp-gr-num</td>
                                         <td class="column-for-button secondary-title-two-tables js-hidden-element js-root-view js-admin-view"> 
                                             <button class="member-page-dell-btn" id="remove-comp-sport-#sp-id"  type="button">
                                                 <svg class="group-info-edit-btn-icon">
@@ -143,7 +146,12 @@
                                         </td>
                                     </tr>
                                 </template>
-
+                                <template id="yes-template">
+                                    -CPHX_YES-
+                                </template>
+                                <template id="no-template">
+                                    -CPHX_NO-
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -596,7 +604,7 @@
                             <div class="">
                                 <div class="login-page-title">
                                     <span class="login-page-popup-title">-CPHX_LOG_IN-</span>
-
+                                </div>
                                 <div class="input-container ic1">
                                     <input id="login" class="input input_login" type="text" placeholder=" " />
                                     <div class="cut"></div>
