@@ -1,0 +1,9 @@
+<svg width="20" height="45" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>select-arr</title>
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <line stroke="#ffffff" id="svg_14" y2="45" x2="10" y1="0" x1="10" stroke-width="20" fill="none"/>
+  <line transform="rotate(-0.256003 9.82068 34.0367)" stroke="#2196f3" stroke-width="2" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="21.98417" x2="19.33653" y1="46.08922" x1="0.30483" fill="none"/>
+  <path id="svg_4" d="m0.63217,-0.76163l18.49472,23.89526" transform="rotate(-0.256003 9.87952 11.186)" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="2" stroke="#2196f3" fill="none"/>
+ </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg width="22.5" height="45" xmlns="http://www.w3.org/2000/svg" stroke="null" style="vector-effect: non-scaling-stroke;" version="1.1">
+ <title stroke="null" style="vector-effect: non-scaling-stroke;">preselect</title>
+ <g stroke="null" id="Layer_1">
+  <title stroke="null">Layer 1</title>
+  <path transform="rotate(-0.256003 9.82068 34.0367)" id="svg_1" d="m0.30483,46.08922l19.0317,-24.10504" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="2" stroke="#ffffff" fill="none"/>
+  <path transform="rotate(-0.256003 9.87952 11.186)" stroke="#ffffff" id="svg_4" d="m0.63217,-0.76163l18.49472,23.89526" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="2" fill="none"/>
+  <path stroke="#ffffff" id="svg_18" d="m4.75721,-12.17618l28.30914,36.01468" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="15" fill="none"/>
+  <path transform="rotate(-0.256003 20.5151 36.8921)" stroke="#ffffff" id="svg_19" d="m10.50251,49.67973l20.02521,-25.57517" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="15" fill="none"/>
+  <path transform="rotate(-0.256003 11.8795 11.186)" stroke="#2196f3" id="svg_20" d="m3.08378,-0.76163l18.49471,23.89527" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="2" fill="none"/>
+  <path transform="rotate(-0.256003 12.2078 34.0367)" id="svg_21" d="m2.69193,46.08922l19.0317,-24.10505" opacity="undefined" stroke-linecap="undefined" stroke-linejoin="undefined" stroke-width="2" stroke="#2196f3" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_23" y2="1" x2="22.5" y1="1" x1="4" stroke-width="2" stroke="#2196f3" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_24" y2="44.09676" x2="22.62903" y1="44.09676" x1="4.12903" stroke-width="2" stroke="#2196f3" fill="none"/>
+ </g>
+</svg>

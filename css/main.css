@@ -436,18 +436,19 @@ textarea {
 
 .container-main {
   width: 100%;
-  margin-right: 25px;
 }
 
 @media (min-width: 320px) {
   .container-main {
-    width: 320px;
+    width: auto;
     overflow-x: scroll;
+    margin-right: 0px;
   }
 }
 
 @media (min-width: 768px) {
   .container-main {
+    margin-right: 25px;
     width: 768px;
     padding-left: 4px;
     overflow-x: hidden;
@@ -456,6 +457,7 @@ textarea {
 
 @media (min-width: 1200px) {
   .container-main {
+    margin-right: 25px;
     width: 1180px;
     margin-right: 35px;
   }
@@ -463,6 +465,7 @@ textarea {
 
 @media (min-width: 1800px) {
   .container-main {
+    margin-right: 25px;
     width: 1780px;
     margin-right: 50px;
   }
@@ -1658,15 +1661,33 @@ body.lock {
 }
 
 .page-header {
-  height: 100px;
   background: #1499f6;
   background: -webkit-gradient(linear, left bottom, left top, from(rgba(20, 153, 246, 0.417787)), color-stop(6%, white));
   background: linear-gradient(0deg, rgba(20, 153, 246, 0.417787) 0%, white 6%);
+  margin-bottom: 0px;
 }
 
 @media (min-width: 320px) {
   .page-header {
-    margin-bottom: 0px;
+    height: 230px;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-header {
+    height: 100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-header {
+    height: 100px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .page-header {
+    height: 100px;
   }
 }
 
@@ -1968,13 +1989,12 @@ body.lock {
 }
 
 /* Style the buttons inside the tab */
-.tab button {
+.tab button,
+.tab div {
   position: relative;
   cursor: pointer;
   display: block;
   background-color: inherit;
-  color: white;
-  padding: 22px 16px;
   width: 100%;
   border: none;
   outline: none;
@@ -1982,34 +2002,55 @@ body.lock {
   cursor: pointer;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  font-size: 13px;
   border-bottom: 1px solid white;
+  color: white;
+  font-size: 12px;
+  padding: 22px 2px;
 }
 
 @media screen and (min-width: 900px) {
-  .tab button {
+  .tab button,
+  .tab div {
+    font-size: 15px;
+    padding: 22px 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .tab button,
+  .tab div {
+    font-size: 17px;
+    padding: 22px 16px;
+  }
+}
+
+.tab button::before {
+  content: 'I';
+  color: rgba(255, 255, 255, 0);
+  position: absolute;
+  left: 99%;
+  top: -9px;
+  width: 10px;
+  padding: 30px 0px;
+  font-size: 13px;
+  background-image: url(../img/tab_traingle.svg);
+  display: none;
+}
+
+@media screen and (min-width: 900px) {
+  .tab button::before {
     font-size: 15px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .tab button {
+  .tab button::before {
     font-size: 17px;
   }
 }
 
-.tab button::before {
-  content: '';
-  position: absolute;
-  display: none;
-  left: 265px;
-  bottom: 0px;
-  border: 32px solid transparent;
-  border-left: 10px solid #2196F3;
-}
-
 .tab button:hover::before,
-.tab button:active::before {
+.tab button.active::before {
   display: block;
 }
 
@@ -2018,21 +2059,29 @@ body.lock {
   background-color: #fff;
   color: black;
   border: 1px solid #2196F3;
+  border-right: 0px solid #ffffff00;
+  border-top: 0px solid #ffffff00;
 }
 
 /* Create an active/current "tab button" class */
 .tab button.active {
   background-color: #fff;
   color: black;
-  border: 1px solid #2196F3;
+  border: 0px solid #ffffff00;
 }
 
 /* Style the tab content */
 .tabcontent {
   float: left;
-  padding: 0px 12px;
   width: 85%;
   border-left: none;
+  padding: 0px 12px;
+}
+
+@media (min-width: 320px) {
+  .tabcontent {
+    padding-right: 0px;
+  }
 }
 
 .tabcontent-sort {
@@ -2043,27 +2092,94 @@ body.lock {
 }
 
 .bread-crumbs {
+  float: left;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #fff;
+  padding-left: 5px;
+  padding-top: 3px;
+  height: 45px;
+  width: auto;
+  border-bottom: 1px solid white;
+  font-size: 13px;
 }
 
-.bread-crumbs-item {
-  margin-right: 15px;
+@media screen and (min-width: 900px) {
+  .bread-crumbs {
+    font-size: 15px;
+  }
 }
 
-.bread-crumbs-img {
-  width: 12px;
-  margin-top: 5px;
+@media screen and (min-width: 1200px) {
+  .bread-crumbs {
+    font-size: 17px;
+  }
 }
 
-.bread-crumbs-comp-page {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  background: #2196f3;
-  padding-left: 282px;
-  margin-left: 4px;
+.bc-department-img {
+  display: inline-block;
+  width: 50%;
+  height: 70%;
+  padding-top: 10px;
+  padding-bottom: 0%;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.bc-arrow {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.bc-link {
+  text-decoration: none;
+}
+
+.bc-text {
+  padding: 0;
+  padding-top: 5%;
+}
+
+.bc-text a {
+  text-decoration: none;
+}
+
+.bc-dp-block {
+  display: block;
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  background: #2196F3;
+  color: white;
+}
+
+.bc-block {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  width: auto;
+  height: 40px;
+  padding: 0px;
+  margin: 0;
+  border: none;
+  outline: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  text-align: center;
+  background: #2196F3;
+  color: white;
+}
+
+.bc-selected {
+  background: #fff;
+  color: black;
+  border-top: 2px solid #2196F3;
+  border-bottom: 2px solid #2196F3;
 }
 
 .add-sportsman-table {

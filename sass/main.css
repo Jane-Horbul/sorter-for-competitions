@@ -1914,7 +1914,7 @@ body.lock {
   margin-top: 5px;
 }
 
-.bread-crumbs-comp-page {
+.bread-crumbs {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

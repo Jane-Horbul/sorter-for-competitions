@@ -36,7 +36,7 @@ function getClientLink(cl){
 }
 
 const markup = {
-    client:          {
+    client: {
         getLoginBtn()               { return document.getElementById("login-btn");},
         getSignOutBtn()             { return document.getElementById("sign-out-btn");},
         getLogin()                  { return document.getElementById("login").value;},
@@ -50,7 +50,19 @@ const markup = {
                                             };
                                     },
         setPhoto(link)              { document.getElementById("client-photo").src = link;}
-        }
+    },
+    tabs: {
+        getLinks()          { return [].slice.call(document.getElementsByClassName("tablinks"));},
+        getContents()       { return [].slice.call(document.getElementsByClassName("tabcontent"));},
+        
+        getConent(linkId)   { return document.getElementById("tabcontent" + linkId.split("tab")[1]);},
+        getCurrent()        { var t = window.location.href.split("#tab="); return t[1];},
+        turnOffAll()        {
+                                this.getLinks().forEach(tl => { tl.classList.remove("active");});
+                                this.getContents().forEach(tc => { tc.style.display = "none";});
+                            },
+        setBarHeight(h)     { document.getElementById("tab-bar-id").style.height = (h > window['innerHeight'] ? h : window['innerHeight'])  + "px";}
+    }
 }
 
 const months = {
@@ -299,29 +311,21 @@ export function createPageItem(item, values){
     return template.content;
 }
 
-function openTab(tabId, contentId) {
-    var tabcontent = document.getElementsByClassName("tabcontent");
-    var tablinks = document.getElementsByClassName("tablinks");
-
-    for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(contentId).style.display = "block";
-    document.getElementById(tabId).classList.add("active");
-    window.location.href = window.location.href.split("#tab=")[0] + "#tab=" + tabId;
+function openTab(tabId) {
+    var tab = document.getElementById(tabId);
+    var content = markup.tabs.getConent(tabId);
+    markup.tabs.turnOffAll();
+    content.style.display = "block";
+    tab.classList.add("active");
+    markup.tabs.setBarHeight(content.offsetHeight)
+    window.location.href = window.location.href.split("#tab=")[0] + "#tab=" + tabId; 
 }
 
 export function prepareTabs() {
-    var tablinks = document.getElementsByClassName("tablinks");
-    for (var i = 0; i < tablinks.length; i++) (function(i){
-        var tabId = tablinks[i].id;
-        var contentId = "tabcontent" + tabId.split("tab")[1];
-        document.getElementById(tabId).onclick = function(){ openTab(tabId, contentId) };
-      })(i);
-    var tab_parts = window.location.href.split("#tab=");
-    var currentTabId = (tab_parts.length > 1) ? tab_parts[1] : tablinks[0].id;
-    document.getElementById(currentTabId).click();
+    var links = markup.tabs.getLinks();
+    for (var i = 0; i < links.length; i++) (
+        function(i) { links[i].onclick = function(){openTab(links[i].id)}; }
+    )(i);
+    var curTabId = markup.tabs.getCurrent();
+    openTab(curTabId == undefined ? links[0].id : curTabId);
 }

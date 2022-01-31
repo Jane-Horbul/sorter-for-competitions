@@ -1,23 +1,20 @@
 .page-header {
-  height: 100px;
   background: rgb(20,153,246);
   background: linear-gradient(0deg, rgba(20,153,246,0.41778718323266806) 0%, rgba(255,255,255,1) 6%);
+  margin-bottom: 0px;
 
-    @include for-size(mobile) {
-        margin-bottom: 0px; 
-      }
-    
-      //@include for-size(tablet) {
-      //  margin-bottom: 20px; 
-      //}
-    
-      //@include for-size(desktop) {
-      //  margin-bottom: 30px; 
-      //}
-  
-      //@include for-size(max-desktop) {
-      //  margin-bottom: 30px; 
-      //} 
+  @include for-size(mobile) {
+      height: 230px;
+    }
+  @include for-size(tablet) {
+      height: 100px;
+    }
+  @include for-size(desktop) {
+      height: 100px; 
+    }
+  @include for-size(max-desktop) {
+      height: 100px;
+    } 
   }
   .page-header .flexbox {
     justify-content: space-between;

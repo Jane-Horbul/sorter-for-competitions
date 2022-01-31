@@ -363,7 +363,7 @@ function fillPageInfo(){
     markup.competitions.setDescription(competition.getDescription());
     markup.competitions.setStartDate(competition.getStartDate("dd MM yy hh:min"));
     markup.competitions.setEndDate(competition.getEndDate("dd MM yy hh:min"));
-    markup.competitions.setDepartmentName(department.getName());
+    //markup.competitions.setDepartmentName(department.getName());
     markup.competitions.setDepartmentLink(departmentLink);
     markup.competitions.setCompetitionName(competition.getName());
     markup.competitions.setCompetitionLink(window.location.href);
@@ -398,8 +398,9 @@ function setBtnActions(){
     filtration(markup.sportsmen.getSearchInput(), markup.sportsmen.getTable(), rowsComparator);
 }
 
-prepareTabs();
+
 fillPageInfo();
 setBtnActions();
 showShadows(client);
+prepareTabs();
 languageSwitchingOn();
