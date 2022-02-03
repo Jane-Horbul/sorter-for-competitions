@@ -1,6 +1,5 @@
 .main-tables {
-display: block;
-
+  display: block;
   @media screen and (min-width: 768px) and (max-width: 1199px) {
     display: flex;
     justify-content: space-between;
@@ -12,188 +11,162 @@ display: block;
     margin-right: 10px;
   }
 }
+
 .main-tables-item {
-width: 100%;
-overflow-x: auto;
-
-  //width: 320px;
-
-  //@media screen and (min-width: 768px) and (max-width: 1199px) {
-  //  width: 375px;
-  //}
-  //@media screen and (min-width: 1200px) and (max-width: 1799px) {
-  //  width: 590px;
-  //  margin-right: 10px;
-  //}
-  //@media screen and (min-width: 1800px) {
-  //  width: 885px;
-  //  margin-right: 15px;
-  //}
-
+  width: 100%;
+  overflow-x: auto;
 }
+
+
+
 .secondary-tables {
-    display: flex;
+  display: flex;
 }
 
-  .secondary-tables--item {
-width: 100%;
-
-    //width: 320px;
-
-    //@media screen and (min-width: 767px) and (max-width: 1199px) {
-    //  width: 270px;
-    //  margin-right: 10px;
-    //}
-    //@media screen and (min-width: 1200px) and (max-width: 1799px) {
-    //  width: 485px;
-    //  margin-right: 15px;
-    //}
-    //@media screen and (min-width: 1800px) {
-    //  width: 780px;
-    //  margin-right: 15px;
-    //}
+.secondary-tables--item {
+  width: 100%;
 }
+
 .secondary-tables--td {
-font-size: 10px;
-padding: 2px;
-text-align: center;
-border: 1px solid #ced7df;
-
-@media screen and (min-width: 767px) and (max-width: 1199px) {
-  font-size: 12px;
-}
-@media screen and (min-width: 1200px) and (max-width: 1799px) {
-  font-size: 14px;
-}
-@media screen and (min-width: 1800px) {
-  font-size: 14px;
-}
+  font-size: 10px;
+  padding: 2px;
+  text-align: center;
+  border: 1px solid #ced7df;
+  @media screen and (min-width: 767px) and (max-width: 1199px) {
+    font-size: 12px;
   }
-
-  .all-table-title {
-    padding-left: 20px;
+  @media screen and (min-width: 1200px) and (max-width: 1799px) {
+    font-size: 14px;
   }
+  @media screen and (min-width: 1800px) {
+    font-size: 14px;
+  }
+}
+
+.all-table-title {
+  padding-left: 20px;
+}
 
 .red-cell-style {
-    background-color: rgb(241, 106, 106);
-    color: #000;
-  }
+  background-color: rgb(241, 106, 106);
+  color: #000;
+}
   
-  .blue-cell-style {
-    background-color: rgb(51, 137, 236);
-    color: #FFF;
-  }
-  .group-info-table-title{
-    height: 60px;
-    position: relative;
-  }
+.blue-cell-style {
+  background-color: rgb(51, 137, 236);
+  color: #FFF;
+}
+.group-info-table-title{
+  height: 60px;
+  position: relative;
+}
 
-  .first-title-tables--text {
-    border: 1px solid #ddd;
+.first-title-tables--text {
+  border: 1px solid #ddd;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: bold;
+  text-align: center;
+
+  @include for-size(mobile) {
     font-size: 10px;
     padding: 3px;
-    font-weight: bold;
-    text-align: center;
-
-    @include for-size(mobile) {
-      font-size: 10px;
-      padding: 3px;
-    }
-  
-    @include for-size(tables) {
-      font-size: 12px;
-      padding: 5px;
-    }
-  
-    @include for-size(desktop) {
-      font-size: 12px;
-      padding: 5px;
-    }
-  
-    @include for-size(max-desktop) {
-      font-size: 13px;
-      padding: 10px;
-    }
   }
 
-  .secondary-title-tables--text {
-    border: 1px solid #ddd;
+  @include for-size(tables) {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  @include for-size(desktop) {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  @include for-size(max-desktop) {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+.secondary-title-tables--text {
+  border: 1px solid #ddd;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: bold;
+  text-align: center;
+
+  @include for-size(mobile) {
     font-size: 10px;
     padding: 3px;
-    font-weight: bold;
-    text-align: center;
-
-    @include for-size(mobile) {
-      font-size: 10px;
-      padding: 3px;
-    }
-  
-    @include for-size(tables) {
-      font-size: 12px;
-      padding: 5px;
-    }
-  
-    @include for-size(desktop) {
-      font-size: 12px;
-      padding: 10px;
-    }
-  
-    @include for-size(max-desktop) {
-      font-size: 12px;
-      padding: 15px;
-    }
   }
 
-  .secondary-title-two-tables {
-    border: 1px solid #ddd;
+  @include for-size(tables) {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  @include for-size(desktop) {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  @include for-size(max-desktop) {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+
+.secondary-title-two-tables {
+  border: 1px solid #ddd;
+  font-size: 10px;
+  padding: 3px;
+  text-align: center;
+
+  @include for-size(mobile) {
     font-size: 10px;
     padding: 3px;
-    text-align: center;
-
-    @include for-size(mobile) {
-      font-size: 10px;
-      padding: 3px;
-    }
-  
-    @include for-size(tables) {
-      font-size: 11px;
-      padding: 5px;
-    }
-  
-    @include for-size(desktop) {
-      font-size: 11px;
-      padding: 5px;
-    }
-  
-    @include for-size(max-desktop) {
-      font-size: 12px;
-      padding: 15px;
-    }
   }
 
-  .sportsman-info-table-info {
+  @include for-size(tables) {
+    font-size: 11px;
+    padding: 5px;
+  }
+
+  @include for-size(desktop) {
+    font-size: 11px;
+    padding: 5px;
+  }
+
+  @include for-size(max-desktop) {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+
+.sportsman-info-table-info {
+  width: 280px;
+  
+  @include for-size(mobile) {
+    font-size: 10px;
+  }
+
+  @include for-size(tables) {
     width: 280px;
-   
-    @include for-size(mobile) {
-      font-size: 10px;
-    }
-  
-    @include for-size(tables) {
-      width: 280px;
-    }
-  
-    @include for-size(desktop) {
-      width: 550px;
-    }
-  
-    @include for-size(max-desktop) {
-      width: 1010px;
-    }
   }
-  .title-row {
-    background: #FFF;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    font-size: 16px;
-    font-weight: bold;
+
+  @include for-size(desktop) {
+    width: 550px;
   }
+
+  @include for-size(max-desktop) {
+    width: 1010px;
+  }
+}
+.title-row {
+  background: #FFF;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
