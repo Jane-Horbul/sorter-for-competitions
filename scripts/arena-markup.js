@@ -20,20 +20,13 @@ export const markup = {
     competitionLink:                cLink,
     selectedStyle:                  "lp-select-pair",
     breadcrumbs: {
-        getContainer()              { return document.getElementById("bread-crumbs-container");},
-        getTemplate()               { return document.getElementById("bread-crumbs-template");},
-        getPlaceholders(dp, cp, ar) { return {
-                                            "#depart-link":         dLink,
-                                            "#depart-name":         dp.getName(),
-                                            "#competition-link":    cLink,
-                                            "#competition-name":    cp.getName(),
-                                            "#arena-link":          aLink,
-                                            "#arena-name":          ar.getName()
-                                        };
-                                    }
+        setDpLink()                 { document.getElementById("department-link-id").setAttribute("href", dLink); },
+        setCompLink()               { document.getElementById("competition-link-id").setAttribute("href", cLink); },
+        setCompName(name)           { document.getElementById("competition-name-id").innerHTML = name; },
+        setArenaName(name)          { document.getElementById("arena-name-id").innerHTML = name; }
     },
     common: {
-        setListName(name)           { document.getElementById("list-name").innerHTML = name;},
+        setPageName(name)           { document.getElementById("page-name").innerHTML = name;},
         getPairWinnerText()         { return document.getElementById("pair-winner-text").innerHTML;},
         getDeleteBtn()              { return document.getElementById("delete-arena-btn");}, 
         getRefilterBtn()            { return document.getElementById("refilter-pairs-btn");}, 

@@ -1,12 +1,19 @@
 
+
+var cLink = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
+var dLink = cLink.substring(0, cLink.lastIndexOf("/"));
+
 export const markup = {
     common: {
         setPageHeader(name)             {document.getElementById("page-name").innerHTML = name;},
-        setPageHeaderLink(link)         {document.getElementById("page-header-name-link").setAttribute("href", link);},
-        setDepartmentLink(name, link)   {var d = document.getElementById("department-link-id"); d.setAttribute("href", link); d.innerHTML = name;},
-        setCompetitionLink(name, link)  {var c = document.getElementById("competition-link-id"); c.setAttribute("href", link); c.innerHTML = name;},
-        getArenaName()                  {return document.getElementById("arena-name-input").value;}
     },
+    breadcrumbs: {
+        setDpLink()                 { document.getElementById("department-link-id").setAttribute("href", dLink); },
+        setCompLink()               { document.getElementById("competition-link-id").setAttribute("href", cLink); },
+        setCompName(name)           { document.getElementById("competition-name-id").innerHTML = name; },
+        setArenaName(name)          { document.getElementById("arena-name-id").innerHTML = name; }
+    },
+
     automation: {
         schedule: {
             getContainer()              { return document.getElementById("schedule-container");},
@@ -53,6 +60,7 @@ export const markup = {
                                         },
         },
 
+        getArenaName()                  {return document.getElementById("auto-arena-name-input").value;},
         getDistanceValue()              { return document.getElementById("cpl-auto-sort-criteria--dist").value;},
         getAgeMinValue()                { return document.getElementById("age-min-input").value;},
         getAgeMaxValue()                { return document.getElementById("age-max-input").value;},
@@ -64,6 +72,7 @@ export const markup = {
         getApplyBtn()                   { return document.getElementById("automatic-apply-btn" );}
     },
     manual: {
+        getArenaName()                  {return document.getElementById("manual-arena-name-input").value;},
         getDetachedPairsList()          { return document.getElementById("unactive-pairs-list"); },
         getDetachedPairTemplate()       { return document.getElementById("unactive-pair-template"); },
         getDetachedPair(pair)           { return document.getElementById("detached-pair-id-" + pair.getId()); },

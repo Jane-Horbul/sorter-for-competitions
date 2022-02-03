@@ -142,11 +142,8 @@ function createSportsman() {
 function fillPageInfo(){
     var trainerName = trainerInfo.getSurname() + " " + trainerInfo.getName();
     markup.trainer.setPageName(departmentInfo.getName());
-    markup.trainer.setDepartmentName(departmentInfo.getName());
-    markup.trainer.setDepartmentLink(departmentLink);
-    markup.trainer.setTrainerHeader(trainerName);
-    markup.trainer.setTrainerName(trainerName);
-    markup.trainer.setTrainerLink(window.location.href);
+    markup.breadcrumbs.setDpLink();
+    markup.breadcrumbs.setTrainerName(trainerName);
     markup.trainer.setPhoto(trainerInfo.getPhoto());
 
     markup.trainer.getInfoId().innerHTML        = trainerInfo.getId();

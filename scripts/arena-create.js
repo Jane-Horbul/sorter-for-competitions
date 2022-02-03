@@ -162,7 +162,7 @@ function createInterval(){
 }
 
 function createArenaAutomatic(){
-    var name = markup.common.getArenaName();
+    var name = markup.automation.getArenaName();
     var distance = markup.automation.getDistanceValue();
     var ageMin = markup.automation.getAgeMinValue();
     var ageMax = markup.automation.getAgeMaxValue();
@@ -202,7 +202,7 @@ function createArenaAutomatic(){
 }
 
 function createArenaManual(){
-    var name = markup.common.getArenaName();
+    var name = markup.manual.getArenaName();
     var arena = ops.createArena(undefined);
     if(!helpers.checkName("Arena name", name))
         return;
@@ -216,8 +216,10 @@ function createArenaManual(){
 
 function fillPageInfo(){
     markup.common.setPageHeader(competition.getName());
-    markup.common.setDepartmentLink(departmentInfo.getName(), departmentLink);
-    markup.common.setCompetitionLink(competition.getName(), competitionLink);
+    markup.breadcrumbs.setDpLink();
+    markup.breadcrumbs.setCompLink();
+    markup.breadcrumbs.setCompName(competition.getName());
+
     competition.getGroups().forEach(gr => {
         deactivateGroup(gr);
     });

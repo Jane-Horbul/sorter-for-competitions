@@ -7,11 +7,13 @@
         <link rel="stylesheet" href="./old-css/normalize.css">
         <link rel="stylesheet" href="./css/main.min.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-
         <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"/>
+
+
         <script src="./datetimepicker-master/jquery.js"></script>
         <script src="./datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-
         <script>
             $(function () {
                 $('#schedule-interval-start').datetimepicker({
@@ -28,359 +30,351 @@
     </head>
     <body>
         <div class="wrapper">
-            <header class="page-header">
+            <header class="hdr-header">
                 <div class="container flexbox">
                     <nav class="navigation">
-                        <svg class="header-logo">
+                        <svg class="hdr-logo">
                             <use href="./img/icons.svg#arena"></use>
                         </svg>
                     </nav>
                     <div>
-                        <h1 id="competition-name"></h1>
-                    </div>
-                    <div id="client-cred-container">
-                        <div id="sing-in-btn-container" class="login-panel">
-                            <ul class="list login-panel-list">
-                                <li class="login-panel-item">
-                                    <div class="log-in-btn--placing">
-                                        <a href="#popup_7" class="popup-link"> 
-                                            <button class="log-in-btn">
-                                                <span>СPHX_SIGN_IN</span> 
-                                            </button>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        <h1 id="page-name"></h1>
                     </div>
 
+                    <div class="hdr-client-info-container">
+                        <div class="hdr-lang-container">
+                            <select class="hdr-lang-select" name="hdr-lang-select" style="display: none">
+                                <option value="en">EN</option>
+                                <option value="ua">UA</option>
+                                <option value="ru">RU</option>
+                            </select>
+                            <template id="hdr-formatted-lang-option">
+                                <span>
+                                    <img class="hdr-lang-image"/>
+                                    <span class="hdr-lang-name"></span>
+                                </span>
+                            </template>
+                        </div>
+
+                        <div class="hdr-client-profile" id="client-cred-container">
+                            <div id="sing-in-btn-container" >
+                                <ul class="list hdr-clt-info-list">
+                                    <li class="hdr-clt-info-item">
+                                        <div class="hdr-login-btn-container">
+                                            <a href="#popup_7" class="popup-link"> 
+                                                <button class="hdr-log-in-btn">
+                                                    <span>СPHX_SIGN_IN</span> 
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <template id="client-data-template">
-                        <div class="login-panel">
-                            <ul class="list login-panel-list">
-                                <li class="login-panel-item">
-                                    <div class="log-out-btn--placing">
-                                        <button id="sign-out-btn" class="log-out-btn">
-                                            <span>СPHX_SIGN_OUT</span> 
-                                        </button>
-                                    </div>
-                                </li>
+                        <div>
+                            <ul class="list hdr-clt-info-list">
                                 <li>
-                                    <a href="#client-link">
-                                        <div class="header__account-avatar"> 
-                                            <div class="header__account-avatar-icon">
-                                                <div class="header__account-avatar-icon img-cover">
-                                                    <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
+                                    <div class="hdr-clt-avatar"> 
+                                        <a href="#client-link">
+                                            <div class="hdr-clt-avatar-icon">
+                                                <div class="hdr-clt-avatar-icon hdr-avatar-img-cut">
+                                                    <img id="client-photo" class="hdr-avatar-photo" src="./img/user.png" alt="">
                                                 </div>
                                             </div>
-                                            <div class="header__account-avatar-text">
-                                                <span class="account-name">#client-name</span> </br>
-                                                <span class="account-status">#client-status</span>
-                                            </div>
+                                        </a>
+                                        <div class="hdr-clt-avatar-text">
+                                            <a href="#client-link"> <span>#client-name</span> </a></br>
+                                            <a href="#client-link"> <span class="hdr-avatar-status">#client-status</span> </a></br>
+                                            <a href="#"> 
+                                                <span class="hdr-sign-out" id="sign-out-btn">СPHX_SIGN_OUT</span>
+                                            </a>
                                         </div>
-                                    </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
                     </template>
                 </div>
             </header>
-            <div class="container main">
-                <div>
-                    <h1 id="page-name"></h1>
-                </div>
-            </div>
-            <div class="bread-crumbs">
-                <div class="bread-crumbs-item" >
-                    <a id="department-link-id" href=""></a>
-                </div>
-                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item">
-                    <a id="competition-link-id" href=""></a>
-                </div>
-                <div class="bread-crumbs-item" id="arrow-bread-crumb"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item">
-                    -PHX_CREATE_ARENA-
-                </div>
-            </div>
+            <main>
+                <div class="container-main">
+                    <div class="tab" id="tab-bar-id">
+                        <div class="tab-indent"></div>
+                        <button class="tablinks" id="tab1">-PHX_AUTOSORT_TAB-</button>
+                        <button class="tablinks" id="tab2">-PHX_MANUAL_TAB-</button>
+                    </div>
+                    <div class="bread-crumbs">
+                        <a class="bc-link" id="department-link-id" href="">
+                            <div class="bc-dp-block">
+                                <img class="bc-department-img" src="./img/white_library.svg" alt="Department">
+                            </div>
+                        </a>
+                        <div class="bc-block">
+                            <img class="bc-arrow" src="./img/unselect.svg" alt="bc">
+                        </div>
 
-            <main class="container">
-                <div class="container">
-                    <ul class="group-page-header list">
-                        <li><h1 id="group-name-header"></h1></li>
-                    </ul>
-                </div>
-                <div class="creating-pairs-list-name">
-                    <div class="cp-list--input">
-                        <input id="arena-name-input" class="cp-list--input-name" type="text" placeholder="-PHX_PLACE_NAME-">
+                        <a class="bc-link" id="competition-link-id" href="">
+                            <div class="bc-block bc-unselected">
+                                <div class="bc-text" id="competition-name-id"></div>
+                            </div>
+                        </a>
+                        <div class="bc-block">
+                            <img class="bc-arrow" src="./img/preselect.svg" alt="bc">
+                        </div>
+
+                        <div class="bc-block bc-selected">
+                            <div class="bc-text">-PHX_CREATE_ARENA_PAGE-</div>
+                        </div>
+                        <div class="bc-block">
+                            <img class="bc-arrow" src="./img/arrow-sel.svg" alt="bc">
+                        </div>
                     </div>
-                </div>
-                <!-- name of list after enter
-                    <div class="creating-pairs-list-name">
-                        <div class="pairs-list-name--title">Name</div>
-                        <button class="member-page-dell-btn cp-list--btn" type="button" id="#">
-                            <svg class="group-info-edit-btn-icon">
-                                <use href="./img/icons.svg#icon-pencil2"></use>
-                            </svg>
-                        </button>
-                    </div>
-               end -->
-                <div class="tab" id="tab-bar-id">
-                    <button class="tablinks" id="tab1">-PHX_AUTOSORT_TAB-</button>
-                    <button class="tablinks" id="tab2">-PHX_MANUAL_TAB-</button>
-                </div>
-                <!--Automatic sorting block start-->
-                <div id="tabcontent1" class="tabcontent">
-                    <div>
-                        <table class="cpl-start-end-table" id="schedule-container">
-                            <tr>
-                                <th colspan="3" class="formulas-table--th-main">
-                                    <span>-PHX_SCHEDULE_NAME-</span>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>-PHX_SCHEDULE_START-</td>
-                                <td>-PHX_SCHEDULE_END-</td>
-                                <td></td>
-                            </tr>
-                            <tr id="interval-input-row">
-                                <td>
-                                    <input class="date" id="schedule-interval-start" type="text" value="__/__/__ __:__">
-                                </td>
-                                <td>
-                                    <input class="date" id="schedule-interval-end" type="text" value="__/__/__ __:__">
-                                </td>
-                                <td>
-                                    <button class="formulas-table-add-btn" type="button" id="schedule-interval-add-btn">
-                                        <svg class="formulas-table-add-btn--svg">
-                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>
-                            <template id="schedule-interval-template">
+
+                    <!--Automatic sorting block start-->
+                    <div id="tabcontent1" class="tabcontent">
+                        <section class="cpl-auto-sort-criteria-list">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1-cpl ">
+                                    <input id="auto-arena-name-input" class="input input_cpl-auto-sort-criteria--dist" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="cpl-auto-sort-criteria--dist" class="placeholder">-PHX_PLACE_NAME-:</label>
+                                </div>
+                            </div>
+                        </section>
+                        <div>
+                            <table class="cpl-start-end-table" id="schedule-container">
                                 <tr>
-                                    <td>#interval-start-time</td>
-                                    <td>#interval-end-time</td>
+                                    <th colspan="3" class="formulas-table--th-main">
+                                        <span>-PHX_SCHEDULE_NAME-</span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>-PHX_SCHEDULE_START-</td>
+                                    <td>-PHX_SCHEDULE_END-</td>
+                                    <td></td>
+                                </tr>
+                                <tr id="interval-input-row">
                                     <td>
-                                        <button class="formulas-table-add-btn" type="button" id="interval-delete-btn-#row-num">
+                                        <input class="date" id="schedule-interval-start" type="text" value="__/__/__ __:__">
+                                    </td>
+                                    <td>
+                                        <input class="date" id="schedule-interval-end" type="text" value="__/__/__ __:__">
+                                    </td>
+                                    <td>
+                                        <button class="formulas-table-add-btn" type="button" id="schedule-interval-add-btn">
                                             <svg class="formulas-table-add-btn--svg">
-                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                <use href="./img/symbol-defs.svg#icon-plus"></use>
                                             </svg>
                                         </button>
                                     </td>
                                 </tr>
-                            </template>
-                        </table>
+                                <template id="schedule-interval-template">
+                                    <tr>
+                                        <td>#interval-start-time</td>
+                                        <td>#interval-end-time</td>
+                                        <td>
+                                            <button class="formulas-table-add-btn" type="button" id="interval-delete-btn-#row-num">
+                                                <svg class="formulas-table-add-btn--svg">
+                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </table>
+                        </div>
+                        <ul class="list cpl-automatic-sorting">
+                            <div>
+                                <div class="cpl-auto-sort-list-title">-PHX_ACTIVE_GROUPS_LIST-</div>
+                                <div class="cpl-auto-sort-list">
+                                    <div class="cpl-sorting-first-column"> 
+                                        <ul class="list active-groups-list" id="active-groups-list">
+                                            <template id="active-group-template">
+                                                <li id="active-group-id-#group-id" class="cpl-automatic-sorting--item cpl-automatic-sorting--item__active">
+                                                    <button class="active-groups-list--item-btn">#group-name</button>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cpl-auto-sort-arrows">
+                                <ul class="list cpl-auto-sort-arrows-btn">
+                                    <li>
+                                        <button class="cpl-automatic-sorting-arrow-btn" id="delete-all-groups-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="cpl-automatic-sorting-arrow-btn" id="add-all-groups-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="cpl-auto-sort-list-title">-PHX_UNACTIVE_GROUPS_LIST-</div>
+                                <div class="cpl-auto-sort-list">
+                                    <div class="cpl-sorting-second-column">
+                                        <ul class="list unactive-groups-list" id="unactive-groups-list">
+                                            <template id="unactive-group-template">
+                                                <li id="unactive-group-id-#group-id" class="cpl-automatic-sorting--item cpl-automatic-sorting--item__unactive">
+                                                    <button class="unactive-groups-list--item-btn">#group-name</button>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                        <section class="cpl-auto-sort-criteria-list">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1-cpl ">
+                                    <input id="cpl-auto-sort-criteria--dist" class="input input_cpl-auto-sort-criteria--dist" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="cpl-auto-sort-criteria--dist" class="placeholder">-PHX_DISTANCE-:</label>
+                                </div>
+                            </div>
+
+                            <ul class="list cpl-auto-sort-criteria">
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="input-criteria-container ic1">
+                                        <input id="age-min-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="age-min-input" class="placeholder">-PHX_AGE_MIN-:</label>
+                                    </div>
+                                </div>
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="input-criteria-container ic1">
+                                        <input id="age-max-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="age-max-input" class="placeholder">-PHX_AGE_MAX-:</label>
+                                    </div>
+                                </div>
+                            </ul>
+
+                            <ul class="list cpl-auto-sort-criteria">
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="input-criteria-container ic1 ">
+                                        <input id="weight-min-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="weight-min-input" class="placeholder">-PHX_WEIGHT_MIN-:</label>
+                                    </div>
+                                </div>
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="input-criteria-container ic1 ">
+                                        <input id="weight-max-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="weight-max-input" class="placeholder">-PHX_WEIGHT_MAX-:</label>
+                                    </div>
+                                </div>
+                            </ul>
+
+                            <ul class="list cpl-auto-sort-criteria">
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="input-criteria-container ic1 ">
+                                        <input id="final-min-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="final-min-input" class="placeholder">-PHX_FINAL_MIN-:</label>
+                                    </div>
+                                </div>
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="input-criteria-container ic1 ">
+                                        <input id="final-max-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="final-max-input" class="placeholder">-PHX_FINAL_MAX-:</label>
+                                    </div>
+                                </div>
+                            </ul>
+
+                            <ul class="list cpl-auto-sort-criteria">
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="select-criteria-container">
+                                        <select name="type" id="qualification-min" class="select-criteria-container--item">
+                                            <option value="">-PHX_QUALIFICATION_MIN-:</option>
+                                            <template id="qual-item-template"><option value="#qual-value">#qual-name</option></template>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="cpl-auto-sort-criteria--item">
+                                    <div class="select-criteria-container">
+                                        <select name="type" id="qualification-max" class="select-criteria-container--item">
+                                            <option value="">-PHX_QUALIFICATION_MAX-:</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </ul>
+
+                        </section>
+                        <button id="automatic-apply-btn" class="cpl-sorting-btn">-PHX_APPLY_BTN-</button>
+
                     </div>
-                    <ul class="list cpl-automatic-sorting">
-                        <div>
-                            <div class="cpl-auto-sort-list-title">-PHX_ACTIVE_GROUPS_LIST-</div>
-                            <div class="cpl-auto-sort-list">
-                                <div class="cpl-sorting-first-column"> 
-                                    <ul class="list active-groups-list" id="active-groups-list">
-                                        <template id="active-group-template">
-                                            <li id="active-group-id-#group-id" class="cpl-automatic-sorting--item cpl-automatic-sorting--item__active">
-                                                <button class="active-groups-list--item-btn">#group-name</button>
+                    <!--Manual sorting block start-->
+                    <div id="tabcontent2" class="tabcontent">
+                        <section class="cpl-auto-sort-criteria-list">
+                            <div class="cpl-auto-sort-criteria--item">
+                                <div class="input-criteria-container ic1-cpl ">
+                                    <input id="manual-arena-name-input" class="input input_cpl-auto-sort-criteria--dist" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="cpl-auto-sort-criteria--dist" class="placeholder">-PHX_PLACE_NAME-:</label>
+                                </div>
+                            </div>
+                        </section>
+                        <ul class="list cpl-manual-sorting">
+                            <div>
+                                <div class="cpl-auto-sort-list-title">-PHX_ACTIVE_PAIRS_LIST-</div>
+                                <div class="cpl-auto-manual-list">
+                                    <ul class="list" id="active-pairs-list">
+                                        <template id="attached-pair-template">
+                                            <li id="attached-pair-id-#pair-id" class="cpl-manual-sorting--item">
+                                                <button >#pair-id</button>
                                             </li>
                                         </template>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="cpl-auto-sort-arrows">
-                            <ul class="list cpl-auto-sort-arrows-btn">
-                                <li>
-                                    <button class="cpl-automatic-sorting-arrow-btn" id="delete-all-groups-btn">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="cpl-automatic-sorting-arrow-btn" id="add-all-groups-btn">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
-                                        </svg>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="cpl-auto-sort-list-title">-PHX_UNACTIVE_GROUPS_LIST-</div>
-                            <div class="cpl-auto-sort-list">
-                                <div class="cpl-sorting-second-column">
-                                    <ul class="list unactive-groups-list" id="unactive-groups-list">
-                                        <template id="unactive-group-template">
-                                            <li id="unactive-group-id-#group-id" class="cpl-automatic-sorting--item cpl-automatic-sorting--item__unactive">
-                                                <button class="unactive-groups-list--item-btn">#group-name</button>
+                            <div>
+                                <ul class="list cpl-auto-sort-arrows-btn">
+                                    <li>
+                                        <button class="cpl-automatic-sorting-arrow-btn" id="delete-all-pairs-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="cpl-automatic-sorting-arrow-btn" id="add-all-pairs-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="cpl-auto-sort-list-title">-PHX_UNACTIVE_PAIRS_LIST-</div>
+                                <div class="cpl-auto-manual-list">
+                                    <ul class="list" id="unactive-pairs-list">
+                                        <template id="unactive-pair-template">
+                                            <li id="detached-pair-id-#pair-id" class="cpl-manual-sorting--item">
+                                                <button >#pair-id</button>
                                             </li>
                                         </template>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </ul>
-                    <section class="cpl-auto-sort-criteria-list">
-                        <div class="cpl-auto-sort-criteria--item">
-                            <div class="input-criteria-container ic1-cpl ">
-                                <input id="cpl-auto-sort-criteria--dist" class="input input_cpl-auto-sort-criteria--dist" type="text" placeholder=" " />
-                                <div class="cut"></div>
-                                <label for="cpl-auto-sort-criteria--dist" class="placeholder">-PHX_DISTANCE-:</label>
-                            </div>
-                        </div>
-
-                        <ul class="list cpl-auto-sort-criteria">
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="input-criteria-container ic1">
-                                    <input id="age-min-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="age-min-input" class="placeholder">-PHX_AGE_MIN-:</label>
-                                </div>
-                            </div>
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="input-criteria-container ic1">
-                                    <input id="age-max-input" class="input input_cpl-auto-sort-criteria--age" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="age-max-input" class="placeholder">-PHX_AGE_MAX-:</label>
-                                </div>
-                            </div>
                         </ul>
-
-                        <ul class="list cpl-auto-sort-criteria">
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="input-criteria-container ic1 ">
-                                    <input id="weight-min-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="weight-min-input" class="placeholder">-PHX_WEIGHT_MIN-:</label>
-                                </div>
-                            </div>
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="input-criteria-container ic1 ">
-                                    <input id="weight-max-input" class="input input_cpl-auto-sort-criteria--weight" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="weight-max-input" class="placeholder">-PHX_WEIGHT_MAX-:</label>
-                                </div>
-                            </div>
-                        </ul>
-
-                        <ul class="list cpl-auto-sort-criteria">
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="input-criteria-container ic1 ">
-                                    <input id="final-min-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="final-min-input" class="placeholder">-PHX_FINAL_MIN-:</label>
-                                </div>
-                            </div>
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="input-criteria-container ic1 ">
-                                    <input id="final-max-input" class="input input_cpl-auto-sort-criteria--final" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="final-max-input" class="placeholder">-PHX_FINAL_MAX-:</label>
-                                </div>
-                            </div>
-                        </ul>
-
-                        <ul class="list cpl-auto-sort-criteria">
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="select-criteria-container">
-                                    <select name="type" id="qualification-min" class="select-criteria-container--item">
-                                        <option value="">-PHX_QUALIFICATION_MIN-:</option>
-                                        <template id="qual-item-template"><option value="#qual-value">#qual-name</option></template>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="cpl-auto-sort-criteria--item">
-                                <div class="select-criteria-container">
-                                    <select name="type" id="qualification-max" class="select-criteria-container--item">
-                                        <option value="">-PHX_QUALIFICATION_MAX-:</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </ul>
-
-                    </section>
-                    <button id="automatic-apply-btn" class="cpl-sorting-btn">-PHX_APPLY_BTN-</button>
-
-                </div>
-                <!--Manual sorting block start-->
-                <div id="tabcontent2" class="tabcontent">
-                    <ul class="list cpl-manual-sorting">
-                        <div>
-                            <div class="cpl-auto-sort-list-title">-PHX_ACTIVE_PAIRS_LIST-</div>
-                            <div class="cpl-auto-manual-list">
-                                <ul class="list" id="active-pairs-list">
-                                    <template id="attached-pair-template">
-                                        <li id="attached-pair-id-#pair-id" class="cpl-manual-sorting--item">
-                                            <button >#pair-id</button>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <ul class="list cpl-auto-sort-arrows-btn">
-                                <li>
-                                    <button class="cpl-automatic-sorting-arrow-btn" id="delete-all-pairs-btn">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-right2"></use>
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="cpl-automatic-sorting-arrow-btn" id="add-all-pairs-btn">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/symbol-arrows-left-right.svg#icon-arrow-left2"></use>
-                                        </svg>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div class="cpl-auto-sort-list-title">-PHX_UNACTIVE_PAIRS_LIST-</div>
-                            <div class="cpl-auto-manual-list">
-                                <ul class="list" id="unactive-pairs-list">
-                                    <template id="unactive-pair-template">
-                                        <li id="detached-pair-id-#pair-id" class="cpl-manual-sorting--item">
-                                            <button >#pair-id</button>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </div>
-                    </ul>
-                    <button id="manual-apply-btn" class="cpl-sorting-btn">-PHX_APPLY_BTN-</button>
+                        <button id="manual-apply-btn" class="cpl-sorting-btn">-PHX_APPLY_BTN-</button>
+                    </div>
                 </div>
             </main>
             <footer class="footer">
-                <div class="lang-panel">
-                    <ul class="list lang-panel-list">
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ru"> 
-                                    <img src="./img/ru.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-en"> 
-                                    <img src="./img/en.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ua"> 
-                                    <img src="./img/ua.png"> 
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </footer>
         </div>
         <!--LogIn popup start-->

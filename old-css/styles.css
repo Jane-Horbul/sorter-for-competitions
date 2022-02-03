@@ -42,12 +42,12 @@ main {
   margin-bottom: 25px;
   min-height: calc(100vh - 180px);
 }
-.page-header {
+.hdr-header {
   padding-top: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid #ececec;
 }
-.page-header .flexbox {
+.hdr-header .flexbox {
   justify-content: flex-end;
   align-items: center;
 }
@@ -1344,7 +1344,7 @@ margin-right: auto;
   margin-bottom: 10px;
   font-size: 15px;
 }
-.group-page-header {
+.group-hdr-header {
   display: flex;
   justify-content: space-between;
 }

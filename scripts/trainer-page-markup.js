@@ -1,13 +1,15 @@
 import {getQualNameByValue} from "./trainer-page.js"
 
+var tLink = window.location.href;
+var dLink = tLink.substring(0, tLink.lastIndexOf("/"));
+
 export const markup = {
+    breadcrumbs: {
+        setDpLink()                 { document.getElementById("department-link-id").setAttribute("href", dLink); },
+        setTrainerName(name)        { document.getElementById("trainer-name-id").innerHTML = name; }
+    },
     trainer: {
         setPageName(name)           {document.getElementById("page-name").innerHTML = name;},
-        setDepartmentName(name)     {document.getElementById("department-link").innerHTML = name;},
-        setDepartmentLink(link)     {document.getElementById("department-link").setAttribute("href", link);},
-        setTrainerName(name)        {document.getElementById("trainer-link").innerHTML = name;},
-        setTrainerLink(link)        {document.getElementById("trainer-link").setAttribute("href", link);},
-        setTrainerHeader(name)      {document.getElementById("trainer-header").innerHTML = name;},
         setPhoto(link)              {if(link != undefined) document.getElementById("trainer-photo-img").setAttribute("src", link);},
 
         getInfoId()                 {return document.getElementById("trainer-info-id");},

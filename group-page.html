@@ -5,369 +5,376 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Group page</title>
         <link rel="stylesheet" href="./old-css/normalize.css">
-        <!--<link rel="stylesheet" href="./css/main.css" />-->
         <link rel="stylesheet" href="./css/main.min.css" />    
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"/>
     </head>
     <body>
         <div class="wrapper">
-            <header class="page-header">
+            <header class="hdr-header">
                 <div class="container flexbox">
                     <nav class="navigation">
-                        <svg class="header-logo">
+                        <svg class="hdr-logo">
                             <use href="./img/icons.svg#arena"></use>
                         </svg>
                     </nav>
                     <div>
                         <h1 id="page-name"></h1>
                     </div>
-                    <div id="client-cred-container">
-                        <div id="sing-in-btn-container" class="login-panel">
-                            <ul class="list login-panel-list">
-                                <li class="login-panel-item">
-                                    <div class="log-in-btn--placing">
-                                        <a href="#popup_7" class="popup-link"> 
-                                            <button class="log-in-btn">
-                                                <span>СPHX_SIGN_IN</span> 
-                                            </button>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
 
-                    <template id="client-data-template">
-                        <div class="login-panel">
-                            <ul class="list login-panel-list">
-                                <li class="login-panel-item">
-                                    <div class="log-out-btn--placing">
-                                        <button id="sign-out-btn" class="log-out-btn">
-                                            <span>СPHX_SIGN_OUT</span> 
-                                        </button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#client-link">
-                                        <div class="header__account-avatar"> 
-                                            <div class="header__account-avatar-icon">
-                                                <div class="header__account-avatar-icon img-cover">
-                                                    <img id="client-photo" class="account-avatar-img" src="./img/user.png" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="header__account-avatar-text">
-                                                <span class="account-name">#client-name</span> </br>
-                                                <span class="account-status">#client-status</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                    <div class="hdr-client-info-container">
+                        <div class="hdr-lang-container">
+                            <select class="hdr-lang-select" name="hdr-lang-select" style="display: none">
+                                <option value="en">EN</option>
+                                <option value="ua">UA</option>
+                                <option value="ru">RU</option>
+                            </select>
+                            <template id="hdr-formatted-lang-option">
+                                <span>
+                                    <img class="hdr-lang-image"/>
+                                    <span class="hdr-lang-name"></span>
+                                </span>
+                            </template>
                         </div>
-                    </template>
-                </div>
-            </header>
-            <div class="bread-crumbs container"> 
-                <div class="bread-crumbs-item" ><a id="department-link" href="#"></a></div>
-                <div class="bread-crumbs-item"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item"><a id="competition-link" href="#"></a></div>
-                <div class="bread-crumbs-item"> 
-                    <img class="bread-crumbs-img" src="./img/right-arrow-bc.png" alt="bc">
-                </div>
-                <div class="bread-crumbs-item"><a id="group-link" href="#"></a></div>
-            </div>
-            <main class="container">
-                <div class="tab" id="tab-bar-id">
-                    <button class="tablinks" id="tab1">-PHX_INFO_TAB-</button>
-                    <button class="tablinks" id="tab2">-PHX_SPORTS_TAB-</button>
-                    <button class="tablinks" id="tab3">-PHX_PAIRS_TAB-</button>
-                    <button class="tablinks" id="tab4">-PHX_GRID_TAB-</button>
-                </div>
-                
-                <div id="tabcontent1" class="tabcontent">
-                    <div class="group-info-main">
-                        <div id="member-info">
-                            <div class="group-info-title--siting">
-                                <div class="group-info-title"><span>-PHX_INFO_HEAD-</span></div>
-                                    <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="group-edit-btn">
-                                        <svg class="group-info-edit-btn-icon">
-                                            <use href="./img/icons.svg#icon-pencil2"></use>
-                                        </svg>
-                                    </button>
-                            </div>
-                            <div class="group-info-fields">
-                                <table class="dynamic-table">
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -CPHX_HUMAN_NAME-:</div> </td>
-                                        <td> <div id="group-info-name"></div>  </td>
-                                    </tr>   
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_SYSTEM-:</div> </td>
-                                        <td> <div id="group-info-system"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_DISCIPLINE-:</div> </td>
-                                        <td> <div id="group-info-discipline"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_SEX-:</div> </td>
-                                        <td> <div id="group-info-sex"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_LOW_AGE-:</div> </td>
-                                        <td> <div id="group-info-age-min"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_TOP_AGE-:</div> </td>
-                                        <td> <div id="group-info-age-max"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_LOW_WEIGHT-:</div> </td>
-                                        <td> <div id="group-info-weight-min"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_TOP_WEIGHT-:</div> </td>
-                                        <td> <div id="group-info-weight-max"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_LOW_QUAL-:</div> </td>
-                                        <td> <div id="group-info-qulification-min"></div>  </td>
-                                    </tr>
-                                    <tr class="group-info-table-pop-up">
-                                        <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_TOP_QUAL-:</div> </td>
-                                        <td> <div id="group-info-qulification-max"></div>  </td>
-                                    </tr>
-                                </table>
-                                <div>
-                                    <table class="formulas-table" id="formulas-table">
-                                        <tr>
-                                            <th colspan="8" class="formulas-table--th-main">
-                                                <span>-PHX_FORMULAS-</span>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th class="formulas-table--th">-PHX_PREPARATION-</th>
-                                            <th class="formulas-table--th">-PHX_ROUNDS_NUM-</th>
-                                            <th class="formulas-table--th">-PHX_ROUND-</th>
-                                            <th class="formulas-table--th">-PHX_REST-</th>
-                                            <th class="formulas-table--th">-PHX_HOLD-</th>
-                                            <th class="formulas-table--th">-PHX_FINAL_MIN-</th>
-                                            <th class="formulas-table--th">-PHX_FINAL_MAX-</th>
-                                            <th class="formulas-table--th">   </th>
-                                            <tr class="js-hidden-element js-root-view js-admin-view">
-                                            <td class="secondary-tables--td">
-                                                <input class="formulas-table--input" type="text" id="add-formula-preparation">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="formulas-table--input" type="text" id="add-formula-rounds-num">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="formulas-table--input" type="text" id="add-formula-rounds-dur">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="formulas-table--input" type="text" id="add-formula-rest-dur">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <input class="formulas-table--input" type="text" id="add-formula-after-hold">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                1/<input class="formulas-table--input" type="text" id="add-formula-final-min">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                1/<input class="formulas-table--input" type="text" id="add-formula-final-max">
-                                            </td>
-                                            <td class="secondary-tables--td">
-                                                <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
-                                                    <svg class="formulas-table-add-btn--svg">
-                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <template id="formula-row-template">
-                                            <td class="secondary-tables--td">#preparation</td>
-                                            <td class="secondary-tables--td">#rounds-num</td>
-                                            <td class="secondary-tables--td">#round-dur</td>
-                                            <td class="secondary-tables--td">#rest-dur</td>
-                                            <td class="secondary-tables--td">#after-hold</td>
-                                            <td class="secondary-tables--td">#final-min</td>
-                                            <td class="secondary-tables--td">#final-max </td>
-                                            <td class="secondary-tables--td">
-                                                <button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">
-                                                    <svg class="formulas-table-add-btn--svg">
-                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                        </template>
-                                    </table>
-                                </div>
-                                <ul class="list header-list">
-                                    <li class="header-item"> 
-                                        <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
-                                            <a id="del-btn-link">
-                                                <button class="group-page-del-btn" type="button" id="delete-group-btn">
-                                                <span class="group-card-btn-del-text">-PHX_DELETE_BTN-</span>
+
+                        <div class="hdr-client-profile" id="client-cred-container">
+                            <div id="sing-in-btn-container" >
+                                <ul class="list hdr-clt-info-list">
+                                    <li class="hdr-clt-info-item">
+                                        <div class="hdr-login-btn-container">
+                                            <a href="#popup_7" class="popup-link"> 
+                                                <button class="hdr-log-in-btn">
+                                                    <span>СPHX_SIGN_IN</span> 
                                                 </button>
                                             </a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                            
                         </div>
                     </div>
-                </div>
-                <div id="tabcontent2" class="tabcontent">
-                    <div class="group-info-tables">
-                    <div class="main-tables">
-                        <div class="main-tables-group-item">
-                            <table class="dynamic-table" id="members-table">
-                                <tr>
-                                    <th colspan="9" class="all-table-title group-info-table-title"> -PHX_TBL_SPORTS- 
-                                        <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view" id="member-add-btn" >
-                                            <button class="group-page-ref-btn" type="button" id="members-add-btn" data-open-modal>
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs.svg#icon-plus"></use>
-                                                </svg>
-                                            </button>
+                    <template id="client-data-template">
+                        <div>
+                            <ul class="list hdr-clt-info-list">
+                                <li>
+                                    <div class="hdr-clt-avatar"> 
+                                        <a href="#client-link">
+                                            <div class="hdr-clt-avatar-icon">
+                                                <div class="hdr-clt-avatar-icon hdr-avatar-img-cut">
+                                                    <img id="client-photo" class="hdr-avatar-photo" src="./img/user.png" alt="">
+                                                </div>
+                                            </div>
                                         </a>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_SURNAME-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_NAME-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_AGE-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_WEIGHT-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_SEX-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_TEAM-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_QUAL-</td>
-                                    <td class="secondary-title-two-tables">-PHX_SPORT_ADMIT-</td>
-                                    <td class="column-for-button secondary-title-two-tables"></td>
-                                </tr>
+                                        <div class="hdr-clt-avatar-text">
+                                            <a href="#client-link"> <span>#client-name</span> </a></br>
+                                            <a href="#client-link"> <span class="hdr-avatar-status">#client-status</span> </a></br>
+                                            <a href="#"> 
+                                                <span class="hdr-sign-out" id="sign-out-btn">СPHX_SIGN_OUT</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </header>
 
-                                <template id="group-member-template">
-                                    <tr id="#sports-row-id">
-                                        <td class="secondary-tables--td" onclick="window.location.href='#sportsman-link'; return false">#sp-surname</td>
-                                        <td class="secondary-tables--td">#sp-name</td>
-                                        <td class="secondary-tables--td">#sp-age</td>
-                                        <td class="secondary-tables--td">#sp-weight</td>
-                                        <td class="secondary-tables--td">#sp-sex</td>
-                                        <td class="secondary-tables--td">#sp-team</td>
-                                        <td class="secondary-tables--td">#sp-qual</td>
-                                        <td class="secondary-tables--td">
-                                            <input class="input-to-choose-type" type="checkbox" id="admit-sp-#sp-id" name="admit-sp-#sp-id" disabled>
-                                            <label class="label-to-choose-type" for="admit-sp-#sp-id" id="label-admit-sp-#sp-id"></label>
-                                        </td>
-                                        <td class="column-for-button secondary-title-two-tables"> 
-                                            <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" id="remove-gr-sports-#sp-id"  type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </template>
-                                <template id="yes-template">
-                                    -CPHX_YES-
-                                </template>
-                                <template id="no-template">
-                                    -CPHX_NO-
-                                </template>
-                            </table>
+            <main>
+                <div class="container-main">
+                    <div class="tab" id="tab-bar-id">
+                        <div class="tab-indent"></div>
+                        <button class="tablinks" id="tab1">-PHX_INFO_TAB-</button>
+                        <button class="tablinks" id="tab2">-PHX_SPORTS_TAB-</button>
+                        <button class="tablinks" id="tab3">-PHX_PAIRS_TAB-</button>
+                        <button class="tablinks" id="tab4">-PHX_GRID_TAB-</button>
+                    </div>
+                    
+                    <div class="bread-crumbs">
+                        <a class="bc-link" id="department-link-id" href="">
+                            <div class="bc-dp-block">
+                                <img class="bc-department-img" src="./img/white_library.svg" alt="Department">
+                            </div>
+                        </a>
+                        <div class="bc-block">
+                            <img class="bc-arrow" src="./img/unselect.svg" alt="bc">
+                        </div>
+
+                        <a class="bc-link" id="competition-link-id" href="">
+                            <div class="bc-block bc-unselected">
+                                <div class="bc-text" id="competition-name-id"></div>
+                            </div>
+                        </a>
+                        <div class="bc-block">
+                            <img class="bc-arrow" src="./img/preselect.svg" alt="bc">
+                        </div>
+
+                        <div class="bc-block bc-selected">
+                            <div class="bc-text" id="group-name-id"></div>
+                        </div>
+                        <div class="bc-block">
+                            <img class="bc-arrow" src="./img/arrow-sel.svg" alt="bc">
                         </div>
                     </div>
+
+                    <div id="tabcontent1" class="tabcontent">
+                        <div class="group-info-main">
+                            <div id="member-info">
+                                <div class="group-info-title--siting">
+                                    <div class="group-info-title"><span>-PHX_INFO_HEAD-</span></div>
+                                        <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="group-edit-btn">
+                                            <svg class="group-info-edit-btn-icon">
+                                                <use href="./img/icons.svg#icon-pencil2"></use>
+                                            </svg>
+                                        </button>
+                                </div>
+                                <div class="group-info-fields">
+                                    <table class="dynamic-table">
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -CPHX_HUMAN_NAME-:</div> </td>
+                                            <td> <div id="group-info-name"></div>  </td>
+                                        </tr>   
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_SYSTEM-:</div> </td>
+                                            <td> <div id="group-info-system"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_DISCIPLINE-:</div> </td>
+                                            <td> <div id="group-info-discipline"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_SEX-:</div> </td>
+                                            <td> <div id="group-info-sex"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_LOW_AGE-:</div> </td>
+                                            <td> <div id="group-info-age-min"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_TOP_AGE-:</div> </td>
+                                            <td> <div id="group-info-age-max"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_LOW_WEIGHT-:</div> </td>
+                                            <td> <div id="group-info-weight-min"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_TOP_WEIGHT-:</div> </td>
+                                            <td> <div id="group-info-weight-max"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_LOW_QUAL-:</div> </td>
+                                            <td> <div id="group-info-qulification-min"></div>  </td>
+                                        </tr>
+                                        <tr class="group-info-table-pop-up">
+                                            <td class="group-info-table-pop-up-td"> <div class=""> -PHX_INFO_TOP_QUAL-:</div> </td>
+                                            <td> <div id="group-info-qulification-max"></div>  </td>
+                                        </tr>
+                                    </table>
+                                    <div>
+                                        <table class="formulas-table" id="formulas-table">
+                                            <tr>
+                                                <th colspan="8" class="formulas-table--th-main">
+                                                    <span>-PHX_FORMULAS-</span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th class="formulas-table--th">-PHX_PREPARATION-</th>
+                                                <th class="formulas-table--th">-PHX_ROUNDS_NUM-</th>
+                                                <th class="formulas-table--th">-PHX_ROUND-</th>
+                                                <th class="formulas-table--th">-PHX_REST-</th>
+                                                <th class="formulas-table--th">-PHX_HOLD-</th>
+                                                <th class="formulas-table--th">-PHX_FINAL_MIN-</th>
+                                                <th class="formulas-table--th">-PHX_FINAL_MAX-</th>
+                                                <th class="formulas-table--th">   </th>
+                                                <tr class="js-hidden-element js-root-view js-admin-view">
+                                                <td class="secondary-tables--td">
+                                                    <input class="formulas-table--input" type="text" id="add-formula-preparation">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    <input class="formulas-table--input" type="text" id="add-formula-rounds-num">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    <input class="formulas-table--input" type="text" id="add-formula-rounds-dur">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    <input class="formulas-table--input" type="text" id="add-formula-rest-dur">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    <input class="formulas-table--input" type="text" id="add-formula-after-hold">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    1/<input class="formulas-table--input" type="text" id="add-formula-final-min">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    1/<input class="formulas-table--input" type="text" id="add-formula-final-max">
+                                                </td>
+                                                <td class="secondary-tables--td">
+                                                    <button class="formulas-table-add-btn" type="button" id="formula-add-btn">
+                                                        <svg class="formulas-table-add-btn--svg">
+                                                            <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <template id="formula-row-template">
+                                                <td class="secondary-tables--td">#preparation</td>
+                                                <td class="secondary-tables--td">#rounds-num</td>
+                                                <td class="secondary-tables--td">#round-dur</td>
+                                                <td class="secondary-tables--td">#rest-dur</td>
+                                                <td class="secondary-tables--td">#after-hold</td>
+                                                <td class="secondary-tables--td">#final-min</td>
+                                                <td class="secondary-tables--td">#final-max </td>
+                                                <td class="secondary-tables--td">
+                                                    <button class="formulas-table-add-btn js-hidden-element js-root-view js-admin-view" type="button" id="#dell-btn_id">
+                                                        <svg class="formulas-table-add-btn--svg">
+                                                            <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </template>
+                                        </table>
+                                    </div>
+                                    <ul class="list header-list">
+                                        <li class="header-item"> 
+                                            <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
+                                                <a id="del-btn-link">
+                                                    <button class="group-page-del-btn" type="button" id="delete-group-btn">
+                                                    <span class="group-card-btn-del-text">-PHX_DELETE_BTN-</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div id="tabcontent3" class="tabcontent">
-                    <div class="group-info-tables">
+                    <div id="tabcontent2" class="tabcontent">
+                        <div class="group-info-tables">
                         <div class="main-tables">
                             <div class="main-tables-group-item">
-                                <table class="dynamic-table" id="pairs-table">
+                                <table class="dynamic-table" id="members-table">
                                     <tr>
-                                        <th class="all-table-title group-info-table-title" colspan="7"> -PHX_TBL_PAIRS- 
-                                            <button class="group-page-ref-btn  js-hidden-element js-root-view js-admin-view" type="button"  id="update-pairs-btn" data-open-modal>
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/icons.svg#icon-loop2"></use>
-                                                </svg>
-                                            </button>
+                                        <th colspan="9" class="all-table-title group-info-table-title"> -PHX_TBL_SPORTS- 
+                                            <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view" id="member-add-btn" >
+                                                <button class="group-page-ref-btn" type="button" id="members-add-btn" data-open-modal>
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs.svg#icon-plus"></use>
+                                                    </svg>
+                                                </button>
+                                            </a>
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="secondary-title-two-tables">-PHX_PAIRS_NUM-</td>
-                                        <td class="secondary-title-two-tables">-PHX_PAIRS_LIST-</td>
-                                        <td class="secondary-title-two-tables">-PHX_PAIR_TIME-</td>
-                                        <td class="secondary-title-two-tables">-PHX_PAIR_FINAL-</td>
-                                        <td class="secondary-title-two-tables">-PHX_PAIR_RED-</td>
-                                        <td class="secondary-title-two-tables">-PHX_PAIR_BLUE-</td>
-                                        <td class="secondary-title-two-tables">-PHX_PAIR_WIN-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_SURNAME-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_NAME-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_AGE-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_WEIGHT-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_SEX-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_TEAM-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_QUAL-</td>
+                                        <td class="secondary-title-two-tables">-PHX_SPORT_ADMIT-</td>
+                                        <td class="column-for-button secondary-title-two-tables"></td>
                                     </tr>
-                                    <template id="pair-template">
-                                        <tr>
-                                            <td class="first-title-tables--text">#pair-num</td>
-                                            <td class="first-title-tables--text">#pairs-list</td>
-                                            <td class="first-title-tables--text">#time</td>
-                                            <td class="first-title-tables--text">#final-part</td>
-                                            <td class="first-title-tables--text group-page-pair-red red-cell-style">#red-sportsman</td>
-                                            <td class="first-title-tables--text group-page-pair-blue blue-cell-style">#blue-sportsman</td>
-                                            <td class="first-title-tables--text #winner-style">#pair-winner</td>
+
+                                    <template id="group-member-template">
+                                        <tr id="#sports-row-id">
+                                            <td class="secondary-tables--td" onclick="window.location.href='#sportsman-link'; return false">#sp-surname</td>
+                                            <td class="secondary-tables--td">#sp-name</td>
+                                            <td class="secondary-tables--td">#sp-age</td>
+                                            <td class="secondary-tables--td">#sp-weight</td>
+                                            <td class="secondary-tables--td">#sp-sex</td>
+                                            <td class="secondary-tables--td">#sp-team</td>
+                                            <td class="secondary-tables--td">#sp-qual</td>
+                                            <td class="secondary-tables--td">
+                                                <input class="input-to-choose-type" type="checkbox" id="admit-sp-#sp-id" name="admit-sp-#sp-id" disabled>
+                                                <label class="label-to-choose-type" for="admit-sp-#sp-id" id="label-admit-sp-#sp-id"></label>
+                                            </td>
+                                            <td class="column-for-button secondary-title-two-tables"> 
+                                                <button class="member-page-dell-btn js-hidden-element js-root-view js-admin-view" id="remove-gr-sports-#sp-id"  type="button">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                    </svg>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </template>
-                                    <template id="win-btn-template">
-                                        <div class="js-hidden-element js-root-view js-admin-view">
-                                            <button type="button" class="red-button-style" id="red-btn-#pair-id"></button>
-                                            <button type="button" class="blue-button-style" id="blue-btn-#pair-id"></button>
-                                        </div>
+                                    <template id="yes-template">
+                                        -CPHX_YES-
+                                    </template>
+                                    <template id="no-template">
+                                        -CPHX_NO-
                                     </template>
                                 </table>
-                            </div> 
+                            </div>
+                        </div>
                         </div>
                     </div>
-                </div>
-                <div id="tabcontent4" class="tabcontent">
-                    <div id="pairs-grid"></div>
+                    <div id="tabcontent3" class="tabcontent">
+                        <div class="group-info-tables">
+                            <div class="main-tables">
+                                <div class="main-tables-group-item">
+                                    <table class="dynamic-table" id="pairs-table">
+                                        <tr>
+                                            <th class="all-table-title group-info-table-title" colspan="7"> -PHX_TBL_PAIRS- 
+                                                <button class="group-page-ref-btn  js-hidden-element js-root-view js-admin-view" type="button"  id="update-pairs-btn" data-open-modal>
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/icons.svg#icon-loop2"></use>
+                                                    </svg>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="secondary-title-two-tables">-PHX_PAIRS_NUM-</td>
+                                            <td class="secondary-title-two-tables">-PHX_PAIRS_LIST-</td>
+                                            <td class="secondary-title-two-tables">-PHX_PAIR_TIME-</td>
+                                            <td class="secondary-title-two-tables">-PHX_PAIR_FINAL-</td>
+                                            <td class="secondary-title-two-tables">-PHX_PAIR_RED-</td>
+                                            <td class="secondary-title-two-tables">-PHX_PAIR_BLUE-</td>
+                                            <td class="secondary-title-two-tables">-PHX_PAIR_WIN-</td>
+                                        </tr>
+                                        <template id="pair-template">
+                                            <tr>
+                                                <td class="first-title-tables--text">#pair-num</td>
+                                                <td class="first-title-tables--text">#pairs-list</td>
+                                                <td class="first-title-tables--text">#time</td>
+                                                <td class="first-title-tables--text">#final-part</td>
+                                                <td class="first-title-tables--text group-page-pair-red red-cell-style">#red-sportsman</td>
+                                                <td class="first-title-tables--text group-page-pair-blue blue-cell-style">#blue-sportsman</td>
+                                                <td class="first-title-tables--text #winner-style">#pair-winner</td>
+                                            </tr>
+                                        </template>
+                                        <template id="win-btn-template">
+                                            <div class="js-hidden-element js-root-view js-admin-view">
+                                                <button type="button" class="red-button-style" id="red-btn-#pair-id"></button>
+                                                <button type="button" class="blue-button-style" id="blue-btn-#pair-id"></button>
+                                            </div>
+                                        </template>
+                                    </table>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tabcontent4" class="tabcontent">
+                        <div id="pairs-grid"></div>
 
-                    <template id="pair-tab-temp">
-                        <table id="pair-table" border="1">
-                            <tr>
-                                <td id="member-red-name"></td>
-                            </tr>
-                            <tr>
-                                <td id="member-blue-name"></td>
-                            </tr>
-                        </table>
-                    </template>
+                        <template id="pair-tab-temp">
+                            <table id="pair-table" border="1">
+                                <tr>
+                                    <td id="member-red-name"></td>
+                                </tr>
+                                <tr>
+                                    <td id="member-blue-name"></td>
+                                </tr>
+                            </table>
+                        </template>
+                    </div>
                 </div>
-
             </main>
             <footer class="footer">
-                <div class="lang-panel">
-                    <ul class="list lang-panel-list">
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ru"> 
-                                    <img src="./img/ru.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-en"> 
-                                    <img src="./img/en.png"> 
-                                </a>
-                            </div>
-                        </li>
-                        <li class="lang-panel-item">
-                            <div class="lang-panel-flag">
-                                <a type="button" id="lang-ua"> 
-                                    <img src="./img/ua.png"> 
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </footer>
 
             <template id="group-input-name-template">

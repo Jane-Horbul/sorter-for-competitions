@@ -1,4 +1,4 @@
-.log-in-btn,
+.hdr-log-in-btn,
 .log-out-btn {
     width: 150px;
     height: 36px;
@@ -12,12 +12,14 @@
 }
 .log-out-btn--placing {
     margin-right: 15px;
+    height: 15px;
 }
-.log-in-btn:hover,
+
+.hdr-log-in-btn:hover,
 .log-out-btn:hover,
-.log-in-btn:focus,
+.hdr-log-in-btn:focus,
 .log-out-btn:focus,
-.log-in-btn:active,
+.hdr-log-in-btn:active,
 .log-out-btn:active,
 .sportsmen-registration-btn:hover,
 .sportsmen-registration-btn:focus,

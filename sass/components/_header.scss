@@ -1,79 +1,168 @@
-.page-header {
+.hdr-header {
   background: rgb(20,153,246);
   background: linear-gradient(0deg, rgba(20,153,246,0.41778718323266806) 0%, rgba(255,255,255,1) 6%);
   margin-bottom: 0px;
 
   @include for-size(mobile) {
-      height: 230px;
-    }
+    height: 230px;
+  }
   @include for-size(tablet) {
-      height: 100px;
-    }
+    height: 100px;
+  }
   @include for-size(desktop) {
-      height: 100px; 
-    }
+    height: 100px; 
+  }
   @include for-size(max-desktop) {
-      height: 100px;
-    } 
-  }
-  .page-header .flexbox {
-    justify-content: space-between;
-    align-items: center;
-  }
-  .header-border {
-      width: 100%;
-    border-bottom: 1px solid #ececec;
-
-    @include for-size(mobile) {
-        margin-bottom: 10px; 
-      }
-    
-      @include for-size(tablet) {
-        margin-bottom: 20px; 
-      }
-    
-      @include for-size(desktop) {
-        margin-bottom: 30px; 
-      }
-  
-      @include for-size(max-desktop) {
-        margin-bottom: 30px; 
-      }
-  }
-
-  .header-list {
-    display: flex;
-    justify-content: space-between;
+    height: 100px;
+  } 
 }
-.header-item {
-    margin-left: 4px;
-    margin-right: 2px;
-    margin-top: 5px;
+
+.hdr-header .flexbox {
+  justify-content: space-between;
+  align-items: center;
 }
-.header__account-avatar {
+
+.hdr-logo {
+  width: 265px;
+  height: 65px;
+}
+
+.hdr-client-info-container {
+  width: 300px;
+}
+
+.hdr-lang-container {
+  position: absolute;
+  width: 100px;
+  @include for-size(mobile) {
+    top: 143px;
+    left: 5vw;
+  }
+  @include for-size(tablet) {
+    top: 20px;
+    left: 67vw;
+  }
+  @include for-size(desktop) {
+    top: 20px;
+    left: 72vw;
+  }
+  @include for-size(max-desktop) {
+    top: 20px;
+    left: 72vw;
+  }
+}
+
+.hdr-lang-select {
+  width: 100px;
+}
+
+.hdr-lang-name {
+  position: relative;
+  top: -10px;
+  font-size: 17px;
+  width: 100px;
+  padding-bottom: 16px;
+}
+
+.hdr-lang-image {
+  display: inline-block;
+  height: 40px;
+}
+
+.select2-selection__rendered {
+  position: absolute !important;;
+  left: 0px !important;
+  line-height: 45px !important;
+  width: 100px !important;
+}
+.select2-container .select2-selection--single {
+  position: absolute !important;
+  left: 0px !important;
+  height: 45px !important;
+  width: 100px !important;
+}
+.select2-selection__arrow {
+  position: absolute !important;
+  left: 0px !important;
+  height: 45px !important;
+  width: 100px !important;
+}
+.select2-selection__arrow {
+  left: 35px !important;
+}
+
+.hdr-client-profile {
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  @include for-size(mobile) {
+    top: 143px;
+    left: 40vw;
+  }
+  @include for-size(tablet) {
+    top: 20px;
+    left: 81vw;
+  }
+  @include for-size(desktop) {
+    top: 20px;
+    left: 81vw;
+  }
+  @include for-size(max-desktop) {
+    top: 20px;
+    left: 81vw;
+  }
+}
+
+.hdr-clt-info-list {
   display: flex;
 }
-.header__account-icon {
-  display: block;
-  width: 30px;
-  height: 30px;
-  margin-right: 30px;
-  fill: #777777;
+
+.hdr-clt-info-item {
+  margin-left: 4px;
+  margin-right: 2px;
+  margin-top: 10px;
 }
-.header__account-avatar-icon {
-border-radius: 50%;
-width: 36px;
-height: 35px;
-margin-top: 2px;
-margin-right: 30px;
+
+.hdr-login-btn-container {
+  margin-top: 5px;
+  margin-right: 15px;
 }
-.header__account-avatar-text {
-  color: #2f2929;
+
+.hdr-log-in-btn {
+  border: 0px;
+  width: 150px;
+  height: 36px;
+  border: 0px;
+  background: #1D8FBD;
+  color: #fff;
+  font-size: 16px;
 }
-.account-status {
-  font-size: 11px;
+
+.hdr-clt-avatar {
+  display: flex;
 }
-.account-avatar-img {
+
+$photo-size: 65px;
+
+.hdr-clt-avatar-icon {
+  border-radius: 50%;
+  width: $photo-size;
+  height: $photo-size;
+  margin-top: 0px;
+  margin-right: 10px;
+}
+
+.hdr-avatar-img-cut {
+  position: relative;
+  display: inline-block;
+  width: $photo-size;
+  height: $photo-size;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #777777;
+}
+
+.hdr-avatar-photo{
   position: absolute;
   top: 0;
   left: 0;
@@ -85,18 +174,18 @@ margin-right: 30px;
   min-height: 100%;
   object-fit: cover;
 }
-.img-cover {
-  position: relative;
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.header__account-avatar-icon.img-cover {
-  border: 1px solid #777777;
+
+.hdr-clt-avatar-text {
+  margin-top: -8px;
+  color: #2f2929;
+  font-size: 17px;
+  A {
+    text-decoration: none;
+    color: #000 !important;
   }
-.header-logo {
-  width: 265px;
-  height: 65px;
 }
+
+.hdr-avatar-status {
+  font-size: 14px;
+}
+

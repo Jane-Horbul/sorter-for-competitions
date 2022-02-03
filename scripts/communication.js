@@ -506,12 +506,12 @@ function addCompStatistics(spArray, link, reload){
 export const server = {
     access: {
         loginLink:          "client-login",
-        llogoutLink:         "client-logout",
+        logoutLink:         "client-logout",
         getStatusLink:      "client-status-get",
         changeLoginLink:    "client-change-login",
         changePassLink:     "client-change-pass",
 
-        logout()            {sendSingle(this.llogoutLink,        "",     true);},
+        logout()            {sendSingle(this.logoutLink,        "",     true);},
         login(cl)           {sendList(  this.loginLink,         cl.obj, true);},
         changeLogin(cl)     {sendList(  this.changeLoginLink,   cl.obj, true);},
         changePass(cl)      {sendList(  this.changePassLink,    cl.obj, true);},

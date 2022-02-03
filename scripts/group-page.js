@@ -450,12 +450,10 @@ function fillPageInfo(){
     var qualMin = qualificationsMap.get(groupInfo.getQualMin());
 
     markup.group.setPageName(groupInfo.getName());
-    markup.group.setCompetitionName(competitionInfo.getName());
-    markup.group.setCompetitionLink(competitionLink);
-    markup.group.setDepartmentName(departmentInfo.getName());
-    markup.group.setDepartmentLink(departmentLink);
-    markup.group.setGroupName(groupInfo.getName());
-    markup.group.setGroupLink(window.location.href);
+    markup.breadcrumbs.setDpLink();
+    markup.breadcrumbs.setCompLink();
+    markup.breadcrumbs.setCompName(competitionInfo.getName());
+    markup.breadcrumbs.setGroupName(groupInfo.getName());
 
     markup.group.setDelBtnLink(competitionLink);
 

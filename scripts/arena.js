@@ -207,9 +207,12 @@ function editArena(){
 }
 
 function fillPageInfo(){
-    var bc = createPageItem(markup.breadcrumbs.getTemplate(), markup.breadcrumbs.getPlaceholders(department, competition, arena));
-    markup.breadcrumbs.getContainer().append(bc);
-    markup.common.setListName(arena.getName());
+    markup.breadcrumbs.setDpLink();
+    markup.breadcrumbs.setCompLink();
+    markup.breadcrumbs.setCompName(competition.getName());
+    markup.breadcrumbs.setArenaName(arena.getName());
+
+    markup.common.setPageName(arena.getName());
 
     var qTemp = markup.settings.getQualTemplate();
     department.getQualifications().forEach(function(name, value) {

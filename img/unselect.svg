@@ -1,0 +1,17 @@
+<svg width="22.5" height="45" xmlns="http://www.w3.org/2000/svg" version="1.1" stroke="null">
+ <title stroke="null">preselect</title>
+
+ <g id="Layer_1" stroke="null">
+  <title stroke="null">Layer 1</title>
+  <path fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="undefined" stroke-linecap="undefined" opacity="undefined" d="m0.30483,46.08922l19.0317,-24.10504" id="svg_1" transform="rotate(-0.256003 9.82068 34.0367)"/>
+  <path fill="none" stroke-width="2" stroke-linejoin="undefined" stroke-linecap="undefined" opacity="undefined" d="m0.63217,-0.76163l18.49472,23.89526" id="svg_4" stroke="#ffffff" transform="rotate(-0.256003 9.87952 11.186)"/>
+  <path fill="none" stroke-width="15" stroke-linejoin="undefined" stroke-linecap="undefined" opacity="undefined" d="m4.75721,-12.17618l28.30914,36.01468" id="svg_18" stroke="#ffffff"/>
+  <path fill="none" stroke-width="15" stroke-linejoin="undefined" stroke-linecap="undefined" opacity="undefined" d="m10.50251,49.67973l20.02521,-25.57517" id="svg_19" stroke="#ffffff" transform="rotate(-0.256003 20.5151 36.8921)"/>
+  <path fill="none" stroke-width="2" stroke-linejoin="undefined" stroke-linecap="undefined" opacity="undefined" d="m3.08378,-0.76163l18.49471,23.89527" id="svg_20" stroke="#2196f3" transform="rotate(-0.256003 11.8795 11.186)"/>
+  <path fill="none" stroke="#2196f3" stroke-width="2" stroke-linejoin="undefined" stroke-linecap="undefined" opacity="undefined" d="m2.69193,46.08922l19.0317,-24.10505" id="svg_21" transform="rotate(-0.256003 12.2078 34.0367)"/>
+  <line fill="none" stroke="#2196f3" stroke-width="2" x1="4" y1="0.83051" x2="22.5" y2="0.83051" id="svg_23" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line fill="none" stroke="#2196f3" stroke-width="2" x1="4.12903" y1="44.09676" x2="22.62903" y2="44.09676" id="svg_24" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke="#2196f3" stroke-width="13" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="21.48305" x2="29.47033" y1="-5.97456" x1="8.2839" fill="none"/>
+  <line stroke="#2196f3" stroke-width="13" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="21.48305" x2="29.9788" y1="50.4661" x1="8.79237" fill="none"/>
+ </g>
+</svg>

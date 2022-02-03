@@ -3,6 +3,9 @@
 import {getSportsName} from "./group-page.js"
 import {helpers, createPageItem} from "./common.js"
 
+var cLink = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
+var dLink = cLink.substring(0, cLink.lastIndexOf("/"));
+
 function getWinStyle(pair){
     var winner = pair.getWinner();
     return helpers.isEmptyString(winner) ? "" : ((winner == pair.getRedSp()) ? markup.pairs.redWinStyle : markup.pairs.blueWinStyle);
@@ -20,116 +23,15 @@ function getPairWinner(pair){
 }
 
 export const markup = {
-    pairs: {
-        redBtnStyle:     "red-button-style",
-        blueBtnStyle:    "blue-button-style",
-        redWinStyle:     "red-cell-style",
-        blueWinStyle:    "blue-cell-style",
-    
-        getTable()                  { return document.getElementById("pairs-table");},
-        getTemplate()               { return document.getElementById("pair-template");},
-        getPlaceholders(p)          { return {
-                                            "#pair-num":        Number(p.getNumber()) > 0 ? p.getNumber() : "",
-                                            "#pairs-list":      p.getArena() != undefined ? p.getArena() : "",
-                                            "#time":            p.getTime("hh:min (dd/mm)"),
-                                            "#final-part":      "1/" + p.getFinalPart(),
-                                            "#red-sportsman":   getSportsName(p.getRedSp()),
-                                            "#blue-sportsman":  getSportsName(p.getBlueSp()),
-                                            "#pair-winner":     getPairWinner(p),
-                                            "#winner-style":    getWinStyle(p)
-                                        };
-                                    },
-        createWinBtns(id)           { return document.getElementById("win-btn-template").innerHTML.replaceAll("#pair-id", id);},
-        getRedBtnId(spId)           { return document.getElementById("red-btn-" + spId); },
-        getBlueBtnId(spId)          { return document.getElementById("blue-btn-" + spId); }       
-    },
-    sportsmen: {
-        sportsmanRowId:     "sports-row-id-",
-        removeBtnId:        "remove-gr-sports-",
-        addBtnId:           "sportsmans-add-list-send-btn",
-    
-        getTable()                  { return document.getElementById("members-table");},
-        getTemplate()               { return document.getElementById("group-member-template");},
-    
-        getAddingTable()            { return document.getElementById("add-sportsman-table");},
-        getAddingTemplate()         { return document.getElementById("add-sportsman-template");},
-        getAddingSportsRow(id)      { return document.getElementById("add-sports-" + id)},
-    
-        getPlaceholders(sp, quals, dlink)  { return {
-                                            "#sp-id":           sp.getId(),
-                                            "#sp-surname":      sp.getSurname(),
-                                            "#sp-name":         sp.getName(),
-                                            "#sp-age":          sp.getAge(),
-                                            "#sp-weight":       sp.getWeight(),
-                                            "#sp-sex":          sp.getSex(),
-                                            "#sp-team":         sp.getTeam(),
-                                            "#sp-qual":         quals.get("" + sp.getQualification()),
-                                            "#sp-admit":        sp.getAdmition(),
-                                            "#sp-gr-num":       sp.getGroupsNum(),
-                                            "#sportsman-link":  dlink + sp.getLink(),
-                                            "#sports-row-id":   this.sportsmanRowId + sp.getId()
-                                        };
-                                    },
-        getSportsRow(id)            { return document.getElementById(this.sportsmanRowId + id);},
-        getAddBtn()                 { return document.getElementById(this.addBtnId);},
-        getDelBtn(sp)               { return document.getElementById(markup.sportsmen.removeBtnId + sp.getId());},
-        getAdmitLabel(sp)           { return document.getElementById("label-admit-sp-" + sp.getId());},
-        getAdmitBtn(sp)             { return document.getElementById("admit-sp-" + sp.getId());},
-        getYesNoWord(val)           { return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;}
-    },
-    grid: {
-        scale:          30,
-        final:          1,
-        whiteFillColor: "rgb(255,255,255)",
-        redFillColor:   "rgb(255,96,90)",
-        blueFillColor:  "rgb(0,148,204)",
-        shiftTextX:     10,
-        shiftTextY:     10,
-        
-        isFinalPair(pair)           {return (pair.getFinalPart() == "1");},
-        getPow(pair_num)            {
-                                        for(var i = 1, pn = 2; ; i++, pn *=2)
-                                            if(pn > pair_num)
-                                                return {pow: i, num: pn};
-                                    },
-        
-        getGridWidh(pair_num)       {return ((this.getPairWidh() + this.getDistanceWidh())      * this.getPow(pair_num).pow);},
-        getGridHeight(pair_num)     {return ((this.getPairHeight() + this.getDistanceHeight())  * this.getPow(pair_num).num / 2);},
-    
-        getPairWidh()               { return 6 * this.scale; },
-        getPairHeight()             { return 2 * this.scale; },
-        
-        getDistanceWidh()           { return this.getPairWidh() / 2; },
-        getDistanceHeight()         { return this.getPairHeight(); },
-        getContainer()              { return document.getElementById("pairs-grid"); },
-        createCanvas(pairs_num)     { 
-                                        var canvas              = document.createElement('canvas');
-                                        canvas.style.position   = 'relative'
-                                        canvas.width            = this.getGridWidh(pairs_num);
-                                        canvas.height           = this.getGridHeight(pairs_num);
-                                        
-                                        var ctx                 = canvas.getContext('2d');
-                                        ctx.font                = "17px serif";
-                                        ctx.lineWidth           = 3;
-                                        return canvas;
-                                    },
-        printText(ctx, text, x, y)  {ctx.fillText(text, x + this.shiftTextX, y - this.shiftTextY);}
+    breadcrumbs: {
+        setDpLink()                 { document.getElementById("department-link-id").setAttribute("href", dLink); },
+        setCompLink()               { document.getElementById("competition-link-id").setAttribute("href", cLink); },
+        setCompName(name)           { document.getElementById("competition-name-id").innerHTML = name; },
+        setGroupName(name)          { document.getElementById("group-name-id").innerHTML = name; }
     },
     group: {
-        pageNameId:         "page-name",
-        pageNameLinkId:     "page-name-link",
-        compLinkId:         "competition-link",
-        depLinkId:          "department-link",
-        groupLinkId:        "group-link",
-    
-        setPageName(name)           {document.getElementById(this.pageNameId).innerHTML = name;},
-        setDepartmentName(name)     {document.getElementById(this.depLinkId).innerHTML = name;},
-        setDepartmentLink(link)     {document.getElementById(this.depLinkId).setAttribute("href", link);},
-        setCompetitionName(name)    {document.getElementById(this.compLinkId).innerHTML = name;},
-        setCompetitionLink(link)    {document.getElementById(this.compLinkId).setAttribute("href", link);},
-        setGroupName(name)          {document.getElementById(this.groupLinkId).innerHTML = name;},
-        setGroupLink(link)          {document.getElementById(this.groupLinkId).setAttribute("href", link);},
-    
+        setPageName(name)           {document.getElementById("page-name").innerHTML = name;},
+
         infoNameId:         "group-info-name",
         infoSystemId:       "group-info-system",
         infoSexId:          "group-info-sex",
@@ -226,5 +128,100 @@ export const markup = {
         getEditBtn()                { return document.getElementById(this.editBtnId);},
         getUpdatePairsBtn()         { return document.getElementById(this.updatePairsBtnId);},
         getAddFormulaBtn()          { return document.getElementById(this.addFormulaBtnId);}
-    }    
+    },
+    pairs: {
+        redBtnStyle:     "red-button-style",
+        blueBtnStyle:    "blue-button-style",
+        redWinStyle:     "red-cell-style",
+        blueWinStyle:    "blue-cell-style",
+    
+        getTable()                  { return document.getElementById("pairs-table");},
+        getTemplate()               { return document.getElementById("pair-template");},
+        getPlaceholders(p)          { return {
+                                            "#pair-num":        Number(p.getNumber()) > 0 ? p.getNumber() : "",
+                                            "#pairs-list":      p.getArena() != undefined ? p.getArena() : "",
+                                            "#time":            p.getTime("hh:min (dd/mm)"),
+                                            "#final-part":      "1/" + p.getFinalPart(),
+                                            "#red-sportsman":   getSportsName(p.getRedSp()),
+                                            "#blue-sportsman":  getSportsName(p.getBlueSp()),
+                                            "#pair-winner":     getPairWinner(p),
+                                            "#winner-style":    getWinStyle(p)
+                                        };
+                                    },
+        createWinBtns(id)           { return document.getElementById("win-btn-template").innerHTML.replaceAll("#pair-id", id);},
+        getRedBtnId(spId)           { return document.getElementById("red-btn-" + spId); },
+        getBlueBtnId(spId)          { return document.getElementById("blue-btn-" + spId); }       
+    },
+    sportsmen: {
+        sportsmanRowId:     "sports-row-id-",
+        removeBtnId:        "remove-gr-sports-",
+        addBtnId:           "sportsmans-add-list-send-btn",
+    
+        getTable()                  { return document.getElementById("members-table");},
+        getTemplate()               { return document.getElementById("group-member-template");},
+    
+        getAddingTable()            { return document.getElementById("add-sportsman-table");},
+        getAddingTemplate()         { return document.getElementById("add-sportsman-template");},
+        getAddingSportsRow(id)      { return document.getElementById("add-sports-" + id)},
+    
+        getPlaceholders(sp, quals, dlink)  { return {
+                                            "#sp-id":           sp.getId(),
+                                            "#sp-surname":      sp.getSurname(),
+                                            "#sp-name":         sp.getName(),
+                                            "#sp-age":          sp.getAge(),
+                                            "#sp-weight":       sp.getWeight(),
+                                            "#sp-sex":          sp.getSex(),
+                                            "#sp-team":         sp.getTeam(),
+                                            "#sp-qual":         quals.get("" + sp.getQualification()),
+                                            "#sp-admit":        sp.getAdmition(),
+                                            "#sp-gr-num":       sp.getGroupsNum(),
+                                            "#sportsman-link":  dlink + sp.getLink(),
+                                            "#sports-row-id":   this.sportsmanRowId + sp.getId()
+                                        };
+                                    },
+        getSportsRow(id)            { return document.getElementById(this.sportsmanRowId + id);},
+        getAddBtn()                 { return document.getElementById(this.addBtnId);},
+        getDelBtn(sp)               { return document.getElementById(markup.sportsmen.removeBtnId + sp.getId());},
+        getAdmitLabel(sp)           { return document.getElementById("label-admit-sp-" + sp.getId());},
+        getAdmitBtn(sp)             { return document.getElementById("admit-sp-" + sp.getId());},
+        getYesNoWord(val)           { return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;}
+    },
+    grid: {
+        scale:          30,
+        final:          1,
+        whiteFillColor: "rgb(255,255,255)",
+        redFillColor:   "rgb(255,96,90)",
+        blueFillColor:  "rgb(0,148,204)",
+        shiftTextX:     10,
+        shiftTextY:     10,
+        
+        isFinalPair(pair)           {return (pair.getFinalPart() == "1");},
+        getPow(pair_num)            {
+                                        for(var i = 1, pn = 2; ; i++, pn *=2)
+                                            if(pn > pair_num)
+                                                return {pow: i, num: pn};
+                                    },
+        
+        getGridWidh(pair_num)       {return ((this.getPairWidh() + this.getDistanceWidh())      * this.getPow(pair_num).pow);},
+        getGridHeight(pair_num)     {return ((this.getPairHeight() + this.getDistanceHeight())  * this.getPow(pair_num).num / 2);},
+    
+        getPairWidh()               { return 6 * this.scale; },
+        getPairHeight()             { return 2 * this.scale; },
+        
+        getDistanceWidh()           { return this.getPairWidh() / 2; },
+        getDistanceHeight()         { return this.getPairHeight(); },
+        getContainer()              { return document.getElementById("pairs-grid"); },
+        createCanvas(pairs_num)     { 
+                                        var canvas              = document.createElement('canvas');
+                                        canvas.style.position   = 'relative'
+                                        canvas.width            = this.getGridWidh(pairs_num);
+                                        canvas.height           = this.getGridHeight(pairs_num);
+                                        
+                                        var ctx                 = canvas.getContext('2d');
+                                        ctx.font                = "17px serif";
+                                        ctx.lineWidth           = 3;
+                                        return canvas;
+                                    },
+        printText(ctx, text, x, y)  {ctx.fillText(text, x + this.shiftTextX, y - this.shiftTextY);}
+    }
 }

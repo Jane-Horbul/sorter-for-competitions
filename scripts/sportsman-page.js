@@ -149,11 +149,8 @@ function fillPageInfo(){
     var trainerName = trainer != undefined ? trainer.getSurname() + " " + trainer.getName() : "";
 
     markup.sportsman.setPageName(departmentInfo.getName());
-    markup.sportsman.setDepartmentName(departmentInfo.getName());
-    markup.sportsman.setDepartmentLink(departmentLink);
-    markup.sportsman.setSportsmanHeader(sportsName);
-    markup.sportsman.setSportsmanName(sportsName);
-    markup.sportsman.setSportsmanLink(window.location.href);
+    markup.breadcrumbs.setDpLink();
+    markup.breadcrumbs.setSportsName(sportsName);
     markup.sportsman.setPhoto(sportsmanInfo.getPhoto());
 
     markup.sportsman.getInfoId().innerHTML        = sportsmanInfo.getId();

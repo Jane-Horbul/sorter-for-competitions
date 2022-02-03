@@ -1,5 +1,8 @@
 import {helpers, createPageItem} from "./common.js"
 
+var sLink = window.location.href;
+var dLink = sLink.substring(0, sLink.lastIndexOf("/"));
+
 const medals = {
     "1": "./img/gold-m-2.png",
     "2": "./img/silver-m.png",
@@ -15,6 +18,11 @@ function getWinLoseStatus(pr, sp){
 }
 
 export const markup = {
+    breadcrumbs: {
+        setDpLink()                 { document.getElementById("department-link-id").setAttribute("href", dLink); },
+        setSportsName(name)         { document.getElementById("sportsman-name-id").innerHTML = name; }
+    },
+
     statistics: {
         competitionsListId:         "tabcontent2",
         competitionStatTemplate:    "competition-item-template-id",
@@ -86,11 +94,6 @@ export const markup = {
 
     sportsman: {
         setPageName(name)           {document.getElementById("page-name").innerHTML = name;},
-        setDepartmentName(name)     {document.getElementById("department-link").innerHTML = name;},
-        setDepartmentLink(link)     {document.getElementById("department-link").setAttribute("href", link);},
-        setSportsmanName(name)      {document.getElementById("sportsman-link").innerHTML = name;},
-        setSportsmanLink(link)      {document.getElementById("sportsman-link").setAttribute("href", link);},
-        setSportsmanHeader(name)    {document.getElementById("sportsman-header").innerHTML = name;},
         setPhoto(link)              {if(link != undefined) document.getElementById("sportsman-photo-img").setAttribute("src", link);},
 
         getInfoId()                 {return document.getElementById("sportsman-info-id");},

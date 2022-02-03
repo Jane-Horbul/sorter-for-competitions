@@ -295,11 +295,41 @@ function langLinkForm(lang){
         return mainLink + lang + afterLink;
     }
 }
+function formatLangItem(state) {
+    if (!state.id)
+        return state.text;
+    var url = "./img/" + state.element.value.toLowerCase() + ".png";
+    var $state = $('<span><img class="hdr-lang-image"/><span class="hdr-lang-name"></span></span>');
+    $state.find("span").text(state.text);
+    $state.find("img").attr("src", url);
+    return $state;
+};
+function getCurrentLang(){
+    var parts = window.location.href.split("?lang=");
+    if(parts.length < 2)
+        return "en";
+    return parts[1].split("/")[0];
+}
+
+
 
 export function languageSwitchingOn(){
-    document.getElementById("lang-ua").setAttribute("href", langLinkForm("ua"))
-    document.getElementById("lang-ru").setAttribute("href", langLinkForm("ru"))
-    document.getElementById("lang-en").setAttribute("href", langLinkForm("en"))
+    import("https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").then(m1 => {
+        import("https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js").then(m2 => {
+            import("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js").then(m3 => {
+                document.querySelectorAll(".hdr-lang-select")[0].value = getCurrentLang();
+                $(".hdr-lang-select").select2({ 
+                    templateResult: formatLangItem,
+                    templateSelection: formatLangItem
+                });
+                $('.hdr-lang-select').on('select2:select', function (e) {
+                    window.location.href = langLinkForm(e.params.data.id);
+                });
+            })
+        })
+    }).catch(err => {
+        console.log(err.message);
+    });
 }
 
 export function createPageItem(item, values){
