@@ -318,6 +318,7 @@ function competitionEdit(){
     } else {
         var cp = ops.createCompetition();
         cp.setName(nameInput.value);
+        cp.setId(page.cid);
         cp.setDescription(descInput.value);
         cp.setStartDate(startDateInput.value);
         cp.setEndDate(endDateInput.value);

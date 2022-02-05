@@ -71,30 +71,25 @@ html {
     }
   }
   .container-main {
-    width: 100%;
+    
+    width: auto;
     @include for-size(mobile) {
-      width: auto;
       overflow-x: scroll;
       margin-right: 0px;
     }
   
     @include for-size(tablet) {
       margin-right: 25px;
-      width: 768px;
       padding-left: 4px;
       overflow-x: hidden;
     }
   
     @include for-size(desktop) {
       margin-right: 25px;
-      width: 1180px;
-      margin-right: 35px;
     }
 
     @include for-size(max-desktop) {
       margin-right: 25px;
-      width: 1780px;
-      margin-right: 50px;
     }
   }
   .section {

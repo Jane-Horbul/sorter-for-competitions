@@ -1,6 +1,9 @@
 import {getQualificationInterval, getQualNameByValue} from "./competition-page.js"
 import {commonStrings} from "./common.js"
 
+function getSexName(s){
+    return document.getElementById(s.toLowerCase() + "-template").innerHTML;
+}
 export const markup = {
     sportsmen: {
         getTable()                  { return document.getElementById("members-table");},
@@ -22,7 +25,7 @@ export const markup = {
                                             "#sp-name":         sp.getName(),
                                             "#sp-age":          sp.getAge(),
                                             "#sp-weight":       sp.getWeight(),
-                                            "#sp-sex":          sp.getSex(),
+                                            "#sp-sex":          getSexName(sp.getSex()),
                                             "#sp-team":         sp.getTeam(),
                                             "#sp-qual":         getQualNameByValue(sp.getQualification()),
                                             "#sp-gr-num":       sp.getGroupsNum(),

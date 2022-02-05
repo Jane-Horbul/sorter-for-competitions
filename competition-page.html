@@ -83,15 +83,15 @@
                     </template>
                 </div>
             </header>
-            
+                
             <main>
                 <div class="container-main">
                     <div class="tab" id="tab-bar-id">
                         <div class="tab-indent"></div>
-                        <button class="tablinks" id="tab1">-PHX_SPORTS-</button>
-                        <button class="tablinks" id="tab2">-PHX_GROUPS-</button>
-                        <button class="tablinks" id="tab3">-PHX_PAIRS_LISTS-</button>
-                        <button class="tablinks" id="tab4">-PHX_INFORM-</button>
+                        <button class="tablinks tab-hidden" id="tab1">-PHX_SPORTS-</button>
+                        <button class="tablinks tab-hidden" id="tab2">-PHX_GROUPS-</button>
+                        <button class="tablinks tab-hidden" id="tab3">-PHX_PAIRS_LISTS-</button>
+                        <button class="tablinks tab-hidden" id="tab4">-PHX_INFORM-</button>
                     </div>
 
                     <div class="bread-crumbs">
@@ -113,119 +113,119 @@
                     </div>
 
                     <div id="tabcontent1" class="tabcontent" style="display: none">
-                        <div class="cp-tbl-sports">
-                            <div class="main-tables-item">
-                                <table class="dynamic-table" id="members-table">
-                                    <tr class="title-row">
-                                        <td class="title-row " colspan="9">
-                                            <span>-PHX_TBL_SPORTS-</span>
-                                        </td>
-                                        <td class="title-row js-hidden-element js-root-view js-admin-view" colspan="1">
-                                            <a href="#popup_1" class="popup-link">
-                                                <button class="sportsmen-registration-btn" type="button">
-                                                    <span>-PHX_SPORT_REG_BTN-</span>
-                                                </button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-search-row">
-                                        <td class="table-search-row" colspan="10">
-                                            <img class="table-search-icon" src="./img/search.png" alt="bc">
-                                            <input type="text" class="table-search-input" id="sportsmen-search-input"  placeholder="-CPHX_TABLE_SEARCHING-">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="secondary-tables--th">-PHX_SPORT_SURNAME-</th>
-                                        <th>-PHX_SPORT_NAME-</th>
-                                        <th>-PHX_SPORT_AGE-</th>
-                                        <th>-PHX_SPORT_WEIGHT-</th>
-                                        <th>-PHX_SPORT_SEX-</th>
-                                        <th>-PHX_SPORT_TEAM-</th>
-                                        <th>-PHX_SPORT_QUAL-</th>
-                                        <th>-PHX_SPORT_ADMIT-</th>
-                                        <th>-PHX_SPORT_GR_NUM-</th>
-                                        <th class="column-for-button secondary-title-two-tables js-hidden-element js-root-view js-admin-view"></th>
-                                    </tr>
-                                </table>
-                                <template id="member-template">
-                                    <tr class="filter-item">
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-surname</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-name</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-age</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-weight</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-sex</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-team</td>
-                                        <td onclick="window.location.href='#sportsman-link'; return false" class="secondary-tables--td">#sp-qual</td>
-                                        <td class="secondary-tables--td">
-                                            <input class="input-to-choose-type" type="checkbox" id="admit-sp-#sp-id" name="admit-sp-#sp-id" disabled>
-                                            <label class="label-to-choose-type" for="admit-sp-#sp-id" id="label-admit-sp-#sp-id"></label>
-                                        </td>
-                                        <td class="secondary-tables--td">#sp-gr-num</td>
-                                        <td class="column-for-button secondary-title-two-tables js-hidden-element js-root-view js-admin-view"> 
-                                            <button class="member-page-dell-btn" id="remove-comp-sport-#sp-id"  type="button">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                </svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </template>
-                                <template id="yes-template">
-                                    -CPHX_YES-
-                                </template>
-                                <template id="no-template">
-                                    -CPHX_NO-
-                                </template>
-                            </div>
+                        <div class="common-table-container">
+                            <table class="common-table" id="members-table">
+                                <tr class="ct-title-row">
+                                    <td class="ct-title-row" colspan="9">
+                                        <ul class="list cp-sports-list">
+                                            <li>
+                                                <button class="ct-title-text cp-sports-title">-PHX_TBL_SPORTS-</button>
+                                            </li>
+                                            <li>
+                                                <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                                    <button class="ct-title-button">-PHX_SPORT_REG_BTN-</button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr class="ct-search-row">
+                                    <td class="ct-search-row" colspan="9">
+                                        <img class="ct-search-icon" src="./img/search.png" alt="bc">
+                                        <input type="text" class="ct-search-input" id="sportsmen-search-input"  placeholder="-CPHX_TABLE_SEARCHING-">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>-PHX_SPORT_SURNAME- -PHX_SPORT_NAME-</th>
+                                    <th>-PHX_SPORT_AGE-</th>
+                                    <th>-PHX_SPORT_WEIGHT-</th>
+                                    <th>-PHX_SPORT_SEX-</th>
+                                    <th>-PHX_SPORT_TEAM-</th>
+                                    <th>-PHX_SPORT_QUAL-</th>
+                                    <th>-PHX_SPORT_ADMIT-</th>
+                                    <th>-PHX_SPORT_GR_NUM-</th>
+                                    <th class="ct-button-col js-hidden-element js-root-view js-admin-view"></th>
+                                </tr>
+                            </table>
+                            <template id="member-template">
+                                <tr class="search-item">
+                                    <td class="ct-usual-col"><a href="#sportsman-link">#sp-surname #sp-name</a></td>
+                                    <td class="ct-usual-col"><a href="#sportsman-link">#sp-age</a></td>
+                                    <td class="ct-usual-col"><a href="#sportsman-link">#sp-weight</a></td>
+                                    <td class="ct-usual-col"><a href="#sportsman-link">#sp-sex</a></td>
+                                    <td class="ct-usual-col"><a href="#sportsman-link">#sp-team</a></td>
+                                    <td class="ct-usual-col"><a href="#sportsman-link">#sp-qual</a></td>
+                                    <td class="ct-usual-col">
+                                        <input class="input-to-choose-type" type="checkbox" id="admit-sp-#sp-id" name="admit-sp-#sp-id" disabled>
+                                        <label class="label-to-choose-type" for="admit-sp-#sp-id" id="label-admit-sp-#sp-id"></label>
+                                    </td>
+                                    <td class="ct-usual-col" >#sp-gr-num</td>
+                                    <td class="ct-button-col js-hidden-element js-root-view js-admin-view"> 
+                                        <button class="ct-del-btn" id="remove-comp-sport-#sp-id"  type="button">
+                                            <svg class="ct-del-btn-icon">
+                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template id="yes-template">-CPHX_YES-</template>
+                            <template id="no-template">-CPHX_NO-</template>
+                            <template id="male-template">-CPHX_MALE_SHORT-</template>
+                            <template id="female-template">-CPHX_FEMALE_SHORT-</template>
                         </div>
                     </div>
                     <div id="tabcontent2" class="tabcontent" style="display: none">
-                            <div class="cp-tbl-groups">
-                                <div class="main-tables-item">
-                                    <table class="dynamic-table" id="groups-table">
-                                        <tr>
-                                            <td class="title-row" colspan="7">
-                                                <ul class="list cp-btn-list">
-                                                    <li>
-                                                        <span>-PHX_TBL_GROUPS-</span>
-                                                    </li>
-                                                    <li>
-                                                        <button class="cp-btn-sort js-hidden-element js-root-view js-admin-view" id="sort-members-btn">-PHX_SORT_BTN-</button>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                                            <button class="cp-btn-add-group" type="button">-PHX_ADD_GROUP_BTN-</button>  
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <button class="cp-btn-group-update js-hidden-element js-root-view js-admin-view" type="button" id="update-pairs-btn" data-open-modal>-PHX_GROUP_UPDATE_BTN-</button>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_NAME-</th>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_AGE-</th>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_SEX-</th>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_DISC-</th>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_WEIGHT-</th>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_QUAL-</th>
-                                            <th class="secondary-title-tables--text">-PHX_GROUP_SP_NUM-</th>
-                                        </tr>
-                                    </table>
-                                    
-                                    <template id="group-template">
-                                        <tr onclick="window.location.href='#group-link'; return false">
-                                            <td class="secondary-tables--td">#group-name</td>
-                                            <td class="secondary-tables--td">#group-age</td>
-                                            <td class="secondary-tables--td">#group-sex</td>
-                                            <td class="secondary-tables--td">#group-discipline</td>
-                                            <td class="secondary-tables--td">#group-weight</td>
-                                            <td class="secondary-tables--td">#group-qualification</td>
-                                            <td class="secondary-tables--td">#group-sp-num</td>
-                                        </tr>
-                                    </template>
-                                </div>
+                            <div class="common-table-container">
+                                <table class="common-table" id="groups-table">
+                                    <tr>
+                                        <td class="ct-title-row" colspan="7">
+                                            <ul class="list cp-groups-list">
+                                                <li>
+                                                    <button class="ct-title-text cp-groups-title">-PHX_TBL_GROUPS-</button>
+                                                </li>
+                                                <li>
+                                                    <button class="ct-title-button js-hidden-element js-root-view js-admin-view" id="sort-members-btn">-PHX_SORT_BTN-</button>
+                                                </li>
+                                                <li>
+                                                    <button class="ct-title-button js-hidden-element js-root-view js-admin-view" type="button" id="update-pairs-btn" data-open-modal>-PHX_GROUP_UPDATE_BTN-</button>
+                                                </li>
+                                                <li>
+                                                    <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
+                                                        <button class="ct-title-button cp-btn-add-group" type="button">-PHX_ADD_GROUP_BTN-</button>  
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="ct-search-row">
+                                        <td class="ct-search-row" colspan="7">
+                                            <img class="ct-search-icon" src="./img/search.png" alt="bc">
+                                            <input type="text" class="ct-search-input" id="group-search-input"  placeholder="-CPHX_TABLE_SEARCHING-">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_NAME-</th>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_AGE-</th>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_SEX-</th>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_DISC-</th>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_WEIGHT-</th>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_QUAL-</th>
+                                        <th class="secondary-title-tables--text">-PHX_GROUP_SP_NUM-</th>
+                                    </tr>
+                                </table>
+                                
+                                <template id="group-template">
+                                    <tr class="search-item">
+                                        <td class="ct-usual-col"><a href="#group-link">#group-name</a></td>
+                                        <td class="ct-usual-col"><a href="#group-link">#group-age</a></td>
+                                        <td class="ct-usual-col"><a href="#group-link">#group-sex</a></td>
+                                        <td class="ct-usual-col"><a href="#group-link">#group-discipline</a></td>
+                                        <td class="ct-usual-col"><a href="#group-link">#group-weight</a></td>
+                                        <td class="ct-usual-col"><a href="#group-link">#group-qualification</a></td>
+                                        <td class="ct-usual-col"><a href="#group-link">#group-sp-num</a></td>
+                                    </tr>
+                                </template>
                             </div>
                     </div>
                     <div id="tabcontent3" class="tabcontent" style="display: none">
@@ -461,7 +461,7 @@
                                         <div class="group-info-title"><span>-PHX_ADD_GROUPS-</span></div>
                                     </div>
                                     <div class="group-info-fields">
-                                        <table class="dynamic-table-pop-up">
+                                        <table class="common-table-pop-up">
                                             <tr class="group-info-table-pop-up">
                                                 <td class="group-info-table-pop-up-td"> <div> -PHX_GROUP_NAME-:</div> </td>
                                                 <td> 

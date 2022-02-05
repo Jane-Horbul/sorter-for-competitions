@@ -435,12 +435,11 @@ textarea {
 }
 
 .container-main {
-  width: 100%;
+  width: auto;
 }
 
 @media (min-width: 320px) {
   .container-main {
-    width: auto;
     overflow-x: scroll;
     margin-right: 0px;
   }
@@ -449,7 +448,6 @@ textarea {
 @media (min-width: 768px) {
   .container-main {
     margin-right: 25px;
-    width: 768px;
     padding-left: 4px;
     overflow-x: hidden;
   }
@@ -458,16 +456,12 @@ textarea {
 @media (min-width: 1200px) {
   .container-main {
     margin-right: 25px;
-    width: 1180px;
-    margin-right: 35px;
   }
 }
 
 @media (min-width: 1800px) {
   .container-main {
     margin-right: 25px;
-    width: 1780px;
-    margin-right: 50px;
   }
 }
 
@@ -1299,7 +1293,7 @@ body.lock {
   margin-top: 15px;
 }
 
-.dynamic-table-for-modal {
+.common-table-for-modal {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -1308,21 +1302,21 @@ body.lock {
   width: 100%;
 }
 
-.dynamic-table-for-modal th,
-.dynamic-table-for-modal td {
+.common-table-for-modal th,
+.common-table-for-modal td {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.dynamic-table-for-modal tr:nth-child(even) {
+.common-table-for-modal tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.dynamic-table-for-modal tr:hover {
+.common-table-for-modal tr:hover {
   background-color: #ddd;
 }
 
-.dynamic-table-for-modal th {
+.common-table-for-modal th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -1537,15 +1531,13 @@ body.lock {
   }
 }
 
-.title-row {
-  background: #FFF;
-  padding-top: 10px;
-  padding-bottom: 15px;
-  font-size: 16px;
-  font-weight: bold;
+.common-table-container {
+  margin-top: 14px;
+  width: 100%;
+  overflow-x: auto;
 }
 
-.dynamic-table {
+.common-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -1553,47 +1545,144 @@ body.lock {
   margin-bottom: 10px;
 }
 
-.dynamic-table tr {
+.common-table tr {
   height: 45px;
 }
 
-.dynamic-table tr:nth-child(even) {
+.common-table tr:nth-child(even) {
   background-color: #c9e6ff;
 }
 
-.dynamic-table tr:hover {
+.common-table tr:hover {
   background-color: aliceblue;
 }
 
-.dynamic-table th {
+.common-table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
   background-color: #2196f3;
   color: white;
   border: 1px solid #ddd;
 }
 
-.added-section-table {
-  margin-top: 20px;
-  width: 600px;
+@media (min-width: 320px) {
+  .common-table th {
+    font-size: 11px;
+  }
 }
 
-.dynamic-table-th--selected {
-  border: 2px solid #2196f3;
+@media (min-width: 768px) {
+  .common-table th {
+    font-size: 14px;
+  }
 }
 
-.dynamic-table-th--selected:hover {
-  border: 2px solid #2196f3;
+@media (min-width: 1200px) {
+  .common-table th {
+    font-size: 15px;
+  }
 }
 
-.table-search-row {
+@media (min-width: 1800px) {
+  .common-table th {
+    font-size: 16px;
+  }
+}
+
+.ct-title-row {
+  background: #FFF;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cp-sports-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.cp-sports-list li {
+  width: 50%;
+}
+
+.cp-sports-list button {
+  width: 50%;
+  left: 75%;
+}
+
+.cp-groups-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.cp-groups-list li {
+  display: inline-block;
+  width: 25%;
+}
+
+.cp-groups-list li button {
+  width: 80%;
+  left: 60%;
+}
+
+.cp-sports-title {
+  left: 25% !important;
+}
+
+.cp-groups-title {
+  left: 40% !important;
+}
+
+.ct-title-text {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  border: none;
+  height: 100%;
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  outline-width: 0px;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+
+.ct-title-button {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  border: none;
+  height: 100%;
+  text-decoration: none;
+  background-color: #1d8fbd;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  outline-width: 0px;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+
+.ct-search-row {
   background: #FFF;
   border: 1px solid #000000;
   padding: 0;
 }
 
-.table-search-icon {
+.ct-search-icon {
   display: inline-block;
   position: relative;
   top: 10px;
@@ -1601,15 +1690,100 @@ body.lock {
   width: 32px;
 }
 
-.table-search-input {
+.ct-search-input {
   display: inline-block;
   position: relative;
   top: 0px;
   left: 5px;
   height: 50px;
-  width: 90%;
+  width: 85%;
   border: 0;
   font-size: 18px;
+}
+
+.ct-usual-col {
+  padding-bottom: 2px;
+  text-align: center;
+  border: 1px solid #ced7df;
+}
+
+.ct-usual-col A {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #000 !important;
+}
+
+@media (min-width: 320px) {
+  .ct-usual-col {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ct-usual-col {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ct-usual-col {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .ct-usual-col {
+    font-size: 16px;
+  }
+}
+
+.ct-button-col {
+  min-width: 35px;
+  width: 35px;
+  padding-bottom: 2px;
+  border: 1px solid #ced7df;
+  padding: 0px;
+}
+
+.ct-del-btn {
+  position: relative;
+  width: 100%;
+  height: 45px;
+  padding: 0px !important;
+  background-color: rgba(0, 0, 0, 0);
+  fill: #2196f3;
+  border: none;
+}
+
+.ct-del-btn:hover,
+.ct-del-btn:focus {
+  background-color: #2196f3;
+  fill: #fff;
+  border: none;
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+
+.ct-del-btn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ct-del-btn-icon:hover,
+.ct-del-btn-icon:focus {
+  fill: #fff;
+  background-color: #2196f3;
+  -webkit-box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+          box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+  -webkit-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .create-ng--interval {
@@ -1682,25 +1856,31 @@ body.lock {
 
 @media (min-width: 320px) {
   .hdr-header {
-    height: 230px;
+    height: 280px;
   }
 }
 
 @media (min-width: 768px) {
   .hdr-header {
-    height: 100px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
   }
 }
 
 @media (min-width: 1200px) {
   .hdr-header {
-    height: 100px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
   }
 }
 
 @media (min-width: 1800px) {
   .hdr-header {
-    height: 100px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
   }
 }
 
@@ -1718,6 +1898,58 @@ body.lock {
   height: 65px;
 }
 
+@media (min-width: 320px) {
+  .hdr-logo {
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hdr-logo {
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hdr-logo {
+    padding-right: 50px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .hdr-logo {
+    padding-right: 60px;
+  }
+}
+
+.hdr-page-name {
+  text-align: center;
+}
+
+@media (min-width: 320px) {
+  .hdr-page-name {
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hdr-page-name {
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hdr-page-name {
+    padding-left: 50px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .hdr-page-name {
+    padding-left: 60px;
+  }
+}
+
 .hdr-client-info-container {
   width: 300px;
 }
@@ -1729,7 +1961,7 @@ body.lock {
 
 @media (min-width: 320px) {
   .hdr-lang-container {
-    top: 143px;
+    top: 185;
     left: 5vw;
   }
 }
@@ -1805,28 +2037,28 @@ body.lock {
 
 @media (min-width: 320px) {
   .hdr-client-profile {
-    top: 143px;
+    top: 190px;
     left: 40vw;
   }
 }
 
 @media (min-width: 768px) {
   .hdr-client-profile {
-    top: 20px;
+    top: 10px;
     left: 81vw;
   }
 }
 
 @media (min-width: 1200px) {
   .hdr-client-profile {
-    top: 20px;
+    top: 10px;
     left: 81vw;
   }
 }
 
 @media (min-width: 1800px) {
   .hdr-client-profile {
-    top: 20px;
+    top: 10px;
     left: 81vw;
   }
 }
@@ -2007,32 +2239,31 @@ body.lock {
   background-color: #0077ff;
   min-width: 15%;
   max-width: 15%;
-  min-height: 100vh;
+  min-height: 45px;
 }
 
-.tab-old {
-  color: white;
-  background-color: #0077ff;
-  width: 100%;
-  height: 50px;
-  font: 2em sans-serif;
-  border: 0px;
-}
-
-.tab_selected {
-  color: black;
-  background-color: white;
-  width: 100%;
-  height: 50px;
-  font: 2em sans-serif;
-  border: 0px;
+.tabs-bar-hidden {
+  height: 45px !important;
+  width: 15% !important;
 }
 
 .tab {
   float: left;
   background-color: #2196F3;
-  width: 15%;
-  height: 100vh;
+  height: 45px;
+  width: 30%;
+  margin-right: 3%;
+}
+
+@media screen and (min-width: 700px) {
+  .tab {
+    width: 15%;
+    margin-right: 0;
+  }
+}
+
+.tab-hidden {
+  display: none !important;
 }
 
 /* Style the buttons inside the tab */
@@ -2120,7 +2351,7 @@ body.lock {
 /* Style the tab content */
 .tabcontent {
   float: left;
-  width: 85%;
+  width: 100%;
   border-left: none;
   padding: 0px 12px;
 }
@@ -2128,18 +2359,40 @@ body.lock {
 @media (min-width: 320px) {
   .tabcontent {
     padding-right: 0px;
+    padding-left: 0px;
   }
 }
 
-.tabcontent-sort {
-  float: left;
-  padding: 60px 12px;
-  width: 85%;
-  border-left: none;
+@media (min-width: 768px) {
+  .tabcontent {
+    padding: 0px 12px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tabcontent {
+    padding: 0px 12px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .tabcontent {
+    padding: 0px 12px;
+  }
+}
+
+.tabcontent-compessed {
+  width: 67% !important;
+}
+
+@media screen and (min-width: 700px) {
+  .tabcontent-compessed {
+    width: 85% !important;
+  }
 }
 
 .bread-crumbs {
-  float: left;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2596,7 +2849,7 @@ body.lock {
   padding-left: 12px;
 }
 
-.dynamic-table-pop-up {
+.common-table-pop-up {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -2604,19 +2857,19 @@ body.lock {
   margin-bottom: 10px;
 }
 
-.dynamic-table-pop-up tr {
+.common-table-pop-up tr {
   height: 45px;
 }
 
-.dynamic-table-pop-up tr:nth-child(even) {
+.common-table-pop-up tr:nth-child(even) {
   background-color: #c9e6ff;
 }
 
-.dynamic-table-pop-up tr:hover {
+.common-table-pop-up tr:hover {
   background-color: aliceblue;
 }
 
-.dynamic-table-pop-up th {
+.common-table-pop-up th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -3570,8 +3823,7 @@ progress {
           box-shadow: 0px 4px 4px 2px rgba(33, 150, 243, 0.15);
 }
 
-.hdr-log-in-btn,
-.log-out-btn {
+.hdr-log-in-btn {
   width: 150px;
   height: 36px;
   border: 0px;
@@ -3580,21 +3832,9 @@ progress {
   font-size: 16px;
 }
 
-.log-out-btn {
-  margin-right: 20px;
-}
-
-.log-out-btn--placing {
-  margin-right: 15px;
-  height: 15px;
-}
-
 .hdr-log-in-btn:hover,
-.log-out-btn:hover,
 .hdr-log-in-btn:focus,
-.log-out-btn:focus,
 .hdr-log-in-btn:active,
-.log-out-btn:active,
 .sportsmen-registration-btn:hover,
 .sportsmen-registration-btn:focus,
 .sportsmen-registration-btn:active {
@@ -3605,76 +3845,24 @@ progress {
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.add-item-btn {
-  position: absolute;
-  top: 22px;
-  right: -9px;
-  width: 50px;
-  height: 30px;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-  background-color: #2196f3;
-  border: none;
-  fill: #fff;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0.06em;
-  outline-width: 0px;
-}
-
-.add-item-btn:hover,
-.add-item-btn:focus {
-  outline-width: 0px;
-  background-color: #fff;
-  border: 1px solid #2196f3;
-  fill: #2196f3;
-}
-
 .sportsmen-registration-btn {
-  position: absolute;
-  right: -130px;
-  top: 23px;
-  border: none;
-  padding: 15px 32px;
-  margin-top: 2px;
-  text-decoration: none;
   display: inline-block;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-  background-color: #1d8fbd;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  letter-spacing: 0.06em;
-  outline-width: 0px;
+  position: relative;
+  right: -25%;
+  width: 50%;
 }
 
-.cp-btn-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+@media screen and (min-width: 400px) {
+  .sportsmen-registration-btn {
+    right: -55%;
+  }
 }
 
-.cp-btn-sort,
-.cp-btn-add-group,
-.cp-btn-group-update {
-  border: none;
-  padding: 15px 32px;
-  margin-top: 15px;
-  margin-left: 170px;
-  text-decoration: none;
-  display: inline-block;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-  background-color: #1d8fbd;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  letter-spacing: 0.06em;
-  outline-width: 0px;
+@media screen and (min-width: 700px) {
+  .sportsmen-registration-btn {
+    right: -65%;
+    width: 35%;
+  }
 }
 
 .group-info {
@@ -4348,7 +4536,7 @@ progress {
   color: #2196f3;
 }
 
-.sportsman-dynamic-table {
+.sportsman-common-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -4356,19 +4544,19 @@ progress {
   margin-bottom: 10px;
 }
 
-.dsportsman-dynamic-table tr {
+.dsportsman-common-table tr {
   height: 45px;
 }
 
-.sportsman-dynamic-table tr:nth-child(even) {
+.sportsman-common-table tr:nth-child(even) {
   background-color: #c9e6ff;
 }
 
-.sportsman-dynamic-table tr:hover {
+.sportsman-common-table tr:hover {
   background-color: aliceblue;
 }
 
-.sportsman-dynamic-table th {
+.sportsman-common-table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

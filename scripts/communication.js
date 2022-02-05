@@ -347,6 +347,7 @@ function castToCompetition(object) {
         getArenas()             {return this.obj[this.arenas].map(castToArena);},
 
         setName(v)              {this.obj[this.name] = v;},
+        setId(v)                {this.obj[this.id] = v;},
         setDescription(v)       {this.obj[this.desc] = v;},
         setStartDate(v)         {this.obj[this.start] = v;},
         setEndDate(v)           {this.obj[this.end] = v;},

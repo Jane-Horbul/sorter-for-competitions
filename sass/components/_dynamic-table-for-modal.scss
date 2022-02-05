@@ -1,4 +1,4 @@
-.dynamic-table-for-modal {
+.common-table-for-modal {
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -6,20 +6,20 @@
   min-height: auto;
     width: 100%;
   }
-  .dynamic-table-for-modal th,
-  .dynamic-table-for-modal td {
+  .common-table-for-modal th,
+  .common-table-for-modal td {
     border: 1px solid #ddd;
     padding: 8px;
   }
-  .dynamic-table-for-modal tr:nth-child(even) {
+  .common-table-for-modal tr:nth-child(even) {
     background-color: #f2f2f2;
   }
   
-  .dynamic-table-for-modal tr:hover {
+  .common-table-for-modal tr:hover {
     background-color: #ddd;
   }
   
-  .dynamic-table-for-modal th {
+  .common-table-for-modal th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

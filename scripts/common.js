@@ -52,16 +52,35 @@ const markup = {
         setPhoto(link)              { document.getElementById("client-photo").src = link;}
     },
     tabs: {
-        getLinks()          { return [].slice.call(document.getElementsByClassName("tablinks"));},
-        getContents()       { return [].slice.call(document.getElementsByClassName("tabcontent"));},
-        
-        getConent(linkId)   { return document.getElementById("tabcontent" + linkId.split("tab")[1]);},
+        barId:              "tab-bar-id",
+        barHiddenClass:     "tabs-bar-hidden",
+        linkClass:          "tablinks",
+        linkHiddenClass:    "tab-hidden",
+        linkActiveClass:    "active",
+        contentClass:       "tabcontent",
+        contentCompressed:  "tabcontent-compessed",
+        indentClass:        "tab-indent",
+
+        getLinks()          { return [].slice.call(document.getElementsByClassName(this.linkClass));},
+        getContents()       { return [].slice.call(document.getElementsByClassName(this.contentClass));},
+        getConent(linkId)   { return document.getElementById(this.contentClass + linkId.split("tab")[1]);},
         getCurrent()        { var t = window.location.href.split("#tab="); return t[1];},
         turnOffAll()        {
-                                this.getLinks().forEach(tl => { tl.classList.remove("active");});
+                                this.getLinks().forEach(tl => { tl.classList.remove(this.linkActiveClass);});
                                 this.getContents().forEach(tc => { tc.style.display = "none";});
                             },
-        setBarHeight(h)     { document.getElementById("tab-bar-id").style.height = (h > window['innerHeight'] ? h : window['innerHeight'])  + "px";}
+        hideTabsBar()       { 
+                                document.getElementById(this.barId).classList.add(this.barHiddenClass);
+                                this.getLinks().forEach(tl => { tl.classList.add(this.linkHiddenClass);});
+                            },
+        showTabsBar()       { 
+                                document.getElementById(this.barId).classList.remove(this.barHiddenClass);
+                                this.getLinks().forEach(tl => { tl.classList.remove(this.linkHiddenClass);});
+                            },
+        compressContent()   { markup.tabs.getContents().forEach(tc => {tc.classList.add(this.contentCompressed);})},
+        decompressContent() { markup.tabs.getContents().forEach(tc => {tc.classList.remove(this.contentCompressed);})},
+        setBarHeight(h)     { document.getElementById(this.barId).style.height = h  + "px";},
+        getTogleBarBtn()    { return document.getElementsByClassName(this.indentClass)[0];},
     }
 }
 
@@ -205,7 +224,7 @@ export function rowsComparator(row, val){
 
 export function filtration(object, container, comparator){
     object.addEventListener("keyup", (e) => {
-        var items = container.querySelectorAll('.filter-item');
+        var items = container.querySelectorAll('.search-item');
         for (let item of items)
             item.style.display = comparator(item, e.target.value);
     }, false);
@@ -311,8 +330,6 @@ function getCurrentLang(){
     return parts[1].split("/")[0];
 }
 
-
-
 export function languageSwitchingOn(){
     import("https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").then(m1 => {
         import("https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js").then(m2 => {
@@ -341,16 +358,39 @@ export function createPageItem(item, values){
     return template.content;
 }
 
+var tabsBarActive = false;
+var activeTab = undefined;
+
 function openTab(tabId) {
     var tab = document.getElementById(tabId);
     var content = markup.tabs.getConent(tabId);
     markup.tabs.turnOffAll();
     content.style.display = "block";
     tab.classList.add("active");
-    markup.tabs.setBarHeight(content.offsetHeight)
-    window.location.href = window.location.href.split("#tab=")[0] + "#tab=" + tabId; 
+    markup.tabs.setBarHeight(content.offsetHeight > window['innerHeight'] ? content.offsetHeight : window['innerHeight']);
+    window.location.href = window.location.href.split("#tab=")[0] + "#tab=" + tabId;
+    activeTab = tabId;
 }
 
+function hideTabs(){
+    markup.tabs.hideTabsBar();
+    markup.tabs.decompressContent();
+    tabsBarActive = false;
+}
+
+function showTabs(){
+    markup.tabs.showTabsBar();
+    markup.tabs.compressContent();
+    var content = markup.tabs.getConent(activeTab);
+    markup.tabs.setBarHeight(content.offsetHeight > window['innerHeight'] ? content.offsetHeight : window['innerHeight']);
+    tabsBarActive = true;
+}
+function togleBar(){
+    if(tabsBarActive)
+        hideTabs();
+    else
+        showTabs();
+}
 export function prepareTabs() {
     var links = markup.tabs.getLinks();
     for (var i = 0; i < links.length; i++) (
@@ -358,4 +398,9 @@ export function prepareTabs() {
     )(i);
     var curTabId = markup.tabs.getCurrent();
     openTab(curTabId == undefined ? links[0].id : curTabId);
+    if(window['innerWidth'] > 700)
+        showTabs();
+    else
+        hideTabs()
+    onClick(markup.tabs.getTogleBarBtn(), togleBar)
 }

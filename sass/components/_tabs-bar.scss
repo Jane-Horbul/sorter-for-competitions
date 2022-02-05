@@ -3,34 +3,30 @@
     background-color: #0077ff;
     min-width: 15%;
     max-width: 15%;
-    min-height: 100vh;
+    min-height: 45px;
 }
-.tab-old {
-    color: white;
-    background-color: #0077ff;
-    width: 100%;
-    height: 50px;
-    font: 2em sans-serif;
-    border: 0px;
-}
-.tab_selected {
-    color: black;
-    background-color: white;
-    width: 100%;
-    height: 50px;
-    font: 2em sans-serif;
-    border: 0px;
+
+.tabs-bar-hidden {
+  height: 45px !important;
+  width: 15% !important;
 }
 
 .tab {
     float: left;
-    //border: 1px solid #ccc;
     background-color: #2196F3;
-    width: 15%;
-    height: 100vh;
+    height: 45px;
+    width: 30%;
+    margin-right: 3%;
+    @media screen and (min-width: 700px) {
+      width: 15%;
+      margin-right: 0;
+    }
 }
 
-
+.tab-hidden
+{
+  display: none !important;
+}
 
 /* Style the buttons inside the tab */
 .tab button,
@@ -52,13 +48,13 @@
     font-size: 12px;
     padding: 22px 2px;
     @media screen and (min-width: 900px) {
-        font-size: 15px;
-        padding: 22px 16px;
-      }
-      @media screen and (min-width: 1200px) {
-        font-size: 17px;
-        padding: 22px 16px;
-      }
+      font-size: 15px;
+      padding: 22px 16px;
+    }
+    @media screen and (min-width: 1200px) {
+      font-size: 17px;
+      padding: 22px 16px;
+    }
 }
 .tab button::before {
     content: 'I';
@@ -83,10 +79,10 @@
     display: none;
   }
 
-  .tab button:hover::before,
-  .tab button.active::before{
-    display: block;
-  }
+.tab button:hover::before,
+.tab button.active::before{
+  display: block;
+}
 
 /* Change background color of buttons on hover */
 .tab button:hover {
@@ -107,23 +103,28 @@
 /* Style the tab content */
 .tabcontent {
     float: left;
-    width: 85%;
+    width: 100%;
     border-left: none;
     padding: 0px 12px;
 
     @include for-size(mobile) {
       padding-right: 0px;
+      padding-left: 0px;
     }
     @include for-size(tablet) {
+      padding: 0px 12px;
     }
     @include for-size(desktop) {
+      padding: 0px 12px;
     }
     @include for-size(max-desktop) {
+      padding: 0px 12px;
     }
 }
-.tabcontent-sort {
-    float: left;
-    padding: 60px 12px;
-    width: 85%;
-    border-left: none;
+
+.tabcontent-compessed {
+  width: 67% !important;
+  @media screen and (min-width: 700px) {
+    width: 85% !important;
+  }
 }

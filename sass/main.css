@@ -1238,7 +1238,7 @@ body.lock {
   margin-top: 15px;
 }
 
-.dynamic-table-for-modal {
+.common-table-for-modal {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -1247,21 +1247,21 @@ body.lock {
   width: 100%;
 }
 
-.dynamic-table-for-modal th,
-.dynamic-table-for-modal td {
+.common-table-for-modal th,
+.common-table-for-modal td {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.dynamic-table-for-modal tr:nth-child(even) {
+.common-table-for-modal tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.dynamic-table-for-modal tr:hover {
+.common-table-for-modal tr:hover {
   background-color: #ddd;
 }
 
-.dynamic-table-for-modal th {
+.common-table-for-modal th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -1475,7 +1475,7 @@ body.lock {
   }
 }
 
-.dynamic-table {
+.common-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -1483,19 +1483,19 @@ body.lock {
   margin-bottom: 10px;
 }
 
-.dynamic-table tr {
+.common-table tr {
   height: 45px;
 }
 
-.dynamic-table tr:nth-child(even) {
+.common-table tr:nth-child(even) {
   background-color: #c9e6ff;
 }
 
-.dynamic-table tr:hover {
+.common-table tr:hover {
   background-color: aliceblue;
 }
 
-.dynamic-table th {
+.common-table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -1509,11 +1509,11 @@ body.lock {
   width: 600px;
 }
 
-.dynamic-table-th--selected {
+.common-table-th--selected {
   border: 2px solid #2196f3;
 }
 
-.dynamic-table-th--selected:hover {
+.common-table-th--selected:hover {
   border: 2px solid #2196f3;
 }
 
@@ -2281,7 +2281,7 @@ body.lock {
   padding-left: 12px;
 }
 
-.dynamic-table-pop-up {
+.common-table-pop-up {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -2289,19 +2289,19 @@ body.lock {
   margin-bottom: 10px;
 }
 
-.dynamic-table-pop-up tr {
+.common-table-pop-up tr {
   height: 45px;
 }
 
-.dynamic-table-pop-up tr:nth-child(even) {
+.common-table-pop-up tr:nth-child(even) {
   background-color: #c9e6ff;
 }
 
-.dynamic-table-pop-up tr:hover {
+.common-table-pop-up tr:hover {
   background-color: aliceblue;
 }
 
-.dynamic-table-pop-up th {
+.common-table-pop-up th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -3789,7 +3789,7 @@ body.lock {
   color: #2196f3;
 }
 
-.sportsman-dynamic-table {
+.sportsman-common-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -3797,19 +3797,19 @@ body.lock {
   margin-bottom: 10px;
 }
 
-.dsportsman-dynamic-table tr {
+.dsportsman-common-table tr {
   height: 45px;
 }
 
-.sportsman-dynamic-table tr:nth-child(even) {
+.sportsman-common-table tr:nth-child(even) {
   background-color: #c9e6ff;
 }
 
-.sportsman-dynamic-table tr:hover {
+.sportsman-common-table tr:hover {
   background-color: aliceblue;
 }
 
-.sportsman-dynamic-table th {
+.sportsman-common-table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

@@ -1,5 +1,4 @@
-.hdr-log-in-btn,
-.log-out-btn {
+.hdr-log-in-btn {
     width: 150px;
     height: 36px;
     border: 0px;
@@ -7,20 +6,10 @@
     color: #fff;
     font-size: 16px;
 }
-.log-out-btn {
-    margin-right: 20px;
-}
-.log-out-btn--placing {
-    margin-right: 15px;
-    height: 15px;
-}
 
 .hdr-log-in-btn:hover,
-.log-out-btn:hover,
 .hdr-log-in-btn:focus,
-.log-out-btn:focus,
 .hdr-log-in-btn:active,
-.log-out-btn:active,
 .sportsmen-registration-btn:hover,
 .sportsmen-registration-btn:focus,
 .sportsmen-registration-btn:active {
@@ -29,64 +18,17 @@
     color: #2F2929;
     transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.add-item-btn {
-    position: absolute;
-    top: 22px;
-    right: -9px;
-    width: 50px;
-    height: 30px;
-    transform: translateX(-50%) translateY(-50%);
-    background-color: $assent-color;
-    border: none;
-    fill: $white-color;
-    font-size: 16px;
-    text-align: center;
-    letter-spacing: 0.06em;
-    outline-width: 0px;
-  }
-  
-  .add-item-btn:hover,
-  .add-item-btn:focus {
-    outline-width: 0px;
-    background-color: $white-color;
-    border: 1px solid $assent-color;
-    fill: $assent-color;
-  }
+
 .sportsmen-registration-btn {
-    position: absolute;
-    right: -130px;
-    top: 23px;
-    border: none;
-    padding: 15px 32px;
-    margin-top: 2px;
-    text-decoration: none;
     display: inline-block;
-    transform: translateX(-50%) translateY(-50%);
-    background-color: #1d8fbd;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    letter-spacing: 0.06em;
-    outline-width: 0px;
-}
-.cp-btn-list {
-    display: flex;
-    justify-content: space-between;
-}
-.cp-btn-sort,
-.cp-btn-add-group,
-.cp-btn-group-update {
-    border: none;
-    padding: 15px 32px;
-    margin-top: 15px;
-    margin-left: 170px;
-    text-decoration: none;
-    display: inline-block;
-    transform: translateX(-50%) translateY(-50%);
-    background-color: #1d8fbd;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    letter-spacing: 0.06em;
-    outline-width: 0px;
+    position: relative;
+    right: -25%;
+    width: 50%;
+    @media screen and (min-width: 400px) {
+        right: -55%;
+    }
+    @media screen and (min-width: 700px) {
+        right: -65%;
+        width: 35%;
+    }
 }

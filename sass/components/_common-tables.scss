@@ -1,0 +1,225 @@
+.common-table-container{
+  margin-top: 14px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.common-table {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 99%;
+  margin-bottom: 10px;
+}
+
+.common-table tr {
+  height: 45px;
+}
+
+.common-table tr:nth-child(even) {
+  background-color: #c9e6ff;
+}
+
+.common-table tr:hover {
+  background-color: aliceblue;
+}
+
+.common-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: $assent-color;
+  color: white;
+  border: 1px solid #ddd;
+
+  @include for-size(mobile) {
+    font-size: 11px;
+  }
+  @include for-size(tablet) {
+    font-size: 14px;
+  }
+  @include for-size(desktop) {
+    font-size: 15px;
+  }
+  @include for-size(max-desktop) {
+    font-size: 16px;
+  }
+}
+
+.ct-title-row {
+  background: #FFF;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cp-sports-list {
+  display: flex;
+}
+.cp-sports-list li{
+  width: 50%;
+}
+
+.cp-sports-list button{
+  width: 50%;
+  left: 75%;
+}
+
+.cp-groups-list {
+  display: flex;
+}
+
+.cp-groups-list li{
+  display: inline-block;
+  width: 25%;
+}
+
+.cp-groups-list li button{
+  width: 80%;
+  left: 60%;
+}
+
+.cp-sports-title{
+  left: 25% !important;
+}
+
+.cp-groups-title{
+  left: 40% !important;
+}
+
+.ct-title-text {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  border: none;
+  height: 100%;
+
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  outline-width: 0px;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.ct-title-button {
+  position: relative;
+  display: inline-block;
+  padding: 15px 15px;
+  margin-top: 15px;
+  margin-right: 5px;
+  border: none;
+  height: 100%;
+
+  text-decoration: none;
+  background-color: #1d8fbd;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  outline-width: 0px;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.ct-search-row {
+  background: #FFF;
+  border: 1px solid #000000;
+  padding: 0;
+}
+
+.ct-search-icon {
+  display: inline-block;
+  position: relative;
+  top: 10px;
+  left: 5px;
+  width: 32px;
+}
+
+.ct-search-input {
+  display: inline-block;
+  position: relative;
+  top: 0px;
+  left: 5px;
+  height: 50px;
+  width: 85%;
+  border: 0;
+  font-size: 18px;
+}
+
+.ct-usual-col {
+  padding-bottom: 2px;
+  text-align: center;
+  border: 1px solid #ced7df;
+  A {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #000 !important;
+  }
+
+  @include for-size(mobile) {
+    font-size: 10px;
+  }
+  @include for-size(tablet) {
+    font-size: 14px;
+  }
+  @include for-size(desktop) {
+    font-size: 15px;
+  }
+  @include for-size(max-desktop) {
+    font-size: 16px;
+  }
+}
+
+.ct-button-col {
+  min-width: 35px;
+  width: 35px;
+  padding-bottom: 2px;
+  border: 1px solid #ced7df;
+  padding: 0px;
+}
+
+.ct-del-btn {
+  position: relative;
+  width: 100%;
+  height: 45px;
+  padding: 0px !important;
+
+  background-color: rgba(0, 0, 0, 0);
+  fill: $assent-color;
+  border: none;
+}
+
+.ct-del-btn:hover,
+.ct-del-btn:focus {
+  background-color: $assent-color;
+  fill: $white-color;
+  border: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  outline-width: 0px;
+}
+
+.ct-del-btn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ct-del-btn-icon:hover,
+.ct-del-btn-icon:focus {
+  fill: $white-color;
+  background-color: $assent-color;
+  box-shadow: drop-shadow(0px 4px 4px rgba(0, 53, 70, 0.699));
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+

@@ -4,16 +4,16 @@
   margin-bottom: 0px;
 
   @include for-size(mobile) {
-    height: 230px;
+    height: 280px;
   }
   @include for-size(tablet) {
-    height: 100px;
+    height: fit-content;
   }
   @include for-size(desktop) {
-    height: 100px; 
+    height: fit-content; 
   }
   @include for-size(max-desktop) {
-    height: 100px;
+    height: fit-content;
   } 
 }
 
@@ -25,8 +25,34 @@
 .hdr-logo {
   width: 265px;
   height: 65px;
+  @include for-size(mobile) {
+    padding-right: 10px;
+  }
+  @include for-size(tablet) {
+    padding-right: 10px;
+  }
+  @include for-size(desktop) {
+    padding-right: 50px; 
+  }
+  @include for-size(max-desktop) {
+    padding-right: 60px;
+  }
 }
-
+.hdr-page-name {
+  text-align: center;
+  @include for-size(mobile) {
+    padding-left: 10px;
+  }
+  @include for-size(tablet) {
+    padding-left: 10px;
+  }
+  @include for-size(desktop) {
+    padding-left: 50px; 
+  }
+  @include for-size(max-desktop) {
+    padding-left: 60px;
+  } 
+}
 .hdr-client-info-container {
   width: 300px;
 }
@@ -35,7 +61,7 @@
   position: absolute;
   width: 100px;
   @include for-size(mobile) {
-    top: 143px;
+    top: 185;
     left: 5vw;
   }
   @include for-size(tablet) {
@@ -96,19 +122,19 @@
   display: inline-block;
   width: 200px;
   @include for-size(mobile) {
-    top: 143px;
+    top: 190px;
     left: 40vw;
   }
   @include for-size(tablet) {
-    top: 20px;
+    top: 10px;
     left: 81vw;
   }
   @include for-size(desktop) {
-    top: 20px;
+    top: 10px;
     left: 81vw;
   }
   @include for-size(max-desktop) {
-    top: 20px;
+    top: 10px;
     left: 81vw;
   }
 }

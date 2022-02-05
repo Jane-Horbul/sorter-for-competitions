@@ -12,7 +12,7 @@
     padding-left: 12px;
 }
 
-.dynamic-table-pop-up {
+.common-table-pop-up {
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -20,18 +20,18 @@
     margin-bottom: 10px;
   }
 
-  .dynamic-table-pop-up tr {
+  .common-table-pop-up tr {
     height: 45px;
   }
-  .dynamic-table-pop-up tr:nth-child(even) {
+  .common-table-pop-up tr:nth-child(even) {
     background-color: #c9e6ff;
   }
   
-  .dynamic-table-pop-up tr:hover {
+  .common-table-pop-up tr:hover {
     background-color: aliceblue;
   }
 
-  .dynamic-table-pop-up th {
+  .common-table-pop-up th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
