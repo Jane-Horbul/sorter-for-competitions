@@ -25,29 +25,29 @@ var sportsmanInfo       = server.sportsman.get(page.sid);
 console.log(sportsmanInfo);
 
 /* ------------------- STATISTICS ----------------------------*/
-function changeParmition(cs, permCheckbox){
+function changePermition(cs, permCheckbox){
     server.sportsman.admitChange(page.sid, cs.getCompetitionId(), permCheckbox.checked ? "true" : "false");
 }
 
 function changeDiscipline(cs, discCheckbox){
     if(discCheckbox.checked){
-        console.log("Add discipline " +  discCheckbox.name + " for "+ cs.getCompetitionName());
         server.sportsman.addDiscipline(page.sid, cs.getCompetitionId(), discCheckbox.name);
     } else {
-        console.log("Delete discipline " +  discCheckbox.name + " for "+ cs.getCompetitionName());
         server.sportsman.delDiscipline(page.sid, cs.getCompetitionId(), discCheckbox.name);
     }
 }
 
 function fillStatistics() {
     sportsmanInfo.getStatistics().forEach(cs => {
+
         markup.statistics.getCompStatsList().append(markup.statistics.createCompStatisticItem(cs, page.sid));
         markup.statistics.setAdmition(cs);
+
         var admitCheckbox = markup.statistics.getAdmitionObj(cs);
-        if(client.isRoot() || client.isAdmin() || client.isTrainer())
-            onClick(admitCheckbox, function(){changeParmition(cs, admitCheckbox);});
+        if(client.isRoot() || client.isAdmin())
+            onClick(admitCheckbox, function(){changePermition(cs, admitCheckbox);});
         
-        departmentInfo.getDisciplines().forEach(disc => {
+        cs.getAllDisciplines().forEach(disc => {
             var isSet = cs.getDisciplines().find( csDisc => csDisc.localeCompare(disc) == 0) != undefined ? true : false;
             if(client.isRoot() || client.isAdmin() || client.isTrainer()) {
                 var item = markup.statistics.createDisciplineItem(cs, disc);
@@ -62,6 +62,7 @@ function fillStatistics() {
                 markup.statistics.setDiscipline(cs, disc);
             }
         });
+
         var csPairs = cs.getPairs();
         cs.getGroupsStats().forEach(gs => {
             markup.statistics.getGroupStatsList(cs).append(markup.statistics.createGroupStatItem(cs, gs));
@@ -153,6 +154,8 @@ function fillPageInfo(){
     markup.breadcrumbs.setSportsName(sportsName);
     markup.sportsman.setPhoto(sportsmanInfo.getPhoto());
 
+    markup.sportsman.ageCalendarInit();
+    
     markup.sportsman.getInfoId().innerHTML        = sportsmanInfo.getId();
     markup.sportsman.getInfoName().innerHTML      = sportsmanInfo.getName();
     markup.sportsman.getInfoSurname().innerHTML   = sportsmanInfo.getSurname();
@@ -177,5 +180,5 @@ function setBtnActions(){
 prepareTabs();
 fillPageInfo();
 setBtnActions();
-showShadows(client);
+showShadows(client, sportsmanInfo.getTrainer());
 languageSwitchingOn();

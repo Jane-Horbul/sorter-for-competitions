@@ -1,4 +1,4 @@
-import {helpers, createPageItem} from "./common.js"
+import {helpers, createPageItem, datePickerInit} from "./common.js"
 
 var sLink = window.location.href;
 var dLink = sLink.substring(0, sLink.lastIndexOf("/"));
@@ -122,6 +122,8 @@ export const markup = {
         getTrainerInput()           { return document.getElementById("sports-input-trainer");},
         getTrainerInputTemplate()   { return document.getElementById("sports-input-trainer-template").cloneNode(true).content;},
     
+        ageCalendarInit()           {datePickerInit("sports-input-age")},
+
         createOption(name, val) { var res = document.createElement("option");
                                         res.value = val;
                                         res.innerHTML = name;

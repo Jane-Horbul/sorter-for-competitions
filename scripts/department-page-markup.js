@@ -1,5 +1,5 @@
 import {getQualNameByValue} from "./department-page.js"
-import {helpers, commonStrings} from "./common.js"
+import {helpers, commonStrings, datetimePickerInit, datePickerInit} from "./common.js"
 export const markup = {
     qualifications: {
         getNameInput()                  { return document.getElementById("add-qualification-name").value;},
@@ -37,10 +37,15 @@ export const markup = {
         getAddingRowTemplate()          { return document.getElementById("division-adding-template");},
     },
     competition: {
+        startInputId:   "competition-start-date-input",
+        endInputId:     "competition-end-date-input",
+
         getNameInput()                  { return document.getElementById("competition-name-input").value;},
         getDescriptionInput()           { return document.getElementById("competition-desc-input").value;},
-        getStartDateInput()             { return document.getElementById("competition-start-date-input").value;},
-        getEndDateInput()               { return document.getElementById("competition-end-date-input" ).value;},
+        getStartDateInput()             { return document.getElementById(this.startInputId).value;},
+        getEndDateInput()               { return document.getElementById(this.endInputId).value;},
+        stratDateCalendarInit()         { datetimePickerInit(this.startInputId) },
+        endDateCalendarInit()           { datetimePickerInit(this.endInputId) },
     
         getTable()                      { return document.getElementById("competitions-list");},
         getTemplate()                   { return document.getElementById("competition-template");},
@@ -58,14 +63,18 @@ export const markup = {
                                         }
     },
     sportsman: {
+        ageInputId:         "new-member-age",
         getNameInput()                  { return document.getElementById("new-member-name").value;},
         getSurnameInput()               { return document.getElementById("new-member-surname").value;},
-        getAgeInput()                   { return document.getElementById("new-member-age").value;},
+        getAgeInput()                   { return document.getElementById(this.ageInputId).value;},
         getWeightInput()                { return document.getElementById("new-member-weight").value;},
         getSexInput()                   { return document.getElementById("new-member-sex-male").checked ? "male" : "female";},
         getTrainerInput()               { return document.getElementById("new-member-trainer").value;},
         getQualificationInput()         { return document.getElementById("new-member-qualifications").value;},
         getOneMoreInput()               { return document.getElementById("add-one-more-sp").checked;},
+
+        ageCalendarInit()               { datePickerInit(this.ageInputId) },
+
         clearInputs()                   {
                                             document.getElementById("new-member-name").value = "";
                                             document.getElementById("new-member-surname").value = "";
@@ -105,15 +114,18 @@ export const markup = {
                                         },
     },
     trainer: {
+        ageInputId:         "new-trainer-age",
+
         getNameInput()                  { return document.getElementById("new-trainer-name").value;},
         getSurnameInput()               { return document.getElementById("new-trainer-surname").value;},
-        getAgeInput()                   { return document.getElementById("new-trainer-age").value;},
+        getAgeInput()                   { return document.getElementById(this.ageInputId).value;},
         getSexInput()                   { return document.getElementById("new-trainer-sex-male").checked ? "male" : "female";},
         getTeamInput()                  { return document.getElementById("new-trainer-team").value;},
         getRegionInput()                { return document.getElementById("new-trainer-region").value;},
         getEmailInput()                 { return document.getElementById("new-trainer-email").value;},
         getOneMoreInput()               { return document.getElementById("add-one-more-tr").checked;},
-        
+        ageCalendarInit()               { datePickerInit(this.ageInputId) },
+
         getTable()                      { return document.getElementById("trainers-table");},
         getTemplate()                   { return document.getElementById("trainer-template");},
         getAddBtn()                     { return document.getElementById("trainer-form-send-btn");},

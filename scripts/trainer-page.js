@@ -76,11 +76,13 @@ function trainerInfoEdit(){
     if(trainerInfo.getSex() != "")
         markup.trainer.getSexInput().value = trainerInfo.getSex();
 
+        /*
     var agePlace = markup.trainer.getInfoAge();
     agePlace.innerHTML = "";
     agePlace.appendChild(markup.trainer.getAgeInputTemplate());
     markup.trainer.getAgeInput().value = trainerInfo.getBirth();
-
+*/
+    markup.trainer.getAgeInput().disabled = false;
     var teamPlace = markup.trainer.getInfoTeam();
     teamPlace.innerHTML = "";
     teamPlace.appendChild(markup.trainer.getTeamInputTemplate());
@@ -146,11 +148,14 @@ function fillPageInfo(){
     markup.breadcrumbs.setTrainerName(trainerName);
     markup.trainer.setPhoto(trainerInfo.getPhoto());
 
+    markup.trainer.ageCalendarInit();
+    markup.sportsman.ageCalendarInit();
+    
     markup.trainer.getInfoId().innerHTML        = trainerInfo.getId();
     markup.trainer.getInfoName().innerHTML      = trainerInfo.getName();
     markup.trainer.getInfoSurname().innerHTML   = trainerInfo.getSurname();
     markup.trainer.getInfoSex().innerHTML       = trainerInfo.getSex();
-    markup.trainer.getInfoAge().innerHTML       = trainerInfo.getBirth("dd MM yy");
+    markup.trainer.getAgeInput().value          = trainerInfo.getBirth("dd/mm/yy");
     markup.trainer.getInfoTeam().innerHTML      = trainerInfo.getTeam();
     markup.trainer.getInfoRegion().innerHTML    = trainerInfo.getRegion();
     markup.trainer.getInfoEmail().innerHTML     = trainerInfo.getEmail();

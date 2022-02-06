@@ -1952,6 +1952,7 @@ body.lock {
 
 .hdr-client-info-container {
   width: 300px;
+  height: 17vh;
 }
 
 .hdr-lang-container {
@@ -4227,6 +4228,75 @@ progress {
   }
 }
 
+.member-profile-block {
+  display: block;
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  border: 2px solid;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.member-title-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 25px;
+  font-size: 30px;
+  color: #2196f3;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .member-title-block {
+    margin-top: 15px;
+    font-size: 24px;
+  }
+}
+
+.member-info-block {
+  margin-left: 25px;
+  width: 100%;
+}
+
+.member-info-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.member-photo-block {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+
+.member-photo-img {
+  width: 250px;
+  height: 375px;
+}
+
+.member-buttons-block {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  max-width: 250px;
+  max-height: 375px;
+}
+
 .advantages {
   margin-top: 35px;
 }
@@ -4589,6 +4659,7 @@ progress {
 
 .sportsman-foto {
   width: 150px;
+  height: 200px;
   margin-right: 10px;
   border: 1px solid #ddd;
 }

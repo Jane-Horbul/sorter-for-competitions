@@ -7,26 +7,9 @@
         <link rel="stylesheet" href="./old-css/normalize.css">
         <link rel="stylesheet" href="./css/main.min.css" />
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"/>
-
-
-        <script src="./datetimepicker-master/jquery.js"></script>
-        <script src="./datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-        <script>
-            $(function () {
-                $('#schedule-interval-start').datetimepicker({
-                format: "d/m/Y H:i"
-            });
-            });
-            $(function () {
-                $('#schedule-interval-end').datetimepicker({
-                format: "d/m/Y H:i"
-            });
-            });
-        </script>
-
+        <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
     </head>
     <body>
         <div class="wrapper">
@@ -102,8 +85,8 @@
                 <div class="container-main">
                     <div class="tab" id="tab-bar-id">
                         <div class="tab-indent"></div>
-                        <button class="tablinks" id="tab1">-PHX_AUTOSORT_TAB-</button>
-                        <button class="tablinks" id="tab2">-PHX_MANUAL_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab1">-PHX_AUTOSORT_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab2">-PHX_MANUAL_TAB-</button>
                     </div>
                     <div class="bread-crumbs">
                         <a class="bc-link" id="department-link-id" href="">

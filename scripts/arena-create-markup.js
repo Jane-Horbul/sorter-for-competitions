@@ -1,4 +1,4 @@
-
+import {datetimePickerInit} from "./common.js"
 
 var cLink = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 var dLink = cLink.substring(0, cLink.lastIndexOf("/"));
@@ -16,10 +16,16 @@ export const markup = {
 
     automation: {
         schedule: {
+            startInputId:   "schedule-interval-start",
+            endInputId:     "schedule-interval-end",
+            
+            startCalendarInit()         { datetimePickerInit(this.startInputId) },
+            endCalendarInit()           { datetimePickerInit(this.endInputId) },
+            getStartIntervalInput()     { return document.getElementById(this.startInputId);},
+            getEndIntervalInput()       { return document.getElementById(this.endInputId);},
+            
+
             getContainer()              { return document.getElementById("schedule-container");},
-            getStartIntervalInput()     { return document.getElementById("schedule-interval-start");},
-            getEndIntervalInput()       { return document.getElementById("schedule-interval-end");},
-            getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
             getTemplate()               { return document.getElementById("schedule-interval-template");},
             insertNewInterval(interv)   {   var before = document.getElementById("interval-input-row");
                                             before.parentNode.insertBefore(interv, before);
@@ -30,6 +36,7 @@ export const markup = {
                                                 "#row-num":             i
                                             }; 
                                         },
+            getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
             getDelBtn(rn)               { return document.getElementById("interval-delete-btn-" + rn);},
         },
         groups: {

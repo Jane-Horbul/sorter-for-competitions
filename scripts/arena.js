@@ -231,6 +231,9 @@ function fillPageInfo(){
     markup.settings.getQualMinInput().value = helpers.getIfDefined(arena.getQualMin(), "Not applicable");
     markup.settings.getQualMaxInput().value = helpers.getIfDefined(arena.getQualMax(), "Not applicable");
 
+    markup.schedule.startCalendarInit();
+    markup.schedule.endCalendarInit();
+    
     arena.getSchedule().forEach(sch => createInterval(sch.start, sch.end));
     arena.getGroups().forEach(gp => attachGroup(gp));
 

@@ -1,3 +1,4 @@
+import {datePickerInit} from "./common.js"
 import {getQualNameByValue} from "./trainer-page.js"
 
 var tLink = window.location.href;
@@ -28,13 +29,14 @@ export const markup = {
         getSurnameInputTemplate()   { return document.getElementById("trainer-input-surname-template").cloneNode(true).content;},
         getSexInput()               { return document.getElementById("trainer-input-sex");},
         getSexInputTemplate()       { return document.getElementById("trainer-input-sex-template").cloneNode(true).content;},
-        getAgeInput()               { return document.getElementById("trainer-input-age");},
-        getAgeInputTemplate()       { return document.getElementById("trainer-input-age-template").cloneNode(true).content;},
         getTeamInput()              { return document.getElementById("trainer-input-team");},
         getTeamInputTemplate()      { return document.getElementById("trainer-input-team-template").cloneNode(true).content;},
         getRegionInput()            { return document.getElementById("trainer-input-region");},
         getRegionInputTemplate()    { return document.getElementById("trainer-input-region-template").cloneNode(true).content;},
-        
+
+        getAgeInput()               { return document.getElementById("trainer-input-age");},
+        ageCalendarInit()           {datePickerInit("trainer-input-age");},
+
         createOption(name, val) { var res = document.createElement("option");
                                         res.value = val;
                                         res.innerHTML = name;
@@ -57,12 +59,13 @@ export const markup = {
     sportsman:{
         getNameInput()                  { return document.getElementById("new-sportsman-name").value;},
         getSurnameInput()               { return document.getElementById("new-sportsman-surname").value;},
-        getAgeInput()                   { return document.getElementById("new-sportsman-age").value;},
         getWeightInput()                { return document.getElementById("new-sportsman-weight").value;},
         getSexInput()                   { return document.getElementById("new-sportsman-sex-male").checked ? "male" : "female";},
         getTrainerInput()               { return document.getElementById("new-sportsman-trainer").value;},
         getQualificationInput()         { return document.getElementById("new-sportsman-qualifications").value;},
         getOneMoreInput()               { return document.getElementById("add-one-more-sp").checked;},
+        getAgeInput()                   { return document.getElementById("new-sportsman-age").value;},
+        ageCalendarInit()               {   datePickerInit("new-sportsman-age");},
 
         getTrainersList()               { return document.getElementById("new-sportsman-trainer");},
         getTrainerTemplate()            { return document.getElementById("new-sportsman-trainer-temp");},

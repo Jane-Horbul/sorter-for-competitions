@@ -265,6 +265,10 @@ function fillPageInfo(){
     markup.departament.setPageName(departamentName);
     markup.departament.setName(departamentName);
     markup.departament.setId(department.getId());
+    markup.competition.stratDateCalendarInit();
+    markup.competition.endDateCalendarInit();
+    markup.sportsman.ageCalendarInit();
+    markup.trainer.ageCalendarInit();
 
     for (var [value, name] of qualifications) {
         qualificationElementAddToPage(name, value);

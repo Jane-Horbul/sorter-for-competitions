@@ -1,52 +1,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./old-css/normalize.css">
-    <link rel="stylesheet" href="./css/main.min.css" />
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
- 
-    <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"/>
-
-    <script src="./datetimepicker-master/jquery.js"></script>
-    <script src="./datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-
-    <script>
-        $(function () {
-            $('#competition-start-date-input').datetimepicker({
-                format: "d/m/Y H:i"
-            });
-        });
-        $(function () {
-            $('#competition-end-date-input').datetimepicker({
-                format: "d/m/Y H:i"
-            });
-        });
-        $(function () {
-            $('#new-member-age').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "c-100:c",
-                dateFormat: "dd/mm/yy"
-            });
-        });
-        $(function () {
-            $('#new-trainer-age').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                yearRange: "c-100:c",
-                dateFormat: "dd/mm/yy"
-            });
-        });
-    </script>
-    
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./old-css/normalize.css">
+        <link rel="stylesheet" href="./css/main.min.css" />
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"/>
+        
+        <link rel="stylesheet" href="./datetimepicker-master/jquery.datetimepicker.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+        
+    </head>
     <body>
         <div class="wrapper">
             <header class="hdr-header">
@@ -121,10 +88,10 @@
                 <div class="container-main">
                     <div class="tab" id="tab-bar-id">
                         <div class="tab-indent"></div>
-                        <button class="tablinks" id="tab1">-PHX_COMP_TAB-</button>
-                        <button class="tablinks" id="tab2">-PHX_SPORTS_TAB-</button>
-                        <button class="tablinks" id="tab3">-PHX_TRAINERS_TAB-</button>
-                        <button class="tablinks" id="tab4">-PHX_INFO_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab1">-PHX_COMP_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab2">-PHX_SPORTS_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab3">-PHX_TRAINERS_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab4">-PHX_INFO_TAB-</button>
                     </div>
                     <div id="tabcontent1" class="tabcontent" style= "display: none">
                         <section class="advantages container">

@@ -1,5 +1,5 @@
 import { department, competition, arena} from "./arena.js";
-import { helpers, formatDate } from "./common.js";
+import { helpers, formatDate, datetimePickerInit } from "./common.js";
 
 var aLink = window.location.href;
 var cLink = aLink.substring(0, aLink.lastIndexOf("/"));
@@ -14,6 +14,17 @@ function getSpName(sid){
         return sp.getName() + " " + sp.getSurname();
     var pair = arena.getPairById(sid);
     return markup.common.getPairWinnerText() + " " + (pair == undefined ? sid : pair.getNumber());
+}
+
+function setSortableCallback(id, cback){
+    id = "#" + id;
+    import("../datetimepicker-master/jquery.js").then(m1 => {
+        import("../scripts/sortable-jquery-ui.js").then(m2 => {
+            $(id).sortable({ update: function( event, ui ){ cback(); }});
+        })
+    }).catch(err => {
+        console.log(err.message);
+    });
 }
 
 export const markup = {
@@ -59,7 +70,7 @@ export const markup = {
         
         getUnattachedItem(pair)     { return document.getElementById("unattached-pair-" + pair.getId()); },
         getAddBtn()                 { return document.getElementById("pairs-add-btn");}, 
-        setUpdateCallback(cback)    { $("#arena-pairs-container").sortable({ update: function( event, ui ){ cback(); }}); },
+        setUpdateCallback(cback)    { setSortableCallback("arena-pairs-container", cback); },
         getNumbers()                {
                                         var items = this.getContainer().getElementsByTagName("li");
                                         var res = new Array(0);
@@ -83,20 +94,26 @@ export const markup = {
         getQualPlaceholders(n, v)   { return { "#qual-name": n, "#qual-value": v }; },
     },
     schedule: {
-        getContainer()              { return document.getElementById("schedule-container");},
-        getStartIntervalInput()     { return document.getElementById("schedule-interval-start");},
-        getEndIntervalInput()       { return document.getElementById("schedule-interval-end");},
-        getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
-        getTemplate()               { return document.getElementById("schedule-interval-template");},
+        startInputId:   "schedule-interval-start",
+        endInputId:     "schedule-interval-end",
+
+        startCalendarInit()         { datetimePickerInit(this.startInputId) },
+        endCalendarInit()           { datetimePickerInit(this.endInputId) },
+        getStartIntervalInput()     { return document.getElementById(this.startInputId);},
+        getEndIntervalInput()       { return document.getElementById(this.endInputId);},
         insertNewInterval(interv)   {   var header = document.getElementById("intervals-header");
                                         header.after(interv);
                                     },
+
+        getContainer()              { return document.getElementById("schedule-container");},
+        getTemplate()               { return document.getElementById("schedule-interval-template");},
         getPlaceholders(s, e, i)    { return {
                                             "#interval-start-time": formatDate(s, "hh:min dd SM"),
                                             "#interval-end-time":   formatDate(e, "hh:min dd SM"),
                                             "#row-num":             i
                                         }; 
                                     },
+        getAddBtn()                 { return document.getElementById("schedule-interval-add-btn");},
         getDelBtn(rn)               { return document.getElementById("interval-delete-btn-" + rn);},
     },
     groups: {
@@ -113,7 +130,7 @@ export const markup = {
                                     },
         
         getAttached(gid)            { return document.getElementById(gid); },
-        setUpdateCallback(cback)    { $("#groups-container").sortable({ update: function( event, ui ){ cback(); }}); },
+        setUpdateCallback(cback)    { setSortableCallback("groups-container", cback);},
         getAddBtn()                 { return document.getElementById("groups-add-btn");},
         getApplyBtn()                 { return document.getElementById("apply-configs-btn");},
         getDelBtn(gp)               { return document.getElementById("group-del-btn-" + gp.getId());},

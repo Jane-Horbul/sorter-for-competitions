@@ -192,8 +192,11 @@ function datetimesCompare(dt1, dt2){
 function arrToStr(arr, getter){
     var res = "";
     for(var i = 0; i < arr.length; i++)
+    {
+        if(i != 0)
+            res += commonStrings.arrDivider;
         res += getter == undefined ? arr[i] : getter(arr[i]);
-        
+    }
     return res;
 }
 
@@ -277,14 +280,19 @@ export function unhideSubelements(elem){
     }
 }
 
-export function showShadows(client){
+export function showShadows(client, myTrainer){
     var shadows = undefined;
+    var myShadows = undefined;
+
     if(client.isRoot())
         shadows = document.querySelectorAll(".js-root-view");
     else if(client.isAdmin())
         shadows = document.querySelectorAll(".js-admin-view");
-    else if(client.isTrainer())
+    else if(client.isTrainer()){
         shadows = document.querySelectorAll(".js-trainer-view");
+        if(myTrainer != undefined && helpers.strEquals(myTrainer, client.getId()))
+            myShadows = document.querySelectorAll(".js-my-trainer-view");
+    }
     else if(client.isJudge())
         shadows = document.querySelectorAll(".js-judge-view");
 
@@ -294,6 +302,13 @@ export function showShadows(client){
             shadow.classList.remove("js-hidden-element");
         }
     }
+    if(myShadows != undefined){
+        for (let shadow of myShadows){
+            shadow.disabled = false;
+            shadow.classList.remove("js-hidden-element");
+        }
+    }
+    
     var hiddens = document.querySelectorAll(".js-hidden-element");
     for (var i = 0; i <  hiddens.length; i++){
         hiddens[i].remove();
@@ -347,6 +362,33 @@ export function languageSwitchingOn(){
     }).catch(err => {
         console.log(err.message);
     });
+}
+
+
+export function datePickerInit(id, plusTime){
+    id = "#" + id
+    import("../datetimepicker-master/jquery.js").then(m1 => {
+        import("../datetimepicker-master/build/jquery.datetimepicker.full.min.js").then(m2 => {
+            import("https://code.jquery.com/ui/1.13.0/jquery-ui.js").then(m3 => {
+                if(plusTime != undefined){
+                    $(id).datetimepicker({ format: "d/m/Y H:i"});
+                } else {
+                    $(id).datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: "c-100:c",
+                        dateFormat: "dd/mm/yy"
+                    });
+                }
+            })
+        })
+    }).catch(err => {
+        console.log(err.message);
+    });
+}
+
+export function datetimePickerInit(id){
+    datePickerInit(id, true);
 }
 
 export function createPageItem(item, values){

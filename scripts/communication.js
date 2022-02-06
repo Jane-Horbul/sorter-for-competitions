@@ -32,6 +32,7 @@ function castToCompetitionStat(object) {
         competitionId:      "Competition",
         competitionName:    "CompetitionName",
         disciplines:        "Disciplines",
+        allDisciplines:      "AllDisciplines",
         admit:              "Admitted",
         groupsStats:        "GroupStats",
         pairs:              "Pairs",
@@ -40,6 +41,7 @@ function castToCompetitionStat(object) {
         getCompetitionId()      {return this.obj[this.competitionId];},
         getCompetitionName()    {return this.obj[this.competitionName];},
         getDisciplines()        {return this.obj[this.disciplines];},
+        getAllDisciplines()     {return this.obj[this.allDisciplines];},
         isAdmitted()            {return this.obj[this.admit];},
         getGroupsStats()        {
                                     var cid = this.getCompetitionId();
@@ -163,7 +165,7 @@ function castToPair(object) {
         getWinner()         {return this.obj[this.winner];},
         getNumber()         {return this.obj[this.number];},
         getArena()          {return this.obj[this.arena];},
-        getTime(f)          {return formatDate(this.obj[this.name], f);},
+        getTime(f)          {return formatDate(this.obj[this.time], f);},
         getFinalPart()      {return this.obj[this.final];},
         getChildPair()      {return this.obj[this.child];},
         getRound()          {return this.obj[this.round];},
@@ -403,7 +405,7 @@ function castToClient(object) {
 
         root:   "Root",
         admin:  "Admin",
-        tariner:"Trainer",
+        trainer:"Trainer",
         judge:  "Judge",
         guest:  "Guest",
 
@@ -491,7 +493,6 @@ function sendList(formName, obj, refresh) {
 }
 
 function sendSingle(link, value, refresh){
-    console.log("Link: " + link + " value: "  + value)
     sendList(link, {[link]: value}, refresh);
 }
 

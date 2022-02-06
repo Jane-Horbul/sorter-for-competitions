@@ -11,21 +11,6 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"/>
-
-        <script src="./datetimepicker-master/jquery.js"></script>
-        <script src="./datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-
-        <script>
-            $(function () {
-                $('#sports-input-age').datepicker({
-                    changeMonth: true,
-                    changeYear: true,
-                    yearRange: "c-100:c",
-                    dateFormat: "dd/mm/yy"
-                });
-            });
-        </script>
     </head>
     <body>
         <div class="wrapper">
@@ -101,8 +86,8 @@
                 <div class="container-main">
                     <div class="tab" id="tab-bar-id">
                         <div class="tab-indent"></div>
-                        <button class="tablinks" id="tab1">-PHX_INFO_TAB-</button>
-                        <button class="tablinks" id="tab2">-PHX_STAT_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab1">-PHX_INFO_TAB-</button>
+                        <button class="tablinks tab-hidden"id="tab2">-PHX_STAT_TAB-</button>
                     </div>
 
                     <div class="bread-crumbs">
@@ -124,132 +109,128 @@
                     </div>
 
                     <div id="tabcontent1" class="tabcontent">
-                        <div class="group-info-main">
-                            <div id="member-info">
-                                <div class="member-info-title--siting">
-
-                                    <div class="member-info-title">
-                                        <span>-PHX_SPORT_INFO-</span>                                                                         
-                                    <div class="js-hidden-element js-root-view js-admin-view">
-                                            <button class="member-info-edit-btn" type="button" id="sportsman-edit-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/icons.svg#icon-pencil2"></use>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="js-invizible-button js-hidden-element js-root-view js-admin-view">
-                                            <button class="member-info-edit-btn" type="button" id="sportsman-edit-btn">
-                                                <svg class="group-info-edit-btn-icon">
-                                                    <use href="./img/symbol-circle-down-checkmark.svg#icon-checkmark"></use>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="group-info-fields">
-                                        <ul class="list sportsman-info-list">
-                                            <li>
-                                                <div class="sportsman-foto">
-                                                    <img id="sportsman-photo-img" src="./img/sportsman-foto.png" alt="sportsman foto">
-                                                </div>
-                                                <form enctype="multipart/form-data" method="post" name="fileinfo" class="js-hidden-element js-root-view js-admin-view">
-                                                    <input type="file" name="trainer-photo" id="new-photo-input" required />
-                                                    <button class="group-page-del-btn" type="button" id="change-photo-btn">
-                                                        <span class="group-card-btn-del-text">-PHX_CHANGE_PHOTO-</span>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <table class="common-table">
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_ID-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--id" id="sportsman-info-id"></div></td>
-                                                    </tr>   
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_SURNAME-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-surname"></div></td>
-                                                        <template id="sports-input-surname-template">
-                                                            <div class="form-field">
-                                                                <input type="text" class="sportsman-info-item--input" id="sports-input-surname"  placeholder="Enter sportsman surname">
-                                                            </div>
-                                                        </template>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_NAME-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-name"></div>  </td>
-                                                        <template id="sports-input-name-template">
-                                                            <div class="form-field">
-                                                                <input type="text" class="sportsman-info-item--input" id="sports-input-name"  placeholder="Enter sportsman name">
-                                                            </div>
-                                                        </template>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_SEX-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-sex"></div> </td>
-                                                        <template id="sports-input-sex-template">
-                                                            <div class="form-field--option">
-                                                                <select class="sportsman-info-item--sex" name="form-system-of-group" id="sports-input-sex">
-                                                                    <option value="Male">-CPHX_MALE_SEX-</option>
-                                                                    <option value="Female">-CPHX_FEMALE_SEX-</option>
-                                                                </select>
-                                                            </div>
-                                                        </template>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_BD-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> 
-                                                            <input type="text" id="sports-input-age" class="input-celendar create-ng--interval-min sportsman-info-item--input" disabled/>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -PHX_INFO_WEIGHT-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-weight"></div>  </td>
-                                                        <template id="sports-input-weight-template">
-                                                            <div class="create-ng--interval">
-                                                                <input type="text" name="weight-min" id="sports-input-weight" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
-                                                            </div>
-                                                        </template>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -PHX_INFO_QUAL-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-qual"></div> </td>
-                                                        <template id="sports-input-qulification-template">
-                                                            <div class="create-ng--interval">
-                                                                <select class="sportsman-info-item--qual" id="sports-input-qulification">
-                                                                </select>
-                                                                
-                                                            </div>
-                                                        </template>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -PHX_INFO_TRAINER-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-trainer"></div> </td>
-                                                        <template id="sports-input-trainer-template">
-                                                            <div class="create-ng--interval">
-                                                                <select class="sportsman-info-item--trainer" id="sports-input-trainer"></select>
-                                                            </div>
-                                                        </template>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_TEAM-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-team"></div>  </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_REGION-:</div> </td>
-                                                        <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-region"></div>  </td>
-                                                    </tr>
-                                                </table>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
-                                        <a id="del-btn-link">
-                                            <button class="group-page-del-btn" type="button" id="delete-member-btn">
-                                            <span class="group-card-btn-del-text">-PHX_DEL_BTN-</span>
-                                            </button>
-                                        </a>
-                                    </div>
+                        <div class="member-profile-block">
+                            <div class="member-title-block">
+                                <span>-PHX_SPORT_INFO-</span>                                                                         
+                                <div class="js-hidden-element js-root-view js-admin-view">
+                                    <button class="member-info-edit-btn" type="button" id="sportsman-edit-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/icons.svg#icon-pencil2"></use>
+                                        </svg>
+                                    </button>
                                 </div>
+                                <div class="js-invizible-button js-hidden-element js-root-view js-admin-view">
+                                    <button class="member-info-edit-btn" type="button" id="sportsman-edit-btn">
+                                        <svg class="group-info-edit-btn-icon">
+                                            <use href="./img/symbol-circle-down-checkmark.svg#icon-checkmark"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="member-info-block">
+                                <ul class="list member-info-list">
+                                    <li>
+                                        <div class="member-photo-block">
+                                            <img class="member-photo-img" id="sportsman-photo-img" src="./img/sportsman-foto.png" alt="sportsman foto">
+                                        </div>
+                                        <div class="member-buttons-block">
+                                            <form enctype="multipart/form-data" method="post" name="fileinfo" class="js-hidden-element js-root-view js-admin-view">
+                                                <input type="file" name="Photo" id="new-photo-input" required />
+                                            </form>
+                                            <button class="group-page-del-btn" type="button" id="change-photo-btn">
+                                                <span class="group-card-btn-del-text">-PHX_CHANGE_PHOTO-</span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <table class="common-table">
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_ID-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--id" id="sportsman-info-id"></div></td>
+                                            </tr>   
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_SURNAME-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-surname"></div></td>
+                                                <template id="sports-input-surname-template">
+                                                    <div class="form-field">
+                                                        <input type="text" class="sportsman-info-item--input" id="sports-input-surname"  placeholder="Enter sportsman surname">
+                                                    </div>
+                                                </template>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_NAME-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-name"></div>  </td>
+                                                <template id="sports-input-name-template">
+                                                    <div class="form-field">
+                                                        <input type="text" class="sportsman-info-item--input" id="sports-input-name"  placeholder="Enter sportsman name">
+                                                    </div>
+                                                </template>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_SEX-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-sex"></div> </td>
+                                                <template id="sports-input-sex-template">
+                                                    <div class="form-field--option">
+                                                        <select class="sportsman-info-item--sex" name="form-system-of-group" id="sports-input-sex">
+                                                            <option value="Male">-CPHX_MALE_SEX-</option>
+                                                            <option value="Female">-CPHX_FEMALE_SEX-</option>
+                                                        </select>
+                                                    </div>
+                                                </template>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_BD-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> 
+                                                    <input type="text" id="sports-input-age" class="input-celendar create-ng--interval-min sportsman-info-item--input" disabled/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -PHX_INFO_WEIGHT-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-weight"></div>  </td>
+                                                <template id="sports-input-weight-template">
+                                                    <div class="create-ng--interval">
+                                                        <input type="text" name="weight-min" id="sports-input-weight" class="create-ng--interval-min sportsman-info-item--input" pattern="[0-9]+" required="required" />
+                                                    </div>
+                                                </template>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -PHX_INFO_QUAL-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-qual"></div> </td>
+                                                <template id="sports-input-qulification-template">
+                                                    <div class="create-ng--interval">
+                                                        <select class="sportsman-info-item--qual" id="sports-input-qulification">
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </template>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -PHX_INFO_TRAINER-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-trainer"></div> </td>
+                                                <template id="sports-input-trainer-template">
+                                                    <div class="create-ng--interval">
+                                                        <select class="sportsman-info-item--trainer" id="sports-input-trainer"></select>
+                                                    </div>
+                                                </template>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_TEAM-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-team"></div>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="secondary-title-two-tables sportsman-info-table"> <div class="group-info-fields--item"> -CPHX_HUMAN_REGION-:</div> </td>
+                                                <td class="secondary-title-two-tables sportsman-info-table-info"> <div class="sportsman-info-item--text" id="sportsman-info-region"></div>  </td>
+                                            </tr>
+                                        </table>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="member-page-btn-del js-hidden-element js-root-view js-admin-view">                
+                                <a id="del-btn-link">
+                                    <button class="group-page-del-btn" type="button" id="delete-member-btn">
+                                    <span class="group-card-btn-del-text">-PHX_DEL_BTN-</span>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -330,7 +311,7 @@
                         </template>
                         <template id="discipline-item-template-id">
                             <li>                                
-                                <input class="input-to-choose-type js-root-view js-admin-view" type="checkbox" id="#disc-id" name="#disc-name" disabled>
+                                <input class="input-to-choose-type js-root-view js-admin-view js-my-trainer-view" type="checkbox" id="#disc-id" name="#disc-name" disabled>
                                 <label class="label-to-choose-type" for="#disc-id">#disc-name</label>
                             </li>
                         </template>

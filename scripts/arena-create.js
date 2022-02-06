@@ -220,6 +220,9 @@ function fillPageInfo(){
     markup.breadcrumbs.setCompLink();
     markup.breadcrumbs.setCompName(competition.getName());
 
+    markup.automation.schedule.startCalendarInit();
+    markup.automation.schedule.endCalendarInit();
+    
     competition.getGroups().forEach(gr => {
         deactivateGroup(gr);
     });
