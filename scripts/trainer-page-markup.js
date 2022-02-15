@@ -94,9 +94,10 @@ export const markup = {
                                                 "#sp-weight":       sp.getWeight(),
                                                 "#sp-sex":          sp.getSex(),
                                                 "#sp-team":         sp.getTeam(),
-                                                "#sp-qual":         getQualNameByValue(sp.getQualification()),
+                                                "#sp-qual":         getQualNameByValue("" + sp.getQualification()),
                                                 "#sportsman-link":  window.location.href.split("/")[0] + sp.getLink()
                                             };
                                         },
+        getSearchInput()            { return document.getElementById("sportsmen-search-input");}
     }
 }

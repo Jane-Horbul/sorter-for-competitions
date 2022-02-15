@@ -192,7 +192,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                                        <button class="ct-title-button cp-btn-add-group" type="button">-PHX_ADD_GROUP_BTN-</button>  
+                                                        <button class="ct-title-button" type="button">-PHX_ADD_GROUP_BTN-</button>  
                                                     </a>
                                                 </li>
                                             </ul>
@@ -205,13 +205,13 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_NAME-</th>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_AGE-</th>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_SEX-</th>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_DISC-</th>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_WEIGHT-</th>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_QUAL-</th>
-                                        <th class="secondary-title-tables--text">-PHX_GROUP_SP_NUM-</th>
+                                        <th>-PHX_GROUP_NAME-</th>
+                                        <th>-PHX_GROUP_AGE-</th>
+                                        <th>-PHX_GROUP_SEX-</th>
+                                        <th>-PHX_GROUP_DISC-</th>
+                                        <th>-PHX_GROUP_WEIGHT-</th>
+                                        <th>-PHX_GROUP_QUAL-</th>
+                                        <th>-PHX_GROUP_SP_NUM-</th>
                                     </tr>
                                 </table>
                                 
@@ -318,38 +318,47 @@
                             <span class="modal-title">
                                 <h3>-PHX_SPORTS_ADD-</h3>
                             </span>
-                            <div class="new-member-field">
-                                <table class="add-sportsman-table" id="add-sportsman-table">
-                                    <tr>
-                                        <th class="group-info-table-title all-table-title" colspan="7">
-                                            <span>-PHX_TBL_SPORTS-</span>
-                                        </th>
+                            <div class="common-table-container">
+                                <table class="common-table" id="add-sportsman-table">
+                                    <tr class="ct-title-row">
+                                        <td class="ct-title-row" colspan="7">
+                                            <ul class="list cp-sports-list">
+                                                <li>
+                                                    <button class="ct-title-text cp-sports-title">-PHX_TBL_SPORTS-</button>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="ct-search-row">
+                                        <td class="ct-search-row" colspan="8">
+                                            <img class="ct-search-icon" src="./img/search.png" alt="bc">
+                                            <input type="text" class="ct-search-input" id="add-sportsmen-search-input"  placeholder="-CPHX_TABLE_SEARCHING-">
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_SURNAME-</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_NAME-</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_AGE-</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_WEIGHT-</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_SEX-</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_TEAM-</td>
-                                        <td class="add-sportsman-table--title secondary-title-tables--text">-PHX_SPORT_QUAL-</td>
+                                        <th>-PHX_SPORT_SURNAME-</th>
+                                        <th>-PHX_SPORT_NAME-</th>
+                                        <th>-PHX_SPORT_AGE-</th>
+                                        <th>-PHX_SPORT_WEIGHT-</th>
+                                        <th>-PHX_SPORT_SEX-</th>
+                                        <th>-PHX_SPORT_TEAM-</th>
+                                        <th>-PHX_SPORT_QUAL-</th>
                                     </tr>
-
                                     <template id="add-sportsman-template">
-                                        <tr id="add-sports-#sp-id">
-                                            <td class="secondary-tables--td">#sp-surname</td>
-                                            <td class="secondary-tables--td">#sp-name</td>
-                                            <td class="secondary-tables--td">#sp-age</td>
-                                            <td class="secondary-tables--td">#sp-weight</td>
-                                            <td class="secondary-tables--td">#sp-sex</td>
-                                            <td class="secondary-tables--td">#sp-team</td>
-                                            <td class="secondary-tables--td">#sp-qual</td>
+                                        <tr class="search-item" id="add-sports-#sp-id">
+                                            <td class="ct-usual-col">#sp-surname</td>
+                                            <td class="ct-usual-col">#sp-name</td>
+                                            <td class="ct-usual-col">#sp-age</td>
+                                            <td class="ct-usual-col">#sp-weight</td>
+                                            <td class="ct-usual-col">#sp-sex</td>
+                                            <td class="ct-usual-col">#sp-team</td>
+                                            <td class="ct-usual-col">#sp-qual</td>
                                         </tr>
                                     </template>
                                     <template id="add-settings-template">
-                                        <td class="secondary-tables--td" colspan="6" id="#disc-list-id"></td>
-                                        <td class="secondary-tables--td" colspan="1">
-                                            <div class="popup-link js-hidden-element js-root-view js-admin-view">
+                                        <td class="ct-usual-col" colspan="6" id="#disc-list-id"></td>
+                                        <td class="ct-usual-col" colspan="1">
+                                            <div class="js-hidden-element js-root-view js-admin-view">
                                                 <input class="input-to-choose-type" type="checkbox" id="#admitted-id" name="#admitted-id">
                                                 <label class="label-to-choose-type" for="#admitted-id">-PHX_SPORT_ADMIT-</label>
                                             </div>

@@ -6,6 +6,8 @@ import {getLinkParams,
     helpers, 
     prepareTabs, 
     unhideSubelements,
+    filtration,
+    rowsComparator,
     prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import {markup} from "./department-page-markup.js"
@@ -291,6 +293,8 @@ function setActions(){
     } else if(client.isTrainer()){
         onClick(markup.sportsman.getAddBtn(),       sendSportsmanForm); 
     }
+    filtration(markup.sportsman.getSearchInput(), markup.sportsman.getTable(), rowsComparator);
+    filtration(markup.trainer.getSearchInput(), markup.trainer.getTable(), rowsComparator);
 };
 
 /* ------------------- MAIN CHUNK ----------------------------*/

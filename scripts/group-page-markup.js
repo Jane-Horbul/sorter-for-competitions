@@ -150,7 +150,8 @@ export const markup = {
                                     },
         createWinBtns(id)           { return document.getElementById("win-btn-template").innerHTML.replaceAll("#pair-id", id);},
         getRedBtnId(spId)           { return document.getElementById("red-btn-" + spId); },
-        getBlueBtnId(spId)          { return document.getElementById("blue-btn-" + spId); }       
+        getBlueBtnId(spId)          { return document.getElementById("blue-btn-" + spId); },
+        getSearchInput()            { return document.getElementById("pairs-search-input");},
     },
     sportsmen: {
         sportsmanRowId:     "sports-row-id-",
@@ -179,12 +180,17 @@ export const markup = {
                                             "#sports-row-id":   this.sportsmanRowId + sp.getId()
                                         };
                                     },
+        selectRow(r)                { r.classList.add("add-sportsman-table-tr--selected");},
+        deselectRow(r)              { r.classList.remove("add-sportsman-table-tr--selected");},
         getSportsRow(id)            { return document.getElementById(this.sportsmanRowId + id);},
         getAddBtn()                 { return document.getElementById(this.addBtnId);},
         getDelBtn(sp)               { return document.getElementById(markup.sportsmen.removeBtnId + sp.getId());},
         getAdmitLabel(sp)           { return document.getElementById("label-admit-sp-" + sp.getId());},
         getAdmitBtn(sp)             { return document.getElementById("admit-sp-" + sp.getId());},
-        getYesNoWord(val)           { return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;}
+        getYesNoWord(val)           { return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;},
+        getSearchInput()            { return document.getElementById("sportsmen-search-input");},
+        getAddingSearchInput()      { return document.getElementById("add-sportsmen-search-input");},
+
     },
     grid: {
         scale:          30,

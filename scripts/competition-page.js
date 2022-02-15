@@ -90,16 +90,18 @@ function sportsmanAddingSelect(sid){
     if(addingRow == undefined) {
         var newItem = createPageItem(markup.sportsmen.getAddingRowTemplate(), markup.sportsmen.getPlaceholders(sp, departmentLink));
         addingRow = table.insertRow(rowIndx);
-        table.rows[rowIndx - 1].setAttribute("class", "add-sportsman-table-tr--selected");
-        table.rows[rowIndx].setAttribute("class", "add-sportsman-table-tr--active");
+        markup.sportsmen.selectRow(table.rows[rowIndx - 1]);
+        markup.sportsmen.selectRow(table.rows[rowIndx]);
+        
         markup.sportsmen.setAddingRowId(addingRow, sid);
         addingRow.append(newItem);
         disciplinesCheckboxesAdd(sid);
         sportsmansAddList.push(sp);
+        showShadows(client);
 
     } else {
         addingRow.remove();
-        table.rows[rowIndx - 1].setAttribute("class", "");
+        markup.sportsmen.deselectRow(table.rows[rowIndx - 1]);
         for(var i = 0; i < sportsmansAddList.length; i++){
             if(sp.getId() == sportsmansAddList[i].getId()){
                 sportsmansAddList.splice(i, 1);
@@ -397,6 +399,8 @@ function setBtnActions(){
     onClick(markup.sportsmen.getAddBtn(),       sportsmansAddListSend);
 
     filtration(markup.sportsmen.getSearchInput(), markup.sportsmen.getTable(), rowsComparator);
+    filtration(markup.sportsmen.getAddingSearchInput(), markup.sportsmen.getAddingTable(), rowsComparator);
+    filtration(markup.groups.getSearchInput(), markup.groups.getTable(), rowsComparator);
 }
 
 

@@ -18,7 +18,9 @@ export const markup = {
         getAddingRowTemplate()      { return document.getElementById("add-settings-template");},
         getSportsAdmition(row, sid) { return row.querySelector('#admitted-' + sid).checked ? "true" : "false";},
         isCheckedDisc(row, sid, num){ return row.querySelector("#discipline-" + sid + "-" + num).checked;},
-
+        selectRow(r)                { r.classList.add("add-sportsman-table-tr--selected");},
+        deselectRow(r)              { r.classList.remove("add-sportsman-table-tr--selected");},
+        
         getPlaceholders(sp, dpLink) { return {
                                             "#sp-id":           sp.getId(),
                                             "#sp-surname":      sp.getSurname(),
@@ -46,6 +48,7 @@ export const markup = {
         getAddBtn()                 { return document.getElementById("sportsmans-add-list-send-btn");},
         getSortSpBtn()              { return document.getElementById("sort-members-btn");},
         getSearchInput()            { return document.getElementById("sportsmen-search-input");},
+        getAddingSearchInput()      { return document.getElementById("add-sportsmen-search-input");},
 
         getYesNoWord(val)           {return (val ? document.getElementById("yes-template") : document.getElementById("no-template")).innerHTML;}
     },
@@ -111,6 +114,7 @@ export const markup = {
                                             };
                                     },
         getPairsRefreshBtn()        { return document.getElementById("update-pairs-btn");},
+        getSearchInput()            { return document.getElementById("group-search-input");},
 
         alertNameFormat()           {alert("Empty group name!");},
         alertAgeMinFormat()         {alert("Bad minimal age!");},

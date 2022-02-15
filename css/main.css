@@ -935,7 +935,7 @@ tr {
 }
 
 .blue-button-style {
-  background-color: #012855;
+  background-color: #026de7;
   width: 30px;
   height: 20px;
 }
@@ -1409,12 +1409,12 @@ body.lock {
 }
 
 .red-cell-style {
-  background-color: #f16a6a;
+  background-color: #f15050;
   color: #000;
 }
 
 .blue-cell-style {
-  background-color: #3389ec;
+  background-color: #026de7;
   color: #FFF;
 }
 
@@ -1596,6 +1596,7 @@ body.lock {
   padding-bottom: 0px;
   font-size: 18px;
   font-weight: bold;
+  height: 90px;
 }
 
 .cp-sports-list {
@@ -1664,7 +1665,7 @@ body.lock {
   margin-top: 15px;
   margin-right: 5px;
   border: none;
-  height: 100%;
+  height: 80%;
   text-decoration: none;
   background-color: #1d8fbd;
   color: white;
@@ -1674,6 +1675,14 @@ body.lock {
   outline-width: 0px;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
+}
+
+.ct-title-button:hover {
+  border: 1px solid #1D8FBD;
+  background: #fff;
+  color: #2F2929;
+  -webkit-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ct-search-row {
@@ -2443,7 +2452,7 @@ body.lock {
 
 .bc-text {
   padding: 0;
-  padding-top: 5%;
+  padding-top: 2%;
 }
 
 .bc-dp-block {
@@ -4002,12 +4011,12 @@ progress {
 }
 
 .group-page-pair-red {
-  background-color: #fb00005e;
+  background-color: #e46262;
   color: black;
 }
 
 .group-page-pair-blue {
-  background-color: #0000fb9c;
+  background-color: #026de7;
   color: white;
 }
 

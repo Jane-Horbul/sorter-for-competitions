@@ -7,6 +7,8 @@ import { getLinkParams,
     unhideSubelements,
     helpers,
     createPageItem,
+    filtration,
+    rowsComparator,
     prepareClient} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./trainer-page-markup.js"
@@ -180,7 +182,8 @@ function setBtnActions(){
     onClick(markup.trainer.getChangePassBtn(), changePass);
     onClick(markup.trainer.getChangePhotoBtn(), function(){server.trainer.changePhoto(page.tid, markup.trainer.getPhotoForm());});
     onClick(markup.sportsman.getAddBtn(), createSportsman);
-    
+
+    filtration(markup.sportsman.getSearchInput(), markup.sportsman.getTable(), rowsComparator);
 }
 
 

@@ -100,7 +100,7 @@ export const markup = {
         getTable()                      { return document.getElementById("members-table");},
         getTemplate()                   { return document.getElementById("member-template");},
         getAddBtn()                     { return document.getElementById("member-form-send-btn");},
-    
+        getSearchInput()                { return document.getElementById("sportsmen-search-input");},                              
         getPlaceholders(sp)             { return {
                                                 "#sp-surname":      sp.getSurname(),
                                                 "#sp-name":         sp.getName(),
@@ -129,7 +129,7 @@ export const markup = {
         getTable()                      { return document.getElementById("trainers-table");},
         getTemplate()                   { return document.getElementById("trainer-template");},
         getAddBtn()                     { return document.getElementById("trainer-form-send-btn");},
-    
+        getSearchInput()                { return document.getElementById("trainer-search-input");},
         getPlaceholders(tr)             { return {
                                                 "#tr-surname":      tr.getSurname(),
                                                 "#tr-name":         tr.getName(),

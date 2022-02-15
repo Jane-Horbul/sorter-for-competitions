@@ -4,7 +4,9 @@ import {helpers,
     languageSwitchingOn,
     onClick,
     createPageItem,
-    commonStrings, 
+    commonStrings,
+    filtration,
+    rowsComparator,
     prepareTabs,
     prepareClient} from "./common.js"
 
@@ -89,13 +91,12 @@ function sportsmanRemove(id){
 function sportsmanAddingSelect(sid){
     var spRow   = markup.sportsmen.getAddingSportsRow(sid);
     var sp      = sportsmansAddList.find( curSp => curSp.getId() == sid);
-    console.log("Select callback: " + sid);
     if(sp == undefined) {
         sp = competitionSportsmans.find( curSp => curSp.getId() == sid);
-        spRow.setAttribute("class", "add-sportsman-table-tr--selected");
+        markup.sportsmen.selectRow(spRow);
         sportsmansAddList.push(sp);
     } else {
-        spRow.setAttribute("class", "");
+        markup.sportsmen.deselectRow(spRow);
         for(var i = 0; i < sportsmansAddList.length; i++){
             if(sid == sportsmansAddList[i].getId()){
                 sportsmansAddList.splice(i, 1);
@@ -482,6 +483,10 @@ function setBtnActions(){
     onClick(markup.group.getEditBtn(),          groupInfoEdit);
     onClick(markup.group.getUpdatePairsBtn(),   refreshPairs);
     onClick(markup.group.getAddFormulaBtn(),    addNewFormula);
+
+    filtration(markup.sportsmen.getSearchInput(), markup.sportsmen.getTable(), rowsComparator);
+    filtration(markup.sportsmen.getAddingSearchInput(), markup.sportsmen.getAddingTable(), rowsComparator);
+    filtration(markup.pairs.getSearchInput(), markup.pairs.getTable(), rowsComparator);
 }
 
 prepareTabs()
