@@ -67,6 +67,7 @@ function castToSportsman(object) {
         region:     "Region",
         trainer:    "Trainer",
         photo:      "Photo",
+        accred:     "AccreditationOut",
         admit:      "Admitted",
         disciplines:"Disciplines",
         groupsNum:  "GroupStatsNum",
@@ -88,6 +89,7 @@ function castToSportsman(object) {
         getDisciplines()      {return this.obj[this.disciplines];},
         getGroupsNum()        {return this.obj[this.groupsNum];},
         getPhoto()            {return this.obj[this.photo];},
+        getAccreditation()    {return this.obj[this.accred];},
         getStatistics()       {return this.obj[this.compStats].map(castToCompetitionStat);},
 
         setName(v)             {this.obj[this.name] = v;},
@@ -100,6 +102,7 @@ function castToSportsman(object) {
         setTrainer(v)          {this.obj[this.trainer] = v;},
         setAdmition(v)         {this.obj[this.admit] = v;},
         setDisciplines(v)      {this.obj[this.disciplines] = v;},
+        setAccreditation(v)    {this.obj[this.accred] = v;},
 
         getLink()              {return "/sportsman?sid=" + this.getId();}
     };
@@ -107,7 +110,7 @@ function castToSportsman(object) {
 
 function castToTrainer(object) {
     return {
-        obj:    object,
+        obj:        object,
         id:         "Id",
         name:       "Name",
         surname:    "Surname",
@@ -116,7 +119,9 @@ function castToTrainer(object) {
         team:       "Team",
         region:     "Region",
         email:      "Email",
+        pass:       "Password",
         photo:      "Photo",
+        accred:     "AccreditationOut",
         link:       "/trainer?tid=",
 
         getId()               {return this.obj[this.id];},
@@ -128,6 +133,7 @@ function castToTrainer(object) {
         getRegion()           {return this.obj[this.region];},
         getEmail()            {return this.obj[this.email];},
         getPhoto()            {return this.obj[this.photo];},
+        getAccreditation()    {return this.obj[this.accred];},
         getLink()             {return this.link + this.getId();},
 
         setId(v)               {this.obj[this.id] = v;},
@@ -137,7 +143,85 @@ function castToTrainer(object) {
         setSex(v)              {this.obj[this.sex] = v;},
         setTeam(v)             {this.obj[this.team] = v;},
         setRegion(v)           {this.obj[this.region] = v;},
-        setEmail(v)            {this.obj[this.email] = v;}
+        setEmail(v)            {this.obj[this.email] = v;},
+        setPassword(v)         {this.obj[this.pass] = v;},
+        setAccreditation(v)    {this.obj[this.accred] = v;},
+    };
+}
+
+function castToJudge(object) {
+    return {
+        obj:        object,
+        id:         "Id",
+        name:       "Name",
+        surname:    "Surname",
+        birth:      "BirthDate",
+        sex:        "Sex",
+        region:     "Region",
+        email:      "Email",
+        pass:       "Password",
+        photo:      "Photo",
+        accred:     "AccreditationOut",
+        link:       "/judge?jid=",
+
+        getId()               {return this.obj[this.id];},
+        getName()             {return this.obj[this.name];},
+        getSurname()          {return this.obj[this.surname];},
+        getBirth(f)           {return formatDate(this.obj[this.birth], f);},
+        getSex()              {return this.obj[this.sex];},
+        getRegion()           {return this.obj[this.region];},
+        getEmail()            {return this.obj[this.email];},
+        getPhoto()            {return this.obj[this.photo];},
+        getAccreditation()    {return this.obj[this.accred];},
+        getLink()             {return this.link + this.getId();},
+
+        setId(v)               {this.obj[this.id] = v;},
+        setName(v)             {this.obj[this.name] = v;},
+        setSurname(v)          {this.obj[this.surname] = v;},
+        setBirth(v)            {this.obj[this.birth] = v;},
+        setSex(v)              {this.obj[this.sex] = v;},
+        setRegion(v)           {this.obj[this.region] = v;},
+        setEmail(v)            {this.obj[this.email] = v;},
+        setPassword(v)         {this.obj[this.pass] = v;},
+        setAccreditation(v)    {this.obj[this.accred] = v;},
+    };
+}
+
+function castToAdmin(object) {
+    return {
+        obj:        object,
+        id:         "Id",
+        name:       "Name",
+        surname:    "Surname",
+        birth:      "BirthDate",
+        sex:        "Sex",
+        region:     "Region",
+        email:      "Email",
+        pass:       "Password",
+        photo:      "Photo",
+        accred:     "AccreditationOut",
+        link:       "/admin?nid=",
+
+        getId()               {return this.obj[this.id];},
+        getName()             {return this.obj[this.name];},
+        getSurname()          {return this.obj[this.surname];},
+        getBirth(f)           {return formatDate(this.obj[this.birth], f);},
+        getSex()              {return this.obj[this.sex];},
+        getRegion()           {return this.obj[this.region];},
+        getEmail()            {return this.obj[this.email];},
+        getPhoto()            {return this.obj[this.photo];},
+        getAccreditation()    {return this.obj[this.accred];},
+        getLink()             {return this.link + this.getId();},
+
+        setId(v)               {this.obj[this.id] = v;},
+        setName(v)             {this.obj[this.name] = v;},
+        setSurname(v)          {this.obj[this.surname] = v;},
+        setBirth(v)            {this.obj[this.birth] = v;},
+        setSex(v)              {this.obj[this.sex] = v;},
+        setRegion(v)           {this.obj[this.region] = v;},
+        setEmail(v)            {this.obj[this.email] = v;},
+        setPassword(v)         {this.obj[this.pass] = v;},
+        setAccreditation(v)    {this.obj[this.accred] = v;},
     };
 }
 
@@ -421,6 +505,7 @@ function castToClient(object) {
         isJudge()           {return helpers.strEquals(this.getStatus(), this.judge);},
         isGuest()           {return helpers.strEquals(this.getStatus(), this.guest);},
 
+        setStatus(v)        {this.obj[this.status] = v;},
         setLogin(v)         {this.obj[this.login] = v;},
         setNewLogin(v)      {this.obj[this.newLogin] = v;},
         setPassword(v)      {this.obj[this.pass] = v;},
@@ -433,6 +518,8 @@ export const ops = {
     createDepartmant(o)     {return castToDepatrment    (o == undefined ? {} : o);},
     createSportsman(o)      {return castToSportsman     (o == undefined ? {} : o);},
     createTrainer(o)        {return castToTrainer       (o == undefined ? {} : o);},
+    createJudge(o)          {return castToJudge         (o == undefined ? {} : o);},
+    createAdmin(o)          {return castToAdmin         (o == undefined ? {} : o);},
     createPair(o)           {return castToPair          (o == undefined ? {} : o);},
     createGroup(o)          {return castToGroup         (o == undefined ? {} : o);},
     createArena(o)          {return castToArena         (o == undefined ? {} : o);},
@@ -605,10 +692,38 @@ export const server = {
         changePhotoLink(tid)    {return "trainer-photo-change?tid=" + tid;},
 
         get(tid)                {return sendRequest(this.getLink(tid), ops.createTrainer);},
-        create(tr)              {sendList(      this.createLink(),          tr.obj, true);},
+        create(tr)              {sendList(      this.createLink(),          tr.obj, false);},
         edit(tid, tr)           {sendList(      this.editLink(tid),         tr.obj, true);},
         remove(tid)             {sendSingle(    this.removeLink(tid),       tid, false);},
         changePhoto(tid, data)  {sendFormData(  this.changePhotoLink(tid),  data, true);}
+    },
+
+    judge: {
+        getLink(jid)            {return "judge-get?tid=" + jid;},
+        createLink()            {return "judge-create";},
+        removeLink(jid)         {return "judge-remove?jid=" + jid;},
+        editLink(jid)           {return "judge-edit?jid=" + jid;},
+        changePhotoLink(jid)    {return "judge-photo-change?jid=" + jid;},
+
+        get(jid)                {return sendRequest(this.getLink(jid), ops.createTrainer);},
+        create(tr)              {sendList(      this.createLink(),          tr.obj, false);},
+        edit(jid, tr)           {sendList(      this.editLink(jid),         tr.obj, true);},
+        remove(jid)             {sendSingle(    this.removeLink(jid),       jid, false);},
+        changePhoto(jid, data)  {sendFormData(  this.changePhotoLink(jid),  data, true);}
+    },
+
+    admin: {
+        getLink(nid)            {return "admin-get?tid=" + nid;},
+        createLink()            {return "admin-create";},
+        removeLink(nid)         {return "admin-remove?nid=" + nid;},
+        editLink(nid)           {return "admin-edit?nid=" + nid;},
+        changePhotoLink(nid)    {return "admin-photo-change?nid=" + nid;},
+
+        get(nid)                {return sendRequest(this.getLink(nid), ops.createTrainer);},
+        create(tr)              {sendList(      this.createLink(),          tr.obj, false);},
+        edit(nid, tr)           {sendList(      this.editLink(nid),         tr.obj, true);},
+        remove(nid)             {sendSingle(    this.removeLink(nid),       nid, false);},
+        changePhoto(nid, data)  {sendFormData(  this.changePhotoLink(nid),  data, true);}
     },
 
     arena: {

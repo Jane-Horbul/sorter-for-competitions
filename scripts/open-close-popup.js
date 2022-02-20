@@ -1,97 +1,77 @@
-const popupLinks = document.querySelectorAll('.popup-link');
-const body = document.querySelector('body');
-const lockPadding = document.querySelectorAll('.lock-padding');
+import {onClick} from "./common.js"
 
-let unlock = true;
+var isLocked = false;
+const markup = {
+    getLockPaddings()   { return document.querySelectorAll('.lock-padding'); },
+    getWrapperWidth()   { return document.querySelector('.wrapper').offsetWidth; },
+    getBody()           { return document.querySelector('body'); },
+    lockBody()          { this.getBody().classList.add("lock"); },
+    unlockBody()        { this.getBody().classList.remove("lock"); },
 
-const timeout = 800;
+    getPopupByLink(l)   { return document.getElementById(l.getAttribute('href').replace('#', '')); },
+    getActivePopup()    { return document.querySelector('.popup.open'); },
+    markOpened(popup)   { popup.classList.add('open'); },
+    markClosed(popup)   { popup.classList.remove('open'); }
+    
 
-if (popupLinks.length > 0) {
-    for (let i = 0; i < popupLinks.length; i++) {
-        const popupLink = popupLinks[i];
-        popupLink.addEventListener("click", function(e) {
-            const popupName = popupLink.getAttribute('href').replace('#', '');
-            const curentPopup = document.getElementById(popupName);
-            popupOpen(curentPopup);
-            e.preventDefault();
-        });
-    }
-}
-
-const popupCloseIcon = document.querySelectorAll('.close-popup');
-if (popupCloseIcon.length > 0) {
-    for (let i = 0; i < popupCloseIcon.length; i++) {
-        const el = popupCloseIcon[i];
-        el.addEventListener('click', function (e) {
-            popupClose(el.closest('.popup'));
-            e.preventDefault();
-        });
-    }
-}
-
-function popupOpen (curentPopup) {
-    if (curentPopup && unlock) {
-        const popupActive = document.querySelector('.popup.open');
-        if (popupActive) {
-            popupClose (popupActive, false);
-        } else {
-            bodyLock();
-        }
-        curentPopup.classList.add('open');
-        curentPopup.addEventListener("click", function (e) {
-            if (!e.target.closest('.popup__content')) {
-                popupClose(e.target.closest('.popup'));
-            }
-        });
-    }
-}
-
-function popupClose(popupActive, doUnlock = true) {
-    if (unlock) {
-        popupActive.classList.remove('open');
-        if (doUnlock) {
-            bodyUnLock();
-        }
-    }
 }
 
 function bodyLock() {
-    const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
-
-    if (lockPadding.length > 0) {
-        for (let i = 0; i < lockPadding.length; i++) {
-            const el = lockPadding[i];
-            el.style.paddingRight = lockPaddingValue;
-        }
-    }
-    body.style.paddingRight = lockPaddingValue;
-    body.classList.add('lock');
-
-    unlock = false;
-    setTimeout(function() {
-        unlock =true;
-    }, timeout);
+    const lockPaddings  = markup.getLockPaddings();
+    const paddingValue  = window.innerWidth - markup.getWrapperWidth() + 'px';
+    
+    markup.getBody().style.paddingRight = paddingValue;
+    for (var i = 0; i < lockPaddings.length; i++)
+        lockPaddings[i].style.paddingRight = paddingValue;
+    markup.lockBody();
+    isLocked = true;
 }
 
 function bodyUnLock() {
-    setTimeout(function() {
-        for (let i = 0; i < lockPadding.length; i++) {
-            const el = lockPadding[i];
-            el.style.paddingRight = '0px';
-        }
-        body.style.paddingRight = '0px';
-        body.classList.remove('lock');
-    }, timeout);
+    const lockPaddings  = markup.getLockPaddings();
 
-    unlock = false;
-    setTimeout(function() {
-        unlock= true;
-    }, timeout);
+    markup.getBody().style.paddingRight = '0px';
+    for (var i = 0; i < lockPaddings.length; i++)
+        lockPaddings[i].style.paddingRight = '0px';
+    markup.unlockBody();
+    isLocked = false;
 }
 
+function popupOpen(link) {
+    const curentPopup = markup.getPopupByLink(link);
+    if (curentPopup == undefined)
+        return;
+
+    const popupActive = markup.getActivePopup();
+    if (popupActive != undefined)
+        popupClose(popupActive, false);
+
+    markup.markOpened(curentPopup);
+    bodyLock();
+    onClick(curentPopup, function (e) {
+        if (!e.target.closest('.popup__content'))
+            popupClose(e.target.closest('.popup'));
+    });
+}
+
+function popupClose(popupActive) {
+    if (!isLocked)
+        return;
+    markup.markClosed(popupActive);
+    bodyUnLock();
+}
+
+
+
+const openLinks = document.querySelectorAll('.popup-link');
+for (let i = 0; i < openLinks.length; i++)
+    onClick(openLinks[i], function(e) { popupOpen(openLinks[i]); e.preventDefault(); });
+
+const closeLinks = document.querySelectorAll('.close-popup');
+for (let i = 0; i < closeLinks.length; i++)
+    onClick(closeLinks[i], function (e) { popupClose(closeLinks[i].closest('.popup')); e.preventDefault(); })
+
 document.addEventListener('keydown', function(e) {
-    if (e.which === 27) {
-        const popupActive = document.querySelector('.popup.open');
-        popupClose(popupActive);
-    }
+    if (e.which === 27)
+        popupClose(markup.getActivePopup());
 });

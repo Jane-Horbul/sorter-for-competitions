@@ -345,7 +345,7 @@
 
         <!--Create new member-popup-window-start-->
         <div class="popup" id = "popup_1">
-            <a href="" class="popup__area"></a>
+            <a href="#" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
                     <div class="new-member-pop-up">
@@ -446,7 +446,7 @@
 
         <!--Create new member-popup-window-start-->
         <div class="popup" id = "popup_2">
-            <a href="" class="popup__area"></a>
+            <a href="#" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
                     <div class="new-member-pop-up">
@@ -544,7 +544,7 @@
 
         <!--Add-competition-popup-window-start-->
         <div class="popup" id = "popup_4">
-            <a href="" class="popup__area"></a>
+            <a href="#" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
                     <div class="create-new-competition-popup__content">
@@ -588,9 +588,118 @@
         </div>
         <!--second-popup-window-end-->
 
+        <!--Create new member-popup-window-start-->
+        <div class="popup" id = "popup_6">
+            <a href="#" class="popup__area"></a>
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="new-member-pop-up">
+                        <a href="" class="popup__close close-popup">X</a>
+                        <form class="modal-form new-member-pop-up-mf">
+                            <span class="add-member-popup-title">-PHX_CREATE_MEMBER-</span>
+                            <div class="new-member-field">
+                                <div class="input-container ic1">
+                                    <input id="reg-member-name" class="input" type="text" placeholder=" "/>
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="reg-member-name" class="placeholder">-CPHX_HUMAN_NAME-</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="reg-member-surname" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="reg-member-surname" class="placeholder">-CPHX_HUMAN_SURNAME-</label>
+                                </div>
+                                
+                                <div class="input-container ic2">
+                                    <div class="input">
+                                        <input type="text" id="reg-member-age" class="input-celendar" placeholder="-CPHX_HUMAN_BD-" autocomplete="off"/>
+                                        <svg class="popup-form-fields-icon">
+                                            <use href="./img/register-and-popup-icons.svg#icon-calendar"></use>
+                                        </svg>
+                                        <div class="cut"></div>
+                                        <label for="reg-member-age" class="placeholder"></label>
+                                    </div>
+                                </div>
+                                <div class="new-member-pop-up-check">
+                                    <ul class="list new-member-gender-list">
+                                        <label for="new-member-sex" class="form-field-label">
+                                            <li class="new-member-pop-up-check-gender">-CPHX_HUMAN_SEX-</li>
+                                            <li class="new-member-pop-up-check-gender">
+                                                <div class="form_radio_btn">
+                                                    <input type="radio" id="reg-member-sex-male" name="reg-member-sex" value="male" checked>
+                                                    <label for="reg-member-sex-male">-CPHX_MALE_SEX-</label>
+                                                </div>
+                                            </li>
+                                            <li class="new-member-pop-up-check-gender">
+                                                <div class="form_radio_btn">
+                                                    <input type="radio" id="reg-member-sex-female" name="reg-member-sex" value="female">
+                                                    <label for="reg-member-sex-female">-CPHX_FEMALE_SEX-</label>
+                                                </div>
+                                            </li>
+                                        </label>
+                                    </ul>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="reg-member-region" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="reg-member-region" class="placeholder">-CPHX_HUMAN_REGION-</label>
+                                </div>
+                                <div class="">
+                                    <label for="reg-member-status"><span class="form-field-title">-PHX_STATUS-</span></label>
+                                    <select class="new-member-pop-up-check-qual" name="reg-member-status" id="reg-member-status">
+                                            <option value="Trainer">-PHX_STATUS_TRAINER-</option>
+                                            <option value="Judge">-PHX_STATUS_JUDGE-</option>
+                                            <option value="Admin">-PHX_STATUS_ADMIN-</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="reg-member-email" class="input" type="text" placeholder=" " />
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="reg-member-email" class="placeholder">-CPHX_EMAIL-</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="reg-password" class="input input_login" type="password" placeholder=" " autocomplete="off"/>
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="reg-password" class="placeholder">-CPHX_OLD_PASS-</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="reg-confirm-password" class="input input_login" type="password" placeholder=" " autocomplete="off"/>
+                                    <svg class="popup-form-fields-icon">
+                                        <use href="./img/register-and-popup-icons.svg#icon-user"></use>
+                                    </svg>
+                                    <div class="cut"></div>
+                                    <label for="reg-confirm-password" class="placeholder">-CPHX_NEW_PASS-</label>
+                                </div>
+
+                                <button type="button" id="reg-member-send-btn" class="add-member-popup--send">
+                                    <span class="modal-btn-submit-text">-PHX_CONFIRM REG_BTN-</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Create new member-popup-window-end-->
+
         <!--LogIn popup start-->
         <div class="popup" id = "popup_7">
-            <a href="" class="popup__area"></a>
+            <a href="#" class="popup__area"></a>
             <div class="popup__body">
                 <div class="popup__content">
                     <div class="login_popup__content">
@@ -616,6 +725,7 @@
                                 </button>
                             </div>
                         </form>
+                        <a class="popup-link" href="#popup_6">Registration</a>
                     </div>
                 </div>
             </div>

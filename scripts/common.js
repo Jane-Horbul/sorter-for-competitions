@@ -26,9 +26,9 @@ function getClientLink(cl){
     if(cl.isRoot()){
         return "";
     } else if(cl.isAdmin()){
-        return "";
+        return res + "/admin?nid=" + cl.getId();;
     } else if(cl.isJudge()){
-        return "";
+        return res + "/judge?jid=" + cl.getId();;
     } else if(cl.isTrainer()){
         return res + "/trainer?tid=" + cl.getId();
     }
@@ -36,6 +36,20 @@ function getClientLink(cl){
 }
 
 const markup = {
+    registration: {
+        getName()                   { return document.getElementById("reg-member-name").value;},
+        getSurname()                { return document.getElementById("reg-member-surname").value;},
+        getBirthDate()              { return document.getElementById("reg-member-age").value;},
+        initBirthDate()             { datePickerInit("reg-member-age"); },
+        getSex()                    { return document.getElementById("reg-member-sex-male").checked ? 
+                                        document.getElementById("reg-member-sex-male").value : document.getElementById("reg-member-sex-female").value; },
+        getRegion()                 { return document.getElementById("reg-member-region").value; },                                
+        getStatus()                 { return document.getElementById("reg-member-status").value; },
+        getEmail()                  { return document.getElementById("reg-member-email").value;},
+        getPassword()               { return document.getElementById("reg-password").value;},
+        getPasswordConfirm()        { return document.getElementById("reg-confirm-password").value;},
+        getApplyBtn()               { return document.getElementById("reg-member-send-btn"); }
+    },
     client: {
         getLoginBtn()               { return document.getElementById("login-btn");},
         getSignOutBtn()             { return document.getElementById("sign-out-btn");},
@@ -233,7 +247,7 @@ export function filtration(object, container, comparator){
     }, false);
 }
 
-export function getLinkParams(link){
+export function getLinkParams(link) {
     var paramsMap = new Map();
     var sectors = link.split("/");
     sectors.forEach(sect => {
@@ -250,17 +264,60 @@ export function getLinkParams(link){
     return paramsMap;
 }
 
-function logIn(){
+function logIn() {
     var client = ops.createClient();
     client.setLogin(markup.client.getLogin());
     client.setPassword(markup.client.getPass());
     server.access.login(client)
 }
 
+function clientRegister() {
+    var pass = markup.registration.getPassword();
+    var confirmPass = markup.registration.getPasswordConfirm();
+    if(!helpers.strEquals(pass, confirmPass)) {
+        alert("Mistmatch passwords!");
+        return;
+    }
+
+    var newClient = ops.createClient();
+    newClient.setStatus(markup.registration.getStatus());
+    newClient.setLogin(markup.registration.getEmail());
+    newClient.setPassword(pass);
+
+    if(newClient.isTrainer()) {
+        var member = ops.createTrainer(); 
+    } else if(newClient.isJudge()) {
+        var member = ops.createJudge(); 
+    } else if(newClient.isAdmin()) {
+        var member = ops.createAdmin(); 
+    } else {
+        alert("Undefined status");
+        return;
+    }
+    member.setName(markup.registration.getName());
+    member.setSurname(markup.registration.getSurname());
+    member.setBirth(markup.registration.getBirthDate());
+    member.setSex(markup.registration.getSex());
+    member.setRegion(markup.registration.getRegion());
+    member.setEmail(markup.registration.getEmail());
+    member.setPassword(pass);
+    
+    if(newClient.isTrainer()) {
+        server.trainer.create(member);
+    } else if(newClient.isJudge()) {
+        server.judge.create(member);
+    } else if(newClient.isAdmin()) {
+        server.admin.create(member);
+    }
+    server.access.login(newClient);
+}
+
 export function prepareClient(cl){
-    if(cl.isGuest())
+    if(cl.isGuest()) {
+        markup.registration.initBirthDate();
+        onClick(markup.registration.getApplyBtn(), clientRegister);
         onClick(markup.client.getLoginBtn(), logIn);
-    else {
+    } else {
         var clContainer =  markup.client.getClientContainer();
         clContainer.innerHTML = "";
         clContainer.append(createPageItem(markup.client.getTemplate(), markup.client.getPlaceholders(cl)));
@@ -400,6 +457,11 @@ export function createPageItem(item, values){
     return template.content;
 }
 
+
+
+/**********************************
+ * TABS BAR*
+ * ****************************** */
 var tabsBarActive = false;
 var activeTab = undefined;
 
@@ -427,12 +489,14 @@ function showTabs(){
     markup.tabs.setBarHeight(content.offsetHeight > window['innerHeight'] ? content.offsetHeight : window['innerHeight']);
     tabsBarActive = true;
 }
+
 function togleBar(){
     if(tabsBarActive)
         hideTabs();
     else
         showTabs();
 }
+
 export function prepareTabs() {
     var links = markup.tabs.getLinks();
     for (var i = 0; i < links.length; i++) (
