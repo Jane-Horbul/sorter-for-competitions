@@ -8,7 +8,8 @@ import {helpers,
     filtration,
     rowsComparator,
     prepareTabs,
-    prepareClient} from "./common.js"
+    prepareClient,
+    onPageLoad} from "./common.js"
 
 import {ops, server} from "./communication.js"
 import {markup} from "./group-page-markup.js"
@@ -20,9 +21,7 @@ const page = {
     gid: pageParams.get("gid")
 }
 
-const client = server.access.getClient();
-prepareClient(client);
-
+const client              = server.access.getClient();
 var groupInfo             = server.group.get(page.cid, page.gid);
 const departmentInfo      = server.department.get();
 const competitionInfo     = server.competition.get(page.cid);
@@ -489,9 +488,14 @@ function setBtnActions(){
     filtration(markup.pairs.getSearchInput(), markup.pairs.getTable(), rowsComparator);
 }
 
-prepareTabs()
-fillPageInfo();
-setBtnActions();
-formPairsGrid();
-showShadows(client);
-languageSwitchingOn();
+function main() {
+    prepareClient(client);
+    prepareTabs()
+    fillPageInfo();
+    setBtnActions();
+    formPairsGrid();
+    showShadows(client);
+    languageSwitchingOn(client.getLang());    
+}
+
+onPageLoad(main);

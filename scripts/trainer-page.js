@@ -9,7 +9,8 @@ import { getLinkParams,
     createPageItem,
     filtration,
     rowsComparator,
-    prepareClient} from "./common.js"
+    prepareClient,
+    onPageLoad} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./trainer-page-markup.js"
 
@@ -18,9 +19,7 @@ const page = {
     tid: pageParams.get("tid")
 }
 
-const client = server.access.getClient();
-prepareClient(client);
-
+const client            = server.access.getClient();
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
@@ -186,9 +185,13 @@ function setBtnActions(){
     filtration(markup.sportsman.getSearchInput(), markup.sportsman.getTable(), rowsComparator);
 }
 
+function main() {
+    prepareClient(client);
+    prepareTabs();
+    fillPageInfo();
+    setBtnActions();
+    showShadows(client);
+    languageSwitchingOn(client.getLang());    
+}
 
-prepareTabs();
-fillPageInfo();
-setBtnActions();
-showShadows(client);
-languageSwitchingOn();
+onPageLoad(main);

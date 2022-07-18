@@ -53,8 +53,8 @@ const markup = {
     client: {
         getLoginBtn()               { return document.getElementById("login-btn");},
         getSignOutBtn()             { return document.getElementById("sign-out-btn");},
-        getLogin()                  { return document.getElementById("login").value;},
-        getPass()                   { return document.getElementById("password").value;},
+        getLogin()                  { return document.getElementById("login");},
+        getPass()                   { return document.getElementById("password");},
         getClientContainer()        { return document.getElementById("client-cred-container");},
         getTemplate()               { return document.getElementById("client-data-template");},
         getPlaceholders(client)     { return {
@@ -232,6 +232,13 @@ export function onClick(object, action){
     object.addEventListener("click", action, false);
 }
 
+export function onEnterPress(object, action) {
+    object.addEventListener('keypress', (event) => {
+        if(helpers.strEquals(event.key, "Enter"))
+            action();
+      });
+}
+
 export function rowsComparator(row, val){
     for(let cell of row.cells)
         if(cell.innerHTML.includes(val))
@@ -266,8 +273,8 @@ export function getLinkParams(link) {
 
 function logIn() {
     var client = ops.createClient();
-    client.setLogin(markup.client.getLogin());
-    client.setPassword(markup.client.getPass());
+    client.setLogin(markup.client.getLogin().value);
+    client.setPassword(markup.client.getPass().value);
     server.access.login(client)
 }
 
@@ -317,6 +324,8 @@ export function prepareClient(cl){
         markup.registration.initBirthDate();
         onClick(markup.registration.getApplyBtn(), clientRegister);
         onClick(markup.client.getLoginBtn(), logIn);
+        onEnterPress(markup.client.getLogin(), logIn);
+        onEnterPress(markup.client.getPass(), logIn);
     } else {
         var clContainer =  markup.client.getClientContainer();
         clContainer.innerHTML = "";
@@ -372,20 +381,6 @@ export function showShadows(client, myTrainer){
     }
 }
 
-function langLinkForm(lang){
-    var indx = window.location.href.indexOf("lang=");
-    if(indx < 0){
-        indx = window.location.href.indexOf("pp.ua/") + 6;
-        var mainLink = window.location.href.substring(0, indx);
-        var afterLink =  window.location.href.substring(indx);
-        return mainLink + "?lang=" + lang + "/" + afterLink;
-    } else{
-        indx += "?lang=".length - 1;
-        var mainLink = window.location.href.substring(0, indx)
-        var afterLink =  window.location.href.substring(indx + 2);
-        return mainLink + lang + afterLink;
-    }
-}
 function formatLangItem(state) {
     if (!state.id)
         return state.text;
@@ -395,24 +390,18 @@ function formatLangItem(state) {
     $state.find("img").attr("src", url);
     return $state;
 };
-function getCurrentLang(){
-    var parts = window.location.href.split("?lang=");
-    if(parts.length < 2)
-        return "en";
-    return parts[1].split("/")[0];
-}
 
-export function languageSwitchingOn(){
+export function languageSwitchingOn(curLang){
     import("https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js").then(m1 => {
         import("https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js").then(m2 => {
             import("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js").then(m3 => {
-                document.querySelectorAll(".hdr-lang-select")[0].value = getCurrentLang();
-                $(".hdr-lang-select").select2({ 
+                document.querySelectorAll(".hdr-lang-select")[0].value = curLang;
+                $(".hdr-lang-select").select2({
                     templateResult: formatLangItem,
                     templateSelection: formatLangItem
                 });
                 $('.hdr-lang-select').on('select2:select', function (e) {
-                    window.location.href = langLinkForm(e.params.data.id);
+                    server.access.changeLang(e.params.data.id);
                 });
             })
         })
@@ -509,4 +498,34 @@ export function prepareTabs() {
     else
         hideTabs()
     onClick(markup.tabs.getTogleBarBtn(), togleBar)
+}
+
+/* *******************
+ * COMMON HTML LOADER
+ * *******************/
+
+function loadResources(array, indx, handler){
+    console.log("Load " + array[indx].source);
+    $(array[indx].dest).load(array[indx].source, function() {
+        console.log("Resource " + array[indx].source + " loaded");
+        if(indx == (array.length - 1))
+            handler();
+        else
+            loadResources(array, indx + 1, handler)
+    });
+}
+
+export function onPageLoad(handler) {
+    var htmlImportPairs = [
+        { source: "imports.html #temp-header-id", dest: "#page-header-id"},
+        { source: "imports.html #popup_6", dest: "#client-registration-id"},
+        { source: "imports.html #popup_1", dest: "#sportsman-create-id"},
+        { source: "imports.html #popup_7", dest: "#client-popup"}
+    ];
+
+    import("https://code.jquery.com/jquery-3.5.0.js").then(m1 => {
+        loadResources(htmlImportPairs, 0, handler);
+    }).catch(err => {
+        console.log("!ERR: " + err.message);
+    });
 }

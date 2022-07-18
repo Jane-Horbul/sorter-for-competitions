@@ -9,7 +9,8 @@ import {helpers,
     prepareClient,
     filtration,
     rowsComparator,
-    commonStrings} from "./common.js"
+    commonStrings,
+    onPageLoad} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./competition-page-markup.js";
 
@@ -17,14 +18,12 @@ const page = {
     cid: getLinkParams(location.search).get("cid")
 }
 
-const client = server.access.getClient();
-prepareClient(client);
-
+const client            = server.access.getClient();
 const department        = server.department.get();
 var competition         = server.competition.get(page.cid);
 const qualificationsMap = department.getQualifications();
 const disciplines       = department.getDisciplines();
-var acttiveDisciplines = disciplines.filter(disc => (undefined != competition.getGroups().find(gr => helpers.strEquals(gr.getDiscipline(), disc))));
+var acttiveDisciplines  = disciplines.filter(disc => (undefined != competition.getGroups().find(gr => helpers.strEquals(gr.getDiscipline(), disc))));
 const departmentLink    = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
 
 var departamentSportsmans   = new Array(0);
@@ -403,9 +402,13 @@ function setBtnActions(){
     filtration(markup.groups.getSearchInput(), markup.groups.getTable(), rowsComparator);
 }
 
+function main() {
+    prepareClient(client);
+    fillPageInfo();
+    setBtnActions();
+    showShadows(client);
+    prepareTabs();
+    languageSwitchingOn(client.getLang());
+}
 
-fillPageInfo();
-setBtnActions();
-showShadows(client);
-prepareTabs();
-languageSwitchingOn();
+onPageLoad(main);

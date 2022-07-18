@@ -7,21 +7,19 @@ import {
     prepareTabs,
     onClick,
     commonStrings,
-    prepareClient
+    prepareClient,
+    onPageLoad
 } from "./common.js"
+
 import { markup } from "./arena-create-markup.js";
-import {server, ops} from "./communication.js" //закоментувати перед початком роботи
-//import {ops} from "./communication.js" //закоментувати перед початком роботи
-//import {server} from "./dbg_server.js" //закоментувати рядок перед комітом
+import {server, ops} from "./communication.js"
 
 
 const page = {
     cid: getLinkParams(location.search).get("cid")
 }
 
-const client = server.access.getClient();
-prepareClient(client);
-
+const client            = server.access.getClient();
 const departmentInfo    = server.department.get();
 const competition       = server.competition.get(page.cid);
 const competitionLink   = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
@@ -253,10 +251,13 @@ function setBtnActions(){
     onClick(markup.manual.getApplyBtn(), createArenaManual);
 }
 
-
-prepareTabs();
-fillPageInfo();
-setBtnActions();
-showShadows(client);
-languageSwitchingOn();
-fillPairsList();
+function main() {
+    prepareClient(client);
+    prepareTabs();
+    fillPageInfo();
+    setBtnActions();
+    showShadows(client);
+    languageSwitchingOn(client.getLang());
+    fillPairsList();
+}
+onPageLoad(main);

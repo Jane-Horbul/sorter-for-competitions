@@ -86,8 +86,14 @@ def translateAll(wb, src, dst):
         fileTranslate(flText, sheet, commonSheet, destFile)
 
 def main():
+    dstPath = "../langs"
+    tmpPath = "../../langs"
+    
+    if os.path.exists(dstPath):
+        shutil.rmtree(dstPath)
     wb = load_workbook('./dictionary.xlsx')
-    translateAll(wb, "../", "../../langs")
+    translateAll(wb, "../", tmpPath)
+    shutil.move(tmpPath, dstPath)
     print("Done!")
     
 main()

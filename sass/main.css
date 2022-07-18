@@ -3210,7 +3210,7 @@ body.lock {
   margin-right: 45px;
 }
 
-.new-member-pop-up-check-qual,
+.member-create-list,
 .new-member-pop-up-check-team {
   width: 342px;
   border-radius: 0px;
@@ -3224,9 +3224,9 @@ body.lock {
   width: 323px;
 }
 
-.new-member-pop-up-check-qual:hover,
-.new-member-pop-up-check-qual:active,
-.new-member-pop-up-check-qual:focus,
+.member-create-list:hover,
+.member-create-list:active,
+.member-create-list:focus,
 .new-member-pop-up-check-team:hover,
 .new-member-pop-up-check-team:active,
 .new-member-pop-up-check-team:focus {

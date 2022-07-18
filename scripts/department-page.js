@@ -1,5 +1,4 @@
-import {getLinkParams, 
-    onClick, 
+import {onClick, 
     showShadows, 
     languageSwitchingOn, 
     createPageItem,
@@ -8,19 +7,16 @@ import {getLinkParams,
     unhideSubelements,
     filtration,
     rowsComparator,
-    prepareClient} from "./common.js"
+    prepareClient,
+    onPageLoad} from "./common.js"
 import {ops, server} from "./communication.js"
 import {markup} from "./department-page-markup.js"
 
-const client = server.access.getClient();
-prepareClient(client);
-
 const department = server.department.get();
-console.log(department);
-console.log(client.getStatus());
+const client = server.access.getClient();
+var qualificationsMap = new Map();
 
 /* ------------------- QUALIFICATIONS ----------------------------*/
-var qualificationsMap = new Map();
 
 export function getQualNameByValue(val){
     return qualificationsMap.get(val) == undefined ? val : qualificationsMap.get(val);
@@ -298,8 +294,15 @@ function setActions(){
 };
 
 /* ------------------- MAIN CHUNK ----------------------------*/
-prepareTabs();
-fillPageInfo();
-setActions();
-showShadows(client);
-languageSwitchingOn();
+function main() {
+    prepareClient(client);
+    console.log(department);
+    console.log(client.getStatus());
+    prepareTabs();
+    fillPageInfo();
+    setActions();
+    showShadows(client);
+    languageSwitchingOn(client.getLang());
+}
+
+onPageLoad(main);

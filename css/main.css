@@ -6,119 +6,107 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 html {
-  line-height: 1.15;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /* Sections
-     ========================================================================== */
+   ========================================================================== */
 /**
-   * Remove the margin in all browsers.
-   */
+ * Remove the margin in all browsers.
+ */
 body {
   margin: 0;
 }
 
 /**
-   * Render the `main` element consistently in IE.
-   */
+ * Render the `main` element consistently in IE.
+ */
 main {
   display: block;
 }
 
 /**
-   * Correct the font size and margin on `h1` elements within `section` and
-   * `article` contexts in Chrome, Firefox, and Safari.
-   */
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
 
 /* Grouping content
-     ========================================================================== */
+   ========================================================================== */
 /**
-   * 1. Add the correct box sizing in Firefox.
-   * 2. Show the overflow in Edge and IE.
-   */
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
 hr {
   -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  /* 1 */
-  height: 0;
-  /* 1 */
-  overflow: visible;
-  /* 2 */
+          box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
 }
 
 /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
 pre {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /* Text-level semantics
-     ========================================================================== */
+   ========================================================================== */
 /**
-   * Remove the gray background on active links in IE 10.
-   */
+ * Remove the gray background on active links in IE 10.
+ */
 a {
   background-color: transparent;
 }
 
 /**
-   * 1. Remove the bottom border in Chrome 57-
-   * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
-   */
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
 abbr[title] {
-  border-bottom: none;
-  /* 1 */
-  text-decoration: underline;
-  /* 2 */
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
-  /* 2 */
+          text-decoration: underline dotted; /* 2 */
 }
 
 /**
-   * Add the correct font weight in Chrome, Edge, and Safari.
-   */
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
 b,
 strong {
   font-weight: bolder;
 }
 
 /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /**
-   * Add the correct font size in all browsers.
-   */
+ * Add the correct font size in all browsers.
+ */
 small {
   font-size: 80%;
 }
 
 /**
-   * Prevent `sub` and `sup` elements from affecting the line height in
-   * all browsers.
-   */
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
 sub,
 sup {
   font-size: 75%;
@@ -136,38 +124,35 @@ sup {
 }
 
 /* Embedded content
-     ========================================================================== */
+   ========================================================================== */
 /**
-   * Remove the border on images inside links in IE 10.
-   */
+ * Remove the border on images inside links in IE 10.
+ */
 img {
   border-style: none;
 }
 
 /* Forms
-     ========================================================================== */
+   ========================================================================== */
 /**
-   * 1. Change the font styles in all browsers.
-   * 2. Remove the margin in Firefox and Safari.
-   */
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
 button,
 input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  line-height: 1.15;
-  /* 1 */
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
   /* margin: 0; */
 }
 
 /**
-   * Show the overflow in IE.
-   * 1. Show the overflow in Edge.
-   */
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
 button,
 input {
   /* 1 */
@@ -175,9 +160,9 @@ input {
 }
 
 /**
-   * Remove the inheritance of text transform in Edge, Firefox, and IE.
-   * 1. Remove the inheritance of text transform in Firefox.
-   */
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
 button,
 select {
   /* 1 */
@@ -185,157 +170,145 @@ select {
 }
 
 /**
-   * Correct the inability to style clickable types in iOS and Safari.
-   */
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type=button],
+[type=reset],
+[type=submit] {
   -webkit-appearance: button;
 }
 
 /**
-   * Remove the inner border and padding in Firefox.
-   */
+ * Remove the inner border and padding in Firefox.
+ */
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
 /**
-   * Restore the focus styles unset by the previous rule.
-   */
+ * Restore the focus styles unset by the previous rule.
+ */
 button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
 /**
-   * Correct the padding in Firefox.
-   */
+ * Correct the padding in Firefox.
+ */
 fieldset {
   padding: 0.35em 0.75em 0.625em;
 }
 
 /**
-   * 1. Correct the text wrapping in Edge and IE.
-   * 2. Correct the color inheritance from `fieldset` elements in IE.
-   * 3. Remove the padding so developers are not caught out when they zero out
-   *    `fieldset` elements in all browsers.
-   */
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
 legend {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  display: table;
-  /* 1 */
-  max-width: 100%;
-  /* 1 */
-  padding: 0;
-  /* 3 */
-  white-space: normal;
-  /* 1 */
+          box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
 }
 
 /**
-   * Add the correct vertical alignment in Chrome, Firefox, and Opera.
-   */
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
 progress {
   vertical-align: baseline;
 }
 
 /**
-   * Remove the default vertical scrollbar in IE 10+.
-   */
+ * Remove the default vertical scrollbar in IE 10+.
+ */
 textarea {
   overflow: auto;
 }
 
 /**
-   * 1. Add the correct box sizing in IE 10.
-   * 2. Remove the padding in IE 10.
-   */
-[type="checkbox"],
-[type="radio"] {
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type=checkbox],
+[type=radio] {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */
+          box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
 }
 
 /**
-   * Correct the cursor style of increment and decrement buttons in Chrome.
-   */
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
   height: auto;
 }
 
 /**
-   * 1. Correct the odd appearance in Chrome and Safari.
-   * 2. Correct the outline style in Safari.
-   */
-[type="search"] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type=search] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
 }
 
 /**
-   * Remove the inner padding in Chrome and Safari on macOS.
-   */
-[type="search"]::-webkit-search-decoration {
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
 /**
-   * 1. Correct the inability to style clickable types in iOS and Safari.
-   * 2. Change font properties to `inherit` in Safari.
-   */
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
 }
 
 /* Interactive
-     ========================================================================== */
+   ========================================================================== */
 /*
-   * Add the correct display in Edge, IE 10+, and Firefox.
-   */
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
 details {
   display: block;
 }
 
 /*
-   * Add the correct display in all browsers.
-   */
+ * Add the correct display in all browsers.
+ */
 summary {
   display: list-item;
 }
 
 /* Misc
-     ========================================================================== */
+   ========================================================================== */
 /**
-   * Add the correct display in IE 10+.
-   */
+ * Add the correct display in IE 10+.
+ */
 template {
   display: none;
 }
 
 /**
-   * Add the correct display in IE 10.
-   */
+ * Add the correct display in IE 10.
+ */
 [hidden] {
   display: none;
 }
@@ -389,7 +362,6 @@ img {
 .link {
   text-decoration: none;
 }
-
 .link:hover, .link:focus {
   color: #2196f3;
   -webkit-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -406,14 +378,12 @@ textarea {
   margin-right: auto;
   margin-left: 0px;
 }
-
 @media (min-width: 320px) {
   .container {
     width: 320px;
     overflow-x: scroll;
   }
 }
-
 @media (min-width: 768px) {
   .container {
     width: 768px;
@@ -421,13 +391,11 @@ textarea {
     overflow-x: hidden;
   }
 }
-
 @media (min-width: 1200px) {
   .container {
     width: 1100px;
   }
 }
-
 @media (min-width: 1800px) {
   .container {
     width: 1700px;
@@ -437,14 +405,12 @@ textarea {
 .container-main {
   width: auto;
 }
-
 @media (min-width: 320px) {
   .container-main {
     overflow-x: scroll;
     margin-right: 0px;
   }
 }
-
 @media (min-width: 768px) {
   .container-main {
     margin-right: 25px;
@@ -452,13 +418,11 @@ textarea {
     overflow-x: hidden;
   }
 }
-
 @media (min-width: 1200px) {
   .container-main {
     margin-right: 25px;
   }
 }
-
 @media (min-width: 1800px) {
   .container-main {
     margin-right: 25px;
@@ -472,13 +436,11 @@ textarea {
 .flexbox {
   display: block;
 }
-
 @media (min-width: 320px) {
   .flexbox {
     display: block;
   }
 }
-
 @media (min-width: 768px) {
   .flexbox {
     display: -webkit-box;
@@ -486,7 +448,6 @@ textarea {
     display: flex;
   }
 }
-
 @media (min-width: 1200px) {
   .flexbox {
     display: -webkit-box;
@@ -507,25 +468,21 @@ h1 {
   letter-spacing: 0.06em;
   margin: 0.2em 0;
 }
-
 @media (max-width: 319px) {
   h1 {
     font-size: 20px;
   }
 }
-
 @media (min-width: 320px) {
   h1 {
     font-size: 26px;
   }
 }
-
 @media (min-width: 768px) {
   h1 {
     font-size: 30px;
   }
 }
-
 @media (min-width: 1200px) {
   h1 {
     font-size: 44px;
@@ -535,9 +492,9 @@ h1 {
 h2 {
   font-size: 36px;
   color: #212121;
-  text-align-last: center;
+  -moz-text-align-last: center;
+       text-align-last: center;
 }
-
 @media screen and (max-width: 1199px) {
   h2 {
     font-size: 28px;
@@ -564,6 +521,7 @@ input:hover,
 input:focus {
   outline: 0;
   outline-offset: 0;
+  color: #000;
 }
 
 tr {
@@ -702,21 +660,18 @@ tr {
   padding-left: 0px;
   width: 320px;
 }
-
 @media screen and (min-width: 767px) and (max-width: 1199px) {
   .competition-page-main-btn-list {
     width: 200px;
     margin-right: 10px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .competition-page-main-btn-list {
     width: 200px;
     margin-right: 10px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .competition-page-main-btn-list {
     width: 200px;
@@ -821,14 +776,12 @@ tr {
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   outline-width: 0px;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .group-info-edit-btn {
     margin-top: 9px;
     margin-right: 9px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .group-info-edit-btn {
     margin-top: 19px;
@@ -935,7 +888,7 @@ tr {
 }
 
 .blue-button-style {
-  background-color: #026de7;
+  background-color: rgb(2, 109, 231);
   width: 30px;
   height: 20px;
 }
@@ -1040,28 +993,24 @@ tr {
           filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   outline-width: 0px;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .member-info-edit-btn {
     margin-top: 9px;
     margin-right: 9px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .member-info-edit-btn {
     margin-top: 8px;
     margin-right: 103px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .member-info-edit-btn {
     margin-top: 8px;
     margin-right: 108px;
   }
 }
-
 .member-info-edit-btn .member-info-edit-btn:hover,
 .member-info-edit-btn .member-info-edit-btn:focus,
 .member-info-edit-btn .member-info-edit-btn-icon:hover,
@@ -1186,7 +1135,7 @@ body.lock {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #bdbdbdea;
+  background-color: rgba(189, 189, 189, 0.9176470588);
   top: 0;
   left: 0;
   opacity: 0;
@@ -1339,7 +1288,6 @@ body.lock {
 .main-tables {
   display: block;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .main-tables {
     display: -webkit-box;
@@ -1351,7 +1299,6 @@ body.lock {
     margin-right: 4px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .main-tables {
     display: -webkit-box;
@@ -1385,19 +1332,16 @@ body.lock {
   text-align: center;
   border: 1px solid #ced7df;
 }
-
 @media screen and (min-width: 767px) and (max-width: 1199px) {
   .secondary-tables--td {
     font-size: 12px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .secondary-tables--td {
     font-size: 14px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .secondary-tables--td {
     font-size: 14px;
@@ -1409,12 +1353,12 @@ body.lock {
 }
 
 .red-cell-style {
-  background-color: #f15050;
+  background-color: rgb(241, 80, 80);
   color: #000;
 }
 
 .blue-cell-style {
-  background-color: #026de7;
+  background-color: rgb(2, 109, 231);
   color: #FFF;
 }
 
@@ -1430,21 +1374,18 @@ body.lock {
   font-weight: bold;
   text-align: center;
 }
-
 @media (min-width: 320px) {
   .first-title-tables--text {
     font-size: 10px;
     padding: 3px;
   }
 }
-
 @media (min-width: 1200px) {
   .first-title-tables--text {
     font-size: 12px;
     padding: 5px;
   }
 }
-
 @media (min-width: 1800px) {
   .first-title-tables--text {
     font-size: 13px;
@@ -1459,21 +1400,18 @@ body.lock {
   font-weight: bold;
   text-align: center;
 }
-
 @media (min-width: 320px) {
   .secondary-title-tables--text {
     font-size: 10px;
     padding: 3px;
   }
 }
-
 @media (min-width: 1200px) {
   .secondary-title-tables--text {
     font-size: 12px;
     padding: 10px;
   }
 }
-
 @media (min-width: 1800px) {
   .secondary-title-tables--text {
     font-size: 12px;
@@ -1487,21 +1425,18 @@ body.lock {
   padding: 3px;
   text-align: center;
 }
-
 @media (min-width: 320px) {
   .secondary-title-two-tables {
     font-size: 10px;
     padding: 3px;
   }
 }
-
 @media (min-width: 1200px) {
   .secondary-title-two-tables {
     font-size: 11px;
     padding: 5px;
   }
 }
-
 @media (min-width: 1800px) {
   .secondary-title-two-tables {
     font-size: 12px;
@@ -1512,19 +1447,16 @@ body.lock {
 .sportsman-info-table-info {
   width: 280px;
 }
-
 @media (min-width: 320px) {
   .sportsman-info-table-info {
     font-size: 10px;
   }
 }
-
 @media (min-width: 1200px) {
   .sportsman-info-table-info {
     width: 550px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-info-table-info {
     width: 1010px;
@@ -1565,25 +1497,21 @@ body.lock {
   color: white;
   border: 1px solid #ddd;
 }
-
 @media (min-width: 320px) {
   .common-table th {
     font-size: 11px;
   }
 }
-
 @media (min-width: 768px) {
   .common-table th {
     font-size: 14px;
   }
 }
-
 @media (min-width: 1200px) {
   .common-table th {
     font-size: 15px;
   }
 }
-
 @media (min-width: 1800px) {
   .common-table th {
     font-size: 16px;
@@ -1715,7 +1643,6 @@ body.lock {
   text-align: center;
   border: 1px solid #ced7df;
 }
-
 .ct-usual-col A {
   position: relative;
   display: block;
@@ -1724,25 +1651,21 @@ body.lock {
   text-decoration: none;
   color: #000 !important;
 }
-
 @media (min-width: 320px) {
   .ct-usual-col {
     font-size: 10px;
   }
 }
-
 @media (min-width: 768px) {
   .ct-usual-col {
     font-size: 14px;
   }
 }
-
 @media (min-width: 1200px) {
   .ct-usual-col {
     font-size: 15px;
   }
 }
-
 @media (min-width: 1800px) {
   .ct-usual-col {
     font-size: 16px;
@@ -1857,18 +1780,16 @@ body.lock {
 }
 
 .hdr-header {
-  background: #1499f6;
-  background: -webkit-gradient(linear, left bottom, left top, from(rgba(20, 153, 246, 0.417787)), color-stop(6%, white));
-  background: linear-gradient(0deg, rgba(20, 153, 246, 0.417787) 0%, white 6%);
+  background: rgb(20, 153, 246);
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(20, 153, 246, 0.4177871832)), color-stop(6%, rgb(255, 255, 255)));
+  background: linear-gradient(0deg, rgba(20, 153, 246, 0.4177871832) 0%, rgb(255, 255, 255) 6%);
   margin-bottom: 0px;
 }
-
 @media (min-width: 320px) {
   .hdr-header {
     height: 280px;
   }
 }
-
 @media (min-width: 768px) {
   .hdr-header {
     height: -webkit-fit-content;
@@ -1876,7 +1797,6 @@ body.lock {
     height: fit-content;
   }
 }
-
 @media (min-width: 1200px) {
   .hdr-header {
     height: -webkit-fit-content;
@@ -1884,7 +1804,6 @@ body.lock {
     height: fit-content;
   }
 }
-
 @media (min-width: 1800px) {
   .hdr-header {
     height: -webkit-fit-content;
@@ -1906,25 +1825,21 @@ body.lock {
   width: 265px;
   height: 65px;
 }
-
 @media (min-width: 320px) {
   .hdr-logo {
     padding-right: 10px;
   }
 }
-
 @media (min-width: 768px) {
   .hdr-logo {
     padding-right: 10px;
   }
 }
-
 @media (min-width: 1200px) {
   .hdr-logo {
     padding-right: 50px;
   }
 }
-
 @media (min-width: 1800px) {
   .hdr-logo {
     padding-right: 60px;
@@ -1934,25 +1849,21 @@ body.lock {
 .hdr-page-name {
   text-align: center;
 }
-
 @media (min-width: 320px) {
   .hdr-page-name {
     padding-left: 10px;
   }
 }
-
 @media (min-width: 768px) {
   .hdr-page-name {
     padding-left: 10px;
   }
 }
-
 @media (min-width: 1200px) {
   .hdr-page-name {
     padding-left: 50px;
   }
 }
-
 @media (min-width: 1800px) {
   .hdr-page-name {
     padding-left: 60px;
@@ -1968,28 +1879,24 @@ body.lock {
   position: absolute;
   width: 100px;
 }
-
 @media (min-width: 320px) {
   .hdr-lang-container {
     top: 185;
     left: 5vw;
   }
 }
-
 @media (min-width: 768px) {
   .hdr-lang-container {
     top: 20px;
     left: 67vw;
   }
 }
-
 @media (min-width: 1200px) {
   .hdr-lang-container {
     top: 20px;
     left: 72vw;
   }
 }
-
 @media (min-width: 1800px) {
   .hdr-lang-container {
     top: 20px;
@@ -2044,28 +1951,24 @@ body.lock {
   display: inline-block;
   width: 200px;
 }
-
 @media (min-width: 320px) {
   .hdr-client-profile {
     top: 190px;
     left: 40vw;
   }
 }
-
 @media (min-width: 768px) {
   .hdr-client-profile {
     top: 10px;
     left: 81vw;
   }
 }
-
 @media (min-width: 1200px) {
   .hdr-client-profile {
     top: 10px;
     left: 81vw;
   }
 }
-
 @media (min-width: 1800px) {
   .hdr-client-profile {
     top: 10px;
@@ -2143,7 +2046,6 @@ body.lock {
   color: #2f2929;
   font-size: 17px;
 }
-
 .hdr-clt-avatar-text A {
   text-decoration: none;
   color: #000 !important;
@@ -2162,21 +2064,18 @@ body.lock {
   border: 1px solid rgba(117, 117, 117, 0.5);
   outline: transparent;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .competition-page-input {
     width: 185px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .competition-page-input {
     width: 330px;
   }
 }
 
-.competition-page-input::-webkit-input-placeholder,
-.competition-page-division-input::-webkit-input-placeholder {
+.competition-page-input::-webkit-input-placeholder, .competition-page-division-input::-webkit-input-placeholder {
   padding-top: 12px;
   font-size: 12px;
   line-height: 14px;
@@ -2184,8 +2083,7 @@ body.lock {
   color: rgba(117, 117, 117, 0.699);
 }
 
-.competition-page-input:-ms-input-placeholder,
-.competition-page-division-input:-ms-input-placeholder {
+.competition-page-input::-moz-placeholder, .competition-page-division-input::-moz-placeholder {
   padding-top: 12px;
   font-size: 12px;
   line-height: 14px;
@@ -2193,8 +2091,15 @@ body.lock {
   color: rgba(117, 117, 117, 0.699);
 }
 
-.competition-page-input::-ms-input-placeholder,
-.competition-page-division-input::-ms-input-placeholder {
+.competition-page-input:-ms-input-placeholder, .competition-page-division-input:-ms-input-placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.699);
+}
+
+.competition-page-input::-ms-input-placeholder, .competition-page-division-input::-ms-input-placeholder {
   padding-top: 12px;
   font-size: 12px;
   line-height: 14px;
@@ -2220,19 +2125,16 @@ body.lock {
   border: 1px solid rgba(117, 117, 117, 0.5);
   outline: transparent;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .competition-page-division-input {
     width: 165px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .competition-page-division-input {
     width: 380px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .competition-page-division-input {
     width: 675px;
@@ -2264,7 +2166,6 @@ body.lock {
   width: 30%;
   margin-right: 3%;
 }
-
 @media screen and (min-width: 700px) {
   .tab {
     width: 15%;
@@ -2295,25 +2196,23 @@ body.lock {
   font-size: 12px;
   padding: 22px 2px;
 }
-
 @media screen and (min-width: 900px) {
   .tab button,
-  .tab div {
+.tab div {
     font-size: 15px;
     padding: 22px 16px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .tab button,
-  .tab div {
+.tab div {
     font-size: 17px;
     padding: 22px 16px;
   }
 }
 
 .tab button::before {
-  content: 'I';
+  content: "I";
   color: rgba(255, 255, 255, 0);
   position: absolute;
   left: 99%;
@@ -2324,13 +2223,11 @@ body.lock {
   background-image: url(../img/tab_traingle.svg);
   display: none;
 }
-
 @media screen and (min-width: 900px) {
   .tab button::before {
     font-size: 15px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .tab button::before {
     font-size: 17px;
@@ -2347,15 +2244,15 @@ body.lock {
   background-color: #fff;
   color: black;
   border: 1px solid #2196F3;
-  border-right: 0px solid #ffffff00;
-  border-top: 0px solid #ffffff00;
+  border-right: 0px solid rgba(255, 255, 255, 0);
+  border-top: 0px solid rgba(255, 255, 255, 0);
 }
 
 /* Create an active/current "tab button" class */
 .tab button.active {
   background-color: #fff;
   color: black;
-  border: 0px solid #ffffff00;
+  border: 0px solid rgba(255, 255, 255, 0);
 }
 
 /* Style the tab content */
@@ -2365,26 +2262,22 @@ body.lock {
   border-left: none;
   padding: 0px 12px;
 }
-
 @media (min-width: 320px) {
   .tabcontent {
     padding-right: 0px;
     padding-left: 0px;
   }
 }
-
 @media (min-width: 768px) {
   .tabcontent {
     padding: 0px 12px;
   }
 }
-
 @media (min-width: 1200px) {
   .tabcontent {
     padding: 0px 12px;
   }
 }
-
 @media (min-width: 1800px) {
   .tabcontent {
     padding: 0px 12px;
@@ -2394,7 +2287,6 @@ body.lock {
 .tabcontent-compessed {
   width: 67% !important;
 }
-
 @media screen and (min-width: 700px) {
   .tabcontent-compessed {
     width: 85% !important;
@@ -2414,13 +2306,11 @@ body.lock {
   border-bottom: 1px solid white;
   font-size: 13px;
 }
-
 @media screen and (min-width: 900px) {
   .bread-crumbs {
     font-size: 15px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .bread-crumbs {
     font-size: 17px;
@@ -2511,7 +2401,7 @@ body.lock {
 
 .add-sportsman-table-tr--selected {
   border: 2px solid #1e8e1b;
-  background-color: #c9ffe896;
+  background-color: rgba(201, 255, 232, 0.5882352941);
 }
 
 .add-sportsman-table-tr--selected:hover {
@@ -2520,7 +2410,7 @@ body.lock {
 
 .add-sportsman-table-tr--active {
   border: 2px solid #1e8e1b;
-  background-color: #c9e6ff6e;
+  background-color: rgba(201, 230, 255, 0.431372549);
 }
 
 .add-sportsman-table--title {
@@ -2551,7 +2441,7 @@ body.lock {
 }
 
 .label-to-choose-type::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0px;
   right: 32px;
@@ -2602,7 +2492,6 @@ body.lock {
   background: red;
   color: black;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .label-to-choose-type--admition {
     width: 120px;
@@ -2611,7 +2500,6 @@ body.lock {
     font-size: 16px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .label-to-choose-type--admition {
     width: 140px;
@@ -2622,7 +2510,7 @@ body.lock {
 }
 
 .label-to-choose-type--admition::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0px;
   right: 32px;
@@ -2656,7 +2544,7 @@ body.lock {
 
 .label-to-choose-type--sportsmen {
   position: relative;
-  width: 60px;
+  width: 175px;
   height: 36px;
   line-height: 36px;
   margin-right: 40px;
@@ -2675,7 +2563,7 @@ body.lock {
 }
 
 .label-to-choose-type--sportsmen::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0px;
   right: 32px;
@@ -2688,7 +2576,7 @@ body.lock {
   border-radius: 0px;
   height: 26px;
   line-height: 26px;
-  width: 24px;
+  width: 175px;
 }
 
 .input-to-choose-type--sportsmen[type=checkbox]:checked + .label-to-choose-type--sportsmen {
@@ -2715,25 +2603,21 @@ body.lock {
   -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
           box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
 }
-
 @media (min-width: 320px) {
   .sportsman-group-card {
     width: 320px;
   }
 }
-
 @media (min-width: 768px) {
   .sportsman-group-card {
     width: 275px;
   }
 }
-
 @media (min-width: 1200px) {
   .sportsman-group-card {
     width: 300px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-group-card {
     width: 335px;
@@ -2758,26 +2642,22 @@ body.lock {
   margin-right: 30px;
   margin-bottom: 30px;
 }
-
 @media (min-width: 320px) {
   .sportsman-group-card--item {
     width: 320px;
   }
 }
-
 @media (min-width: 768px) {
   .sportsman-group-card--item {
     width: 260px;
   }
 }
-
 @media (min-width: 1200px) {
   .sportsman-group-card--item {
     width: 280px;
     margin-left: 7px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-group-card--item {
     width: 335px;
@@ -2793,25 +2673,21 @@ body.lock {
   margin-right: 30px;
   margin-bottom: 30px;
 }
-
 @media (min-width: 320px) {
   .sp-card-item {
     width: 300px;
   }
 }
-
 @media (min-width: 768px) {
   .sp-card-item {
     width: 300px;
   }
 }
-
 @media (min-width: 1200px) {
   .sp-card-item {
     width: 300px;
   }
 }
-
 @media (min-width: 1800px) {
   .sp-card-item {
     width: 310px;
@@ -2963,11 +2839,19 @@ body.lock {
   color: #bebebe;
 }
 
+.add-group-pop-up--input::-moz-placeholder {
+  color: #bebebe;
+}
+
 .add-group-pop-up--input::placeholder {
   color: #bebebe;
 }
 
 .new-member-pop-up-input::-webkit-input-placeholder {
+  color: #bebebe;
+}
+
+.new-member-pop-up-input::-moz-placeholder {
   color: #bebebe;
 }
 
@@ -3027,14 +2911,12 @@ body.lock {
   border: 0px;
   color: white;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .comp-statistics-btn {
     width: 120px;
     height: 30px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .comp-statistics-btn {
     width: 140px;
@@ -3071,13 +2953,11 @@ body.lock {
 .comp-statistics-main-res {
   width: 45%;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .comp-statistics-main-res {
     width: 40%;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .comp-statistics-main-res {
     width: 30%;
@@ -3094,13 +2974,11 @@ body.lock {
 .comp-statistics-main-discipline {
   width: 33%;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .comp-statistics-main-discipline {
     width: 40%;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .comp-statistics-main-discipline {
     width: 50%;
@@ -3130,13 +3008,11 @@ body.lock {
   width: 23%;
   font-size: 18px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .comp-statistics-main-admition {
     width: 17%;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .comp-statistics-main-admition {
     width: 15%;
@@ -3218,9 +3094,16 @@ body.lock {
 .new-member-pop-up-check-gender {
   display: inline;
   margin-right: 45px;
+  font-size: 16px;
 }
 
-.new-member-pop-up-check-qual,
+.member-create-list-name {
+  display: inline;
+  margin-right: 45px;
+  font-size: 16px;
+}
+
+.member-create-list,
 .new-member-pop-up-check-team {
   width: 342px;
   border-radius: 0px;
@@ -3228,15 +3111,17 @@ body.lock {
   border: 1px solid #dfdfdf;
   height: 54px;
   margin-top: 9px;
+  margin-left: 9px;
+  font-size: 15px;
 }
 
 .new-member-pop-up-check-team {
   width: 323px;
 }
 
-.new-member-pop-up-check-qual:hover,
-.new-member-pop-up-check-qual:active,
-.new-member-pop-up-check-qual:focus,
+.member-create-list:hover,
+.member-create-list:active,
+.member-create-list:focus,
 .new-member-pop-up-check-team:hover,
 .new-member-pop-up-check-team:active,
 .new-member-pop-up-check-team:focus {
@@ -3274,12 +3159,12 @@ body.lock {
 
 /* Checked */
 .form_radio_btn input[type=radio]:checked + label {
-  background: #2195f375;
+  background: rgba(33, 149, 243, 0.4588235294);
 }
 
 /* Hover */
 .form_radio_btn label:hover {
-  color: #575858;
+  color: rgb(87, 88, 88);
 }
 
 /* Disabled */
@@ -3342,6 +3227,14 @@ body.lock {
   width: 50px;
 }
 
+.input:not(:-moz-placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.input:not(:-ms-input-placeholder) ~ .cut {
+  transform: translateY(8px);
+}
+
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
   -webkit-transform: translateY(8px);
@@ -3363,10 +3256,26 @@ body.lock {
   top: 20px;
 }
 
+.input:not(:-moz-placeholder-shown) ~ .placeholder {
+  transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
+.input:not(:-ms-input-placeholder) ~ .placeholder {
+  transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
 .input:focus ~ .placeholder,
 .input:not(:placeholder-shown) ~ .placeholder {
   -webkit-transform: translateY(-40px) translateX(10px) scale(0.75);
           transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
+.input:not(:-moz-placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:not(:-ms-input-placeholder) ~ .placeholder {
+  color: #808097;
 }
 
 .input:not(:placeholder-shown) ~ .placeholder {
@@ -3527,6 +3436,14 @@ body.lock {
   width: 50px;
 }
 
+.input:not(:-moz-placeholder-shown) ~ .cut {
+  transform: translateY(8px);
+}
+
+.input:not(:-ms-input-placeholder) ~ .cut {
+  transform: translateY(8px);
+}
+
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
   -webkit-transform: translateY(8px);
@@ -3548,10 +3465,26 @@ body.lock {
   top: 20px;
 }
 
+.input:not(:-moz-placeholder-shown) ~ .placeholder {
+  transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
+.input:not(:-ms-input-placeholder) ~ .placeholder {
+  transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
 .input:focus ~ .placeholder,
 .input:not(:placeholder-shown) ~ .placeholder {
   -webkit-transform: translateY(-40px) translateX(10px) scale(0.75);
           transform: translateY(-40px) translateX(10px) scale(0.75);
+}
+
+.input:not(:-moz-placeholder-shown) ~ .placeholder {
+  color: #808097;
+}
+
+.input:not(:-ms-input-placeholder) ~ .placeholder {
+  color: #808097;
 }
 
 .input:not(:placeholder-shown) ~ .placeholder {
@@ -3784,7 +3717,7 @@ footer {
 .cp-location-card-loading {
   width: 135px;
   text-align: center;
-  font-family: 'Teko', sans-serif;
+  font-family: "Teko", sans-serif;
 }
 
 .cp-location-card-date--time {
@@ -3861,13 +3794,11 @@ progress {
   right: -25%;
   width: 50%;
 }
-
 @media screen and (min-width: 400px) {
   .sportsmen-registration-btn {
     right: -55%;
   }
 }
-
 @media screen and (min-width: 700px) {
   .sportsmen-registration-btn {
     right: -65%;
@@ -3901,20 +3832,17 @@ progress {
   font-size: 30px;
   color: #2196f3;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .group-info-title {
     margin-top: 15px;
     font-size: 24px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .group-info-title {
     width: 320px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .group-info-title {
     width: 320px;
@@ -3945,7 +3873,6 @@ progress {
 .group-hdr-header {
   display: block;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .group-hdr-header {
     display: -webkit-box;
@@ -3956,7 +3883,6 @@ progress {
             justify-content: space-between;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .group-hdr-header {
     display: -webkit-box;
@@ -3967,7 +3893,6 @@ progress {
             justify-content: space-between;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .group-hdr-header {
     display: -webkit-box;
@@ -3988,21 +3913,18 @@ progress {
   width: 100%;
   margin-top: 10px;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .main-tables-group-item {
     margin-left: 7px;
     margin-top: 0px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .main-tables-group-item {
     margin-left: 10px;
     margin-top: 0px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .main-tables-group-item {
     margin-left: 15px;
@@ -4011,12 +3933,12 @@ progress {
 }
 
 .group-page-pair-red {
-  background-color: #e46262;
+  background-color: rgb(228, 98, 98);
   color: black;
 }
 
 .group-page-pair-blue {
-  background-color: #026de7;
+  background-color: rgb(2, 109, 231);
   color: white;
 }
 
@@ -4095,6 +4017,14 @@ progress {
   color: rgba(117, 117, 117, 0.5);
 }
 
+.form-field-add-comp-comment::-moz-placeholder {
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.01em;
+  color: rgba(117, 117, 117, 0.5);
+}
+
 .form-field-add-comp-comment:-ms-input-placeholder {
   padding-top: 12px;
   font-size: 12px;
@@ -4152,7 +4082,6 @@ progress {
   width: 320px;
   margin-top: 10px;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .main-tables-member-item {
     width: 480px;
@@ -4160,7 +4089,6 @@ progress {
     margin-top: 0px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .main-tables-member-item {
     width: 860px;
@@ -4168,7 +4096,6 @@ progress {
     margin-top: 0px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .main-tables-member-item {
     width: 1455px;
@@ -4216,7 +4143,6 @@ progress {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .member-info-title {
     width: 595px;
@@ -4224,13 +4150,11 @@ progress {
     font-size: 24px;
   }
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .member-info-title {
     width: 975px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .member-info-title {
     width: 1484px;
@@ -4262,7 +4186,6 @@ progress {
   font-size: 30px;
   color: #2196f3;
 }
-
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .member-title-block {
     margin-top: 15px;
@@ -4297,7 +4220,6 @@ progress {
   width: 250px;
   height: 375px;
 }
-
 .member-buttons-block {
   margin-right: 10px;
   margin-bottom: 10px;
@@ -4305,7 +4227,6 @@ progress {
   max-width: 250px;
   max-height: 375px;
 }
-
 .advantages {
   margin-top: 35px;
 }
@@ -4321,13 +4242,11 @@ progress {
 .advantages-list {
   display: block;
 }
-
 @media (min-width: 320px) {
   .advantages-list {
     display: block;
   }
 }
-
 @media (min-width: 768px) {
   .advantages-list {
     display: -webkit-box;
@@ -4337,7 +4256,6 @@ progress {
         flex-wrap: wrap;
   }
 }
-
 @media (min-width: 1200px) {
   .advantages-list {
     display: -webkit-box;
@@ -4347,36 +4265,32 @@ progress {
 }
 
 /*.advantages-item {
-    width: calc((100% - 30px * 3) / 4);
-    margin-right: 30px;
-    margin-bottom: 30px;
-  }
-  .advantages-item:nth-child(4n) {
-    margin-right: 0;
-  }*/
+  width: calc((100% - 30px * 3) / 4);
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.advantages-item:nth-child(4n) {
+  margin-right: 0;
+}*/
 .advantages-item {
   margin-right: 30px;
   margin-bottom: 30px;
 }
-
 @media (min-width: 320px) {
   .advantages-item {
     width: 300px;
   }
 }
-
 @media (min-width: 768px) {
   .advantages-item {
     width: 338px;
   }
 }
-
 @media (min-width: 1200px) {
   .advantages-item {
     width: 353px;
   }
 }
-
 @media (min-width: 1800px) {
   .advantages-item {
     width: 310px;
@@ -4420,13 +4334,11 @@ progress {
   text-decoration: none;
   font-size: 20px;
 }
-
 @media (min-width: 1200px) {
   .title-of-competition-list-item {
     font-size: 22px;
   }
 }
-
 @media (min-width: 1800px) {
   .title-of-competition-list-item {
     font-size: 24px;
@@ -4438,25 +4350,21 @@ progress {
   margin-right: 30px;
   margin-bottom: 30px;
 }
-
 @media (min-width: 320px) {
   .projects-item {
     width: 300px;
   }
 }
-
 @media (min-width: 768px) {
   .projects-item {
     width: 338px;
   }
 }
-
 @media (min-width: 1200px) {
   .projects-item {
     width: 353px;
   }
 }
-
 @media (min-width: 1800px) {
   .projects-item {
     width: 310px;
@@ -4553,13 +4461,11 @@ progress {
   margin-right: 7px;
   margin-top: 15px;
 }
-
 @media screen and (min-width: 900px) {
   .competition-info-list-item {
     margin-right: 9px;
   }
 }
-
 @media screen and (min-width: 1200px) {
   .competition-info-list-item {
     margin-right: 14px;
@@ -4572,7 +4478,6 @@ progress {
   margin-top: -20px;
   height: 1000px;
 }
-
 @media screen and (min-width: 1200px) {
   .login-page {
     padding-top: 5px;
@@ -4615,6 +4520,15 @@ progress {
   color: #2196f3;
 }
 
+.registration-link {
+  display: block;
+  text-align: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  text-decoration: none;
+  color: #2196f3;
+}
+
 .sportsman-common-table {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -4653,13 +4567,11 @@ progress {
 .sportsman-info-item {
   width: 79%;
 }
-
 @media (min-width: 1200px) {
   .sportsman-info-item {
     width: 81%;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-info-item {
     width: 86%;
@@ -4672,13 +4584,11 @@ progress {
   margin-right: 10px;
   border: 1px solid #ddd;
 }
-
 @media (min-width: 1200px) {
   .sportsman-foto {
     width: 175px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-foto {
     width: 200px;
@@ -4689,13 +4599,11 @@ progress {
   width: 150px;
   padding-left: 15px;
 }
-
 @media (min-width: 1200px) {
   .sportsman-info-table {
     width: 200px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-info-table {
     width: 230px;
@@ -4705,19 +4613,16 @@ progress {
 .sportsman-info-item--id {
   font-size: 12px;
 }
-
 @media (min-width: 768px) {
   .sportsman-info-item--id {
     font-size: 16px;
   }
 }
-
 @media (min-width: 1200px) {
   .sportsman-info-item--id {
     font-size: 18px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-info-item--id {
     font-size: 20px;
@@ -4730,21 +4635,18 @@ progress {
   background: transparent;
   color: #767676;
 }
-
 @media (min-width: 768px) {
   .sportsman-info-item--input {
     font-size: 16px;
     padding: 5px;
   }
 }
-
 @media (min-width: 1200px) {
   .sportsman-info-item--input {
     font-size: 18px;
     padding: 5px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-info-item--input {
     font-size: 20px;
@@ -4764,13 +4666,11 @@ progress {
 .sportsman-info-item--text {
   font-size: 16px;
 }
-
 @media (min-width: 1200px) {
   .sportsman-info-item--text {
     font-size: 18px;
   }
 }
-
 @media (min-width: 1800px) {
   .sportsman-info-item--text {
     font-size: 20px;
@@ -4807,13 +4707,11 @@ progress {
   position: relative;
   margin-left: 130px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .creating-pairs-list-name {
     margin-left: 193px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .creating-pairs-list-name {
     margin-left: 282px;
@@ -4831,7 +4729,6 @@ progress {
   border: 1px solid gray;
   border-radius: 0px;
 }
-
 @media screen and (min-width: 1200px) {
   .cp-list--input {
     width: 820px;
@@ -4850,7 +4747,6 @@ progress {
   height: 33px;
   margin-left: 15px;
 }
-
 @media screen and (min-width: 1200px) {
   .cp-list--input-name {
     width: 800px;
@@ -4861,7 +4757,6 @@ progress {
   margin-top: -19px;
   margin-left: 592px;
 }
-
 @media screen and (min-width: 1200px) {
   .cp-list--btn {
     margin-left: 870px;
@@ -4876,10 +4771,9 @@ progress {
   margin-top: 15px;
   margin-left: 5px;
 }
-
 @media screen and (min-width: 1200px) {
   .cpl-manual-sorting,
-  .cpl-automatic-sorting {
+.cpl-automatic-sorting {
     margin-left: 15px;
   }
 }
@@ -4969,7 +4863,6 @@ progress {
   margin-top: 20px;
   margin-left: 5px;
 }
-
 @media screen and (min-width: 1200px) {
   .cpl-auto-sort-criteria {
     margin-left: 0px;
@@ -4993,7 +4886,6 @@ progress {
 .cpl-auto-sort-criteria--item-input {
   width: 100px;
 }
-
 @media screen and (min-width: 1200px) {
   .cpl-auto-sort-criteria--item-input {
     width: 250px;
@@ -5012,13 +4904,11 @@ progress {
 .cpl-auto-sort-arrows {
   width: 10%;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .cpl-auto-sort-arrows {
     margin-right: 35px;
   }
 }
-
 @media screen and (min-width: 1800px) {
   .cpl-auto-sort-arrows {
     margin-right: 0px;
@@ -5080,10 +4970,9 @@ progress {
   font-size: 16px;
   height: 38px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table th,
-  .lp-list-table-settings th {
+.lp-list-table-settings th {
     font-size: 10px;
   }
 }
@@ -5094,7 +4983,6 @@ progress {
   text-align: center;
   padding: 0px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table td {
     font-size: 11px;
@@ -5107,12 +4995,11 @@ progress {
 .lp-list-table-td9 {
   width: 65px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table-th--t1,
-  .lp-list-table-th--t9,
-  .lp-list-table-td1,
-  .lp-list-table-td9 {
+.lp-list-table-th--t9,
+.lp-list-table-td1,
+.lp-list-table-td9 {
     width: 40px;
   }
 }
@@ -5121,10 +5008,9 @@ progress {
 .lp-list-table-td2 {
   width: 85px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table-th--t2,
-  .lp-list-table-td2 {
+.lp-list-table-td2 {
     width: 62px;
   }
 }
@@ -5135,12 +5021,11 @@ progress {
 .lp-list-table-td4 {
   width: 230px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table-th--t3,
-  .lp-list-table-th--t4,
-  .lp-list-table-td3,
-  .lp-list-table-td4 {
+.lp-list-table-th--t4,
+.lp-list-table-td3,
+.lp-list-table-td4 {
     width: 156px;
   }
 }
@@ -5151,12 +5036,11 @@ progress {
 .lp-list-table-td6 {
   width: 230px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table-th--t5,
-  .lp-list-table-th--t6,
-  .lp-list-table-td5,
-  .lp-list-table-td6 {
+.lp-list-table-th--t6,
+.lp-list-table-td5,
+.lp-list-table-td6 {
     width: 135px;
   }
 }
@@ -5167,12 +5051,11 @@ progress {
 .lp-list-table-td8 {
   width: 145px;
 }
-
 @media screen and (min-width: 1200px) and (max-width: 1799px) {
   .lp-list-table-th--t7,
-  .lp-list-table-th--t8,
-  .lp-list-table-td7,
-  .lp-list-table-td8 {
+.lp-list-table-th--t8,
+.lp-list-table-td7,
+.lp-list-table-td8 {
     width: 91px;
   }
 }
@@ -5271,5 +5154,4 @@ progress {
   height: 35px;
   padding: 5px;
   margin-bottom: 20px;
-}
-/*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */

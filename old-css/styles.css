@@ -243,7 +243,7 @@ li.active a span {
 }
 .form-field-title {
   font-weight: normal;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 14px;
   letter-spacing: 0.01em;
   color: var(--main-text-color);

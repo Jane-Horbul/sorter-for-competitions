@@ -37,8 +37,16 @@
 .new-member-pop-up-check-gender {
 display: inline;
 margin-right: 45px;
+font-size: 16px;
 }
-.new-member-pop-up-check-qual,
+
+.member-create-list-name {
+    display: inline;
+    margin-right: 45px;
+    font-size: 16px;
+}
+
+.member-create-list,
 .new-member-pop-up-check-team {
         width: 342px;
         border-radius: 0px;
@@ -46,13 +54,15 @@ margin-right: 45px;
         border: 1px solid #dfdfdf;
         height: 54px;
         margin-top: 9px;
+        margin-left: 9px;
+        font-size: 15px;
 }
 .new-member-pop-up-check-team {
     width: 323px;
 }
-.new-member-pop-up-check-qual:hover,
-.new-member-pop-up-check-qual:active,
-.new-member-pop-up-check-qual:focus,
+.member-create-list:hover,
+.member-create-list:active,
+.member-create-list:focus,
 .new-member-pop-up-check-team:hover,
 .new-member-pop-up-check-team:active,
 .new-member-pop-up-check-team:focus {

@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        
         <title>Arena</title>
         <link rel="stylesheet" href="./old-css/normalize.css">
         <link rel="stylesheet" href="./css/main.min.css" />
@@ -15,74 +19,7 @@
 
     <body>
         <div class="wrapper">
-            <header class="hdr-header">
-                <div class="container flexbox">
-                    <nav class="navigation">
-                        <svg class="hdr-logo">
-                            <use href="./img/icons.svg#arena"></use>
-                        </svg>
-                    </nav>
-                    <div>
-                        <h1 id="page-name"></h1>
-                    </div>
-
-                    <div class="hdr-client-info-container">
-                        <div class="hdr-lang-container">
-                            <select class="hdr-lang-select" name="hdr-lang-select" style="display: none">
-                                <option value="en">EN</option>
-                                <option value="ua">UA</option>
-                                <option value="ru">RU</option>
-                            </select>
-                            <template id="hdr-formatted-lang-option">
-                                <span>
-                                    <img class="hdr-lang-image"/>
-                                    <span class="hdr-lang-name"></span>
-                                </span>
-                            </template>
-                        </div>
-
-                        <div class="hdr-client-profile" id="client-cred-container">
-                            <div id="sing-in-btn-container" >
-                                <ul class="list hdr-clt-info-list">
-                                    <li class="hdr-clt-info-item">
-                                        <div class="hdr-login-btn-container">
-                                            <a href="#popup_7" class="popup-link"> 
-                                                <button class="hdr-log-in-btn">
-                                                    <span>СPHX_SIGN_IN</span> 
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <template id="client-data-template">
-                        <div>
-                            <ul class="list hdr-clt-info-list">
-                                <li>
-                                    <div class="hdr-clt-avatar"> 
-                                        <a href="#client-link">
-                                            <div class="hdr-clt-avatar-icon">
-                                                <div class="hdr-clt-avatar-icon hdr-avatar-img-cut">
-                                                    <img id="client-photo" class="hdr-avatar-photo" src="./img/user.png" alt="">
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="hdr-clt-avatar-text">
-                                            <a href="#client-link"> <span>#client-name</span> </a></br>
-                                            <a href="#client-link"> <span class="hdr-avatar-status">#client-status</span> </a></br>
-                                            <a href="#"> 
-                                                <span class="hdr-sign-out" id="sign-out-btn">СPHX_SIGN_OUT</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </template>
-                </div>
-            </header>
+            <header class="hdr-header" id="page-header-id"></header>
             <main>
                 <div class="container-main">
                     <div class="tab" id="tab-bar-id">
@@ -376,39 +313,10 @@
             <footer class="footer">
             </footer>
         </div>
-        <!--LogIn popup start-->
-        <div class="popup" id = "popup_7">
-            <a href="#" class="popup__area"></a>
-            <div class="popup__body">
-                <div class="popup__content">
-                    <div class="login_popup__content">
-                        <a href="" class="popup__close close-popup">X</a>
-                        <form class="modal-form">
-                            <div class="">
-                                <div class="login-page-title">
-                                    <span class="login-page-popup-title">-CPHX_LOG_IN-</span>
-                                </div>
-                                <div class="input-container ic1">
-                                    <input id="login" class="input input_login" type="text" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="login" class="placeholder">-CPHX_LOGIN_INPUT-</label>
-                                </div>
-                                <div class="input-container ic2">
-                                    <input id="password" class="input input_login" type="password" placeholder=" " />
-                                    <div class="cut"></div>
-                                    <label for="password" class="placeholder">-CPHX_PASS_INPUT-</label>
-                                </div>
-
-                                <button type="button" id="login-btn" class="login-page-btn-submit">
-                                    <span class="modal-btn-submit-text">-CPHX_LOGIN_BTN-</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--LogIn popup end-->
+        
+        <div id="client-registration-id"></div>
+        <div id="client-popup"></div>
+        
         <!--Fix-list popup start-->
         <div class="popup" id = "popup_8">
             <a href="#" class="popup__area"></a>

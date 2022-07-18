@@ -5,7 +5,8 @@ import { getLinkParams,
     onClick,
     prepareTabs,
     helpers,
-    prepareClient} from "./common.js"
+    prepareClient,
+    onPageLoad} from "./common.js"
 import {ops, server} from "./communication.js"
 import { markup } from "./sportsman-page-markup.js"
 
@@ -14,9 +15,7 @@ const page = {
     sid: pageParams.get("sid")
 }
 
-const client = server.access.getClient();
-prepareClient(client);
-
+const client            = server.access.getClient();
 const departmentInfo    = server.department.get();
 const qualificationsMap = departmentInfo.getQualifications();
 var departmentLink      = window.location.href.substring(0, window.location.href.lastIndexOf("/"));
@@ -176,9 +175,13 @@ function setBtnActions(){
     onClick(markup.sportsman.getDelBtn(),           function(){ server.sportsman.remove(page.sid); });
     onClick(markup.sportsman.getChangePhotoBtn(),   function(){ server.sportsman.changePhoto(page.sid, markup.sportsman.getPhotoForm()); });
 }
+function main() {
+    prepareClient(client);
+    prepareTabs();
+    fillPageInfo();
+    setBtnActions();
+    showShadows(client, sportsmanInfo.getTrainer());
+    languageSwitchingOn(client.getLang());
+}
 
-prepareTabs();
-fillPageInfo();
-setBtnActions();
-showShadows(client, sportsmanInfo.getTrainer());
-languageSwitchingOn();
+onPageLoad(main);

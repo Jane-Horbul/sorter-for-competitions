@@ -7,7 +7,8 @@ import {
     prepareTabs,
     onClick,
     commonStrings,
-    prepareClient
+    prepareClient,
+    onPageLoad
 } from "./common.js"
 import { markup } from "./arena-markup.js";
 import {server, ops} from "./communication.js"
@@ -19,8 +20,6 @@ const page = {
 }
 
 const client = server.access.getClient();
-prepareClient(client);
-
 export const department     = server.department.get();
 export const competition    = server.competition.get(page.cid);
 export const arena          = server.arena.get(page.cid, page.aid);
@@ -261,10 +260,15 @@ function setBtnActions(){
     }
 }
 
-prepareTabs();
-fillPageInfo();
-setBtnActions();
-showShadows(client);
-languageSwitchingOn();
-setTimeout(fillUnattached, 0);
+function main() {
+    prepareClient(client);
+    prepareTabs();
+    fillPageInfo();
+    setBtnActions();
+    showShadows(client);
+    languageSwitchingOn(client.getLang());
+    setTimeout(fillUnattached, 0);
+}
+
+onPageLoad(main);
 

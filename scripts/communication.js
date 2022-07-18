@@ -485,7 +485,7 @@ function castToClient(object) {
         pass:       "Password",
         newLogin:   "NewLogin",
         newPass:    "NewPassword",
-        
+        lang:       "lang",
 
         root:   "Root",
         admin:  "Admin",
@@ -498,7 +498,8 @@ function castToClient(object) {
         getName()           {return this.obj[this.name];},
         getSurname()        {return this.obj[this.surname];},
         getPhoto()          {return this.obj[this.photo];},
-        
+        getLang()           {return this.obj[this.lang];},
+
         isRoot()            {return helpers.strEquals(this.getStatus(), this.root);},
         isAdmin()           {return helpers.strEquals(this.getStatus(), this.admin);},
         isTrainer()         {return helpers.strEquals(this.getStatus(), this.trainer);},
@@ -547,7 +548,7 @@ function sendFormData(formName, data, refresh) {
             if(answer.ErrorCode != 0)
                 alert(answer.Body);
             if(refresh == true)
-                location.reload();
+                location().reload();
         };
     };
     xhr.open('POST', "/" + formName, true);
@@ -570,7 +571,7 @@ function sendList(formName, obj, refresh) {
             if(answer.ErrorCode != 0)
                 alert(answer.Body);
             if(refresh == true)
-                location.reload();
+                location().reload();
         };
     };
     xhr.open('POST', "/" + formName, true);
@@ -579,19 +580,13 @@ function sendList(formName, obj, refresh) {
     return true;
 }
 
-function sendSingle(link, value, refresh){
-    sendList(link, {[link]: value}, refresh);
-}
-
-
-function addCompStatistics(spArray, link, reload){
+function getCompStatistics(spArray){
     var list = {};
     spArray.forEach(sp => {
         list[sp.getId() + "=" + sp.getAdmition()] = helpers.arrayToString(sp.getDisciplines());
     });
-    sendList(link, list, reload);
+    return list;
 }
-
 export const server = {
     access: {
         loginLink:          "client-login",
@@ -599,11 +594,13 @@ export const server = {
         getStatusLink:      "client-status-get",
         changeLoginLink:    "client-change-login",
         changePassLink:     "client-change-pass",
+        getLangLink(lang)   {return "client-change-lang?lang=" + lang;},
 
-        logout()            {sendSingle(this.logoutLink,        "",     true);},
-        login(cl)           {sendList(  this.loginLink,         cl.obj, true);},
-        changeLogin(cl)     {sendList(  this.changeLoginLink,   cl.obj, true);},
-        changePass(cl)      {sendList(  this.changePassLink,    cl.obj, true);},
+        logout()            {sendList(this.logoutLink,                    {},     true);},
+        login(cl)           {sendList(this.loginLink,                     cl.obj, true);},
+        changeLogin(cl)     {sendList(this.changeLoginLink,               cl.obj, true);},
+        changePass(cl)      {sendList(this.changePassLink,                cl.obj, true);},
+        changeLang(lang)    {sendList(this.getLangLink(lang),             {},     true);},
         getClient()         {return sendRequest(this.getStatusLink, ops.createClient);},
     },
     department: {
@@ -615,11 +612,11 @@ export const server = {
         discRemoveLink:                 "department-disc-del",
 
         get()                           {return sendRequest(this.getLink, ops.createDepartmant);},
-        edit(name)                      {sendSingle(this.editLink,          name,                 true);},
-        addQualification(value, name)   {sendSingle(this.qualAddLink,       value + commonStrings.mapDivider + name, false)},
-        deleteQualification(value)      {sendSingle(this.qualRemoveLink,    value,                false);},
-        addDiscipline(name)             {sendSingle(this.discAddLink,       name,                 false);},
-        deleteDiscipline(name)          {sendSingle(this.discRemoveLink,    name,                 false);}
+        edit(name)                      {sendList(this.editLink,          { [castToDepatrment().name]:        name },   true);},
+        addDiscipline(name)             {sendList(this.discAddLink,       { [castToDepatrment().disciplines]: name },   false);},
+        deleteDiscipline(name)          {sendList(this.discRemoveLink,    { [castToDepatrment().disciplines]: name },   false);},
+        deleteQualification(value)      {sendList(this.qualRemoveLink,    { [castToDepatrment().quals]:       value },  false);},
+        addQualification(value, name)   {sendList(this.qualAddLink,       { [castToDepatrment().quals]: value + commonStrings.mapDivider + name}, false)},
     },
     competition: {
         createLink:                     "department-comp-add",
@@ -634,11 +631,12 @@ export const server = {
         get(cid)                        {return sendRequest(this.getLink(cid),          ops.createCompetition);},
         sortSportsmans(cid)             {return sendRequest(this.sortSportsLink(cid),   ops.createCompetition);},
         formPairs(cid)                  {return sendRequest(this.updatePairsLink(cid),  ops.createCompetition);},
-        create(cp)                      {sendList(this.createLink,                   cp.obj, true);},
-        edit(cp)                        {sendList(this.editLink(cp.getId()),         cp.obj, true);},
-        delete(cid)                     {sendSingle(this.removeLink(cid),            cid,    false);},
-        delSprotsman(cid, sid)          {sendSingle(this.removeSportsLink(cid, sid), sid,    true);},
-        addSprotsmen(cid, ids)          {addCompStatistics(ids, this.addSportsLink(cid), true);},   
+
+        create(cp)                      {sendList(this.createLink,                  cp.obj,                 true);},
+        edit(cp)                        {sendList(this.editLink(cp.getId()),        cp.obj,                 true);},
+        delete(cid)                     {sendList(this.removeLink(cid),             {},                     false);},
+        delSprotsman(cid, sid)          {sendList(this.removeSportsLink(cid, sid),  {},                     true);},
+        addSprotsmen(cid, ids)          {sendList(this.addSportsLink(cid),          getCompStatistics(ids), true);},   
     },
     group: {
         getLink(cid, gid)                   {return "group-get?cid="                + cid + "&gid=" + gid;},
@@ -654,14 +652,14 @@ export const server = {
 
         get(cid, gid)                       {return sendRequest(this.getLink(cid, gid),         ops.createGroup);},
         refreshPairs(cid, gid)              {return sendRequest(this.updatePairsLink(cid, gid), ops.createGroup);},
-        edit(cid, gid, gr)                  {sendList(this.editLink(cid, gid), gr.obj, true)},
-        create(cid, gr)                     {sendList(this.createLink(cid), gr.obj, true);},
-        remove(cid, gid)                    {sendSingle(this.removeLink(cid), gid, false);},
-        excludeSportsman(cid, gid, sid)     {sendSingle(this.removeSportsLink(cid, gid), sid, false);},
-        includeSportsList(cid, gid, sids)   {sendSingle(this.addSportsLink(cid, gid), sids, true);},
-        setPairWinner(cid, gid, pid, color) {sendSingle(this.setWinnerLink(cid, gid, pid), color, true);},
-        addFormula(cid, gid, formula)       {sendSingle(this.addFormulaLink(cid, gid), formula, false);},
-        deleteFormula(cid, gid, formula)    {sendSingle(this.removeFormulaLink(cid, gid), formula, true);},
+        edit(cid, gid, gr)                  {sendList(this.editLink(cid, gid),          gr.obj,                             true)},
+        create(cid, gr)                     {sendList(this.createLink(cid),             gr.obj,                             true);},
+        remove(cid, gid)                    {sendList(this.removeLink(cid, gid),        {},                                 false);},
+        excludeSportsman(cid, gid, sid)     {sendList(this.removeSportsLink(cid, gid),  {[castToGroup().sportsmen]: sid},   false);},
+        includeSportsList(cid, gid, sids)   {sendList(this.addSportsLink(cid, gid),     {[castToGroup().sportsmen]: sids},  true);},
+        setPairWinner(cid, gid, pid, color) {sendList(this.setWinnerLink(cid, gid, pid),{[castToPair().winner]: color},     true);},
+        addFormula(cid, gid, formula)       {sendList(this.addFormulaLink(cid, gid),    {[castToGroup().formulas]: formula},false);},
+        deleteFormula(cid, gid, formula)    {sendList(this.removeFormulaLink(cid, gid), {[castToGroup().formulas]: formula},true);},
         createFormula()                     {return castToFormula({});}
     },
     sportsman: {
@@ -675,13 +673,14 @@ export const server = {
         changeAdmitLink(cid, sid)       {return "competition-stat-perm-change?cid=" + cid + "&sid=" + sid;},
 
         get(sid)                        {return sendRequest(this.getLink(sid), ops.createSportsman);},
-        create(sp)                      {sendList(  this.createLink,                    sp.obj, false);},
-        edit(sid, sp)                   {sendList(  this.editLink(sid),                 sp.obj, true);},
-        remove(sid)                     {sendSingle(this.deleteLink(sid),               sid,  false);},
-        addDiscipline(sid, cid, disc)   {sendSingle(this.addDisciplineLink(cid, sid),   disc, false);},
-        delDiscipline(sid, cid, disc)   {sendSingle(this.removeDisciplineLink(cid, sid),disc, false);},
-        admitChange(sid, cid, stat)     {sendSingle(this.changeAdmitLink(cid, sid),     stat, false);},
-        changePhoto(sid, data)          {sendFormData(this.changePhotoLink(sid),        data, true);}
+
+        create(sp)                      {sendList(this.createLink,                      sp.obj, false);},
+        edit(sid, sp)                   {sendList(this.editLink(sid),                   sp.obj, true);},
+        remove(sid)                     {sendList(this.deleteLink(sid),                 {},     false);},
+        addDiscipline(sid, cid, disc)   {sendList(this.addDisciplineLink(cid, sid),     {[castToCompetitionStat().disciplines]: disc},  false);},
+        delDiscipline(sid, cid, disc)   {sendList(this.removeDisciplineLink(cid, sid),  {[castToCompetitionStat().disciplines]: disc},  false);},
+        admitChange(sid, cid, stat)     {sendList(this.changeAdmitLink(cid, sid),       {[castToCompetitionStat().admit]: stat},        false);},
+        changePhoto(sid, data)          {sendFormData(this.changePhotoLink(sid),        data,                                           true);}
     },
 
     trainer: {
@@ -694,8 +693,8 @@ export const server = {
         get(tid)                {return sendRequest(this.getLink(tid), ops.createTrainer);},
         create(tr)              {sendList(      this.createLink(),          tr.obj, false);},
         edit(tid, tr)           {sendList(      this.editLink(tid),         tr.obj, true);},
-        remove(tid)             {sendSingle(    this.removeLink(tid),       tid, false);},
-        changePhoto(tid, data)  {sendFormData(  this.changePhotoLink(tid),  data, true);}
+        remove(tid)             {sendList(      this.removeLink(tid),       {},     false);},
+        changePhoto(tid, data)  {sendFormData(  this.changePhotoLink(tid),  data,   true);}
     },
 
     judge: {
@@ -708,8 +707,8 @@ export const server = {
         get(jid)                {return sendRequest(this.getLink(jid), ops.createTrainer);},
         create(tr)              {sendList(      this.createLink(),          tr.obj, false);},
         edit(jid, tr)           {sendList(      this.editLink(jid),         tr.obj, true);},
-        remove(jid)             {sendSingle(    this.removeLink(jid),       jid, false);},
-        changePhoto(jid, data)  {sendFormData(  this.changePhotoLink(jid),  data, true);}
+        remove(jid)             {sendList(    this.removeLink(jid),         {},     false);},
+        changePhoto(jid, data)  {sendFormData(  this.changePhotoLink(jid),  data,   true);}
     },
 
     admin: {
@@ -722,8 +721,8 @@ export const server = {
         get(nid)                {return sendRequest(this.getLink(nid), ops.createTrainer);},
         create(tr)              {sendList(      this.createLink(),          tr.obj, false);},
         edit(nid, tr)           {sendList(      this.editLink(nid),         tr.obj, true);},
-        remove(nid)             {sendSingle(    this.removeLink(nid),       nid, false);},
-        changePhoto(nid, data)  {sendFormData(  this.changePhotoLink(nid),  data, true);}
+        remove(nid)             {sendList(      this.removeLink(nid),       {},     false);},
+        changePhoto(nid, data)  {sendFormData(  this.changePhotoLink(nid),  data,   true);}
     },
 
     arena: {
@@ -731,17 +730,17 @@ export const server = {
         getLink(cid, aid)                   {return "arena-get?cid="    + cid + "&aid=" + aid;},
         removeLink(cid, aid)                {return "arena-remove?cid=" + cid + "&aid=" + aid;},
         editLink(cid, aid)                  {return "arena-edit?cid="   + cid + "&aid=" + aid;},
-        pairRemoveLink(cid, aid)            {return "arena-pair-remove?cid="    + cid + "&aid=" + aid;},
+        pairRemoveLink(cid, aid, pid)       {return "arena-pair-remove?cid="    + cid + "&aid=" + aid + "&pid=" + pid;},
         pairsRebuildLink(cid, aid)          {return "arena-pairs-rebuild?cid="  + cid + "&aid=" + aid;},
         pairsFilterLink(cid, aid)           {return "arena-pairs-filter?cid="   + cid + "&aid=" + aid;},
 
 
         get(cid, aid)                       {return sendRequest(this.getLink(cid, aid), ops.createArena);},
-        create(cid, arena)                  {sendList(this.createLink(cid),     arena.obj, false);},
-        edit(cid, aid, arena)               {sendList(this.editLink(cid, aid),  arena.obj, true);},
-        remove(cid, aid)                    {sendSingle(this.removeLink(cid, aid),          aid,  false);},
-        pairRemove(cid, aid, pid)           {sendSingle(this.pairRemoveLink(cid, aid),      pid,  false);},
-        pairsListRebuild(cid, aid, pids)    {sendSingle(this.pairsRebuildLink(cid, aid),    pids, true);},
-        filterPairs(cid, aid)               {sendSingle(this.pairsFilterLink(cid, aid),     aid,  true);},
+        create(cid, arena)                  {sendList(this.createLink(cid),                 arena.obj,                      false);},
+        edit(cid, aid, arena)               {sendList(this.editLink(cid, aid),              arena.obj,                      true);},
+        remove(cid, aid)                    {sendList(this.removeLink(cid, aid),            {},                             false);},
+        pairRemove(cid, aid, pid)           {sendList(this.pairRemoveLink(cid, aid, pid),   {},                             false);},
+        pairsListRebuild(cid, aid, pids)    {sendList(this.pairsRebuildLink(cid, aid),      {[castToArena().pairs]: pids},  true);},
+        filterPairs(cid, aid)               {sendList(this.pairsFilterLink(cid, aid),       {},                             true);},
     }
 }
