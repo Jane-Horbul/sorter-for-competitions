@@ -11,7 +11,7 @@ import {
     onPageLoad
 } from "./common.js"
 
-import { markup } from "./arena-create-markup.js";
+import { markup } from "./create-arena-page-markup.js";
 import {server, ops} from "./communication.js"
 
 

@@ -548,7 +548,7 @@ function sendFormData(formName, data, refresh) {
             if(answer.ErrorCode != 0)
                 alert(answer.Body);
             if(refresh == true)
-                location().reload();
+                location.reload();
         };
     };
     xhr.open('POST', "/" + formName, true);
@@ -571,7 +571,7 @@ function sendList(formName, obj, refresh) {
             if(answer.ErrorCode != 0)
                 alert(answer.Body);
             if(refresh == true)
-                location().reload();
+                location.reload();
         };
     };
     xhr.open('POST', "/" + formName, true);

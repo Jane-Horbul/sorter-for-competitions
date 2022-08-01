@@ -1,5 +1,5 @@
 import {server, ops} from "./communication.js"
-
+import {tablesMarkup} from "./tables_descriptors.js"
 
 function cutPairId(id){
     var indx = id.indexOf("G")
@@ -437,13 +437,16 @@ export function datetimePickerInit(id){
     datePickerInit(id, true);
 }
 
-export function createPageItem(item, values){
-    var template = item.cloneNode(true);
-
-    for (let ph in values) {
-        template.innerHTML = template.innerHTML.replaceAll(ph, values[ph]);
+function replacePlaceholders(obj, placeholders) {
+    for (let ph in placeholders) {
+        obj.innerHTML = obj.innerHTML.replaceAll(ph, placeholders[ph]);
     }
-    return template.content;
+}
+
+export function createPageItem(item, values){
+    var container = item.cloneNode(true)
+    replacePlaceholders(container, values);
+    return container.content.cloneNode(true)
 }
 
 
@@ -504,10 +507,50 @@ export function prepareTabs() {
  * COMMON HTML LOADER
  * *******************/
 
+function createTable(descriptor) {
+    var table_markup = tablesMarkup[descriptor.type];
+
+
+    var wrapper = document.getElementById(descriptor.type);
+    wrapper.id = descriptor.wrapper_id;
+    replacePlaceholders(wrapper, table_markup.getCommonPlaceholdes(descriptor));
+    
+    var table = document.getElementById(descriptor.table_id).querySelector("tbody");
+    var btnsList = table_markup.getTitleBtnsList(table);
+    descriptor.title_buttons.forEach(btn => {
+        var btnItem = createPageItem(table_markup.getTitleBtnTemplate(table, btn), table_markup.getTitleBtnPlaceholdes(btn));
+        btnsList.append(btnItem);
+    });
+
+    var headersList = table_markup.getHeadersList(table);
+    var rowTemplate = table_markup.getRowTemplate(table);
+    var rowTempItem = rowTemplate.content.querySelector("tr");
+    rowTemplate.id = descriptor.row_template_id;
+    descriptor.columns.forEach(column => {
+        var headerItem = createPageItem(table_markup.getHeaderTemplate(table), table_markup.getHeaderPlaceholdes(column));
+        headersList.append(headerItem);
+
+        var cellItem = createPageItem(table_markup.getCellTemplate(table, column), table_markup.getCellPlaceholdes(column));
+        rowTempItem.append(cellItem);
+    });
+}
+
 function loadResources(array, indx, handler){
+    for(; document.getElementById(array[indx].dest.substring(1)) == undefined; indx++) {
+        console.log("Import " + array[indx].dest + " is undefined!")
+        if(indx == (array.length - 1)) {
+            handler();
+            return;
+        }
+    }
+
     console.log("Load " + array[indx].source);
     $(array[indx].dest).load(array[indx].source, function() {
         console.log("Resource " + array[indx].source + " loaded");
+
+        if(array[indx].table_descriptor != undefined)
+            createTable(array[indx].table_descriptor);
+
         if(indx == (array.length - 1))
             handler();
         else
@@ -515,13 +558,23 @@ function loadResources(array, indx, handler){
     });
 }
 
-export function onPageLoad(handler) {
+export function onPageLoad(handler, tables) {
     var htmlImportPairs = [
         { source: "imports.html #temp-header-id", dest: "#page-header-id"},
         { source: "imports.html #popup_6", dest: "#client-registration-id"},
         { source: "imports.html #popup_1", dest: "#sportsman-create-id"},
         { source: "imports.html #popup_7", dest: "#client-popup"}
     ];
+    if(tables != undefined) {
+        tables.forEach(table => {
+            htmlImportPairs.push({
+                source: "imports.html #" + table.type,
+                dest: "#" + table.container_id,
+                table_descriptor: table
+            });
+        });
+    }
+    console.log(htmlImportPairs);
 
     import("https://code.jquery.com/jquery-3.5.0.js").then(m1 => {
         loadResources(htmlImportPairs, 0, handler);

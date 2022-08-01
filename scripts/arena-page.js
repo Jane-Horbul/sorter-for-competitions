@@ -10,7 +10,7 @@ import {
     prepareClient,
     onPageLoad
 } from "./common.js"
-import { markup } from "./arena-markup.js";
+import { markup } from "./arena-page-markup.js";
 import {server, ops} from "./communication.js"
 
 

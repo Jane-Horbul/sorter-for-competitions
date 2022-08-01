@@ -27,9 +27,14 @@
     border: 1px solid #dfdfdf;
     height: 54px;
   }
+
+  input::placeholder {
+    color: blue;
+    font-size: 1.5em;
+  }
+
   .input_login {
-      width: 440px;
-      padding: 4px 25px 0;
+    font-size: 16px;
   }
   
   

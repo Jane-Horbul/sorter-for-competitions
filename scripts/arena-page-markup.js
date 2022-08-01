@@ -1,4 +1,4 @@
-import { department, competition, arena} from "./arena.js";
+import { department, competition, arena} from "./arena-page.js";
 import { helpers, formatDate, datetimePickerInit } from "./common.js";
 
 var aLink = window.location.href;

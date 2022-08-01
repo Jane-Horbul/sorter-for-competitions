@@ -23,8 +23,8 @@ def copyLangFolders(langs, dst, src):
         shutil.copytree(src, dstFolder, 1024*1024)
 
 def getLangs(wb):
-    sheets = wb.get_sheet_names()
-    sheet = wb.get_sheet_by_name(sheets[0])
+    sheets = wb.sheetnames
+    sheet = wb[sheets[0]]
     langs = []
     for i in range(2, MAX_LANG_NUM):
         lang = sheet.cell(row=1, column=i).value
@@ -47,8 +47,7 @@ def fileTranslate(fileText, fileSheet, commonSheet, dst):
             curLang = fileSheet.cell(row=1, column=colNum).value
             writePath = dst.format(lang=curLang)
             langText = fileText
-            print(writePath)
-            
+
             rowNum = 1
             word = commonSheet.cell(row=rowNum, column=colNum).value
             while word != None:
@@ -67,23 +66,30 @@ def fileTranslate(fileText, fileSheet, commonSheet, dst):
         colNum += 1
 
 def translateAll(wb, src, dst):
-    filesNames = wb.get_sheet_names()
+    sheetsNames = wb.sheetnames
     langs = getLangs(wb)
     copyLangFolders(langs, dst, src)
     commonSheet = None
 
-    for flName in filesNames:
-        if flName == "common":
-            commonSheet = wb.get_sheet_by_name(flName)
+    for shName in sheetsNames:
+        if shName == "common":
+            commonSheet = wb[shName]
             break
 
-    for flName in filesNames:
-        if flName == "common":
+    for shName in sheetsNames:
+        if shName == "common":
             continue
-        destFile = dst + "/{lang}/" + flName
-        sheet = wb.get_sheet_by_name(flName)
-        flText = readFile(src + "/" + flName)
-        fileTranslate(flText, sheet, commonSheet, destFile)
+        flNames = [shName + ".html", "scripts/" + shName + "-markup.js"]
+        for srcFile in flNames:
+            src_path = src + "/" + srcFile
+            if not os.path.exists(src_path):
+                print("File not exists: " + src_path)
+                continue
+            destFile = dst + "/{lang}/" + srcFile
+            sheet = wb[shName]
+            flText = readFile(src_path)
+            print("Translate: " + src_path)
+            fileTranslate(flText, sheet, commonSheet, destFile)
 
 def main():
     dstPath = "../langs"
@@ -92,7 +98,7 @@ def main():
     if os.path.exists(dstPath):
         shutil.rmtree(dstPath)
     wb = load_workbook('./dictionary.xlsx')
-    translateAll(wb, "../", tmpPath)
+    translateAll(wb, "..", tmpPath)
     shutil.move(tmpPath, dstPath)
     print("Done!")
     

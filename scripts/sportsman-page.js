@@ -175,9 +175,11 @@ function setBtnActions(){
     onClick(markup.sportsman.getDelBtn(),           function(){ server.sportsman.remove(page.sid); });
     onClick(markup.sportsman.getChangePhotoBtn(),   function(){ server.sportsman.changePhoto(page.sid, markup.sportsman.getPhotoForm()); });
 }
+
 function main() {
     prepareClient(client);
     prepareTabs();
+    console.log("Fill infos")
     fillPageInfo();
     setBtnActions();
     showShadows(client, sportsmanInfo.getTrainer());

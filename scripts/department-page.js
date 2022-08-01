@@ -10,7 +10,7 @@ import {onClick,
     prepareClient,
     onPageLoad} from "./common.js"
 import {ops, server} from "./communication.js"
-import {markup} from "./department-page-markup.js"
+import {markup, tablesDescriptors} from "./department-page-markup.js"
 
 const department = server.department.get();
 const client = server.access.getClient();
@@ -305,4 +305,4 @@ function main() {
     languageSwitchingOn(client.getLang());
 }
 
-onPageLoad(main);
+onPageLoad(main, tablesDescriptors);

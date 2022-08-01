@@ -71,119 +71,33 @@
                         </template>
                     </div>
                     <div id="tabcontent2" class="tabcontent" style= "display: none">
-                        <div class="common-table-container">
-                            <table class="common-table" id="members-table">
-                                <tr class="ct-title-row">
-                                    <td class="ct-title-row" colspan="8">
-                                        <ul class="list cp-sports-list">
-                                            <li>
-                                                <button class="ct-title-text cp-sports-title">-PHX_SPORTS-</button>
-                                            </li>
-                                            <li>
-                                                <a href="#popup_1" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                                    <button class="ct-title-button">-PHX_SPORTS_CREATE-</button>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="ct-search-row">
-                                    <td class="ct-search-row" colspan="8">
-                                        <img class="ct-search-icon" src="./img/search.png" alt="bc">
-                                        <input type="text" class="ct-search-input" id="sportsmen-search-input"  placeholder="-CPHX_TABLE_SEARCHING-">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>-CPHX_HUMAN_SURNAME-</th>
-                                    <th>-CPHX_HUMAN_NAME-</th>
-                                    <th>-CPHX_HUMAN_AGE-</th>
-                                    <th>-CPHX_HUMAN_WEIGHT-</th>
-                                    <th>-CPHX_HUMAN_SEX-</th>
-                                    <th>-CPHX_HUMAN_TEAM-</th>
-                                    <th>-CPHX_QUALIFICATION-</th>
-                                </tr>
-                                <template id="member-template">
-                                    <tr class="search-item">
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-surname</a></td>
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-name</a></td>
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-age</a></td>
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-weight</a></td>
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-sex</a></td>
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-team</a></td>
-                                        <td class="ct-usual-col"><a href="#sportsman-link">#sp-qual</a></td>
-                                    </tr>
-                                </template>
-                            </table>
-                        </div>
+                        <!-- Sportsmen table will be inserted here by js script-->
                     </div>
                     <div id="tabcontent3" class="tabcontent" style= "display: none">
-                        <div class="common-table-container">
-                            <table class="common-table" id="trainers-table">
-                                <tr class="ct-title-row">
-                                    <td class="ct-title-row" colspan="8">
-                                        <ul class="list cp-sports-list">
-                                            <li>
-                                                <button class="ct-title-text cp-sports-title">-PHX_TRAINERS-</button>
-                                            </li>
-                                            <li>
-                                                <a href="#popup_2" class="popup-link js-hidden-element js-root-view js-admin-view">
-                                                    <button class="ct-title-button">-PHX_TRAINER_CREATE-</button>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr class="ct-search-row">
-                                    <td class="ct-search-row" colspan="8">
-                                        <img class="ct-search-icon" src="./img/search.png" alt="bc">
-                                        <input type="text" class="ct-search-input" id="trainer-search-input"  placeholder="-CPHX_TABLE_SEARCHING-">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>-CPHX_HUMAN_SURNAME-</th>
-                                    <th>-CPHX_HUMAN_NAME-</th>
-                                    <th>-CPHX_HUMAN_BD-</th>
-                                    <th>-CPHX_HUMAN_SEX-</th>
-                                    <th>-CPHX_HUMAN_TEAM-</th>
-                                    <th>-CPHX_HUMAN_REGION-</th>
-                                </tr>
-                                <template id="trainer-template">
-                                    <tr class="search-item">
-                                        <td class="ct-usual-col"><a href="#trainer-link">#tr-surname</a></td>
-                                        <td class="ct-usual-col"><a href="#trainer-link">#tr-name</a></td>
-                                        <td class="ct-usual-col"><a href="#trainer-link">#tr-bd</a></td>
-                                        <td class="ct-usual-col"><a href="#trainer-link">#tr-sex</a></td>
-                                        <td class="ct-usual-col"><a href="#trainer-link">#tr-team</a></td>
-                                        <td class="ct-usual-col"><a href="#trainer-link">#tr-region</a></td>
-                                    </tr>
-                                </template>
-                            </table>
-                        </div>
+                        <!-- Trainers table will be inserted here by js script-->
                     </div>
                     <div id="tabcontent4" class="tabcontent" style= "display: none">
                         <div>
                             <section class="competition-info">
-
-                                        <div class="competition-info-main">
-                                            <div id="member-info">
-                                                <div class="group-info-title--siting">
-                                                    <div class="group-info-title"><span>-PHX_DP_INFO-</span></div>
-                                                    <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="department-edit-btn">
-                                                        <svg class="group-info-edit-btn-icon">
-                                                            <use href="./img/icons.svg#icon-pencil2"></use>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="group-info-fields">
-                                                <div class="" id="member-info">
-                                                    <div class="competition-info-fields--item">-CPHX_NOT_HUMAN_NAME-:<span>&nbsp</span><div id="department-name-set">            </div></div>
-                                                    <div class="competition-info-fields--item">-CPHX_ID-:<span>&nbsp</span><div id="department-id">      </div></div>
-                                                </div>
-                                            </div>
+                                <div class="competition-info-main">
+                                    <div id="member-info">
+                                        <div class="group-info-title--siting">
+                                            <div class="group-info-title"><span>-PHX_DP_INFO-</span></div>
+                                            <button class="group-info-edit-btn js-hidden-element js-root-view js-admin-view" type="button" id="department-edit-btn">
+                                                <svg class="group-info-edit-btn-icon">
+                                                    <use href="./img/icons.svg#icon-pencil2"></use>
+                                                </svg>
+                                            </button>
                                         </div>
+                                    </div>
+                                    <div class="group-info-fields">
+                                        <div class="" id="member-info">
+                                            <div class="competition-info-fields--item">-CPHX_NOT_HUMAN_NAME-:<span>&nbsp</span><div id="department-name-set">            </div></div>
+                                            <div class="competition-info-fields--item">-CPHX_ID-:<span>&nbsp</span><div id="department-id">      </div></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </section>
-
                             <div>
                                 <ul class="list flexbox">
                                     <li class="competition-info-list-item">
@@ -199,32 +113,31 @@
                                                     </th>
                                                 </tr>
                                             </table>
-                                                <template id="qualification-template">
-                                                    <tr>
-                                                        <td class="secondary-tables--td">#qualification-value</td>
-                                                        <td class="secondary-tables--td">#qualification-name</td>
-                                                        <td class="secondary-tables--td column-for-button"> 
-                                                            <button class="member-page-dell-btn js-hidden-element" type="button" id="qual-dell-btn">
-                                                                <svg class="group-info-edit-btn-icon">
-                                                                    <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
-                                                                </svg>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </template>
-
-                                                <template id="qualification-adding-template">
-                                                    <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="-PHX_VALUE-"> </td>
-                                                    <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="-PHX_NAME-">  </td>
-                                                    <td class="secondary-tables--td ">
-                                                        <button class="member-page-dell-btn" type="button" id="qual-ok-btn">
-                                                        <svg class="group-info-edit-btn-icon">
-                                                            <use href="./img/icons.svg#icon-checkmark"></use>
-                                                        </svg>
+                                            <template id="qualification-template">
+                                                <tr>
+                                                    <td class="secondary-tables--td">#qualification-value</td>
+                                                    <td class="secondary-tables--td">#qualification-name</td>
+                                                    <td class="secondary-tables--td column-for-button"> 
+                                                        <button class="member-page-dell-btn js-hidden-element" type="button" id="qual-dell-btn">
+                                                            <svg class="group-info-edit-btn-icon">
+                                                                <use href="./img/symbol-defs-pen-del.svg#icon-cross"></use>
+                                                            </svg>
                                                         </button>
                                                     </td>
-                                                </template>
+                                                </tr>
+                                            </template>
 
+                                            <template id="qualification-adding-template">
+                                                <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-value" placeholder="-PHX_VALUE-"> </td>
+                                                <td class="secondary-tables--td"><input class="competition-page-input" type="text" id="add-qualification-name" placeholder="-PHX_NAME-">  </td>
+                                                <td class="secondary-tables--td ">
+                                                    <button class="member-page-dell-btn" type="button" id="qual-ok-btn">
+                                                    <svg class="group-info-edit-btn-icon">
+                                                        <use href="./img/icons.svg#icon-checkmark"></use>
+                                                    </svg>
+                                                    </button>
+                                                </td>
+                                            </template>
                                         </div>
                                     </li>
                                     <li class="competition-info-list-item">
